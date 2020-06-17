@@ -1,0 +1,131 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Chef Configuration Management</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../wiki.css" />
+<script type="text/javascript" src="../../wiki.js" ></script>
+<script type="text/javascript" src="../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Chef Configuration Management";
+    pageId="urn:lsid:ibm.com:td:785c2732-9a76-4bdf-92c3-82841d27c567";
+    toRoot="../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Chef Configuration Management</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h2 dir="ltr">Summary</h2>
+
+<p dir="ltr">Installation and maintenance of DB2 and WebSphere can be daunting for new developers, and those responsible for a builder farm. The purpose of this project is to create a full specification for DB2 and WebSphere installation and upgrade, complete with the infrastructure to deploy the configuration, enabling the developers to focus on their work, rather than a non-compliant machine due to outdated software.</p>
+
+<h2 dir="ltr">Components</h2>
+
+<ul dir="ltr">
+	<li>Chef Server - dubxpcvm337.mul.ie.ibm.com
+	<ul>
+		<li>This server stores the configurations and nodes enrolled to receive config updates.</li>
+	</ul>
+	</li>
+	<li>Chef Workstations
+	<ul>
+		<li>The configurations are developed and managed by authorized users</li>
+	</ul>
+	</li>
+	<li>Chef Nodes
+	<ul>
+		<li>Machines, whose configuration is managed by Chef Server. Can request updates to own configuration on demand, via scheduled task, or pushed from a workstation.</li>
+	</ul>
+	</li>
+</ul>
+
+<h2 dir="ltr">Enrollment Instructions</h2>
+
+<h3 dir="ltr">Step 1: Prepare the node</h3>
+
+<p dir="ltr">Before a node's configuration can be managed by Chef, the WinRM protocol needs to be configured. Run the following commands in a PowerShell console:</p>
+
+<blockquote dir="ltr">
+<pre>
+winrm quickconfig -q
+winrm set winrm/config/winrs '@{MaxMemoryPerShellMB="1024"}'
+winrm set winrm/config '@{MaxTimeoutms="1800000"}'
+winrm set winrm/config/service '@{AllowUnencrypted="true"}'
+winrm set winrm/config/service/auth '@{Basic="true"}'
+
+netsh advfirewall firewall add rule name="WinRM 5985" protocol=TCP dir=in localport=5985 action=allow
+netsh advfirewall firewall add rule name="WinRM 5986" protocol=TCP dir=in localport=5986 action=allow
+
+net stop winrm
+sc.exe config winrm start= auto
+net start winrm</pre>
+</blockquote>
+
+<h3 dir="ltr">Step 2: Bootstrap the node</h3>
+
+<p dir="ltr">This step involves installing the Chef Client on the node, and configuring the client to talk to the Chef Server. All of this can be done from the <a href="http://dslvm10.mul.ie.ibm.com:8080/job/01_CHEF_BOOTSTRAP_WINRM/" target="_blank">TI&nbsp;Jenkins&nbsp;master</a> CHEF_BOOTSTRAP_WINRM project.</p>
+
+<ol dir="ltr">
+	<li>Enter the name of the node being bootstrapped without the domain, e.g. dslvm123</li>
+	<li>Enter the domain portion of the login credentials, or the machine name if not in a domain, e.g. ITDESIGN2 or DSLVM123</li>
+	<li>Enter the username portion of the login credentials, e.g. sde</li>
+	<li>Enter the password for the above account (will be masked in the logs)</li>
+	<li>Confirm that you have prepared WinRM as per instructions.</li>
+</ol>
+
+<h3 dir="ltr">Step 3: Set a node role</h3>
+
+<p dir="ltr">Configuration is grouped into several roles to bundle any prerequisites for installation, e.g. IBM Installation Manager for installing WebSphere. This can also be done from the <a href="http://dslvm10.mul.ie.ibm.com:8080/job/02_CHEF_SET_NODE_ROLE/" target="_blank">TI&nbsp;Jenkins&nbsp;master</a> CHEF_SET_NODE_ROLE project.</p>
+
+<ol dir="ltr">
+	<li>Enter the name of the node being configured.</li>
+	<li>Enter the desired configuration (see dropdown in the job for available configurations)</li>
+	<li>Confirm that the node is already bootstrapped using the instructions above.</li>
+</ol>
+
+<h2 dir="ltr">Updating the Node</h2>
+
+<p dir="ltr">To update the managed software, you have 2 options:</p>
+
+<ol dir="ltr">
+	<li>Via Jenkins
+	<ul>
+		<li>Run the <a href="http://dslvm10.mul.ie.ibm.com:8080/job/99_CHEF_RUN_CLIENT/" target="_blank">99_CHEF_RUN_CLIENT</a> project</li>
+	</ul>
+	</li>
+	<li>Via Command Prompt on the node
+	<ul>
+		<li>Run the following command on the node:
+		<ul>
+			<li>
+			<pre>
+<em>C:\&gt;</em> chef-client</pre>
+			</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ol>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,337 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Passing hidden values with an Editable List row</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Passing hidden values with an Editable List row";
+    pageId="urn:lsid:ibm.com:td:426d1883-e444-47e8-b03a-8310df3bb4b5";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Passing hidden values with an Editable List row</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><span style="font-size: 20px;"><strong>Design Page for support for hidden values to be passed as list row data</strong></span></p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Background</span></strong></p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">This feature was required for Guided Evidence Management, specifically for their relationships page. That particular page was considered to be the "wow" for case workers who were shown the prototype so the feature was "must have".</p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Requirements</span></strong></p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">The requirement is to allow the passing of data hidden data, e.g. a concernRoleID, alongside data entered in an editable list.</p>
+
+<ul dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+	<li>143955&nbsp; - <span style="color: rgb(0, 0, 0); font-family: Arial, sans-serif; line-height: normal; white-space: nowrap;">Editable lists need a way to uniquely identify a row upon submitting the page</span></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Non Functional Requirements</span></strong></p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">This is&nbsp;<strong>mandatory</strong>. We can fill in N/A if the specified non functional requirement is not applicable to the feature being delivered, otherwise some notes must be entered here covering the particular area.</p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;" width="671">
+	<tbody>
+		<tr>
+			<td style="width: 118px;"><strong>NFR</strong></td>
+			<td style="width: 537px;"><strong>Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Accessibility</td>
+			<td style="width: 537px;">n/a</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Availability &amp; Resilience</td>
+			<td style="width: 537px;">n/a</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Development Resource</td>
+			<td style="width: 537px;">Work has been completed.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Evolution</td>
+			<td style="width: 537px;">No evolution. This is a standalone feature.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Internationalisation</td>
+			<td style="width: 537px;">Hidden fields are not locale specific, nothing additional is displayed to the user</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Location</td>
+			<td style="width: 537px;">n/a</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Performance and Scalability</td>
+			<td style="width: 537px;">Developer can configure additional data to be submitted. This is no different to adding a new field to a screen.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Regulation</td>
+			<td style="width: 537px;">n/a</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Security</td>
+			<td style="width: 537px;">Data is submitted using standard Curam data submission infrastructure.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Usability</td>
+			<td style="width: 537px;">n/a</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Design Options</span></strong></p>
+
+<p dir="ltr"><strong>1. Allow CONNECT as a child of list:</strong></p>
+
+<p dir="ltr">&lt;LIST&gt;<br />
+.<br />
+.<br />
+.<br />
+<strong>&lt;CONNECT&gt;</strong><br />
+&nbsp;&lt;SOURCE NAME="listAllCases" PROPERTY="concernRoleID"/&gt;<br />
+&nbsp;&lt;TARGET NAME="EditCases3" PROPERTY="concernRoleID"/&gt;<br />
+<strong>&lt;/CONNECT&gt;</strong><br />
+&nbsp; &lt;/LIST&gt;&nbsp;</p>
+
+<p dir="ltr">Pros:<br />
+- [Conor] Semantically this is what a developer would "expect".</p>
+
+<p dir="ltr">Cons:<br />
+- Connect is not currently allowed as a child of UIM<br />
+- Connect is not currently treated as a "list" element so change is invasive.<br />
+- We need to implement the submission of the data<br />
+- [Conor] It's very late in the 6.2 release cycle to introduce such an unknown, far-reaching change. &nbsp;Although maybe a development spike will prove it's not as fraught as it sounds.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>2. Allow a FIELD to be tagged as "hidden"</strong></p>
+
+<p dir="ltr">&lt;LIST&gt;<br />
+.<br />
+.<br />
+.<br />
+&nbsp; &nbsp; &lt;FIELD <strong>HIDDEN="TRUE"</strong>&gt;<br />
+&nbsp;&lt;CONNECT&gt;<br />
+&lt;SOURCE NAME="listAllCases" PROPERTY="concernRoleID"/&gt;<br />
+&nbsp;&lt;/CONNECT&gt;<br />
+&nbsp;&lt;CONNECT&gt;<br />
+&lt;TARGET NAME="EditCases2" PROPERTY="concernRoleID"/&gt;<br />
+&nbsp;&lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;<br />
+&lt;/LIST&gt;</p>
+
+<p dir="ltr">Pros:<br />
+- Cheaper. Only change is to "hide" field (using CSS probably) and not "count" it when we are calculating field widths.<br />
+- Submission of data will be handled by existing infrastructure<br />
+- [Conor] A safer option to deliver this late in the 6.2 cycle. Less to go wrong.</p>
+
+<p dir="ltr">Cons:<br />
+- [Conor] Semantically incorrect as it's not a field - another quirk to learn in UIM.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>3. Introduce a new UIM element to support this requirement</strong></p>
+
+<p dir="ltr">Winner!</p>
+
+<p dir="ltr">It was felt that introducing a new UIM element was the safest option. This isolates the changes from impacting on existing functionality. The new UIM element is to be name LIST_CONNECT</p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Design</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">A</p>
+
+<p dir="ltr" style="margin-left: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><span style="line-height: 1.5; font-weight: bold; font-size: 18px;">Component A</span></p>
+
+<p dir="ltr" style="margin-left: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Component B</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Validations</span></strong></p>
+
+<ul dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+	<li style="margin-left: 40px;">Schema validations</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Data Model Changes and Required Indexes</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">n/a</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Q &amp; A</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">This is&nbsp;<strong>optional</strong>. There may be some outstanding questions as regards to the design. These questions and the answers when they become available may be recorded here.</p>
+
+<p dir="ltr" style="margin-left: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Use Cases</span></strong></p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">This is&nbsp;<strong>mandatory</strong>. The various use cases for the feature must be outlined here. They can be in whatever format deemed appropriate (i.e. verbose description or in a tabular format with actors and actions etc.). Below is an example of how use cases may be documented in a tabular format.</p>
+
+<table border="1" dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; width: 638px;">
+	<tbody>
+		<tr>
+			<td><strong>Role/Actor</strong></td>
+			<td><strong>Description</strong></td>
+			<td><strong>Expected Behavior</strong></td>
+			<td style="width: 256px;"><strong>Tested</strong></td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td>Does Something</td>
+			<td>What happens when this action is taken?</td>
+			<td style="width: 256px;">How is this tested, manual or automatically?</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Implementation Notes</span></strong></p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">This is&nbsp;<strong>optional</strong>. Any notes related to the actual implementation can be described here. These can be related to some questions related to the implementation, the way some part of the implementation was completed etc.</p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Application Impact</span></strong></p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">This is&nbsp;<strong>mandatory</strong>. If there is no impact, then this is as simple as saying so. If there is impact, then this may describe the impact in detail and outline the upgrade path. If the feature is related to a CLE, this section can be a link to that CLE (and hence the documentation associated with the CLE will suffice).</p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">CTM</span></strong></p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">This is&nbsp;<strong>optional</strong>. Consideration should be given to whether this feature adds or changes administration data. If new administration data is being added, are new CTM business objects required to transport this data. If existing administration data is being modified, will this require changes to existing CTM BOM instances?</p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Testing</span></strong></p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">This is&nbsp;<strong>mandatory</strong>. An outline of all of the testing required by the feature should be present here. This may tie in with the use cases outlined above. This may differ from component to component so the sub headings here will reflect that.</p>
+
+<ul dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+	<li>
+	<p>Unit tests</p>
+	</li>
+	<li>
+	<p>Manual Test Plans</p>
+	</li>
+	<li>
+	<p>Automated tests</p>
+	</li>
+</ul>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Documentation/How To Use Feature</span></strong></p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">This is&nbsp;<strong>mandatory</strong>. This should describe how to use the feature added. Again this may differ from component to component but there are some general headings to consider:</p>
+
+<ul dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+	<li>
+	<p>Where the feature fits in the overall component?</p>
+	</li>
+	<li>
+	<p>How it may be accessed (i.e. created/authored)?</p>
+	</li>
+	<li>
+	<p>What does it do (may be linked to the use cases above)?</p>
+	</li>
+	<li>
+	<p>Advantages of using the feature?</p>
+	</li>
+	<li>
+	<p>Any limitations associated with the feature?</p>
+	</li>
+	<li>
+	<p>A description of how the feature should be used etc.? This may also include a description of a contract between the various teams using the feature and will incorporate some details of the design.</p>
+	</li>
+</ul>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Check List</span></strong></p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">This is&nbsp;<strong>mandatory</strong>. Basically this is a quick check list of items that should be considered when doing a design for that particular component.</p>
+
+<table border="1" dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; width: 658px;">
+	<tbody>
+		<tr>
+			<td style="width: 166px;"><strong>Check List Item</strong></td>
+			<td style="width: 314px;"><strong>Notes</strong></td>
+			<td style="width: 157px;"><strong>Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">????</td>
+			<td style="width: 314px;">?????.</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Work Estimation</span></strong></p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">This is&nbsp;<strong>mandatory</strong>. Again, the actual items listed in the estimate breakdown may vary from task to task and component to component.</p>
+
+<ul dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+	<li>
+	<p>Work Estimates</p>
+
+	<ul>
+		<li>
+		<p>Design: ? Days</p>
+		</li>
+		<li>
+		<p>Prototype: ? Days</p>
+		</li>
+		<li>
+		<p>Implementation: ? Days</p>
+		</li>
+		<li>
+		<p>Testing: ? Days</p>
+		</li>
+		<li>
+		<p>Documentation: ? Days</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Total: ? Days</p>
+	</li>
+</ul>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

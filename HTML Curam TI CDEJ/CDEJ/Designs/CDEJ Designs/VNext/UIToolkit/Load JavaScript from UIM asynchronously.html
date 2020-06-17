@@ -1,0 +1,610 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Load JavaScript from UIM asynchronously</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Load JavaScript from UIM asynchronously";
+    pageId="urn:lsid:ibm.com:td:ae1c1aee-9b8e-4b48-b09c-44fe262b78bc";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Load JavaScript from UIM asynchronously</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr"><span style="font-size:20px;"><strong>Design Page for Loading UIM asynchronously - </strong></span><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=107484">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=107484</a></p>
+
+<p dir="ltr"><span style="font-size:20px;"><strong>Stakeholders</strong></span></p>
+
+<table border="1" dir="ltr" style="width: 500px;">
+	<tbody>
+		<tr>
+			<td style="width: 197px;"><strong><span style="font-size:16px;">Role</span></strong></td>
+			<td style="width: 120px;"><strong><span style="font-size:16px;">Name</span></strong></td>
+			<td style="width: 168px;"><strong><span style="font-size:16px;">Sign Off if Applicable</span></strong></td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">&nbsp;</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">Business Owner/Product Owner</td>
+			<td style="width: 120px;">Shane McFadden</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">Architect</td>
+			<td style="width: 120px;">Fergal Gavin</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">Developer(s)</td>
+			<td style="width: 120px;">Barry O Sullivan</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">FVT</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">SVT</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Background</span></strong></p>
+
+<p dir="ltr">The Curam application is pretty dynamic in so far as that it has many UI widgets that has JavaScript logic that changes the behaviour of the UI in response to the user performing some action.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">These are essentially 2 ways of including a JavaScript file (module in AMD terminology) onto a web page in order to give the UI widgets on that page the dynamic behavior.</p>
+
+<p dir="ltr"><strong>(1) Renderers</strong></p>
+
+<p dir="ltr">There are two ways in which JavaScript can be included in on a webpage via a Java Renderer</p>
+
+<p dir="ltr"><strong>(i)</strong> By using the <strong>includeScripts() </strong>method of The RendererContext Object which can be used to set variables (also global variables), include a plain JavaScript file or include a Dojo Module (Module is Dojo terminology for a file).</p>
+
+<p dir="ltr"><strong>(ii)</strong> By setting the <strong>"dojo-data-type" attribute</strong> on an element. This is ONLY specifically done for Dojo JavaScript widget also known as a Dijit Widget. When the Dojo parser in invoked at runtime it substitutes the&nbsp; element that sets the attribute for the HTML template of the specified Dijit widget. For example when the following Div sets the attribute like so menuItemDiv.setAttribute("data-dojo-type", "dijit/Menu"); that div is replaced by the HTML for the Menu widget at runtime.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>(2) UIM</strong></p>
+
+<p dir="ltr">Currently JavaScript can be referenced in a UIM file using the SCRIPT_FILE attribute. When UIM is converted to JSPX files during the build process 2 things happen to enable the JavaScript to be invoked on a web page at runtime:</p>
+
+<p dir="ltr"><strong>(i)</strong> The<strong> JavaScript file from the component gets copied into the root of the CDEJ/jscript</strong> (name space is<strong> NOT </strong>respected) within the ClientModule.war file. An <strong>important caveat</strong> here is the JavaScript file must <strong>NOT </strong>be in a WebContent directory of a component in order to be used <strong>directly</strong> in UIM.</p>
+
+<p dir="ltr"><strong>(ii)</strong> The JavaScript file gets pulled into the web page by <strong>including it on the generated JSPX</strong> file like so - where &lt;&lt;fileName&gt;&gt; is the name of JavaScript file referred to in JSCRIPT_FILE in UIM:</p>
+
+<p dir="ltr">&nbsp;&lt;script src="../CDEJ/jscript/&lt;&lt;fileName&gt;&gt;.js" type="text/javascript"&gt;// dummy script content&lt;/script&gt;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The key points here are:</p>
+
+<p dir="ltr"><strong>(1) </strong>When including JavaScript via a renderer the JavaScript can be included by referencing the file from the root&nbsp; (CDEJ/jscript) OR by referencing the properly name spaced file relative to the root. Whereas for UIM, <strong>ONLY</strong> the JavaScript file at the root can be referenced.</p>
+
+<p dir="ltr"><strong>(2) </strong>In order to get a JavaScript file generated into the root, the JavaScript file in source can be placed anywhere<strong> EXCEPT</strong> in a WebContent directory within a component. In order to get a JavaScript file generated into the properly name spaced location, then the JavaScript file in source <strong>MUST</strong> be placed in a WebContent directory within a component.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Requirements</span></strong></p>
+
+<p dir="ltr">The actual requirement here is to support the inclusion of <strong>AMD</strong> Dojo modules in UIM and in renderers. The word AMD is important here. It means the code is in Asynchronous Module Definition format. More information on this the Dojo AMD format can be viewed here: <a href="https://dojotoolkit.org/documentation/tutorials/1.10/modules/">https://dojotoolkit.org/documentation/tutorials/1.10/modules/</a></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">In the context of this requirement, an important question is, why do we need to think about this now because the AMD format has been around for the last 5 years or so?</p>
+
+<p dir="ltr">The ultimate driver for this requirement is that AMD will be the only format supported for version 2 of the Dojo Toolkit. The Legacy format will <strong>NOT</strong> be supported for Dojo version 2.0. This means there is a time limit on how long long we have to convert legacy Dojo modules into AMD modules (assuming we still want to support Dojo in the future). A secondary driver is that if application developers want to unit test Dojo modules (we don't care about plain JavaScript files with no Dojo) using the UI Toolkit then they need to convert the legacy modules into AMD modules. Therefore we anticipate that in the near to medium term developers will convert legacy modules to AMD modules.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">An other important point bearing in mind with respect to this requirement is that because there is a mix of AMD modules and legacy Dojo modules in the application, Dojo is loaded into the application using the legacy loader instead of the AMD loader. The AMD loader loads JavaScript asynchronously and thereby improves performance. See here for more information: <a href="https://dojotoolkit.org/reference-guide/1.10/loader/amd.html">https://dojotoolkit.org/reference-guide/1.10/loader/amd.html.</a></p>
+
+<p dir="ltr">All of the Dojo modules need to be converted to AMD modules in the application, before the AMD loader can be turned on.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">So what needs to be done in order to support AMD Dojo modules in UIM and in Java Renderers (assuming that we are sticking with Dojo as one our supported JavaScript frameworks in the future)?</p>
+
+<p dir="ltr">I think the key to answering is to consider the following:</p>
+
+<ul dir="ltr">
+	<li>Do we want to turn on the AMD loader now (after all legacy modules converted) or in the future?</li>
+	<li>Do we want to preserve name spaces for developers? Currently in UIM when including Dojo files on a page, the full namespace for the file is not properly respected.</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">List of Requirements</p>
+
+<ul dir="ltr">
+	<li>Requirement 1: Validate the AMD Modules to ensure that modules written conform to what we expect</li>
+	<li>Requirement 2: Update the UIM generator to require modules asynchronously</li>
+	<li>Requirement 3: Validate the invocation of Dojo in Java Renderers to ensure it the Dojo code is invoked the proper AMD way so that the AMD loader can be turned on. <strong>This requirement is dependent on whether we would like to enable AMD loader or not!!</strong></li>
+	<li>Requirement 4: Update the TI Java Code (not Java Renderers) so that all Dojo modules invoked in AMD way (not legacy). <strong> This requirement is dependent on whether we would like to enable AMD loader or not!!</strong></li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=?????" target="_blank">RTC&nbsp;Story&nbsp;###</a> - Title of the story in RTC.</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Requirement Decisions</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">There may be some outstanding questions/decisions made as regards to the requirements. These decisions should be documented here.</p>
+
+<table border="1" dir="ltr" height="156" width="860">
+	<tbody>
+		<tr>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Requirement Decision Title</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:14px;"><strong>Issue or Problem Statement</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Assumptions</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Motivation</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Alternatives</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Decision</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Justification</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Implications</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Status</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Date</strong></span></td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Non Functional Requirements</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Do the following non functional requirements apply to the enhancement being created and if so, minor details should be provided here. We can fill in N/A if the specified non functional requirement is not applicable to the feature being delivered.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" width="671">
+	<tbody>
+		<tr>
+			<td style="width: 118px;"><strong>NFR</strong></td>
+			<td style="width: 537px;"><strong>Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Development Resource</td>
+			<td style="width: 537px;">The ability of the system to be designed, built, deployed and operated within known constraints of people, budget, time, etc. In general there is not much information required here, however where special skill sets or people with siloed knowledge are required to work on the change/enhancement, this should be detailed here.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Evolution</td>
+			<td style="width: 537px;">The ability of the system to be flexible in the face of the inevitable change that all systems experience after deployment, balanced against the costs of providing such flexibility. Consideration should be given to future proofing the change, including considering how to upgrade to any changes or enhancements provided in the future. Specifically designs should accommodate elements such as localisation (text, dates, etc.), customization, configurability, and componentization. Providing these features in future releases, when not considered up front, has caused impacts for customers in the past and has prevented us from providing the features in some cases.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Internationalisation</td>
+			<td style="width: 537px;">The ability of the system to be independent from any particular language, country or cultural group. Localisation and internationalisation are a large concern for Cúram. Support should always be provided to view information in multiple locales, based on the user and server locale, along with support for working in multiple time zones.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Location</td>
+			<td style="width: 537px;">The ability of the system to overcome problems brought about by the absolute location of its elements and the distances between them. For the most part this is not a major concern, however we should never design based on the assumption that the customer will use a default configuration</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Performance and Scalability</td>
+			<td style="width: 537px;">The ability of the system to predictably execute within its mandated performance profile and to handle increased processing volumes. Performance and scalability are a concern and should always be considered during design. Where necessary, the Performance and Benchmarking teaming should be engaged early to help with determining impact of potential changes.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Regulation</td>
+			<td style="width: 537px;">The ability of the system to conform to locale and international laws, quasi-legal regulations, company policies and other rules and standards. Regulation includes the usages of third party tools and the licensing issues associated with these. New jars should never be introduced without considering the legal implications and licensing of the jars. This includes usage of GPL licensed code. Also, usage of code freely provided on the web and not properly licensed should be avoided.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Security</td>
+			<td style="width: 537px;">The ability of the system to reliably control, monitor and audit who can perform what actions on what resources and to detect and recover from failures in security mechanisms. This is a concern where new features are added that are not contained within the normal Cúram security.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Usability</td>
+			<td style="width: 537px;">The ease with which people who interact with the system can work effectively. How the change will affect the user and how they use the application/feature should always be considered. Where necessary the business analysts and our user interface experts should be engaged early to ensure we meet usability requirements. e.g. printing.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Design Options</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">OPTION 1: (Story 197656) Validate the declared name of Dojo AMD Modules and update generator to require Module</span></strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 80px;">This means that we load up all the Dojo modules (legacy format and AMD format) using the legacy loader but enable AMD modules to be referenced in UIM and Java Renderers.</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 80px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 80px;"><img alt="" id="1497365618495_0" src="Load%20JavaScript%20from%20UIM%20asynchronously._ATTACHMENTS_/editor_image_44087b8d-8126-4a10-8613-6addf9d06139.png"></img></p>
+
+<p dir="ltr" style="margin-left: 80px;">The following work would be needed:</p>
+
+<p dir="ltr" style="margin-left: 80px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Document explicitly what a developer must do when converting a non AMD module to an AMD module.</p>
+
+<p dir="ltr" style="margin-left: 80px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Write an AMD module validator that does certain validations on and existing AMD module that exist in the recommended new structure i.e jscript\src</p>
+
+<p dir="ltr" style="margin-left: 80px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Update the UIM generator to require a Dojo module in correctly</p>
+
+<p dir="ltr" style="margin-left: 80px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i.e &nbsp;&nbsp;&nbsp; &lt;script&gt;require(["&lt;&lt;fileName&gt;&gt;"], function(){ });&lt;/script&gt; <strong>instead of the old way&nbsp; </strong>&lt;script src="../CDEJ/jscript/&lt;&lt;fileName&gt;&gt;.js" type="text/javascript"&gt;// dummy script content&lt;/script&gt;</p>
+
+<p dir="ltr" style="margin-left: 80px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; An important consideration when doing the above is whether at this point we<strong> want to preserve the namespace </strong>at this point as we are already copying the JavaScript the full name space already into jscript directory at root of WebContent</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 80px;">The Pros of choosing this option are:</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 80px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Not much work needed</p>
+
+<p dir="ltr" style="margin-left: 80px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - We are doing the minimum necessary in preparing to migrate to Dojo 2.0. This could be a wise approach because we do not want to invest too much on Dojo up front considering we are not sure that this will be the JavaScript framework toolkit we will be using in the long term future.</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 80px;">Cons of choosing this option</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 80px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If we do not consider enabling the AMD loader to be turned on now then perhaps we risk not giving the customer advance notice about what needs to be done before we can turn it on.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">OPTION 2: (Story 197656) Enable the AMD loader to be turned on as soon as possible</span></strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 80px;">This means that we do the work now up front to enable the AMD loader to be switched on as soon as possible (when all modules converted to AMD format).</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 80px;"><img alt="" id="1497863252050_0" src="Load%20JavaScript%20from%20UIM%20asynchronously._ATTACHMENTS_/editor_image_9e31949f-944b-4127-8676-27e31eb03726.png"></img></p>
+
+<p dir="ltr" style="margin-left: 80px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 80px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The basic design is that there would be a build time property available that enables or disables the Dojo AMD Loader to be turned on. The loader would be turned OFF by default. In this scenario the client would build as normal.</p>
+
+<p dir="ltr" style="margin-left: 80px;">&nbsp;If however the property was ON, then the design option here proposes that we need to implement 2 things:</p>
+
+<p dir="ltr" style="margin-left: 80px;">&nbsp;&nbsp; -&nbsp; A validator that validates Java renderers and Dojo modules to ensure that they invoke Dojo correctly in the case of the former and that the modules are correctly formatted for the latter.</p>
+
+<p dir="ltr" style="margin-left: 80px;">- The UIM generator needs to be updated so that Dojo script are required properly. This is same a described above.</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 80px;">The only con really is the amount of work involved. It is quite a lot of work especially if we decide to go with another JavaScript framework in a few years time</li>
+	<li style="margin-left: 80px;">The pros of this approach is that all the work for AMD loading is now done up front. There will be&nbsp; nothing more to do with repect to AMD loading design.</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Design</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. This should outline in detail the design chosen with all of the various areas for the component covered.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Architecture/Design Decisions</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<table border="1" dir="ltr" height="156" width="860">
+	<tbody>
+		<tr>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Architecture Decision Title</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:14px;"><strong>Issue or Problem Statement</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Assumptions</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Motivation</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Alternatives</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Decision</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Justification</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Implications</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Status</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Date</strong></span></td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">Open/In Progress/Closed</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Use Cases</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. The various use cases for the feature must be outlined here. They can be in the following format.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody>
+		<tr>
+			<td style="width: 188px;">Use Case ID</td>
+			<td style="width: 336px;">1.1</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Name</td>
+			<td style="width: 336px;">Add informational message to cluster with no toggle.</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Actor</td>
+			<td style="width: 336px;">Citizen</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Description</td>
+			<td style="width: 336px;">
+			<p>Where a cluster is defined to not have expand/collapse functionality, if the contents of the cluster are labelled by an informational label, the informational label shall still be displayed.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Preconditions</td>
+			<td style="width: 336px;">
+			<p>Define a &lt;cluster&gt; element.</p>
+
+			<p>&nbsp;</p>
+
+			<p>The contents of this &lt;cluster&gt; element should be labelled by adding an &lt;informational-label&gt; child element.</p>
+
+			<p>&nbsp;</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Flow</td>
+			<td style="width: 336px;">The citizen navigates to the question, relationship or summary page where the &lt;cluster&gt; defined in the preconditions is displayed.</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Expected</td>
+			<td style="width: 336px;">The cluster which was labelled with an informational message shall be displayed as normal and have a informational message.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Implementation Notes</span></strong></p>
+
+<p dir="ltr">This is <strong>optional</strong>. Any notes related to the actual implementation can be described here. These can be related to some questions related to the implementation, the way some part of the implementation was completed etc.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Application Impact</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. If there is no impact, then this is as simple as saying so. If there is impact, then this may describe the impact in detail and outline the upgrade path. If the feature is related to a CLE, this section can be a link to that CLE (and hence the documentation associated with the CLE will suffice).</p>
+
+<table border="1" dir="ltr" height="74" width="1124">
+	<tbody>
+		<tr>
+			<td style="width: 125px;"><span style="font-size:16px;"><strong>Description</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:16px;"><strong>Components Affected</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:16px;"><strong>Actions</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:16px;"><strong>Comments</strong></span></td>
+		</tr>
+		<tr>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;
+<p dir="ltr">&nbsp;</p>
+</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Testing</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. An outline of all of the testing required by the feature should be present here. This may tie in with the use cases outlined above. Describe the framework being used and the kinds of tests being written:</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">Unit Tests</li>
+	<li style="margin-left: 40px;">Process Tests</li>
+	<li style="margin-left: 40px;">End to End Tests</li>
+	<li style="margin-left: 40px;">Functional/Business Flow Tests</li>
+</ul>
+
+<p dir="ltr">Is it just functional tests or are further performance tests required:</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">FVT Required?</li>
+	<li style="margin-left: 40px;">SVT Required?</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Check List</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Basically this is a quick check list of items that should be considered when doing a design for that particular component. This varies between components.</p>
+
+<h3 dir="ltr">IEG Check List</h3>
+
+<table border="1" dir="ltr" style="width: 658px;">
+	<tbody>
+		<tr>
+			<td style="width: 166px;"><strong>Check List Item</strong></td>
+			<td style="width: 314px;"><strong>Notes</strong></td>
+			<td style="width: 157px;"><strong>Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Navigation</td>
+			<td style="width: 314px;">Is the feature being introduced going to have an affect on IEG navigation (fast path, disabling sections, page navigation, looping, visited pages, summary pages and links from them). Ensure tests cases in place for all of these.</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Different Running Modes</td>
+			<td style="width: 314px;">IEG can be run in a tab, in a modal and in a page, consider the affect your new feature will have in all these running modes? Also External and Internal Mode.</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Localizable Text</td>
+			<td style="width: 314px;">Is there any localizable text in the new feature being added?</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Layout Impact</td>
+			<td style="width: 314px;">The feature you are adding may be used in many different contexts. Ensure you consider all of the places that this new feature can be used (examining the schema could give you a good idea of places where the metadata element/attribute can be used etc.). The actual way the feature is displayed in all of the different contexts should also be considered here.</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Data Storage</td>
+			<td style="width: 314px;">Consider the new feature with regards to the data (datastore entities) that it is manipulating (IEG Engine functionality). Ensure that the new feature will have no adverse affect on this.</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">RTL Requirements</td>
+			<td style="width: 314px;">Consider the new feature being added with regards to right to left requirements and feed these into the use cases</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Code Line</td>
+			<td style="width: 314px;">Consider the new feature with regards to the code line policy for IEG</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">ERD</td>
+			<td style="width: 314px;">Does the feature require updates to the ERD. If so, then it should be mocked up to see the relationships between the new feature and existing functionality at the ERD level. This may highlight some design features in the new data structures being added.</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">CPT</td>
+			<td style="width: 314px;">Should this feature be added to the V7 CPT?</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;
+<p dir="ltr">&nbsp;</p>
+</p>
+
+<div class="firebugResetStyles firebugBlockBackgroundColor firebugLayoutBox firebugLayoutBoxOffset" dir="ltr" style="left: 86px ! important; top: 3602px ! important;">
+<div class="firebugResetStyles firebugLayoutBox" style="padding: 0px ! important; background-color: rgb(237, 255, 100) ! important;">
+<div class="firebugResetStyles firebugLayoutBox" style="padding: 0px ! important; background-color: rgb(68, 68, 68) ! important;">
+<div class="firebugResetStyles firebugLayoutBox" style="padding: 0px ! important; background-color: SlateBlue ! important;">
+<div class="firebugResetStyles firebugLayoutBox" style="width: 866px ! important; height: 545px ! important; background-color: SkyBlue ! important;">&nbsp;</div>
+</div>
+</div>
+</div>
+</div></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

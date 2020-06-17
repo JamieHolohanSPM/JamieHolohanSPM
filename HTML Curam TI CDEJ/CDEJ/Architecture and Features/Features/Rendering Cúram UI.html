@@ -1,0 +1,192 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Rendering Cúram UI</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Rendering Cúram UI";
+    pageId="urn:lsid:ibm.com:td:713a6bdf-a3c2-4107-8aa1-a0bdac29779c";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Rendering Cúram UI</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii12">Application Container (shaded blue)</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii13">Application Screens (shaded green)</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii15">Rendering Application Container - First Stage</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii15">Rendering Application Container - Second stage AJAX Request\Response</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii16">Rendering Application Container - Third stage UIM Request\Response</a></div>
+
+<p dir="ltr"><span style="font-size:9px;"><em>(courtesy of Padraig Kiely)</em></span></p>
+
+<p dir="ltr"><img alt="Application Container" src="../CDEJ%20Architecture%20Overview._ATTACHMENTS_/app_container.png" title="Application Container"></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii12">Application Container</h2>
+
+<p dir="ltr" id="ii12">(shaded blue)</p>
+
+<ul dir="ltr">
+	<li>Hosts the application content and screens</li>
+	<li>Provides common screen components (e.g. banner)</li>
+	<li>Provides global navigation and options</li>
+	<li>Proprietary Configuration files define the structure (e.g. available tabs, shortcut panel to the side)</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li>HTML generated at runtime using the renderer framework technology (DOM API to generate HTML)</li>
+	<li>All Tabs shown are customized Dojo TabContainers</li>
+	<li>Panels on the left are right are customized Dojo&nbsp; “Expando Panes”</li>
+	<li>Entire page is laid out with Dojo Border Container</li>
+	<li>UIM screens are included using iframes</li>
+</ul>
+
+<h2 dir="ltr" id="ii13">Application Screens</h2>
+
+<p dir="ltr" id="ii13">(shaded green)</p>
+
+<ul dir="ltr">
+	<li>Represents the vast majority of screen content in Cúram (~13000 screens in “Platform”, ~20000 screens in full suite)</li>
+	<li>Screens are defined in a proprietary XML language known as UIM (User Interface Metadata). They are referred to as “UIM Screens”.</li>
+	<li>“Application Screens” (or “UIM Screens”) are included in the “Application Container” via iframes.</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li>When the User Interface is first displayed, rendering the HTML has 3 main stages in terms of request\response with the server
+	<ul>
+		<li>1. When a user first logs in the “AppController.do” URL is requested. This returns a HTML document which contains everything except the contents of the “Person Search” and “James Smith” tabs above (known as our “object tabs”). The HTML document also contains JavaScript “bootstrapping” code which performs the second stage.</li>
+		<li>2. The next stage is to create the “object tabs”. An AJAX request is sent to retrieve the data for each tab. Tabs are added to the tab container dynamically via JavaScript (i.e. it is a Dojo TabContainer)</li>
+		<li>3. Finally, the UIM screen content is loaded (shaded in green above). The reason this is a completely separate request again is that these documents are loaded in iframes.</li>
+	</ul>
+	</li>
+	<li>These steps will be described in more detail in the following pages.</li>
+</ul>
+
+<h2 dir="ltr" id="ii15">Rendering Application Container - First Stage</h2>
+
+<p dir="ltr"><img alt="Runtime Architecture" src="../CDEJ%20Architecture%20Overview._ATTACHMENTS_/runtime_architecture_of_application_container.png" title="Runtime Architecture"></img></p>
+
+<ul dir="ltr">
+	<li>Browser request for “Application.do” triggers rendering of “Application Container”</li>
+	<li>Apache Struts Mapping from “AppController.do” to “AppController.jspx”</li>
+	<li>“AppController.jspx” : TIVOB\client\CoreInf\CuramCDEJ\lib\curam\web\jsp\tab\AppController.jspx</li>
+	<li>Struts Configuration File : TIVOB\tests\TabTestApp\webclient\WebContent\WEB-INF\struts-config.xml (NOTE: This is a generated file, produced when a curam application is built)</li>
+	<li>AppController.jspx contains “inline” HTML as well as HTML generated from JSP tags etc.</li>
+	<li>The “inline” HTML “bootstraps” the document, including the necessary CSS and JavaScript code (e.g. Dojo)</li>
+	<li>The body of AppController.jspx is very simple, it contains the following:<br />
+	&nbsp;&nbsp;&nbsp; &lt;cing:page pageID="AppController"&gt;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;cing:component style="curam-util-client::application-view"/&gt;<br />
+	&nbsp;&nbsp;&nbsp; &lt;/cing:page&gt;</li>
+	<li>These custom JSP tags “render” the what the users see. The most important tag here is &lt;cing:component style="curam-util-client::application-view"/&gt;. It is a “bridge” that links JSPs to Cúram’s proprietary “Renderer Framework”.</li>
+	<li>The “style” attribute corresponds to a logical name for a “renderer” (not to be confused with a CSS style).</li>
+	<li>This name is configured in the files: TIVOB\client\components\plug-in-framework\src\main\resources\curam\util\client\style\styles-config.xml and TIVOB\client\components\plug-in-framework\src\main\resources\curam\util\client\style\plug-ins-config.xml.</li>
+	<li>Searching those files for “curam-util-client::application-view” leads to the “renderer”: TIVOB\client\components\renderer-plug-ins\src\main\java\curam\util\client\render\component\ApplicationRenderer.java</li>
+	<li>The “ApplicationRenderer.java” class does the following:</li>
+	<li>Reads XML configuration files for the User Interface. These files describe the structure of the application (e.g. the sections and tabs etc. that are visible to the user). Example configuration files for “TabTest Application” would be in the folder: TIVOB\tests\TabTestApp\EJBServer\components\core\tab. (TIP: The files with extensions such as “.app”, “.sec”, “.tab” in this folder are all XML files. Setup a file association with the XML editor in Eclipse for each of these)</li>
+	<li>Generates the appropriate HTML based on the XML configuration to render.</li>
+	<li>The “ApplicationRenderer” delegates to other “Application Component Renderers” to generate the HTML for different parts of the user interface. In the code of this renderer, you will see references to other “styles” such as “curam-util-client::application-banner” and “curam-util-client::application-sections”. Again, look up the files “styles-config.xml” and “plug-ins-config.xml” mentioned above, to find the appropriate Java class for each of these “styles”.</li>
+	<li>Theses renderers in turn can delegate to other renderers as needed, so the code will have to be “followed”.</li>
+	<li>A renderer delegates to another renderer using the API “curam.util.client.view.RendererContext.render()”.</li>
+	<li>Once “ApplicationRenderer.java” has completed, the HTML is returned to the browser. Behind the scenes, the renderer framework serializes the DOM to a string, and this is written to the JSP writer by the custom JSP tags invoked from “AppController.jspx”.</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li>The result of this first request is NOT enough to display the entire user interface to the user.</li>
+	<li>The next slide shows the areas which are returned as part of the first request.</li>
+	<li>Source Code:<br />
+	The source code to all these renderer can be found in: C:\cc\view\TIVOB\client\components\renderer-plug-ins\src\**\*.java</li>
+</ul>
+
+<p dir="ltr"><img alt="Application Container rendered" src="../CDEJ%20Architecture%20Overview._ATTACHMENTS_/app_container_rendered.png" title="Application Container rendered"></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li>The result of the first “AppController.do” HTTP request\response is shown above, shaded in blue.</li>
+	<li>In the HTML that is returned, is JavaScript code which initiates subsequent AJAX request to get the content for the “object tabs” (e.g. Person Search, James Smith)</li>
+</ul>
+
+<h2 dir="ltr" id="ii15">Rendering Application Container - Second stage AJAX Request\Response</h2>
+
+<p dir="ltr"><img alt="second stage" src="../CDEJ%20Architecture%20Overview._ATTACHMENTS_/second_stage.png" title="second stage"></img></p>
+
+<ul dir="ltr">
+	<li>As described previously, the first stage HTTP response only produces part of the user interface.</li>
+	<li>The second stage is to display the “object tabs” (e.g. Person Search, James Smith).</li>
+	<li>The first stage HTTP response contains JavaScript code to initiate the second stage. Specifically it contains the call “curam.ui.UIController.initialize()” (TIVOB\client\components\client-inf\src\main\javascript\internal\curam\ui\UIController.js)</li>
+	<li>This JavaScript module adds tabs to the “Object Tab” container. It performs the following for each tab it needs to create:</li>
+	<li>Creates a Dojo ContentPane</li>
+	<li>The ContentPane content is retrieved by an XHR request for “TabContent.do”. Specifically, see the ContentPane href is set here: curam.util.ui.ApplicationTabbedUIController.createTab() (TIVOB\client\components\client-inf\src\main\javascript\internal\curam\util\ui\ApplicationTabbedUiController.js)</li>
+	<li>The ContentPane is then added to the tab container.</li>
+	<li>The request to “TabContent.do” results in the following:</li>
+	<li>An Apache Struts mapping from “TabContent.do” to “TabContent.jspx” (TIVOB\client\CoreInf\CuramCDEJ\lib\curam\web\jsp\tab\TabContent.jspx)</li>
+	<li>TabContent.jspx has some inline HTML as well as the following: &lt;cing:component style="curam-util-client::tab-layout"/&gt;</li>
+	<li>Looking up TIVOB\client\components\plug-in-framework\src\main\resources\curam\util\client\style\styles-config.xml and TIVOB\client\components\plug-in-framework\src\main\resources\curam\util\client\style\plug-ins-config.xml, this “style” corresponds to the class “curam.util.client.render.component.TabRenderer”.</li>
+	<li>The “TabRenderer” class outputs the HTML for an instance of an “object tab” (e.g. Person Search or James Smith from previous screenshots).</li>
+	<li>It can also delegate to other renderers to prouduce HTML. For example, you will find the following code in it<br />
+	cb.setStyle(context.getStyle("tab-details"));<br />
+	context.render(cb.getComponent(), detailsFragment, contract<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .createSubcontract());</li>
+	<li>This delegates to a renderer with the “style” called “tab-details”. This “style” corresponds to the class: TIVOB\client\components\renderer-plug-ins\src\main\java\curam\util\client\render\component\DetailsPanelRenderer.java (“tab-details” will be configured in TIVOB\client\components\plug-in-framework\src\main\resources\curam\util\client\style\plug-ins-config.xml)</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li>The JavaScript code (initiated by curam.ui.UIController.initialize()) will issue requests for TabContent.do for each tab it needs to load.</li>
+	<li>Cúram persists the tabs open by a user and can restore them when the user interface is opened again (or refreshed by “F5”)</li>
+	<li>So, the flow shown above may be repeated a number of times.</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li>Also, certain page links in Cúram are configured to open new tabs. The AJAX request\response shown above will be repeated to open a new tab in this case.</li>
+</ul>
+
+<h2 dir="ltr" id="ii16">Rendering Application Container - Third stage UIM Request\Response</h2>
+
+<p dir="ltr"><img alt="" src="../CDEJ%20Architecture%20Overview._ATTACHMENTS_/third_stage.png" title=""></img></p>
+
+<ul dir="ltr">
+	<li>At this stage, what is remaining to be loaded is the areas shaded green from the first screen shot. These are the “UIM Screens”.</li>
+	<li>As described in the “Arabic Project Developmen​t Workshop Part 2.ppt” presentation, UIM is converted into JSP.</li>
+	<li>So, for every UIM screen definition, a JSP can be found in the “WebContent\jsps” folder, once the “build tabtestapp” target is run.</li>
+	<li>Consider a UIM file called “Person_home.uim”, the corresponding generated JSP file would be “Person_home.jspx”.</li>
+	<li>The file name minus the extension is known as the “Page ID” e.g. “Person_home” is the “Page ID” in the above example.</li>
+	<li>A convention we use with Apache Structs is that we have a mapping from “{PageID}Page.do” to “{PageID}.jspx. So, a request for “Person_homePage.do” would map to “Person_home.jspx”.</li>
+	<li>The JSP is then executed, the HTML returned to the browser and the browser displays this in the iframe (again, the green shaded areas from the first screen shot).</li>
+	<li>The presentation “Arabic Project Developmen​t Workshop Part 2.ppt” provides more information on UIM to JSP translation.</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

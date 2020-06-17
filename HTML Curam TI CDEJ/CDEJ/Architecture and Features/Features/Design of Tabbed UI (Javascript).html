@@ -1,0 +1,184 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Design of Tabbed UI (Javascript)</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Design of Tabbed UI (Javascript)";
+    pageId="urn:lsid:ibm.com:td:383c0c98-d7ce-449e-8476-ecd29e51e219";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Design of Tabbed UI (Javascript)</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Overview</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">Application Config</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii3">Banner</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii4">Sections</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii6">Tabs</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii7">Handling links</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii8">Opening Tabs</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii9">Closing Tabs</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii5">Shortcuts panel</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii10">Dynamic Navigation Tabs and Buttons</a></div>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Note: For now only covering the parts I wrote directly or contributed to significantly.</p>
+
+<h2 dir="ltr" id="ii1">Overview</h2>
+
+<ul dir="ltr">
+	<li>tabbed UI is put together using a bunch of renderers, each outputting a certain part of UI</li>
+	<li>these are all bootstrapped from a single hand crafted JSP - the app controller</li>
+	<li>lot of supporting JavaScript is output into the page by JspUtil class</li>
+	<li>then this is the top level renderer
+	<ul>
+		<li>&lt;cing:page pageID="AppController"&gt;<br />
+		&nbsp; &lt;cing:component style="curam-util-client::application-view"/&gt;<br />
+		&lt;/cing:page&gt;</li>
+	</ul>
+	</li>
+	<li>the above is a declaration referring to renderer framework configuration, which maps it to a specific renderer class implementation
+	<ul>
+		<li>client\components\plug-in-framework\src\main\resources\curam\util\client\style\plug-ins-config.xml</li>
+		<li>curam.util.client.render.component.ApplicationRenderer</li>
+	</ul>
+	</li>
+	<li>the renderer executes, calling delegate (sub) renderers in the process, all together producing the complete application HTML including appropriate calls to JavaScript, widget declarations, etc.</li>
+</ul>
+
+<h2 dir="ltr" id="ii2">Application Config</h2>
+
+<ul dir="ltr">
+	<li>[TBD]</li>
+	<li>see <a lconnwikimacro="wikilink" href="Tabbed%20UI%20Configuration.html" lconnwikiparamwikipage="Tabbed UI Configuration">Tabbed UI Configuration</a> for more information</li>
+</ul>
+
+<h2 dir="ltr" id="ii3">Banner</h2>
+
+<ul dir="ltr">
+	<li>[TBD]</li>
+</ul>
+
+<h2 dir="ltr" id="ii4">Sections</h2>
+
+<ul dir="ltr">
+	<li>corresponding ApplicationSectionsRenderer renders the sections container of an application</li>
+	<li>the appropriate sections are rendered according to configuration</li>
+	<li>curam.layout.TabContainer to contain individual object tabs</li>
+	<li>[TBD]</li>
+</ul>
+
+<h2 dir="ltr" id="ii6">Tabs</h2>
+
+<h3 dir="ltr" id="ii7">Handling links</h3>
+
+<ul dir="ltr">
+	<li>typically a tab opens in response to a user clicking a link to specific page
+	<ul>
+		<li>curam/ui/UIController.handleLinkClick()</li>
+		<li>the above implements what we call the Cúram Tabbed UI <strong>linking infrastructure</strong></li>
+	</ul>
+	</li>
+	<li>the page is resolved to a tab type via navigation configuration, in linking inf it is called <strong>page associations</strong>
+	<ul>
+		<li>if association is found then a tab open event is published, in effect requesting a tab to be opened</li>
+	</ul>
+	</li>
+	<li>this is handled by the tabTopicHandler() function, which is the core of infrastructure for opening tabs</li>
+</ul>
+
+<h3 dir="ltr" id="ii8">Opening Tabs</h3>
+
+<ul dir="ltr">
+	<li>curam.util.ui.ApplicationTabbedUiController API encapsulates implementations for common actions in this area</li>
+	<li>in general it tries to find an already open tab suitable for the page
+	<ul>
+		<li>based on page id, it's association to a tab type and (siginificant) page parameters</li>
+	</ul>
+	</li>
+	<li>if not found, it'll open a new tab
+	<ul>
+		<li>for new tabs, they come empty at first and a separate AJAX request is made to get the tab structure, based on configuration
+		<ul>
+			<li>implemented by TabContent.jspx</li>
+		</ul>
+		</li>
+		<li>most notably this includes the iframes for main content and optionally the context panel
+		<ul>
+			<li>curam/contentPanel</li>
+			<li>curam/util/ContextPanel</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li>smart panel also an option
+	<ul>
+		<li>curam/smartPanel</li>
+	</ul>
+	</li>
+	<li>Once the tab is ready and loaded the actual page(s) will be loaded in the iframes</li>
+	<li>load mask
+	<ul>
+		<li>the tab content (TabContent.jspx) comes masked by default
+		<ul>
+			<li>see the "tab-load-mask" DIV</li>
+		</ul>
+		</li>
+		<li>the following code takes care of removing mask once pages load
+		<ul>
+			<li>UIController.instantiateTab(); revealTabNow()</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<h3 dir="ltr" id="ii9">Closing Tabs</h3>
+
+<ul dir="ltr">
+	<li>by clicking the X icon or selecting dropdown menu</li>
+	<li>using our overridde - curam.widget._TabButton</li>
+	<li>has some funky accessibility code to dynamically update labels to indicate position of tab in stack</li>
+</ul>
+
+<h3 dir="ltr">Smart Panel</h3>
+
+<ul dir="ltr">
+	<li>curam.smartPanel</li>
+</ul>
+
+<h2 dir="ltr" id="ii5">Shortcuts panel</h2>
+
+<ul dir="ltr">
+	<li>uses expando pane - a copy/pase customization of dojox widget</li>
+	<li>[TBD]</li>
+</ul>
+
+<h2 dir="ltr" id="ii10">Dynamic Navigation Tabs and Buttons</h2>
+
+<ul dir="ltr">
+	<li>implemented as overrides to Dojo</li>
+	<li>[TBD]</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

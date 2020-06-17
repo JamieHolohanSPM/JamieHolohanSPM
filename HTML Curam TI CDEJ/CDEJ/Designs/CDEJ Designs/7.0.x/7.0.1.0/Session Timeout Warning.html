@@ -1,0 +1,1479 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Session Timeout Warning</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Session Timeout Warning";
+    pageId="urn:lsid:ibm.com:td:743941c3-2fd6-4ac3-9db5-b6ee3a1f8915";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Session Timeout Warning</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><span style="font-size:20px;"><strong>Design Page for Introduce the Session Timeout Warning&nbsp;</strong></span></p>
+
+<p dir="ltr"><u><strong><span style="font-size:18px;">Background</span></strong></u></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">There has been confusion with the end users to understand when a server interaction is made, and eventually losing data on some of the screens. As of now, Curam application does not let the&nbsp;user know when the session would be timed out, and when was the last interaction made to the server.&nbsp;</span></p>
+
+<p class="li1" dir="ltr">Not every click on the application rightly so does not make server calls, and there have been numerous instances user assumes they are active in the application, but when the next server call is made, the&nbsp;user is forced to re-authenticate to the application. There are some cases where the user inserts data, for example, a contact log for more than couple of hours, and user assumed that keying in the comments field is being active, and with these confusions, after the session timed out user is forced to re-authenticate and eventually losing the data which has been extremely frustrating to the end user.<br />
+<br />
+<br />
+<br />
+<u><strong><span style="font-size:18px;">Requirements</span></strong></u></p>
+
+<p dir="ltr"><strong>EPIC -107499 - Introduce a session timer into the application to let users know when the session will time out.</strong></p>
+
+<ol dir="ltr">
+	<li>This notification should take the form of a modal window being presented to the user with the following specifications (as default)<br />
+	&nbsp;</li>
+	<li><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">If</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;a user does not interact with the server for a specified period of time in the application, they should be notified by the application that their session&nbsp;is about to timeout.</span><br />
+	&nbsp;</li>
+	<li>A timer countdown which details how much longer the user has before the session does time out (and list the default for this).&nbsp;However, there is also an extra buffer size that could potentially be configured on the application server for the timeout which should also be taken into account.<br />
+	&nbsp;</li>
+	<li>The message to explain to the user what is happening.<br />
+	&nbsp;</li>
+	<li>A button to allow the user to restart the session and continue their work.
+	<ol>
+		<li>The modal dialog is closed;</li>
+		<li>The system resets back the session timeout;</li>
+		<li>The user can interact with the application.<br />
+		&nbsp;</li>
+	</ol>
+	</li>
+	<li>A button to allow the user to not restart the session.
+	<ol>
+		<li>The modal dialog is closed;</li>
+		<li>The application is redirected to the logon page defined by the property.<br />
+		&nbsp;</li>
+	</ol>
+	</li>
+	<li>When the session times out without any user interaction:
+	<ol>
+		<li>The modal dialog is automatically closed;</li>
+		<li>The application is redirected to the logon page defined by the System admin or the default logon page with a message informing the user that the session has timed out.</li>
+	</ol>
+	</li>
+</ol>
+
+<p dir="ltr"><u style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Screenshots flow:&nbsp;</span></strong></u></p>
+
+<p dir="ltr"><u style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Internal Application:</span></strong></u></p>
+
+<p dir="ltr"><span style="font-size:14px;"><u style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>&nbsp; &nbsp;Following the screenshot pages for the requirements defined above:</strong></u></span></p>
+
+<p dir="ltr" style="margin-left: 40px;"><span style="font-size:12px;">1. Session timeout warning modal dialog - <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">notified by the application that their <strong>session&nbsp;is about to timeout</strong></span></span></p>
+
+<p dir="ltr"><img alt="" src="Session%20Timeout%20Warning._ATTACHMENTS_/Screen%20Shot%202016-10-25%20at%2016.11.45.png" style="width: 500px; height: 278px; margin-left: 100px; margin-right: 100px;"></img></p>
+
+<p class="li1" dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p class="li1" dir="ltr" style="margin-left: 40px;"><span style="font-size:12px;">2. If the user clicks on the <strong>Continue button in step 1</strong>, the application closes the modal dialog above and allow the user resets the session time. </span></p>
+
+<p class="li1" dir="ltr" style="margin-left: 40px;"><span style="font-size:12px;"><img alt="" src="Session%20Timeout%20Warning._ATTACHMENTS_/Screen%20Shot%202016-10-19%20at%2009.37.31.png" style="width: 500px; height: 239px; margin-left: 50px; margin-right: 50px;"></img></span></p>
+
+<p class="li1" dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p class="li1" dir="ltr" style="margin-left: 40px;"><span style="font-size:12px;">3. If the user clicks on the</span> <strong>Quit button&nbsp;</strong><strong style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 16px;">in step 1</strong>, <span style="font-size:12px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">the application closes the modal dialog above and redirects the user to the login&nbsp;page.</span></span></p>
+
+<p class="li1" dir="ltr" style="margin-left: 40px;"><span style="font-size:12px;"><img alt="" src="Session%20Timeout%20Warning._ATTACHMENTS_/Screen%20Shot%202016-10-19%20at%2010.10.16.png" style="width: 500px; height: 245px; margin-left: 50px; margin-right: 50px;"></img></span></p>
+
+<p class="li1" dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p class="li1" dir="ltr" style="margin-left: 40px;"><span style="font-size:12px;">4.&nbsp;<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">When the <strong>sessions times out</strong> without any user interaction, the application redirects to the login page with the expired message displayed to the user.</span><br />
+<br />
+<br />
+<br />
+<img alt="" src="Session%20Timeout%20Warning._ATTACHMENTS_/Screen%20Shot%202016-11-01%20at%2010.43.39.png" style="width: 500px; height: 287px; margin-left: 50px; margin-right: 50px;"></img></span></p>
+
+<p class="li1" dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p class="li1" dir="ltr"><u style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Session Timeout Modal Dialog Specification:</span></strong></u></p>
+
+<p class="li1" dir="ltr" style="margin-left: 40px;"><u style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">1. Modal Dialog Session Timeout Warning - Internal application</span></strong></u></p>
+
+<p class="li1" dir="ltr" style="margin-left: 80px;"><span style="font-size:12px;"><u style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>Default values for the properties:</strong></u></span></p>
+
+<table align="center" dir="ltr" style="width:500px;border:2px">
+	<tbody>
+		<tr>
+			<td style="width: 250px;"><strong><span style="font-size:16px;">Property</span></strong></td>
+			<td style="width: 250px;"><span style="font-size:16px;"><strong>Value</strong></span></td>
+		</tr>
+		<tr>
+			<td style="width: 250px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Title</span></td>
+			<td style="width: 250px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Timeout</span><span class="s1" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Warning</span></td>
+		</tr>
+		<tr>
+			<td style="width: 250px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">user-message</span></td>
+			<td style="width: 250px;">
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">You</span><span class="s1" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">will</span><span class="s1" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">be</span><span class="s1" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">timed</span><span class="s1" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">out</span><span class="s1" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">when</span><span class="s1" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">the</span><span class="s1" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span><span class="s2" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">countdown</span><span class="s1" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">reaches</span><span class="s1" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">0</span><span class="s1" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">seconds.</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Click</span><span class="s1" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Continue</span><span class="s1" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">to</span><span class="s1" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">resume</span><span class="s1" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">using</span><span class="s1" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">the</span><span class="s1" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">application</span><span class="s1" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">or</span><span class="s1" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Quit</span><span class="s1" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">to</span><span class="s1" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">exit.</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">quit-button</span></td>
+			<td style="width: 250px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Quit</span></td>
+		</tr>
+		<tr>
+			<td style="width: 250px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">continue-button</span></td>
+			<td style="width: 250px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Continue &nbsp;</span></td>
+		</tr>
+		<tr>
+			<td style="width: 250px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">width</span></td>
+			<td style="width: 250px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">580 px</span></td>
+		</tr>
+		<tr>
+			<td style="width: 250px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">height</span></td>
+			<td style="width: 250px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">250 px</span></td>
+		</tr>
+		<tr>
+			<td style="width: 250px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">timeout</span></td>
+			<td style="width: 250px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">120 seconds&nbsp;</span></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="text-align: center;"><br />
+<br />
+<br />
+<br />
+<img alt="UI Modal Dialog Session Timeout Warning" src="Session%20Timeout%20Warning._ATTACHMENTS_/Screen%20Shot%202016-09-30%20at%2011.44.40.png" style="width: 600px; height: 258px; margin-left: 150px; margin-right: 150px;"></img></p>
+
+<p dir="ltr" style="text-align: center;"><strong><span style="font-size:16px;">UI Design Page Session Timeout Warning Screen Shot Showing Default Properties</span></strong></p>
+
+<p dir="ltr" style="text-align: center;">&nbsp;</p>
+
+<p dir="ltr" style="text-align: center;">&nbsp;</p>
+
+<p dir="ltr"><u><span style="font-size:16px;"><strong>The Scrolling bar feature on session timeout warning modal</strong></span></u></p>
+
+<p dir="ltr">The scrolling bar feature was added to the session timeout warning modal. This feature was introduced to fully show the time session out a warning message when it is more than two lines of text and to avoid text overlapping.</p>
+
+<p dir="ltr">This feature is automatically shown only when the session timeout warning message is longer than two lines of text.</p>
+
+<p dir="ltr">The height of the modal was expanded out ( from 150px to 250px) to have more space in case of a longer warning message.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<ol dir="ltr">
+	<li>Below is the screenshot of the session timeout warning model when the warning message is only one line of text.</li>
+</ol>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img lconnwikiparamattachmentname="withoutScrolling.png" src="Session%20Timeout%20Warning._ATTACHMENTS_/withoutScrolling.png" lconnwikiparamwikipage="Session Timeout Warning" lconnwikimacro="image" width="664" height="306" alt=""></img></p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. Session time out warning&nbsp; modal when the warning message is more than two lines of text( with scroll bar)</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img lconnwikiparamattachmentname="withScrolling.png" src="Session%20Timeout%20Warning._ATTACHMENTS_/withScrolling.png" lconnwikiparamwikipage="Session Timeout Warning" lconnwikimacro="image" width="678" height="314" alt=""></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="text-align: center;">&nbsp;</p>
+
+<p class="li1" dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin-left: 40px;"><u><strong><span style="font-size: 18px;">2. Logon page with an expired message - Internal application</span></strong></u></p>
+
+<p class="li1" dir="ltr" style="margin-left: 80px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><u><strong>Default values for the properties:</strong></u><br />
+<br />
+<br />
+<br />
+&nbsp;</p>
+
+<table align="center" dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; width: 500px;">
+	<tbody>
+		<tr>
+			<td style="width: 181px;"><span style="font-size:16px;"><strong>Property</strong></span></td>
+			<td style="width: 303px;"><span style="font-size:16px;"><strong>Value</strong></span></td>
+		</tr>
+		<tr>
+			<td style="width: 181px;">expired-user-message</td>
+			<td style="width: 303px;">
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">You have been automatically timed&nbsp;out due to a period of inactivity on your account.</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="li1" dir="ltr" style="margin-left: 80px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><img alt="" src="Session%20Timeout%20Warning._ATTACHMENTS_/Screen%20Shot%202016-11-01%20at%2010.43.39.png" style="width: 600px; height: 287px; margin-left: 150px; margin-right: 150px;"></img><br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<u><strong><span style="font-size:18px;">Non-Functional Requirements</span></strong></u></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table align="center" border="1" dir="ltr" height="263" width="671">
+	<tbody>
+		<tr>
+			<td style="width: 118px;"><strong>NFR</strong></td>
+			<td style="width: 537px;"><strong>Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Accessibility</td>
+			<td style="width: 537px;">Need to ensure that modal is fully accessible- using JAWS and that RPT tests pass successfully.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Availability &amp; Resilience</td>
+			<td>
+			<p>Default values are supplied for all of the properties for this feature.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>Evolution</td>
+			<td>
+			<p>No planned changes in this area.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>Internationalisation</td>
+			<td>
+			<p>All of the properties displayed in the dialog must be translated</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Location</td>
+			<td style="width: 537px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">No planned changes in this area.</span></td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Performance and Scalability</td>
+			<td style="width: 537px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Loading a modal so no perceived issues here.</span></td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Regulation</td>
+			<td style="width: 537px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">No planned changes in this area.</span></td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Security</td>
+			<td style="width: 537px;">We are dealing with URLs and requests, need to make sure they are correctly handled on the web tier. The modal is being opened using a standard CDEJ infrastructure API.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Usability</td>
+			<td style="width: 537px;">&nbsp;Modal dialog should meet UX specifications. Modal spec has been designed by the UX team and this spec has been followed.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><u><strong><span style="font-size:18px;">Design Options</span></strong></u></p>
+
+<p dir="ltr">We have started this functionality with these two possible screen&nbsp;designs: The first option was chosen to have the same behaviour in an External Application and an internal application</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<strong style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: 18px;">Option 1: Open a Modal dialog with message, timer and buttons.</span></strong></p>
+
+<p dir="ltr"><strong style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: 18px;"><img alt="" src="Session%20Timeout%20Warning._ATTACHMENTS_/TimeoutWarningWithModal.png" style="width: 700px; height: 254px;"></img></span></strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: 18px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Option 2: Message and timer in the Application Banner.</span></strong></p>
+
+<p dir="ltr"><strong style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: 18px;"><img alt="" src="Session%20Timeout%20Warning._ATTACHMENTS_/TimeoutWarningWithMessageOnTabs.png" style="width: 700px; height: 254px; float: left;"></img></span></strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><u><strong><span style="font-size:18px;">Design - Option 1</span></strong></u></p>
+
+<p dir="ltr"><span style="font-size:14px;">The existing solution which was already implemented for an external application will be reused for an internal application. The following are the details of that implementation.</span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><img alt="" src="Session%20Timeout%20Warning._ATTACHMENTS_/Session%20Timeout%20Warning%20-%20diagram.png" style="width: 1000px; height: 520px;"></img></p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <strong><span style="font-size:18px;">&nbsp;</span></strong></p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <strong style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: 18px;">&nbsp;-&nbsp;Application Configuration</span></strong></p>
+
+<ul dir="ltr">
+	<li style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin-left: 40px;"><span style="font-size:14px;"><strong>Enables feature:</strong></span>
+
+	<ul>
+		<li style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin-left: 40px;"><span style="font-size:14px;"><strong>Globally: </strong></span>
+
+		<ul>
+			<li style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin-left: 40px;"><span style="font-size:12px;">Setting the property<strong>&nbsp;</strong><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>curam.environment.enable.timeout.warning.modal</strong> equals true - an external application</i></span></li>
+			<li style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin-left: 40px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Setting the property</span><strong style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</strong><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>curam.environment.internal.enable.timeout.warning.modal</strong>&nbsp;equals true - an internal application</i></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin-left: 40px;"><span style="font-size:14px;"><strong>There are three ways to&nbsp;set this feature:</strong></span></li>
+</ul>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin-left: 80px;"><strong style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: 18px;">&nbsp;</span></strong><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; </span>1. <strong>Specific Application Configuration</strong></p>
+
+<p dir="ltr" style="margin-left: 80px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; - The <i>timeout-warning</i> element within the application<strong> configuration(*.app) xml</strong> <font color="#323232" face="HelvRegularIBM, Helvetica Neue, Arial, sans-serif"><span style="font-size: 16px;">.</span></font></p>
+
+<p dir="ltr" style="margin-left: 80px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. <strong>System administrator application</strong></p>
+
+<p dir="ltr" style="margin-left: 80px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; - creates the property used for all applications<font color="#323232" face="HelvRegularIBM, Helvetica Neue, Arial, sans-serif"><span style="font-size: 16px;">.</span></font></p>
+
+<p dir="ltr" style="margin-left: 80px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3.&nbsp;<span style="font-size:12px;"><strong>Global Configuration -</strong></span></p>
+
+<p dir="ltr" style="margin-left: 80px;"><span style="font-size:12px;"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - </strong>gets the default value by the files<strong> </strong></span><strong><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">ApplicationConfiguration.properties and <span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;">CDEJResources.properties</span></span></strong></p>
+
+<p dir="ltr" style="margin-left: 80px;">&nbsp;</p>
+
+<ul dir="ltr" style="margin-left: 40px;">
+	<li><span style="font-size:14px;"><strong>Following the table with the configuration properties</strong>: </span></li>
+	<li style="margin-left: 80px;"><span style="font-size:14px;"><strong>The specific application configuration has more priority than the global configuration properties. <span style="color:#FF0000;">The priority these properties are showing as numbers in the table.</span></strong></span>
+	<ul>
+		<li style="margin-left: 80px;"><span style="font-size:14px;"><strong><span style="color:#FF0000;">1: High priority</span></strong></span></li>
+		<li style="margin-left: 80px;"><span style="font-size:14px;"><strong><span style="color:#FF0000;">2: Medium priority</span></strong></span></li>
+		<li style="margin-left: 80px;"><span style="font-size:14px;"><strong><span style="color:#FF0000;">3: Low priority</span></strong></span></li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<table align="center" border="1" dir="ltr" style="width: 989px;">
+	<tbody>
+		<tr>
+			<td style="width: 125px;"><span style="font-size:14px;"><strong>Property</strong></span></td>
+			<td style="width: 152px;"><span style="font-size:14px;"><strong>Type / Default Value</strong></span></td>
+			<td style="width: 212px;"><span style="font-size:14px;"><strong>Description</strong></span></td>
+			<td style="width: 281px;"><span style="font-size:14px;"><strong>Configuration</strong></span></td>
+		</tr>
+		<tr>
+			<td style="width: 125px;"><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>curam.environment.enable.timeout.warning.modal</strong></i></td>
+			<td style="width: 152px;">Boolean / true</td>
+			<td style="width: 212px;"><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><em style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; font-size: inherit;">Enables/Disables the featu</em></i><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><em style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; font-size: inherit;">re in an external application</em></i></td>
+			<td style="width: 281px;">
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">1.&nbsp;</span><span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;">The system admin can enable or disable the feature by changing the property&nbsp;</span><span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;">in the&nbsp;<u>system administration application.</u></span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 125px;"><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>curam.environment.internal.enable.timeout.warning.modal</strong></i></td>
+			<td style="width: 152px;">Boolean/true</td>
+			<td style="width: 212px;"><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><em style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; font-size: inherit;">Enables/Disables the featu</em></i><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><em style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; font-size: inherit;">re in an internal application</em></i></td>
+			<td style="width: 281px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">1.&nbsp;</span><span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;">The system admin can enable or disable the feature by changing the property&nbsp;</span><span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;">in the&nbsp;<u>system administration application.</u></span></td>
+		</tr>
+		<tr>
+			<td style="width: 125px;"><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>curam.environment.timeout.warning.modal.time</strong></i></td>
+			<td style="width: 152px;"><span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;">Integer /120 seconds</span></td>
+			<td style="width: 212px;"><span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;">The period of time in seconds that the application will show the timeout warning dialog before the current session expires in an external application</span></td>
+			<td style="width: 281px;">
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">1. Per specific application with the element timeout-warning within the *.app xml&nbsp;file.</span><br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">2. </span><span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;">The system admin can enable or disable the feature by changing the property&nbsp;</span><span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;">in the&nbsp;<u>system administration application.</u></span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">3. By default value 120 seconds.</span></p>
+
+			<p><span style="color:#FF0000;"><span style="font-size: 11px;">**see the information below</span></span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 125px;"><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>curam.environment.internal.timeout.warning.modal.time</strong></i></td>
+			<td style="width: 152px;"><span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;">Integer /120 seconds</span></td>
+			<td style="width: 212px;"><span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;">The period of time in seconds that the application will show the timeout warning dialog before the current session expires in an internal application</span></td>
+			<td style="width: 281px;">
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">1. Per specific application with the element timeout-warning within the *.app xml&nbsp;file.<br />
+			2.&nbsp;<span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;">The system admin can enable or disable the feature by changing the property&nbsp;</span><span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;">in the&nbsp;<u>system administration application.</u></span></p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">3. By default value 120 seconds.</p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="color: rgb(255, 0, 0);"><span style="font-size: 11px;">**see the information below</span></span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 125px;"><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>curam.environment.timeout.warning.modal.logoutpage</strong></i></td>
+			<td style="width: 152px;"><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><em style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; font-size: inherit;">String / LogoutWrapper</em></i></td>
+			<td style="width: 212px;"><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Sets the logout page in an external application.</i><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The page needs to be UIM type.</span></td>
+			<td style="width: 281px;">
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">1. Per specific application with the element banner-menu within the *.app XML&nbsp;file.</span><br />
+			<span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;">2. The system admin can enable or disable the feature by changing the property&nbsp;</span><span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;">in the&nbsp;<u>system administration application.</u></span><br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">3. By default value&nbsp;</span>LogoutWrapper</p>
+
+			<p><span style="color: rgb(255, 0, 0); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 11px;">*see the information below</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 125px;"><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>curam.environment.internal.timeout.warning.modal.logoutpage</strong></i></td>
+			<td style="width: 152px;"><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><em style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; font-size: inherit;">String / internalLogoutWrapper</em></i></td>
+			<td style="width: 212px;"><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Sets the logout page in an internal application.</i><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The page needs to be UIM type.</span></td>
+			<td style="width: 281px;">
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;">1. The system admin can enable or disable the feature by changing the property&nbsp;</span><span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;">in the&nbsp;<u>system administration application.</u></span><br />
+			2. By default value internalLogoutWrapper</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 125px;">
+			<p class="p1"><span style="color:#000000;"><strong>timeout.warning.modal.appServer.buffering.period </strong></span></p>
+			</td>
+			<td style="width: 152px;"><span style="color:#000000;"><span style="font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;">Integer / 20 seconds</span></span></td>
+			<td style="width: 212px;">
+			<p class="p1"><span style="color:#000000;">Configures the buffering period (in seconds) to allow a server more time to respond to client request over a slow network.</span></p>
+			</td>
+			<td style="width: 281px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">1. The default value would be set in <u>ApplicationConfiguration.properties</u></span></td>
+		</tr>
+		<tr>
+			<td style="width: 125px;"><strong><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">timeout.warning.modal.width </span></strong></td>
+			<td style="width: 152px;">580px</td>
+			<td style="width: 212px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Width of modal in pixels</span></td>
+			<td style="width: 281px;">
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">1. Per specific application with the element timeout-warning within the *.app XML&nbsp;file</span><br />
+			<br />
+			<br />
+			<br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">2. The default value would be set in <u>ApplicationConfiguration.properties</u></span></p>
+
+			<p><span style="color:#FF0000;"><span style="font-size: 11px;">**see the information below</span></span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 125px;"><strong><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">timeout.warning.modal.height </span></strong></td>
+			<td style="width: 152px;">250px</td>
+			<td style="width: 212px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Height of modal in pixels</span></td>
+			<td style="width: 281px;">
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">1. Per specific application with the element timeout-warning within the *.app XML&nbsp;file</span><br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">2. The default value would be set in <u>ApplicationConfiguration.properties</u></span></p>
+
+			<p><span style="color:#FF0000;"><span style="font-size: 11px;">**see the information below</span></span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 125px;"><strong><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">timeout.warning.modal.title </span></strong></td>
+			<td>String / Timeout Warning</td>
+			<td>
+			<p>Configures the initial title of the timeout warning modal</p>
+			</td>
+			<td>
+			<p>1. Per specific application with the element timeout-warning within the *.app XML file.</p>
+
+			<p>2. The default value would be set in&nbsp;CDEJResources.properties file.</p>
+
+			<p><span style="color:#FF0000;">**see the information below</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td><strong>timeout.warning.modal.user.message</strong></td>
+			<td>String / You will be timed out when the countdown reaches 0 seconds:Click Continue to resume using the application or Quit to exit.</td>
+			<td>
+			<p>Configures the initial user message of the timeout warning modal when the warning is displayed to the&nbsp;user.</p>
+
+			<p>&nbsp;</p>
+			</td>
+			<td>
+			<p>1. Per specific application with the element timeout-warning within the *.app XML file</p>
+
+			<p>2. The default value would be set in&nbsp;CDEJResources.properties file.</p>
+
+			<p><span style="color:#FF0000;">**see the information below</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td><strong>timeout.warning.modal.continue.buton</strong></td>
+			<td>String /&nbsp;Continue</td>
+			<td>
+			<p>Configures the text of the Continue modal button.</p>
+			</td>
+			<td>
+			<p>1. Per specific application with the element timeout-warning within the *.app XML file.</p>
+
+			<p>2. The default value would be set in&nbsp;CDEJResources.properties file.</p>
+
+			<p><span style="color:#FF0000;">**see the information below</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td><strong>timeout.warning.modal.quit.buton</strong></td>
+			<td>String /&nbsp;Quit</td>
+			<td>
+			<p>Configures the text of the Quit modal button.</p>
+			</td>
+			<td>
+			<p>1. Per specific application with the element timeout-warning within the *.app XML file.</p>
+
+			<p>2. The default value would be set in&nbsp;CDEJResources.properties file.</p>
+
+			<p><span style="color:#FF0000;">**see the information below</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p><strong>timeout.warning.modal.expired.user.message</strong></p>
+			</td>
+			<td>String / &nbsp;You have been automatically timed out due to a period of inactivity on your account.</td>
+			<td>
+			<p>Configures the user message of the timeout warning modal when the session timeout out.</p>
+			</td>
+			<td style="width: 281px;">
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">1. Per specific application with the element timeout-warning within the *.app XML file.</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">2. The default value would be set in&nbsp;<span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;"><u>CDEJResources.properties</u> file.</span></span></p>
+
+			<p><span style="color:#FF0000;"><span style="font-size: 11px;">**see the information below</span></span></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p class="p1"><strong><s>timeout.warning.modal.expired.title</s>&nbsp;@deprecated</strong></p>
+			</td>
+			<td><s><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">String / &nbsp;</span>Timeout</s></td>
+			<td><s>This </s><s>propery</s><s> will be deprecated because in the new version we are using the login page to show the expired message.</s></td>
+			<td style="width: 281px;">
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><s>1. Per specific application with the element timeout-warning within the *.app XML file.</s></p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><s>2. The default value would be set in&nbsp;<span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;"><u>CDEJResources.properties</u>&nbsp;file.</span></s></p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="color: rgb(255, 0, 0);"><span style="font-size: 11px;">**see the information below</span></span></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p class="p1"><strong><s>timeout.warning.modal.dismiss.buton</s>&nbsp;@deprecated</strong></p>
+			</td>
+			<td><s><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">String / &nbsp;Close</span></s></td>
+			<td><s><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">This propery will be deprecated because in the new version we are using the login page to show the expired message.</span></s></td>
+			<td style="width: 281px;">
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><s>1. Per specific application with the element timeout-warning within the *.app XML file.</s></p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><s>2. The default value would be set in&nbsp;<span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;"><u>CDEJResources.properties</u>&nbsp;file.</span></s></p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="color: rgb(255, 0, 0);"><span style="font-size: 11px;">**see the information below</span></span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="p1" dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </i></p>
+
+<p class="p1" dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="font-size:24px;"><span style="color: rgb(255, 0, 0);"><span style="font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif;">*</span></span></span><span style="color:#000000;"><u><span style="font-size:16px;"> Enabling the specific logout page associated with the Quit button</span></u><span style="font-size:24px;"><span style="font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif;">&nbsp;in the External application</span></span></span></p>
+
+<ul dir="ltr">
+	<li class="p1" style="font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif;"><span style="font-size:12px;">In order to configure the logout associated with the Quit button within the dialog for a specific feature the&nbsp;<em style="margin: 0px; padding: 0px; border: 0px; vertical-align: baseline; font-size: inherit;">logout</em>&nbsp;attribute needs to be set to true on the logout banner menu item on the person banner menu.</span>
+
+	<ul>
+		<li class="p1" style="font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif;"><span style="font-size:12px;">The following example demonstrates this:</span><br />
+		<br />
+		<br />
+		<br />
+		<span style="font-size:12px;">&lt;ac:banner-menu type="person" title="person.title" page-id="somPageID"&gt; </span><br />
+		&nbsp;&nbsp; &nbsp;&nbsp;<span style="font-size:12px;">&lt;ac:menu-item id="logout" title="menu.logout.title" text="menu.logout.text" page-id="LogoutWrapper" logout="true"/&gt;<br />
+		&lt;/ac:banner-menu&gt;</span></li>
+	</ul>
+	</li>
+</ul>
+
+<div class="code panel" dir="ltr" style="margin: 0px; padding: 0px; border: 1px; vertical-align: baseline; font-size: 16px; color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;">
+<p>&nbsp;</p>
+
+<p><span style="font-size:24px;"><span style="color: rgb(255, 0, 0);"><span style="font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif;">** </span></span></span>The following attributes can be used to configure the size of the modal and text within this modal dialog. Each of these attributes are optional and in the case where an attribute is not specified the value will be taken from the build time defaults provided.&nbsp;</p>
+
+<p class="p1" dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size:14px;"><strong> &lt;ac:timeout-warning title="timeout.title"</strong></span></p>
+
+<p class="p1" dir="ltr"><span style="font-size:14px;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;user-message="timeout.user-message"</strong></span></p>
+
+<p class="p1" dir="ltr"><span style="font-size:14px;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="left" style="color: rgb(0, 0, 0);">expired-user-message = "timeout.expired-message"</span></strong></span></p>
+
+<p class="p1" dir="ltr"><span style="font-size:14px;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;continue-button="timeout.continue"</strong></span></p>
+
+<p class="p1" dir="ltr"><span style="font-size:14px;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;quit-button="timeout.logout"</strong></span></p>
+
+<p class="p1" dir="ltr"><span style="font-size:14px;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;timeout="300"</strong></span></p>
+
+<p class="p1" dir="ltr"><span style="font-size:14px;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;width="650"</strong></span></p>
+
+<p class="p1" dir="ltr"><span style="font-size:14px;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;height="300"</strong></span><br />
+<br />
+<span style="color:#000000;"><strong><span style="font-size:18px;">Resilience</span></strong></span></p>
+</div>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">&nbsp;<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">What happens if the application can't read the session expiry cookie or properties?</span>
+
+	<ul>
+		<li style="margin-left: 40px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The application is not able to execute this feature</span></li>
+	</ul>
+	</li>
+	<li style="margin-left: 40px;">What happens if the default properties are configured in the <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;"><u>CDEJResources.properties and&nbsp;</u></span><u>ApplicationConfiguration.properties</u></span> but the feature is not enabled by the System Admin with the property <i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>curam.environment.enable.timeout.warning.modal</strong></i>&nbsp; or <i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>curam.environment.internal.enable.timeout.warning.modal</strong></i>?
+	<ul>
+		<li style="margin-left: 40px;">The application is not able to execute this feature</li>
+	</ul>
+	</li>
+	<li style="margin-left: 40px;">&nbsp; What happens if the configuration properties are not able to share between both applications(external and internal)?
+	<ul>
+		<li style="margin-left: 40px;">A new solution needs to be thought.</li>
+	</ul>
+	</li>
+	<li style="margin-left: 40px;">&nbsp; What will happen if the values of cookie are changed maliciously?
+	<ul>
+		<li style="margin-left: 40px;">The session timeout will not appear as while the cookie is invalid. We could have an endless loop in this case. The session timeout warning will never appear in this case.</li>
+	</ul>
+	</li>
+	<li style="margin-left: 40px;">&nbsp; What will happen if the session is reset when any modal dialog or the application does some redirect for a second page?
+	<ul>
+		<li style="margin-left: 40px;">The Filter will reset the cookie with the new values.</li>
+	</ul>
+	</li>
+	<li style="margin-left: 40px;">&nbsp; What will happen if the user doesn't like this feature?
+	<ul>
+		<li style="margin-left: 40px;">The user needs to talk to the System Admin to switch off this feature.</li>
+	</ul>
+	</li>
+	<li style="margin-left: 40px;">&nbsp; What will happen if the System admin decides to switch on this feature?
+	<ul>
+		<li style="margin-left: 40px;">The System admin needs to follow the steps to turn on this feature.</li>
+	</ul>
+	</li>
+	<li style="margin-left: 40px;">What will happen if the System Admin would like to change the default configuration properties per application or globally.
+	<ul>
+		<li style="margin-left: 40px;">The System admin needs to change *.app XML file with the element timeout-warning defined above.</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr"><u><strong><span style="font-size:18px;">Use Cases</span></strong></u></p>
+
+<p dir="ltr">These scenarios are already working on the external application. The internal application needs to have the same behavior.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" style="width:100%;">
+	<tbody>
+		<tr>
+			<td><strong>Role/Actor</strong></td>
+			<td style="width: 602px;"><strong>Description</strong></td>
+			<td style="width: 417px;"><strong>Expected Behavior</strong></td>
+			<td style="width: 129px;"><strong>Tested</strong></td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 602px;">
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The session timeout warning is globally enabled in an Internal and</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">disabled in and external application</span></p>
+			</td>
+			<td style="width: 417px;">Starts the session timeout warning in the internal application</td>
+			<td style="width: 129px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Automate</span></td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">User</span></td>
+			<td style="width: 602px;">
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The session timeout warning is globally enabled in an external and </span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">disabled in and internal application</span></p>
+			</td>
+			<td style="width: 417px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Starts the session timeout warning in the external application</span></td>
+			<td style="width: 129px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Automate</span></td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 602px;">
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The session timeout warning is globally enabled in an internal application with this values:</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-</span><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">curam.environment.internal.enable.timeout.warning.modal=true</i></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-</span><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">curam.environment.internal.timeout.warning.modal.time= 100</i></p>
+
+			<p>-<i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">curam.environment.internal.timeout.warning.modal.logoutpage= </i> customizeLogoutWrapper</p>
+
+			<p>&nbsp;</p>
+			</td>
+			<td style="width: 417px;">Return the JSON with all properties. The global properties are returned instead of the default value.</td>
+			<td style="width: 129px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Automate</span></td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">User</span></td>
+			<td style="width: 602px;">
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The session timeout warning is globally enabled in an external application with this values:</p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-<i>curam.environment.enable.timeout.warning.modal=true</i></p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-<i>curam.environment.timeout.warning.modal.time= 100</i></p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-<i>curam.environment.timeout.warning.modal.logoutpage= LogoutWrapper</i></p>
+			</td>
+			<td style="width: 417px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Return the JSON with all properties. The global properties are returned instead of the default value.</span></td>
+			<td style="width: 129px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Automate</span></td>
+		</tr>
+		<tr>
+			<td>User&nbsp;</td>
+			<td style="width: 602px;">The session timeout warning is globally enabled in an internal application. The timeout-warning element is not configured.</td>
+			<td style="width: 417px;">
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">- Gets properties the according with the priority of the configuration defined on the table above.</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-The application specific configuration has precedence over the global configurations.</span></p>
+
+			<p>-Shows the dialog to a user if their session is about to expire accordingly to the configured remaining time for all the applications.</p>
+
+			<p>&nbsp;</p>
+			</td>
+			<td style="width: 129px;">
+			<p>Manual / Testing Plan 3.</p>
+
+			<p><span style="color: rgb(255, 0, 0); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">**See item "Testing" below</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td>System</td>
+			<td style="width: 602px;">The property&nbsp;
+			<p class="p1"><strong>curam.environment.timeout.warning.modal.logoutpage</strong>&nbsp;is not defined by the system admin.</p>
+
+			<p class="p1">&nbsp;</p>
+			</td>
+			<td style="width: 417px;">
+			<p class="p1">The default value "LogoutWrapper" is returned.&nbsp;</p>
+			</td>
+			<td style="width: 129px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Automate.</span></td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">User</span></td>
+			<td style="width: 602px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The session timeout warning is globally enabled in an internal application and external application with the specific configuration.</span></td>
+			<td style="width: 417px;">
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">- Gets properties the according with the priority of the configuration defined on the table above.</p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-The application specific configuration has precedence over the global configurations.</p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-Shows the&nbsp;dialog&nbsp;to a user if their session is about to expire accordingly to the configured remaining time for all the applications.</p>
+			</td>
+			<td style="width: 129px;">
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Manual / Testing Plan 1.</p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="color:#FF0000;">**See item "Testing" below</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 602px;">The session timeout warning is globally disabled in an external and an internal application by the system admin but the timeout-warning element is configured</td>
+			<td style="width: 417px;">Feature is disabled for all the applications.</td>
+			<td style="width: 129px;">Manual/ Testing Plan 2</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 602px;">Doesn't execute any action after the warning of session timeout.</td>
+			<td style="width: 417px;">The application will redirect to the login page defined after the session expires with the expired message.</td>
+			<td style="width: 129px;">Automate</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 602px;">Click on the button <strong>Continue </strong>of the timeout warning modal dialog.</td>
+			<td style="width: 417px;">
+			<p class="p1">Allow the user reset the session timeout timer,&nbsp;close the modal dialog and enables<span class="s1"> </span>the<span class="s1"> </span>user<span class="s1"> </span>to<span class="s1"> </span>continue<span class="s1"> </span>using<span class="s1"> </span>the<span class="s1"> </span>application.<span class="s1"> </span></p>
+			</td>
+			<td style="width: 129px;">Automate</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 602px;">Click on the button <strong>Quit </strong>of the timeout warning modal.</td>
+			<td style="width: 417px;">Close the modal and go to the login page.</td>
+			<td style="width: 129px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Automate.</span></td>
+		</tr>
+		<tr>
+			<td>user</td>
+			<td style="width: 602px;">Manipulate maliciously the cookie values.</td>
+			<td style="width: 417px;">
+			<p>If the cookie is not valid, do not execute the session timeout verification.</p>
+			</td>
+			<td style="width: 129px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Automate.</span></td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 602px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Insert data on the application without any interaction with the server and the session is about to expire</span></td>
+			<td style="width: 417px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Shows the modal dialog when the time to show the warning is true.</span></td>
+			<td style="width: 129px;">Automate</td>
+		</tr>
+		<tr>
+			<td>System</td>
+			<td style="width: 602px;">Specifies a login page for the login page to navigate to when the session times out. This login page is different to that which has been specified in the deployment descriptor (web.xml).</td>
+			<td style="width: 417px;">One login page should be displayed to the user to authenticate. There should never be a situation where two pages are presented to the user to log in. Should be tested for internal and external applications.</td>
+			<td style="width: 129px;">Automate</td>
+		</tr>
+		<tr>
+			<td>System</td>
+			<td style="width: 602px;">The value specified for the logout property is not a login page but a different page.</td>
+			<td style="width: 417px;">Ensure that if the session times out and the page specified in the property is requested, that the page to log in is displayed to the user and then redirected to the correct page.</td>
+			<td style="width: 129px;">Automate</td>
+		</tr>
+		<tr>
+			<td>System</td>
+			<td style="width: 602px;">The value specified for the logout property does not exist on the system.</td>
+			<td style="width: 417px;">The application shows the message default for page not found: "<span style="color: rgb(0, 0, 0); font-family: Tahoma; font-size: 11.2px;">Tab Test Application Customized Message: The page you have requested is not available. One possible cause for this is that you are not licensed for the necessary Cúram module - if that is the case, you can use the User Interface administration screens to remove these links.</span>"</td>
+			<td style="width: 129px;">
+			<p>Manual/ Testing plan 4</p>
+
+			<p><span style="color: rgb(255, 0, 0); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">**See item "Testing" below</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-left: 40px;"><u style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Implementation&nbsp;Notes</span></strong></u></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The session timeout warning API is started in all the applications that extends:</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1) The appController.jspx (internal application) or</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2)ExternalApplicationBannerRenderer - external application for Authenticated user or</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3) resolve.jspx and player.jspx - external application for Not authenticated user.<br />
+&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:16px;"><span style="background-color:#FFFF00;">Configuration</span></span></strong><span style="background-color:#FFFF00;">&nbsp;</span><strong><span style="font-size:16px;"><span style="background-color:#FFFF00;">Properties</span></span></strong></p>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;- &nbsp;External Application</span></strong></p>
+
+<ol dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin-left: 80px;">
+	<li>&nbsp;The ExternalApplicationBannerRenderer Class(banner component) calls the JSPUtil to recover the session timeout warning&nbsp;string to insert the&nbsp;javascript&nbsp;in all the pages.</li>
+	<li><span style="color: rgb(0, 0, 0);">The&nbsp;<span class="s1" style="font-family: Monaco; font-size: 11px; color: rgb(34, 34, 34);">curam.util.client.jsp.JspUtil.getSessionTimeoutWarningInitializationJavaScript(appID, sContext) return the javascript responsible to start the session timeout javascript check</span><span style="font-family: Monaco; font-size: 11px; color: rgb(34, 34, 34);">;</span></span></li>
+	<li><span style="color: rgb(0, 0, 0);">There is a javascript called SessionTimeout.js that is responsible for all the logic of this feature.</span></li>
+	<li><span style="color: rgb(0, 0, 0);">The LandingPageRenderer class(home page renderer) calls&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">the JSPUtil to print an expired message on the page.</span></li>
+</ol>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;- &nbsp;Internal Application</span></strong></p>
+
+<ol dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin-left: 80px;">
+	<li>&nbsp;The<strong>&nbsp;appController.jspx</strong>&nbsp;call the JSPUtil to recover the session timeout warning&nbsp;string to&nbsp;<span style="color: rgb(0, 0, 0);">start&nbsp;to check the session timeout warning.</span></li>
+	<li><span style="color: rgb(0, 0, 0);">&nbsp;There is a javascript called SessionTimeout.js that is responsible for all the logic of this feature.</span></li>
+</ol>
+
+<p dir="ltr" style="margin-left: 40px;"><strong style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: 16px;">&nbsp; &nbsp; - &nbsp;Manage properties between Internal and External application</span></strong></p>
+
+<ol dir="ltr" style="margin-left: 40px;">
+	<li style="margin-left: 40px;">The JSPUtil class create a string with the&nbsp;session timeout warning javascript to be inserted in both applications.</li>
+	<li style="margin-left: 40px;"><span style="color: rgb(0, 0, 0); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The&nbsp;</span><span class="s1" style="font-family: Monaco; font-size: 11px;">curam.util.client.jsp.JspUtil.getSessionTimeoutWarningInitializationJavaScript(appID, sContext) return the javascript responsible to start the session timeout javascript check</span><span style="font-family: Monaco; font-size: 11px;">;</span></li>
+	<li style="margin-left: 40px;">The properties is recovered calling&nbsp;<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;the class&nbsp;TabLayoutResolver.java using the path parameter:&nbsp;"/</span><span class="s1" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">config</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">/</span><span class="s1" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">tablayout</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">/</span><span class="s1" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">timeout-warning</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">[</span><span class="s1" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">app</span><span class="s2" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">id][app-container]".</span></li>
+	<li style="margin-left: 40px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The class TabLayoutResolver is used to get the properties.&nbsp;</span>
+	<ol>
+		<li class="li1">The Class TabLayoutResolver has all the logic to return the JSON based if&nbsp;the application has the specific configuration or the global configuration needs to be returned.</li>
+		<li class="li1">The step timeout-warning is responsible for getting all the properties according to the priority.&nbsp;</li>
+	</ol>
+	</li>
+</ol>
+
+<p dir="ltr" style="margin-left: 40px;"><span style="font-size:16px;"><strong><span style="background-color:#FFFF00;">Modal Dialog Infrastructure&nbsp;</span></strong></span></p>
+
+<ul dir="ltr">
+	<li class="li1" style="margin-left: 40px;">Currently, the cookie is reset when the modal is opened, then the user has accessed a new cookie before the button "Continue" is clicked. &nbsp;</li>
+</ul>
+
+<p class="p1 li1" dir="ltr" style="margin-left: 40px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color:#000000;">&nbsp;- As a result of this If the user clicks on the button of back of the browser or open a new browser, they can have the access&nbsp;later&nbsp;session time.</span></p>
+
+<ul dir="ltr" style="margin-left: 40px;">
+	<li class="li1"><span style="font-size:12px;">In this feature, we shouldn't renew a session time when the modal dialog session timeout.</span></li>
+	<li class="li1"><span style="font-size:14px;"><strong><span style="background-color:#FF0000;">A new component should be created to open a modal without server call.</span></strong></span></li>
+</ul>
+
+<p class="li1" dir="ltr"><span style="font-size:16px;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; <span style="background-color:#FFFF00;">&nbsp;Integration between Internal and external application:</span></strong></span></p>
+
+<ul dir="ltr" style="margin-left: 40px;">
+	<li class="li1">The <strong>JspUtil Class</strong> is used to make the&nbsp;junction between an internal and an external application.</li>
+</ul>
+
+<p class="li1" dir="ltr"><strong><span style="font-size:16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="background-color:#FFFF00;">Logout Page&nbsp;</span></span></strong></p>
+
+<ul dir="ltr" style="border: 0px; vertical-align: baseline; padding-right: 0px; padding-bottom: 15px; padding-left: 0px; margin: 0px 0px 0px 25px; list-style: none; font-size: 16px; line-height: 1.625rem; color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;">
+	<li style="margin: 0px; padding: 0px 0px 0px 20px; border: 0px; vertical-align: baseline; font-size: inherit;"><span style="font-size:12px;">&nbsp;&nbsp; &nbsp;•&nbsp;&nbsp; This property&nbsp;should be configured by the system admin</span></li>
+	<li style="margin: 0px; padding: 0px 0px 0px 20px; border: 0px; vertical-align: baseline; font-size: inherit;"><span style="font-size:12px;">&nbsp;&nbsp; &nbsp;</span><span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;">•&nbsp;&nbsp;</span><span style="font-size:12px;">The default value for this property&nbsp;is </span><strong><span style="font-size:14px;">internal<span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;">LogoutWrapper in an internal application.</span></span></strong> <span style="font-size:12px;"> &nbsp;<span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;">Basically, this page will redirect to the </span></span><span style="font-size:14px;"><span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;"><span style="font-size:12px;">logon</span></span></span><span style="font-size:12px;"><span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;"> page</span></span>.<span style="font-size:14px;"><strong><span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;">&nbsp;&nbsp;</span></strong></span></li>
+</ul>
+
+<p dir="ltr" style="margin: 0px; padding: 0px 0px 0px 20px; border: 0px; vertical-align: baseline; font-size: inherit;">&nbsp; &nbsp; &nbsp; <span style="font-size: 18px;"><strong><span style="background-color:#FFFF00;">Timer :</span></strong></span></p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Multi time zones, the&nbsp;client is one location and server is in another location, how will we handle this?</p>
+
+<p dir="ltr">Locale of the time being shown on the modal, different locales handle times in different ways, how are we going to handle this?</p>
+
+<ul dir="ltr" style="margin-left: 80px;">
+	<li>it’s not impacted because we work only with the&nbsp;server session timeout time….we don’t use any local time.</li>
+</ul>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-size: 18px;"><strong><span style="background-color: rgb(255, 255, 0);">CSS :</span></strong></span></p>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - The curam_timeout_warning.css is created to style the session timeout warning.</p>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - The "curam" theme is updated to insert this .css that will be used by the internal application.</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - The file curam-extapp.css must be updated with this line below:&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><img lconnwikiparamattachmentname="SessionTimeout.png" src="Session%20Timeout%20Warning._ATTACHMENTS_/SessionTimeout.png" lconnwikiparamwikipage="Session Timeout Warning" lconnwikimacro="image" alt=""></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><br />
+<br />
+<span style="font-weight: bold; font-size: 18px;"><u>Application Impact</u></span></p>
+
+<ul dir="ltr">
+	<li>External application
+	<ul>
+		<li>The session timeout warning can be enabled just by system admin globally. In the last release, this feature could be enabled per application with the timeout-warning element an external application.</li>
+		<li>The property&nbsp;<i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>curam.environment.enable.timeout.warning.modal </strong></i><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">had the default value &nbsp;"false"</span><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>. </strong>Now, this property has the value "true"</i><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"> </i><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">as default</i><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">.&nbsp;</i></li>
+		<li><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The logon page was modified to display the session expired message in case "</span>When the&nbsp;<strong>session times out is finished</strong>&nbsp;without any user interaction". Following the screen:</li>
+	</ul>
+	</li>
+</ul>
+
+<p class="li1" dir="ltr" style="margin-left: 120px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><img style="width: 600px;" lconnwikiparamattachmentname="Screen Shot 2017-01-16 at 16.18.02.png" src="Session%20Timeout%20Warning._ATTACHMENTS_/Screen%20Shot%202017-01-16%20at%2016.18.02.png" lconnwikiparamwikipage="Session Timeout Warning" lconnwikimacro="image" alt=""></img><br />
+&nbsp;</p>
+
+<p class="li1" dir="ltr" style="margin-left: 40px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr"><u><strong><span style="font-size:18px;">Testing</span></strong></u></p>
+
+<ul dir="ltr">
+	<li>
+	<p>Manual</p>
+
+	<ul>
+		<li>
+		<p><strong>Plan 1:&nbsp;</strong></p>
+
+		<ul>
+			<li>
+			<p><b>External application configuration - Check the following properties as sysadmin :</b><br />
+			<br />
+			- curam.environment.enable.timeout.warning.modal = true</p>
+			</li>
+			<li>
+			<p><b style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Internal application configuration - Check&nbsp;the following properties as sysadmin&nbsp;:</b><br />
+			<br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">- curam.environment.internal.enable.timeout.warning.modal = true</span></p>
+			</li>
+			<li>
+			<p class="p1"><b>On WebSphere console:&nbsp;</b>&gt;&gt;&gt;&nbsp;<a href="https://servername:9043/ibm/console">https://servername:9043/ibm/console</a>&nbsp;&nbsp; Login:&nbsp;websphere/websphere<br />
+			<br />
+			1. Servers -&gt; Server Types -&gt; WebSphere Application Servers<br />
+			<br />
+			2. CuramServer<br />
+			<br />
+			3. Container Settings -&gt; Session management<br />
+			<br />
+			4. Session Timeout -&gt; 3 minutes<br />
+			<br />
+			5. Apply; Save; Logout<br />
+			<br />
+			6. Stop and start the application server</p>
+			</li>
+			<li>
+			<p class="p1"><strong>In the external application: </strong>for this test consider the timeout element configured as :<strong>&nbsp;</strong> &lt;ac:timeout-warning timeout="150"/&gt;</p>
+
+			<ul>
+				<li>
+				<p class="p1">Login as UATEST in the external application - uatest.</p>
+				</li>
+				<li>
+				<p class="p1">After 2:30 minute of idle time, the session timeout warning&nbsp;dialog&nbsp;should appear with the Continue button and Quit button and a 1-minutes timer.<br />
+				<br />
+				&nbsp;&nbsp;&nbsp;&nbsp; - If the user clicks on the Continue button:<br />
+				<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1) Close the modal&nbsp;dialog<br />
+				<br />
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2) Resets the session<br />
+				<br />
+				&nbsp;&nbsp;&nbsp;&nbsp; - If the user clicks on the Quit button:<br />
+				<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1) Close the modal&nbsp;dialog&nbsp;<br />
+				<br />
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2) The application will redirect to the&nbsp;logon&nbsp;page.<br />
+				<br />
+				<br />
+				<br />
+				- After the timer counts down to 00:00, the application will redirect to the&nbsp;logon&nbsp;page, hence invalidating the session with the message " You have been automatically timed out due to a period of inactivity on your account.".<br />
+				<br />
+				&nbsp;</p>
+				</li>
+			</ul>
+			</li>
+			<li>
+			<p class="p1"><strong>In the Internal application:&nbsp;</strong><span style="color: rgb(69, 69, 69); font-family: &quot;Helvetica Neue&quot;;">for this test consider the timeout element configured as :</span><strong style="color: rgb(69, 69, 69); font-family: &quot;Helvetica Neue&quot;;">&nbsp;</strong><span style="color: rgb(69, 69, 69); font-family: &quot;Helvetica Neue&quot;;">&lt;ac:timeout-warning timeout="60"/&gt;</span></p>
+			</li>
+			<li>
+			<p class="p1">Login as caseworker in the internal&nbsp;application</p>
+			</li>
+			<li>
+			<p class="p1">After 2 minutes of idle time, the session timeout warning&nbsp;dialog&nbsp;should appear with the Continue button and Quit button and a 1-minutes timer.<br />
+			<br />
+			&nbsp;&nbsp;&nbsp;&nbsp; - If the user clicks on the Continue button :<br />
+			<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1) Close the modal&nbsp;dialog<br />
+			<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2)&nbsp; Allow the user resets the session<br />
+			<br />
+			&nbsp;&nbsp;&nbsp;&nbsp; - If the user clicks on the Quit button:<br />
+			<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1) Close the modal&nbsp;dialog<br />
+			<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2) The application will redirect to the&nbsp;logon&nbsp;page.<br />
+			<br />
+			- After the timer counts down to 00:00, the application will redirect to the&nbsp;logon&nbsp;page, hence invalidating the session with the message " You have been automatically timed out due to a period of inactivity on your account.".</p>
+			</li>
+		</ul>
+		</li>
+		<li>
+		<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>Plan 2</strong></p>
+
+		<ul>
+			<li>
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><b style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Add &amp; Publish the following properties as sysadmin:</b><br />
+			<br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">- curam.environment.enable.timeout.warning.modal = false</span><br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">- curam.environment.internal.enable.timeout.warning.modal = false</span></p>
+			</li>
+			<li>
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><b style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">On WebSphere console:&nbsp;</b><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&gt;&gt;&gt;&nbsp;</span><a href="https://servername:9043/ibm/console">https://servername:9043/ibm/console</a><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;&nbsp; Login:&nbsp;websphere/websphere</span><br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">1. Servers -&gt; Server Types -&gt; WebSphere Application Servers</span><br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">2. CuramServer</span><br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">3. Container Settings -&gt; Session management</span><br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">4. Session Timeout -&gt; 3 minute</span><br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">5. Apply; Save; Logout</span><br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">6. Stop and start the application server</span></p>
+			</li>
+			<li>
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">In an External application:&nbsp;</strong></p>
+
+			<ul>
+				<li>
+				<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Login as&nbsp;</span> UATEST</p>
+				</li>
+				<li>
+				<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The session timeout warning dialog doesn't show the warning because the feature is disabled.</p>
+				</li>
+			</ul>
+			</li>
+			<li>
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>In an Internal application:</strong></p>
+
+			<ul>
+				<li>
+				<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Login as&nbsp;</span> <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">caseworker</span></p>
+				</li>
+				<li>
+				<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The session timeout warning dialog doesn't show the warning because the feature is disabled.</span></p>
+				</li>
+			</ul>
+			</li>
+		</ul>
+		</li>
+		<li>
+		<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>Plan 3:&nbsp;</strong></p>
+
+		<ul>
+			<li>
+			<p><b style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Check</b><b> the following properties as sysadmin:</b><br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">- curam.environment.internal.enable.timeout.warning.modal = true</span></p>
+			</li>
+			<li>
+			<p class="p1"><b>On WebSphere console:&nbsp;</b>&gt;&gt;&gt;&nbsp;<a href="https://servername:9043/ibm/console">https://servername:9043/ibm/console</a>&nbsp;&nbsp; Login:&nbsp;websphere/websphere<br />
+			1. Servers -&gt; Server Types -&gt; WebSphere Application Servers<br />
+			2. CuramServer<br />
+			3. Container Settings -&gt; Session management<br />
+			4. Session Timeout -&gt; 3 minute<br />
+			5. Apply; Save; Logout<br />
+			6. Stop and start the application server<br />
+			<br />
+			&nbsp;</p>
+			</li>
+			<li>
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>In an Internal application</strong></p>
+
+			<ul>
+				<li>
+				<p class="p1">Login as superuser in an internal application</p>
+				</li>
+			</ul>
+			</li>
+			<li>
+			<p class="p1">After 3&nbsp;minutes of idle time, the session timeout warning&nbsp;dialog&nbsp;should appear with the Continue button and Quit button and a 2-minutes timer.<br />
+			&nbsp;&nbsp;&nbsp;&nbsp; - If the user clicks on the Continue button:<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1) Close the modal&nbsp;dialog&nbsp;&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2) Allow the user resets the session<br />
+			<br />
+			&nbsp;&nbsp;&nbsp;&nbsp; - If the user clicks on the Quit button:<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1) Close the modal&nbsp;dialog&nbsp;<br />
+			&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2) The application will redirect to the&nbsp;logon&nbsp;page.<br />
+			<br />
+			- After the timer counts down to 00:00, the application will redirect to the&nbsp;logon&nbsp;page, hence invalidating the session with the message " You have been automatically timed out due to a period of inactivity on your account.".</p>
+			</li>
+		</ul>
+		</li>
+		<li>
+		<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>Plan 4:&nbsp;</strong></p>
+
+		<ul>
+			<li>
+			<p><b style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Check</b><b> the following properties as sysadmin:</b><br />
+			<br />
+			- curam.environment.internal.enable.timeout.warning.modal = true<br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">- </span><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">curam.environment.internal.timeout.warning.modal.logoutpage=logon</i></p>
+			</li>
+			<li>
+			<p class="p1"><b>On WebSphere console:&nbsp;</b>&gt;&gt;&gt;&nbsp;<a href="https://servername:9043/ibm/console">https://servername:9043/ibm/console</a>&nbsp;&nbsp; Login:&nbsp;websphere/websphere<br />
+			<br />
+			1. Servers -&gt; Server Types -&gt; WebSphere Application Servers<br />
+			2. CuramServer<br />
+			3. Container Settings -&gt; Session management<br />
+			4. Session Timeout -&gt; 3 minute<br />
+			5. Apply; Save; Logout<br />
+			6. Stop and start the application server<br />
+			&nbsp;</p>
+			</li>
+			<li>
+			<p><strong>In an Internal application:</strong></p>
+
+			<ul>
+				<li>
+				<p>Login as&nbsp;&nbsp;caseworker&nbsp;</p>
+				</li>
+			</ul>
+			</li>
+			<li>
+			<p class="p1">After 3&nbsp;minutes of idle time, the session timeout warning&nbsp;dialog&nbsp;should appear with the Continue button and Quit button and a 2-minutes timer.<br />
+			&nbsp;&nbsp;&nbsp;&nbsp; - If the user clicks on the Quit button:<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1) Close the modal&nbsp;dialog&nbsp;<br />
+			&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2) The application will redirect to the page not found with the message: "<span style="color: rgb(0, 0, 0); font-family: Tahoma; font-size: 11.2px;">The page you have requested is not available. One possible cause for this is that you are not licensed for the necessary Cúram module - if that is the case, you can use the User Interface administration screens to remove these links.</span>"<br />
+			<br />
+			&nbsp;</p>
+			</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Automate</p>
+
+	<ul>
+		<li>
+		<p>Javascript tests for sesesionTimeout.js in the file SessionTimeoutTestCase.js</p>
+		</li>
+		<li>
+		<p>Unit Tests for the class TabLayoutResolver and JspUtil in files&nbsp;<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">TabLayoutResolverTestcase and JspUtilTestCase</span></p>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr"><u><strong><span style="font-size:18px;">Documentation/How to Use Feature</span></strong></u></p>
+
+<ol dir="ltr">
+	<li>By default, this feature is enabled. This feature can be enabled or disabled<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;updating &nbsp;the system admin application</span></li>
+	<li><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The properties should be configured per application and globally.&nbsp;</span>
+	<ul>
+		<li><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Inserting the properties into the timeout-warning element. Follow the example:</span>
+		<p class="p1" dir="ltr" style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: 16px;"><span style="font-size:10px;">&lt;ac:timeout-warning title="timeout.title"</span></p>
+
+		<p class="p1" dir="ltr" style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: 16px;"><span style="font-size:10px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;user-message="timeout.user-message"</span></p>
+
+		<p class="p1" dir="ltr" style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: 16px;"><span style="font-size:10px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="left" style="color: rgb(0, 0, 0);">expired-user-message = "timeout.expired-message"</span></span></p>
+
+		<p class="p1" dir="ltr" style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: 16px;"><span style="font-size:10px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;continue-button="timeout.continue"</span></p>
+
+		<p class="p1" dir="ltr" style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: 16px;"><span style="font-size:10px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;quit-button="timeout.logout"</span></p>
+
+		<p class="p1" dir="ltr" style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: 16px;"><span style="font-size:10px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;timeout="300"</span></p>
+
+		<p class="p1" dir="ltr" style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: 16px;"><span style="font-size:10px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;width="650"</span></p>
+
+		<p class="p1" dir="ltr" style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: 16px;"><span style="font-size:10px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;height="300"/&gt;</span></p>
+		</li>
+		<li><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Updating properties in the system admin application. Follow properties that should be configured:</span>
+		<ul>
+			<li><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">In the internal application:</span>
+			<ul>
+				<li><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">curam.environment.internal.enable.timeout.warning.modal</i><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"> </span></li>
+				<li><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">curam.environment.internal.timeout.warning.modal.time</i><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"> </span></li>
+				<li><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">curam.environment.internal.timeout.warning.modal.logoutpage</i></li>
+			</ul>
+			</li>
+			<li><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">In the external application:</span>
+			<ul>
+				<li><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">curam.environment.enable.timeout.warning.modal</i><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"> </span></li>
+				<li><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">curam.environment.timeout.warning.modal.time</i></li>
+				<li><i style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">curam.environment.timeout.warning.modal.logoutpage</i><br />
+				&nbsp;</li>
+			</ul>
+			</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li>If the session timeout warning needs to be included in any jspx that is not showing the session timeout warning for the anonyuns user in the external application
+	<ol>
+		<li>​​<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Get the application ID,&nbsp;</span>for example:
+		<p class="p1">&nbsp; &nbsp; &nbsp; &nbsp; UserPreferences prefs = UserPreferencesFactory.getUserPreferences(session);<br />
+		&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;prefs.getApplicationID(); or<br />
+		&nbsp;</p>
+
+		<p class="p1">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;final String appID = (String) pageContext.getAttribute(<span class="s2">"appId"</span>);</p>
+		</li>
+		<li><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Get the screen context with the information if it is and external or internal application, for example:</span><br />
+		&nbsp;
+		<p class="p1">curam.omega3.taglib.ScreenContext sContext =</p>
+
+		<p class="p1">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; (curam.omega3.taglib.ScreenContext) pageContext.getAttribute(<span class="s1">"ctx"</span>); or</p>
+
+		<p class="p1"><span class="s1">final</span> ScreenContext <span class="s2">screenContext</span> = <span class="s1">new</span> curam.omega3.taglib.ScreenContext();</p>
+
+		<p class="p1">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="s2">screenContext</span>.addContextBits(curam.omega3.taglib.ScreenContext.<span class="s3">EXTAPP</span>);</p>
+		</li>
+		<li>
+		<p>Insert the code line below &nbsp;and pass by parameter the screen context and the application ID:<br />
+		String sessionTimeoutWarningInicialization = JspUtil.getSessionTimeoutWarningInitializationJavaScript(appID, sContext);<br />
+		&nbsp;</p>
+		</li>
+		<li>
+		<p>Check if the string is not null and wrapper the string in a &lt;script&gt;</p>
+
+		<p class="p1">String sessionTimeoutWarningInicialization = curam.util.client.jsp.JspUtil.getSessionTimeoutWarningInitializationJavaScript(prefs.getApplicationID(), sContext);</p>
+
+		<p class="p1"><span class="s2">if</span>(sessionTimeoutWarningInicialization != <span class="s2">null</span>){</p>
+
+		<p class="p1">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; out.print(<span class="s3">"&lt;script&gt;"</span>);</p>
+
+		<p class="p3"><span class="s4">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; out.print(</span><span class="s4">&nbsp;sessionTimeoutWarningInicialization</span><span class="s4">);</span></p>
+
+		<p class="p1">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;out.print(<span class="s3">"&lt;/script&gt;"</span>);</p>
+
+		<p class="p2">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;</p>
+
+		<p class="p1">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}</p>
+
+		<p>&nbsp;</p>
+		</li>
+	</ol>
+	</li>
+	<li>When the time to show the warning is true, the application shows a modal dialog with the information bellow:
+	<ul>
+		<li>These are the defaults values for these properties:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Message: You will be timed out when the countdown reaches 0 seconds: Click Continue to resume using the application or Quit to exit.</li>
+	</ul>
+	</li>
+</ol>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;- Countdown: 120 seconds</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - Button: Continue<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; - Button: Quit</p>
+
+<p dir="ltr" style="margin-left: 40px;">The values should be changed by the element timeout-warning into the *.app (XML file) per application or by System admin globally.</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp; &nbsp;&nbsp;</p>
+
+<ol dir="ltr" start="4">
+	<li>When the countdown is 00:00, if the user doesn’t do any action in this time, the application redirects to the logon page with the expired message:</li>
+</ol>
+
+<ul dir="ltr" style="list-style-type: circle; margin-left: 40px;">
+	<li>&nbsp;In the case of a customised logon page, It needs to be prepared to show this message.</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 80px;">1. Custom Logon JSP page:<br />
+* Import the class JSPUtil using the page directive: &nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;jsp:directive.page import="curam.util.client.jsp.JspUtil"/&gt;</p>
+
+<p dir="ltr" style="margin-left: 80px;">* Insert the scriptlet to print the session expired message on the page:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;jsp:scriptlet&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;![CDATA[ &nbsp;JspUtil. printSessionExpiredMessage(pageContext); ]]&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;/jsp:scriptlet&gt;</p>
+
+<p dir="ltr" style="margin-left: 80px;">2. Custom Logon Renderer class:<br />
+* Create a div with a custom id on your logon page to wrap the session expired message<br />
+* Call the following method sending your div's id as a parameter:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; JspUtil.getSessionExpiredMessageScript(div.id);</p>
+
+<p dir="ltr"><u><strong><span style="font-size:18px;">Check List</span></strong></u><br />
+<br />
+<br />
+&nbsp;</p>
+
+<table border="1" dir="ltr" style="width: 658px;">
+	<tbody>
+		<tr>
+			<td style="width: 166px;"><strong>Check List Item</strong></td>
+			<td style="width: 314px;"><strong>Notes</strong></td>
+			<td style="width: 157px;"><strong>Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Application Configuration</td>
+			<td style="width: 314px;">How will it enabled for both application(internal and external)</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Session Timeout Warning properties</td>
+			<td style="width: 314px;">Check the default values, Check if it will work for both. How the way that the System admin inserts this information. is it accessed to both application</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Refactor of Test Units to cover the internal application</td>
+			<td style="width: 314px;">&nbsp;</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Check the External Application</td>
+			<td style="width: 314px;">&nbsp;</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Check the changes on the CEF</td>
+			<td style="width: 314px;">&nbsp;</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Refactor of the screen with the new layout</td>
+			<td style="width: 314px;">&nbsp;</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Check items of accessibility&nbsp;</td>
+			<td style="width: 314px;">&nbsp;Verify with the team what are the items that need to be checked for the accessibility &nbsp;</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Insert on the release note that the the default UIM&nbsp;<span style="font-size:12px;"><span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;">LogoutWrapper need to be created</span></span></td>
+			<td style="width: 314px;"><em style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif; font-size: inherit; margin: 0px; padding: 0px; border: 0px; vertical-align: baseline;">The default value for this property curam.environment.timeout.warning.modal.logoutpage is&nbsp;</em><span style="color: rgb(50, 50, 50); font-family: HelvRegularIBM, &quot;Helvetica Neue&quot;, Arial, sans-serif;">LogoutWrapper. Then, this information needs to be inserted on the release note.</span></td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Test of External and Internal application</td>
+			<td style="width: 314px;">&nbsp;</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Check if the stream ent_mods has the&nbsp;<font color="#4e9192" style="font-family: Monaco; font-size: 11px;">c</font><span style="color: rgb(57, 45, 231); font-family: Monaco; font-size: 11px;">uram_timeout_warning.css</span></td>
+			<td style="width: 314px;">
+			<p class="p1"><span class="s1">@import</span><span class="s2"> </span>url("../../../themes/curam/css/curam_timeout_warning.css")<span class="s2">;</span></p>
+			</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Documentation about the logon page</td>
+			<td style="width: 314px;">Insert the steps that need to have in this page</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Deprecated properties</td>
+			<td style="width: 314px;">Create documentation for deprecated properties</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Login Page in the external application</td>
+			<td style="width: 314px;">
+			<p>We are not delivering this page. What the flow to change this page in the project that has this page?</p>
+
+			<p>&nbsp;</p>
+			</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><u><strong><span style="font-size:18px;">Work Estimation</span></strong></u></p>
+
+<p dir="ltr">Work Estimates</p>
+
+<ul dir="ltr">
+	<li>
+	<ul>
+		<li>
+		<p>Design: 3&nbsp;Days</p>
+		</li>
+		<li>
+		<p>Prototype: 2&nbsp;Days</p>
+		</li>
+		<li>
+		<p>Implementation: 5&nbsp;Days</p>
+		</li>
+		<li>
+		<p>Testing: 2&nbsp;Days</p>
+		</li>
+		<li>
+		<p>Documentation: 1&nbsp;Days</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Total: 13&nbsp;Days</p>
+	</li>
+</ul>
+
+<h1 dir="ltr"><u>Attachments</u></h1>
+
+<ul dir="ltr">
+	<li>
+	<h2 dir="ltr"><strong>Session Management</strong></h2>
+	</li>
+</ul>
+
+<p class="shortdesc" dir="ltr" style="color: rgb(0, 0, 0); font-family: Arial,sans-serif; font-size: 12.8px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); margin-left: 40px;">Learn how browser sessions are handled in the Cúram application. A browser session can be defined as a continuous period of user activity in the web browser, where successive events are separated by no more than 30 minutes.</p>
+
+<p class="shortdesc" dir="ltr" style="color: rgb(0, 0, 0); font-family: Arial,sans-serif; font-size: 12.8px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; background-color: rgb(255, 255, 255); margin-left: 40px;"><strong>Following the link:</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><span style="font-size:10px;"><a href="http://www.ibm.com/support/knowledgecenter/SS8S5A_6.2.0/com.ibm.curam.content.doc/WebClientReference/r_WEBCREF_Management1SessionManagement1.html">http://www.ibm.com/support/knowledgecenter/SS8S5A_6.2.0/com.ibm.curam.content.doc/WebClientReference/r_WEBCREF_Management1SessionManagement1.htlml</a></span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<div dir="ltr">&nbsp;</div>
+
+<div dir="ltr">&nbsp;</div></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

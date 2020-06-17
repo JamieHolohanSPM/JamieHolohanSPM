@@ -1,0 +1,76 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Test Automation - BackStop.js,puppeteer VS TestCafe</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Test Automation - BackStop.js,puppeteer VS TestCafe";
+    pageId="urn:lsid:ibm.com:td:3662b471-e1ab-47e8-9111-002b8869b81c";
+    toRoot="../../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Test Automation - BackStop.js,puppeteer VS TestCafe</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr"><strong>Backstop JS &amp; Puppeteer :<br />
+WDS example:&nbsp;&nbsp;<a href="https://github.ibm.com/WH-GovHHS/GovHHS-Design-System">https://github.ibm.com/WH-GovHHS/GovHHS-Design-System</a></strong></p>
+
+<ul dir="ltr">
+	<li>Compares&nbsp;screenshots or HTML files with reference screen shots and reports visual differences on the page.&nbsp;</li>
+	<li>Capturing Screenshots is slow. It took over 5 minutes to capture 320 pages.
+	<ul>
+		<li>&nbsp;Screenshots not recommended&nbsp;for our count of 25000 pages.</li>
+	</ul>
+	</li>
+	<li>BackstopJS uses puppeteer behind the scenes. Any additional&nbsp;Puppeteer scripts that are added will&nbsp;run before backstops&nbsp;comparison.&nbsp;</li>
+	<li>Initial setup is not complex&nbsp;&amp; if we generate HTML files we won't need to write complex scripts to access many pages.
+	<ul>
+		<li>HTML files won't be full renderings</li>
+		<li>Configure the JSON files for initial setup and add scenarios (as direct URL or scripted scenario).</li>
+	</ul>
+	</li>
+	<li>Puppeteer scripts can be used on their own to generate a report showing where helvetica font types exist. It doesn't need backstopjs for that information.</li>
+	<li>Backstopjs tests&nbsp; will only&nbsp;run&nbsp;on chromium.</li>
+</ul>
+
+<p dir="ltr"><strong>Selenium :&nbsp;<a href="https://github.ibm.com/WH-Minions/selenium-e2e-tests/">https://github.ibm.com/WH-Minions/selenium-e2e-tests/</a></strong></p>
+
+<ul dir="ltr">
+	<li>Scripts already exists for SPM can these be leveraged?
+	<ul>
+		<li>DevOps&nbsp;can&nbsp;included these in our nightly build.&nbsp;&nbsp;</li>
+		<li>The existing tests are currently broken. It will take a few weeks of work to get these in a passing state.</li>
+		<li>The design of these tests has no central point where we could add code to&nbsp;scan the DOM.&nbsp;</li>
+	</ul>
+	</li>
+	<li>Can it generate reports showing where helvetica font is used?&nbsp;
+	<ul>
+		<li>Its possible to log information about the page and where the font is used on that page.</li>
+	</ul>
+	</li>
+	<li>An advantage of using this over CADG pages is that it will&nbsp;fully render&nbsp;pages included in the script.&nbsp;</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

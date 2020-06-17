@@ -1,0 +1,318 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Dojo Upgrade Instructions</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Dojo Upgrade Instructions";
+    pageId="urn:lsid:ibm.com:td:e01bfed9-a72e-4055-9802-2a2edb8277aa";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Dojo Upgrade Instructions</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Overview</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">Create new source ZIP</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii3">Finding the required IDT sources in iRam</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii4">Finding the required open source Dojo sources on the Web</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii5">Putting it all together into the target ZIP</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii6">Dojo Overrides</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii7">Custom Widgets</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii9">Details</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii10">Theme Customizations</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii8">Testing</a></div>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii1">Overview</h2>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">At the highest level the required activities are:</p>
+
+<ol dir="ltr">
+	<li>Create a new dojo-source ZIP for the target version, put on TINY and update installer to use the new ZIP.</li>
+	<li>Review and reapply Dojo overrides as appropriate.</li>
+	<li>Review and migrate (if needed) custom widgets that build on Dijit.</li>
+	<li>Review and update our customized theme.</li>
+	<li>Test.</li>
+</ol>
+
+<p dir="ltr">Each of these is discussed in more detail below.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">This instruction also covers the most of the instruction for the IDX upgrade, however for the specific information about the IDX upgrade, please refer to&nbsp;<a wiki="W0c6659bf1ea2_4ec4_a931_2222e7accb81" href="/wikis/home#!/wiki/W0c6659bf1ea2_4ec4_a931_2222e7accb81/page/IDX%20Upgrade%20Instructions" id="wikiLink1462791697488" page="IDX Upgrade Instructions">IDX Upgrade Instructions</a></p>
+
+<h2 dir="ltr" id="ii2">Create new source ZIP</h2>
+
+<p dir="ltr">We now use IBM Dojo Toolkit (IDT) instead of the plain open source Dojo Toolkit. This means that we download the relevant sources from iRAM (Rational Asset Manager). Note that you need to request access to this system in order to be able to access assets.<br />
+<br />
+The JDE dojo-source package consists of several IDT packages, here is the list of what you need to get a full dojo-source ready to use.</p>
+
+<ul dir="ltr">
+	<li>Dojo itself, containing "dojo", "dijit" and "dojox" packages.</li>
+	<li>The now-archived "soria" theme.</li>
+	<li>The "util" package that includes the Dojo builder.</li>
+	<li>The "doh" package that includes the Unit test framework (DoH).</li>
+	<li>The "dojox/storage" module from the open source Dojo as this is removed from IDT for legal reasons.</li>
+</ul>
+
+<p dir="ltr">Here is an example of the existing source ZIP currently in use:</p>
+
+<pre dir="ltr">
+\\tiny.curamsoftware.com\ProductDevelopment\TechInf\Development_Tools\dojo-source\dojo-sourceibm_1.7.3.zip</pre>
+
+<p dir="ltr">Note the naming of the file - all aspects of it (name, version and the way they are put together, e.g. "&lt;tool-name&gt;&lt;tool-version&gt;.zip") are configured in:</p>
+
+<pre dir="ltr">
+&lt;JDE_ROOT&gt;\devenv\setup\installers\dojo-source.properties</pre>
+
+<p dir="ltr">This is the file you need to update so that your new source ZIP file is used.<br />
+<br />
+The internal structure of the ZIP is like this:</p>
+
+<pre dir="ltr">
+&lt;ZIP_ROOT&gt;
+  "dojo" folder
+  "dijit" folder
+  "dojox" folder
+  "util" folder
+  README.txt
+  version.txt
+
+On TI_MAIN (dojo 1.9 or later)additional two:
+   "gridx" folder
+   "cometd" folder 
+   
+</pre>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii3">Finding the required IDT sources in iRam</h3>
+
+<ul dir="ltr">
+	<li>Log into iRam</li>
+	<li>Search for "IDT" in the upper right corner</li>
+	<li>In the results list, click on the version you are looking for, e.g. IBM Dojo Toolkit (IDT) 1.7.X - note that versions may be collapsed into one line item in that list so if you can't find your version, try to expand the line item.</li>
+	<li>On the next page click on "Content" link from the left-hand side menu.</li>
+	<li>Go to "Builds" folder</li>
+	<li>Go to folder for the required Dojo build, e.g. 1.7.4-20130307-IBM</li>
+	<li>The ZIP file that starts with "source_" contains the source of Dojo itself.</li>
+	<li>Then go to "Internal Use Only - Do not distribute externally" folder.</li>
+	<li>The ZIP file that starts with "util_" contains the build system.</li>
+	<li>The ZIP file that starts with "tests_" contains the Unit test framework (DoH).</li>
+	<li>The ZIP file that starts with "theme_archive_" contains the archived "soria" theme.</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii4">Finding the required open source Dojo sources on the Web</h3>
+
+<p dir="ltr"><strong><img alt="Idea" height="18" src="https://w3-connections.ibm.com/common/resources/web/com.ibm.oneui.ckeditor/editor/plugins/ibmsametimeemoticons/images/EmoticonLightbulb.gif" title="Idea" width="18"></img></strong>Not required anymore on TI_MAIN as we have stopped using the dojox/storage module.</p>
+
+<ul dir="ltr">
+	<li>Go to <a href="https://dojotoolkit.org/download/">https://dojotoolkit.org/download/</a></li>
+	<li>Find the required Dojo version, e.g. <a href="http://download.dojotoolkit.org/release-1.7.4/">http://download.dojotoolkit.org/release-1.7.4/</a></li>
+	<li>Download the required source ZIP, e.g. dojo-release-1.7.4-src.zip</li>
+	<li>This contains the dojox/storage module.</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii5">Putting it all together into the target ZIP</h3>
+
+<p dir="ltr">[ideal candidate for automating (Python or Ant, anyone?)]</p>
+
+<ul dir="ltr">
+	<li>Copy the "dojo", "dijit" and "dojox" folders from "source_*.zip" into the root of your new ZIP.</li>
+	<li>Copy the "util" folder from "util_*.zip" into the root of your new ZIP.</li>
+	<li>Copy the "util/doh" folder from "tests_*.zip" into the "util" foolder in your new ZIP.</li>
+	<li>Copy the "dijit/themes/soria" folder from "theme_archive_*.zip" into the "dijit/themes" folder in your new ZIP.</li>
+	<li>Copy the "dojox/storage" folder from "dojo-release-XXX-src.zip" into the "dojox" folder in your new ZIP.</li>
+	<li>Copy the "dojox/storage.js" file from "dojo-release-XXX-src.zip" into the "dojox" folder of your new ZIP.</li>
+	<li>Remove the following files and folders from the "dojox/storage" folder of your new ZIP: demos, tests, AirDBStorageProvider.js, AirEncryptedLocalStorageProvider.js, AirFileStorageProvider.js, AirFileStorageProvider.js, FlashStorageProvider.js, GearsStorageProvider.js, Storage.as, Storage.swf, storage_dialog.fla, storage_dialog.swf</li>
+	<li>Remove all the PHP files from the "dojo", "dijit" and "dojox" folders, currently</li>
+</ul>
+
+<pre dir="ltr">
+      dojox/analytics/logger/dojoxAnalytics.php
+      dojox/analytics/logger/JSON.php
+      dojox/form/resources/RecieveFile.php
+      dojox/resources/explore.php
+      dijit/bench/benchReceive.php
+      dijit/bench/widget_construction_test.php</pre>
+
+<ul dir="ltr">
+	<li>Update "dojox/storage/_common.js" in your new ZIP file to remove references to the files you removed in the previous step.</li>
+</ul>
+
+<p dir="ltr">You can now put your newly created dojo-source ZIP on the network, place it in both locations below:</p>
+
+<pre dir="ltr">
+\\tiny.curamsoftware.com\ProductDevelopment\TechInf\Development_Tools\dojo-source</pre>
+
+<pre dir="ltr">
+\\gigantic.curamsoftware.com\ProductDevelopment\TechInf\Development_Tools\dojo-source
+
+Update TIVOB\build_scripts\client.xml     and   TIVOB\client\CoreInf\CuramCDEJ\bin\build-properties.xml
+</pre>
+
+<p dir="ltr">Now do "build cleanclient client" and the first step of the Dojo upgrade process is finished.(If problem occurs at the setup level(delete the dojo-source folder and start again , that should pull down new version of dojo)).</p>
+
+<h3 dir="ltr"><strong><img alt="Idea" height="18" src="https://w3-connections.ibm.com/common/resources/web/com.ibm.oneui.ckeditor/editor/plugins/ibmsametimeemoticons/images/EmoticonLightbulb.gif" title="Idea" width="18"></img> </strong>Note</h3>
+
+<p dir="ltr">The previous didn't actually work for the latest Dojo upgrade.</p>
+
+<p dir="ltr">Instead of deleting the dojo-source, what was needed was the proper un-installation/re-installation.</p>
+
+<ul dir="ltr">
+	<li>Change to devenv/setup of the stream</li>
+	<li>
+	<p>Uninstall dojo-source:</p>
+	</li>
+</ul>
+
+<pre dir="ltr">
+      setup uninstall -Dtool.name=dojo-source</pre>
+
+<ul dir="ltr">
+	<li>Once the uninstall finishes, now run the opposite:</li>
+</ul>
+
+<pre dir="ltr">
+      setup install -Dtool.name=dojo-source</pre>
+
+<ul dir="ltr">
+	<li>Change to the %DEVENV_HOME%/tools/dojo-source for your stream and check that the zip dojo source copied is now the right one (the one you put on tiny).</li>
+</ul>
+
+<h2 dir="ltr" id="ii6">Dojo Overrides</h2>
+
+<p dir="ltr">Dojo overrides are local patches we apply in order to fix problems or introduce capabilities not available in the vanilla Dojo source.<br />
+<br />
+These patches live in the <span style="font-family: courier new,courier,monospace;">&lt;JDE_ROOT&gt;\client\dojo-overrides</span> project in "<span style="font-family: courier new,courier,monospace;">src\main\javascript</span>" and they have a form of whole files taken from the vanilla source where we then make desired changes. During the JDE build the patched files are copied over the corresponding vanilla files and used when generating the target Dojo distribution we then use at runtime.<br />
+<br />
+In order to review the patched files against the new Dojo version we recommend the following procedure.</p>
+
+<ul dir="ltr">
+	<li>Make a unified diff of the patched files against their original vanilla templates.</li>
+	<li>Then apply this udiff onto he corresponding files in the new Dojo version.</li>
+	<li>Review all individual changes for correctness.</li>
+	<li>Resolve any issues and patch failures.</li>
+</ul>
+
+<p dir="ltr">Note: on TI_MAIN the above steps are now automated with the&nbsp;<span style="font-family: 'courier new', courier, monospace;">&lt;JDE_ROOT&gt;\client\dojo-overrides\upgrade.py&nbsp;</span><span style="line-height: 1.5;">script. If you want to use that, read the comments at the top of the file.</span><br />
+To run the script install Python 3.3 or latest and full installation (all default packages)of cygwin .</p>
+
+<p dir="ltr"><br />
+Apart from the above procedure you also need to:</p>
+
+<ul dir="ltr">
+	<li>Check all the overrides against the migration guide for the Dojo version you are upgrading to. E.g. <a href="http://dojotoolkit.org/reference-guide/1.8/releasenotes/1.8.html#migration-notes">http://dojotoolkit.org/reference-guide/1.8/releasenotes/1.8.html#migration-notes</a></li>
+	<li>Check that every override still makes sense - some of them might be obsoleted by changes in Dojo itself.</li>
+	<li>IDT can contain additional fixes which are not part of the open source Dojo Toolkit. While these should not require any migration, it is still worth checking the "CHANGELOG.txt" file for the corresponding Dojo build in iRAM for details.</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii7">Custom Widgets</h2>
+
+<p dir="ltr">Start by running <span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">the&nbsp;</span><span style="font-family: 'courier new', courier, monospace;">&lt;JDE_ROOT&gt;\client\components\client-inf\dojo_upgrade_widgets.py</span><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;script.&nbsp;</span><span style="line-height: 1.5;">It will report on any Dojo changes that may affect the known widgets and will also give you a list of files for manual review.</span></p>
+
+<h3 dir="ltr" id="ii9">Details</h3>
+
+<p dir="ltr">CDEJ has custom widgets in <span style="font-family: courier new,courier,monospace;">&lt;JDE_ROOT&gt;\client\components\client-inf\src\main\javascript\internal</span> under the following locations:</p>
+
+<ul dir="ltr">
+	<li>curam\layout</li>
+	<li>curam\widget</li>
+	<li>curam\matrix</li>
+</ul>
+
+<p dir="ltr">In general we have the following types of widgets:</p>
+
+<ol dir="ltr">
+	<li>customizations of some higher-level Dijit widget
+	<ol>
+		<li>by copy/pasting JS code and then making changes to it</li>
+		<li>by subclassing Dojo classes, then customizing that way</li>
+		<li>by copy/pasting HTML template and making changes to it - this comes with an associated&nbsp;subclass-customized JS code to apply the new template</li>
+	</ol>
+	</li>
+	<li>genuine new development, subclassing a lower-level Dijit widget</li>
+</ol>
+
+<p dir="ltr">Of the above the cases in 1.x usually need changes from Dojo code to be applied to&nbsp;our customized version.<br />
+<br />
+The <span style="font-family:courier new,courier,monospace;">dojo_upgrade_widgets.py</span>&nbsp;script provides detailed information for the 1.1 and 1.3 cases.<br />
+<br />
+For 1.2 cases a manual review is needed to determine if the semantics in the superclass&nbsp;have possibly changed and an update is required to how our own code interfaces with it.&nbsp;Pay special attention where our subclass refers to some non-public members&nbsp;of the superclass, because those could have changed, affecting our subclass.<br />
+Also make sure to review the migration notes for the widgets in this group and make&nbsp;any relevant updates.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><span style="line-height: 1.5;">The case 2. generally only needs&nbsp;</span><span style="line-height: 1.5;">to be reviewed with respect to the Dojo migration guide. E.g. </span><a href="http://dojotoolkit.org/reference-guide/1.8/releasenotes/1.8.html#migration-notes">http://dojotoolkit.org/reference-guide/1.8/releasenotes/1.8.html#migration-notes</a>.&nbsp;<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">If a migration note applies, the corresponding&nbsp;</span><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">changes need to be made to our code.</span></p>
+
+<p dir="ltr"><br />
+Remember you need to review changes in all of these areas:</p>
+
+<ul dir="ltr">
+	<li>JavaScript (*.js)</li>
+	<li>CSS (*.css)</li>
+	<li>HTML templates (*.html)</li>
+</ul>
+
+<h2 dir="ltr" id="ii10">Theme Customizations</h2>
+
+<p dir="ltr">In general a theme is applied to any visual elements of widgets at two levels:</p>
+
+<ul dir="ltr">
+	<li>DOM - it's <strong>structure </strong>and any <strong>class names</strong> assigned to specific elements</li>
+	<li>CSS - rules that reference structure and class names</li>
+</ul>
+
+<p dir="ltr">At a high level the recommended procedure is as follows.</p>
+
+<ul dir="ltr">
+	<li>find out what changes there have been between the current and new Dojo version in the HTML and CSS files
+	<ul>
+		<li>you can use "diff" to get delta of changes for the complete dijit package</li>
+	</ul>
+	</li>
+	<li>verify that those changes are applied to our customized copy, if applicable
+	<ul>
+		<li>[TBD] list relevant CSS files fro the JDE source here</li>
+	</ul>
+	</li>
+</ul>
+
+<h2 dir="ltr" id="ii8">Testing</h2>
+
+<ul dir="ltr">
+	<li>build the JDE, build TabTest app and ClientMockApp</li>
+	<li>run all automated tests, specifically check JavaScript ones</li>
+	<li>Verify overall functionality and look of the TabTest application.</li>
+	<li>Verify in a little more detail specific areas: modal dialogs, expandable lists, pagination, Word integration, ...</li>
+	<li>Build CEF test application and verify its overall functionality and look.&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://curzilla/EJB/Nethra?highlight=%28TestApplications%29#head-b7a6bac77f861ab026fe7bf56ba456ae805d3ac7">http://curzilla/EJB/Nethra?highlight=%28TestApplications%29#head-b7a6bac77f861ab026fe7bf56ba456ae805d3ac7</a></li>
+	<li>Specifically test that each of the dojo-overrides and custom widgets still work after upgrade.</li>
+	<li>Execute RPT and verify there is no new accessibility issues introduced by Dojo upúgrade.</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

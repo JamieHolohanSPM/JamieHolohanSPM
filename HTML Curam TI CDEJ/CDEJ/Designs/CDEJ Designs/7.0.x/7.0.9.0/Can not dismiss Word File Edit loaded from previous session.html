@@ -1,0 +1,163 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Can not dismiss Word File Edit loaded from previous session</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Can not dismiss Word File Edit loaded from previous session";
+    pageId="urn:lsid:ibm.com:td:cd29dad3-92fe-4d53-8f8e-1f4a7ebe18cd";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Can not dismiss Word File Edit loaded from previous session</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h1 dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Design Page for&nbsp;</strong><span class="floatingTable" dojoattachpoint="floatingTableNode"><span class="titleTextArea" dojoattachpoint="titleTextAreaNode"><span class="FloatingSummary TitleText"><span class="SummaryNode TitleText" dojoattachpoint="_floatingSummary">251184</span></span></span></span><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"> - Can not dismiss Word File Edit loaded from previous session</strong></h1>
+
+<h2 dir="ltr" id="ii3">Stakeholders</h2>
+
+<table border="1" dir="ltr" style="width: 269px;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 0px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Role</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 182px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 0px;">Customer</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 182px;">
+			<div class="com-ibm-team-rtc-foundation-web-ui-views-aligned-text com-ibm-team-rtc-foundation-web-ui-label" dojoattachpoint="_value"><span class="LabelValue" title="Ontario - Minstry Children Youth Svcs (003473)">Ontario - Minstry Children Youth Svcs (003473)</span></div>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 0px;">Architect</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 182px;">Fergal Gavin</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 0px;">Developer(s)</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 182px;">Cian McCann</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 0px;">FVT</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 182px;">Satya Minnekanti</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii4">Background</h2>
+
+<p dir="ltr">User blocked from navigating through the application on Internet Explorer when a UIM page containing a Word File Edit widget is relaunched from a previous session following login.</p>
+
+<p dir="ltr"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=251184">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=251184</a></p>
+
+<h2 dir="ltr" id="ii5">Requirements</h2>
+
+<p dir="ltr">Upon session timeout, page refresh or logging out when a Word File Edit Widget is active, the application shall:</p>
+
+<ul dir="ltr">
+	<li><strong>Requirement Option 1</strong>: Successfully re-launch the Word File Edit Widget from the tab session without blocking the application.</li>
+	<li><strong>Requirement Option 2</strong>: Never re-launch the Word File Edit Widget as part of the previous tab session.</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii8">Design Options</h2>
+
+<ul dir="ltr">
+	<li>Currently a file edit widget is launched from UIM <strong>&lt;WIDGET TYPE="FILE_EDIT"&gt;</strong>, example Case_controlMSWord.uim.</li>
+	<li>When the Word File Edit widget is launched:
+	<ul>
+		<li>TabSessionManager.tabUpdated() located at /client-inf/jscript/src/internal/curam/tab/ stores the UIM the Word File Edit widget was launched from in the session.</li>
+	</ul>
+	</li>
+	<li>When session is closed and launched again with the UIM of the Word File Edit widget still stored in the session.
+	<ul>
+		<li>TabSessionManager._restoreTabSession() ensures tabs are restored to the same state as before with the same selected tab. At this point the Word File Edit Control Panel modal will relaunch and block the application.</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr"><strong>Requirement Option 1, Design </strong><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Option 1:</strong></p>
+
+<ul dir="ltr">
+	<li><strong>Make no changes to the tab session manager.</strong>
+
+	<ul>
+		<li>Motivation: The tab session manager is functioning as expected. It is launching each UIM stored from the previous session, in doing so Word File Edit widgets are being relaunched.</li>
+		<li>Solution: Figure out why the Word File Edit Widget does not relaunch correctly and blocks the application and fix it directly.</li>
+		<li>Assumption: We could solve this issue by fixing the Word File Edit widget itself.</li>
+		<li>Implications: Also have to figure out why the Word File Edit widget seems to launch when a session is restored back to the homepage.</li>
+		<li>Pros: Seems like a cleaner fix rather than trying to work around the issue with <strong>Requirement Option 2</strong>.</li>
+		<li>Cons: Hard to identify how much work would be involved in this. I think we are replacing the current Word integration with a new solution in the near future.</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Requirement Option 2, Design </strong><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Option 1:</strong></p>
+
+<ul dir="ltr">
+	<li><strong>UIM Blacklist.</strong>
+
+	<ul>
+		<li>Motivation: This was the preferred solution suggested by the customer.</li>
+		<li>Solution: Specify one or more UIM page ID's to not get stored in the tab session manager, in doing so, they will not relaunch when a session is restored. Any UIM page containing a Word File Edit widget could be specified, therefore the File Edit Control Panel modal will not be relaunched upon login.</li>
+		<li>Assumption:</li>
+		<li>Implications: We currently don't seem to have any contribution mechanism that would allow us to specify a property at TI level which would accumulate values through the stack, rather than be overwritten. We will have to stand over this property going forward. Documentation tasks will be required.</li>
+		<li>Pros: Would make the customer happiest. It is more of an enhancement and would provide additional functionality on top of being used to fix this issue.</li>
+		<li>Cons: Hard to identify how much work would be involved in this. I think we are replacing the current Word integration with a new solution in the near future.</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Requirement Option 2, Design </strong><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Option 2:</strong></p>
+
+<ul dir="ltr">
+	<li><strong>Remove/Ignore UIM's containing a Word File Edit from the tab session.</strong>
+
+	<ul>
+		<li>Motivation: This was the preferred solution suggested by the customer.</li>
+		<li>Solution: It appears that there is no handle on whether the UIM opening has a file edit widget or not at the time it is stored in the sessions. Seems like the most feasible solution would be hook into /CoreInf/CuramCDEJ/lib/curam/web/jsp/file-edit-dialog.jsp to call some javascript which removes the latest entry from the tab session. It sounds doable but I'm finding it difficult to pull back the current session in a format the can be modified and recorded again.</li>
+		<li>Assumption:</li>
+		<li>Implications:</li>
+		<li>Pros: Would make the customer happiest. It is more of an enhancement and would provide additional functionality on top of being used to fix this issue.</li>
+		<li>Cons: Seems like there is a problem with the Word File Edit widget rather than with the tab session.</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">Requirement Decisions</h2>
+
+<p dir="ltr"><strong>Requirement Option 2, Design </strong><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Option 2 </strong>was selected. By setting a variable in session storage through jsp for the word file edit widget we were able to get a handler on whether it was a word file edit widget being opened or not and then ignore these when updating the tab session.</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

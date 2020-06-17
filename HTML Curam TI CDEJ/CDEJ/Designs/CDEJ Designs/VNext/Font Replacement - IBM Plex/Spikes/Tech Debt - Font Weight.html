@@ -1,0 +1,317 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Tech Debt - Font Weight</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Tech Debt - Font Weight";
+    pageId="urn:lsid:ibm.com:td:ad9e954d-43a8-4a38-89b7-3f232b96bed1";
+    toRoot="../../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Tech Debt - Font Weight</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr"><br />
+This page will not explain why this is Tech Debt but suffice it to say that it is the reason that we can't have 1 main font-face name and it's currently causing excessive accidental use of faux fonts.<br />
+<br />
+This Spike changes a lot of CSS. In order to do this in reality, you would need to have a system in place for Automated, Visual, Regression Testing.&nbsp; That would slow down the effort considerably but is the only approach to really know the impact of each change. Having said that, if some CSS is very specific to a small set of screens, then it may be possible to manually test those ones rather than waiting for the AVRT run.</p>
+
+<h2 dir="ltr">Overview of how the change will be made</h2>
+
+<p dir="ltr">The main script will append the appropriate weight after&nbsp;any "font-XXX" CSS property that uses our internal CSS templating properties that derive from our 4 main font family definitions.<br />
+i.e.&nbsp;</p>
+
+<table border="1" dir="ltr" style="width: 200px; table-layout: fixed; overflow-wrap: break-word; border-collapse : collapse; border-color : #696969;">
+	<tbody>
+		<tr>
+			<td style="overflow: hidden; width: 200px; border-color : #696969;">font-family: $something_bold;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">will become</p>
+
+<table border="1" dir="ltr" style="width: 200px; table-layout: fixed; overflow-wrap: break-word; border-collapse : collapse; border-color : #696969;">
+	<tbody>
+		<tr>
+			<td style="overflow: hidden; width: 200px; border-color : #696969;">font-family: $something_bold;<br />
+			font-weight: bold;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">Therefore, before we run it, in Step 1 we make sure that no block will end up with 2 weights defined. It's easier to action this before the main script.&nbsp; However, the fix isn't just to remove the weight as often the existing weight and family conflict.&nbsp;Usually the weight gives you more of an indication of what the developer wanted than the font-family, so this means updating the family inline with the existing weight and then deleting the weight (which will be re-added by the main script).&nbsp;<br />
+i.e.&nbsp;</p>
+
+<table border="1" dir="ltr">
+	<tbody>
+		<tr>
+			<td>font-family: $something_medium;<br />
+			font-weight: normal;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">will become</p>
+
+<table border="1" dir="ltr">
+	<tbody>
+		<tr>
+			<td>font-family: $something_regular;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">and after the main script will become</p>
+
+<table border="1" dir="ltr">
+	<tbody>
+		<tr>
+			<td>font-family: $something_regular;<br />
+			font-weight: normal;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">If the font wasn't being changed, this would still yield a different looking style as before users were seeing a faux font (medium chars forced to look regular) and afterwards, users will see the true font directly from the font file (probably, but other CSS font properties can also cause faux font issues).<br />
+<br />
+There's one outlier which I'll have to deal with later:</p>
+
+<table border="1" dir="ltr">
+	<tbody>
+		<tr>
+			<td>font-family: $something_regular;<br />
+			font-weight: bold !important;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">From my limited CSS experience (growing everyday), it seems like it's best practice to avoid "!important" where possible.&nbsp; I don't have time to figure out whether it's needed though, so I think I'll fix the conflict but leave the existing weight&nbsp;and run another search for it after the main script when it ought to look like this:</p>
+
+<table border="1" dir="ltr">
+	<tbody>
+		<tr>
+			<td>font-family: $something_bold;<br />
+			font-weight: bold;<br />
+			font-weight: bold !important;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">Then I'll remove the one added by the script</p>
+
+<table border="1" dir="ltr">
+	<tbody>
+		<tr>
+			<td>font-family: $something_bold;<br />
+			font-weight: bold !important;</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2 dir="ltr"><br />
+1. Run this command from the root of your repo.&nbsp;</h2>
+
+<table border="1" dir="ltr" style="width: 500px; table-layout: fixed; overflow-wrap: break-word; border-collapse : collapse; border-color : #696969;">
+	<tbody>
+		<tr>
+			<td style="overflow: hidden; width: 500px; border-color : #696969;">
+			<p>find . -type f \( -iname "*.css" \) -print0 | xargs -0 perl -0777 -ne 'while(m/{[^}]*((((font-weight:[^\n^;]*;*)[^}]*)(font[^:]*:[^:^\n^;^}]*[\x24]infrastructure_[^;]*;)[^}]*)|(((font[^:]*:[^:^\n^;^}]*[\x24]infrastructure_[^;]*;)[^}]*)(font-weight:[^\n^;]*;*)))[^}]*}/g){print "\\$ARGV\n";}' | sort -u</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">It finds CSS file containing a CSS block that includes both a "font-weight" and a "fontXXX: $infrastructure_XXX" (in either order).<br />
+<br />
+&nbsp;</p>
+
+<h2 dir="ltr">2. Run the main&nbsp;script from the root of your repo.&nbsp;</h2>
+
+<table border="1" dir="ltr" style="width: 850px; table-layout: fixed; overflow-wrap: break-word; border-collapse : collapse; border-color : #696969;">
+	<tbody>
+		<tr>
+			<td style="overflow: hidden; width: 850px; border-color : #696969;">
+			<p># Read this script by starting after the functions<br />
+			declare -i count=0</p>
+
+			<p># TODO make this script take 1 dir<br />
+			TI_PATH=../../cd_TI_70100mac/TI/<br />
+			SUFFIX=";/g"</p>
+
+			<p>print_property_refs() {<br />
+			&nbsp;&nbsp; &nbsp;local PROPS=("$@")<br />
+			&nbsp;&nbsp; &nbsp;((count+=2))</p>
+
+			<p>&nbsp;&nbsp; &nbsp;for SEARCH_ARGS in ${PROPS[@]}<br />
+			&nbsp;&nbsp; &nbsp;do<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;# Note WEIGHT is not local so will be set within the first call, and persist in the recursive calls<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case $SEARCH_ARGS in<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; infrastructure_main-light_font-family)<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;WEIGHT=300<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;;;<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; infrastructure_main-regular_font-family)<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;WEIGHT=normal<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;;;<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; infrastructure_main-medium_font-family)<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;WEIGHT=500<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;;;<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; infrastructure_main-bold_font-family)<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;WEIGHT=bold<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;;;&nbsp;<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;esac</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;# now based on weight, set up the replacement<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;PREFIX="s/^([ ]*)(font[^:]*:[^:^\n^;^}]*[\x24]$SEARCH_ARGS;)/\$1\$2\\n\$1font-weight: "<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case $WEIGHT in<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; 300)<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;REPLACEMENT="${PREFIX}300${SUFFIX}"<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;;;<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; regular)<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;REPLACEMENT="${PREFIX}normal${SUFFIX}"<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;;;<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; 500)<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;REPLACEMENT="${PREFIX}500${SUFFIX}"<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;;;<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; bold)<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;REPLACEMENT="${PREFIX}bold${SUFFIX}"<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;;;&nbsp;<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;esac</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;#<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;# DIRECT REFERENCES<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;#</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;# printf "%${count}s%s\n" '' "&gt;&gt; BEGIN $SEARCH_ARGS"<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;local SORTED_FILES=`grep -Rl --include=*.css --exclude=*.properties "[\$]$SEARCH_ARGS" . | grep -v fontweights2csv.sh`<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;for FILE in $SORTED_FILES<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;do&nbsp;<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;local NUM_INSTANCES=`grep -c $SEARCH_ARGS $FILE`<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;# printf "%${count}s%s\n" '' "$SEARCH_ARGS, $NUM_INSTANCES, $FILE"&nbsp;<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;echo &nbsp;"$WEIGHT, $SEARCH_ARGS, $NUM_INSTANCES, $FILE"&nbsp;</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;# perl -i.plexbak -pwe "$REPLACEMENT" $FILE<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;# perl -i.plexbak -0777 -pwe "$REPLACEMENT" $FILE<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;done</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;#<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;# INDIRECT REFERENCES<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;#</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;# get the subproperties that directly reference the font families<br />
+			&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;local SUBPROPS=($(grep -ERoi --include=*.properties "^[^=]*=[ ]*[\$]$SEARCH_ARGS" $TI_PATH . | awk -F':' '{print $2}' | awk '{print $1}'))<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; if [ ${#SUBPROPS[@]} -gt 0 ]<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; then<br />
+			&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(<br />
+			&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;print_property_refs "${SUBPROPS[@]}"<br />
+			&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;)<br />
+			&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;fi<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;# printf "%${count}s%s\n" '' "&lt;&lt; END &nbsp; $SEARCH_ARGS"<br />
+			&nbsp;&nbsp; &nbsp;done<br />
+			&nbsp;&nbsp; &nbsp;((count-=2))<br />
+			}</p>
+
+			<p>##################### START OF MAIN SCRIPT #####################</p>
+
+			<p># echo "-----------------------------------------------"<br />
+			# echo "1. Search for refs to helvetica-neue-ibm.css"<br />
+			# echo "-----------------------------------------------"</p>
+
+			<p># echo "weight, search term, instances, file"</p>
+
+			<p># SORTED_FILES=`grep -Rl "main-ibm-font.css" $1 | grep -v fontweights2csv.sh`<br />
+			# for FILE in $SORTED_FILES<br />
+			# do&nbsp;<br />
+			# &nbsp;&nbsp; &nbsp;NUM_INSTANCES=`grep -c "main-ibm-font.css" $FILE`<br />
+			# &nbsp;&nbsp; &nbsp;echo "-, main-ibm-font.css, $NUM_INSTANCES, $FILE" &nbsp;<br />
+			# done</p>
+
+			<p># echo " "<br />
+			# echo "-----------------------------------------------"<br />
+			# echo "2. Search for refs to the font faces defined in helvetica-neue-ibm.css"<br />
+			# echo "-----------------------------------------------"</p>
+
+			<p>FONT_FACES="MainRegularforIBM MainMediumforIBM MainBoldforIBM MainLightforIBM"</p>
+
+			<p>for SEARCH_ARGS in $FONT_FACES<br />
+			do<br />
+			&nbsp;&nbsp; &nbsp;# echo \&gt;\&gt; BEGIN $SEARCH_ARGS<br />
+			&nbsp;&nbsp; &nbsp;PREFIX="s/^([ ]*)(font[^:]*:[^:^\n^;^}]*[\x24]$SEARCH_ARGS;)/\$1\$2\\n\$1font-weight: "<br />
+			&nbsp;&nbsp; &nbsp;case $SEARCH_ARGS in<br />
+			&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; MainLightforIBM)<br />
+			&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;WEIGHT=light<br />
+			&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;REPLACEMENT="${PREFIX}300${SUFFIX}"<br />
+			&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;;;<br />
+			&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; MainRegularforIBM)<br />
+			&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;WEIGHT=regular<br />
+			&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;REPLACEMENT="${PREFIX}normal${SUFFIX}"<br />
+			&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;;;<br />
+			&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; MainMediumforIBM)<br />
+			&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;WEIGHT=medium<br />
+			&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;REPLACEMENT="${PREFIX}500${SUFFIX}"<br />
+			&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;;;<br />
+			&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; MainBoldforIBM)<br />
+			&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;WEIGHT=bold<br />
+			&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;REPLACEMENT="${PREFIX}bold${SUFFIX}"<br />
+			&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;;;&nbsp;<br />
+			&nbsp;&nbsp; &nbsp;esac</p>
+
+			<p><br />
+			&nbsp;&nbsp; &nbsp;SORTED_FILES=`grep -Rl --include=*.css --exclude=*.plexbak "$SEARCH_ARGS" . | grep -v fontweights2csv.sh | grep -v helvetica-neue-ibm.css | grep -v main-ibm-font.css | grep -v internal-infrastructure-css.properties`<br />
+			&nbsp;&nbsp; &nbsp;for FILE in $SORTED_FILES<br />
+			&nbsp;&nbsp; &nbsp;do&nbsp;<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;NUM_INSTANCES=`grep -c $SEARCH_ARGS $FILE`<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;echo "$WEIGHT, $SEARCH_ARGS, $NUM_INSTANCES, $FILE" &nbsp;<br />
+			&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;echo perl -i.plexbak -0777 -pwe "$REPLACEMENT" $FILE<br />
+			&nbsp;&nbsp; &nbsp;done<br />
+			&nbsp;&nbsp; &nbsp;# echo \&lt;\&lt; END $SEARCH_ARGS<br />
+			&nbsp;&nbsp; &nbsp;# echo ------------------<br />
+			done</p>
+
+			<p>echo " "<br />
+			echo "-----------------------------------------------"<br />
+			echo "3. Search for refs to the font family properties defined in internal-infrastructure-css.properties"<br />
+			echo " &nbsp; - then recursively search for references to any properties that reference these properties"<br />
+			echo "-----------------------------------------------"</p>
+
+			<p>FONT_FAMILIES=(infrastructure_main-regular_font-family infrastructure_main-medium_font-family infrastructure_main-bold_font-family infrastructure_main-light_font-family)<br />
+			print_property_refs "${FONT_FAMILIES[@]}"</p>
+
+			<p><br />
+			&nbsp;</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr"><br />
+Note, you might think what's the point? - Are we not removing the font-family properties now that we have one main font family for most of the application? i.e. the main one could be specified for "body" and only specify a font family elsewhere when you don't want to inherit the body CSS.</p>
+
+<p dir="ltr">We are not attempting to remove the font-family definitions yet as we have no idea what CSS block combinations are possible across our application. With an AVRT system in place we could rip these all out and then examine the diffs and fix up any we don't like.<br />
+<br />
+The AVRT is out of scope for this spike but I have an idea for how to write it.</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

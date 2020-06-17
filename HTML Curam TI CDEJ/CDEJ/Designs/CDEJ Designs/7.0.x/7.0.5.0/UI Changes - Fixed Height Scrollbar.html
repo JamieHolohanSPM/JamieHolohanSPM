@@ -1,0 +1,766 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>UI Changes - Fixed Height Scrollbar</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="UI Changes - Fixed Height Scrollbar";
+    pageId="urn:lsid:ibm.com:td:4c536882-fae2-46dd-b451-6a4d1b553189";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">UI Changes - Fixed Height Scrollbar</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr"><span style="font-size:20px;"><strong>UI Changes - Fixed Height Scrollbar</strong></span></p>
+
+<p dir="ltr"><span style="font-size:20px;"><strong>Stakeholders</strong></span></p>
+
+<ul dir="ltr">
+	<li>Refer to the following Org Chart to ensure you are engaging the correct people. The table below indicates the current contacts for each area.
+	<ul>
+		<li><a href="https://ibm.biz/BdsuKd">https://ibm.biz/BdsuKd</a></li>
+	</ul>
+	</li>
+</ul>
+
+<table border="1" dir="ltr" style="width: 500px;">
+	<tbody>
+		<tr>
+			<td style="width: 197px;"><strong><span style="font-size:16px;">Role</span></strong></td>
+			<td style="width: 120px;"><strong><span style="font-size:16px;">Name</span></strong></td>
+			<td style="width: 168px;"><strong><span style="font-size:16px;">Sign Off if Applicable</span></strong></td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">Customer</td>
+			<td style="width: 120px;">Alberta</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">Business Owner/Product Owner</td>
+			<td style="width: 120px;">
+			<p>Shane McFadden / Niambh Scuillion / Sonya Purcell</p>
+			</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">Architect</td>
+			<td style="width: 120px;">Fergal Gavin</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">Developer(s)</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">FVT</td>
+			<td style="width: 120px;">
+			<p>Feargal Conneely</p>
+
+			<p>/ Vamsi Mulollu</p>
+
+			<p>/solution FVT</p>
+			</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">SVT</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">Information Developer</td>
+			<td style="width: 120px;">??</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">UX Design</td>
+			<td style="width: 120px;">Darran McCague</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">Legal</td>
+			<td style="width: 120px;">Jim Rook</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Background</span></strong></p>
+
+<p dir="ltr">Numerous UI issues have been raised by Alberta, key among these was the double scroll bar issue tracked in defect&nbsp;210071.&nbsp;<span style="font-family:Arial, Helvetica, sans-serif">Spike&nbsp;</span>223866 <span style="font-family:Arial, Helvetica, sans-serif">was focused on resolving one element of the UI issues tracked by<span>&nbsp;</span></span><a class="jazz-ui-ResourceLink" href="https://jazz031.hursley.ibm.com:9443/ccm/resource/itemName/com.ibm.team.workitem.WorkItem/210071" id="jazz_ui_ResourceLink_63" style="color: rgb(48, 135, 179); text-decoration: none; position: relative; zoom: 1; border-bottom: 1px solid transparent; cursor: pointer; font-family: Arial, sans-serif; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">defect 210071</a><span style="font-family:Arial, Helvetica, sans-serif"><span>&nbsp;</span>specifically the&nbsp; UI issues related to the double scroll bar caused by the fixed height scroll-able elements. This document outlines the work related to that specific issue.</span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Requirements</span></strong></p>
+
+<p dir="ltr">List of Requirements</p>
+
+<ul dir="ltr">
+	<li>Requirement 1: Remove the fixed height scroll-able elements from the SPM User interface&nbsp; (Platform)
+	<ul>
+		<li>The 455 UIM/VIMs identified by spike 223866 with these elements are details here
+		<ul>
+			<li><a wiki="W4ab16969fba4_4f7e_b302_993010e04343" page="Results - 455 UIM and VIM pages with fixed height scroll bars" id="wikiLink1529579533427" href="https://w3-connections.ibm.com/wikis/home?lang=en#!/wiki/W4ab16969fba4_4f7e_b302_993010e04343/page/Results%20-%20455%20UIM%20and%20VIM%20pages%20with%20fixed%20height%20scroll%20bars">&nbsp;https://w3-connections.ibm.com/wikis/home?lang=en#!/wiki/W4ab16969fba4_4f7e_b302_993010e04343/page/Results%20-%20455%20UIM%20and%20VIM%20pages%20with%20fixed%20height%20scroll%20bars</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li><span style="font-family:Arial, Helvetica, sans-serif">Defect 210071 - Double scrollbar issue on modals</span>. <a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=210071">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=210071</a></li>
+	<li>Spike 223866 - <span style="font-family:Arial, Helvetica, sans-serif">Double scrollbar issue on modals - due to fixed height scrollable </span>- <a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=223866">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=223866</a></li>
+	<li>Story 231510 - <span style="font-family:Arial, Helvetica, sans-serif">UI Changes - Fixed Height Scrollbar - Platform - </span><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=231510">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=231510</a></li>
+	<li>Task 231378 - <span style="font-family:Arial, Helvetica, sans-serif">UI update validation for the Double scroll bar caused by fixed height </span>- <a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=231378">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=231378</a></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Requirement Decisions</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">There may be some outstanding questions/decisions made as regards to the requirements. These decisions should be documented here.</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<table border="1" dir="ltr" height="156" style="width: 1134px;" width="860">
+	<tbody>
+		<tr>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Requirement Decision Title</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:14px;"><strong>Issue or Problem Statement</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Assumptions</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Motivation</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Alternatives</strong></span></td>
+			<td style="width: 325px;"><span style="font-size:14px;"><strong>Decision</strong></span></td>
+			<td style="width: 67px;"><span style="font-size:14px;"><strong>Justification</strong></span></td>
+			<td style="width: 80px;"><span style="font-size:14px;"><strong>Implications</strong></span></td>
+			<td style="width: 62px;"><span style="font-size:14px;"><strong>Status</strong></span></td>
+			<td style="width: 56px;"><span style="font-size:14px;"><strong>Date</strong></span></td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">Remove the fixed height scroll-able elements</td>
+			<td style="width: 125px;">To address one cause of the double scroll-bars within the UI tracked by <span style="font-family:Arial, Helvetica, sans-serif">Defect 210071 and </span>detailed in spike 223866</td>
+			<td style="width: 50px;">
+			<p>1) Pending successful sign off of the testing detailed in task 231378</p>
+
+			<p>&nbsp;</p>
+
+			<p>2) This "fixed height element " will be removed from the platform code in 7.0.5</p>
+
+			<p>&nbsp;</p>
+
+			<p>&nbsp;</p>
+			</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 325px;">
+			<p>Discussed during a meeting 26th June</p>
+
+			<p>It was agreed to remove this fixed height scroll-able elements</p>
+
+			<p>Meeting attended by&nbsp;</p>
+
+			<p><strong>[TPM] </strong>Shane Mcfadden/Ireland/IBM@IBMIE</p>
+
+			<p><strong>[TPM ]</strong> Antoinette Reade/Ireland/IBM@IBMIE</p>
+
+			<p><strong>[Architect-platform ] </strong>Fergal Gavin/Ireland/IBM@IBMIE,</p>
+
+			<p><strong>[Scrum master]</strong> Clodagh Hannon/Ireland/IBM@IBMIE,</p>
+
+			<p><strong>[PO-platform]</strong> Niambh Scullion/Ireland/IBM@IBMIE,</p>
+
+			<p><strong>[BA-platform]</strong> Desmond McCann/Ireland/IBM,</p>
+
+			<p><strong>[FVT]</strong> Feargal Conneely/Ireland/IBM@IBMIE,</p>
+
+			<p>Vamsi Mukollu1/Ireland/IBM@IBM</p>
+
+			<p><strong>[Design] </strong>Darran Mccague/Ireland/IBM@IBMIE</p>
+			</td>
+			<td style="width: 67px;">&nbsp;</td>
+			<td style="width: 80px;">&nbsp;</td>
+			<td style="width: 62px;">Agreed</td>
+			<td style="width: 56px;">26/6/2018</td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">Any stream that will NOT take this change</td>
+			<td style="width: 125px;">The CWC stream is outside the scope of this change to remove the fixed height element&nbsp;</td>
+			<td style="width: 50px;">Investigation done to identify the pages with the fixed height element</td>
+			<td style="width: 50px;">No domain knowledge in testing the changes</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 325px;">
+			<p>Discussion between Sheryl Brenton/Houston/IBM and Niambh Scullion/Ireland/IBM@IBMIE</p>
+
+			<p>~60 CWC pages identified with this element no customer feedback related to issue on these pages it was decided to leave these pages unchanged.</p>
+
+			<p><span style="color:#008080;">Awaiting feedback from Paul and Adin [NS]</span></p>
+
+			<p>&nbsp;</p>
+			</td>
+			<td style="width: 67px;">This decision&nbsp; can be reassessed for future releases if any customer feedback is received</td>
+			<td style="width: 80px;">&nbsp;</td>
+			<td style="width: 62px;">Agreed</td>
+			<td style="width: 56px;">1/8/2018</td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">Where the source code should be integrated in TI</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 325px;">The source code will be integrated in TI/tests folder</td>
+			<td style="width: 67px;">An old version of UiLayoutHelper is already there. It will be overwritten</td>
+			<td style="width: 80px;">&nbsp;</td>
+			<td style="width: 62px;">Agreed</td>
+			<td style="width: 56px;">5/9/2018</td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 325px;">&nbsp;</td>
+			<td style="width: 67px;">&nbsp;</td>
+			<td style="width: 80px;">&nbsp;</td>
+			<td style="width: 62px;">&nbsp;</td>
+			<td style="width: 56px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Non Functional Requirements</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Do the following non functional requirements apply to the enhancement being created and if so, minor details should be provided here. We can fill in N/A if the specified non functional requirement is not applicable to the feature being delivered.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" style="width: 1130px;" width="671">
+	<tbody>
+		<tr>
+			<td style="width: 118px;"><strong>NFR</strong></td>
+			<td style="width: 537px;"><strong>Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+			<td style="width: 454px;"><strong>Comment</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Accessibility</td>
+			<td style="width: 537px;">
+			<p>The ability of the system to be used by people with disabilities. When new technologies are being used for the UI very careful consideration should be given to whether screen readers can be used with the technologies. This applies specifically to usage of JavaScript, Flex and SVG. The use of colors to provide functionality should be considered (and avoided), along with resolutions that will be used by vision impaired users.</p>
+
+			<p>Both desktop application and tablet devices should be considered in this effort.</p>
+			</td>
+			<td style="width: 454px; text-align: center;">This update should not impact on accessibility<strong>. However, as with all wide spread UI changes such as this one (&gt; 500 pages), some regression testing should be built in to test at least some of the affected pages after the change has been made.</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Availability &amp; Resilience</td>
+			<td style="width: 537px;">The ability of the system to be fully or partly operational as and when required and to effectively handle failures that could affect system availability. This should be considered when working outside of the normal infrastructure and deployment. For example, the XML Server is not deployed in an application server and has special handling for fail-over and load balancing. Careful consideration should be taken before adding new components, e.g. EJB Beans, MDBs, to the infrastructure.</td>
+			<td style="width: 454px; text-align: center;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Development Resource</td>
+			<td style="width: 537px;">The ability of the system to be designed, built, deployed and operated within known constraints of people, budget, time, etc. In general there is not much information required here, however where special skill sets or people with siloed knowledge are required to work on the change/enhancement, this should be detailed here.</td>
+			<td style="width: 454px; text-align: center;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Evolution</td>
+			<td style="width: 537px;">The ability of the system to be flexible in the face of the inevitable change that all systems experience after deployment, balanced against the costs of providing such flexibility. Consideration should be given to future proofing the change, including considering how to upgrade to any changes or enhancements provided in the future. Specifically designs should accommodate elements such as localisation (text, dates, etc.), customization, configurability, and componentization. Providing these features in future releases, when not considered up front, has caused impacts for customers in the past and has prevented us from providing the features in some cases.</td>
+			<td style="width: 454px; text-align: center;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Internationalisation</td>
+			<td style="width: 537px;">The ability of the system to be independent from any particular language, country or cultural group. Localisation and internationalisation are a large concern for Cúram. Support should always be provided to view information in multiple locales, based on the user and server locale, along with support for working in multiple time zones.</td>
+			<td style="width: 454px; text-align: center;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Location</td>
+			<td style="width: 537px;">The ability of the system to overcome problems brought about by the absolute location of its elements and the distances between them. For the most part this is not a major concern, however we should never design based on the assumption that the customer will use a default configuration</td>
+			<td style="width: 454px; text-align: center;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Performance and Scalability</td>
+			<td style="width: 537px;">The ability of the system to predictably execute within its mandated performance profile and to handle increased processing volumes. Performance and scalability are a concern and should always be considered during design. Where necessary, the Performance and Benchmarking teaming should be engaged early to help with determining impact of potential changes.</td>
+			<td style="width: 454px; text-align: center;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Regulation</td>
+			<td style="width: 537px;">The ability of the system to conform to locale and international laws, quasi-legal regulations, company policies and other rules and standards. Regulation includes the usages of third party tools and the licensing issues associated with these. New jars should never be introduced without considering the legal implications and licensing of the jars. This includes usage of GPL licensed code. Also, usage of code freely provided on the web and not properly licensed should be avoided.</td>
+			<td style="width: 454px; text-align: center;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Security</td>
+			<td style="width: 537px;">The ability of the system to reliably control, monitor and audit who can perform what actions on what resources and to detect and recover from failures in security mechanisms. This is a concern where new features are added that are not contained within the normal Cúram security.</td>
+			<td style="width: 454px; text-align: center;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Usability</td>
+			<td style="width: 537px;">The ease with which people who interact with the system can work effectively. How the change will affect the user and how they use the application/feature should always be considered. Where necessary the business analysts and our user interface experts should be engaged early to ensure we meet usability requirements. e.g. printing.</td>
+			<td style="width: 454px; text-align: center;">
+			<p style="text-align: left;">This enhancement is designed to improve the usability of the application. The current&nbsp; design limits the available visible space to display list results and forces the user to scroll down to see search results.</p>
+
+			<p style="text-align: left;">For&nbsp; example If I wish to register a person with last name "Smith", I first search for the person in the registration modal. if for example a search result of&nbsp; 6 "Smiths" are returned, only 1 is visible and the user must scroll down within a very limited scroll-able panel to view the other results - one at a time please see the screen shot below</p>
+
+			<p>&nbsp;</p>
+
+			<p><img alt="" height="318" id="1529585874382_0" src="UI%20Changes%20-%20Fixed%20Height%20Scrollbar._ATTACHMENTS_/editor_image_1d24bf8d-2480-4b51-8f78-2fd5ff679021.png" width="431"></img></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">&nbsp;</td>
+			<td style="width: 537px;">&nbsp;</td>
+			<td style="width: 454px; text-align: center;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Design Options</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Option 1</span></strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 80px;">Design Option Details
+	<ul>
+		<li style="margin-left: 80px;">Remove the fixed height scroll-able&nbsp; elements from the UIMs/VIMs</li>
+	</ul>
+	</li>
+	<li style="margin-left: 80px;">This will change the UI from the current user experience (Screenshot and Issue outline in the Usability section above ) to the following</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 120px;"><img alt="" id="1529586246960_0" src="UI%20Changes%20-%20Fixed%20Height%20Scrollbar._ATTACHMENTS_/editor_image_a21bc595-d18f-44b1-8cef-94ed0584fb44.png"></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 80px;">Pros of choosing this option.
+	<ul>
+		<li style="margin-left: 80px;">Addresses the issue of the second scroll bar</li>
+		<li style="margin-left: 80px;">This will bring the user experience across the application in line with the current "Person" search experience</li>
+	</ul>
+	</li>
+	<li style="margin-left: 80px;">Cons of choosing this option
+	<ul>
+		<li style="margin-left: 80px;">&nbsp;In the majority of pages this option will resolve the issue but on some pages due to the way the page was coded the following issue is found</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr" style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 40px; text-align: left; direction: ltr; unicode-bidi: embed; word-break: normal;"><img alt="" id="1530700682004_0" src="UI%20Changes%20-%20Fixed%20Height%20Scrollbar._ATTACHMENTS_/editor_image_914133c0-ee9b-4ce5-8d9b-c411543d0546.png"></img></p>
+
+<p dir="ltr" style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 40px; text-align: left; direction: ltr; unicode-bidi: embed; word-break: normal;"><strong>Issue 1</strong>:&nbsp; <span style="language:en-IE;"><span style="color:black;"><span style="font-family:Arial, Helvetica, sans-serif"><span style="font-size:8.0pt;">Sample of the before and after for the CCSPlacement_createChildPlacementRequest.uim</span></span></span></span> <span style="language:en-IE;"><span style="color:black;"><span style="font-family:Arial, Helvetica, sans-serif"><span style="font-size:8.0pt;"><a href="http://">http://</a></span></span></span></span><span style="language:en-IE;"><span style="color:black;"><span style="font-family:Arial, Helvetica, sans-serif"><span style="font-size:8.0pt;"><a href="http://devopstest1111.mulvm.ie.ibm.com/7.0.3.0/cadgConsolidatedView1-30.html">devopstest1111.mulvm.ie.ibm.com/7.0.3.0/cadgConsolidatedView1-30.html</a></span></span></span></span></p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">To address this issue the following options were identified:</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>Option1</strong>: To skip these page and to not make any change to remove the fixed height scroll bar from the pages identified with the issue above.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>Option 2</strong>: To make the change and remove the fixed height scroll bars and then to "fix" the page</p>
+
+<p dir="ltr" style="margin-left: 40px;">If option 2 is selected how do we fix the page</p>
+
+<p dir="ltr" style="margin-left: 80px;">Options suggested by design (Discussed by BA [Des McCann] with Design [Darran McCague] 2nd July)</p>
+
+<ul dir="ltr" style="margin-left: 40px;">
+	<li style="margin-left: 40px;">Change the layout so that each list is now a full length row and stack the two lists one on top of the other.</li>
+	<li style="margin-left: 40px;">Add padding between the two lists to have an obvious separation and have each list in a "twist-able" section</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 80px;">Q: Any other options ?</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Design</span></strong></p>
+
+<p dir="ltr">Describe what the solution is here?</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Architecture/Design Decisions</span></strong></p>
+
+<p dir="ltr"><span style="font-size:12px;"><strong>This enhancement will not require any architecture change to the application </strong></span></p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<table border="1" dir="ltr" height="156" width="860">
+	<tbody>
+		<tr>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Architecture Decision Title</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:14px;"><strong>Issue or Problem Statement</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Assumptions</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Motivation</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Alternatives</strong></span></td>
+			<td style="width: 94px;"><span style="font-size:14px;"><strong>Decision</strong></span></td>
+			<td style="width: 53px;"><span style="font-size:14px;"><strong>Justification</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Implications</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Status</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Date</strong></span></td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">How will the UIMs/VIMs be updated to make the change and remove the fixed height scroll UIM metadata?</td>
+			<td style="width: 125px;">If the issue persists across such a large number of files, how will we make the changes to such a large number of files etc.</td>
+			<td style="width: 50px;">&gt; 500 UIMs/VIMs affected.</td>
+			<td style="width: 50px;">Cost of making the change.</td>
+			<td style="width: 50px;">Manually identify each affected file and then manually change each file.</td>
+			<td style="width: 94px;">A tool previously written to traverse UIM files for the UI reskin project will now be altered to make this change.</td>
+			<td style="width: 53px;">Can be run across all of the components, identify the problematic pages, run in reporting mode to document the affected pages and in execute mode to make the required changes</td>
+			<td style="width: 50px;">Automated tool, ensure it has no further adverse affect on the UIMs being updated</td>
+			<td style="width: 50px;">Done</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">How the change will be validated?</td>
+			<td style="width: 125px;">If the issue persists across such a wide range if UIMs/VIMs, how will the change, once made, be validated that it is correct and the problems on those pages have been addressed?</td>
+			<td style="width: 50px;">That all of the pages will not have to physically visited and populated in the deployed application.</td>
+			<td style="width: 50px;">Huge resource cost if each change had to be manually validated in a deployed application.</td>
+			<td style="width: 50px;">Manually visit each page, populate relevant data and verify the issue no longer exists. Also verify no&nbsp; further problems introduced into the pages as a result of the change.</td>
+			<td style="width: 94px;">
+			<p>1. Use CADG to generate screen shots for before and after the change. Manually inspect this screens and make a decision on whether or not the page looks OK.</p>
+
+			<p>2. 42 use cases defined on pages that will be visited in the deployed application and validated.</p>
+
+			<p>3. 6 out of those 42 cases will be reviewed by design from a usability perspective to ensure they are OK</p>
+			</td>
+			<td style="width: 53px;">Resource capacity plus a risk assessment that such an approach should be sufficient to ensure the changes are good.</td>
+			<td style="width: 50px;">
+			<p>1. Not all of the pages are being manually visited and verified.</p>
+
+			<p>2. CADG does not populate data into the lists for the screen shot so may not be perfect representation of what the page looks like with populated data.</p>
+
+			<p>3. Verifying a subset of the pages, there is a risk that something might be missed for pages we are not manually verifying in a deployed application populated with real data.</p>
+
+			<p>&nbsp;</p>
+			</td>
+			<td style="width: 50px;">Done</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">How to address Issue 1 (outlined above) ?</td>
+			<td style="width: 125px;">Issue1 is where the change proposed will leave two lists in the same cluster.&nbsp;</td>
+			<td style="width: 50px;">This is seen on a limited number of pages and is due to the way the page was originally coded</td>
+			<td style="width: 50px;">To have a Consistent look and feel across all pages the change (to remove the fixed height scroll-able element) should be implemented</td>
+			<td style="width: 50px;">
+			<p dir="ltr"><strong>Option1</strong>: To skip these page and to not make any change to remove the fixed height scroll bar from the pages identified with the issue above.</p>
+
+			<p dir="ltr">&nbsp;</p>
+
+			<p dir="ltr"><strong>Option 2</strong>: To make the change and remove the fixed height scroll bars and then to "fix" the page</p>
+
+			<p dir="ltr">&nbsp;</p>
+
+			<p dir="ltr">Q: If option 2 is selected how do we fix the pages</p>
+			</td>
+			<td style="width: 94px;">Option 2</td>
+			<td style="width: 53px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 94px;">&nbsp;</td>
+			<td style="width: 53px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">System Context Diagram</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">This UI update is applicable to a wide range to pages and modals in the application.&nbsp; It is not possible to display this in a diagram.</p>
+
+<p dir="ltr" style="margin-left: 40px;">Investigation within the platform code indicates that 455 UIMs/VIMs will be impacted.</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">The lists of the UIMs/Vims&nbsp; to edit,&nbsp; based on 7.0.5.0 analysis are attached as</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;"><a href="UI%20Changes%20-%20Fixed%20Height%20Scrollbar._ATTACHMENTS_/7-0-5_451-REPORTING_MasterScollablePages_InitialReport.csv" lconnwikiparamwikiattachment="7-0-5_451-REPORTING_MasterScollablePages_InitialReport.csv">7.0.5.0 Platform build analysis</a></li>
+	<li style="margin-left: 40px;"><a href="UI%20Changes%20-%20Fixed%20Height%20Scrollbar._ATTACHMENTS_/7-0-5_508-REPORTING_MasterScollablePages_InitialReport.csv" lconnwikiparamwikiattachment="7-0-5_508-REPORTING_MasterScollablePages_InitialReport.csv">7.0.5.0 Cross Solutions build analysis</a></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">The platform streams where the fix has been applied are:</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">CEF - <a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=233327">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=233327</a></li>
+	<li style="margin-left: 40px;">HCR - <a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=233577">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=233577</a></li>
+	<li style="margin-left: 40px;">SPM-EndMods - <a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=233395">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=233395</a></li>
+	<li style="margin-left: 40px;">CFSS - <a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=233627">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=233627</a></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">In attached you will find the report with all the UIMs fixed, not fixed and not found after the tool has been ran. <a class="qkrAttachmentExpanded" hastooltip="dijit_Tooltip_12183" href="UI%20Changes%20-%20Fixed%20Height%20Scrollbar._ATTACHMENTS_/ScollablePagesReport_updated.xls" title="ScollablePagesReport_updated.xls">ScollablePagesReport_updated.xls</a></p>
+
+<p dir="ltr" style="margin-left: 40px;">NOTE: the report was just a line guide in order to address the testing and the manually fixes.</p>
+
+<p dir="ltr" style="margin-left: 40px;">These are detailed in the following wiki page</p>
+
+<p dir="ltr" style="margin-left: 80px;"><a wiki="W4ab16969fba4_4f7e_b302_993010e04343" page="Results - 455 UIM and VIM pages with fixed height scroll bars" id="wikiLink1529590556261" href="https://w3-connections.ibm.com/wikis/home?lang=en#!/wiki/W4ab16969fba4_4f7e_b302_993010e04343/page/Results%20-%20455%20UIM%20and%20VIM%20pages%20with%20fixed%20height%20scroll%20bars">https://w3-connections.ibm.com/wikis/home?lang=en#!/wiki/W4ab16969fba4_4f7e_b302_993010e04343/page/Results%20-%20455%20UIM%20and%20VIM%20pages%20with%20fixed%20height%20scroll%20bars</a></p>
+
+<p dir="ltr" style="margin-left: 40px;">Within the cross solutions deployment (which includes platform) the investigation indicates 508 UIMs/VIMs will be impacted. These are detailed in the following wiki page</p>
+
+<p dir="ltr" style="margin-left: 80px;"><a wiki="W4ab16969fba4_4f7e_b302_993010e04343" page="Results Solutions- 508 UIM and VIM pages with fixed height scroll bars" id="wikiLink1529590556262" href="https://w3-connections.ibm.com/wikis/home?lang=en#!/wiki/W4ab16969fba4_4f7e_b302_993010e04343/page/Results%20Solutions-%20508%20UIM%20and%20VIM%20pages%20with%20fixed%20height%20scroll%20bars">https://w3-connections.ibm.com/wikis/home?lang=en#!/wiki/W4ab16969fba4_4f7e_b302_993010e04343/page/Results%20Solutions-%20508%20UIM%20and%20VIM%20pages%20with%20fixed%20height%20scroll%20bars</a></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Architecture/Design Context Diagram</span></strong></p>
+
+<p dir="ltr"><strong>No&nbsp;</strong><span style="font-size:12px;"><strong>architecture change</strong> will be applied to the application as part of this enhancement. But this will involve a html change in the pages displayed to end user. This change will remove the fixed height scroll-able elements.</span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Design User Interface</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">If the new enhancement contains any User Interface element, then a UX spec may be required. These include screenshots associated with the new feature, usability concerns, styling and any other UI considerations. Designers and UX team should be involved here. The spec should be associated with this design.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>Note: New UI features should also be tested to ensure they work on a tablet device. From 7.0.1.0 we state we support tablet devices so we need to make sure we are not regressing in this area.</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>Key board short cuts should also be considered if developing features that interact with the user depending on mouse clicks/key board interaction (i.e. back browser button, refresh etc.)</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>Browser differences should be considered for features being developed ensuring that the required browsers are tested and supported.</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>Is the feature specified for the internal caseworker application or for the external Universal Access application (or both)..</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>Accessibility for both the desktop application (JAWS and IE11 is the supported combination) and tablet (VoiceOver on an iPAD using the keyboard and gestures is the supported combination) should be considered for new UI features.</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>Table Support</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;"><span style="OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; OUTLINE-COLOR: invert"><b style="OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; OUTLINE-COLOR: invert">As of v7.0.1 Curam will be certified for use on tablet devices. This introduces a new responsibility on Business Analysts, UX Designers and Developers to ensure that they do not change existing or introduce new features that break the Tablet support statement. For the most part this is limited to the production of custom widgets (non-standard UIM) and how they perform when using touch screen controls. Please note the following:</b></span></li>
+	<li style="margin-left: 40px;"><span style="OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; OUTLINE-COLOR: invert"><b style="OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; OUTLINE-COLOR: invert">Tablet resolution is typically lower than the minimum recommended resolution of 1366x768. This means that the rules around wrapping of text have been relaxed for tablet, but teams should make a reasonable effort to ensure that any wrapping is not excessive and does not affect the ability to understand and use the application.</b></span></li>
+	<li style="margin-left: 40px;"><span style="OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; OUTLINE-COLOR: invert"><b style="OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; OUTLINE-COLOR: invert">Where custom features are introduced, teams must test using a iOS and Android device to ensure that the feature is compatible with touch screen controls.</b></span></li>
+	<li style="margin-left: 40px;"><span style="OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; OUTLINE-COLOR: invert"><b style="OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; OUTLINE-COLOR: invert">Where custom features are introduced, they must meet accessibility requirements for mobile devices.</b></span></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Design Validations</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<table border="1" dir="ltr" style="width: 773px;">
+	<tbody>
+		<tr>
+			<td style="width: 757px;"><strong>Design validations:</strong> A subset&nbsp; of (6 out of the 42) test cases outlined in the wiki below will reviewed by design</td>
+		</tr>
+		<tr>
+			<td style="width: 757px;"><a wiki="W4ab16969fba4_4f7e_b302_993010e04343" page="Test cases to validate UI - fixed height scrollbar" id="wikiLink1529590556263" href="https://w3-connections.ibm.com/wikis/home?lang=en#!/wiki/W4ab16969fba4_4f7e_b302_993010e04343/page/Test%20cases%20to%20validate%20UI%20-%20fixed%20height%20scrollbar">https://w3-connections.ibm.com/wikis/home?lang=en#!/wiki/W4ab16969fba4_4f7e_b302_993010e04343/page/Test%20cases%20to%20validate%20UI%20-%20fixed%20height%20scrollbar</a></td>
+		</tr>
+		<tr>
+			<td style="width: 757px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr" style="language:en-IE;margin-top:0pt;margin-bottom:0pt;margin-left:0in;text-align:left;direction:ltr;unicode-bidi:embed;word-break:normal;punctuation-wrap:hanging;"><span style="language:en-IE;"><span style="color:black;"><span style="font-family:Arial, Helvetica, sans-serif"><span style="font-size:8.0pt;">Sample of the before and after for the&nbsp;&nbsp;&nbsp; LegalAction_createPetition.uim</span></span></span></span>&nbsp;&nbsp; showing that the&nbsp; scroll&nbsp; bars are removed, the usability i improved&nbsp; but the functionality is unaffected.</p>
+
+<p dir="ltr" style="language:en-IE;margin-top:0pt;margin-bottom:0pt;margin-left:0in;text-align:left;direction:ltr;unicode-bidi:embed;word-break:normal;punctuation-wrap:hanging;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><img alt="" id="1530270886450_0" src="UI%20Changes%20-%20Fixed%20Height%20Scrollbar._ATTACHMENTS_/editor_image_7beae2ad-658a-4790-81a5-5f5ee119951d.png"></img></p>
+
+<p dir="ltr" style="margin-left: 40px;">more examples are available here&nbsp; <span style="language:en-IE;"><span style="color:black;"><span style="font-family:Arial, Helvetica, sans-serif"><span style="font-size:8.0pt;"><a href="http://devopstest1111.mulvm.ie.ibm.com/7.0.3.0/cadgConsolidatedView1-30.html">http</a></span></span></span></span><span style="language:en-IE;"><span style="color:black;"><span style="font-family:Arial, Helvetica, sans-serif"><span style="font-size:8.0pt;"><a href="http://devopstest1111.mulvm.ie.ibm.com/7.0.3.0/cadgConsolidatedView1-30.html">://</a></span></span></span></span><span style="language:en-IE;"><span style="color:black;"><span style="font-family:Arial, Helvetica, sans-serif"><span style="font-size:8.0pt;"><a href="http://devopstest1111.mulvm.ie.ibm.com/7.0.3.0/cadgConsolidatedView1-30.html">devopstest1111.mulvm.ie.ibm.com/7.0.3.0/cadgConsolidatedView1-30.html</a></span></span></span></span></p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Design Metadata Changes</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>There is a potential UIM metadata change here. If the attribute being removed is no longer required, then we need to make a decision on whether or not that element/attribute should remain as part of UIM or if it should be deprecated/removed?</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">The change proposed here is implemented by the tooling which was designed to remove the SCROLL_HEIGHT attribute on a LIST element in clean up mode for UIM/VIM files</p>
+
+<p dir="ltr" style="margin-left: 80px;"><strong>Sample of the before code:</strong></p>
+
+<p dir="ltr" style="margin-left: 80px;">&nbsp; &lt;LIST TITLE="BasicScrollableList.Title" SCROLL_HEIGHT="100" PAGINATED="true" &gt;<br />
+&nbsp;&nbsp; &lt;FIELD LABEL="Field.Text"&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;CONNECT&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;SOURCE NAME="LISTDISPLAY" PROPERTY="text"/&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;/CONNECT&gt;<br />
+&nbsp;&nbsp; &lt;/FIELD&gt;<br />
+&nbsp;&lt;/LIST&gt;</p>
+
+<p dir="ltr" style="margin-left: 80px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 80px;"><strong>Sample of the after code:</strong><br />
+&lt;LIST TITLE="BasicScrollableList.Title"PAGINATED="true" &gt;<br />
+&nbsp;&nbsp; &lt;FIELD LABEL="Field.Text"&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;CONNECT&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;SOURCE NAME="LISTDISPLAY" PROPERTY="text"/&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;/CONNECT&gt;<br />
+&nbsp;&nbsp; &lt;/FIELD&gt;<br />
+&nbsp;&lt;/LIST&gt;</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Design Accessibility</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">The UX design should contain an accessible requirements but this section can capture any further requirements in this area.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Use Cases</span></strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">This UI update will impact on a large number of pages across the application (455 for platform) a subset of these pages will be manually validated by the 42 test cases detailed in the wiki below</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="93" style="width: 1087px;" width="1087">
+	<tbody>
+		<tr>
+			<td style="width: 757px;"><strong>Test case validations:</strong> 42 test cases outlined in the wiki below will be manually validated</td>
+		</tr>
+		<tr>
+			<td style="width: 757px;"><a wiki="W4ab16969fba4_4f7e_b302_993010e04343" page="Test cases to validate UI - fixed height scrollbar" id="wikiLink1529590556264" href="https://w3-connections.ibm.com/wikis/home?lang=en#!/wiki/W4ab16969fba4_4f7e_b302_993010e04343/page/Test%20cases%20to%20validate%20UI%20-%20fixed%20height%20scrollbar">https://w3-connections.ibm.com/wikis/home?lang=en#!/wiki/W4ab16969fba4_4f7e_b302_993010e04343/page/Test%20cases%20to%20validate%20UI%20-%20fixed%20height%20scrollbar</a></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Implementation Notes</span></strong></p>
+
+<p dir="ltr">The <span style="font-family:Arial, Helvetica, sans-serif">Tool to Identify, list and remove the UIMs-VIMs containing fixed height scroll-able elements is detailed in task 227293</span></p>
+
+<p dir="ltr" style="margin-left: 40px;"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=227293">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=227293</a></p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr">The source controlling of the tool is tracked by the task 232197</p>
+
+<p dir="ltr" style="margin-left: 40px;"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=232197">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=232197</a></p>
+
+<p dir="ltr" style="margin-left: 40px;">The tool has been integrated in TI/test/UiLayoutHelper folder.</p>
+
+<p dir="ltr" style="margin-left: 40px;">Part of this tool was already there, we overwrite the old version with the current one.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The tool offers the ability to :</p>
+
+<ol dir="ltr">
+	<li><span style="font-family:Arial, Helvetica, sans-serif">Identify and list the UIMs containing these fixed height elements.</span><span style="color:#008000;"><span style="font-family:Arial, Helvetica, sans-serif">&nbsp; - Done</span></span></li>
+	<li><span style="font-family:Arial, Helvetica, sans-serif">Generate a summary log file that lists the height set in pixels, the UIM/VIM name, and to list the url to the CADG page showing the page preview for that UIM/vim </span><span style="color:#008000;"><span style="font-family:Arial, Helvetica, sans-serif">&nbsp; - Done</span></span></li>
+	<li><span style="font-family:Arial, Helvetica, sans-serif">Have a "Clean up " mode that will remove the elements identified in (1) </span><span style="color:#008000;"><span style="font-family:Arial, Helvetica, sans-serif">&nbsp; - Done</span></span></li>
+	<li><span style="font-family:Arial, Helvetica, sans-serif">Generate a consolidated CADG .html page<span>. This required the tool to generate an output file as per the POC work tracked in Task 226042 <a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SCM%20Support%20Hub#action=com.ibm.team.workitem.viewWorkItem&amp;id=226042">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SCM%20Support%20Hub#action=com.ibm.team.workitem.viewWorkItem&amp;id=226042 </a></span></span><span style="color:#008000;"><span style="font-family:Arial, Helvetica, sans-serif">&nbsp; - Done</span></span></li>
+	<li><span style="font-family:Arial, Helvetica, sans-serif">Add a black / white list functionality to the tool</span> This will allow a user to specify by means of a csv file a list of UIMs which the tool will not to "clean" - <span style="color:#FF0000;">Not Implemented</span></li>
+</ol>
+
+<p dir="ltr" style="margin-left: 40px;">- This will support the possible case where test or business identify pages that should not be changed<span> </span>proposal that if the list is empty (or does not exist) all UIMs will be "cleaned"<br />
+&nbsp;</p>
+
+<p dir="ltr">This tool will be used in conjunction with a new DevOps Pipeline that is described in details in Enhancement 226690</p>
+
+<p dir="ltr" style="margin-left: 40px;"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SCM%20Support%20Hub#action=com.ibm.team.workitem.viewWorkItem&amp;id=226690">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SCM%20Support%20Hub#action=com.ibm.team.workitem.viewWorkItem&amp;id=226690</a></p>
+
+<p dir="ltr">The new pipeline offers the ability to :</p>
+
+<ol dir="ltr">
+	<li>Deploy the Curam application, for example a platform or cross solutions build</li>
+	<li>To make wide spread UI updates to the application&nbsp; for example 500+ UIM/VIM changes on a cross solutions build&nbsp;</li>
+	<li>To generate before and after consolidated preview pages displaying a large number of the actual UI screens for easy comparison</li>
+	<li>To give test the ability to test a fully functional application</li>
+	<li><strong>and all without changing any of the checked in code</strong></li>
+</ol>
+
+<p dir="ltr">The testing is outlined in the sections above.</p>
+
+<p dir="ltr">On successful completion of this testing the code will then be updated. The process to execute this task is outlined in task 231565</p>
+
+<p dir="ltr" style="margin-left: 40px;"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=231565">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=231565</a></p>
+
+<p dir="ltr" style="margin-left: 40px;">Following this final testing will be run on the updated code</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr"><strong>Overview of the implementation is show below:</strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><img alt="" height="269" id="1530280140938_0" src="data:image/png;base64,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rtjHaq6puSz2ov45SIsW+X9m9mMQEy06F2TLHPUc07K5kuuzWoCwJM7ulILZwmiyTu1kREsZuIflc3GE7mG2zO5ZETNq0EujpfypUmuc9HGJIHWsLVq0yk6WWBkpdcxkZMdVKgtXWdtu+SEn/9da21v5sZR5EOBGI3Msf3508eP/8U04x9Js+L/+9U/r9fqLL764uLhAtMAhIFqOQefyo3b47R/L+5U3RD4F0RJOuZR1RYs7ECbzoEQ7smix75XVolXRUpal9RCbz+diQUYt0fL6zIAVLdbOdv5CGdFisa/V86KlvL6cI+Mb5kxJfdbarFEvr9DlSVpSMo3eVaqLlnwuIVHREs062shS02jKg+tIi83nc61IURRaBTc2ohvNyRRQKi9NNiV4JC/tmmjnZkRLavQ6wiGnwzvs3PxYyjwIcKN5/vz55eXl48eP//SnP73z7x/8P69/9pf/8rX7GfrBnfVP7/zLz//5N7947c07//rbiuEXr735D//yxs//+Tc/vfMv//Uf/vln//Qvb7zxxkcfffTVV18hWuBAEC3HoHPtcWBYf1FpQ+RTEC2vmJXxr7z046onWqzgeeXl+vt7T0qJqWtarrYvkj010TKdTtW+HI1G1l50hqnDihZrH+8lWkKXmyqixVqQe/mGKTaaWP+2ClGvLWG9XkftV6W6aMnnEqa8cyG+Zh11rBLCYi+XS03HdbS0idNRDc60RMfVwMy9uOtuei2VRWZIlLuGnHO3c1ItSv5BgBvN8+fPLy4uHjx4cPfu3d///ve//vWvf/73//B/v/rfpv9471vR8g//4+c///k//uM/LpfLf96H5XL5y1/+8p/+6Z9++ctf/vrXv37nnXfu3r378OHDy8vLGge/ACiIlmPQueo4PPzuXvlg14bIxxctsqPXtry25bHdffjRZakL+g/c8rg0EziPzEYFNk25opKpVdFSvrT8rN1pRYvOVMhFMWqtJWpta3ncOkQdIlqsbW1d0XaKFvunnQRwVBQtciV0GYrSS9Fis9NnnS9ciOTVqmgpg060paohWnYOuTLoF1vNKPkHAW40MtPy6NGje/fuvf/++2+++eYvf/nLV1999W//9m//8//7s7/6+/f/4rWr//OfPhLV8frrr79Zi7feeuv3v//9xx9/fP/+/adPn8ruyV1XHW4wiJZj0LnkaCr84avyefoL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" width="589"></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Application Impact</span></strong></p>
+
+<p dir="ltr">There is no application impact associated with this change.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Testing</span></strong></p>
+
+<p dir="ltr">The use cases have been described above in the use case validation.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" style="width: 1021px;">
+	<tbody>
+		<tr>
+			<td style="width: 1011px;"><strong>Test results defects raised&nbsp;</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 1011px;"><a wiki="W4ab16969fba4_4f7e_b302_993010e04343" page="Issues to investigate" id="wikiLink1533285527889" href="https://w3-connections.ibm.com/wikis/home?lang=en#!/wiki/W4ab16969fba4_4f7e_b302_993010e04343/page/Issues%20to%20investigate">https://w3-connections.ibm.com/wikis/home?lang=en#!/wiki/W4ab16969fba4_4f7e_b302_993010e04343/page/Issues%20to%20investigate</a></td>
+		</tr>
+		<tr>
+			<td style="width: 1011px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Documentation/How To Use Feature</span></strong></p>
+
+<p dir="ltr">Are we documenting what pages are affected or how is this being communicated to the customer?</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

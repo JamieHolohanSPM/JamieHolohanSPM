@@ -1,0 +1,155 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>IDX Upgrade Instructions</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="IDX Upgrade Instructions";
+    pageId="urn:lsid:ibm.com:td:15154844-985f-4724-a992-18dd4216bc88";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">IDX Upgrade Instructions</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Overview</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">Create new source ZIP</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii3">Curam Widgets for External Container</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii4">IDX Themes for External Container</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii5">Custom IDX Widget in JDE</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii6">Testing</a></div>
+
+<h2 dir="ltr" id="ii1">Overview</h2>
+
+<p dir="ltr"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">If you are looking for the dojo upgrade instruction, please refer to&nbsp;</span><a wiki="W0c6659bf1ea2_4ec4_a931_2222e7accb81" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;" href="/wikis/home#!/wiki/W0c6659bf1ea2_4ec4_a931_2222e7accb81/page/Dojo%20Upgrade%20Instructions" id="wikiLink1462791742300" page="Dojo Upgrade Instructions">Dojo Upgrade Instructions</a><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">.</span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">This page documents the specific information about IDX Upgrade in Curam.</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">At the highest level the required activities are:</p>
+
+<ol dir="ltr" style="margin-bottom: 0px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; list-style-position: outside !important; margin-top: 0px !important;">
+	<li style="margin: 0px !important;">&nbsp;Create a new ibm idx source ZIP for the target version, put on TINY &amp; GIGANTIC and update installer to use the new ZIP.</li>
+	<li style="margin: 0px !important;">&nbsp;Review and reapply Dojo overrides as appropriate.</li>
+	<li style="margin: 0px !important;">&nbsp;Review and migrate (if needed) custom widgets that build on Dijit.</li>
+	<li style="margin: 0px !important;">&nbsp;Test.</li>
+</ol>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">Each of these is discussed in more detail below.&nbsp;</p>
+
+<h2 dir="ltr" id="ii2" style="font-size: 1.6em; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; color: rgb(0, 0, 0) !important; padding: 2px !important; border: none !important;">Create new source ZIP</h2>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">The version of IBM Dojo Extension Toolkit (IDX , now it is re-branded to IBM Front End Toolkit from version 1.5) that you'd like to upgrade to can be downloaded from the&nbsp;<a href="http://idx.ibm.com/" target="_blank">IBM&nbsp;IDX&nbsp;Website</a>, which will redirect you to the the&nbsp;iRAM (Rational Asset Manager). Note that you need to request access to this system in order to be able to download the IDX toolkit ZIP.</p>
+
+<ol dir="ltr">
+	<li style="font-family: Helvetica, Arial, Tahoma, Verdana, sans-serif; line-height: 1.5em; margin: 0px; padding: 0px; font-size: 1em;">Once the toolkit is downloaded. Extract the ZIP into a temporary directory.</li>
+	<li style="font-family: Helvetica, Arial, Tahoma, Verdana, sans-serif; line-height: 1.5em; margin: 0px; padding: 0px; font-size: 1em;">In the temporary directory, find the "idx-v1.x.x.x-x-YYYYMMDD-ibmproducts.zip" and extract it as well.</li>
+	<li style="font-family: Helvetica, Arial, Tahoma, Verdana, sans-serif; line-height: 1.5em; margin: 0px; padding: 0px; font-size: 1em;">Go to the directory where <span style="font-family: Helvetica, Arial, Tahoma, Verdana, sans-serif;">"idx-v1.x.x.x-x-YYYYMMDD-ibmproducts.zip" is extracted. Find the "idx-v1.x.x.x-YYYYMMDD.zip" and rename it to ibm_idx_source_&lt;&lt;version&gt;&gt;.zip (e.g. </span>ibm_idx_source_1.4.2.6.ga.zip).&nbsp;<span style="font-family: Helvetica, Arial, Tahoma, Verdana, sans-serif;">&nbsp;Note: you don't need the ones ended by "-build" or "-ex".</span></li>
+	<li style="font-family: Helvetica, Arial, Tahoma, Verdana, sans-serif; line-height: 1.5em; margin: 0px; padding: 0px; font-size: 1em;">Put the renamed ZIP on to&nbsp;
+	<pre dir="ltr" style="line-height: normal;">
+\\tiny.curamsoftware.com\ProductDevelopment\TechInf\Development_Tools\ibm_idx_source
+\\tiny.curamsoftware.com\ProductDevelopment\TechInf\Development_Tools\<span style="font-size: 1em;">ibm_idx_source</span></pre>
+	</li>
+	<li style="font-family: Helvetica, Arial, Tahoma, Verdana, sans-serif; line-height: 1.5em; margin: 0px; padding: 0px; font-size: 1em;">Update the&nbsp;<span style="font-family: 'Courier New', Courier, monospace; line-height: normal;">&lt;JDE_ROOT&gt;\devenv\setup\installers\ibm_idx_source.properties&nbsp;</span>with the new version.</li>
+	<li style="font-family: Helvetica, Arial, Tahoma, Verdana, sans-serif; line-height: 1.5em; margin: 0px; padding: 0px; font-size: 1em;">Additionally, Put the new renamed ZIP to the <span style="font-family: 'Courier New', Courier, monospace; line-height: normal;">&lt;JDE_ROOT&gt;\client\components\client-inf\src\main\javascript\internal</span>&nbsp;and add into source control.&nbsp;Then update the the following to build scripts which reference the ZIP file in this location:<span style="font-family: 'Courier New', Courier, monospace; line-height: normal;">&lt;JDE_ROOT&gt;\build_scripts\properties.xml &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="font-family: 'Courier New', Courier, monospace; font-size: 1em; line-height: normal;">&lt;JDE_ROOT&gt;\client\CoreInf\CuramCDEJ\bin\build-properties.xml</span></li>
+	<li style="margin: 0px; padding: 0px; font-size: 1em;"><font face="Courier New, Courier, monospace"><span style="line-height: normal;">Finally run "build cleanclient client" from&nbsp;</span></font><span style="font-family: 'Courier New', Courier, monospace; line-height: normal;">&lt;JDE_ROOT&gt;. (If it fails at the setup stage, delete ibm_idx_source</span> folder from devenv\tools and start build again)</li>
+</ol>
+
+<h2 dir="ltr" id="ii3">Curam Widgets for External Container</h2>
+
+<p dir="ltr">The Curam widgets for the external container are based on the IDX toolkit. So we need to review them if they are stilll working. The following widgets should be reviewed and tested as shown the table below:</p>
+
+<div dir="ltr">
+<div>&nbsp;</div>
+
+<div>
+<table border="1" dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; width: 500px;">
+	<tbody>
+		<tr>
+			<td style="width: 500px;"><b>curam/app/ExternalApplication</b></td>
+		</tr>
+		<tr>
+			<td style="width: 500px;">
+			<p><strong>curam/widget/form/DateTextBox</strong></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 500px;"><strong style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">curam/widget/menu/MenuPane</strong></td>
+		</tr>
+	</tbody>
+</table>
+</div>
+</div>
+
+<h2 dir="ltr" id="ii4">IDX Themes for External Container</h2>
+
+<p dir="ltr">In the external container, we use a group of CSS files from IDX themes, they need to be reviewed as well. All of them is referenced in the file shown below:</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" style="width: 500px;">
+	<tbody>
+		<tr>
+			<td style="width: 500px;"><strong>&lt;JDE_ROOT&gt;\tests\TabTestApp\webclient\components\eclient\WebContent\CDEJ\jscript\ibmidxtk\idx\themes\oneui\oneui-curam-custom.css</strong></td>
+		</tr>
+	</tbody>
+</table>
+
+<h2 dir="ltr" id="ii5">Custom IDX Widget in JDE</h2>
+
+<p dir="ltr">As the out-of-the-box IDX widgets usually have some accessibility issues, it is likely that some IDX widget is customized so that these accessibility issues are resolved. Therefore in every IDX upgrade we need to ensure that these custom IDX widget is not affected by the upgrade.</p>
+
+<p dir="ltr">Currently, we have the following custom IDX widgets in the Curam JDE:</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" style="width: 500px;">
+	<tbody>
+		<tr>
+			<td style="width: 500px;"><strong>curam/widget/IDXSelect</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 500px;"><strong>curam/widget/IDXFilteringSelect</strong></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">For the details of how to review&nbsp;and upgrade the custom IDX widget, please refer to Custom Widget section in&nbsp;<a wiki="W0c6659bf1ea2_4ec4_a931_2222e7accb81" href="/wikis/home#!/wiki/W0c6659bf1ea2_4ec4_a931_2222e7accb81/page/Dojo%20Upgrade%20Instructions" id="wikiLink1462791742301" page="Dojo Upgrade Instructions">Dojo Upgrade Instructions</a></p>
+
+<h2 dir="ltr" id="ii6">Testing</h2>
+
+<p dir="ltr" style="margin: 0px !important;">1. build the JDE, build TabTestApp.</p>
+
+<p dir="ltr" style="margin: 0px !important;">2. run all automated tests, specifically check JavaScript ones</p>
+
+<p dir="ltr" style="margin: 0px !important;">3. Verify overall functionality and look of the external application in TabTestApp.</p>
+
+<p dir="ltr" style="margin: 0px !important;">4. Verify in a little more detail specific areas: external application banner, mega menu, person card, side menu ...</p>
+
+<p dir="ltr" style="margin: 0px !important;">5. Specifically test that each of the Curam widgets for external container and custom IDX widgets in JDE are still working.</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

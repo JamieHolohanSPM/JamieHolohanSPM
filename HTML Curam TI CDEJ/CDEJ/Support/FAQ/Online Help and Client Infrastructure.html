@@ -1,0 +1,87 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Online Help and Client Infrastructure</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Online Help and Client Infrastructure";
+    pageId="urn:lsid:ibm.com:td:51d68f74-43c2-47c8-86eb-ab1553f61adb";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Online Help and Client Infrastructure</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h2 dir="ltr">Question:</h2>
+
+<p dir="ltr">What Client Infrastructure is present to generate the online help for the SPM application?</p>
+
+<h2 dir="ltr">Answer:</h2>
+
+<p dir="ltr">The current status of this infrastructure is as follows:</p>
+
+<p dir="ltr">1) The online help is always generated along with the application, unless switched off by the console switch (called DISABLE_HELP).</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">2) The help generation is integrated with the application (client) build process, and there is no separate target to build just the online help files any longer.<br />
+&nbsp;&nbsp;&nbsp; The help metadata is processed along with the page properties when generating the pages for the application, and the help property files are saved by the client-persistence project classes, and then jarred along with the page properties files into the pageprops_&lt;localecode&gt;.jar libraries found under the WebContent/WEB-INF/lib.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">3) The help properties for the fields on the page are ending up with .help, these are optionally included into any page associated .properties file and end up in the mentioned separate properties files used by the online help system.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">4) The online help page for a page is displayed by a single handcrafted JSP page called help.jsp which is passed the page id. This retrieves some properties from the associated CDEJResources.properties file.<br />
+&nbsp;&nbsp; The file uses curam.util.client.render.component.OnlineHelpRenderer to display the actual content for a help page, to wrap the properties and their texts into the tabular format.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Previously there was either help applet or help servlet used to display the help pages and a separate target to generate help pages, the applet solution stopped to be used earlier, the servlet does not seem to be present in web.xml either.</p>
+
+<p dir="ltr"><br />
+Also, it might be that there is couple of left-over artifacts from the older online help system to remove when tidying up.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">==================</p>
+
+<p dir="ltr">CDEJResources.properties entries associated with online help:</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"># Online Help Page properties<br />
+help.page.title=IBM C\u00FAram Social Program Management Online Help<br />
+copyright.license.text=Licensed Materials - Property of IBM Corp, IBM Corporation and other(s) 1999,2012. IBM is a registered trademark of IBM Corporation, in the United States, other countries or both.<br />
+description.label.text=Description<br />
+fields.label.text=Fields and Columns<br />
+links.label.text=Links and Actions<br />
+table.header.name=Name<br />
+table.header.description=Description</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

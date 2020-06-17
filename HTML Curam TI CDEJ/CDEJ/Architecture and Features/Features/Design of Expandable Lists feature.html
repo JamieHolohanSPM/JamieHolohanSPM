@@ -1,0 +1,93 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Design of Expandable Lists feature</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Design of Expandable Lists feature";
+    pageId="urn:lsid:ibm.com:td:42b0e254-3fca-4109-910b-55bf0b6558e7";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Design of Expandable Lists feature</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Overview</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">Webtier</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii3">JavaScript</a></div>
+
+<h2 dir="ltr" id="ii1">Overview</h2>
+
+<ul dir="ltr">
+	<li>adds "details row" onto each row in a standard list
+	<ul>
+		<li>design page: <a href="http://ibmurl.hursley.ibm.com/N4K7">http://ibmurl.hursley.ibm.com/N4K7</a></li>
+	</ul>
+	</li>
+	<li>lazy loading</li>
+	<li>persistence of expanded state of each row
+	<ul>
+		<li>design page: <a href="http://ibmurl.hursley.ibm.com/N4K5">http://ibmurl.hursley.ibm.com/N4K5</a></li>
+	</ul>
+	</li>
+	<li>integrated with pagination</li>
+</ul>
+
+<h2 dir="ltr" id="ii2">Webtier</h2>
+
+<ul dir="ltr">
+	<li>builds on standard UIM list rendering in gen-jsp.xsl</li>
+	<li>ExpandableListRowRenderer (curam-util-client::expandable-list-row)</li>
+	<li>ExpandableListCellRenderer (curam-util-client::expandable-list-cell)
+	<ul>
+		<li>not sure about this class, seems unused</li>
+	</ul>
+	</li>
+</ul>
+
+<h2 dir="ltr" id="ii3">JavaScript</h2>
+
+<ul dir="ltr">
+	<li>curam/util/ExpandableLists
+	<ul>
+		<li>lazy loading of content, after user expands a row
+		<ul>
+			<li>using UIMController to support in-page navigation</li>
+		</ul>
+		</li>
+		<li>sizing based on row contents</li>
+		<li>saving state data to local storage</li>
+	</ul>
+	</li>
+	<li>curam/pagination/ExpandableListModel
+	<ul>
+		<li>used for paginating expandable lists</li>
+	</ul>
+	</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

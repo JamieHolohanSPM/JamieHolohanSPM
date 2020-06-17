@@ -1,0 +1,262 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Modals become unresponsive when the form is submitted before the infrastructure loads the JS</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Modals become unresponsive when the form is submitted before the infrastructure loads the JS";
+    pageId="urn:lsid:ibm.com:td:795ab085-0c01-48ad-80a0-0ddcc813c147";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Modals become unresponsive when the form is submitted before the infrastructure loads the JS</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Modals become unresponsive-&nbsp;</strong>Curam usability</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Stakeholders</strong></p>
+
+<table border="1" dir="ltr">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Role</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Sign Off if Applicable</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Customer</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Dataport</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Business Owner/Product Owner</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Architect</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Fergal Gavin</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Developer(s)</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Bruna Dantas/Sharunas/ Vicent</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">FVT</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Feargal Conneely</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">SVT</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Information Developer</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">UX Design</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Legal</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Problem</strong></p>
+
+<p dir="ltr">Curam Usability - Modals become unresponsive when the Add Evidence and Transfer Evidence menu options are invoked</p>
+
+<p dir="ltr">There was an issue using the Add Evidence and Transfer Evidence menu options on the Evidence Dashboard. Once these menu options were launched twice, it caused a responsiveness problem across modals.</p>
+
+<p dir="ltr">These specific actions could be launched a second time in the same browser session but not a third time. Other actions would no longer launch. List pages continued to work and display data, and modals could be launched if the application was refreshed, but the lack of responsiveness affected caseworkers managing modals dialogs.&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </strong>&nbsp; &nbsp; &nbsp; &nbsp; <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</strong></p>
+
+<p dir="ltr">Support ticket: <a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/L2%20Support#action=com.ibm.team.workitem.viewWorkItem&amp;id=242942" rel="noopener noreferrer" target="_blank">link</a></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Implementation Notes:</strong></p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp; &nbsp;- Problem:</strong></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Submit the form before loads the javascript infrastructure cause infrastructure problem in the modal dialogs.</strong>
+
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Listeners cannot be executed to alert the infrastructure that the modal dialog is opened or closed</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">it should cause problems on the focus in the modal dialog</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">among others problems&nbsp;<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"> &nbsp; &nbsp; &nbsp; &nbsp;</strong></li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">This issue started to happen after the refactoring that was done for the modal dialog part of the ticket&nbsp;RTC234604
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">we moved the listener('/curam/dialog/iframeUnloaded') to reset the state of the modal dialog from the beforeunload to unload event</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp; - Solution:</strong></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Submit the form after the javascript infrastructure loads</strong>
+
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Unfortunately, we do not have in the infrastructure a signal that tells when the infrastructure Javascript is done&nbsp;&nbsp;</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">to handle it, we had to find the event that should be executed only after the modal dialog loads</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">In this scenario, we decide to use the 'focusin' event.</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CEF files:</strong><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.scm.viewChangeSetItem&amp;contextItemId=_ZEkQYC6IEeicAdebRfxe_A&amp;contextItemType=com.ibm.team.scm.Workspace&amp;componentItemId=_J7B8oPsZEeWMwuQwL-bFgg&amp;itemType=com.ibm.team.filesystem.FileItem&amp;itemId=_s2r24PvMEeWVS4SSGGfwFA&amp;stateId=_Y5CNViuVEem-vKtLm8L9Qw" title="Show file content">CEF/CEFBase/webclient/components/core/jscript/evidenceTypeWorkspace.js</a>
+
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">javascript file.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+		&nbsp;</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.scm.viewChangeSetItem&amp;contextItemId=_ZEkQYC6IEeicAdebRfxe_A&amp;contextItemType=com.ibm.team.scm.Workspace&amp;componentItemId=_J7B8oPsZEeWMwuQwL-bFgg&amp;itemType=com.ibm.team.filesystem.FileItem&amp;itemId=_s2zysPvMEeWVS4SSGGfwFA&amp;stateId=_Y4_KBCuVEem-vKtLm8L9Qw" title="Show file content">CEF/CEFBase/webclient/components/core/jscript/transferEvidence.js</a>
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">javascript file.</li>
+	</ul>
+	</li>
+</ul>
+
+<h2 dir="ltr" id="ii12">Use cases</h2>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Character/Actor</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Expected Behavior</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tested</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1. Login as a caseworker.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			2. Register a new Person.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			3. Create an integrated case for the Person.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			4. Open the 'Evidence' tab.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			5. Go to the 'Actions' menu and click on 'New Evidence'.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			6. Add new evidence of type Address.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			7. Repeat a second time; add another evidence record of type Address.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			8. Issue: On the third time of adding a new evidence record, the modal doesn't open.&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Open the modal dialog to create new evidence</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Manual</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1. Login as a caseworker.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			2. Register a new Person.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			3. Create an integrated case for the Person.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			4. Open the 'Evidence' tab.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			5. Go to the 'Actions' menu and click on 'New Evidence'.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			6. Add new evidence of type Address.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">7. Repeat a second time; add another evidence record of type Address.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			8. Issue: On the third time, attempt to launch the Validate Changes modal from the menu option. The modal doesn't open.&nbsp;</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Open the modal dialog&nbsp;to create new evidence</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Manual</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1. Login as superuser<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			2. Register a new person.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			3. Create an integrated case for the Person.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			4. Open the 'Evidence' tab.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			5. Go to the 'Actions' menu and click on 'New Evidence'.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			6. Add new evidence of type Address.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">7. Go to the 'Actions' menu and click on 'Apply Changes'.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">8. Select all the evidence&nbsp;and click on 'Save'.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">9. Create a second&nbsp;integrated case for the same Person.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			10. Return to the first integrated case tab</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">11. Go to the 'Actions' menu and click on 'Transfer Evidence'.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">12. Search the integrated case and click on 'Save' to transfer the evidence.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">13. Repeat a second time; transfer a new evidence record&nbsp;&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			14. Issue: On the third time of adding a new evidence record, the modal doesn't open.&nbsp;</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Open the modal dialog &nbsp;to transfer&nbsp;an evidence</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Manual</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1. Login as a caseworker.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			2. Register a new Person.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			3. Create an integrated case for the Person.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			4. Open the 'Evidence' tab.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			5. Go to the 'Dashboard'.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			6. Add new evidence of type Address.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			7. Repeat a second time; add another evidence record of type Address.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">8. The modal dialog&nbsp;opens all the times.</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Open the modal dialog</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Manual</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

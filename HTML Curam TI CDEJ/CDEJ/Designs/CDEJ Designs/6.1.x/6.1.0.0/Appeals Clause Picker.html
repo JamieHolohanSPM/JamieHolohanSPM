@@ -1,0 +1,224 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Appeals Clause Picker</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Appeals Clause Picker";
+    pageId="urn:lsid:ibm.com:td:545a4209-eff8-4657-a816-ed394205f9f7";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Appeals Clause Picker</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr"><span style="font-size:20px;"><strong>Design Page for File Edit Search page functionality (a.k.a. Appeal clause picker)</strong></span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Background</span></strong></p>
+
+<p dir="ltr">This feature was available prior to 6.0. We are reintroducing it specifically for California DIR who are threatening legal action if the feature is not available in 6.1.</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Requirements</span></strong></p>
+
+<p dir="ltr">The requirement is as follows:</p>
+
+<p dir="ltr">- It should be possible to configure a search page as a FILE EDIT widget parameter. The specified search page should be a UIM page.</p>
+
+<p dir="ltr">- When the widget is launched the user should have access to the configured search page.</p>
+
+<p dir="ltr">- If the search page contains a CLIPBOARD element, clicking the clipboard link should insert the copied text into the open Word document at the current cursor position.</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Q&amp;A</span></strong></p>
+
+<p dir="ltr">n/a</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Non Functional Requirements</span></strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" width="671">
+	<tbody>
+		<tr>
+			<td style="width: 118px;"><strong>NFR</strong></td>
+			<td style="width: 537px;"><strong>Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Accessibility</td>
+			<td style="width: 537px;">So special requirements. Configured search page is UIM.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Availability &amp; Resilience</td>
+			<td style="width: 537px;">Feature is subject to the same vulnerabilities as the FILE EDIT widget e.g. Java version, security, etc.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Development Resource</td>
+			<td style="width: 537px;">n/a</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Evolution</td>
+			<td style="width: 537px;">We have a long term goal to move away from supporting the FILE EDIT widget completely</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Internationalisation</td>
+			<td style="width: 537px;">The feature should be available in all supported languages</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Location</td>
+			<td style="width: 537px;">n/a</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Performance and Scalability</td>
+			<td style="width: 537px;">n/a</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Regulation</td>
+			<td style="width: 537px;">Relies on JACOB library which is already used in FILE_EDIT solution.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Security</td>
+			<td style="width: 537px;">Relies on the same security settings that required for the existing FILE_EDIT solution.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Usability</td>
+			<td style="width: 537px;">Should be obvious to the user that the action has been successful/otherwise.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Design Options</span></strong></p>
+
+<p dir="ltr">This is <strong>optional</strong>. If there are is more than one design option available and being discussed, then these should be outlined here.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Option 1</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">Use the system clipboard and use "paste" action to insert the test into the document.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Option 2</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">Pass the text to be inserted into the document directly to the document via Javascript &amp; the applet rather than replying on the system clipboard.</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Design</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>UI:</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">A "search" button has been added to the new FILE_EDIT control modal. Clicking this modal launches the search page, in a modal, on top of the control modal. The search page includes an action link which triggers the insertion of the text into the document.</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>Functional:</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">When the action link is click a javascript function is executed. This function executes a DOJO publish event, passing the text to be inserted, to the parent window. The parent window has subscribed to this event and executes a new operation on the applet. The implementation of this applet function executes three JACOB calls to inset the text into the document:</p>
+
+<p dir="ltr" style="margin-left: 40px;">1. Get the current cursor position</p>
+
+<p dir="ltr" style="margin-left: 40px;">2. Insert the text</p>
+
+<p dir="ltr" style="margin-left: 40px;">3. Press the "arrow" key so that the text is not highlight (this prevents the user inadvertently overwriting the inserted text.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Validations</span></strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">n/a</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Data Model Changes and Required Indexes</span></strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">n/a</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Q &amp; A</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">n/a</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Use Cases</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. The various use cases for the feature must be outlined here. They can be in whatever format deemed appropriate (i.e. verbose description or in a tabular format with actors and actions etc.). Below is an example of how use cases may be documented in a tabular format.</p>
+
+<table border="1" dir="ltr" style="width: 638px;">
+	<tbody>
+		<tr>
+			<td><strong>Role/Actor</strong></td>
+			<td><strong>Description</strong></td>
+			<td><strong>Expected Behavior</strong></td>
+			<td style="width: 256px;"><strong>Tested</strong></td>
+		</tr>
+		<tr>
+			<td>Appeals worker</td>
+			<td>Clicks the action link in the search page.</td>
+			<td>The associated text is inserted into the document.</td>
+			<td style="width: 256px;">Manually tested.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Implementation Notes</span></strong></p>
+
+<p dir="ltr">n/a</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Application Impact</span></strong></p>
+
+<p dir="ltr">No impact/upgrade steps required.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">CTM</span></strong></p>
+
+<p dir="ltr">n/a</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Testing</span></strong></p>
+
+<p dir="ltr">A test page has been added to TabTest application to facilitate the testing of the feature.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Documentation/How To Use Feature</span></strong></p>
+
+<p dir="ltr">Feature is documented in Appeals Guide.</p>
+
+<p dir="ltr">&nbsp;
+<p dir="ltr"><strong><span style="font-size:18px;">Work Estimation</span></strong></p>
+</p>
+
+<p dir="ltr">n/a. This was completed post-implementation.</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><br />
+&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

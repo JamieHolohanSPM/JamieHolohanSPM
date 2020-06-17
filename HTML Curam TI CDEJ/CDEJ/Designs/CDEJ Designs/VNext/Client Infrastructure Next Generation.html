@@ -1,0 +1,128 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Client Infrastructure Next Generation</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../wiki.css" />
+<script type="text/javascript" src="../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Client Infrastructure Next Generation";
+    pageId="urn:lsid:ibm.com:td:cffa2b91-353b-4ed5-b271-6a782f7d24d5";
+    toRoot="../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Client Infrastructure Next Generation</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h1 dir="ltr">IN PROGRESS</h1>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Overview</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">Universal Access Requirements</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii3">1. User Experience</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii4">2. Flexibility</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii5">3. Mobile</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii6">Current Solutions</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii7">Current IEG Solution</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii8">Current CDEJ Solution.....</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii9">Other Solutions.....</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii10">Proposed Solutions</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii11">Current UA Solution</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii12">Other Solution B.....</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii13">Other Solution C...</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii14">Discussion on Solutions</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii15">Pros and Cons...</a></div>
+
+<h2 dir="ltr" id="ii1">Overview</h2>
+
+<p dir="ltr">The following page will detail some thoughts on what the possibilities are for producing the next generation of the CDEJ Infrastructure. More details to follow....</p>
+
+<h2 dir="ltr">Requirements</h2>
+
+<p dir="ltr">Some requirements questions as they are being thought about:</p>
+
+<ul dir="ltr">
+	<li>Do we have to consider customer implementation? Is the future of SPM on the cloud (internal development) or will there always be external/customer development i.e. customers will have to develop large amounts of screens based on the Curam framework?</li>
+	<li>
+	<p>Flexibility - dependency on Dojo/JSP/Struts Framework, JSDL JSP Generator - not producing flexible enough output, what should we output.... to satisfy modern UI frameworks.... Is there a requirement to plug and play multiple JS frameworks or should be evaluate a few, pick one and base the default implementation on that?</p>
+	</li>
+	<li>
+	<p>Is UIM the future, is it too verbose..., do developers like it, what do they think, do we still have to to base any solution on UIM?</p>
+	</li>
+	<li>
+	<p>Are we designing for Mobile First (10% of caseworkers?) or desk top (approx. 90% of caseworker usage?). Customers want a responsive UI but for the internal caseworker application, is it only a small part of the application that will be exposed to mobile devices? If so, does this have an impact on the way our screens are designed.</p>
+	</li>
+</ul>
+
+<h2 dir="ltr" id="ii2">Universal Access Requirements</h2>
+
+<h3 dir="ltr" id="ii3">1. User Experience</h3>
+
+<p dir="ltr">Consumer expectations of digital services are defined by their interactions with the private sector, e.g. shopping online or online banking, and social media tools. UA has not kept pace with user experience evolution.</p>
+
+<h3 dir="ltr" id="ii4">2. Flexibility</h3>
+
+<p dir="ltr">Customers need to customise the offering - not just through configuration. They want to provide a service that looks and feels like the rest of their website, and often, like the rest of government websites across the state/country. They also want to be able to adjust the way the product works to meet the needs of their organization and clients. UA today does not provide the level of flexibility required.</p>
+
+<h3 dir="ltr" id="ii5">3. Mobile</h3>
+
+<p dir="ltr">All customers want to make their services accessible to everyone - regardless of whether or not those people have laptops, desktop computers or mobile devices. Analytics.usa.gov shows that right now, almost 40% of citizens are accessing government websites from their mobile phone. Universal Access does not support mobile devices which means we are creating a barrier to support for vulnerable people, who often have a mobile phone as their sole means of survival - this is how they find shelter for the night, this is how they find work, this is how they find support.</p>
+
+<h2 dir="ltr" id="ii6">Current Solutions</h2>
+
+<h3 dir="ltr" id="ii7">Current IEG Solution</h3>
+
+<p dir="ltr">The following is a quick schematic of the components and interaction between those components of the IEG Player.</p>
+
+<p dir="ltr"><img alt="" id="1491814481611_0" src="Client%20Infrastructure%20Next%20Generation._ATTACHMENTS_/editor_image_51e556fc-c020-4949-8f5c-8d07d6072430.png"></img></p>
+
+<h3 dir="ltr" id="ii8">Current CDEJ Solution.....</h3>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii9">Other Solutions.....</h3>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii10">Proposed Solutions</h2>
+
+<h3 dir="ltr" id="ii11">Current UA Solution</h3>
+
+<p dir="ltr"><img alt="" id="1491815418073_0" src="Client%20Infrastructure%20Next%20Generation._ATTACHMENTS_/editor_image_6e6da828-b3db-43d0-8065-7b5d76d12672.png"></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii12">Other Solution B.....</h3>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii13">Other Solution C...</h3>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii14">Discussion on Solutions</h2>
+
+<h3 dir="ltr" id="ii15">Pros and Cons...</h3>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

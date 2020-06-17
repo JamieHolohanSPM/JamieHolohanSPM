@@ -1,0 +1,172 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>AMD switchover</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../wiki.css" />
+<script type="text/javascript" src="../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="AMD switchover";
+    pageId="urn:lsid:ibm.com:td:cfe0bcc1-fad3-4dab-a16f-9793b1c3c5da";
+    toRoot="../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">AMD switchover</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h1 dir="ltr">Introduction</h1>
+
+<p dir="ltr">Since Cúram v5.2, Cúram has been leveraging the Dojo Toolkit [1] in our client infrastructure. With the introduction of the "tabbed" application for v6.0 this dependency was cemented and Dojo is now the core foundation of our client.</p>
+
+<p dir="ltr">For Cúram 6.1, we have upgraded to Dojo 1.10.</p>
+
+<h1 dir="ltr">Current situation</h1>
+
+<p dir="ltr">Dojo 1.7 introduced support for AMD [2] loading of modules. This release was backward compatible with the legacy/previous loader. This meant that it was still possible to continue to synchronously load modules. Cúram was not in a position to refactor all of the Javascript in the application at the time so elected to use the legacy version of the loader.</p>
+
+<p dir="ltr">This legacy loader is effectively&nbsp; unsupported by the Dojo team. Currently it is not possible to request bug fixes or enhancements for this loader (with the exception of critical security vulnerabilities). This situation has contributed to the performance issues currently affecting the application.</p>
+
+<h1 dir="ltr">Dojo roadmap</h1>
+
+<p dir="ltr">Dojo plans to release Dojo 2.0 in Q3 2015 [3].</p>
+
+<p dir="ltr">Dojo 2.0 will not support the legacy loader [4] which means that Cúram, in it's current form, can never upgrade to this version and is stuck on the Dojo 1.X line.</p>
+
+<p dir="ltr">With the release of Dojo 2.0, there are no major releases planned for Dojo 1.X after version 1.11. Instead Dojo will release "periodic maintenance releases on 1.4+, primarily to fix issues when new browsers are released."</p>
+
+<h1 dir="ltr">Benefits v Risks</h1>
+
+<h2 dir="ltr">Benefits</h2>
+
+<p dir="ltr">- Performance</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">- Unit testing</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">Risks</h2>
+
+<p dir="ltr">- Upgrade path</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">- Security</p>
+
+<p dir="ltr">- Performance</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;"><strong><span style="font-size: 18px;">Background</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">The Progress Widget main goal is to inform the user about an action that is still happening in the server and that is causing the screen that si current being displayed to be blocked, preventing any kind of user interaction.</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">At this point of time, we are using the dojox.widget.Standb</span><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">y component that already provides the application with that functionality and it is customizable,</span></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;"><strong><span style="font-size: 18px;">Requirements</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">There need to be a mechanism to switch from Dojo Legacy Loader to Dojo AMD Loader.</p>
+
+<p dir="ltr">&nbsp;
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;"><strong><span style="font-size: 18px;">Non Functional Requirements</span></strong></p>
+</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" style="margin: 4px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; border-collapse: collapse !important;" width="671">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 118px;"><strong>NFR</strong></td>
+			<td style="padding: 4px; width: 537px;"><strong>Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Accessibility</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Availability &amp; Resilience</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Development Resource</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Evolution</td>
+			<td style="padding: 4px; width: 537px;">The legacy loader should be deprecated in a following release - possibly the next one.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Internationalisation</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Location</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Performance and Scalability</td>
+			<td style="padding: 4px; width: 537px;">Yes. If the AMD Loader is switch on, should have positive impact on performance.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Regulation</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Security</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Usability</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;"><strong><span style="font-size: 18px;">Design</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">(1) <span style="font-size:14px;">The dojoConfig variable need to set up on AppController.jspx, all handcrafted JSP files, and generated JSPX file in order to enable the Dojo AMD Loader. This is a prerequite</span></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;"><span style="font-size:14px;">(2) Provide a Java utility class (DojoAMDConverter.java) that parses the invocation of Dojo Modules in a renderer (context.includeScripts) and converts to AMD format. It will only do this parsing if a property in ApplicationConfiguration.properties is switched on or not. Two scenarios:</span></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;"><span style="font-size:14px;">&nbsp; - If property enabled it means Dojo AMD Loader switched on and dojo modules have to declared using AMD format so the DojoAMDConverter.java should parse in AMD format.</span></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;"><span style="font-size:14px;">&nbsp; - If the property is disabled then dojo modules can be declared as is today and DojoAMDConverter.java should not do any parsing.</span></p>
+
+<h1 dir="ltr">References</h1>
+
+<p dir="ltr">[1] Dojo Toolkit - <a href="http://dojotoolkit.org/">http://dojotoolkit.org/</a></p>
+
+<p dir="ltr">[2] AMD specification -&nbsp;<a href="https://github.com/amdjs/amdjs-api/blob/master/AMD.md">https://github.com/amdjs/amdjs-api/blob/master/AMD.md</a></p>
+
+<p dir="ltr">[3] Dojo release roadmap - <a href="https://bugs.dojotoolkit.org/roadmap">https://bugs.dojotoolkit.org/roadmap</a></p>
+
+<p dir="ltr">[4] The Dojo Loader -<a href="http://dojotoolkit.org/reference-guide/1.9/loader/"> </a><a href="http://dojotoolkit.org/reference-guide/1.9/loader/">http://dojotoolkit.org/reference-guide/1.9/loader/</a></p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

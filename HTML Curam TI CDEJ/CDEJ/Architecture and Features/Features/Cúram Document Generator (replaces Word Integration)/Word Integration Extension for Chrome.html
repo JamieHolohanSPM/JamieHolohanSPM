@@ -1,0 +1,145 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Word Integration Extension for Chrome</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../wiki.css" />
+<script type="text/javascript" src="../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Word Integration Extension for Chrome";
+    pageId="urn:lsid:ibm.com:td:67626475-9f9b-4f10-9099-7eeaad2bc52e";
+    toRoot="../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Word Integration Extension for Chrome</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">Chrome announced they are dropping NPAPI support which means Java applets stop working in this browser.</p>
+
+<p dir="ltr">Therefore or applet-based Word Integration bridge will stop working in Chrome same way.</p>
+
+<p dir="ltr"><br />
+<br />
+In order to keep supporting this functionality, we need to come out with either completely different Word documents handling solution suitable for all browsers, or extend/adopt the existing functionality to just add alternative for Chrome.</p>
+
+<p dir="ltr">The following discusses that second option, the steps necessary there and the estimates for the implementation/integration and testing.</p>
+
+<p dir="ltr">It does also include some considerations regarding the different approach for Internet Explorer which might be considered to minimize our problems with the applet-based solution there.</p>
+
+<h3 dir="ltr">Chrome extension</h3>
+
+<p dir="ltr">Chrome introduces the alternative to running Java in browsers, which is called <strong>Native Messaging API</strong>.</p>
+
+<p dir="ltr">The essence of the approach is Chrome supporting and managing the external applications register on the system in a specific and predefined way, and organizing the message exchange with them using the standard input and standard output to do that communication.</p>
+
+<p dir="ltr">This way the external app (called host app) is isolated from the browser environment, and exchange using standard communication channels is safe.</p>
+
+<p dir="ltr">To make it even more safe, Chrome limits the size of the data being passed both ways.</p>
+
+<p dir="ltr">And, also, the Native Messaging API is being made available just for the Chrome extensions which are properly registered and have the appropriate permissions.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp; The current solution uses the applet in a separate browser window to launch MS Word application via COM bridge and register listeners to MS Word COM events; it also takes care of passing the edited data back to the server using the standard form submit mechanism.</p>
+
+<p dir="ltr"><br />
+<br />
+&nbsp;&nbsp;&nbsp; The solution extension for Chrome would mean the browser role minimized to the launch of the host application and passing it the required parameters to properly initialize the Word document; then the browser simply waits to resume the normal operational flow upon receiving the corresponding quit message; there also could be a situation where the browser is closed in the middle of edit in which case it should indicate the host application of this event, which would mean the host app needs to quit gracefully.</p>
+
+<p dir="ltr"><br />
+<br />
+&nbsp;&nbsp;&nbsp; There is no submit back by the browser - to avoid the limitation of the message size; this functionality should be moved to the host application so that it reads and submits the changed document contents to the server when Word is closed after the edit has finished (restricting the user to just one document per editing session).</p>
+
+<p dir="ltr"><br />
+<br />
+&nbsp;&nbsp;&nbsp; As regards the internals of the host application, apart from the difference in the initialization and data exchange with the browser, the communication with MS Word could reuse the existing approach with Jacob-JNI (there is the newer JNA technology which could be considered if there is any benefit in the licensing terms, however at this stage there is still no solution to the COM events handling from Word, and writing this chain is related to the additional effort/time).</p>
+
+<p dir="ltr">&nbsp; So, the effort and estimates at this stage are seen as follows:</p>
+
+<table border="1" dir="ltr" style="width: 900px;">
+	<tbody>
+		<tr>
+			<td style="width: 43px;">Step</td>
+			<td style="width: 586px;">Description</td>
+			<td style="width: 103px;">Estimate</td>
+			<td style="width: 232px;">Comments;</td>
+		</tr>
+		<tr>
+			<td style="width: 43px;">1</td>
+			<td style="width: 586px;">Writing dedicated and properly packed Chrome extension and the Native Messaging bridge with the host application</td>
+			<td style="width: 103px;">4 days</td>
+			<td style="width: 232px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 43px;">2</td>
+			<td style="width: 586px;">&nbsp; Writing the host application - porting the existing solution to standalone app, adopting the messaging exchange with the Word application - without the submit functionality</td>
+			<td style="width: 103px;">6 days</td>
+			<td style="width: 232px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 43px;">3</td>
+			<td style="width: 586px;">&nbsp; Writing the submit-back functionality from the host application upon interception Word close event</td>
+			<td style="width: 103px;">1-1.5 weeks (8 days)</td>
+			<td style="width: 232px;">Requires a bit of research</td>
+		</tr>
+		<tr>
+			<td style="width: 43px;">4</td>
+			<td style="width: 586px;">Packaging-installation mechanism to have it all wrapped for Chrome and IE;</td>
+			<td style="width: 103px;">1 week</td>
+			<td style="width: 232px;">Potential IE mechanism changes to stick to the same submitting process</td>
+		</tr>
+		<tr style="background-color:#D3D3D3;">
+			<td style="width: 43px;"><strong>Total</strong></td>
+			<td style="width: 586px;">&nbsp;</td>
+			<td style="width: 103px;"><strong>4 - 4.5 weeks</strong></td>
+			<td style="width: 232px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr"><br />
+IE changes<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp; As it was mentioned, with extending the solution to take into account just Chrome specifics another level of complexity is created.</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp; So while this is not high priority (since MS do not change their approach to NPAPI support in IE), the solution needs to be reviewed to see what could be done to make it more robust, easier to maintain and consistent with the Chrome approach.<br />
+<br />
+&nbsp; Internet Explorer has it's own extension mechanism called <strong>Browser Helper Objects</strong>.</p>
+
+<p dir="ltr">&nbsp; This technology came into our attention some time ago and the idea was dropped at that time as it required development in C (no Java option to do the IE add-on) and the familliarity with the add-on development specifics.</p>
+
+<p dir="ltr">&nbsp; However, this still remains a viable option in terms of getting rid of the problems caused by using Java in the browser environment.<br />
+<br />
+&nbsp;&nbsp; Basically, such an add-on would allow us to switch to using the same/similar standalone host application approach as for Chrome; the exchange process would obviously be a bit more manual and development in C is not something we are familiar with.</p>
+
+<p dir="ltr">&nbsp; However, in the longer term, unless a complete rewriting in favor of the document generation proposed earlier is decided upon, we might consider writing such an add-on.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Building the Word Integration Assistant (a.k.a. "Native Messaging Bridge" or "Word Integration Bridge")</strong></p>
+
+<p dir="ltr">See details in TI\client\components\word-file-edit\lib\Updating_MSI_installer.txt</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

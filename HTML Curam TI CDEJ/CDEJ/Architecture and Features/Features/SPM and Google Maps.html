@@ -1,0 +1,158 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>SPM and Google Maps</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="SPM and Google Maps";
+    pageId="urn:lsid:ibm.com:td:b0d5a489-63c9-49fc-bd63-2414f82fe136";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">SPM and Google Maps</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><div contenteditable="false" name="intInfo" style="border-radius: 6px; margin: 8px; padding: 4px; display: block; width: auto;background-color: #ffc;">Table of Contents:
+<ul style="list-style-type:none !important;">
+	<li style="list-style-type:none;"><a href="#ii1" style="display: block;">Overview</a></li>
+	<li style="list-style-type:none;"><a href="#ii2" style="display: block;">Details</a></li>
+	<li style="list-style-type:none;"><a href="#ii3" style="display: block;">OOTB Streams Referenced</a></li>
+	<li style="list-style-type:none;"><a href="#ii4" style="display: block;">Google Maps API Picker</a></li>
+	<li style="list-style-type:none;"><a href="#ii5" style="display: block;">Google Maps APIs Used</a></li>
+	<li style="list-style-type:none;"><a href="#ii6" style="display: block;">Google Maps JavaScript APIs Referenced in OOTB Code</a></li>
+	<li style="list-style-type:none;"><a href="#ii7" style="display: block;">Google Maps JavaScript APIs Referenced in OOTB Code</a></li>
+	<li style="list-style-type:none;"><a href="#ii8" style="display: block;">Environment Variables Referencing Google Maps</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii9" style="display: block;">SPM Ent Mods</a></li>
+		<li style="list-style-type:none;"><a href="#ii10" style="display: block;">CEF Widgets</a></li>
+	</ul>
+	</li>
+</ul>
+</div>
+
+<h2 dir="ltr" id="ii1">Overview</h2>
+
+<p dir="ltr">The information below was gathered due to a customer request on what potential Google Map APIs they would need to subscribe to if they went into production with that feature enabled. The request was as a result of demo given to Norway in Jan 2020 where the integration of Google Maps was included.</p>
+
+<h2 dir="ltr" id="ii2">Details</h2>
+
+<p dir="ltr">Note the information below may not be complete as the analysis performed was done in a very short space of time. However, it does give an idea on what Google Maps APIs are included and referenced across some of the SPM code streams.</p>
+
+<h2 dir="ltr" id="ii3">OOTB Streams Referenced</h2>
+
+<ul dir="ltr">
+	<li>CEF</li>
+	<li>CEFWidgets</li>
+	<li>SPM Ent Mods</li>
+	<li>HCR</li>
+</ul>
+
+<h2 dir="ltr" id="ii4">Google Maps API Picker</h2>
+
+<ul dir="ltr">
+	<li><a href="https://developers.google.com/maps/documentation/api-picker">https://developers.google.com/maps/documentation/api-picker</a></li>
+</ul>
+
+<h2 dir="ltr" id="ii5">Google Maps APIs Used</h2>
+
+<p dir="ltr">1. <em><strong>Maps JavaScript API</strong></em> (https://developers.google.com/maps/documentation/javascript/tutorial) - Add a map to a web page. Customize the map with your own data and imagery.<br />
+Optionally support map controls, as well as gestures on the mobile web.</p>
+
+<p dir="ltr">2. <em><strong>Directions</strong></em> service in the Maps JavaScript API (examples) (https://developers.google.com/maps/documentation/javascript/directions) - Get directions<br />
+data from origin to destination using various forms of transport: walking, driving, cycling, public transit.</p>
+
+<h2 dir="ltr" id="ii6">Google Maps JavaScript APIs Referenced in OOTB Code</h2>
+
+<ol dir="ltr">
+	<li><a href="https://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false&amp;client=">https://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false&amp;client=</a>"</li>
+	<li><a href="https://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false&amp;key=">https://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false&amp;key=</a>"</li>
+	<li><a href="https://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false&amp;language=">https://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false&amp;language=</a>"</li>
+	<li>"http://maps.google.com/maps?f=d&amp;saddr=" + fromAddress + "&amp;daddr=" + destination + "&amp;hl=" + language + "&amp;pw=2";</li>
+</ol>
+
+<h2 dir="ltr" id="ii7">Google Maps JavaScript APIs Referenced in OOTB Code</h2>
+
+<ul dir="ltr">
+	<li>google.maps.LatLng</li>
+	<li>google.maps.LatLngBounds</li>
+	<li>google.maps.MapTypeId.ROADMAP</li>
+	<li>google.maps.TravelMode.WALKING;</li>
+	<li>google.maps.TravelMode.DRIVING;</li>
+	<li>google.maps.Geocoder()</li>
+	<li>google.maps.DirectionsService()</li>
+	<li>google.maps.DirectionsRenderer();</li>
+	<li>google.maps.GeocoderStatus.OK</li>
+	<li>google.maps.DirectionsService()</li>
+	<li>google.maps.DirectionsStatus.OK</li>
+	<li>google.maps.DirectionsStatus.ZERO_RESULTS</li>
+	<li>google.maps.DirectionsStatus.NOT_FOUND</li>
+	<li>google.maps.DirectionsStatus.OVER_QUERY_LIMIT</li>
+	<li>google.maps.DirectionsStatus.REQUEST_DENIED</li>
+	<li>google.maps.DirectionsStatus.MAX_WAYPOINTS_EXCEEDED</li>
+	<li>google.maps.DirectionsStatus.INVALID_REQUEST</li>
+	<li>google.maps.DirectionsStatus.UNKNOWN_ERROR</li>
+	<li>google.maps.UnitSystem.METRIC</li>
+	<li>google.maps.UnitSystem.IMPERIAL</li>
+	<li>google.maps.MapTypeId.ROADMAP</li>
+	<li>google.maps.Map(document.getElementById(mapDivID), mapOptions);</li>
+	<li>google.maps.Marker</li>
+	<li>google.maps.event.addListener</li>
+	<li>google.maps.event.addDomListener</li>
+	<li>google.maps.event.trigger</li>
+	<li>google.maps.InfoWindow</li>
+	<li>google.maps.Map</li>
+	<li>google.maps.Size</li>
+	<li>google.maps.Point</li>
+</ul>
+
+<h2 dir="ltr" id="ii8">Environment Variables Referencing Google Maps</h2>
+
+<h3 dir="ltr" id="ii9">SPM Ent Mods</h3>
+
+<p dir="ltr"><br />
+&lt;variable displayname="Triage Google map license key" constant="ENV_CW_GOOGLE_MAP_LICENSE_KEY" default="" name="curam.citizenworkspace.google.map.license.key" onlyin="all" type="STRING"&gt;<br />
+&nbsp; &lt;comment&gt;This property is to hold the public key value entered by users. The key is used when loading the Google Maps API onto pages freely accessible to the general public.&lt;/comment&gt;<br />
+&lt;/variable&gt;</p>
+
+<h3 dir="ltr" id="ii10">CEF Widgets</h3>
+
+<p dir="ltr"><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;variable<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; constant="ENV_GOOGLE_MAPS_API_URL"<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; default="https://maps.googleapis.com/maps/api/js?sensor=false&amp;amp;key="<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; displayname="Google Maps API URL"<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name="curam.miscapp.geocode.googlemapsapiurl"<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; onlyin="all"<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type="STRING"<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;comment&gt;Google Maps API URL used for geocode functionality&lt;/comment&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;doccomment&gt;Google Maps API URL used for geocode functionality&lt;/doccomment&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/variable&gt;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

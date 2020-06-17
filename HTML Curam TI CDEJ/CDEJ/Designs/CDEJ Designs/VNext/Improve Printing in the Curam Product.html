@@ -1,0 +1,581 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Improve Printing in the Curam Product</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../wiki.css" />
+<script type="text/javascript" src="../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Improve Printing in the Curam Product";
+    pageId="urn:lsid:ibm.com:td:86b20ae9-e309-430c-91b6-6f95e67d8ee1";
+    toRoot="../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Improve Printing in the Curam Product</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr"><span style="font-size:20px;"><strong>Design Page for Improve Printing in the Curam Product</strong></span></p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Background</span></strong></p>
+
+<p dir="ltr">There are a number of printing issues in the application. Printing in Curam is highly coupled with the browser CSS. This means when we bring in a new browser, browser update or we make a change. We run the risk of their being a browser issue. What appears to be a minor update, the impact of a change may be sever and lead to blank pages.</p>
+
+<p dir="ltr">Testing can also be difficult.&nbsp;</p>
+
+<p dir="ltr">We have technical limitations because we have to render a number of iFrames.</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Requirements</span></strong></p>
+
+<p dir="ltr">1)&nbsp; A user needs to be able to print content in the content panel and have the print out in a PDF.</p>
+
+<p dir="ltr">2)&nbsp; All content in the content panel needs to be visible and printable in PDF form.</p>
+
+<ul dir="ltr">
+	<li><span class="titleAndText" draggable="false"><span class="TitleText" style="">168581</span></span> -<strong> </strong>Improve Printing in the Curam Product</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Q&amp;A</span></strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">Should the printing PDF functionality implemented for every pages on the application(e.g. drop down lists) or just some pages which costumers might want to print?</li>
+	<li style="margin-left: 40px;">Should the printing PDF supports all the browsers(IE, FF, Chrome)?</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Non Functional Requirements</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. We can fill in N/A if the specified non functional requirement is not applicable to the feature being delivered, otherwise some notes must be entered here covering the particular area.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" width="671">
+	<tbody>
+		<tr>
+			<td style="width: 118px;"><strong>NFR</strong></td>
+			<td style="width: 537px;"><strong>Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Accessibility</td>
+			<td style="width: 537px;">The user should be able to tab to the print button and select it.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Availability &amp; Resilience</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Development Resource</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Evolution</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Internationalisation</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Location</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Performance and Scalability</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Regulation</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Security</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Usability</td>
+			<td style="width: 537px;">The ease with which people who interact with the system can work effectively. How the change will affect the user and how they use the application/feature should always be considered. Where necessary the business analysts and our user interface experts should be engaged early to ensure we meet usability requirements. e.g. printing.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Design Options</span></strong></p>
+
+<p dir="ltr">This is <strong>optional</strong>. If there are is more than one design option available and being discussed, then these should be outlined here.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Option 1</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">External application:</p>
+
+<p dir="ltr" style="margin-left: 40px;">The external application (UA)&nbsp;has the printing to PDF functionality implemented. In the UA, when user fills in and submits the application form, the data is stored in the database. When a user clicks on 'my application' tab, there is a link to open the application which was submitted in a PDF format(as shown below).</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">This functionality was implemented using java (PDFGenerationHelperImpl). The data is retrieved from the database and shown in a PDF form&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><img lconnwikiparamattachmentname="Screen Shot 2016-09-30 at 09.40.18.png" src="Improve%20Printing%20in%20the%20Curam%20Product._ATTACHMENTS_/Screen%20Shot%202016-09-30%20at%2009.40.18.png" lconnwikiparamwikipage="Improve Printing in the Curam Product" lconnwikimacro="image" width="1098" height="203" alt=""></img></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Option 2</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><span style="font-size:14px;">Internal application:</span></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;"><span style="font-size:14px;">Use iText API and Flying saucer:</span>
+
+	<ul>
+		<li style="margin-left: 40px;"><span style="font-size:14px;">along with the iText the following JAR files are needed</span></li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><span style="font-size:14px;">1) core-renderer.jar</span></p>
+
+<p dir="ltr" style="margin-left: 40px;"><span style="font-size:14px;">2) core-renderer-minimal.jar<br />
+<br />
+3) xml-apis-xerces-2.9.1.jar</span></p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><span style="font-size:14px;">The co.itextpdf.text.Document is the main class for PDF document generation. Once the document is created, a writer is required to write into the created document.</span></p>
+
+<p dir="ltr" style="margin-left: 40px;"><span style="font-size:14px;">Below are some commonly used classes for generating a PDF.</span></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;"><span style="font-size:14px;">com.itextpdf.text.Paragraph</span></li>
+	<li style="margin-left: 40px;"><span style="font-size:14px;">com.itextpdf.text.chapter</span></li>
+	<li style="margin-left: 40px;"><span style="font-size:14px;">com.itextpdf.text.List</span></li>
+	<li style="margin-left: 40px;"><span style="font-size:14px;">com.itextpdf.text.Font</span></li>
+	<li style="margin-left: 40px;"><span style="font-size:14px;">com.itextpdf.text.Anchor</span></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Option 3</span></strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;"><span style="font-size:12px;">Using Prince (print with CSS)</span></li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Option 4</span></strong></p>
+
+<p dir="ltr"><span style="font-size:14px;">PDFreactor</span></p>
+
+<p dir="ltr"><span style="font-size:14px;">&nbsp;&nbsp;&nbsp; Using the java library</span></p>
+
+<p dir="ltr">Create PDFs inside an applications and servlet.</p>
+
+<p dir="ltr">The following sample program converts <a href="http://www.realobjects.com.com/">http://www.realobjects.com </a>to PDF and saves it as output.pdf.</p>
+
+<p dir="ltr">This takes in a URL and generate it to PDF file</p>
+
+<pre class="programlisting" dir="ltr">
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+
+import com.realobjects.pdfreactor.PDFreactor;
+
+public class FirstStepsWithPDFreactor {
+    public static void main(String[] args) {
+        try {
+            PDFreactor pdfReactor = new PDFreactor();
+            
+            <span class="phrase">// configuration settings</span>
+            pdfReactor.setAddLinks(true);
+            pdfReactor.setAddBookmarks(true);
+            
+            <span class="phrase">// render the PDF document</span>
+            byte[] pdf = pr.renderDocumentFromURL("http://www.realobjects.com");
+            
+            OutputStream outputStream = new FileOutputStream("output.pdf");
+            outputStream.write(pdf);
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}</pre>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:16px;"><strong> Prons and Cons of the Technologies </strong></span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="361" width="832">
+	<tbody>
+		<tr>
+			<td style="width: 221px;"><span style="font-size:18px;"><strong>Technologies</strong></span></td>
+			<td style="width: 208px;"><strong><span style="font-size:18px;">Prons</span></strong></td>
+			<td style="width: 250px;"><strong><span style="font-size:18px;">Cons</span></strong></td>
+		</tr>
+		<tr>
+			<td style="width: 221px;">
+			<p>iText</p>
+
+			<p><a href="http://itextpdf.com/">http://itextpdf.com/</a></p>
+			</td>
+			<td style="width: 208px;">
+			<p>It's Java library</p>
+
+			<p>easier and faster</p>
+
+			<p>Works better for forms/report</p>
+			</td>
+			<td style="width: 250px;">
+			<p><span style="font-size:12px;">Expensive</span></p>
+
+			<p><span style="font-size:12px;">Template required for every pages,</span></p>
+
+			<p><span style="font-size:12px;">Requires access to the database.</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 221px;">
+			<p>PDFeactor</p>
+
+			<p><a href="http://www.pdfreactor.com/">http://www.pdfreactor.com/</a></p>
+			</td>
+			<td style="width: 208px;">
+			<p>supports all HTML5 elements, support Javascript</p>
+
+			<p>available in many different computer languages</p>
+			</td>
+			<td style="width: 250px;">
+			<p>Expensive, uses advanced css3</p>
+
+			<p>In java it takes URL as input to generate the PDF(see above code),</p>
+
+			<p>&nbsp;</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 221px;">
+			<p>PrinceXML</p>
+
+			<p><a href="http://www.princexml.com/">http://www.princexml.com/</a></p>
+			</td>
+			<td style="width: 208px;">
+			<p>client side</p>
+
+			<p>easy integration</p>
+			</td>
+			<td style="width: 250px;">
+			<p>Expensive</p>
+
+			<p>requires advanced css</p>
+
+			<p>License required</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 221px;">
+			<p>EVO PDF Software</p>
+
+			<p><a href="http://www.evopdf.com/">http://www.evopdf.com/</a></p>
+			</td>
+			<td style="width: 208px;">provides lots of different features</td>
+			<td style="width: 250px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 221px;">
+			<p>jsPDF</p>
+
+			<p><a href="https://parall.ax/products/jspdf">https://parall.ax/products/jspdf</a></p>
+			</td>
+			<td style="width: 208px;">
+			<p>client side, javascript tool, direct access to the HTML DOM.</p>
+
+			<p>An Open Source Javascript tool</p>
+			</td>
+			<td style="width: 250px;">In development</td>
+		</tr>
+		<tr>
+			<td style="width: 221px;">
+			<p>Apache PDF Box</p>
+
+			<p><a href="https://pdfbox.apache.org/">https://pdfbox.apache.org/</a></p>
+			</td>
+			<td style="width: 208px;">
+			<p>An Open source Java tool,</p>
+
+			<p>Features to Print a PDF file using the standard Java printing API.</p>
+			</td>
+			<td style="width: 250px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Design</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">This is <strong>mandatory</strong>. This should outline in detail the design chosen with all of the various areas for the component covered.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">UML Diagram/Class Architecture Diagram/Schematic Architecture Diagram</span></strong></p>
+
+<p dir="ltr">If applicable, a diagram should be constructed and placed here to display to the reader at a glance the architecture of the new feature or at the very least the relationship between the various classes that make up the new feature. It may also be applicable to construct a schematic to highlight the feature within the overall product that the feature is being applied to (i.e. where does this new feature fit into the overall offering etc.)</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">This will differ from component to component so the sub headings here will reflect that.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Component A</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Component B</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Validations</span></strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">Validations Required</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Data Model Changes and Required Indexes</span></strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">Describe any changes required to the data model, entities, operations, indexes etc.</li>
+	<li style="margin-left: 40px;"><strong>Also important here that if new tables/indexes are being added, check to ensure that the primary key/index lenght does not exceed the maximum allowed for DB2</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Resilience</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><br />
+<br />
+This is <strong>mandatory</strong>. Some thought should be given to how resilient the new feature is.</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">&nbsp;&nbsp;&nbsp; What happens if something expected/unexpected goes wrong?</li>
+	<li style="margin-left: 40px;">&nbsp;&nbsp;&nbsp; What happens to the system?</li>
+	<li style="margin-left: 40px;">&nbsp;&nbsp;&nbsp; Will the user be able to take corrective action in the system without the need to resort to application logs/SQL searching/data manipulation outside of the system.</li>
+	<li style="margin-left: 40px;">&nbsp;&nbsp;&nbsp; Will the data be left in a consistent state within the system after the exception is thrown?</li>
+	<li style="margin-left: 40px;">&nbsp;&nbsp;&nbsp; Will there be messages given to the user? What will these messages be?</li>
+	<li style="margin-left: 40px;">&nbsp;&nbsp;&nbsp; Will there something written to the logs? What will this be?</li>
+	<li style="margin-left: 40px;">&nbsp;&nbsp;&nbsp; Does the feature require some of the exception data to be captured and an admin function provided to allow the situation to be re-mediated?</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Q &amp; A</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">This is <strong>optional</strong>. There may be some outstanding questions as regards to the design. These questions and the answers when they become available may be recorded here.</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Use Cases </span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. The various use cases for the feature must be outlined here. They can be in whatever format deemed appropriate (i.e. verbose description or in a tabular format with actors and actions etc.). Below is an example of how use cases may be documented in a tabular format.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="256" width="599">
+	<tbody>
+		<tr>
+			<td style="width: 77px;"><strong>Role/Actor</strong></td>
+			<td style="width: 175px;"><strong>Description</strong></td>
+			<td style="width: 243px;"><strong>Expected Behavior</strong></td>
+			<td style="width: 89px;"><strong>Tested</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 77px;">User</td>
+			<td style="width: 175px;">clicks on printing <strong>button/icon</strong></td>
+			<td style="width: 243px;">
+			<p>PDF document opens</p>
+
+			<p>&nbsp;</p>
+			</td>
+			<td style="width: 89px;">Manual</td>
+		</tr>
+		<tr>
+			<td style="width: 77px;">user</td>
+			<td style="width: 175px;">clicks <strong>print icon</strong> on the PDF document</td>
+			<td style="width: 243px;">
+			<p>print preview/summary pages dialog opens</p>
+
+			<p>&nbsp;</p>
+			</td>
+			<td style="width: 89px;">Manual</td>
+		</tr>
+		<tr>
+			<td style="width: 77px;">user</td>
+			<td style="width: 175px;">previews and click <strong>Print</strong></td>
+			<td style="width: 243px;">
+			<p>the selected page should be printed as PDF</p>
+
+			<p>&nbsp;</p>
+			</td>
+			<td style="width: 89px;">Manual</td>
+		</tr>
+		<tr>
+			<td style="width: 77px;">&nbsp;</td>
+			<td style="width: 175px;">&nbsp;</td>
+			<td style="width: 243px;">&nbsp;</td>
+			<td style="width: 89px;">
+			<p>&nbsp;</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 77px;">&nbsp;</td>
+			<td style="width: 175px;">&nbsp;</td>
+			<td style="width: 243px;">&nbsp;</td>
+			<td style="width: 89px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Implementation Notes</span></strong></p>
+
+<p dir="ltr">Below is an example of java code used to convert the HTML document to PDF.</p>
+
+<pre dir="ltr">
+<span class="syntax0"><span class="syntax-KEYWORD2">import</span> java.io.*;
+<span class="syntax-KEYWORD2">import</span> com.lowagie.text.DocumentException;
+<span class="syntax-KEYWORD2">import</span> org.xhtmlrenderer.pdf.ITextRenderer;
+
+<span class="syntax-KEYWORD1">public</span> <span class="syntax-KEYWORD3">class</span> FirstDoc <span class="syntax-OPERATOR">{</span>
+    
+    <span class="syntax-KEYWORD1">public</span> <span class="syntax-KEYWORD1">static</span> <span class="syntax-KEYWORD3">void</span> <span class="syntax-FUNCTION">main</span><span class="syntax-OPERATOR">(</span>String[] args<span class="syntax-OPERATOR">)</span> 
+            <span class="syntax-KEYWORD1">throws</span> IOException, DocumentException <span class="syntax-OPERATOR">{</span>
+        String File_To_Convert <span class="syntax-OPERATOR">=</span> <span class="syntax-LITERAL1">"</span><span class="syntax-LITERAL1">test.htm</span><span class="syntax-LITERAL1">"</span>;
+        String url <span class="syntax-OPERATOR">=</span> <span class="syntax-KEYWORD1">new</span> <span class="syntax-FUNCTION">File</span><span class="syntax-OPERATOR">(</span>File_To_Convert<span class="syntax-OPERATOR">)</span>.<span class="syntax-FUNCTION">toURI</span><span class="syntax-OPERATOR">(</span><span class="syntax-OPERATOR">)</span>.<span class="syntax-FUNCTION">toURL</span><span class="syntax-OPERATOR">(</span><span class="syntax-OPERATOR">)</span>.<span class="syntax-FUNCTION">toString</span><span class="syntax-OPERATOR">(</span><span class="syntax-OPERATOR">)</span>;
+        System.out.<span class="syntax-FUNCTION">println</span><span class="syntax-OPERATOR">(</span><span class="syntax-LITERAL1">"</span><span class="syntax-LITERAL1">"</span><span class="syntax-OPERATOR">+</span>url<span class="syntax-OPERATOR">)</span>;
+        String HTML_TO_PDF <span class="syntax-OPERATOR">=</span> <span class="syntax-LITERAL1">"</span><span class="syntax-LITERAL1">ConvertedFile.pdf</span><span class="syntax-LITERAL1">"</span>;
+        OutputStream os <span class="syntax-OPERATOR">=</span> <span class="syntax-KEYWORD1">new</span> <span class="syntax-FUNCTION">FileOutputStream</span><span class="syntax-OPERATOR">(</span>HTML_TO_PDF<span class="syntax-OPERATOR">)</span>;       
+        ITextRenderer renderer <span class="syntax-OPERATOR">=</span> <span class="syntax-KEYWORD1">new</span> <span class="syntax-FUNCTION">ITextRenderer</span><span class="syntax-OPERATOR">(</span><span class="syntax-OPERATOR">)</span>;
+        renderer.<span class="syntax-FUNCTION">setDocument</span><span class="syntax-OPERATOR">(</span>url<span class="syntax-OPERATOR">)</span>;      
+        renderer.<span class="syntax-FUNCTION">layout</span><span class="syntax-OPERATOR">(</span><span class="syntax-OPERATOR">)</span>;
+        renderer.<span class="syntax-FUNCTION">createPDF</span><span class="syntax-OPERATOR">(</span>os<span class="syntax-OPERATOR">)</span>;        
+        os.<span class="syntax-FUNCTION">close</span><span class="syntax-OPERATOR">(</span><span class="syntax-OPERATOR">)</span>;
+    <span class="syntax-OPERATOR">}</span>
+<span class="syntax-OPERATOR">}</span>
+</span></pre>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Application Impact</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. If there is no impact, then this is as simple as saying so. If there is impact, then this may describe the impact in detail and outline the upgrade path. If the feature is related to a CLE, this section can be a link to that CLE (and hence the documentation associated with the CLE will suffice).</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Testing</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. An outline of all of the testing required by the feature should be present here. This may tie in with the use cases outlined above. This may differ from component to component so the sub headings here will reflect that.</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Unit tests</p>
+	</li>
+	<li>
+	<p>Manual Test Plans</p>
+	</li>
+	<li>
+	<p>Automated tests</p>
+	</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Documentation/How To Use Feature</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. This should describe how to use the feature added. Again this may differ from component to component but there are some general headings to consider:</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Where the feature fits in the overall component?</p>
+	</li>
+	<li>
+	<p>How it may be accessed (i.e. created/authored)?</p>
+	</li>
+	<li>
+	<p>What does it do (may be linked to the use cases above)?</p>
+	</li>
+	<li>
+	<p>Advantages of using the feature?</p>
+	</li>
+	<li>
+	<p>Any limitations associated with the feature?</p>
+	</li>
+	<li>
+	<p>A description of how the feature should be used etc.? This may also include a description of a contract between the various teams using the feature and will incorporate some details of the design.</p>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Check List</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Basically this is a quick check list of items that should be considered when doing a design for that particular component.</p>
+
+<table border="1" dir="ltr" style="width: 658px;">
+	<tbody>
+		<tr>
+			<td style="width: 166px;"><strong>Check List Item</strong></td>
+			<td style="width: 273px;"><strong>Notes</strong></td>
+			<td style="width: 196px;"><strong>Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">??????</td>
+			<td style="width: 273px;">?????.</td>
+			<td style="width: 196px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Work Estimation</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Again, the actual items listed in the estimate breakdown may vary from task to task and component to component.</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Work Estimates</p>
+
+	<ul>
+		<li>
+		<p>Design: 3 Days</p>
+		</li>
+		<li>
+		<p>Prototype: 2 Days</p>
+		</li>
+		<li>
+		<p>Implementation: ? days</p>
+		</li>
+		<li>
+		<p>Testing: ? days</p>
+		</li>
+		<li>
+		<p>Documentation: ? days</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Total: ???</p>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><br />
+<br />
+&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

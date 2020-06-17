@@ -1,0 +1,721 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Dynamic Browser Tab Titles</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Dynamic Browser Tab Titles";
+    pageId="urn:lsid:ibm.com:td:bca7f20e-4982-4875-830e-5b22d171c6a8";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Dynamic Browser Tab Titles</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr"><span style="font-size:20px;"><strong>Page titles in SPM are missing meaningful page titles 1.2.4d</strong></span></p>
+
+<p dir="ltr"><span style="font-size:20px;"><strong>Subtitle: "Dynamic Browser Tab Titles" for short</strong></span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Background</span></strong></p>
+
+<div class="user-content-block" dir="ltr">
+<p>Page title in SPM is currently hardcoded to "IBM Curam Social Program Management". This is not meaningful for a screen reader user and therefore fails VPAT checkpoint 1.2.4d.</p>
+
+<p>Page title should include context (what section is open, application tab is open, context panel name, content panel name). This information will need to be updated using JavaScript as the user navigates through the application.</p>
+
+<p>&nbsp;</p>
+</div>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Requirements</span></strong></p>
+
+<p dir="ltr">The browser tab title should update to include a meaningful title for the visible page. E.g. "My Payments - IBM Curam Universal Access" or "Person Search - IBM Curam Social Program Management".</p>
+
+<ul dir="ltr">
+	<li>TEC-18049 - Page titles in SPM are missing meaningful page titles 1.2.4d (TI changes)</li>
+	<li>TEC-18886 - Page titles in SPM are missing meaningful page titles 1.2.4d (IEG changes)</li>
+	<li>GUM-6153 - Page titles in SPM are missing meaningful page titles 1.2.4d (UA changes)</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Q&amp;A</span></strong></p>
+
+<ul dir="ltr">
+	<li>None</li>
+</ul>
+
+<h2 dir="ltr">Tickets</h2>
+
+<ul dir="ltr">
+	<li>
+	<p><span style="font-size:14px;">TEC-18049/TEC-18886/GUM-6153</span></p>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Non Functional Requirements</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. We can fill in N/A if the specified non functional requirement is not applicable to the feature being delivered, otherwise some notes must be entered here covering the particular area.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" style="width: 987px;" width="671">
+	<tbody>
+		<tr>
+			<td style="width: 118px;"><strong>NFR</strong></td>
+			<td style="width: 537px;"><strong>Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+			<td style="width: 311px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Accessibility</td>
+			<td style="width: 537px;">The ability of the system to be used by people with disabilities. When new technologies are being used for the UI very careful consideration should be given to whether screen readers can be used with the technologies. This applies specifically to usage of JavaScript, Flex and SVG. The use of colors to provide functionality should be considered (and avoided), along with resolutions that will be used by vision impaired users.</td>
+			<td style="width: 311px;">This fix is specifically to address an accessibility defect.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Availability &amp; Resilience</td>
+			<td style="width: 537px;">The ability of the system to be fully or partly operational as and when required and to effectively handle failures that could affect system availability. This should be considered when working outside of the normal infrastructure and deployment. For example, the XML Server is not deployed in an application server and has special handling for fail-over and load balancing. Careful consideration should be taken before adding new components, e.g. EJB Beans, MDBs, to the infrastructure.</td>
+			<td style="width: 311px;">n/a</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Development Resource</td>
+			<td style="width: 537px;">The ability of the system to be designed, built, deployed and operated within known constraints of people, budget, time, etc. In general there is not much information required here, however where special skill sets or people with siloed knowledge are required to work on the change/enhancement, this should be detailed here.</td>
+			<td style="width: 311px;">n/a</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Evolution</td>
+			<td style="width: 537px;">The ability of the system to be flexible in the face of the inevitable change that all systems experience after deployment, balanced against the costs of providing such flexibility. Consideration should be given to future proofing the change, including considering how to upgrade to any changes or enhancements provided in the future. Specifically designs should accommodate elements such as localisation (text, dates, etc.), customization, configurability, and componentization. Providing these features in future releases, when not considered up front, has caused impacts for customers in the past and has prevented us from providing the features in some cases.</td>
+			<td style="width: 311px;">
+			<p>It is possible that this will break if dojo change the underlying mechanism of how they render items such as TabContainers. It could also break if we change how we render items such as PagePlayer pages.</p>
+
+			<p>&nbsp;</p>
+
+			<p>If this happens, the code will fail to find the 'dynamic' part of the title, and will default to using the static application title text on its own.</p>
+
+			<p>&nbsp;</p>
+
+			<p>We hope to soon have an automated test that so that we can be notified as soon as possible if this code breaks.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Internationalisation</td>
+			<td style="width: 537px;">The ability of the system to be independent from any particular language, country or cultural group. Localisation and internationalisation are a large concern for Cúram. Support should always be provided to view information in multiple locales, based on the user and server locale, along with support for working in multiple time zones.</td>
+			<td style="width: 311px;">All text comes from localizable properties files.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Location</td>
+			<td style="width: 537px;">The ability of the system to overcome problems brought about by the absolute location of its elements and the distances between them. For the most part this is not a major concern, however we should never design based on the assumption that the customer will use a default configuration</td>
+			<td style="width: 311px;">n/a</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Performance and Scalability</td>
+			<td style="width: 537px;">The ability of the system to predictably execute within its mandated performance profile and to handle increased processing volumes. Performance and scalability are a concern and should always be considered during design. Where necessary, the Performance and Benchmarking teaming should be engaged early to help with determining impact of potential changes.</td>
+			<td style="width: 311px;">n/a</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Regulation</td>
+			<td style="width: 537px;">The ability of the system to conform to locale and international laws, quasi-legal regulations, company policies and other rules and standards. Regulation includes the usages of third party tools and the licensing issues associated with these. New jars should never be introduced without considering the legal implications and licensing of the jars. This includes usage of GPL licensed code. Also, usage of code freely provided on the web and not properly licensed should be avoided.</td>
+			<td style="width: 311px;">n/a</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Security</td>
+			<td style="width: 537px;">The ability of the system to reliably control, monitor and audit who can perform what actions on what resources and to detect and recover from failures in security mechanisms. This is a concern where new features are added that are not contained within the normal Cúram security.</td>
+			<td style="width: 311px;">All properties are escaped before being rendered to the page.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Usability</td>
+			<td style="width: 537px;">The ease with which people who interact with the system can work effectively. How the change will affect the user and how they use the application/feature should always be considered. Where necessary the business analysts and our user interface experts should be engaged early to ensure we meet usability requirements. e.g. printing.</td>
+			<td style="width: 311px;">This feature is a positive change for users with screen reading software.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Design Options</span></strong></p>
+
+<ul dir="ltr">
+	<li>n/a</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Design</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. This should outline in detail the design chosen with all of the various areas for the component covered. This will differ from component to component so the sub headings here will reflect that.</p>
+
+<ul dir="ltr">
+	<li><strong><span style="font-size:18px;">TI</span></strong></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">When the visible navigation tab, navigation item, content panel, context panel or section changes, the browser tab title should update to reflect what they are looking at.</p>
+
+<ul dir="ltr">
+	<li><strong><span style="font-size:18px;">IEG</span></strong></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">As the user navigates forwards (or backwards) through an IEG script, the browser title should update to reflect the current section.</p>
+
+<ul dir="ltr">
+	<li><strong><span style="font-size:18px;">UA</span></strong></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">As the user uses the landing page, the pages linked to from the landing page, their home page, pages linked to from their home page, or navigates through an IEG script, the browser title should update to reflect what they are looking at.</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Validations</span></strong></p>
+
+<ul dir="ltr">
+	<li>None</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Data Model Changes and Required Indexes</span></strong></p>
+
+<ul dir="ltr">
+	<li>None</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Q &amp; A</span></strong></p>
+
+<p dir="ltr">This is <strong>optional</strong>. There may be some outstanding questions as regards to the design. These questions and the answers when they become available may be recorded here.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Use Cases</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. The various use cases for the feature must be outlined here. They can be in whatever format deemed appropriate (i.e. verbose description or in a tabular format with actors and actions etc.). Below is an example of how use cases may be documented in a tabular format.</p>
+
+<p dir="ltr">User</p>
+
+<table border="1" dir="ltr" style="width: 805px;">
+	<tbody>
+		<tr>
+			<td><strong>Role/Actor</strong></td>
+			<td style="width: 359px;"><strong>Description</strong></td>
+			<td style="width: 275px;"><strong>Expected Behavior</strong></td>
+			<td style="width: 87px;"><strong>Tested</strong></td>
+		</tr>
+		<tr>
+			<td colspan="4" style="text-align: center;"><strong>CDEJ Use Cases</strong></td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">CDEJ - TabTestApp - User navigates to a page with a page title in the content panel</td>
+			<td style="width: 275px;">The browser tab title displays page title, e.g. "&lt;page title&gt; - IBM Curam Social Program Management"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">CDEJ - TabTestApp - User navigates to a page with no page title in the content panel but has a navigation group</td>
+			<td style="width: 275px;">The browser tab title displays nav group item, e.g. "&lt;nav group item&gt; - IBM Curam Social Program Management"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">CDEJ - TabTestApp - User navigates to a page with no page title in the content panel, no navigation group, but has a set of navigation tabs</td>
+			<td style="width: 275px;">The browser tab title displays nav tab name, e.g. "&lt;nav tab name&gt; - IBM Curam Social Program Management"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">CDEJ - TabTestApp - User navigates to a page with no page title in the content panel, no navigation group, and no navigation tabs, but has a title in the context panel title bar</td>
+			<td style="width: 275px;">The browser tab title displays context panel title, e.g. "&lt;context panel title&gt; - IBM Curam Social Program Management"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">CDEJ - TabTestApp - User navigates to a page with no page title in the content panel, no navigation group, and no navigation tabs, and has no title in the context panel title bar</td>
+			<td style="width: 275px;">The browser tab title displays section name, e.g. "&lt;section&gt; - IBM Curam Social Program Management"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">CDEJ - UATestApp - User home page</td>
+			<td style="width: 275px;">The browser tab title displays application title only, e.g. "IBM Curam Universal Access"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">CDEJ - UATestApp - User opens UIM fragment with script to change browser tab title (Test 7)</td>
+			<td style="width: 275px;">The browser tab title displays given title, e.g. "&lt;title&gt; - IBM Curam Universal Access"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">CDEJ - UATestApp - User opens plain UIM fragment (Test 8)</td>
+			<td style="width: 275px;">The browser tab title displays application title only, e.g. "IBM Curam Universal Access"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">CDEJ - UATestApp - User opens UIM page with title (Test 9)</td>
+			<td style="width: 275px;">The browser tab title displays UIM page title, e.g. "&lt;page title&gt; - IBM Curam Universal Access"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">CDEJ - UATestApp - User opens UIM page with no title (Test 10)</td>
+			<td style="width: 275px;">The browser tab title displays application title only, e.g. "IBM Curam Universal Access"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td colspan="4" style="text-align: center;">
+			<p><strong>IEG Use Cases</strong></p>
+
+			<p>(These apply to internal modal, internal in-tab, and external in-tab scripts)</p>
+			</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">IEG - User starts an IEG script</td>
+			<td style="width: 275px;">The browser tab title displays title of first page, e.g. "&lt;page title&gt; - IBM Curam Social Program Management"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">IEG - User clicks Next button during script</td>
+			<td style="width: 275px;">The browser tab title displays title of next page, e.g. "&lt;page title&gt; - IBM Curam Social Program Management"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">IEG - User clicks Back button during script</td>
+			<td style="width: 275px;">The browser tab title displays title of previous page, e.g. "&lt;page title&gt; - IBM Curam Social Program Management"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">IEG - User clicks Edit button during script</td>
+			<td style="width: 275px;">The browser tab title displays title of opened page, e.g. "&lt;page title&gt; - IBM Curam Social Program Management"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">IEG - User clicks Add button during script</td>
+			<td style="width: 275px;">The browser tab title displays title of opened page, e.g. "&lt;page title&gt; - IBM Curam Social Program Management"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">IEG - User clicks Delete button during script</td>
+			<td style="width: 275px;">The browser tab title displays delete modal window title, e.g. "Delete Confirm - IBM Curam Social Program Management"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">IEG - User clicks Section heading during script</td>
+			<td style="width: 275px;">The browser tab title displays title of opened page, e.g. "&lt;page title&gt; - IBM Curam Social Program Management"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td colspan="4" style="text-align: center;"><strong>UA Use Cases</strong></td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">UA - User navigates to landing page</td>
+			<td style="width: 275px;">The browser tab title displays application title only, i.e. "IBM Curam Universal Access"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">UA - User opens Page Player page</td>
+			<td style="width: 275px;">The browser tab title displays the title of new page, i.e. "&lt;page title&gt; - IBM Curam Universal Access"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">UA - User clicks Next on Page Player page</td>
+			<td style="width: 275px;">The browser tab title displays the title of next page, i.e. "&lt;page title&gt; - IBM Curam Universal Access"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">UA - User clicks Back on Page Player page</td>
+			<td style="width: 275px;">The browser tab title displays the title of previous page, i.e. "&lt;page title&gt; - IBM Curam Universal Access"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">UA - User opens modal window</td>
+			<td style="width: 275px;">The browser tab title displays the title of the modal window, e.g. "Add Comment - IBM Curam Universal Access"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">UA - User closes modal window</td>
+			<td style="width: 275px;">The browser tab title displays the title of the open page, i.e. "&lt;page title&gt; - IBM Curam Universal Access"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">UA - Users opens provider details popup window</td>
+			<td style="width: 275px;">The browser tab title on the popup window displays the popup window title, e.g. "UA Test Provider - Provider Details". The browser tab title on the original page remains unchanged.</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">UA - User clicks a nav item on their home page</td>
+			<td style="width: 275px;">The browser tab title displays the newly-opened page title, e.g. "&lt;page title&gt; - IBM Curam Universal Access"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">UA - User starts IEG script in External Application</td>
+			<td style="width: 275px;">The browser tab title displays the script title, e.g. "Information about you - IBM Curam Universal Access"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">UA - User clicks Next in IEG script in External Application</td>
+			<td style="width: 275px;">The browser tab title displays title of opened page, e.g. "Information about your situation - IBM Curam Universal Access"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">UA - User clicks Back button in IEG script in External Application</td>
+			<td style="width: 275px;">The browser tab title displays title of opened page, e.g. "Information about you - IBM Curam Universal Access"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">UA - User clicks Edit in IEG script in External Application</td>
+			<td style="width: 275px;">The browser tab title displays title of opened page, e.g. "Information about you - IBM Curam Universal Access"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">UA - User clicks Add in IEG script in External Application</td>
+			<td style="width: 275px;">The browser tab title displays title of opened page, e.g. "Home Member Information - IBM Curam Universal Access"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">UA - User clicks Delete in IEG script in External Application</td>
+			<td style="width: 275px;">The browser tab title displays title of confirm dialog modal window, e.g. "Delete Confirm - IBM Curam Universal Access"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">UA - User clicks Delete/Cancel on Delete Confirm modal window in IEG script in External Application</td>
+			<td style="width: 275px;">The browser tab title displays title of the original page, e.g. "Review your Answers - IBM Curam Universal Access"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td style="width: 359px;">UA - User clicks Section link in IEG script in External Application</td>
+			<td style="width: 275px;">The browser tab title displays title of opened page, e.g. "&lt;page title&gt; - IBM Curam Universal Access"</td>
+			<td style="width: 87px;">Manually</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Implementation Notes</span></strong></p>
+
+<p dir="ltr">The most important parts are two functions in TI file util.js:</p>
+
+<p dir="ltr"><strong>curam.util._setupBrowserTabTitle(staticApplicationTitle, separator, displayApplicationNameFirst)</strong></p>
+
+<p dir="ltr">This function is called by either AppController.jspx or ExternalApplicationBannerRenderer.java depending on whether user is using the internal or external application. The method saves the given properties for later use.</p>
+
+<table border="1" dir="ltr" height="163" width="878">
+	<tbody>
+		<tr>
+			<td style="width: 238px;">&nbsp;</td>
+			<td style="width: 295px;"><strong>Internal App</strong></td>
+			<td style="width: 336px;"><strong>External App</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 238px;" valign="top">When is function called?</td>
+			<td style="width: 295px;" valign="top">AppController.jspx</td>
+			<td style="width: 336px;" valign="top">ExternalApplicationBannerRenderer.java</td>
+		</tr>
+		<tr>
+			<td style="width: 238px;">Params come from</td>
+			<td style="width: 295px;">CDEJResource.properties</td>
+			<td style="width: 336px;">CITWSAPP.properties (or other similar .app file)</td>
+		</tr>
+		<tr>
+			<td style="width: 238px;">Param for application title string</td>
+			<td style="width: 295px;">browser.tab.title</td>
+			<td style="width: 336px;">landing.title</td>
+		</tr>
+		<tr>
+			<td style="width: 238px;">Param for separator string</td>
+			<td style="width: 295px;">browser.tab.title.separator</td>
+			<td style="width: 336px;">browser.tab.title.separator</td>
+		</tr>
+		<tr>
+			<td style="width: 238px;">Param for application title first boolean</td>
+			<td style="width: 295px;">browser.tab.title.application.title.first</td>
+			<td style="width: 336px;">browser.tab.title.application.title.first</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">See the javadoc in util.js for more info.</p>
+
+<p dir="ltr"><strong>curam.util.setBrowserTabTitle(/*optional*/ name)</strong></p>
+
+<p dir="ltr">If given a name value, this function sets the browser tab title to "&lt;name&gt;&lt;separator&gt;&lt;application title&gt;" or "&lt;application title&gt;&lt;separator&gt;&lt;name&gt;", depending on the value of "browser.tab.title.application.title.first", e.g. "Select Screening - IBM Curam Universal Access".</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">In the external application, curam.util.setBrowserTabTitle is called by the following files:</p>
+
+<ul dir="ltr">
+	<li>PagePlayerRenderer.java</li>
+	<li>LandingPageRenderer.java</li>
+	<li>UIMIFrameWrapper.java</li>
+</ul>
+
+<p dir="ltr">The following files call RendererUtils.setPopupWindowPageTitle as due to them being pop-up windows they do not have access to the application.jspx browser context and thus are unable to get the settings from CDEJResource.properties. They instead use properties from ProviderServiceModal.properties or else fall back to default values:q</p>
+
+<ul dir="ltr">
+	<li>GetDirectionsRenderer.java</li>
+	<li>ProviderModalDetailsMapContainerRenderer.java</li>
+	<li>ReferralFieldRenderer.java</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">In the internal application, curam.util.setBrowserTabTitle is called by the following functions:</p>
+
+<ul dir="ltr">
+	<li>curam.ModalDialog._loadErrorHandler</li>
+	<li>
+	<p>curam.ModalDialog._modalClosedHandler</p>
+	</li>
+	<li>
+	<p>curam.UIMController.processFrameLoadEvent</p>
+	</li>
+	<li>
+	<p>curam.tab.TabSessionManager.tabSelected</p>
+	</li>
+	<li>
+	<p>curam.tab.TabSessionManager.tabSectionSelected</p>
+	</li>
+	<li>
+	<p>curam.ui.UIController.revealTabNow</p>
+	</li>
+	<li>
+	<p>curam.util.TabNavigation.postIframeLoadHandler</p>
+	</li>
+</ul>
+
+<p dir="ltr">In IEG, curam.util.setBrowserTabTitle is called by the following files:</p>
+
+<ul dir="ltr">
+	<li>ieg-bootstrap.js</li>
+	<li>update-manager.js</li>
+</ul>
+
+<p dir="ltr">In the external application, curam.util.setBrowserTabTitle is called by the following functions:</p>
+
+<ul dir="ltr">
+	<li>curam.widget.containers.TransitionContainer._setDisplayPanelAttr</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Typically in the internal application it will be called without a name parameter. If not given a value for 'name' the method will call curam.util._findAppropriateDynamicTitle() which attempts to find an appropriate title in the DOM. It searches for:</p>
+
+<ul dir="ltr">
+	<li>Page Title on Content Panel</li>
+	<li>If no page title on CPanel, then get title from page navigation group,</li>
+	<li>If no page navigation group title then use title from navigation tab bar</li>
+	<li>If no title on navigation tab bar then use title on application tab</li>
+	<li>If no title on application tab then use title on Section.</li>
+</ul>
+
+<p dir="ltr">If none of the above are found it will default back to displaying the Application Title on its own. It uses the first item found.</p>
+
+<p dir="ltr">It also searches for a sixth item, for use with UIM pages in external application (for when curam.ModalDialog._modalClosedHandler gets called in that context.) This is because when closing a modal dialog window we need to trigger the check to update the title to the underlying page.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Application Impact</span></strong></p>
+
+<ul dir="ltr">
+	<li>Browser tab title will change based on user context.</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">CTM</span></strong></p>
+
+<ul dir="ltr">
+	<li>n/a</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Testing</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. An outline of all of the testing required by the feature should be present here. This may tie in with the use cases outlined above. This may differ from component to component so the sub headings here will reflect that.</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Unit tests - n/a</p>
+	</li>
+	<li>
+	<p>Manual Test Plans</p>
+
+	<ul>
+		<li>
+		<p>For TI, I have added 6 scenarios linked to in the Tab Test App. The pages are "Dynamic Browser Tab TitleTests 1-3", "Dynamic Browser Tab Title Test 4" and "Dynamic Browser Tab Title Tests 5-6". These pages contain test scenarios where a given title should appear in the browser tab title.</p>
+		</li>
+		<li>
+		<p>For IEG, the test is to run a script, both modal and in-tab, and check does the browser tab title match the IEG page title, e.g. "About You - IBM Curam Social Program Management"</p>
+		</li>
+		<li>
+		<p>For UA, I have added 4 scenarios linked to in the UA Test App. Initiall the landing page should just display the Application Title only, Page Player pages should display the page title, e.g. "Select Screening - IBM Curam Universal Access", the user home pages should contain an appropriate title, e.g. "My Payments - IBM Curam Universal Access"</p>
+		</li>
+		<li>
+		<p>This code must also be tested in the 'real' external application, i.e. an actual UA build, in order to ensure that other pages e.g. Page Player pages function correctly.</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Automated tests</p>
+	</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Documentation/How To Use Feature</span></strong></p>
+
+<ul dir="ltr">
+	<li>
+	<p>Where the feature fits in the overall component?</p>
+
+	<ul>
+		<li>
+		<p>FIXME AB</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>How it may be accessed (i.e. created/authored)?</p>
+
+	<ul>
+		<li>
+		<p>FIXME AB</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>What does it do (may be linked to the use cases above)?</p>
+
+	<ul>
+		<li>
+		<p>Changes browser title based on user context</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Advantages of using the feature?</p>
+
+	<ul>
+		<li>
+		<p>Fixes an accessibility defect and makes our program more accessible.</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Any limitations associated with the feature?</p>
+
+	<ul>
+		<li>
+		<p>There is a bug/feature in Curam where if you have a navigation group containing only a single item it will be rendered on the page, and will be visible, but will be given a width of 0. From a DOM/dojo.query standpoint the item will be visible and so its title will be found. The easy solution for this is to not have navigation groups with only one item!</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>A description of how the feature should be used etc.? This may also include a description of a contract between the various teams using the feature and will incorporate some details of the design.</p>
+
+	<ul>
+		<li>
+		<p>The feature should automatically work on any page in the application.</p>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Check List</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Basically this is a quick check list of items that should be considered when doing a design for that particular component.</p>
+
+<table border="1" dir="ltr" style="width: 658px;">
+	<tbody>
+		<tr>
+			<td style="width: 166px;"><strong>Check List Item</strong></td>
+			<td style="width: 314px;"><strong>Notes</strong></td>
+			<td style="width: 157px;"><strong>Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">????</td>
+			<td style="width: 314px;">?????.</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Work Estimation</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Again, the actual items listed in the estimate breakdown may vary from task to task and component to component.</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Work Estimates</p>
+
+	<ul>
+		<li>
+		<p>Design: ? Days</p>
+		</li>
+		<li>
+		<p>Prototype: ? Days</p>
+		</li>
+		<li>
+		<p>Implementation: ? Days</p>
+		</li>
+		<li>
+		<p>Testing: ? Days</p>
+		</li>
+		<li>
+		<p>Documentation: ? Days</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Total: ? Days</p>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

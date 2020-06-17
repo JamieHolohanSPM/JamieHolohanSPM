@@ -1,0 +1,679 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Tags and Renderers Summary</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Tags and Renderers Summary";
+    pageId="urn:lsid:ibm.com:td:55b022ec-1e80-46d0-ad62-ca5f73bf1ea5";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Tags and Renderers Summary</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h1 dir="ltr">Summary of the TI Tags and Renderers</h1>
+
+<ul dir="ltr">
+	<li>CoreInf/src/curam/omega3/taglib --- generic classes, tag support. Used by tags and once the tags are gone, these might be mosty removed as well
+	<ul>
+		<li>ClientTagException - a dedicated exception class for reporting different failures when enacting a tag.</li>
+		<li>CuramTagSupport - common tag, request and bean interaction base implementation, further superclass in the inheritance chain.</li>
+		<li>HTMLAttributesTagSupport - helper class to distribute tag related functionality; extracts the standard tag attribute holder fields, getters and setters into the base class. The ancestor for most if not all tags, removable if the tags are gone.</li>
+		<li>HTMLComponent - one method interface to standardize the Curam tag output. Valid as long as there is at least one plain or wrapped tag.</li>
+		<li>HTMLControls - supposed to be a generic helper class but only used in the legacy FileEditTag, therefore should be removed along with that tag, which is not used at the JSP level any longer.</li>
+		<li>LocalizedTagSupport - furtherst curam class in the tag ancestor chain, adds locale, timezone, text direction awareness to all the curam tags.</li>
+		<li>Parameterised - helper interface to add parameter tag support, requires a method in the parent tag to add the named parameters from the children (nested parameter, say linParameter tags; might be removed when all the parameter tags consumers are converted into renderers or equivalent.</li>
+		<li>ScreenContext - support for the special request parameter which might also shape the particular tag output. This one would not go, since it isn't used by the tag infrastructure only, however it might be moved from the taglib to a more relevant location eventually.</li>
+		<li>SetConditionalDisplayValue - utility for implementing the CONDITION tag and the conditional display, sets or updates page context value to be consumed by the subsequent CONDITION tags on a page to render or skip part of the page layout.</li>
+		<li>TagLibUtil - another utility class, outside the tag inheritance chain but providing tags with the services like code table code and frequency pattern translation, current loop index and domain information. Code base should be scanned to see if this is used outside the tag library by some other parts of infrastructure.</li>
+	</ul>
+	</li>
+</ul>
+
+<table border="1" dir="ltr" style="width: 1000px;">
+	<tbody>
+		<tr>
+			<td style="width: 333px;"><strong>Package/tag class name</strong></td>
+			<td style="width: 252px;"><strong>Matching renderer name (if present)</strong></td>
+			<td style="width: 400px;"><strong>Notes</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 333px; text-align: right;"><strong>CoreInf/src/curam/omega3/taglib/bean</strong></td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">CallServerTag</td>
+			<td style="width: 252px;">-</td>
+			<td style="width: 400px;">Contained by each generated JSP. Does not have any specifics to require JSP container and might be considered for reworking when finally getting rid of all the tags.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">GetFieldTag</td>
+			<td style="width: 252px;">
+			<p>LegacyTextViewRenderer</p>
+
+			<p>TextViewRenderer</p>
+			</td>
+			<td style="width: 400px;">The present renderers seem to fully substitute the tag functionality, and this tag hence is the candidate for removal.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">JSContextVariableTag</td>
+			<td style="width: 252px;">-</td>
+			<td style="width: 400px;">Used very rarely if at all; converting to renderer seems easy enough.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">JSControlVariableTag</td>
+			<td style="width: 252px;">-</td>
+			<td style="width: 400px;">Part of the recently introduced dynamic clusters functionality. To be reviewed where it requires JSP container services and if the paths required by it are resolved by the renderer infrastructure. If so, needs to be converted to the renderer.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">SetFieldTag</td>
+			<td style="width: 252px;">-</td>
+			<td style="width: 400px;">Initializes non-visual field with the value from a bean, parameter or the literal; corresponds to the UIM page level connection. Might be converted to a renderer, however it should be considered that renderers are useful where easy override by the customer or other layers are planned; this is the background functionality reserved by the infrastructure, and hence we might resort to some other replacement, not the renderer to avoid any uncontrollable overriding possibilities,</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">UseTextHelperTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">Another mandatory prerequisite on any JSP page and another one where we do not want any overriding. An option to leave it as a custom tag, or to come out with the pure Java substitution.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">&nbsp;UseTextHelperTEI</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">Unknown; analyse code</td>
+		</tr>
+		<tr>
+			<td style="width: 333px; text-align: right;"><strong>CoreInf/src/curam/omega3/taglib/user</strong></td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">Another tag set which TI would not like to see overriden and expose through the renderer framework capabilities. Their conversion capabilities are to be considered; converting them into POJOs might be more relevant from the testing perspective</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">AccessCheckTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">See above</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">IfUserPreferencesTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">See above</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">JavaScriptUserPreferencesTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">See above</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">UserPreferencesTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">See above</td>
+		</tr>
+		<tr>
+			<td style="width: 333px; text-align: right;"><strong>CoreInf/src/curam/omega3/taglib/message</strong></td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">GetOmega3MessageTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">The above said applies. The TI functional tag without the intention to allow overriding, and hence subject to a different treatment.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">GetResourceTag</td>
+			<td style="width: 252px;">
+			<p>ResourceViewRenderer</p>
+
+			<p>LegacyResourceViewRenderer</p>
+			</td>
+			<td style="width: 400px;">The renderer substitution seems to be exhaustive, and hence the tag should be safe to remove; furthermore the Legacy wrapper seems to to be completely excessive since the proper renderer is implemented. The only thing needed is a bit of code analysis to see that no tag functionality is left outside by the ResourceViewRenderer.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">IfOmega3MessagesExistTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">This and the rest of the tags here except for InformationalsTag are wrapping the Omega3Messages buffer and represent conditional functionality which, however, is stable, unchanging and not overridable. Not to be exposed as renderers but little value of leaving them as custom tags.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">Omega3MessageLoopTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">Another candidate for POJO but not renderer</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">RecordNumberTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">An optional visual output which might be considered as part as the list component sub-renderer, since it is not domain based.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">RemoveMessagesTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">Another candidate for POJO/part of API but not renderer; might intake customized clearing rules, but again this is better solved by pure Java means than by the JSP tag APIs</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">InformationalsTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">A conditionally included informational message outputter, uses the Omega3Messages but is a proper externally exposed (via UIM INFORMATIONAL) tag, and hence it might equally be considered as part of the Java API for page messages if this is the chosen approach, or converted to a renderer to provide the additional styling or maybe placement; a discussion needed on the best option here.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px; text-align: right;"><strong>CoreInf/src/curam/omega3/taglib/context</strong></td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">GetParameterTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 333px; text-align: right;"><strong>CoreInf/src/curam/omega3/taglib/domain</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">BatchFunctionTag</td>
+			<td style="width: 252px;">LegacyBatchFunctionEditRenderer</td>
+			<td style="width: 400px;">This is more widget than a tag; just wrapped with the Legacy tag renderer API. A candidate for proper conversion</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">ScheduleTag</td>
+			<td style="width: 252px;">(renderer?)</td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 333px; text-align: right;"><strong>CoreInf/src/curam/omega3/taglib/flow</strong></td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">LinkParameterTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">This tag works in pair with the LinkTag and utilizes the JSP container APIs for processing the nested tags. Therefore an isolated replacement is not an option and might prove problematic. Some design spike would be necessary before suggesting any viable option.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">LinkTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">One of the main tags, heavily used and not exposed for customization or replacement. There is the renderer replacement for the dynamic UIM pages which needs to be reviewed for the suitability to become the proper renderer-based replacement of this tag. However, the first task here before any replacement would be optimization-aimed refactoring - the LinkTag is overloaded with attributes, options and contexts and therefore is difficult to maintain not mentioning the replacement.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">LoopTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">This is the purely control tag with just auxiliary HTML output. It utilizes the JSP container implicit objects (pretty much the same as UserPreferencesTag). Other tags and renderers rely on being optionally wrapped in the loop tag, and hence it is the adequate custom tag and any other replacement should just be considered if equally easy to understand and maintain but provides better performance.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px; text-align: right;"><strong>CoreInf/src/curam/omega3/taglib/formwidget</strong></td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">AddressTag</td>
+			<td style="width: 252px;">
+			<p>AddressViewRenderer</p>
+
+			<p>AddressEditRenderer</p>
+
+			<p>LegacyAddressEditRenderer</p>
+
+			<p>LegacyAddressViewRenderer</p>
+			</td>
+			<td style="width: 400px;">While the address infrastructure needs to be left, the tag wrappers - both tag and renderer-flavour need to be removed. The widget is implemented/re-implemented/copied at the CEF level and should be supported in that central place. The legacy tag and the legacy wrappers can be removed straight away, no point in keeping this excessive code.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">ButtonTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">CheckBoxTag</td>
+			<td style="width: 252px;">
+			<p>CheckboxEditRenderer</p>
+
+			<p>LegacyCheckBoxEditRenderer</p>
+			</td>
+			<td style="width: 400px;">The tag and the legacy tag is to be removed, since it seems there is a renderer-based replacement.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">ClipTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">Just used in IE and just for Word Integration extension (Appeals Clause); however, it is documented and should be supported. An easy conversion to renderer, but not a high priority.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">FieldLabelTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">Carries out the readable field label information for the error messages should errors occur. Completely redesigned by the renderer framework, however should remain untouched until the last form widget (input field) is replaced with the renderer to avoid the inconsistency in form error reporting.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">FileDownloadTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">This one should be easy to convert into renderer, since all it dows - outputs the properly formatted link to the dedicated servlet.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">FileUploadTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">Formally an easy conversion, but attention needs to be paid in advance if the renderer framework implements all the necessary path resolving and data accessing support.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">FormTag</td>
+			<td style="width: 252px;">FormTag</td>
+			<td style="width: 400px;">A special case which wraps all the form functionality (including validation and submit process). The same named renderer does not replace but rather is built on the top of the 'legacy' FormTag and hence the thorough refactoring is needed to see if this reflects inability to do the proper replacement or just lack of time and resources to do so.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">HiddenFieldTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">Widely used under the hood and easy to convert. No renderer as of now, and this one might be one of the first candidates. However, the hidden field treatment isn't something customizable, and therefore the same problem should be solved -&nbsp; either leave as is (since the tag is not customizable), convert to a Java class which again would not be customizable, or do a renderer with the path resolving, hence subject to customization. Or come out with the mechanism to use the renderer mechanism without the overriding capability (something like final in Java), at the same time availing of the easy POJO testing available for renderers and path resolvers.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">MultiSelectAllCheckBoxTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">The component renderer which is bound to the multiselect widget tag but resides in the list headers. Might be made part of list header renderer or JavaScript based implementation, there is no need to have it as a separate tag.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">MultiSelectCheckBoxTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">A candidate for the conversion to the proper renderer, since there are functionality gaps with the current implementation as a tag - no paginated list functionality is supported.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">TextInputTag</td>
+			<td style="width: 252px;">
+			<p>TextEditRenderer</p>
+
+			<p>TextEditWithPromptRenderer</p>
+
+			<p>PasswordEditRenderer</p>
+			</td>
+			<td style="width: 400px;">The only reason to keep the TextInputTag would be it potentially being used by some other tags still in use (DateSelectorTag would be an example, DateTextInputTag inherits it as well, might be popup tags). Therefore, additional analysis is needed, and the dependent tags need to be reworked/replaced with the renderers before getting rid of this one.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">TimeSelectorTag</td>
+			<td style="width: 252px;">
+			<p>TimeEditRenderer</p>
+
+			<p>LegacyTimeSelectorEditRenderer</p>
+
+			<p>LegacyTimeSelectorViewRenderer</p>
+			</td>
+			<td style="width: 400px;">Tag looks a candidate for a removal along with the Legacy wrappers, however the TimeEditRenderer functionality needs to be compared against the tag to see if everything is covered.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px; text-align: right;"><strong>CoreInf/src/curam/omega3/taglib/formwidget/list</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">CTListTag</td>
+			<td style="width: 252px;">
+			<p>CodeTableEditRenderer</p>
+
+			<p>CTHierarchyListEditRenderer</p>
+
+			<p>CTListEditRenderer</p>
+
+			<p>LegacyCTListEditRenderer</p>
+
+			<p>CheckboxedSelectRenderer</p>
+
+			<p>NumberEditRenderer?</p>
+
+			<p>GraphicalSingleSelectRenderer?</p>
+			</td>
+			<td style="width: 400px;">The renderers in the right column seems to be covering most if not all of the legacy CTListTag which makes it a good candidate for removal. An additional look is needed though to see if the tag is not used in combination with the other functionality (say multiple selection popup).</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">CTRadioGroupTag</td>
+			<td style="width: 252px;">LegacyCTRadioGroupEditRenderer</td>
+			<td style="width: 400px;">This one needs to be replaced with the proper renderer (already implemented, just to be discussed, tested and released)</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">SourcedListTag</td>
+			<td style="width: 252px;">
+			<p>LegacySourcedListSelectRenderer</p>
+
+			<p>ListSelectOptionRenderer</p>
+
+			<p>ListSelectRenderer</p>
+			</td>
+			<td style="width: 400px;">ListSelectRenderer and ListSelectOptionRenderer should be covering the functionality of the SourcedListTag, hence it should be considered for removal - additional look is needed though.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">StringListTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">Looks completely excessive, see usage - alone and as part of the composite tags; if no usage is found, it should be removed.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px; text-align: right;"><strong>CoreInf/src/curam/omega3/taglib/formwidget/popup</strong></td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">DateSelectorTag</td>
+			<td style="width: 252px;">
+			<p>BirthdateEditRenderer</p>
+
+			<p>DateEditRenderer</p>
+
+			<p>LegacyDateSelectorEditRenderer</p>
+			</td>
+			<td style="width: 400px;">DateSelectorTag and its Legacy renderer wrapper are replaced by the DateEditRenderer. This makes the tag a good candidate for removal, unless it is used as part of other composite tags or directly on the hand-crafted JSP pages.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">DateTimeSelectorTag</td>
+			<td style="width: 252px;">
+			<p>DateTimeEditRenderer</p>
+
+			<p>LegacyDateTimeSelectorEditRenderer</p>
+			</td>
+			<td style="width: 400px;">The tag is superseded by the DateTimeEditRenderer. A candidate for removal after short additional check.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">DateTimeTextInputTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">This is part of the date selector (with the popup) functionality, and therefore might be removed when the DateSelectorTag and DateTimeSelectorTag are removed.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">FrequencyPatternHelperTag</td>
+			<td style="width: 252px;">LegacyFrequencyPatternEditRenderer</td>
+			<td style="width: 400px;">Outputs the HTML structure which controls entering and editing the frequency pattern via pop-up selector. Heavily dependent on the current popup infrastructure. Might be converted to a renderer same way as with DateSelectorTag, but the popup infrastructure seems higher priority goal.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">OpenPopupTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">The base class for the popup dialogs, adds the JavaScript to create the necessary bindings between the field popping up the dialog and the dialog to return back and populate the field with the user selection from the dialog. Works in pair with PopupReturnTag.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">PopupReturnTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">Another functional tag to be used on the pop up dialogs (mainly custom popup dialogs). Should be inserted automatically by the infrastructure (subject to checking). Again, not so much about the tags themselves, rather about the underlying pop up infrastructure they wrap-up. This and the OpenPopupTag classes might be replaced by the renderers or POJOs if there is no exposure for the Customer or upper layers to help them create custom pop-ups.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">StandardPopupTag</td>
+			<td style="width: 252px;">
+			<p>MultipleSearchPopupEditRenderer</p>
+
+			<p>SingleSearchPopupEditRenderer</p>
+			</td>
+			<td style="width: 400px;">The standard pop up dialog page (field designed to open a pop up dialog). Mostly the same as the open modal functionality on a link, but takes care of the pop up bindings with the original field, and hence requires a deeper review before replacing it with some other solution.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">StaticPopupTextTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">A helper field tag used internally by the popup infrastructure to display non-editable values returned from the pop-up (just limiting user actions to the selection in the pop-up). Does not really need to be a tag and might be made part of the renderer without separating into a class on its own (since there is no separate use for it).</td>
+		</tr>
+		<tr>
+			<td style="width: 333px; text-align: right;"><strong>CoreInf/src/curam/omega3/taglib/paymentstatement</strong></td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">PaymentStatementTag</td>
+			<td style="width: 252px;">LegacyPaymentStatementViewRenderer</td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 333px; text-align: right;"><strong>CoreInf/src/curam/omega3/taglib/widget</strong></td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">
+			<p>The tags in this package are not rewritten, just wrapped into the Legacy renderers. They should be reviewed individually to assess the conversion effort, or the potential to drop them from TI (leaving just the domain support).</p>
+
+			<p>NOTE: the presence of the Legacy wrapper means that the tag is not any longer invoked by the JSP container, and therefore it could be removed from the TLD with the immediate effect - unless used directly on any of the custom JSP pages.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">BarChartTag</td>
+			<td style="width: 252px;">LegacyBarChartViewRenderer</td>
+			<td style="width: 400px;">Remove this one. Consider the domain though, if we need to support the domain, we might have to come out with the "Unsupported" renderer for the domains where TI does not longer provide widget output.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">CalendarTag</td>
+			<td style="width: 252px;">LegacyCalendarViewRenderer</td>
+			<td style="width: 400px;">CalendarTag draws the daily/monthly/weekly tables and allocates the events from the dedicated XML. It could be substituted by a renderer, but the development effort would be noticeable.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">DisplayAsImageTag</td>
+			<td style="width: 252px;">LegacyImageMapViewRenderer</td>
+			<td style="width: 400px;">Do we still support boolean mapping to image? If we do, tag conversion would be an option, if not, removal to be considered. Another consideration - what customization would we feel to be relevant here? Other output forms with tight binding might be considered, same as in the other cases where no customization is possible/relevant - tag is not the most performant option, renderer is even worse - no added value to have the JSP container managed output, rather the opposite.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">DynamicMenuTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">Dynamic or breadcrumb menu - so far just the tag; it is unclear if it is used at all (check) since no Legacy wrapper is there, however might be directly output in JSP as not domain based. Might be replaced and superseded by one of the component renderers below (check). In any case, this is one of the XSLT processing based renderer which requires that step of intermediate XML conversion, so a reusable mechanism for XML conversion needs to be come out with.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">EvidenceComparisonTag</td>
+			<td style="width: 252px;">LegacyEvidenceComparisonViewRenderer</td>
+			<td style="width: 400px;">Unless anybody uses that, it needs to be removed and not converted. If the domain is to be left, consider binding to some sort of "not supported" renderer to keep the binding but request overriding.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">EvidenceReviewTag</td>
+			<td style="width: 252px;">
+			<p>LegacyEvidenceReviewViewRenderer</p>
+
+			<p>LegacyEvidenceReviewEditRenderer</p>
+			</td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">EvidenceTabContainerTag</td>
+			<td style="width: 252px;">LegacyEvidenceTabContainerViewRenderer</td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">EvidenceTag</td>
+			<td style="width: 252px;">LegacyEvidenceViewRenderer</td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">FlexChartTag</td>
+			<td style="width: 252px;">LegacyFlexChartViewRenderer</td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">FlexLineChartTag</td>
+			<td style="width: 252px;">LegacyLineChartViewRenderer</td>
+			<td style="width: 400px;">Line charts haven't ever been used outside TI and in any application. The only problem when removing them are the OOTB domains. These should either be removed along, or the proper fall-back for the unsupported withet be implemented.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">FlexPieChartTag</td>
+			<td style="width: 252px;">LegacyPieChartViewRenderer</td>
+			<td style="width: 400px;">Line charts haven't ever been used outside TI and in any application. The only problem when removing them are the OOTB domains. These should either be removed along, or the proper fall-back for the unsupported withet be implemented.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">HeatmapTag</td>
+			<td style="width: 252px;">LegacyHeatmapViewRenderer</td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">MeetingViewTag</td>
+			<td style="width: 252px;">LegacyMeetingViewViewRenderer</td>
+			<td style="width: 400px;">The meeting view tag is an old style widget for scheduling meetings and view their details. The future of it should be decided purely based on the current usage in the application and the business estimation on the value oh having the support for it (in principle the functionality seems as having business value, however it might be already implemented or replaced by the third-party library in the layers above).</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">RatesTableTag</td>
+			<td style="width: 252px;">LegacyRatesTableViewRenderer</td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">RulesDynamicTag</td>
+			<td style="width: 252px;">LegacyRulesViewRenderer?</td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">RulesEditorTag</td>
+			<td style="width: 252px;">LegacyRulesEditorViewRenderer</td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">RulesSimDataEditorTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">RulesTag</td>
+			<td style="width: 252px;">LegacyRulesViewRenderer?</td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">TreeControlTag</td>
+			<td style="width: 252px;">LegacyTreeControlViewRenderer</td>
+			<td style="width: 400px;">This is the hierarchical page viewer with the tree-like navigation structure at the left. The widget is frameset and outdated 3rd-party JS library based, therefore is completely outdated technologically, and equally bad performing. The lazy loading tree based on Dojo and utilizing a single page is the right substitution for it, however requires the lazy loaders on the server side; nevertheless there is a very little point in keeping the TreeControlTag in the TI code base.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">TypicalPictureEditorTag</td>
+			<td style="width: 252px;">LegacyTypicalPictureEditorEditRenderer</td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">WizardSummaryTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">(check how it is inserted on the page, there should be UIM construct for it; it is part of Agenda Player)</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">WizardTag</td>
+			<td style="width: 252px;">LegacyWizardViewRenderer</td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">WorkflowTag</td>
+			<td style="width: 252px;">LegacyWorkflowViewRenderer</td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 333px; text-align: right;"><strong>CoreInf/src/curam/omega3/taglib/widget/ieg</strong></td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">IEGPlayerTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">IEG1 player widget, not a tag at all.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px; text-align: right;"><strong>CoreInf/src/curam/omega3/taglib/widget/ieg</strong></td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">UserPreferenceEditorTag</td>
+			<td style="width: 252px;">&nbsp;</td>
+			<td style="width: 400px;">This is part of a single CDEJ dialog page, not re-usable elsewhere. It is questionable if it should be a tag because of that. It might be a component plug-in, or might be better integrated with the preferences dialog. The only reason to keep it in the re-usable format is the potential customer customization of the preferences dialog, where the essential functionality remains encapsulated by this tag (or renderer) mandatory on any such customized page.</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">&nbsp;</td>
+			<td style="width: 252px;"><strong>PACKAGE</strong></td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 333px;">&nbsp;</td>
+			<td style="width: 252px;">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; AdminDataTypeEditRenderer<br />
+			ComponentAdapterEditRenderer ComponentAdapterViewRenderer</td>
+			<td style="width: 400px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr"><br />
+&nbsp;Component Renderers</p>
+
+<p dir="ltr">Component renderers are supposed to be tabbed app "furniture" building blocks or layout elements and not related with the user data or domains; the tabbed application "furniture" components do not belong to any of the single pages (content) and do not match any tags.</p>
+
+<p dir="ltr">HOWEVER, in practice as the following shows they are the mix of the tags which can be used on a single page and even bound to the domains (see the analysis below). Therefore it is felt that the classification and the resulting package structure might need a review and adjustments going forward.</p>
+
+<p dir="ltr">The following classification is just the result of the first glimpse and might be refined.</p>
+
+<p dir="ltr"><strong>renderer-plug-ins/src/main/java/curam/util/client/render/component</strong></p>
+
+<p dir="ltr">[application][component]['furniture']</p>
+
+<ul dir="ltr">
+	<li>AboutBoxRenderer</li>
+	<li>AbstractApplicationComponentRenderer</li>
+	<li>&nbsp;ActionMenuRenderer</li>
+	<li>ApplicationBannerRenderer</li>
+	<li>ApplicationHeaderRenderer</li>
+	<li>ApplicationHelpButtonRenderer</li>
+	<li>ApplicationMenuRenderer</li>
+	<li>ApplicationRenderer</li>
+	<li>ApplicationSearchPanelRenderer</li>
+	<li>ApplicationSectionsRenderer</li>
+	<li>ApplicationSkipLinkRenderer</li>
+	<li>BorderLayoutRenderer</li>
+	<li>ConditionalRenderer</li>
+	<li>ContainerElementRenderer</li>
+	<li>ContentHeadingRenderer</li>
+	<li>ContentPanelRenderer</li>
+	<li>DetailsPanelRenderer</li>
+	<li>DynamicHeaderRenderer</li>
+	<li>DynamicUIMRenderer</li>
+	<li>FlowLayoutRenderer</li>
+	<li>ScrollPaneRenderer</li>
+	<li>SectionShortcutPanelRenderer</li>
+	<li>SmartPanelRenderer</li>
+	<li>TabRenderer</li>
+</ul>
+
+<p dir="ltr">[page][layout]</p>
+
+<ul dir="ltr">
+	<li>InPageNavRenderer</li>
+	<li>LabelRenderer</li>
+	<li>NavigationTabRenderer</li>
+	<li>PageRenderer</li>
+	<li>ExpandableListCellRenderer</li>
+	<li>ExpandableListRowRenderer</li>
+	<li>ActionSetRenderer -- another one for the page content, but for Dynamic UIMs?</li>
+	<li>SimpleClusterBodyRenderer</li>
+	<li>SimpleInnerClusterBodyRenderer</li>
+	<li>SimpleListBodyRenderer</li>
+</ul>
+
+<p dir="ltr">[page][domain][uim]</p>
+
+<ul dir="ltr">
+	<li>ListMultiSelectBodyWidgetRenderer</li>
+	<li>ListMultiSelectHeaderWidgetRenderer</li>
+	<li>ListRenderer</li>
+	<li>ListSelectWidgetRenderer</li>
+	<li>ListSingleSelectWidgetRenderer</li>
+	<li>LiteralRenderer</li>
+	<li>OrgTreeRenderer</li>
+	<li>PageTitleRenderer</li>
+	<li>HiddenInputRenderer -- hidden field tag for dynamic UIMs?</li>
+	<li>InformationalRenderer - informational renderer for dynamic UIM?</li>
+	<li>FlashObjectRenderer -- to be removed</li>
+	<li>ServerInterfaceRenderer</li>
+</ul>
+
+<p dir="ltr">[page][component]</p>
+
+<ul dir="ltr">
+	<li>MandatoryIndicatorTextRenderer</li>
+	<li>ActionControlRenderer -- this one is the LinkTag replacement for the dynamic UIMs??</li>
+	<li>MenuBarRenderer</li>
+	<li>OnlineHelpRenderer</li>
+	<li>OptimalBrowserMsgRenderer</li>
+	<li>PageContentTitleRenderer</li>
+	<li>PageDescriptionRenderer</li>
+	<li>PageToolbarRenderer.java</li>
+	<li>ProtoContentHeadingRenderer</li>
+	<li>WizardProgressBarRenderer</li>
+	<li>WindowOptionsRenderer (?)</li>
+	<li>SetRequestAttributeRenderer - why renderer?</li>
+</ul>
+
+<p dir="ltr"><br />
+&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

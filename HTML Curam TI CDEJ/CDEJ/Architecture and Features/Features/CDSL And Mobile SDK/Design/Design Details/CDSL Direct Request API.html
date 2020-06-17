@@ -1,0 +1,150 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>CDSL Direct Request API</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="CDSL Direct Request API";
+    pageId="urn:lsid:ibm.com:td:d146dcae-44c6-4c26-980b-7ac43f472765";
+    toRoot="../../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">CDSL Direct Request API</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Description</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">Class name of this Direct Request API</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii3">Use Cases / Requirements</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii4">When making connection, developers</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii5">When calling facades using Curam Store, developers</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii10">When calling facades directly, developers</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii6">Multiple Dijit widgets using separate instances of CuramStore</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii11">Limitations of the SimpleAccess API compared to full CDSL API</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii7">Design</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii8">buildStore</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii9">makeRequest</a></div>
+
+<h2 dir="ltr" id="ii1"><span style="line-height: 1.5;">Description</span></h2>
+
+<p dir="ltr">The purpose of designing this CDSL direct request API is to ease the development by making calls to the Curam Facades without writing multiple lines to&nbsp;instantiating <span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Curam&nbsp;</span>connection object, <span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Curam&nbsp;</span>store object, etc.</p>
+
+<p dir="ltr">Based on&nbsp;<a href="http://pdappsrv.mul.ie.ibm.com:8080/browse/TEC-16206">TEC-16206</a>.</p>
+
+<h2 dir="ltr" id="ii2">Class name of this Direct Request API</h2>
+
+<p dir="ltr"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">SimpleAccess</span> - This class will only accept the connection string as its mandatory parameters</p>
+
+<p dir="ltr">Directory for the class: curam/cdsl/connection</p>
+
+<p dir="ltr">[MV] I'd rather make it curam/cdsl/<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">connection/</span>SimpleAccess to reflect the fact it is a simplified version of the full CDSL API.</p>
+
+<h2 dir="ltr" id="ii3">Use Cases / Requirements</h2>
+
+<h3 dir="ltr" id="ii4">When making connection, developers</h3>
+
+<ol dir="ltr">
+	<li>Will like to specify this connection URL only once.</li>
+	<li>The <span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">SimpleAccess</span> object itself can be reused again and again.</li>
+</ol>
+
+<h3 dir="ltr" id="ii5">When calling facades using Curam Store, developers</h3>
+
+<ol dir="ltr">
+	<li>only need to call a method on the <span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">SimpleAccess</span> object.</li>
+	<li>should provide<strong> facade class name</strong> as a mandatory param.</li>
+	<li><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">have an option to &nbsp;specify the<strong> identity API</strong>.</span></li>
+	<li>have an option to&nbsp;<span style="line-height: 1.5;">make the returned store <strong>observable</strong></span></li>
+	<li>have an option to make the returned store <strong>cached</strong></li>
+</ol>
+
+<h3 dir="ltr" id="ii10">When calling facades directly, developers</h3>
+
+<ol dir="ltr">
+	<li>only need to call a method on the <span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">SimpleAccess</span> object.</li>
+	<li>should provide<strong> facade class name</strong>, <strong>method name</strong> and <strong>method arguments</strong> as mandatory params.</li>
+	<li>have an option to specify an callback function</li>
+	<li>have an option to specify an callback error function</li>
+</ol>
+
+<h3 dir="ltr" id="ii6">Multiple Dijit widgets using separate instances of CuramStore</h3>
+
+<ol dir="ltr">
+	<li>CuramStore instances are created in relatively unrelated parts of code and developer doesn't want to be explicitly managing the <span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">SimpleAccess</span> instance or access to it.</li>
+</ol>
+
+<h2 dir="ltr" id="ii11">Limitations of the SimpleAccess API compared to full CDSL API</h2>
+
+<p dir="ltr">[TBD]</p>
+
+<p dir="ltr">This section should highlight what are the limitations. When would a developer choose to use <span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">SimpleAccess</span> API and when should he choose the full CDSL instead?</p>
+
+<p dir="ltr">Some examples:</p>
+
+<ul dir="ltr">
+	<li>full CDSL allows for making multiple requests at the same time, simplified API doesn't</li>
+	<li>with full CDSL you have access to the Connection object in order to get metadata, such as codetables</li>
+	<li>full CDSL lets you choose connection type, e.g. for Worklight connections</li>
+	<li>we plan to introduce more sophisticated request control (monitor, abort) and that will require separate method call objects from full CDSL</li>
+</ul>
+
+<p dir="ltr">To get a full view please consult the CDSL documentation.</p>
+
+<h2 dir="ltr" id="ii7">Design</h2>
+
+<p dir="ltr">The <span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">SimpleAccess</span> class will have the following public method:</p>
+
+<p dir="ltr">1. buildStore</p>
+
+<p dir="ltr">2. makeRequest</p>
+
+<p dir="ltr">Once the <span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">SimpleAccess</span> class is instantiated, its object is cached and for reuse. Both two public methods have the flexibility to call any Curam facade method in any facade class on the same <span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">SimpleAccess</span> object. The way to use this two method is explained below.</p>
+
+<h3 dir="ltr" id="ii8"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">buildStore</span></h3>
+
+<pre dir="ltr" style="color: rgb(0, 0, 0); line-height: normal; word-wrap: break-word; white-space: pre-wrap;">
+var simpleAccessObj = new <span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">SimpleAccess</span>("http://localhost:9080/TabTest/dataservice");
+
+var args = {
+&nbsp;                  facadeClassName: "Curam facade class name",
+&nbsp;                  identityApi: identity API object,
+&nbsp;                  observable: false/true,
+&nbsp;                  cache: false/true
+    };
+
+var store = simpleAccessObj.buildStore(args);</pre>
+
+<h3 dir="ltr" id="ii9"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">makeRequest</span></h3>
+
+<pre dir="ltr" style="color: rgb(0, 0, 0); line-height: normal; word-wrap: break-word; white-space: pre-wrap;">
+var args = {
+&nbsp;                  facadeClassName: "Curam facade class name",
+&nbsp;                  facadeMethodName: "one of the facade method from the facade class"
+&nbsp;                  facadeMethodParmas: {
+&nbsp;                       concernRoleID: "256"
+&nbsp;                  },
+&nbsp;                  callback: function(data){},
+&nbsp;                  callbackError: function(error){}
+    };</pre>
+
+<pre dir="ltr" style="color: rgb(0, 0, 0); line-height: normal; word-wrap: break-word; white-space: pre-wrap;">
+var promise = simpleAccessObj.makeRequest(args);</pre>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

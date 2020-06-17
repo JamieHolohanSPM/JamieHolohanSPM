@@ -1,0 +1,444 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Blank Screens</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Blank Screens";
+    pageId="urn:lsid:ibm.com:td:f8ac09b8-3e48-4d89-943b-2b07c6436056";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Blank Screens</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Support Case List</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">Common Must Gather Information</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii35">Common Resolutions</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii4">Additional Information</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii37">Blank Screens on Modal in IEG</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii3">Symptoms</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii4">Cause</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii5">Resolution</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii6">Related Information:</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii7">Dummy Text Displayed on Blank Screen</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii8">Symptoms</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii9">Cause</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii10">Related Information:</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii11">Blank Screens in IE, but not seen in Chrome</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii12">Symptoms</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii13">Resolution</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii14">Related Information</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii15">Blank Screens (Maryland)</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii16">Resolution</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii17">Related Information:</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii18">Blank/Frozen Screens (MCSS)</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii19">Potential Causes</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii20">Resolution</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii21">Related Information</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii22">Stack Overflow Error (MCSS)</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii23">Potential Causes</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii24">Related Information</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii31">Connection leak in IE9 (DWP)</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii32">Information</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii33">Response</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii34">Resolution</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii25">Proposal for Improvements</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii26">Progress indicator</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii27">Error reporting</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii28">Session timeout handling</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii29">Retry policies</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii30">Public API</a></div>
+
+<p dir="ltr">&nbsp;</p>
+
+<h1 dir="ltr">Blank and Frozen Screens</h1>
+
+<p dir="ltr">The page covers all support cases related to blank and frozen screens that have been countered. A blank screen is as described - the user gets a white screen in the browser with no content displayed. A frozen screen is similar, but may not always have a blank screen and may have the symptom of the browser not responding to input.</p>
+
+<p dir="ltr">In general, the most common cause of frozen and blank screens, especially intermittent behaviour, is generally related to performance problems and potentially the number of connections open within the Browser.</p>
+
+<h2 dir="ltr" id="ii1">Support Case List</h2>
+
+<table border="1" dir="ltr" style="width: 90%;">
+	<tbody>
+		<tr>
+			<td><strong>PMR</strong></td>
+			<td style="width: 101px;"><strong>Customer</strong></td>
+			<td style="width: 224px;"><strong>Problem</strong></td>
+			<td style="width: 223px;"><strong>Resolution</strong></td>
+			<td style="width: 135px;"><strong>Notes</strong></td>
+		</tr>
+		<tr>
+			<td>72467,999,649</td>
+			<td style="width: 101px;">MCSS</td>
+			<td style="width: 224px;">
+			<p dir="ltr" id="ii2">Blank Screens on Modal in IEG</p>
+			</td>
+			<td style="width: 223px;"><a href="#1">Further Information</a></td>
+			<td style="width: 135px;">TEC-15712</td>
+		</tr>
+		<tr>
+			<td>00042,004,000</td>
+			<td style="width: 101px;">Arkanasa</td>
+			<td style="width: 224px;">Dummy Text displayed on Blank Screen</td>
+			<td style="width: 223px;"><a href="#2">Further Information</a></td>
+			<td style="width: 135px;">TEC-15667</td>
+		</tr>
+		<tr>
+			<td>40786,499,000</td>
+			<td style="width: 101px;">North Carolina</td>
+			<td style="width: 224px;">Blank screen issues seen in IE, but not Chrome</td>
+			<td style="width: 223px;"><a href="#3">Further Information</a></td>
+			<td style="width: 135px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td>05323,999,000</td>
+			<td style="width: 101px;">Maryland</td>
+			<td style="width: 224px;">Blank Screens</td>
+			<td style="width: 223px;"><a href="#4">Further Information</a></td>
+			<td style="width: 135px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td>
+			<p>76004,999,649 &amp; 75921,999,649</p>
+			</td>
+			<td style="width: 101px;">MCSS</td>
+			<td style="width: 224px;">Blank/Frozen Screens</td>
+			<td style="width: 223px;"><a href="#5">Further Information</a></td>
+			<td style="width: 135px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td>76024,999,649</td>
+			<td style="width: 101px;">MCSS</td>
+			<td style="width: 224px;">Stack Overflow Error</td>
+			<td style="width: 223px;"><a href="#6">Further Information</a></td>
+			<td style="width: 135px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td>
+			<p>06480,019,866</p>
+			</td>
+			<td style="width: 101px;">DWP</td>
+			<td style="width: 224px;">Connection Leak in IE9</td>
+			<td style="width: 223px;"><a href="#7">Further Information</a></td>
+			<td style="width: 135px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">Please keep information in the table as succinct as possible. If the resolution, problem or notes field are verbose, please use the Additional Information section and add a link.</p>
+
+<h2 dir="ltr" id="ii2">Common Must Gather Information</h2>
+
+<ul dir="ltr">
+	<li>Browser Version, including compatability mode settings</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">Can you please confirm the 'Browser Mode' and 'Document Mode' on the users machines encountering the issue. This is done by pressing F12 in the browser window and taking note of the browser and document modes listed.</p>
+
+<p dir="ltr" style="margin-left: 40px;">Is this issue reproducible on Chrome?</p>
+
+<ul dir="ltr">
+	<li>Usage scenarios</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">Any usage scenarios that can be provided will help narrow down the cause of the issue.</p>
+
+<ul dir="ltr">
+	<li>Server response times</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">Any potential performance issues with the server?<br />
+Are the users locale or remote? Is there potential network issues with response times?</p>
+
+<ul dir="ltr">
+	<li>HTML Source for blank page</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">To get the HTML source in IE, right click and choose the View Source option.<br />
+Are there are any JavaScript errors in the browser?<br />
+Please provide screenshots and details if there are.</p>
+
+<ul dir="ltr">
+	<li>How do users recover from this issue?</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">Does the browser crash and need to be restarted?<br />
+Do they just refresh the page and start again?</p>
+
+<ul dir="ltr">
+	<li>Browser Javascript Logging</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">Client and browser tier debugging can be enabled using the following settings<br />
+<br />
+TraceOn=true<br />
+JavaScriptTraceOn=true<br />
+<br />
+These should be set in the CDEJResources.properties file, located in the curam/omega3/i18n directory.<br />
+<br />
+At development time, this file can be added to your webclient project in a custom component, before building the application.</p>
+
+<p dir="ltr" style="margin-left: 40px;">At runtime, a copy of the file can be found in properties.jar located in the WEB-INF\lib directory of the ClientModule.war file (within the Curam EAR file).</p>
+
+<p dir="ltr" style="margin-left: 40px;">For example, in WebSphere, locate the client WEB-INF\lib directory installed in WebSphere:</p>
+
+<p dir="ltr" style="margin-left: 40px;">&lt;WAS_HOME&gt;profiles\&lt;profile&gt;\installedApps\&lt;node&gt;\Curam.ear\ClientModule.war\WEB-INF\lib</p>
+
+<p dir="ltr" style="margin-left: 40px;">Extract a copy of CDEJResource.properties from the properties.jar located in this directory. The file should have the package curam\omega3\i18n.</p>
+
+<p dir="ltr" style="margin-left: 40px;">Place this copy in the &lt;WAS_HOME&gt;profiles\&lt;profile&gt;\installedApps\&lt;node&gt;\Curam.ear\ClientModule.war\WEB-INF\classes\curam\omega3\i18n directory and modify it to set the above properties as required.</p>
+
+<p dir="ltr" style="margin-left: 40px;">Restart the server<br />
+<br />
+Both options have performance implications, so may not be possible to set in a production system.</p>
+
+<ul dir="ltr">
+	<li>Enable browser JavaScript Tracing locally</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">It is possible to enable the browser javascript tracing locally for a user using a web debugging proxy tool.<br />
+<br />
+There are a number of these online that can be used and we would recommend the Fiddler2 Web Debugger tool (http://fiddler2.com/).<br />
+<br />
+Using the web debugging proxy tool, you should set the DEBUG javascript variable to true (default false). Then, using IE Developer Tools (access by pressing F12 in IE),view the Script Console view, copy/save the resulting debug output and send it in the PMR.<br />
+<br />
+Note: IE Developer Tools must be open before reproducing the issue to catch the output and the output cannot be caught if the browser itself crashes as part of the issue.<br />
+<br />
+If using Fiddler the following approach can be used to modify the DEBUG variable:</p>
+
+<p dir="ltr" style="margin-left: 40px;">Select Rules -&gt; Customize Rules ... in the Fiddler menu</p>
+
+<p dir="ltr" style="margin-left: 40px;">In the file that opens find the onBeforeResponse function and add the following line:</p>
+
+<p dir="ltr" style="margin-left: 40px;">static function OnBeforeResponse(oSession: Session) {<br />
+&nbsp; ......<br />
+&nbsp; <strong>oSession.utilReplaceInResponse("var DEBUG=false;", "var DEBUG=true;");</strong><br />
+<br />
+}</p>
+
+<p dir="ltr" style="margin-left: 40px;">Save the file and any subsequent accessing to the application, with Fiddler running, will result in debug output.</p>
+
+<p dir="ltr" id="ii3" style="margin-left: 40px;">In addition to the console log from IE, the traffic captured by fiddler itself can be used for debugging. This will allow us to see what network traffic is happening and if connections are being lost.<br />
+Note: You need to unencrypt the HTTPS content in fiddler. This can be done using the Tools -&gt; Fiddler Options menu. Select the HTTPS tab and tick the decrypt HTTPS traffic.</p>
+
+<h2 dir="ltr" id="ii35">Common Resolutions</h2>
+
+<p dir="ltr">See <a href="https://w3-connections.ibm.com/forums/html/topic?id=6d90bf40-0811-4b9c-a8fe-0081c243413c&amp;ps=25" target="_blank">Technical&nbsp;Forum</a> entry for more information.</p>
+
+<p dir="ltr">A full summary is available in the attached <a href="/wikis/form/api/wiki/a9f56d17-79a7-403e-bfca-f7168f46299f/page/1d65e0b5-9e75-40e4-9df8-4c0722b122d2/attachment/cd65f7f4-e934-4c31-8e50-db974f918438/media/BlankScreenSummary.doc">BlankScreenSummary.doc</a>. (INTERNAL ONLY)</p>
+
+<h2 dir="ltr" id="ii4">Additional Information</h2>
+
+<p dir="ltr"><a id="1" name="1"></a></p>
+
+<h3 dir="ltr" id="ii37">Blank Screens on Modal in IEG</h3>
+
+<h4 dir="ltr" id="ii3">Symptoms</h4>
+
+<p dir="ltr">The following javascript error accompanies such a blank screen, seen when running an IEG script in a modal in IE9 running IE8 mode on Curam 6.0.4.4:<br />
+<br />
+"Member not found." in dojo.js, line 32, character 44086</p>
+
+<p dir="ltr">Note: If there is no javascript error with the issue, then the problem could be the lack of removal of the loading mask. If a HTTP error occurs when IEG script is running in a modal, the loading mask is not removed. This applies to 6.0.4.x and is covered by TEC-16158</p>
+
+<h4 dir="ltr" id="ii4">Cause</h4>
+
+<p dir="ltr">This was an issue in IE9 using IE8 mode where the mode was being set manually by the developer in the browser. Where the mode is forced by the HTTP Server or a configuration property, this is not an issue.</p>
+
+<h4 dir="ltr" id="ii5">Resolution</h4>
+
+<p dir="ltr">We now believe that the mechanism being used by the customer (in these environments where the issue is being reported) to instruct IE9 to use IE8 mode may not be correct and could be causing the issue.<br />
+<br />
+Can we ask the customer if they are using the developer tools in the browser for achieving this (e.g. pressing F12 and setting this manually)? This is not an approach they could use in a production environment or one Cúram would support - the customer would have to send down the instruction from the server to the browser that would do this automatically. This method of changing the IE mode will not work with IEG.<br />
+<br />
+=================================<br />
+Instructing IE9 to use IE8 Mode<br />
+<br />
+There are two supported methods for the customer to instruct IE9 to use IE8 mode.<br />
+<br />
+1. Use a configuration property in ApplicationConfiguration.properties<br />
+2. Use a HTTP Server to send this instruction to the browser.<br />
+<br />
+The first method is the easiest one for the customer to use and the one we would recommend. In order to do this they need to set the "user.agent.compatibility" property in "ApplicationConfiguration.properties" to be the value "IE8".<br />
+==================================</p>
+
+<h4 dir="ltr" id="ii6">Related Information:</h4>
+
+<ul dir="ltr">
+	<li>TEC-15712</li>
+	<li>MCSS 72467,999,649<br />
+	&nbsp;</li>
+</ul>
+
+<p dir="ltr"><a id="2" name="2"></a></p>
+
+<h3 dir="ltr" id="ii7">Dummy Text Displayed on Blank Screen</h3>
+
+<h4 dir="ltr" id="ii8">Symptoms</h4>
+
+<p dir="ltr">"Dummy" Text displayed on the screen.</p>
+
+<h4 dir="ltr" id="ii9">Cause</h4>
+
+<p dir="ltr"><font face="Default Sans Serif,Verdana,Arial,Helvetica,sans-serif" size="2"><span>The "dummy" text is displayed during a prolonged rendering phase of the application. IE 7 was the browser being used, which is not very performant and was the cause of the problem.</span></font></p>
+
+<h4 dir="ltr" id="ii10">Related Information:</h4>
+
+<ul dir="ltr">
+	<li>Arkansas 00042,004,000</li>
+	<li>TEC-15667</li>
+</ul>
+
+<p dir="ltr"><a id="3" name="3"></a></p>
+
+<h3 dir="ltr" id="ii11">Blank Screens in IE, but not seen in Chrome</h3>
+
+<h4 dir="ltr" id="ii12">Symptoms</h4>
+
+<p dir="ltr">Intermittent blank screens and crashes of the browser. Unable to send any logging information due to the browser crash. Problem does not manifest in Chrome.</p>
+
+<h4 dir="ltr" id="ii13">Resolution</h4>
+
+<p dir="ltr">NC is currently field testing a potential fix involving a Microsoft security patch KB2888505. It seems that removing and reinstalling may correct the problem.</p>
+
+<h4 dir="ltr" id="ii14">Related Information</h4>
+
+<ul dir="ltr">
+	<li>North Carolina 40786,499,000</li>
+</ul>
+
+<p dir="ltr"><a id="4" name="4"></a></p>
+
+<h3 dir="ltr" id="ii15">Blank Screens (Maryland)</h3>
+
+<h4 dir="ltr" id="ii16">Resolution</h4>
+
+<p dir="ltr">Maryland took the following action (as per PMR):<br />
+<br />
+"WebSEAL has the ability to disable keep-alive connections. This has been tested and has been found to completely solve the issue.<br />
+<br />
+Unfortunately, this dramatically increases initial page load times. The HCR portal s initial load downloads over 200 separate files, adding a 100ms HTTP connection establishment to each of these resource requests is increasing the initial page load by over 20 seconds (that brings the total page load to 50 seconds on a high bandwidth low latency connection)."<br />
+<br />
+Maryland considered a longer keep alive connection, but I don't know whether this is what they went with in the end.<br />
+<br />
+In Marylands case, the problem was with IEG and caused the screen to crash. The behaviour is a bit different to what has been reported in North Carolina, but could be similarly related.<br />
+<br />
+Note: The following microsoft knowledge base articles are also mentioned on the case: 831167 and 895954</p>
+
+<h4 dir="ltr" id="ii17">Related Information:</h4>
+
+<ul dir="ltr">
+	<li>Maryland 05323,999,000</li>
+</ul>
+
+<p dir="ltr"><a id="5" name="5"></a></p>
+
+<h3 dir="ltr" id="ii18">Blank/Frozen Screens (MCSS)</h3>
+
+<h4 dir="ltr" id="ii19">Potential Causes</h4>
+
+<div dir="ltr">The most common cause of frozen screens, especially intermittent behaviour, is generally related to performance problems and potentially the number of connections open.<br />
+<br />
+Where the advisor panel is in use, The advisor panel has a feature that polls via javascript every 2 minutes for updated information.<br />
+<br />
+If the response times from the server are slow, either due to network or server issues, then this can cause too many connections to be opened.<br />
+<br />
+There is a maximum number of connections that can be opened concurrently by browsers at any one time. The browser will stop responding to click requests at this point and appear frozen.<br />
+<br />
+For IE 8 and Chrome a maximum of 6 connections is supported.<br />
+<br />
+In addition, the evidence flow widget uses a similar polling approach for updating data. If this is also displayed in an open tab, it could be increasing the number of connections being opened.</div>
+
+<div dir="ltr">&nbsp;</div>
+
+<div dir="ltr">One option is to disable the polling of these features by increasing the poll interval to a value of days or hours. This can be done by setting the following properties via the administration screens:<br />
+<br />
+curam.evidenceflow.polling.interval<br />
+curam.advisor.advicerefreshinterval<br />
+<br />
+Obviously doing this will mean that these widgets are not updated with relevant information without manually refreshing them.</div>
+
+<h4 dir="ltr" id="ii20">Resolution</h4>
+
+<p dir="ltr">Ongoing - but currently appears to be performance problems on their end. They turned off the extra polling, including some added by their own custom code just to reduce the impact of this.</p>
+
+<h4 dir="ltr" id="ii21">Related Information</h4>
+
+<ul dir="ltr">
+	<li>76004,999,649 - Page Real Estate Freezes</li>
+	<li>75921,999,649 - Blank Screens</li>
+</ul>
+
+<p dir="ltr"><a id="6" name="6"></a></p>
+
+<h3 dir="ltr" id="ii22">Stack Overflow Error (MCSS)</h3>
+
+<p dir="ltr"><img alt="" src="/wikis/form/api/wiki/6900d1bd-a7e2-4fc9-973f-bca6c088b6b1/page/9df8feff-d7d3-4bf7-864d-507e6adc27cb/attachment/16a66a79-9cb6-4624-9c0d-57a4dc937b7e/media/76024.999.649.stackoverflow.png?preventCache=1461763911128" style="width: 800px; height: 450px;" title=""></img></p>
+
+<h4 dir="ltr" id="ii23">Potential Causes</h4>
+
+<p dir="ltr">Ongoing - current cause of this is likely to be performance and configuration issues on customer site. Thinking is that the browser is having problems due to connection issues. Similar to the description above for the frozen screen issue.</p>
+
+<h4 dir="ltr" id="ii24">Related Information</h4>
+
+<ul dir="ltr">
+	<li>&nbsp;&nbsp;&nbsp; 76024,999,649&nbsp; - Stackoverflow error in browser</li>
+</ul>
+
+<p dir="ltr"><a id="7" name="7"></a></p>
+
+<h3 dir="ltr" id="ii31">Connection leak in IE9 (DWP)</h3>
+
+<h4 dir="ltr" id="ii32">Information</h4>
+
+<p dir="ltr">Customer encountering blank screens and through their investigation identified the following reproducible scenario:</p>
+
+<p dir="ltr">1) Log in as admin<br />
+2) Open a complex page such as "My Organisation"<br />
+3) Reload a sub-tab as fast as possible by clicking very rapidly over the Curam Refresh button<br />
+&nbsp;<br />
+In a command window, watch netstat -an and search for connections to the Curam server. After multiple reloads, we get a number of connections stuck in CLOSE_WAIT or ESTABLISHED state. These linger, whereas normally connections in CLOSE_WAIT or ESTABLISHED state disappear in a few seconds.<br />
+&nbsp;<br />
+This is enough to demonstrate the fault. But if you can manage to repeat it until 6 connections are stuck, this is the default maximum IE9 will open to a single website. Future requests to Curam result in white screens.<br />
+&nbsp;<br />
+Increasing the max AJAX HTTP1.0 and HTTP1.1 connections allowed in Computer Configuration&gt;Administrative Templates&gt;Windows Components&gt;Internet Explorer&gt;Security Features&gt;AJAX group policy can delay the white screen behaviour. But this affects all web sites, not just Curam.</p>
+
+<h4 dir="ltr" id="ii33">Response</h4>
+
+<p dir="ltr">In response to the CLOSE_WAIT and ESTABLISHED states seen:</p>
+
+<p dir="ltr">Connections are stuck in CLOSE_WAIT until the application (in this case IE9) closes the connection (socket.close()). Only then will the OS move the connection to the next state towards closing. If connections are not closing down correctly, the fault is potentially a problem in Internet Explorer.</p>
+
+<p dir="ltr">For ESTABLISHED connections, these will remain open depending on the keep alive timeout settings the client and server have negotiated. The keep alive timeout is done at the HTTP level and is usually configured in the HTTP server. It usually has a value between 1 and 30.</p>
+
+<h4 dir="ltr" id="ii34">Resolution</h4>
+
+<p dir="ltr">HP onsite have opened up a support case with Microsoft on this issue. Internal feedback from Gary Parker is that Microsoft have stated in a response - but not explicitly - that IE is not honoring the close connection request in some circumstances (what these are, they are not sure).&nbsp; As such, connections are remaining open incorrectly which can't be used and it is possible to hit max connections causing the white screens. HP are asking explicitly if this is an IE bug.</p>
+
+<p dir="ltr">HP have also done a number of changes, including increasing the size of the max connections in IE to 10 and that seems to have improved the situation. Gary is going to get a summary of the changes made by HP. TODO: Include Gary's update when available.</p>
+
+<h2 dir="ltr" id="ii25">Proposal for Improvements</h2>
+
+<p dir="ltr">Most of the issues in this group are reported as Cúram issues even though they may not directly related to Cúram. The overarching problem is that under exceptional circumstances the Cúram application is not behaving in a predictable and helpful manner. Specifically when network reponse becomes slow or fails the application is frequently left in a bad state and errors are not reported in a useful way.</p>
+
+<p dir="ltr">This proposal is aimed at improving the situation by providing a robust and consistent error handling mechanism for AJAX/iframe requests in the Cúram application.</p>
+
+<h3 dir="ltr" id="ii26">Progress indicator</h3>
+
+<p dir="ltr">Provide a progress indicator that will kick in automatically if a request is taking longer that X amount of seconds. It should be a non-intrusive message in a place where it is sure to be noticed by the user. The message would disappear again when request completes successfully. This will help prevent users getting frustrated and breaking the UI by clicking ahead of the previous operation finishing.</p>
+
+<h3 dir="ltr" id="ii27">Error reporting</h3>
+
+<p dir="ltr">In case of requests failures, we should display error message to the user.</p>
+
+<p dir="ltr">Depending on the context and severity it should either be the same non-intrusive message as above (disappearing on the next user action in the UI), or a dialog window requiring confirmation. In any case it needs to inform the user of something going wrong and it must provide information about what the next steps are for the user.</p>
+
+<p dir="ltr">More descriptive information for developers can be written to log.</p>
+
+<h3 dir="ltr" id="ii28">Session timeout handling</h3>
+
+<p dir="ltr">Handle redirect to login screen, and/or redirects in general.</p>
+
+<h3 dir="ltr" id="ii29">Retry policies</h3>
+
+<p dir="ltr">handle retry policy</p>
+
+<h3 dir="ltr" id="ii30">Public API</h3>
+
+<p dir="ltr">The proposed functionality must be available as infrastructure service/API for use by application code, because there are a number of cases where they are using AJAX.</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Design Details</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Design Details";
+    pageId="urn:lsid:ibm.com:td:5ca92057-8ba2-4553-a8a3-b401a6d31921";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Design Details</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: {}, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii8">Description of Change</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii9">Additional Documentation Links</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii10">High-Level Design</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii1">Design Areas</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii2">Curam Data Service Layer</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii3">Worklight Integration</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii4">Sample Application</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii5">Offline Customization Points</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii6">Pagination Support</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii11">Interim Documentation</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii7">Section X</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii13">Setup Instructions</a></div>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii8">Description of Change</h2>
+
+<p dir="ltr">The aim of the Cúram Mobile SDK is to provide a set of tools to our customers and business partners that will enable them to develop Cúram mobile applications.</p>
+
+<ul dir="ltr">
+	<li><strong>Targeted Release(s): </strong>6.1</li>
+	<li><strong>CEMS Case: </strong><a href="http://cems.curamsoftware.com:8080/browse/TEC-13280" target="_blank">TEC-13280</a></li>
+</ul>
+
+<h2 dir="ltr" id="ii9">Additional Documentation Links</h2>
+
+<ul dir="ltr">
+	<li><a wiki="W0a1fd4167cf0_4b87_9de1_934ee047dc09" target="_blank" href="https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/W0a1fd4167cf0_4b87_9de1_934ee047dc09/page/Mobile%20SDK" id="wikiLink1384423029664" page="Mobile SDK">Mobile&nbsp;Design&nbsp;Wiki</a></li>
+	<li><a wiki="Wd51dcbf36150_43ea_a9da_d9f96522e2f0" target="_blank" href="https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/Wd51dcbf36150_43ea_a9da_d9f96522e2f0/page/Mobile_SDK_Early_Architecture_Review" id="wikiLink1384423029665" page="Mobile_SDK_Early_Architecture_Review">Early&nbsp;Architecture&nbsp;Review</a></li>
+	<li><a href="https://w3-connections.ibm.com/activities/service/html/mainpage#activitypage,edcdd9d3-ca09-48bf-b73e-24edb355bfb7" target="_blank">CDSL&nbsp;Original&nbsp;Design&nbsp;Activity</a></li>
+	<li><a href="https://www.ibm.com/support/knowledgecenter/SSHS8R_8.0.0/wl_welcome.html" target="_blank">Worklight&nbsp;Information&nbsp;Centre</a></li>
+</ul>
+
+<h2 dir="ltr" id="ii10">High-Level Design</h2>
+
+<h3 dir="ltr" id="ii1">Design Areas</h3>
+
+<p dir="ltr">This section lists the various detailed design pages for the different parts of the Curam Mobile SDK. A high level outline of the project can be found on the <a wiki="W0a1fd4167cf0_4b87_9de1_934ee047dc09" target="_blank" href="https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/W0a1fd4167cf0_4b87_9de1_934ee047dc09/page/Mobile%20SDK" id="wikiLink1384423029666" page="Mobile SDK">Mobile&nbsp;Design&nbsp;Wiki</a>.</p>
+
+<h4 dir="ltr" id="ii2">Curam Data Service Layer</h4>
+
+<ul dir="ltr">
+	<li><a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" href="Design%20Details/CDSL%20JavaScript%20API.html" id="wikiLink1526291285886" page="CDSL JavaScript API">CDSL&nbsp;JavaScript&nbsp;API</a></li>
+	<li><a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" href="Design%20Details/CDSL%20Service.html" id="wikiLink1384423029667" page="CDSL Service">CDSL&nbsp;Service</a></li>
+	<li><a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" href="Design%20Details/Struct%20Serialisation.html" id="wikiLink1526291285887" page="Struct Serialisation">Struct&nbsp;Serialisation</a></li>
+</ul>
+
+<h4 dir="ltr" id="ii3">Worklight Integration</h4>
+
+<ul dir="ltr">
+	<li>&nbsp;</li>
+</ul>
+
+<h4 dir="ltr" id="ii4">Sample Application</h4>
+
+<ul dir="ltr">
+	<li>&nbsp;</li>
+</ul>
+
+<h4 dir="ltr" id="ii5">Offline Customization Points</h4>
+
+<ul dir="ltr">
+	<li>&nbsp;</li>
+</ul>
+
+<h4 dir="ltr" id="ii6">Pagination Support</h4>
+
+<ul dir="ltr">
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</li>
+</ul>
+
+<h2 dir="ltr" id="ii11">Interim Documentation</h2>
+
+<p dir="ltr">This section is a placeholder for maintaining documentation as we go. This will serve as release notes, in addition to forming the base of what we document at the end of the project.</p>
+
+<h3 dir="ltr" id="ii7">Section X</h3>
+
+<p dir="ltr">TBD</p>
+
+<h2 dir="ltr" id="ii13">Setup Instructions</h2>
+
+<p dir="ltr"><a wiki="We1458f1078dd_463a_9e7c_c54ac9e1e5a7" href="https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/We1458f1078dd_463a_9e7c_c54ac9e1e5a7/page/Setup%20Instructions" id="wikiLink1384423029668" page="Setup Instructions">Setup&nbsp;Instructions</a></p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

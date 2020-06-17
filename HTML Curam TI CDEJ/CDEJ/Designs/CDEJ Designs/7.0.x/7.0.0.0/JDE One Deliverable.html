@@ -1,0 +1,405 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>JDE One Deliverable</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="JDE One Deliverable";
+    pageId="urn:lsid:ibm.com:td:d59d39d4-f043-4c1a-9927-37beb156a0cc";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">JDE One Deliverable</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr"><span style="color:#FF0000;"><strong><span style="font-size: 18px;">HOW TO TAKE ON THE NEW "JDE ONE DELIVERABLE"</span></strong></span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">1. Add JDEVersion.txt to your ExternalVersions folder, containing the following: <span style="color:#FF0000;">(<strong>NB:</strong> The line beginning with "zip.version=" will&nbsp; have to be modified to match the version of the zip you are taking on)</span></p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">zip.name=CuramJDE<br />
+zip.version=_7_0_0_0_test1<br />
+zip.network.location=ProductDevelopment/DevReleases/SDEJ_CDEJ_release<br />
+zip.unpack.location=${sysenv.CURAM_DIR}/JDE<br />
+zip.post.unzip.file=${zip.unpack.location}/jde_post_unzip.xml<br />
+zip.post.unzip.target=main</span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">2. Remove the following files from ExternalVersions folder if present:</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp; - CdevenvVersion.txt</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp; - CuramRSMPluginVersion.txt</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp; - EnvVarsVersion.txt</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp; - GSSVersion.txt</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp; - GlbnToolsVersion.txt</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp; - PolicingVersion.txt</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp; - SdevenvVersion.txt</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp; - ToolsVersion.txt</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">3. Bootstrap, build and test everything as you would normally.</p>
+
+<p dir="ltr">4. Commit JDEVersion.txt plus the deletion of the other text files to source control.</p>
+
+<p dir="ltr">5. That's it. You are done. The rest of this page is the design page.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<hr dir="ltr"></hr>
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><span style="font-size:20px;"><strong>Design Page for JDE One Deliverable</strong></span></p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Background</span></strong></p>
+
+<p dir="ltr">Currently we release 9 zips with a JDE release: <span style="color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 18px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none; background-color: rgb(255, 255, 255);">SDEJ, CDEJ, EnvVars, GlbnTools, InternalPlugins, Policing, RSM, UDP and UIToolkit.</span></p>
+
+<p dir="ltr">Although it is not strictly necessary for consumers of these zips to keep everything in sync it would be recommended.</p>
+
+<p dir="ltr">There is also takeon effort required to keep those zips in sync.</p>
+
+<p dir="ltr">A better idea would be to release a single zip containing all of the above tools so that there is just a single takeon step required.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Requirements</span></strong></p>
+
+<p dir="ltr">1. Convert nine zips into one zip</p>
+
+<p dir="ltr">2. Have a single takeon step for consumers</p>
+
+<p dir="ltr">3. Tools are unpacked in the same way as they were before</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Ticket: RTC 149493 - JDE One Deliverable</strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Q&amp;A</span></strong></p>
+
+<p dir="ltr">1. Normally a consumer can choose what location the JDE or a tool is unpacked to. Although the JDE can retain this ability, we are planning on removing it for the other 7 tools. As far as I know no-one uses anything other than the default location.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Non Functional Requirements</span></strong></p>
+
+<table border="1" dir="ltr" height="263" style="width: 1128px;" width="671">
+	<tbody>
+		<tr>
+			<td style="width: 118px;"><strong>NFR</strong></td>
+			<td style="width: 537px;"><strong>Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+			<td style="width: 453px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Accessibility</td>
+			<td style="width: 537px;">The ability of the system to be used by people with disabilities. When new technologies are being used for the UI very careful consideration should be given to whether screen readers can be used with the technologies. This applies specifically to usage of JavaScript, Flex and SVG. The use of colors to provide functionality should be considered (and avoided), along with resolutions that will be used by vision impaired users.</td>
+			<td style="width: 453px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Availability &amp; Resilience</td>
+			<td style="width: 537px;">The ability of the system to be fully or partly operational as and when required and to effectively handle failures that could affect system availability. This should be considered when working outside of the normal infrastructure and deployment. For example, the XML Server is not deployed in an application server and has special handling for fail-over and load balancing. Careful consideration should be taken before adding new components, e.g. EJB Beans, MDBs, to the infrastructure.</td>
+			<td style="width: 453px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Development Resource</td>
+			<td style="width: 537px;">The ability of the system to be designed, built, deployed and operated within known constraints of people, budget, time, etc. In general there is not much information required here, however where special skill sets or people with siloed knowledge are required to work on the change/enhancement, this should be detailed here.</td>
+			<td style="width: 453px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Evolution</td>
+			<td style="width: 537px;">The ability of the system to be flexible in the face of the inevitable change that all systems experience after deployment, balanced against the costs of providing such flexibility. Consideration should be given to future proofing the change, including considering how to upgrade to any changes or enhancements provided in the future. Specifically designs should accommodate elements such as localization (text, dates, etc.), customization, configurability, and componentization. Providing these features in future releases, when not considered up front, has caused impacts for customers in the past and has prevented us from providing the features in some cases.</td>
+			<td style="width: 453px;">New tools can easily be added to the zip and build scripts.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Internationalisation</td>
+			<td style="width: 537px;">The ability of the system to be independent from any particular language, country or cultural group. Localisation and internationalisation are a large concern for Cúram. Support should always be provided to view information in multiple locales, based on the user and server locale, along with support for working in multiple time zones.</td>
+			<td style="width: 453px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Location</td>
+			<td style="width: 537px;">The ability of the system to overcome problems brought about by the absolute location of its elements and the distances between them. For the most part this is not a major concern, however we should never design based on the assumption that the customer will use a default configuration</td>
+			<td style="width: 453px;">SDEJ and CDEJ unpack to a configurable "zip.unpack.location" value. Other tools have hard-coded locations within the view.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Performance and Scalability</td>
+			<td style="width: 537px;">The ability of the system to predictably execute within its mandated performance profile and to handle increased processing volumes. Performance and scalability are a concern and should always be considered during design. Where necessary, the Performance and Benchmarking teaming should be engaged early to help with determining impact of potential changes.</td>
+			<td style="width: 453px;">New tools can be added to the released zip with no upgrade impact.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Regulation</td>
+			<td style="width: 537px;">The ability of the system to conform to locale and international laws, quasi-legal regulations, company policies and other rules and standards. Regulation includes the usages of third party tools and the licensing issues associated with these. New jars should never be introduced without considering the legal implications and licensing of the jars. This includes usage of GPL licensed code. Also, usage of code freely provided on the web and not properly licensed should be avoided.</td>
+			<td style="width: 453px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Security</td>
+			<td style="width: 537px;">The ability of the system to reliably control, monitor and audit who can perform what actions on what resources and to detect and recover from failures in security mechanisms. This is a concern where new features are added that are not contained within the normal Cúram security.</td>
+			<td style="width: 453px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Usability</td>
+			<td style="width: 537px;">The ease with which people who interact with the system can work effectively. How the change will affect the user and how they use the application/feature should always be considered. Where necessary the business analysts and our user interface experts should be engaged early to ensure we meet usability requirements. e.g. printing.</td>
+			<td style="width: 453px;">Consumers need to remove their old version text files and add a new JDEVersion.txt file.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Design</span></strong></p>
+
+<ol dir="ltr">
+	<li>Modify pack.xml to generate the new zip containing all nine folders</li>
+	<li>Include a jde_post_unzip.xml file that will move the tools to the appropriate locations, run&nbsp;all post-unzip targets, check&nbsp;guard files, etc.</li>
+	<li>Higher offsets need to add a JDEVersion.txt file and delete the old version text files</li>
+</ol>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Resilience</span></strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">What happens if something expected/unexpected goes wrong?
+	<ul>
+		<li style="margin-left: 40px;">Same as existing system</li>
+	</ul>
+	</li>
+	<li style="margin-left: 40px;">What happens to the system?
+	<ul>
+		<li style="margin-left: 40px;">Same as existing system</li>
+	</ul>
+	</li>
+	<li style="margin-left: 40px;">Will the user be able to take corrective action in the system without the need to resort to application logs/SQL searching/data manipulation outside of the system.
+	<ul>
+		<li style="margin-left: 40px;">Same as existing system</li>
+	</ul>
+	</li>
+	<li style="margin-left: 40px;">Will the data be left in a consistent state within the system after the exception is thrown?
+	<ul>
+		<li style="margin-left: 40px;">Same as existing system</li>
+	</ul>
+	</li>
+	<li style="margin-left: 40px;">Will there be messages given to the user? What will these messages be?
+	<ul>
+		<li style="margin-left: 40px;">Same as existing system</li>
+	</ul>
+	</li>
+	<li style="margin-left: 40px;">Will there something written to the logs? What will this be?
+	<ul>
+		<li style="margin-left: 40px;">Same as existing system</li>
+	</ul>
+	</li>
+	<li style="margin-left: 40px;">Does the feature require some of the exception data to be captured and an admin function provided to allow the situation to be re-mediated?
+	<ul>
+		<li style="margin-left: 40px;">Same as existing system</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Design Q &amp; A</span></strong></p>
+
+<p dir="ltr">???</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Use Cases</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. The various use cases for the feature must be outlined here. They can be in whatever format deemed appropriate (i.e. verbose description or in a tabular format with actors and actions etc.). Below is an example of how use cases may be documented in a tabular format.</p>
+
+<table border="1" dir="ltr" height="69" style="width: 871px;" width="814">
+	<tbody>
+		<tr>
+			<td style="width: 93px;"><strong>Role/Actor</strong></td>
+			<td style="width: 138px;"><strong>Description</strong></td>
+			<td style="width: 415px;"><strong>Expected Behavior</strong></td>
+			<td style="width: 199px;"><strong>Tested</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 93px;">User</td>
+			<td style="width: 138px;">Takes on a new JDE</td>
+			<td style="width: 415px;">Zips are downloaded, unpacked, tools are moved to the appropriate locations, post-unzip targets are run.</td>
+			<td style="width: 199px;">Manual test</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Application Impact</span></strong></p>
+
+<p dir="ltr">Consumers will need to remove their old version text files and add a new JDEVersion.txt file. An example file is given in 'Implementation Notes' above.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">CTM</span></strong></p>
+
+<p dir="ltr">n/a</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">JMX</span></strong></p>
+
+<p dir="ltr">n/a</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Testing</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. An outline of all of the testing required by the feature should be present here. This may tie in with the use cases outlined above. This may differ from component to component so the sub headings here will reflect that.</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Unit tests</p>
+
+	<ul>
+		<li>
+		<p>N/A</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Manual Test Plans</p>
+
+	<ul>
+		<li>
+		<p>Can be manually tested. The "pack" target can also be run with a "-Dnobuild=true" to skip the build process.</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Automated tests</p>
+
+	<ul>
+		<li>
+		<p>N/A</p>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Documentation/How To Use Feature</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. This should describe how to use the feature added. Again this may differ from component to component but there are some general headings to consider:</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Where the feature fits in the overall component?</p>
+	</li>
+	<li>
+	<p>How it may be accessed (i.e. created/authored)?</p>
+	</li>
+	<li>
+	<p>What does it do (may be linked to the use cases above)?</p>
+	</li>
+	<li>
+	<p>Advantages of using the feature?</p>
+	</li>
+	<li>
+	<p>Any limitations associated with the feature?</p>
+	</li>
+	<li>
+	<p>A description of how the feature should be used etc.? This may also include a description of a contract between the various teams using the feature and will incorporate some details of the design.</p>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Check List</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Basically this is a quick check list of items that should be considered when doing a design for that particular component.</p>
+
+<table border="1" dir="ltr" style="width: 658px;">
+	<tbody>
+		<tr>
+			<td style="width: 166px;"><strong>Check List Item</strong></td>
+			<td style="width: 314px;"><strong>Notes</strong></td>
+			<td style="width: 157px;"><strong>Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">????</td>
+			<td style="width: 314px;">?????</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Work Estimation</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Again, the actual items listed in the estimate breakdown may vary from task to task and component to component.</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Work Estimates</p>
+
+	<ul>
+		<li>
+		<p>Design: ? Days</p>
+		</li>
+		<li>
+		<p>Prototype: ? Days</p>
+		</li>
+		<li>
+		<p>Implementation: ? Days</p>
+		</li>
+		<li>
+		<p>Testing: ? Days</p>
+		</li>
+		<li>
+		<p>Documentation: ? Days</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Total: ? Days</p>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">Notes</h2>
+
+<ul dir="ltr">
+	<li>Why is ADBuildTools still separate?
+	<ul>
+		<li>ADBuildTools is bootstrapped using a different process than the other JDE components. Bootstrap uses an old version of ADBuildTools unzipped on tiny&nbsp;to pull down the latest ADBuildTools. Bootstrap then uses the new ADBuildTools to pull down everything else. So the new ADBuildTools is required in order to download the JDE zip. Therefore we cannot include it in the JDE zip!</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

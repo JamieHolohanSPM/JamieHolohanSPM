@@ -1,0 +1,70 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>RTC Plugin in DevEnv</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="RTC Plugin in DevEnv";
+    pageId="urn:lsid:ibm.com:td:0cb4377c-ac31-4fc1-8c00-afb2d1ebe090";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">RTC Plugin in DevEnv</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">vNext Stack 1 delivers the RTC plugin into your Eclipse workspace, so there is no need to keep the RTC Client and development Eclipse open at the same time.</p>
+
+<p dir="ltr">In order to enable tracking of changes in your workspace, the RTC sandbox must be registered with the plugin.</p>
+
+<ol dir="ltr">
+	<li>Open Window -&gt; Preferences, and navigate to Team -&gt; Jazz Source Control -&gt; Sandboxes</li>
+	<li>Add the RTC workspace (e.g. C:\RTC-Dev\BizInf-vNext) as a Sandbox, and click OK to close the Preferences dialog.</li>
+	<li>Open Window -&gt; Open Perspective -&gt; Work Items (go to Other &gt; Work Items, if not already visible)</li>
+	<li>Create a repository &amp; project connection:
+	<ol>
+		<li>Repository: <a href="https://jazz031.hursley.ibm.com:9443/ccm">https://jazz031.hursley.ibm.com:9443/ccm</a></li>
+	</ol>
+	</li>
+	<li>Select all of the projects in Project Explorer, right-click, and select Team &gt; Share Project
+	<ul>
+		<li>Select Jazz Source Control as the repository type, and click Next</li>
+		<li>Click Finish</li>
+		<li>This will create the relevant mappings between projects in the Eclipse workspace and the RTC Sandbox.</li>
+	</ul>
+	</li>
+</ol>
+
+<p dir="ltr">For a better experience, in the Java / Java EE perspective, add two additional views:</p>
+
+<ul dir="ltr">
+	<li>Work Items &gt; Work Items</li>
+	<li>Jazz Source Control &gt; Pending Changes</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">If the Work Items view or perspective is not available, go to C:\CC\DevEnv\7.0\eclipse-extensions\rtc_plugin and remove artifact.jar and contents.jar</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

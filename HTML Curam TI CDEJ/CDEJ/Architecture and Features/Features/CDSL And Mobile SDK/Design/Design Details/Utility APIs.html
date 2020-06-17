@@ -1,0 +1,90 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Utility APIs</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Utility APIs";
+    pageId="urn:lsid:ibm.com:td:a040f36f-7e79-4123-b3c9-56bcaba223c3";
+    toRoot="../../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Utility APIs</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Description</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii3">Use Cases / Requirements</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii7">Design</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">Documentation</a></div>
+
+<h2 dir="ltr" id="ii1"><span style="line-height: 1.5;">Description</span></h2>
+
+<p dir="ltr">A number of Utility APIs are required to allow access to web-tier CDEJ functionality such as codetables and user and global preferences.</p>
+
+<h2 dir="ltr" id="ii3">Use Cases / Requirements</h2>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii7">Design</h2>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii2">Documentation</h2>
+
+<p dir="ltr">A new API, curam.cdsl.util.Preferences, is now available to access global and user specific preferences via the CDSL Layer. Please consult the JavaScript documentation for full details.</p>
+
+<p dir="ltr">This is an internal API, only available to NPG to use.</p>
+
+<p dir="ltr">The following global preferences are available via this API:</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp; dateFormat - The date format as defined in ApplicationConfiguration.properties<br />
+&nbsp;&nbsp;&nbsp; timeFormat - The time format as defined in ApplicationConfiguration.properties<br />
+&nbsp;&nbsp;&nbsp; dateTimeFormat - Combination of date and time format as defined in ApplicationConfiguration.properties</p>
+
+<p dir="ltr">The following user specific preferences are available via this API:</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp; locale - The user locale<br />
+&nbsp;&nbsp;&nbsp; highContrast - True if the user preference for high contrast mode is enabled<br />
+&nbsp;&nbsp;&nbsp; timezone - The timezone preference for the user</p>
+
+<p dir="ltr">Note:<br />
+The timezone is returned, but not in a value that is usable at present. Further work is required to determine the correct handling of this.</p>
+
+<p dir="ltr">Example usage of curam.cdsl.util.Preferences:</p>
+
+<pre dir="ltr">
+// Read user preferences and display in text area
+new Preferences(connection).loadPreferences().then(
+  function(pref) {
+    var locale = pref.getPreference('userlocale');
+  },
+  function(err) {
+    // Handle error scenario
+  });</pre>
+
+<p dir="ltr">The API also contains a function to return an array of preferences names: getPreferenceNames().</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

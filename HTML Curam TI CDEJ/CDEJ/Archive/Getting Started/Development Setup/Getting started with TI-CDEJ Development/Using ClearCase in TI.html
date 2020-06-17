@@ -1,0 +1,330 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Using ClearCase in TI</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Using ClearCase in TI";
+    pageId="urn:lsid:ibm.com:td:e2357b76-c4a9-45ab-a071-39c81890fef6";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Using ClearCase in TI</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h1 dir="ltr">Using ClearCase for Technical Infrastructure development (WIP)</h1>
+
+<p dir="ltr">This guide provides the instructions for getting started with TI projects, and addresses some of the common issues.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {} }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Assumptions</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">Naming Conventions</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii3">Stream Names</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii4">Snapshot / View Names</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii5">Creating a Development Stream and Snapshot View</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii6">Creating a Review Stream</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii7">DevEnv Setup</a></div>
+
+<h2 dir="ltr" id="ii1">Assumptions</h2>
+
+<ul dir="ltr">
+	<li>You have configured your machine to point to Curam DNS ( 9.162.143.20 )</li>
+	<li>You have added your Curam AD account to the local Administrators group.</li>
+	<li>You have added your machine to the Curam Domain.</li>
+	<li>You have turned off UAC and restarted the machine.</li>
+	<li>You have installed ClearCase/ClearQuest 8.0.1.7</li>
+	<li>You have installed SCMTools (included in CC/CQ installation guide)</li>
+</ul>
+
+<p dir="ltr">If you fail on any of the above assumptions, please <strong>resolve before proceeding</strong>!</p>
+
+<h2 dir="ltr" id="ii2">Naming Conventions</h2>
+
+<p dir="ltr">This section deals with ClearCase streams and local views, for which names must be specified by the developer.</p>
+
+<p dir="ltr">The names are important because</p>
+
+<ol dir="ltr">
+	<li>the stream names share a common namespace within the organization.</li>
+	<li>the view/snapshot name can affect the directory structure which will be created on your machine. Names, which are too long can result in a directory structure that exceeds the Windows maximum of 255 characters.</li>
+</ol>
+
+<h3 dir="ltr" id="ii3">Stream Names</h3>
+
+<p dir="ltr">Streams names must be named uniquely within the organization and must always include at least the following information:</p>
+
+<ul dir="ltr">
+	<li>
+	<p>your identity (your username, or initials)</p>
+	</li>
+	<li>
+	<p>the project name (e.g. TI_MAIN, or TI_6_0_5_FP)</p>
+	</li>
+</ul>
+
+<p dir="ltr"><strong>The convention recommended for stream names is as follows:</strong></p>
+
+<pre dir="ltr" style="margin-left: 40px;">
+&lt;userid&gt;_&lt;project-name&gt;_&lt;number&gt;</pre>
+
+<p dir="ltr" style="margin-left: 40px;">where</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;"><em>userid&nbsp; </em>is a means for uniquely identifying yourself. Typically this would be your login name, or your initials.</li>
+	<li style="margin-left: 40px;"><em>project-name</em>&nbsp; is the name of the project stream you are working on.</li>
+	<li style="margin-left: 40px;"><em>number</em>&nbsp; is an incrementing number to allow for multiple streams on your machine.</li>
+</ul>
+
+<p dir="ltr">Examples of suitable stream names:</p>
+
+<ul dir="ltr">
+	<li>jbloggs_TI_Main_01</li>
+	<li>jbloggs_TI_6_1_x_02</li>
+	<li>jb_TI_6_0_5_FP_03</li>
+</ul>
+
+<h3 dir="ltr" id="ii4">Snapshot / View Names</h3>
+
+<p dir="ltr">The "Snapshot" name (your "copy" of a stream) can differ from the ClearCase Stream name and it is recommended to change this default name to allow your directory hierarchy to be shallow as possible. It is recommended that ClearCase snapshots are stored in a directory named <tt>CC</tt> on the root of one your hard drives. The benefit of using this directory is that the Curam virus scanner is configured to ignore the contents of directories <tt>C:\CC</tt>, etc, which greatly reduces the virus scanning overhead and improves build times.</p>
+
+<p dir="ltr"><strong>The convention recommended for snapshot/view names is as follows:</strong></p>
+
+<pre dir="ltr" style="margin-left: 40px;">
+&lt;project-name&gt;_&lt;number&gt;</pre>
+
+<p dir="ltr" style="margin-left: 40px;">where</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;"><em>project-name</em>&nbsp; is the name of the project stream you are working on.</li>
+	<li style="margin-left: 40px;"><em>number</em>&nbsp; is an incrementing number to allow for multiple streams on your machine.</li>
+</ul>
+
+<p dir="ltr">Examples of suitable snapshot/view names:</p>
+
+<ul dir="ltr">
+	<li>TI_Main_01</li>
+	<li>TI_6_1_x_02</li>
+	<li>TI_6_0_5_FP_03</li>
+</ul>
+
+<h2 dir="ltr" id="ii5">Creating a Development Stream and Snapshot View</h2>
+
+<p dir="ltr">Use ClearCase Explorer to create a development stream and view (the stream is where your data resides in the repository, and the view is your local copy of it).</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Click the <tt>ToolBox</tt> tab (on the left side of the application), and select <tt>Base&nbsp;ClearCase</tt> from the listbox.</p>
+	</li>
+	<li>
+	<p>Click the <tt>Create&nbsp;View</tt> icon to launch the view creation wizard.</p>
+	</li>
+	<li>
+	<p>'View Creation Wizard - Choose a Project':</p>
+
+	<ul>
+		<li>
+		<p>Ensure that 'Yes' is selected for the 'Will this view be used for working on one of the Projects described in the ClearCase project tree?' question.</p>
+		</li>
+		<li>
+		<p>Find <tt>TIPVOB</tt> in the list. If it is not present, check the 'Show all project VOBs' box to see the full list of available projects.</p>
+		</li>
+		<li>
+		<p>Expand <tt>TIPVOB</tt> and select project <tt>TI_MAIN</tt> or the project relevant to you.</p>
+		</li>
+		<li>
+		<p>Click Next.</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>'View Creation Wizard - Create a Development Stream:</p>
+
+	<ul>
+		<li>
+		<p>Ensure that the 'Create a development stream' box is checked'.</p>
+		</li>
+		<li>
+		<p>In the box labelled 'Your development stream for this project is', ClearCase will suggest a Stream Name based on your login name and project, see the "Stream&nbsp;Names" section for recommended naming conventions.</p>
+		</li>
+		<li>
+		<p>For 'Integration Stream' ensure that <tt>ti_main_int</tt> or the relevant project is selected in the dropdown.</p>
+		</li>
+		<li>
+		<p>Click Next.</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>'View Creation Wizard - Review Types of Views':</p>
+
+	<ul>
+		<li>
+		<p>Ensure that 'Create a development view' is checked, that Type: Snapshot is selected, and that 'Create an integration view' is unchecked.</p>
+		</li>
+		<li>
+		<p>Click Next.</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>'View Creation Wizard - Choose Location for a Snapshot View':</p>
+
+	<ul>
+		<li>
+		<p>You are now prompted for the location of your snapshot view. All views should be stored in a directory named <tt>cc</tt> at the root of one of your local drives. e.g: <tt>C:\CC</tt>. The view directory name will be the same as the Stream name. Based on the above examples, if your new Stream is called <tt>jbloggs_TI_Main_02</tt> then you should specify a snapshot view directory something like: <tt>C:\CC\TI_Main_02</tt>, see the "Stream&nbsp;Names" section for recommended naming conventions.</p>
+		</li>
+		<li>
+		<p>Click the 'Advanced Options' button.</p>
+		</li>
+		<li>
+		<p>In the 'Advanced View Options' dialog, click the 'Browse...' button.</p>
+		</li>
+		<li>
+		<p>Another dialog will open and you will be asked to specify a view storage directory. By default this dialog will show the shares currently available on your own machine. Click on the 'Views' share and click Open. ClearCase will automatically populate the 'View Storage Directory' field with an appropriate value corresponding to your view name. Click OK here.</p>
+		</li>
+		<li>
+		<p>You are now returned to the 'Advanced View Options' dialog. Click OK.</p>
+		</li>
+		<li>
+		<p>You are now returned to the 'Choose Location for a Snapshot View' dialog.</p>
+		</li>
+		<li>
+		<p>Click Next.</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>'View Creation Wizard - Choose Components':</p>
+
+	<ul>
+		<li>
+		<p>Ensure that the first item in the list is checked and click Finish.</p>
+		</li>
+		<li>
+		<p>A confirmation dialog will appear. Double check that you are creating the view in the right place, then click OK.</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>View creation will now proceed. This will create some 37000 files locally and make take some time.</p>
+	</li>
+</ul>
+
+<h2 dir="ltr" id="ii6">Creating a Review Stream</h2>
+
+<p dir="ltr">Each developer will have one review stream which is used to obtain a local copy of the files on another developers CR. This section describes how to setup the review stream. Using the stream is described later in this document.</p>
+
+<p dir="ltr">Setting up this stream is a once-off task for each developer (on each of their machines if they have more than one).</p>
+
+<p dir="ltr">Use ClearCase Explorer to perform the following actions:</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Click the <tt>ToolBox</tt> tab (on the left side of the application), and select <tt>Base&nbsp;ClearCase</tt> from the listbox.</p>
+	</li>
+	<li>
+	<p>Click the <tt>Create&nbsp;View</tt> icon to launch the view creation wizard.</p>
+	</li>
+	<li>
+	<p>'View Creation Wizard - Choose a Project':</p>
+
+	<ul>
+		<li>
+		<p>Ensure that 'Yes' is selected for the 'Will this view be used for working on one of the Projects described in the ClearCase project tree?' question.</p>
+		</li>
+		<li>
+		<p>Find <tt>TIPVOB</tt> in the list. If it is not present, check the 'Show all project VOBs' box to see the full list of available projects.</p>
+		</li>
+		<li>
+		<p>Expand <tt>TIPVOB</tt> and select project <tt>TI_MAIN</tt> or the project relevant to you.</p>
+		</li>
+		<li>
+		<p>Click Next.</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Uncheck the "Create a development stream" checkbox.</p>
+	</li>
+	<li>
+	<p>Leave Integration Stream set to <tt>ti_main_int</tt> or the relevant project <em>_int </em>stream.</p>
+	</li>
+	<li>Click Next.</li>
+	<li>Check the "Create an integration view" checkbox, and specify Snapshot as the type.</li>
+	<li>Click Next.</li>
+	<li>Provide a name for the view, along the lines of <tt>C:\CC\TI_Main_rev</tt>
+	<ul>
+		<li><strong>NOTE: </strong>the name of the view <u>must</u> end in _rev, otherwise the GetCRIncludeRebase.bat script will not work.</li>
+	</ul>
+	</li>
+	<li>Click the Advanced Options button.
+	<ul>
+		<li>Ensure that the name of the view matches the directory name</li>
+		<li>Specify an explicit view storage location, along the lines of \\MARCH\views\jbloggs_TI_Main_rev.vws</li>
+	</ul>
+	</li>
+	<li>Accept defaults for the remainder of the setup.</li>
+</ul>
+
+<h2 dir="ltr" id="ii7">DevEnv Setup</h2>
+
+<p dir="ltr">TI development requires a different toolset than the rest of Curam application developers.</p>
+
+<p dir="ltr">The script is located at <tt>CuramJDE_ROOT/devenv/setup/setup.bat</tt>. The script checks the version of each tool, and if the locally installed copy is not the correct version, will download and unzip the correct copy from the server. The first time this script is run, it will take some time (10 - 15 minutes) to complete because it must download and unzip all of the tools onto your local drive. Subsequent runs should take only a few seconds.</p>
+
+<p dir="ltr">By default the devenv setup script installs its tools into <tt>CuramJDE_ROOT/devenv/tools</tt> and requires approx 500MB per installation, but to avoid wasting time and disk space installing it into every view on your machine it is possible to specify a shared directory for the installation using the <em>DEVENV_HOME</em> environment variable.</p>
+
+<p dir="ltr">To use it:</p>
+
+<ul dir="ltr">
+	<li>
+	<p>set environment variable <em>DEVENV_HOME</em> to the directory into which you want the devenv tools installed. e.g. <em>DEVENV_HOME</em>=C:\CC\devenvHomeMain</p>
+	</li>
+	<li>
+	<p>run the devenv installer (<em>CuramJDE_ROOT</em>/devenv/setup/setup.bat)</p>
+	</li>
+	<li>
+	<p>ensure that the <em>DEVENV_HOME</em> variable remains set during builds, since some scripts use it to reference the devenv directory</p>
+	</li>
+	<li>
+	<p>ensure that your <em>ANT_HOME</em> variable references the version in <em>DEVENV_HOME</em> i.e. <tt>set&nbsp;ANT_HOME=%DEVENV_HOME%\tools\ant</tt></p>
+	</li>
+</ul>
+
+<p dir="ltr"><strong>Notes</strong>:</p>
+
+<ul dir="ltr">
+	<li>
+	<p>This will give you a shared copy of Eclipse, but you will need a different Eclipse workspace for each view on your machine, because each of these is a different directory containing different versions of the JDE source. (If you use script <tt>CURAMJDE_ROOT/devenv/eclipse.bat</tt> to launch Eclipse, it will automatically use the correct version of Eclipse and the correct workspace for that view.)</p>
+	</li>
+	<li>
+	<p>It is recommended to put your DEVENV_HOME directory somewhere within your <tt>\CC</tt> directory because this directory is excluded from virus checking and doing so will lessen the virus checking overhead.</p>
+	</li>
+	<li>
+	<p>Even though this installs a single shared copy of the tools, the installer must still be run for each view on your machine. This is because in addition to unzipping the tools into the shared location, it also creates a number of files in the devenv directory of the view in which it is run. As mentioned above, only the first run should be lengthy, second and subsequent ones should take only a few seconds.</p>
+	</li>
+	<li>
+	<p>Different version lines (e.g. TI_MAIN and TI_60) will use different versions of tools, so you may find it easier not to share the DevEnv.</p>
+	</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

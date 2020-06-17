@@ -1,0 +1,1025 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Preventing Loss of Data in Curam Application</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Preventing Loss of Data in Curam Application";
+    pageId="urn:lsid:ibm.com:td:259d4cdb-55ec-47f2-8c9c-fee17b7cde86";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Preventing Loss of Data in Curam Application</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<h1 dir="ltr"><span style="font-size:20px;"><strong>Design Page for Improved Browser Back/Refresh/Close Button Handling</strong></span></h1>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Background</span></strong></h2>
+
+<p dir="ltr">The browser back button is not supported by Cúram as may lead to loss of data (e..g a form is being filled out). As such, we need to ensure that the system behaves in a consistent manner if a citizen clicks on it.</p>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Requirements</span></strong></h2>
+
+<hr dir="ltr"></hr>
+<p dir="ltr">Requirements as follows:</p>
+
+<p dir="ltr">1) When a citizen or user performs a Browser Back Button, Refresh or Close action while using the the Curam Application, they should be informed with a browser standard confirmation dialog.</p>
+
+<p dir="ltr">2) The citizen or user must be able to return to the page they were on before they selected the Browser Back Button, Refresh or Close action so that they can continue with whatever process they had started e.g. if the citizen is in the middle of an application, the citizen must be able to continue with the application.</p>
+
+<p dir="ltr">3) System behavior on Browser Back Button, Refresh or Close actions must be consistent across all browsers supported by Curam.</p>
+
+<p dir="ltr">4) The use case of solution working with the current logout warning page needs to be considered.</p>
+
+<ul dir="ltr">
+	<li><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=168582" target="_blank">168582</a> - Improve Back Button management within Curam Application</li>
+</ul>
+
+<h3 dir="ltr" style="margin-left: 40px;">Q&amp;A</h3>
+
+<ol dir="ltr">
+	<li style="margin-left: 40px;">Should the Back button be blocked application-wide, or only in specific areas of the application? <span style="color:#0000FF;">Ans: Application-wide.</span></li>
+	<li style="margin-left: 40px;">There are restrictions imposed by browsers as to what can happen when the Back button is blocked. <span style="color:#0000FF;">Ans: Restrictions acknowledged and accepted.</span>
+	<ul>
+		<li style="margin-left: 40px;">IE11/Edge permits a custom message in the browser's confirm() dialog. This dialog cannot be overridden with a custom one.</li>
+		<li style="margin-left: 40px;">Chrome/Firefox/Safari do not allow custom messages in the browser's dialog triggered on the user attempting to navigate away from the page.</li>
+	</ul>
+	</li>
+	<li style="margin-left: 40px;">A module was created 3 years ago with the proposed solution (curam/util/ui/AppExitConfirmation), which can be activated by setting <em>curam.app.guard.against.leaving</em> system property to true. What were the concerns that led to a decision not to use this module? <span style="color:#FF0000;">Action taken: reached out to former UA members who may have been involved in the process (Ciaran &amp; Alan), </span><span style="color:#0000CD;">they didn't know the reason why the module was not used.</span></li>
+	<li style="margin-left: 40px;">Should the same property be used for the internal application and for the Out of Box Application? <span style="color:#0000FF;">Ans: Create two separated properties and use one for each.</span></li>
+	<li style="margin-left: 40px;">Should the confirm dialog be displayed when the user clicks on the logout button? <span style="color:#0000FF;">Ans: No. the confirm dialog/warning message should not be displayed when the user clicks on the logout button.</span> There are also some others scenarios where the confirm dialog/warning message should not be displayed e.g. when the user clicks on <span style="color:#0000FF;">'mailto:'</span> links and <span style="color:#0000FF;">directlinks </span>(any internal links that will not cause the outer application to be reloaded)</li>
+	<li style="margin-left: 40px;">&nbsp;As IE11/Edge permits a custom message in the browser's confirm(). What would be&nbsp; the best message to display in the dialog? Should it be something similar to the message that displayed on Chrome and FireFox?. <span style="color:#0000FF;">Ans: Yes, the custom message on the IE11/Edge dialog should be changed to be similar to the Chrome version: "Changes you made may not be saved."</span></li>
+</ol>
+
+<p dir="ltr" style="margin-left: 40px;">Below are the screenshots of the dialog message:</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<table border="1" dir="ltr" style="width: 1189px;">
+	<tbody>
+		<tr>
+			<td style="width: 104px;">Browser</td>
+			<td style="width: 309px;">Observation</td>
+			<td style="width: 757px;">Style</td>
+		</tr>
+		<tr>
+			<td style="width: 104px;">IE 11</td>
+			<td style="width: 309px;">
+			<p>The text "Message from webpage:" is from the browser. We have no control&nbsp;on&nbsp;that. We may want not to add a custom message here "Changes you made may not be saved". But the text "Message from webpage:"&nbsp; will still be displayed.</p>
+			</td>
+			<td style="width: 757px;">
+			<p><img lconnwikiparamattachmentname="Screen Shot 2016-11-10 at 09.57.45.png" lconnwikimacro="image" src="Preventing%20Loss%20of%20Data%20in%20Curam%20Application._ATTACHMENTS_/Screen%20Shot%202016-11-10%20at%2009.57.45.png" alt="" style="width: 270px; height: 222px;" lconnwikiparamwikipage="Improved Back Button Handling"></img><img lconnwikiparamattachmentname="Screen Shot 2016-11-14 at 14.22.32.png" lconnwikimacro="image" src="Preventing%20Loss%20of%20Data%20in%20Curam%20Application._ATTACHMENTS_/Screen%20Shot%202016-11-14%20at%2014.22.32.png" alt="" style="width: 250px; height: 210px;" lconnwikiparamwikipage="Improved Back Button Handling"></img></p>
+
+			<p>&nbsp;</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 104px;">Edge</td>
+			<td style="width: 309px;">Microsoft Edge have an additional check box <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">to stop the page from opening more&nbsp;</span>dialog <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;window.</span></td>
+			<td style="width: 757px;">
+			<p><img id="1484911946837_0" src="Preventing%20Loss%20of%20Data%20in%20Curam%20Application._ATTACHMENTS_/Screen%20Shot%202017-01-20%20at%2011.23.48.png" style="width: 280px; height: 222px;"></img>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<img id="1535032739966_0" src="Preventing%20Loss%20of%20Data%20in%20Curam%20Application._ATTACHMENTS_/editor_image_eb80f827-3517-46d2-8573-f35d40dc9026.png" style="width: 280px; height: 182px;"></img></p>
+
+			<p>&nbsp;</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 104px;">Firefox</td>
+			<td style="width: 309px;">&nbsp;</td>
+			<td style="width: 757px;">
+			<p><img lconnwikiparamattachmentname="Screen Shot 2016-11-10 at 09.58.24.png" lconnwikimacro="image" src="Preventing%20Loss%20of%20Data%20in%20Curam%20Application._ATTACHMENTS_/Screen%20Shot%202016-11-10%20at%2009.58.24.png" alt="" style="width: 456px; height: 168px;" lconnwikiparamwikipage="Improved Back Button Handling"></img></p>
+
+			<p>&nbsp;</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 104px;">Chrome</td>
+			<td style="width: 309px;">
+			<p>1) Refresh button</p>
+
+			<p>2) Back and close button</p>
+
+			<p>3)&nbsp;<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Chrome has an additional</span>&nbsp;checkbox <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">to stop the page from opening more&nbsp;</span>dialog <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">window.</span></p>
+			</td>
+			<td style="width: 757px;">
+			<p><img lconnwikiparamattachmentname="Screen Shot 2016-11-10 at 10.15.41.png" lconnwikimacro="image" src="Preventing%20Loss%20of%20Data%20in%20Curam%20Application._ATTACHMENTS_/Screen%20Shot%202016-11-10%20at%2010.15.41.png" alt="" style="width: 371px; height: 150px;" lconnwikiparamwikipage="Improved Back Button Handling"></img><img lconnwikiparamattachmentname="Screen Shot 2017-01-17 at 13.43.54.png" lconnwikimacro="image" src="Preventing%20Loss%20of%20Data%20in%20Curam%20Application._ATTACHMENTS_/Screen%20Shot%202017-01-17%20at%2013.43.54.png" alt="" style="width: 366px; height: 150px;" lconnwikiparamwikipage="Improved Back Button Handling"></img></p>
+
+			<p><img id="1535032832607_0" src="Preventing%20Loss%20of%20Data%20in%20Curam%20Application._ATTACHMENTS_/editor_image_39842315-7b96-4f03-8ce2-16614d37648e.png"></img></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Non Functional Requirements</span></strong></p>
+
+<hr dir="ltr"></hr>
+<p dir="ltr">This is <strong>mandatory</strong>. We can fill in N/A if the specified non functional requirement is not applicable to the feature being delivered, otherwise some notes must be entered here covering the particular area.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" width="671">
+	<tbody>
+		<tr>
+			<td style="width: 118px;"><strong>NFR</strong></td>
+			<td style="width: 537px;"><strong>Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Accessibility</td>
+			<td style="width: 537px;">The browser dialog displayed to the page must be accessible by screen readers(JAWS). The screen reader must read out the message on the dialog and the "Leave this page" and "Stay on this page" actions. The user must be able to navigate through the dialog using keyboard. This is test on IE11 (the supported browser for the accessibility)</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Availability &amp; Resilience</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Development Resource</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Evolution</td>
+			<td style="width: 537px;">The means of stopping a browser's Back button may change by the respective vendors. Given the current trend, there will be less/no scope for customization of dialogs.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Internationalisation</td>
+			<td style="width: 537px;">The message displayed in the dialog is not customizable, as will display in the locale of the browser.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Location</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Performance and Scalability</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Regulation</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Security</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Usability</td>
+			<td style="width: 537px;">When a user attempt to navigate away from the Curam application window, they will be presented with a dialog, warning that leaving the page may result in a loss of data. Users can either accept the risk and navigate away from Curam, or stay on the current page. This applies to the browser's back, reload, and close buttons.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">Design Options</h2>
+
+<hr dir="ltr"></hr>
+<ol dir="ltr">
+	<li><strong>Manipulate Window.History object</strong>
+
+	<ul>
+		<li><span style="color:#FF0000;">No single cross-browser solution</span></li>
+		<li><span style="color:#FF0000;">Can be tricked by holding back button and selecting page from menu</span></li>
+		<li><span style="color:#FF0000;">Does not capture page reload / close / navigate away actions</span>
+		<ul>
+			<li>"navigate away" presumes an external link being opened in the same tab/window of the browser</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><strong>Use 'beforeunload' Event</strong>
+	<ul>
+		<li><span style="color:#008000;">Interrupts back / reload / close browser actions with a confirm() dialog</span></li>
+		<li><span style="color:#FF0000;">Dialog can not be substituted with a custom modal</span></li>
+		<li><span style="color:#FF0000;">Message in the dialog slightly varies by browser:</span>
+		<ul>
+			<li>Firefox: "This page is asking you to confirm that you want to leave - data you have entered may not be saved."</li>
+			<li>Chrome: "Do you want to leave this site? Changes that you made may not be saved."</li>
+			<li>IE 11 / Edge: "Are you sure you want to leave this page? " + custom message</li>
+			<li>Safari: "Are you sure you want to leave this page?"<span style="display: none;">&nbsp;</span></li>
+		</ul>
+		</li>
+		<li>Prototype:
+		<ul>
+			<li><a _ic_files_uuid="df24e9fd-d9f5-4ba1-b60f-684698a2522c" _ic_source="files" href="https://w3-connections.ibm.com/files/form/anonymous/api/library/a622dcb3-4bd9-4dcd-9a8d-534c2bb3b79d/document/df24e9fd-d9f5-4ba1-b60f-684698a2522c/media/onbeforeunload.zip" target="_blank" title="Download onbeforeunload.zip"><img aria-hidden="true" class="lconn-ftype16 lconn-ftype16-zip" src="https://w3-connections.ibm.com/common/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20160722.213209"></img><strong>onbeforeunload.zip</strong></a><span aria-hidden="true" class="lotusDivider" role="img">|</span><a href="https://w3-connections.ibm.com/files/app/file/df24e9fd-d9f5-4ba1-b60f-684698a2522c" target="_blank" title="View details of onbeforeunload.zip">View Details</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ol>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Design</span></strong></h2>
+
+<hr dir="ltr"></hr>
+<h3 dir="ltr" style="margin-left: 40px;"><span style="font-size: 18px;">Flow Diagram - High level back, refresh and close button from the browser.</span></h3>
+
+<p dir="ltr" style="margin-left: 40px;"><img lconnwikiparamattachmentname="Diagram" lconnwikimacro="image" src="Preventing%20Loss%20of%20Data%20in%20Curam%20Application._ATTACHMENTS_/Diagram" alt="" lconnwikiparamwikipage="Preventing Loss of Data in Curam Application"></img></p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><span style="font-size:18px;"><strong>Explanation</strong></span></p>
+
+<ol dir="ltr">
+	<li style="margin-left: 40px;"><strong><span style="font-size:12px;">The AppExitConfirmation.js contains the Javascript(JS) code that is executed in each window(iframe)</span></strong>
+
+	<ul>
+		<li style="margin-left: 40px;"><span style="font-size:12px;">Install the listeners for the events:</span>
+
+		<ul>
+			<li style="margin-left: 40px;"><span style="font-size:12px;">The Beforeunload&nbsp; to show the browser dialog confirmation or cancel this event. </span></li>
+			<li style="margin-left: 40px;"><span style="font-size:12px;"><span style="font-size:12px;">The Keydown and click events to set the indicator that the user has executed action outside of the application. </span></span></li>
+			<li style="margin-left: 40px;"><span style="font-size:12px;"><span style="font-size:12px;"><span style="font-size:12px;">The Unload event to reset the javascript indicators and remove the listeners of the window.</span></span></span></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li style="margin-left: 40px;"><strong><span style="font-size:12px;">The AppExitTracker.js contains the Javascript code that is executed ONLY on the top level window.&nbsp;</span></strong>
+	<ul>
+		<li style="margin-left: 40px;"><span style="font-size:12px;">Contain&nbsp;the indicator that allows the application to show the browser dialog confirmation or cancel the display of the </span><span style="font-size: 14px;"><span style="font-size:12px;">dialog</span></span><span style="font-size:12px;">.</span></li>
+		<li style="margin-left: 40px;"><span style="font-size:12px;">Install the listener's for the events:</span>
+		<ul>
+			<li style="margin-left: 40px;"><span style="font-size:12px;">The Mouseover and mouseout events to identify when the user has done the action outside the application.</span></li>
+			<li style="margin-left: 40px;">The Unload event to reset the javascript indicators&nbsp;<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">and remove the listeners and subscribes from the window.</span></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ol>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Resilience</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;&nbsp;&nbsp; What happens if the custom message is not returned/ specified for IE/Edge?</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The browser confirm dialog will not be displayed/work on all the browsers including IE/Edge</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">&nbsp;&nbsp;&nbsp; The browser confirmation dialog is not fully in our control, we only can enable/disable to display the dialog, but the dialog itself is controlled by the browsers. If something goes wrong, for example browser version is changed. we don't have the access to the overall behavior and code source to fix or modify it.</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Use Cases</span></strong></h2>
+
+<hr dir="ltr"></hr>
+<p dir="ltr">For the caseworker application - Need to test against Chrome, IE and Edge</p>
+
+<p dir="ltr">For the Citizen application -&nbsp;<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Need to test against Chrome, IE, Safari, Firefox and Edge</span></p>
+
+<table border="1" dir="ltr" height="376" style="width: 1171px;" width="1034">
+	<tbody>
+		<tr>
+			<td style="width: 79px;"><strong>Role/Actor</strong></td>
+			<td style="width: 258px;"><strong>Description</strong></td>
+			<td style="width: 278px;"><strong>Expected Behavior</strong></td>
+			<td style="width: 143px;"><strong>Tested</strong></td>
+			<td style="width: 125px;"><strong>If Manual why?</strong></td>
+			<td style="width: 50px;"><strong>IE 11</strong></td>
+			<td style="width: 86px;"><strong>Chrome 53</strong></td>
+			<td style="width: 50px;"><strong>FireFox</strong></td>
+			<td style="width: 45px;"><strong>Safari</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 79px;">Developer</td>
+			<td style="width: 258px;">Tests the confirm dialog displays on all the supported browsers by hitting the Back button, refresh and close actions</td>
+			<td style="width: 278px;">Confirm dialog is displayed. with "Stay" and "Leave" options on page.</td>
+			<td style="width: 143px;">Manual&nbsp;</td>
+			<td style="width: 125px;">The developer just need to manually tests if the dialog is displaying on all the supported browsers.</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 86px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 79px;">Citizen</td>
+			<td style="text-align: left; vertical-align: middle; width: 258px;">Accidentally hits browser back/reload/close button.</td>
+			<td style="width: 278px; text-align: left; vertical-align: middle;">Confirm dialog is displayed. "Stay" option preserves any entered data on page.</td>
+			<td style="width: 143px; text-align: left; vertical-align: middle;">Automate.&nbsp;</td>
+			<td style="width: 125px; text-align: left; vertical-align: middle;">&nbsp;</td>
+			<td style="width: 50px; text-align: left; vertical-align: middle;">&nbsp;</td>
+			<td style="width: 86px; text-align: left; vertical-align: middle;">&nbsp;</td>
+			<td style="width: 50px; text-align: left; vertical-align: middle;">&nbsp;</td>
+			<td style="width: 45px; text-align: left; vertical-align: middle;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 79px;">Citizen</td>
+			<td style="text-align: left; vertical-align: middle; width: 258px;">Intentionally hits browser back/reload/close button.</td>
+			<td style="width: 278px; text-align: left; vertical-align: middle;">Confirm dialog is displayed. "Leave" option executes the requested action.</td>
+			<td style="width: 143px; text-align: left; vertical-align: middle;">Automate.</td>
+			<td style="width: 125px; text-align: left; vertical-align: middle;">&nbsp;</td>
+			<td style="width: 50px; text-align: left; vertical-align: middle;">&nbsp;</td>
+			<td style="width: 86px; text-align: left; vertical-align: middle;">&nbsp;</td>
+			<td style="width: 50px; text-align: left; vertical-align: middle;">&nbsp;</td>
+			<td style="width: 45px; text-align: left; vertical-align: middle;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 79px;">Citizen</td>
+			<td style="text-align: left; vertical-align: middle; width: 258px;">Opens Universal Access; Session times out.</td>
+			<td style="text-align: left; vertical-align: middle; width: 278px;">Session should timeout and redirect to specific page without being blocked by confirm dialog.</td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;">Automate.</td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 79px;">Caseworker</td>
+			<td style="text-align: left; vertical-align: middle; width: 258px;">Accidentally hits browser back/reload/close button.</td>
+			<td style="width: 278px; text-align: left; vertical-align: middle;">Confirm dialog is displayed. "Stay" option preserves any entered data on page.</td>
+			<td style="width: 143px; text-align: left; vertical-align: middle;">Automate.&nbsp;</td>
+			<td style="width: 125px; text-align: left; vertical-align: middle;">&nbsp;</td>
+			<td style="width: 50px; text-align: left; vertical-align: middle;">&nbsp;</td>
+			<td style="width: 86px; text-align: left; vertical-align: middle;">&nbsp;</td>
+			<td style="width: 50px; text-align: left; vertical-align: middle;">&nbsp;</td>
+			<td style="width: 45px; text-align: left; vertical-align: middle;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 79px;">Caseworker</td>
+			<td style="text-align: left; vertical-align: middle; width: 258px;">Intentionally hits browser back/reload/close button.</td>
+			<td style="text-align: left; vertical-align: middle; width: 278px;">Confirm dialog is displayed. "Leave" option executes the requested action.</td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;">Automate.&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 79px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Citizen</span></td>
+			<td style="text-align: left; vertical-align: middle; width: 258px;">Opens Universal Access; Session times out.</td>
+			<td style="text-align: left; vertical-align: middle; width: 278px;">Session should timeout and redirect to specific page without being blocked by confirm dialog.</td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;">Automate.</td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 79px;">Citizen</td>
+			<td style="text-align: left; vertical-align: middle; width: 258px;">Navigates to create account page in the external application to create an account</td>
+			<td style="text-align: left; vertical-align: middle; width: 278px;">Once user navigated to Create Account page, when user clicks on Back button browser modal should display with ‘Stay/Leave’ options</td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;">Manual</td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 79px;">Caseworker</td>
+			<td style="text-align: left; vertical-align: middle; width: 258px;">Navigates to the internal navigational tabs of any tab in the home page of Tabtest and click on 'Back' button in the middle of navigational tabs</td>
+			<td style="text-align: left; vertical-align: middle; width: 278px;">Browser modal should display every time when the user clicks on back button in tabs navigation</td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;">Manual&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 79px;">Caseworker</td>
+			<td style="text-align: left; vertical-align: middle; width: 258px;">Navigates to the internal navigational tabs of any tab in the home page of Tabtest and click on 'Refresh' button in the middle of navigational tabs</td>
+			<td style="text-align: left; vertical-align: middle; width: 278px;">Focus of the navigational Tab shouldn’t change once user selected ‘Leave’ option from the browser modal</td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;">Manual &nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 79px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Caseworker</span></td>
+			<td style="text-align: left; vertical-align: middle; width: 258px;"><span style="color:#FF0000;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Navigates to the starting page of IEG script&nbsp;</span></span></td>
+			<td style="text-align: left; vertical-align: middle; width: 278px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Once the user created an account and navigates to&nbsp;</span> first <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;page of IEG script and clicks on browser 'Back' button then browser&nbsp;</span> modal <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;should prompt</span></td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;">Manual&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 79px;">Citizen</td>
+			<td style="text-align: left; vertical-align: middle; width: 258px;">Navigates to the starting page of IEG script by creating an account</td>
+			<td style="text-align: left; vertical-align: middle; width: 278px;">Once the user created an account and navigates to first page of IEG script and clicks on browser 'Back' button then browser modal should prompt</td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;">Manual</td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 79px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Caseworker</span></td>
+			<td style="text-align: left; vertical-align: middle; width: 258px;">Disable the session timeout warning by System Admin and wait until the session expired.&nbsp;
+			<p class="p1"><span class="s1">Attempt to navigate to any navigation item.</span></p>
+			</td>
+			<td style="text-align: left; vertical-align: middle; width: 278px;">The logon page is showed without show the browser modal.</td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;">Manual&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 79px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Caseworker</span></td>
+			<td style="text-align: left; vertical-align: middle; width: 258px;">Navigates to the section shortcut panel and click on two or more shortcut menu item.&nbsp;<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Intentionally hits&nbsp;</span> browser <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;back/reload/close button.</span></td>
+			<td style="text-align: left; vertical-align: middle; width: 278px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Confirm&nbsp;</span> dialog <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;is displayed. with "Stay" and "Leave" options on&nbsp;</span> page <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">.</span></td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;">Manual&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 79px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Caseworker</span></td>
+			<td style="text-align: left; vertical-align: middle; width: 258px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Go to Person shortcut category and click on the Refresh button application</span></td>
+			<td style="text-align: left; vertical-align: middle; width: 278px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The page is refreshed</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;page without being blocked by&nbsp;</span> confirm <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span> dialog</td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Manual&nbsp;</span></td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 79px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Caseworker</span></td>
+			<td style="text-align: left; vertical-align: middle; width: 258px;">Search for a person, select it and navigate between the in page navigation tabs options.
+			<div class="page" title="Page 14">
+			<div class="layoutArea">
+			<div class="column">&nbsp;</div>
+			</div>
+			</div>
+			</td>
+			<td style="text-align: left; vertical-align: middle; width: 278px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Confirm&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">dialog&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">is displayed. with "Stay" and "Leave" options on&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">page</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">.</span></td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;">Manual&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 79px;">Caseworker</td>
+			<td style="text-align: left; vertical-align: middle; width: 258px;">Navigates to the starting page of internal IEG script by Registering a person and click on browser ‘Back’ button in the fist page of IEG script</td>
+			<td style="text-align: left; vertical-align: middle; width: 278px;">Browser modal should prompt with ‘Stay’/Leave’ options</td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;">Manual&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 79px;">Citizen</td>
+			<td style="text-align: left; vertical-align: middle; width: 258px;">Login with in existing user and navigates to home page. Select Back/Refresh/Cancel browser buttons</td>
+			<td style="text-align: left; vertical-align: middle; width: 278px;">Browser modal should prompt with associated options for Back/Refresh/Cancel options</td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;">Manual</td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 79px;">Caseworker</td>
+			<td style="text-align: left; vertical-align: middle; width: 258px;">Navigate to the tabs of Tabtest and open any modal under the opened tabs, click on browser ‘Back’ button and Select ‘Leave page’ option from the browser modal</td>
+			<td style="text-align: left; vertical-align: middle; width: 278px;">One user selected ‘Leave’ option, user should redirected to logon page</td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;">Manual&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 79px;">Citizen/Caseworker</td>
+			<td style="text-align: left; vertical-align: middle; width: 258px;">Open internal/external application and select Back/Refresh/Cancel browser buttons - This use case can be verified for both internal and external applications on all supported browsers - IE/Chrome/Firefox/Edge/Safari</td>
+			<td style="text-align: left; vertical-align: middle; width: 278px;">
+			<p>Browser modal should prompt with associated options for Back/Refresh/Cancel options across all browsers</p>
+
+			<p>&nbsp;</p>
+			</td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;">Manual</td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 258px;">Citizen/Caseworker</td>
+			<td>Navigates to IEG script and select ‘Leave’ option under browser modal which displayed when user selects browser ‘Cancel’ button - This can be verified for both internal and external applications</td>
+			<td style="text-align: left; vertical-align: middle; width: 101px;">Curam application web page should be closed</td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;">Manual</td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 258px;">Caseworker</td>
+			<td>Open a page which contains in page nav menu items. Navigate through a few of them and click on Back button&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 101px;">User should be brought to the previous page.&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;">Manual</td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;"><span style="background-color:#00FF00;">Pass</span>&nbsp;<s><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=193888" target="_blank">193888</a></s></td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 258px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Citizen/Caseworker</span></td>
+			<td>Turing off the sysadmin properties and ensure that the warning dialog does not appear</td>
+			<td style="text-align: left; vertical-align: middle; width: 101px;">
+			<p>When the following sysadmin properties are set to false no warning dialog should appear</p>
+
+			<p><strong>curam.app.guard.against.leaving<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			curam.internal.app.guard.against.leaving</strong></p>
+			</td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;">Manual</td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 258px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Caseworker</span></td>
+			<td>Navigation from all internal application Navigation Tabs</td>
+			<td style="text-align: left; vertical-align: middle; width: 101px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Manual</span></td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 258px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Caseworker</span></td>
+			<td>Navigation from Internal Wizards</td>
+			<td style="text-align: left; vertical-align: middle; width: 101px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Manual</span></td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 258px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Caseworker</span></td>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Navigation from Internal IEG Scripts</span></td>
+			<td style="text-align: left; vertical-align: middle; width: 101px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Manual</span></td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 258px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Caseworker</span></td>
+			<td>Navigation from a Modal with an informational/warning message</td>
+			<td style="text-align: left; vertical-align: middle; width: 101px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Manual</span></td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 258px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Caseworker</span></td>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Navigation from an internal page with an informational/warning message</span></td>
+			<td style="text-align: left; vertical-align: middle; width: 101px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Manual</span></td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 79px;">Citizen/Caseworker (AVT1)</td>
+			<td style="text-align: left; vertical-align: middle; width: 258px;">Navigates to the Curam application (internal/external) and click on Browser Back/Refresh/Cancel buttons. Confirm dialogue displayed, now run the RPT scan.</td>
+			<td style="text-align: left; vertical-align: middle; width: 278px;">Violations/potential violations shouldn't be there for browser dialogue</td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;">Manual</td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 79px;">Caseworker (AVT2 Tab testing)</td>
+			<td style="text-align: left; vertical-align: middle; width: 258px;">
+			<p>Navigates to the Curam internal application and navigate to Browser back/refresh/cancel buttons through tabbing&nbsp;</p>
+
+			<table>
+			</table>
+
+			<p><span style="color:#008000;">back: alt+left arrow (For MAC users use Command+{ )<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			refresh: F5 (For MAC users use Command+R)<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			close: ctrl+w (For MAC users use Command+w)</span></p>
+
+			<p>Confirm dialogue displayed, and verify tabbing (side arrows) should work on the browser warning modal.</p>
+			</td>
+			<td style="text-align: left; vertical-align: middle; width: 278px;">Tabbing should work on all browser back/refresh/cancel buttons and on Conform dialogue as well</td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;">Manual&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 79px;">Citizen/Caseworker (AVT2 Browser zoom testing)</td>
+			<td style="text-align: left; vertical-align: middle; width: 258px;">Navigates to the Curam internal/external application with 200%zoom on IE browser and navigate to Browser back/refresh/cancel buttons. Confirm dialogue displayed</td>
+			<td style="text-align: left; vertical-align: middle; width: 278px;">Verify the dialogue displayed with options Stay/Leave with 200% zoom</td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;">Manual</td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="text-align: left; vertical-align: middle; width: 79px;">Citizen/Caseworker (AVT3)</td>
+			<td style="text-align: left; vertical-align: middle; width: 258px;">Navigates to the Curam internal/external application with JAWS (v18) reading and navigate to Browser back/refresh/cancel buttons. Confirm dialogue displayed</td>
+			<td style="text-align: left; vertical-align: middle; width: 278px;">Verify JAWS reading correctly back/refresh/cancel options and confirm dialogue and the options</td>
+			<td style="text-align: left; vertical-align: middle; width: 143px;">Manual</td>
+			<td style="text-align: left; vertical-align: middle; width: 125px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 86px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 50px;">&nbsp;</td>
+			<td style="text-align: left; vertical-align: middle; width: 45px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Implementation Notes</span></strong></h2>
+
+<hr dir="ltr"></hr>
+<ol dir="ltr">
+	<li><u><span style="font-size:14px;">Installing the AppExitConfirmation.js within the iframes:</span></u><br />
+	&nbsp;
+	<ul>
+		<li>The AppExitConfirmation.js contains the code that installs the events and helps&nbsp;the application to know the time to show the browser dialog confirmation to the user.</li>
+		<li>The event <strong>onbeforeunload</strong>&nbsp;is the entry point that shows the dialog or cancels the event.</li>
+		<li>Below, the image shows all the files within the application&nbsp;that include the AppExitConfirmation.js on the caseworker, Universal Access, BIZ INF.</li>
+	</ul>
+	</li>
+</ol>
+
+<pre dir="ltr" id="line1" style="margin-left: 80px;">
+&nbsp;<img lconnwikiparamattachmentname="BackButtonIncludes.png" lconnwikimacro="image" src="Preventing%20Loss%20of%20Data%20in%20Curam%20Application._ATTACHMENTS_/BackButtonIncludes.png" alt="" style="width: 800px; height: 450px;" lconnwikiparamwikipage="Preventing Loss of Data in Curam Application"></img>
+</pre>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li><span style="font-size: 14px;"><b>Observation:&nbsp;</b></span>Some pages in the Universal Access, BIZINF and JDE application don't use the TI infrastructure to translate UIM into JSPX or XML into JSPX. So, for this type of scenario, the code that installs the AppExitConfirmation.js&nbsp; needs to be included in the page. As an example, we have date-selector.jsp(handcrafted page) and RendererUtils.java.</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<ol dir="ltr" start="2">
+	<li><u style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: 14px;">Dealing with multiples iframes being unloaded&nbsp;when the form is submitted:</span></u>
+
+	<ul>
+		<li><strong>Problem</strong>:
+
+		<ul>
+			<li><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">User submits the modal dialog that causes multiples unload iframes on the</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;application.</span></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ol>
+
+<ul dir="ltr" style="list-style-type: circle;">
+	<li style="margin-left: 40px;"><strong>Solution</strong>:&nbsp; Added during the version 7.0.5.0.&nbsp; <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">So, when the form is submitted the AppExiTracker.js start to react to the following topics:</span>
+
+	<ul>
+		<li>Firstly, when the tab is opened, The AppExitTracker.js(the top level window javascript) listen the topic to:
+		<ul>
+			<li>Register the current tabwidgetID selected with the topic <u>curam</u><u>/tab/selected</u></li>
+			<li>Register the number of iframes expected by tabWidgetID with the topic <u>curam</u><u>/tab/quantityExpectedFrames/load</u></li>
+		</ul>
+		</li>
+		<li>So, when the form is submitted the AppExiTracker.js start to react to the following topics:
+		<ul>
+			<li><u>curam/form/submit</u> - Set the flag that the form has been submitted and stop the browser dialog confirmation to true until all the expected iframes have been loaded</li>
+			<li><u>curam/frame/detalisPanelLoaded</u> - the topic&nbsp;alerts that the details panel has been loaded.&nbsp;
+			<ul>
+				<li>It decreases from the number of iframes expected to be loaded.</li>
+			</ul>
+			</li>
+			<li><u>curam/main-content/page/loaded</u> - the topic&nbsp;<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">alerts that the main content has been loaded.&nbsp;</span>
+			<ul>
+				<li>It decreases from the number of&nbsp;iframes&nbsp;expected to be loaded.</li>
+			</ul>
+			</li>
+			<li><u>curam/modal/close/ignoreRefresh </u>- Reset the number of expected iframes to zero. No iframes are unloaded for this scenario.
+			<ul>
+				<li>It enables the flag that allows the browser&nbsp;dialog confirmation to be displayed.</li>
+			</ul>
+			</li>
+			<li><u>curam/tab/contextRefresh&nbsp;</u>-&nbsp;<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">the topic&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">alerts that the iframe has been loaded.&nbsp;</span>
+			<ul>
+				<li>It decreases from the number of&nbsp;iframes&nbsp;expected to be loaded.</li>
+			</ul>
+			</li>
+			<li>When the number of expected iframes is zero, <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">the flag to stop the</span>&nbsp;browser&nbsp;dialog <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">confirmation is set to false</span></li>
+		</ul>
+		</li>
+		<li><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Finally, when the tab is closed the tabwidgetID and the number of expected iframes are removed.</span>
+		<ul>
+			<li><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The topic curam/tab/closing alerts it.</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"> </span></li>
+		</ul>
+		</li>
+		<li><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The image bellow shows the javacript files and the topic shared for the submit solution:</span></li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><img lconnwikiparamattachmentname="Submit solution back button" lconnwikimacro="image" src="Preventing%20Loss%20of%20Data%20in%20Curam%20Application._ATTACHMENTS_/Submit%20solution%20back%20button" alt="" style="width: 700px; height: 367px; margin-left: 300px; margin-right: 300px;" lconnwikiparamwikipage="Preventing Loss of Data in Curam Application"></img></p>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Application Impact</span></strong></h2>
+
+<hr dir="ltr"></hr>
+<ol dir="ltr">
+	<li>The&nbsp;<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">browser dialog confirmation from AppExitConfirmation.js&nbsp;</span>only appears when the user clicks on the back/Refresh or Close button from the browser.</li>
+	<li>However,&nbsp;for some reason, if the dialog appear in a specific scenario, it may need to be stopped. The variable setting the variable&nbsp;<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">stopBrowserConfirmationDialog = true from the AppExitTracker.js;</span></li>
+	<li>The variable is only available on the top level window. So, the variable needs to be accessed by it:&nbsp;_AEX.tracker.stopBrowserConfirmationDialog</li>
+</ol>
+
+<p dir="ltr"><br />
+<br />
+<strong><span style="font-size:18px;">Documentation/How To Use Feature</span></strong></p>
+
+<hr dir="ltr"></hr>
+<p dir="ltr">This feature used to warn users, every time they perform the following actions.</p>
+
+<ul dir="ltr">
+	<li>Accidentally hits a browser back/reload/close button.</li>
+	<li>Intentionally hits a browser back/reload/close button.</li>
+</ul>
+
+<p dir="ltr">When the above actions are performed, Confirm dialog is displayed to warn users that if they leave the page they might lost any unsaved data. There are two options that the users can take "Stay on the Page" and "Leave the Page".</p>
+
+<p dir="ltr">Stay on the Page" option preserves any entered data on page and "Leave the Page" option executes the requested action.</p>
+
+<p dir="ltr">Message in the dialog slightly varies by browser:</p>
+
+<p dir="ltr">Firefox: "This page is asking you to confirm that you want to leave - data you have entered may not be saved."</p>
+
+<p dir="ltr">Chrome: "Do you want to leave this site? Changes that you made may not be saved."</p>
+
+<p dir="ltr">Microsoft Edge: "Are you sure you want to leave this page? Changes that you made may not be saved."</p>
+
+<p dir="ltr">IE 11: "Are you sure you want to leave this page? " Changes that you made may not be saved.</p>
+
+<p dir="ltr">Safari: "Are you sure you want to leave this page?"</p>
+
+<p dir="ltr">The warning dialog for preventing loss of data has been introduced in the internal and the external application. In the internal application, this feature has been introduced as new. However, in the external application this feature has been implemented three years ago but it wasn't been used.</p>
+
+<p dir="ltr">The feature was disabled by default in the external application, Now the feature is enabled on both the internal and external application.</p>
+
+<p dir="ltr">The following properties are responsible for enabling or disabling this feature in the application.</p>
+
+<ul dir="ltr">
+	<li>External application - curam.app.guard.against.leaving</li>
+	<li>Internal application - curam.internal.app.guard.against.leaving</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><span style="font-size:18px;"><strong>Limitations</strong></span></p>
+
+<hr dir="ltr"></hr>
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" style="width: 1153px;">
+	<tbody>
+		<tr>
+			<td style="width: 250px;">Browser</td>
+			<td style="width: 898px;">Limitation</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">All browsers</td>
+			<td style="width: 898px;">
+			<ul dir="ltr">
+				<li style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;If the user clicks on the back button before the full page is loaded, the browser won't show the browser&nbsp;dialog.</li>
+				<li style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;There are cases when the modal&nbsp;dialog&nbsp;is closed, and the user clicks on the back button straight the user may experience that the browser&nbsp;dialog&nbsp;confirmation is not shown.&nbsp; &nbsp;It happens because the beforeunload event is not fired at this moment. However, it is noticed that the user won't lose any information in the application. The problem happens in version before to have the AppExitConfirmation feature.</li>
+				<li style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The browser only shows the browser&nbsp;dialog&nbsp;confirmation when it identifies that the page has been changed by&nbsp;<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">by clicking, touching, scrolling or typing on the elements of that page.</span></li>
+			</ul>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">IE 11</td>
+			<td style="width: 898px;">
+			<ul>
+				<li>When the browser dialog confirmation is shown and&nbsp;the user clicks on the option to stay on the application. It will disable the browser dialog confirmation for 3 seconds. This solution was applied to avoid multiple dialog when the user clicks to leave the application</li>
+			</ul>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;"><span style="font-size:12px;">Safari</span></td>
+			<td style="width: 898px;">
+			<ul>
+				<li>When the browser&nbsp;dialog&nbsp;confirmation&nbsp;is shown and&nbsp;the user clicks on the "Leave" button. The Safari browser will&nbsp;be disabled&nbsp;this feature. The user can see this feature enabled again only when the&nbsp;main&nbsp;current browser is closed an reopened again.</li>
+			</ul>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">Tablet</td>
+			<td style="width: 898px;">
+			<ul>
+				<li>The browser dialog confirmation doesn't work on tablets, as a limitation of our design.</li>
+			</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Check List</span></strong></h2>
+
+<hr dir="ltr"></hr>
+<table border="1" dir="ltr" style="width: 658px;">
+	<tbody>
+		<tr>
+			<td style="width: 166px;"><strong>Check List Item</strong></td>
+			<td style="width: 314px;"><strong>Notes</strong></td>
+			<td style="width: 157px;"><strong>Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">
+			<p>Test the browser confirm dialog on all the supported browsers</p>
+
+			<p>&nbsp;</p>
+			</td>
+			<td style="width: 314px;">Verify that the dialog displays on FireFox, IE, Chrome, Edge and Safari</td>
+			<td style="width: 157px;">YES</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">
+			<p>Test the browser confirm dialog on all scenarios</p>
+
+			<p>&nbsp;</p>
+			</td>
+			<td style="width: 314px;">Check if the dialog displays on the Back, Refresh and Close button.</td>
+			<td style="width: 157px;">YES</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">
+			<p>Check the custom message on IE and Edge</p>
+
+			<p>&nbsp;</p>
+			</td>
+			<td style="width: 314px;">Verify the custom message is added on IE and Edge</td>
+			<td style="width: 157px;">YES</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">
+			<p>Test the browser&nbsp;confirm dialog on internal applications</p>
+
+			<p>&nbsp;</p>
+			</td>
+			<td style="width: 314px;">Make sure the dialog works fine on internal application</td>
+			<td style="width: 157px;">YES</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Test the browser confirm dialog on external applications</td>
+			<td style="width: 314px;">Make sure the browser confirm dialog is enabled and works fine on external application</td>
+			<td style="width: 157px;">YES</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Check the browser confirm dialog on logout button</td>
+			<td style="width: 314px;">&nbsp;</td>
+			<td style="width: 157px;">YES</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">
+			<p>Create a separated/new property for internal application</p>
+			</td>
+			<td style="width: 314px;">&nbsp;</td>
+			<td style="width: 157px;">YES</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">
+			<p>Create properties on CEF system admin for both internal and external</p>
+			</td>
+			<td style="width: 314px;">Check the properties are added on the System admin and the default values are set to true</td>
+			<td style="width: 157px;">YES</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">
+			<p>Test if the browser confirm dialog is blocking the session timeout</p>
+
+			<p>&nbsp;</p>
+			</td>
+			<td style="width: 314px;">Verify that the confirm dialog will not block the session time out when the quit button is clicked, instead it should be redirected to the logon.jsp</td>
+			<td style="width: 157px;">YES</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Work Estimation</span></strong></h2>
+
+<hr dir="ltr"></hr>
+<p dir="ltr">Work Estimates</p>
+
+<ul dir="ltr">
+	<li>
+	<ul>
+		<li>
+		<p>Design: 3 Days</p>
+		</li>
+		<li>
+		<p>Prototype: 2 Days</p>
+		</li>
+		<li>
+		<p>Implementation: 2 Days</p>
+		</li>
+		<li>
+		<p>Testing: 0.5 Days</p>
+		</li>
+		<li>
+		<p>Documentation: 0.5 Days</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Total: 8 Days</p>
+	</li>
+</ul>
+
+<p dir="ltr"><br />
+<br />
+<br />
+<br />
+&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

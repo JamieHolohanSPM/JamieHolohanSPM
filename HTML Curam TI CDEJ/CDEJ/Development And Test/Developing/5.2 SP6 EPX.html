@@ -1,0 +1,161 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>5.2 SP6 EPX</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="5.2 SP6 EPX";
+    pageId="urn:lsid:ibm.com:td:8379c26b-f6ad-4abc-bd23-85595ce88bb3";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">5.2 SP6 EPX</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h2 dir="ltr" id="head-5d37a143aeb41f31f61b7b6f649a63f4fffcf01c" style="border-bottom: 4px solid rgb(237, 208, 151); color: rgb(0, 0, 0); font-family: Arial, &quot;Lucida Grande&quot;, sans-serif;">Set Up the Development Environment</h2>
+
+<p dir="ltr" style="color: rgb(0, 0, 0); font-family: Arial, &quot;Lucida Grande&quot;, sans-serif; font-size: 16px;">Note: Setup is for Windows only - Mac development not supported on these legacy streams.&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<ol dir="ltr">
+	<li>Run "install-appserver.bat wls"</li>
+	<li>Create a file called setenv.bat&nbsp;containing the following commands:
+	<ul>
+		<li>set DEVENV_HOME=%CD%\devenv</li>
+		<li>set WLS_HOME=%CD%\devenv\tools\weblogic\weblogic92\server</li>
+		<li>set JAVA_HOME=%CD%\devenv\tools\weblogic\jdk150_04</li>
+		<li>set J2EE_JAR=%CD%\devenv\tools\weblogic\weblogic92\server\lib\weblogic.jar</li>
+		<li>set PATH=%CD%\devenv\tools\weblogic\jdk150_04\bin;%PATH%</li>
+		<li>set CURAMSDEJ=%CD%\release\CuramSDEJ</li>
+		<li>set CURAMCDEJ=%CD%\release\CuramCDEJ</li>
+	</ul>
+	</li>
+	<li>Add Bootstrap.properties and AppServer.properties files to TI\coreinf\properties folder.
+	<ul>
+		<li>Example files for you to edit and use:
+		<ul>
+			<li><a href="5.2%20SP6%20EPX._ATTACHMENTS_/AppServer.properties" lconnwikiparamwikiattachment="AppServer.properties">AppServer.properties</a></li>
+			<li><a href="5.2%20SP6%20EPX._ATTACHMENTS_/Bootstrap.properties" lconnwikiparamwikiattachment="Bootstrap.properties">Bootstrap.properties</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li>Run the following commands from root folder, "TI":
+	<ul>
+		<li>setenv.bat<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">​​</span></li>
+		<li>anthill-runbuild.bat server client database clientmockapp&nbsp;</li>
+		<li>anthill-runbuild.bat -f client/components/build.xml eclipse</li>
+		<li>rename .project .project.backup</li>
+	</ul>
+	</li>
+	<li>Start Eclipse:
+	<ul>
+		<li>setenv.bat</li>
+		<li>cd devenv</li>
+		<li>eclipse.bat</li>
+	</ul>
+	</li>
+	<li>In Eclipse:
+	<ul>
+		<li>Create a Repository Connection,<span class="TextRun SCXO15681195" lang="EN-GB" style="margin: 0px; padding: 0px; user-select: text; -webkit-user-drag: none; -webkit-tap-highlight-color: transparent; color: windowtext; font-size: 10pt; font-family: &quot;Calibri Light&quot;, &quot;Calibri Light_MSFontService&quot;, sans-serif; line-height: 16px; font-variant-ligatures: none !important;" xml:lang="EN-GB"><span class="NormalTextRun SCXO15681195" style="margin: 0px; padding: 0px; user-select: text; -webkit-user-drag: none; -webkit-tap-highlight-color: transparent; background-color: inherit;">&nbsp;</span></span><a href="https://jazz031.hursley.ibm.com:9443/ccm/">https://jazz031.hursley.ibm.com:9443/ccm/</a></li>
+		<li>Click File &gt; Import &gt; Preferences &gt; Select "&lt;TI workspace root&gt;\devenv\eclipseenv\curam.epf"</li>
+		<li>Change to the "Java" perspective</li>
+		<li>Click File &gt; Import &gt; General &gt; Existing Projects into Workspace</li>
+		<li>Select the root 'TI' folder of your workspace and click Ok</li>
+		<li>Wait for Eclipse to finish searching for projects</li>
+		<li>Select the following projects and click Ok:
+		<ul>
+			<li>AppInf</li>
+			<li>client-persistence</li>
+			<li>ClientMockApp</li>
+			<li>CoreInf</li>
+			<li>general-plug-ins</li>
+			<li>Generator</li>
+			<li>JDECommons</li>
+			<li>plug-in-framework</li>
+			<li>renderer-plug-ins</li>
+			<li>ServerCore</li>
+			<li>test-framework</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li>Right-click on ClientMockApp &gt; Tomcat &gt; Remove Context Definition, then right-click on ClientMockApp &gt; Tomcat &gt; Update Context Definition</li>
+	<li>Start Tomcat and open <a href="http://localhost:9080/ClientMockApp">http://localhost:9080/ClientMockApp</a> in your browser</li>
+</ol>
+
+<p dir="ltr">&nbsp;</p>
+
+<hr dir="ltr"></hr>
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr">Other Notes</h3>
+
+<p dir="ltr">In case you run into errors...</p>
+
+<ol dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">
+	<li>Click Window &gt; Preferences
+	<ul>
+		<li>Java &gt; Compiler&nbsp;
+		<ul>
+			<li>Set compiler to 1.5</li>
+		</ul>
+		</li>
+		<li>Java &gt; Installed JREs
+		<ul>
+			<li>Set jdk path to java 1.5 file location</li>
+		</ul>
+		</li>
+		<li>Tomcat
+		<ul>
+			<li>Set version to 5.x</li>
+			<li>Set Tomcat home to devenv/tools/tomcat</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li>If you see errors about unbound classpath variables, e.g. "Unbound Classpath Variable: CURAMSDEJ/lib/jde-commons.jar":
+	<ul>
+		<li>Right-click on the affected project (e.g. ServerCore) &gt; Properties &gt; Java Build Path &gt; Libraries</li>
+		<li>Take note of the path of the missing jar (e.g. CURAMSDEJ/lib/jde-commons.jar)</li>
+		<li>Remove the missing library</li>
+		<li>Click 'Add External JARs...' and select the required jar. For example, for a missing "CURAMSDEJ/lib/jde-commons.jar" select "&lt;TI workspace root&gt;\release\CuramSDEJ\lib\jde-commons.jar"</li>
+		<li>Do the same for any other missing jars</li>
+	</ul>
+	</li>
+	<li>If you have an error for Workflow_display_TH.java being unable to find curam.omega3.mockobjects.MockLog:
+	<ul>
+		<li>Right-click on ClientMockApp &gt; Properties &gt; Java Build Path &gt; Libraries &gt; Add External JARs</li>
+		<li>Select &lt;TI workspace root&gt;\release\CuramCDEJ\lib\curam\jar\omega3-coreInf.jar</li>
+	</ul>
+	</li>
+</ol>
+
+<p dir="ltr">&nbsp;</p>
+
+<div dir="ltr">&nbsp;</div></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

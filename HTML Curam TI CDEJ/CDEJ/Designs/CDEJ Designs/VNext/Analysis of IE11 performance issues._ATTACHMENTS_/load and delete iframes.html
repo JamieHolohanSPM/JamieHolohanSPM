@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test</title>
+</head>
+<body>
+   <button onclick="addIframes()">Add iframes</button>
+  <script>
+  var numberOfClicks = 0;
+
+    function addIframes() {
+    	var count = 0; //set counter to 0
+		numberOfClicks++;
+
+    	//Create iframes
+    	for (i = 1; i <= 20; i++) {
+    		var iframe = document.createElement("iframe");
+    		iframe.src = "http://www.sometestwebsite.com";
+			iframe.id = numberOfClicks + "_" + i;
+
+    		iframe.onload = function () {  //Check for onload event of iframe
+    			 count++;  //Increment counter
+    			 removeAllIframes(); //Call removeAllIFrames function
+    		};
+
+    		document.body.appendChild(iframe); //Append iframe to body element
+    	}
+
+    	function removeAllIframes() {
+    		if (count == 20) { //Execute removal of iframe only after all iframes have been loaded
+
+    			var iframes = document.querySelectorAll("iframe"); //Get all iframes
+
+    			for (var i = 0; i < iframes.length; i++) { //Loop through the iframes
+
+    				//Remove iframes one by one
+    				setTimeout(function(i) { return function() {
+						iframes[i].parentNode.removeChild(iframes[i])
+					}; }(i), 100*i);
+    			}
+    		}
+    	}
+    }
+  </script>
+</body>
+</html>

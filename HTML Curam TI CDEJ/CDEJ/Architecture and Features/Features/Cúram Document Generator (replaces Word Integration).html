@@ -1,0 +1,134 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Cúram Document Generator (replaces Word Integration)</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Cúram Document Generator (replaces Word Integration)";
+    pageId="urn:lsid:ibm.com:td:097ba6b6-9c5f-4909-b2f5-27ec3cb3a0f1";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Cúram Document Generator (replaces Word Integration)</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">This is a work area to explore and design a new solution to replace the interactive Word document editing widget (FILE_EDIT).</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Introduction</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii5">Requirements</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">Use Cases</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii3"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Case Worker</span></a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii4">Admin</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii6">Competitor Offerings</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii7">Existing Solutions within Cúram/IBM</a></div>
+
+<h2 dir="ltr" id="ii1" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Introduction</h2>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">The FILE_EDIT widget is a UIM component that allows interactive editing of Microsoft Word documents directly from the Cúram application, without the need to save document files locally and re-upload after making changes.</p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><span style="line-height: 1.5;">While the feature is highly appreciated by customers, it is technically challenging to implement and as a result the current solution is not as reliable and secure as it should be. Improving reliability and maintaining/supporting the solution in the long term is very costly and given the circumstances of the use case (Cúram code interacting with components on the actual individual user machines, outside of our control) it is not even possible to achieve fully satisfactory implementation with a justifiable investment. Moreover, browser vendors are now moving away from NPAPI, which is required for the existing solution to work.</span></p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><span style="line-height: 1.5;">Given the above we have decided to provide a replacement, which would have the necessary functionality while avoiding all the issues.</span></p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><span style="line-height: 1.5;">See Jira:&nbsp;</span><a href="http://pdappsrv.mul.ie.ibm.com:8080/browse/TEC-12510" style="line-height: 1.5;">Replace&nbsp;interactive&nbsp;editing&nbsp;of&nbsp;Word&nbsp;documents&nbsp;(FILE_EDIT&nbsp;widget)&nbsp;with&nbsp;a&nbsp;solution&nbsp;based&nbsp;on&nbsp;document&nbsp;generation</a></p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">See 44153,499,000:&nbsp;</p>
+
+<h2 dir="ltr" id="ii5">Requirements</h2>
+
+<ul dir="ltr">
+	<li>create professionally looking documents</li>
+	<li>intuitive creation of templates, e.g. WYSIWYG, directly in Word</li>
+	<li>automatically fill in data from DB to predefined places in template</li>
+	<li>output to common formats, PDF, Word, OpenOffice</li>
+	<li>templates can vary based on conditions</li>
+</ul>
+
+<h2 dir="ltr" id="ii2">Use Cases</h2>
+
+<p dir="ltr"><span style="color:#FF0000;">Can we come up with a use case where lack of interactivity would be a blocker or would at least seriously limit applicability?</span></p>
+
+<h3 dir="ltr" id="ii3"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Case Worker</span></h3>
+
+<ul dir="ltr">
+	<li>send a predefined letter to a specific client, filling in some client data</li>
+	<li>send an ad-hoc/free-form letter to a specific client, filling in <span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">filling in some client data</span></li>
+	<li><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">"clause search" scenario in Appeals, where user makes search in Cúram and then manually picks a result to be added to specific place in the document</span></li>
+	<li>send a dynamically generated letter, e.g. where the content is largely determined by variables, as opposed to mostly predefined content</li>
+</ul>
+
+<h3 dir="ltr" id="ii4">Admin</h3>
+
+<ul dir="ltr">
+	<li>add a new document template</li>
+	<li>edit a document template</li>
+	<li>remove document template</li>
+</ul>
+
+<h2 dir="ltr" id="ii6">Competitor Offerings</h2>
+
+<p dir="ltr">Here we examine what are the competitor capabilities in the area.</p>
+
+<ul dir="ltr">
+	<li>Windward DocGen:&nbsp;<a href="http://go.windward.net/docgen8.html">http://go.windward.net/docgen8.html</a>
+
+	<ul>
+		<li>templates defined in Word or Excel by non-developers</li>
+		<li>custom data sources</li>
+		<li>output to lots of formats</li>
+		<li>conditional logic to dynamically show/hide parts of documents, generate lists, etc.</li>
+	</ul>
+	</li>
+	<li>IC Template-Based Document Creation:&nbsp;<a href="http://ibmurl.hursley.ibm.com/MZZH">http://ibmurl.hursley.ibm.com/MZZH</a>
+	<ul>
+		<li>templates defined in&nbsp;Microsoft Word/Excel, Adobe Acrobat</li>
+		<li>data from enterprise DB</li>
+		<li>outputs to PDF, DOC, PPT, XLS</li>
+		<li>defines document management process (what if we need to re-generate a doc, change the template, etc.)</li>
+	</ul>
+	</li>
+</ul>
+
+<h2 dir="ltr" id="ii7">Existing Solutions within Cúram/IBM</h2>
+
+<ul dir="ltr">
+	<li>IBM Rational Publishing Engine:&nbsp;<a href="http://ibmurl.hursley.ibm.com/MZZI">http://ibmurl.hursley.ibm.com/MZZI</a>
+
+	<ul>
+		<li>supports data sources</li>
+		<li>provides a graphical template editing environment for custom report design</li>
+		<li>supports multiple output formats and concurrent document generation to multiple target formats from a single template</li>
+	</ul>
+	</li>
+	<li>Cúram XML server:&nbsp;<a href="http://ibmurl.hursley.ibm.com/MZZE">http://ibmurl.hursley.ibm.com/MZZE</a>
+	<ul>
+		<li>data in XML format provided by Cúram server</li>
+		<li>document template defined as XSL-FO (can be generated from a RTF document with third party software and tweaked)</li>
+		<li>output to <span style="color: rgb(0, 0, 0); font-family: Arial, sans-serif; font-size: 12.6666669845581px; line-height: normal;">PDF, RTF, HTML, or plain text</span></li>
+	</ul>
+	</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

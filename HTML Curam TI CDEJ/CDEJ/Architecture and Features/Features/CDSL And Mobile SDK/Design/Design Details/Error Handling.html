@@ -1,0 +1,203 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Error Handling</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Error Handling";
+    pageId="urn:lsid:ibm.com:td:10663349-6a4f-40c3-857d-896590b04aaf";
+    toRoot="../../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Error Handling</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">This page captures the design notes and corresponding results for CDSL error handling.</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Use Cases</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">Design</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii4">Goals</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii11">Handle network failure scenarios gracefully</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii12">Handle Cúram validation errors and informationals</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii13">Handle generic Cúram application errors</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii14">Handle app server errors (HTTP code &gt; 2xx)</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii15">Handle errors caused by request handler functions throwing exceptions</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii5">Details</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii8">Failed requests must not break the application</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii9">General approach in JavaScript API</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii10">Error Codes</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii3">Notes (work-in-progress!)</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii6">CDSL JavaScript API</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii7">Error handling between webtier and server</a></div>
+
+<h2 dir="ltr" id="ii1">Use Cases</h2>
+
+<ul dir="ltr">
+	<li>connection errors
+	<ul>
+		<li>DNS failure</li>
+		<li>connection refused</li>
+		<li>request timeout</li>
+	</ul>
+	</li>
+	<li>webtier
+	<ul>
+		<li>app server error (will result in HTTP code &gt; 2xx)</li>
+		<li>session timeout (special case, not really an error!)</li>
+	</ul>
+	</li>
+	<li>Cúram application
+	<ul>
+		<li>application error</li>
+		<li>validation error</li>
+		<li>informationals</li>
+	</ul>
+	</li>
+	<li>generic JavaScript handler error
+	<ul>
+		<li>malformed JSON data</li>
+		<li>programming error in handler</li>
+	</ul>
+	</li>
+</ul>
+
+<h2 dir="ltr" id="ii2">Design</h2>
+
+<h3 dir="ltr" id="ii4">Goals</h3>
+
+<h4 dir="ltr" id="ii11"><strong><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Handle network failure scenarios gracefully</span></strong></h4>
+
+<p dir="ltr">CDSL is primarily intended for use by mobile applications. In mobile world connections are often slow and unreliable, so network related errors must be taken as a norm, not exception. Accordingly the design must reflect this fact and handle network failure scenarios gracefully.</p>
+
+<ul dir="ltr">
+	<li>In the mobile application what is expected on a network failure is
+	<ul>
+		<li>when network goes down, the application needs to switch into offline mode, which in it's simplest form can be just a plain <span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">"no connection"&nbsp;</span>message and all user actions are disabled</li>
+		<li>if an ongoing user action fails due to a network failure the relevant UI element shows a "connection failure" message</li>
+		<li>user needs a simple way (button?) to retry the operation and arrive at the correctly updated screen as initially intended</li>
+	</ul>
+	</li>
+	<li>In the CDSL API then we need to provide standard support for this kind of behaviour</li>
+	<li>connection timeout is considered a special case of a network error and handled in the same way</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h4 dir="ltr" id="ii12"><strong>Handle Cúram validation errors and informationals</strong></h4>
+
+<p dir="ltr">This type of errors will not be expressed at HTTP level, e.g. HTTP response code will be 200. Instead the errors will be passed back to CDSL API as part of JSON response.</p>
+
+<ul dir="ltr">
+	<li>The CDSL API will offer default handling consisting of a message dialog displayed to the user and passing the errors over to the application handler, if any.</li>
+	<li>there will be a possibility to either completely override default handling with a custom handler or have both work together</li>
+	<li>this will require a contract on how CDSL API passes the validation errors and informationals to the API client</li>
+</ul>
+
+<h4 dir="ltr" id="ii13"><strong>Handle generic Cúram application errors</strong></h4>
+
+<p dir="ltr"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">This type of errors will not be expressed at HTTP level, e.g. HTTP response code will be 200. Instead the errors will be passed back to CDSL API as part of JSON response.</span></p>
+
+<ul dir="ltr">
+	<li>The CDSL API will offer default handling consisting of a message dialog displayed to the user and passing the errors over to the application handler, if any.</li>
+	<li>there will be a possibility to either completely override default handling with a custom handler or have both work together</li>
+	<li>this will require a contract on how CDSL API passes the application errors to the API client</li>
+</ul>
+
+<h4 dir="ltr" id="ii14"><strong>Handle app server errors (HTTP code &gt; 2xx)</strong></h4>
+
+<p dir="ltr">This type of errors will be caught by the dojo/request API and passed to the error handler callback (in CDSL API) for processing.</p>
+
+<ul dir="ltr">
+	<li>The CDSL API will offer default handling consisting of a message dialog displayed to the user and passing the errors over to the application handler, if any.</li>
+	<li>there will be a possibility to either completely override default handling with a custom handler or have both work together</li>
+	<li>This type of error will be passed to the CDSL API client unchanged, so it will follow the dojo/request contract.</li>
+</ul>
+
+<h4 dir="ltr" id="ii15"><strong>Handle errors caused by request handler functions throwing exceptions</strong></h4>
+
+<p dir="ltr">Any remaining errors, unrelated to previously listed cases will be also processed by the error handler callback in CDSL API.</p>
+
+<ul dir="ltr">
+	<li>The CDSL API will offer default handling consisting of a message dialog displayed to the user and passing the errors over to the application handler, if any.</li>
+	<li>there will be a possibility to either completely override default handling with a custom handler or have both work together</li>
+	<li>This type of error will be passed to the CDSL API client unchanged.</li>
+</ul>
+
+<h3 dir="ltr" id="ii5">Details</h3>
+
+<h4 dir="ltr" id="ii8"><strong style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Failed requests must not break the application</strong></h4>
+
+<p dir="ltr">This is a rule for the application developers.</p>
+
+<p dir="ltr">By default the API will be handling errors and informing the user appropriately, but the application must be written in such a way that any request can fail without breaking the application. In other words, the correct state of the <span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">application&nbsp;</span>UI&nbsp;must not depend on any particular request succeeding. Moreover, if a request fails it must be clear to the user how to retry the operation.</p>
+
+<h4 dir="ltr" id="ii9">General approach in JavaScript API</h4>
+
+<p dir="ltr">A general approach to default handling of errors by CDSL API will be to display user friendly error message and log the error.</p>
+
+<ul dir="ltr">
+	<li>In case of an error any application-provided handler associated with a successful response will NOT run.</li>
+	<li>If API is configured in <strong>DEV mode</strong>, then the error messages will contain full information, stack traces, etc. so they will not be as user friendly, but will be very informative. The same full information will be written to the trace log.</li>
+	<li>error messages must follow the UI style of the application and they must be localizable</li>
+	<li>We have to cater for different target environments: desktop web app, mobile app - this will be achieved by configuring <span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">the CDSL API instance with&nbsp;</span>a specific UiInteractionHandler. This class will encapsulate environment specific UI operations so that we can have different implementations based on environment. Optionally the <span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">UiInteractionHandler</span> could be also overriden by the application developers to get custom application specific behaviour.</li>
+	<li>Validation and informational errors will be passed from server back to CDSL API.<br />
+	Default action in case of the errors will be to display any messages to the user (e.g. a "server says" dialog) and either fail the call (if validation errors) or let the call succeed in case of informationals.
+	<ul>
+		<li>The existing JSON data format will have to be updated to support distinguishing between errors, validation results and informationals and to accommodate carrying these data types. See&nbsp;<a wiki="We1458f1078dd_463a_9e7c_c54ac9e1e5a7" href="/wikis/home#!/wiki/We1458f1078dd_463a_9e7c_c54ac9e1e5a7/page/Struct%20Serialisation" id="wikiLink1526291559126" page="Struct Serialisation">JSON struct spec</a>&nbsp;for details.</li>
+	</ul>
+	</li>
+</ul>
+
+<h4 dir="ltr" id="ii10">Error Codes</h4>
+
+<p dir="ltr">Error codes will be as follows:</p>
+
+<ul dir="ltr">
+	<li>0 success, no errors</li>
+	<li>1 validation error(s)</li>
+	<li>2 informational message(s)</li>
+	<li>3 validation error(s) and informational message(s)</li>
+	<li>4 application error</li>
+	<li>5 generic servlet error</li>
+</ul>
+
+<h3 dir="ltr" id="ii3">Notes (work-in-progress!)</h3>
+
+<p dir="ltr">This section captures the in-progress design notes - <span style="color:#FF0000;"><strong>not to be taken as the final design</strong></span>!</p>
+
+<h4 dir="ltr" id="ii6">CDSL JavaScript API</h4>
+
+<ul dir="ltr">
+	<li><span style="line-height: 1.5;">At the high level we have 4 types of error sources: server tier, web-tier, network and browser-tier.</span></li>
+	<li>But any type of error will ultimately lead to the error callback in CDLS API being invoked, so all the logic for handling errors must be in there. This also applies to network errors and request timeouts, but we have to set timeout for requests in order to get timeout handling.</li>
+	<li>We need to define ways for errors to flow all the way to CDSL API so that it can handle them properly.</li>
+	<li>For some server-side and webtier errors we could say that CDSL API only shows generic message and detailed information will be available in appropriate logs.</li>
+	<li>However with this generic handling in place, we still need to be able to pass detailed info about certain types of errors all the way down, for example validation errors and informationals. Moreover in "dev" mode we might want all the info to be surfaced in CDSL API, to aid easy debugging by CDSL cient developers.</li>
+	<li>So in summary we need a mechanism for passing error information along the path: server-&gt;webtier-&gt;CDSL-&gt;user(be it enduser or developer).</li>
+	<li>What will be the format for encoding this type of information?</li>
+</ul>
+
+<h4 dir="ltr" id="ii7">Error handling between webtier and server</h4>
+
+<ul dir="ltr">
+	<li>I was looking at CuramAction to see what happens with error handling there - hoping to gain insight and be bale to implement correct handling in CDSL servlet then</li>
+	<li>of course the above is only for "action-phase-type" processing, we also need to handle "display-phase-like" processing errors</li>
+	<li>although there we are not concerned with validation errors.</li>
+	<li>we still may be concerned with informationals - can these be thrown at display phase?</li>
+	<li>do display and action phase even make sense in the CDSL world?</li>
+	<li>in any case at action phase what happens is that any errors/informationals are stored in user session, I assume this is for later reporting the errors/infos all at once to user</li>
+	<li>which code gets these errors/info from session and how are they handled normally?</li>
+	<li>and how do we translate this to CDSL?</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

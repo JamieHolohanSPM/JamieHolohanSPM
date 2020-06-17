@@ -1,0 +1,846 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Fix for double load after modal submit</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Fix for double load after modal submit";
+    pageId="urn:lsid:ibm.com:td:4710016a-6d06-470e-846b-2ed27d0e50af";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Fix for double load after modal submit</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr" style="font-size: 1.6em; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: normal; color: rgb(0, 0, 0) !important; padding: 2px !important; border: none !important;">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Background</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">Requirements</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii3">Non-Functional Requirements</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii4">Design</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii5">Resolve Pages scenarios</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii6">#1 Redirect Resolve Pages - No impact</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii7">#2 Redirect Resolve Pages that set the&nbsp;Screen Context&nbsp;in the URL - impacted</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii11">#3 HTML Output Resolve Pages - impacted</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii11">#4 Dynamic Evidence Resolve Pages set the&nbsp;Screen Context and RPU&nbsp;-impacted</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii10">Evidence_DynamicEvidence_resolveNextPageAfterCreate,</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii17">Evidence_DynamicEvidence_resolveNextPageAfterModify and</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii18">Evidence_DynamicEvidence_resolveNextPageAfterCreateSaveAndNew</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii12">Use cases</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii8">Implementation Notes</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii9">Application Impact</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii13">Testing</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii14">Documentation/How To Use Feature</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii15">Work Estimation</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii16">Task list</a></div>
+
+<h2 dir="ltr" id="ii1" style="font-size: 1.6em; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; color: rgb(0, 0, 0) !important; padding: 2px !important; border: none !important;">Background</h2>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; line-height: 0.19in; orphans: 1;"><font color="#222222"><font face="Helvetica Neue, Helvetica, Arial, sans-serif">When&nbsp;a submit action is triggered from&nbsp;a Modal and It has to be closed after the server response, a double load/request happens. The first loading request is made by the current modal&nbsp;that will be closed, and the second is made by the parent page whom requests the same resource&nbsp;again.&nbsp;For pages that have many fields or information, this can cause a bad performance as the application would transfer the data twice.</font></font></p>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; line-height: 0.19in; orphans: 1;">The following&nbsp;sketch illustrates a scenario where a user modifies some person information (Person Details). After clicking the Edit button the Modify Person page is loaded on a modal dialog (1) that should be closed after data submission.&nbsp;After saving the changes on Modify Person (2), the server&nbsp;loads&nbsp;and sends the Person Details page to the modal dialog as a response (3). The modal dialog infrastructure identifies&nbsp;that the Person Details page was supposed to be rendered in&nbsp;the parent page (i.e the tab page) instead of the modal one, &nbsp;t<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; orphans: 1;">hanks to the screen context (<em>03ctx=256</em> for MODAL, <em>o3ctx=4096</em> for&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; orphans: 1;">TAB</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; orphans: 1;">).</span>&nbsp;So the modal is closed (4) and the Person Details page is then requested to the server again by the&nbsp;parent tab page (5).</p>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; line-height: 0.19in; orphans: 1;">&nbsp;</p>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; line-height: 0.19in; orphans: 1;">Impacts:&nbsp;<a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=142913">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=142913</a></p>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; line-height: 0.19in; orphans: 1;">&nbsp;</p>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; line-height: 0.19in; orphans: 1; text-align: center;"><img lconnwikiparamattachmentname="DoublePageLoad1.png" src="Fix%20for%20double%20load%20after%20modal%20submit._ATTACHMENTS_/DoublePageLoad1.png" lconnwikiparamwikipage="Fix for double load after modal submit" lconnwikimacro="image" alt=""></img></p>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; line-height: 0.19in; orphans: 1;">&nbsp;</p>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; line-height: 0.19in; orphans: 1; text-align: center;">Figure 1:&nbsp;Macro representation of the double page load issue.</p>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; line-height: 0.19in; orphans: 1;">&nbsp;</p>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; line-height: 0.19in; orphans: 1">Important links:&nbsp;</p>
+
+<ol dir="ltr">
+	<li style="margin-top: 0.05in; margin-bottom: 0in; line-height: 0.19in; orphans: 1;">
+	<p><span style="font-size:12px;"><span style="color:#000000;"><span class="left" style="font-family: Arial;">Previous Design Page:</span></span><span class="left" style="font-family: Arial; color: rgb(0, 0, 0);"><span style="color: rgb(0, 0, 255);">&nbsp;</span></span><span class="left" style="font-family: Arial;"><b><a href="http://curzilla.curamsoftware.com/EJB/TechInf/ClientTeam/ArchitectureAndDesign/AvoidDoubleLoadOnDialogSubmit"><span style="color:#0000FF;">http://curzilla.curamsoftware.com/EJB/TechInf/ClientTeam/ArchitectureAndDesign/AvoidDoubleLoadOnDialogSubmit</span></a></b></span><span style="color:#0000FF;">&nbsp;</span></span></p>
+	</li>
+	<li style="margin-top: 0.05in; margin-bottom: 0in; line-height: 0.19in; orphans: 1;">
+	<p><span style="font-size:12px;"><span style="color:#000000;"><span class="left" style="font-family: Arial;">Change Request:<b>&nbsp;</b></span></span><span class="left" style="font-family: Arial;"><b><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=107834"><span style="color:#0000FF;">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=107834</span></a></b></span><span style="color:#0000FF;">&nbsp;</span></span></p>
+	</li>
+</ol>
+
+<table dir="ltr">
+</table>
+
+<h2 dir="ltr" id="ii2" style="font-size: 1.6em; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; color: rgb(0, 0, 0) !important; padding: 2px !important; border: none !important;">Requirements</h2>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">Avoid double load/request when submitting and closing a modal.</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<h2 dir="ltr" id="ii3" style="font-size: 1.6em; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; color: rgb(0, 0, 0) !important; padding: 2px !important; border: none !important;">Non-Functional Requirements</h2>
+
+<div dir="ltr">
+<table border="1" dir="ltr" height="263" style="margin: 4px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; border-collapse: collapse !important;" width="671">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 118px;"><strong>NFR</strong></td>
+			<td style="padding: 4px; width: 537px;"><strong>Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Accessibility</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Availability &amp; Resilience</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Development Resource</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Evolution</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Internationalisation</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Location</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Performance and Scalability</td>
+			<td style="padding: 4px; width: 537px;">
+			<p><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">The application is generating unnecessary traffic between server and client.&nbsp;&nbsp;A new logic must be introduced to avoid these&nbsp;</span>unnecessary<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;"> load/requests when dealing with modal submissions.</span></p>
+
+			<p><strong><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">Considerations to be reviewed here:&nbsp;</span></strong><span style="background-color:#FFA07A;">Performance &amp; Scalability - we know that the performance should be better after the fact. Have we done any testing/any metrics to ensure that this is so? Have SVT been informed that this behavior is changing and they could provide some metrics when doing their testing? In this fashion, if a customer queries why we have done this (fix a defect), we would have the details to prove that this is more performant etc.</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Regulation</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Security</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Usability</td>
+			<td style="padding: 4px; width: 537px;"><span style="line-height: 18.24px;">N/A</span></td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<h2 dir="ltr" id="ii4" style="font-size: 1.6em; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; color: rgb(0, 0, 0) !important; padding: 2px !important; border: none !important;">Design</h2>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; line-height: 0.19in; orphans: 1;"><font color="#222222"><font face="Helvetica Neue, Helvetica, Arial, sans-serif">Create a post submit processing logic that verifies&nbsp;if the request comes </font></font><font face="Helvetica Neue, Helvetica, Arial, sans-serif">from a Modal and if redirects to another page. If so, stops&nbsp;struts&nbsp;redirecting to the new page and takes the responsibility of manipulating the HttpServletResponse object that needs to be returned.</font><font color="#222222"><font face="Helvetica Neue, Helvetica, Arial, sans-serif"> The new response sent to the modal is a tiny HTML containing a call to the dialog infrastructure, passing the next URL to be loaded and information about the screen context. Then the infrastructure&nbsp;decides if the modal should be closed&nbsp;and loads&nbsp;the&nbsp;response page (e.g.&nbsp;Person Details) on the correct page (e.g. TAB).&nbsp;</font></font></p>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; line-height: 0.19in; orphans: 1;"><font color="#222222"><font face="Helvetica Neue, Helvetica, Arial, sans-serif">This is achieved&nbsp;by returning a null value for&nbsp;the Struts response (</font></font><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 18.24px; orphans: 1;"><em>ActionForward</em>) </span><font color="#222222"><font face="Helvetica Neue, Helvetica, Arial, sans-serif">and&nbsp;writing a tiny&nbsp;HTML page for the new&nbsp;server response.</font></font></p>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; line-height: 0.19in; orphans: 1;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; orphans: 1;">The Post Process Response page will be sent only on form submissions coming from modal dialogs and when the next page is different than the current page</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; orphans: 1;">.</span></p>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; line-height: 0.19in; orphans: 1;">The following sketch illustrates the adopted design when a user modifies person information:</p>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; line-height: 0.19in; orphans: 1;">&nbsp;</p>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; line-height: 0.19in; orphans: 1; text-align: center;"><img lconnwikiparamattachmentname="DoublePageLoad2.png" src="Fix%20for%20double%20load%20after%20modal%20submit._ATTACHMENTS_/DoublePageLoad2.png" lconnwikiparamwikipage="Fix for double load after modal submit" lconnwikimacro="image" alt=""></img></p>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; line-height: 0.19in; orphans: 1;">&nbsp;</p>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 0.19in; orphans: 1; text-align: center;">Figure 2:&nbsp;Macro representation of the double page load fix.</p>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 0.19in; orphans: 1; text-align: center;">&nbsp;</p>
+
+<h3 dir="ltr" id="ii5" style="margin-top: 0.05in; margin-bottom: 0in; line-height: 0.19in; orphans: 1;">Resolve Pages scenarios</h3>
+
+<p dir="ltr">A resolve page is a specific type of UIM pages that contains only a JSP_SCRIPTLET element.</p>
+
+<p dir="ltr">This fix should cover all the scenarios where the post process logic redirects to a resolve page.</p>
+
+<h4 dir="ltr" id="ii6">#1 Redirect Resolve Pages - No impact</h4>
+
+<p dir="ltr">A common use of the JSP_SCRIPTLET element is to write code that will redirect to another page.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table align="center" border="0" dir="ltr" style="background-color:#f0f5f5;width:100%;">
+	<tbody>
+		<tr>
+			<td style="width: 500px;">
+			<p><span style="font-family:courier new,courier,monospace;">&lt;?xml version="1.0" encoding="UTF-8"?&gt;<br />
+			<br />
+			<br />
+			<br />
+			&lt;PAGE<br />
+			<br />
+			&nbsp; PAGE_ID="Person_resolveRefreshHome"<br />
+			<br />
+			&nbsp; xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"<br />
+			<br />
+			&nbsp; xsi:noNamespaceSchemaLocation="file://Curam/UIMSchema.xsd"&gt;<br />
+			<br />
+			&nbsp;</span></p>
+
+			<p><span style="font-family:courier new,courier,monospace;">&lt;JSP_SCRIPTLET&gt;<br />
+			<br />
+			&nbsp; &nbsp; &lt;![CDATA[<br />
+			<br />
+			&nbsp; &nbsp; &nbsp; curam.omega3.request.RequestHandler handler =&nbsp;<br />
+			<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; curam.omega3.request.RequestHandlerFactory.getRequestHandler(request);<br />
+			<br />
+			&nbsp; &nbsp; &nbsp; String context = request.getContextPath() + "/";<br />
+			<br />
+			&nbsp; &nbsp; &nbsp; context += curam.omega3.user.UserPreferencesFactory.getUserPreferences(pageContext.getSession()).getLocale() + "/";<br />
+			<br />
+			&nbsp; &nbsp; &nbsp; String personID = handler.getRequestItem("id").getValue(); &nbsp; &nbsp;<br />
+			<br />
+			&nbsp; &nbsp; &nbsp; String url = context + "Person_homePage.do?id=" + personID;<br />
+			<br />
+			&nbsp; &nbsp; &nbsp; url += "&amp;" + handler.getSystemParameters();&nbsp; &nbsp; &nbsp;&nbsp;<br />
+			<br />
+			&nbsp; &nbsp; &nbsp; response.sendRedirect(response.encodeRedirectURL(url));&nbsp;<br />
+			<br />
+			&nbsp; &nbsp; ]]&gt;<br />
+			<br />
+			&nbsp; &lt;/JSP_SCRIPTLET&gt; &nbsp;<br />
+			<br />
+			&lt;/PAGE&gt;</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="text-align: center;">Example of&nbsp;Redirect resolve page</p>
+
+<p dir="ltr" style="text-align: center;">&nbsp;</p>
+
+<p dir="ltr">This&nbsp;scenario is described in&nbsp;the following sketch:</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="text-align: center;"><img lconnwikiparamattachmentname="DoublePageLoad3.png" src="Fix%20for%20double%20load%20after%20modal%20submit._ATTACHMENTS_/DoublePageLoad3.png" lconnwikiparamwikipage="Fix for double load after modal submit" lconnwikimacro="image" alt=""></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="text-align: center;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 18.24px; orphans: 1; text-align: center;">Figure 3: Macro representation of the double page load solution with common Redirect&nbsp;Resolve Pages.</span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h4 dir="ltr" id="ii7">#2 Redirect Resolve Pages that set the&nbsp;Screen Context&nbsp;in the URL - impacted</h4>
+
+<p dir="ltr">Very similar to the above scenario, in this case the resolve page&nbsp;doesn't set the next URL <span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;">explicitly,</span>&nbsp;but it is&nbsp;retrieved dynamically from&nbsp;RPU.</p>
+
+<p dir="ltr"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;">RPU&nbsp;</span><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;">represents the Return Page URL. Relating to modals, generally it is the path&nbsp;of its opener, containing&nbsp;configuration parameters such as Screen Context.</span></p>
+
+<p dir="ltr">Those resolve pages are&nbsp;setting&nbsp;the screen context explicitly&nbsp;to 256 (Modal) as described on the following sketch.</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<img lconnwikiparamattachmentname="DoubleLoadResolveSC.png" src="Fix%20for%20double%20load%20after%20modal%20submit._ATTACHMENTS_/DoubleLoadResolveSC.png" lconnwikiparamwikipage="Fix for double load after modal submit" lconnwikimacro="image" alt=""></img></p>
+
+<p dir="ltr" style="text-align: center;">Figure 4: Double Load issue with Resolve Pages setting the Screen Context manually</p>
+
+<p dir="ltr" style="text-align: center;">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Applying&nbsp;the double page load solution,&nbsp;the resolve page redirects to the parent tab page using the RPU, and changes the Screen Context to 256 (Modal). The latter action&nbsp;causes unexpected behaviours like showing the buttons on the bottom of the page instead of tab's menu. That happens&nbsp;because the page renderer acts as the content&nbsp;is within a modal instead of a&nbsp;tab.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
+
+<p dir="ltr" style="text-align: center;"><img lconnwikiparamattachmentname="DoublePageLoad4.png" src="Fix%20for%20double%20load%20after%20modal%20submit._ATTACHMENTS_/DoublePageLoad4.png" lconnwikiparamwikipage="Fix for double load after modal submit" lconnwikimacro="image" alt=""></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="text-align: center;">Figure 5: Problem with&nbsp;the double page load solution with the&nbsp;Resolve Page redirecting to a tab but setting the wrong screen context.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;">Note:</strong><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;">&nbsp;It is not necessary to set the screen context within a resolve page. It is an internal property and is managed automatically by the infrastructure. This scenario would not cause problems if it were omitted</span><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;">.</span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><u>Solutions discussed:</u></strong></p>
+
+<ol dir="ltr">
+	<li style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; line-height: normal;">Remove the&nbsp;screen context override&nbsp;from all resolve pages and let the infrastructure handle it;<br />
+	<br />
+	<br />
+	<br />
+	&nbsp;</li>
+	<li style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; line-height: normal;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Change the infrastructure to expect that a wrong Screen Context can be passed to a tab and ignore it;</span></li>
+</ol>
+
+<p dir="ltr" style="font-family: 'helvetica neue', helvetica, arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<p dir="ltr" style="font-family: 'helvetica neue', helvetica, arial, sans-serif; line-height: normal;"><strong style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><u>Solutions adopted:</u></strong></p>
+
+<ol dir="ltr">
+	<li style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; line-height: normal;"><span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; line-height: normal;">Remove the&nbsp;screen context override&nbsp;from all resolve pages and let the infrastructure handle it;</span></li>
+</ol>
+
+<p dir="ltr">&nbsp;</p>
+
+<h4 dir="ltr" id="ii11"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 18.24px; orphans: 1; text-align: center;">#3 HTML Output Resolve Pages - impacted</span></h4>
+
+<p dir="ltr"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">There is a&nbsp;scenario where a modal dialog is opened by&nbsp;an item from a list loaded after submitting a search. An example is when you are searching for a person, the search provides you with a list of people where every entry in the list has an Edit button that opens a modal.&nbsp;When that the Modal dialog is closed clicking on the submit button, the user is redirected to the&nbsp;search page again, showing the filters and list&nbsp;populated.&nbsp;</span></p>
+
+<p dir="ltr" style="font-family: 'helvetica neue', helvetica, arial, sans-serif; line-height: normal;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Currently this behavior is achieved with a&nbsp;"workaround"&nbsp;that use&nbsp;the resolve page&nbsp;that receives the fields used to filter the results&nbsp;and outputs html code that, via javascript, performs the following actions:&nbsp;access&nbsp;and submit&nbsp;the parent&nbsp;page's&nbsp;form,&nbsp;</span>close&nbsp;the modal dialog.</p>
+
+<p dir="ltr" style="font-family: 'helvetica neue', helvetica, arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<p dir="ltr" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; line-height: normal; text-align: center;"><img lconnwikiparamattachmentname="DoublePageLoad5.png" src="Fix%20for%20double%20load%20after%20modal%20submit._ATTACHMENTS_/DoublePageLoad5.png" lconnwikiparamwikipage="Fix for double load after modal submit" lconnwikimacro="image" alt=""></img></p>
+
+<p dir="ltr" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; line-height: normal; text-align: center;">&nbsp;</p>
+
+<p dir="ltr" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; line-height: normal; text-align: center;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center;">Figure 5:&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center;">Macro representation of&nbsp;the</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center;">&nbsp;HTML Output&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center;">Resolve Page scenario.</span></p>
+
+<p dir="ltr" style="font-family: 'helvetica neue', helvetica, arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<p dir="ltr" style="font-family: 'helvetica neue', helvetica, arial, sans-serif; line-height: normal;">Applying the double page load solution proposed above<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">, the workaround is&nbsp;impacted because the resolve page is being loaded directly on the parent page instead of the&nbsp;modal. Hence there&nbsp;is no more a parent page to access and submit the form via javascript.</span></p>
+
+<p dir="ltr" style="font-family: 'helvetica neue', helvetica, arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<p dir="ltr" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; line-height: normal; text-align: center;"><img lconnwikiparamattachmentname="DoublePageLoad6.png" src="Fix%20for%20double%20load%20after%20modal%20submit._ATTACHMENTS_/DoublePageLoad6.png" lconnwikiparamwikipage="Fix for double load after modal submit" lconnwikimacro="image" alt=""></img></p>
+
+<p dir="ltr" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; line-height: normal; text-align: center;">&nbsp;</p>
+
+<p dir="ltr" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; line-height: normal; text-align: center;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center;">Figure 5:&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center;">Problem with the double page load solution with the</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center;">&nbsp;HTML Output&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center;">Resolve Page.</span></p>
+
+<p dir="ltr" style="font-family: 'helvetica neue', helvetica, arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<table align="center" border="0" dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; background-color: rgb(240, 245, 245); width: 1236px;">
+	<tbody>
+		<tr>
+			<td style="width: 500px;">
+			<p>From &nbsp;\webclient\components\core\System\PropertyAdmin\System_resolveRefreshSearch.uim</p>
+
+			<p>[...]</p>
+
+			<p><span style="font-family: &quot;courier new&quot;, courier, monospace;">&nbsp; &nbsp; &nbsp;out.print("&amp;lt;html&amp;gt;&amp;lt;head&amp;gt;");<br />
+			&nbsp; &nbsp; &nbsp;out.println("&amp;lt;script type='text/javascript' src='../CDEJ/jscript/dojotk/dojo/dojo.js'&amp;gt;//script content&amp;lt;/script&amp;gt;");<br />
+			&nbsp; &nbsp; &nbsp;out.println("&amp;lt;script type='text/javascript'&amp;gt;dojo.registerModulePath('curam', '../../curam/');dojo.registerModulePath('cm', '../../cm/');&amp;lt;/script&amp;gt;");<br />
+			&nbsp; &nbsp; &nbsp;out.println("&amp;lt;script src='../CDEJ/jscript/cdej.js' type='text/javascript'&amp;gt;//Comment&amp;lt;/script&amp;gt;"); &nbsp; &nbsp;<br />
+			&nbsp; &nbsp; &nbsp;out.println("&amp;lt;script type='text/javascript'&amp;gt;");<br />
+			&nbsp; &nbsp; &nbsp;out.println("dojo.require('curam.core-uim');");<br />
+			&nbsp; &nbsp; &nbsp;out.println("dojo.require('curam.util.Dialog');");<br />
+			&nbsp; &nbsp; &nbsp;out.println("curam.util.Dialog.init();");<br />
+			&nbsp; &nbsp; &nbsp;out.println("dojo.ready(curam.util.Dialog.pageLoadFinished);");<br />
+			&nbsp; &nbsp; &nbsp;out.println("dojo.ready(function() {");<br />
+			&nbsp; &nbsp; &nbsp;out.println("var formParameters = " + formParams + ";");<br />
+			&nbsp; &nbsp; &nbsp;out.println("curam.util.Dialog.closeAndSubmitParent(formParameters);});");<br />
+			&nbsp; &nbsp; &nbsp;out.println("&amp;lt;/script&amp;gt;");<br />
+			&nbsp; &nbsp; &nbsp;out.println("&amp;lt;/head&amp;gt;&amp;lt;body&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;");<br />
+			&nbsp; &nbsp;</span></p>
+
+			<p><span style="font-family: &quot;courier new&quot;, courier, monospace;">&nbsp;&lt;/JSP_SCRIPTLET&gt;<br />
+			<br />
+			&nbsp;&lt;/PAGE&gt;</span>&nbsp;</p>
+
+			<p>&nbsp;[...]</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center;">Code snippet of&nbsp;HTML Output Resolve page</p>
+
+<p dir="ltr" style="font-family: 'helvetica neue', helvetica, arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<p dir="ltr" style="font-family: 'helvetica neue', helvetica, arial, sans-serif; line-height: normal;"><strong><u>Solutions dis<span style="font-family: 'helvetica neue', helvetica, arial, sans-serif; line-height: normal;">cussed so far:</span></u></strong></p>
+
+<ol dir="ltr">
+	<li style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; line-height: normal;">Keep using the workaround&nbsp;but&nbsp;edit all the pages that have this&nbsp;behavior,&nbsp;<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">setting modal's action link property DISMISS_MODAL to <em>false</em> in all the UIM that link these resolve pages, hence&nbsp;avoiding the modal to be closed by the post process logic;</span><br />
+	&nbsp;</li>
+	<li style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; line-height: normal;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Develop&nbsp;a new feature to officially support this behavior without workarounds. Could be a new UIM element responsible for keeping the&nbsp;of search page;</span></span></li>
+</ol>
+
+<p dir="ltr" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<p dir="ltr" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; line-height: normal;"><strong style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><u>Solutions adopted:</u></strong></p>
+
+<ol dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">
+	<li style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; line-height: normal;"><span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">Keep using the workaround&nbsp;but&nbsp;edit all the pages that have this&nbsp;behavior,&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">setting modal's action link property DISMISS_MODAL to <em>false</em> in all the UIM that link these resolve pages, hence&nbsp;avoiding the modal to be closed by the post process logic;</span></li>
+</ol>
+
+<p dir="ltr" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<p dir="ltr" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<h4 dir="ltr" id="ii11" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="line-height: 18.24px; orphans: 1; text-align: center;">#4 Dynamic Evidence Resolve Pages </span>set the&nbsp;Screen Context and RPU&nbsp;<span style="line-height: 18.24px; orphans: 1; text-align: center;">-impacted&nbsp;</span></h4>
+
+<ol dir="ltr">
+	<li>
+	<h4 dir="ltr" id="ii10" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="font-size:12px;"><strong style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;"><a href="#Evidence_DynamicEvidence_resolveNextPageAfterCreate and   Evidence_DynamicEvidence_resolveNextPageAfterModify">Evidence_DynamicEvidence_resolveNextPageAfterCreate</a>,&nbsp;</strong></span></h4>
+	</li>
+	<li>
+	<h4 dir="ltr" id="ii17" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="font-size:12px;"><strong style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;"><a href="#Evidence_DynamicEvidence_resolveNextPageAfterCreate and   Evidence_DynamicEvidence_resolveNextPageAfterModify">Evidence_DynamicEvidence_resolveNextPageAfterModify</a> and&nbsp;</strong></span></h4>
+	</li>
+	<li>
+	<h4 dir="ltr" id="ii18" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><a href="#Evidence_DynamicEvidence_resolveNextPageAfterCreateSaveAndNew"><b style="font-family: &quot;Helvetica Neue&quot;; -webkit-text-stroke: rgb(34, 34, 34);">Evidence_DynamicEvidence_resolveNextPageAfterCreateSaveAndNew</b></a></h4>
+	</li>
+</ol>
+
+<p dir="ltr" style="orphans: 1; text-align: center; ">&nbsp;</p>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">There are three resolve pages used by dynamic evidence that there is handcraft code changing information as screen context and&nbsp;the return page URL (RPU) <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">parameter</span>. <a href="#Resolve page Dynamic Evidence">See&nbsp;the&nbsp;code</a>.</p>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The scenarios that involve these resolve pages are impacted when it is applied the double load solution.</p>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">After meeting with the CEF team, we decided don't change these resolves page because it is used by generated UIMs.</p>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>We had discussed some possibilities of changes:</strong></p>
+
+<ol dir="ltr">
+	<li style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;Changing the Java class responsible for generating the Dynamic Evidence inserting<span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">&nbsp;the <strong>dismiss modal = false on the link tag</strong>. Then, in this case, these UIMs won't execute the double load solution.&nbsp;</span><br />
+	<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(0, 0, 0);"><font face="helvetica neue, helvetica, arial, sans-serif">We<u> couldn't follow this solution</u> because the dynamic evidence are generated on the database and it will make a big impact for all the customer. It needs to regenerate all the dynamic evidence on the database to apply the&nbsp;</font></span><font face="helvetica neue, helvetica, arial, sans-serif"><span style="color: rgb(0, 0, 0);">dismiss</span></font><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(0, 0, 0);"><font face="helvetica neue, helvetica, arial, sans-serif">&nbsp;modal value.</font></span></li>
+	<li style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>Refactory</strong><strong> these Resolve pages</strong> removing the screen context and the parameters for RPU(return page URL).<br />
+	These resolve pages have<span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;"> a big piece of work with information that it couldn't have in&nbsp;</span>resolve<span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">&nbsp;pages. <u>It won't </u><u>apply</u> because of changing these resolve pages will impact many scenarios with different behaviors.&nbsp;</span></li>
+	<li style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">Create the system property with all the UIMs that won't process the double load solution.</span><br />
+	<span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">It<u> will be difficult for the customer to maintain this property </u>with all the dynamic evidence.</span></li>
+	<li style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>Insert the verification in the Core level to check if it is a dynamic evidence page. If it is true the double load solution is not applied.<br />
+	<u>This solution was chosen </u>because it was the way to have less impact on these resolve pages. </strong><br />
+	<strong>The idea is that in the future </strong><strong>these resolve pages</strong><strong> should be updated removing these parameters.</strong></li>
+</ol>
+
+<p dir="ltr" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; line-height: normal;"><a id="Flow Dynamic Evidence resolve pages" name="Flow Dynamic Evidence resolve pages"><strong>Following the actual flow of the resolve pages:&nbsp;</strong> </a><strong><a name="Flow Dynamic Evidence resolve pages">&nbsp;</a><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a id="Evidence_DynamicEvidence_resolveNextPageAfterCreate and   Evidence_DynamicEvidence_resolveNextPageAfterModify" name="Evidence_DynamicEvidence_resolveNextPageAfterCreate and   Evidence_DynamicEvidence_resolveNextPageAfterModify">Evidence_DynamicEvidence_resolveNextPageAfterCreate and&nbsp;</a></strong><a name="Evidence_DynamicEvidence_resolveNextPageAfterCreate and   Evidence_DynamicEvidence_resolveNextPageAfterModify"> <strong>&nbsp;Evidence_DynamicEvidence_resolveNextPageAfterModify</strong></a></p>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 1.6em; line-height: normal; color: rgb(0, 0, 0) !important; padding: 2px !important; border: none !important;"><img style="width: 900px; height: 849px; margin-left: 100px; margin-right: 100px;" lconnwikiparamattachmentname="FlowResolvePages_AfterCreateAnd_AfterModify.png" src="Fix%20for%20double%20load%20after%20modal%20submit._ATTACHMENTS_/FlowResolvePages_AfterCreateAnd_AfterModify.png" lconnwikiparamwikipage="Fix for double load after modal submit" lconnwikimacro="image" alt=""></img></p>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 1.6em; line-height: normal; color: rgb(0, 0, 0) !important; padding: 2px !important; border: none !important;">&nbsp;</p>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 1.6em; line-height: normal; color: rgb(0, 0, 0) !important; padding: 2px !important; border: none !important;">&nbsp;</p>
+
+<table align="center" border="0" dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; background-color: rgb(240, 245, 245); width: 1236px;">
+	<tbody>
+		<tr>
+			<td style="width: 500px;">
+			<p><a id="Resolve page Dynamic Evidence" name="Resolve page Dynamic Evidence">From &nbsp;/Curam-CEFBase/components/DynamicEvidence/Evidence/Evidence_DynamicEvidence_resolveNextPageAfterCreate.uim</a></p>
+
+			<p>[...]</p>
+
+			<p><span style="font-family: &quot;courier new&quot;, courier, monospace;">&nbsp; &nbsp; &nbsp;</span></p>
+
+			<p class="p1">&nbsp; &nbsp; if(!nextPage.equals("")){</p>
+
+			<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; background-color: rgb(240, 245, 245);">[...]</span>&nbsp; &nbsp; &nbsp;</p>
+
+			<p>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; // change screen context bits so that next create page opens correctly in a modal</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; int ctxIdxStart = url.lastIndexOf("3ctx="); // add 4 for length of string</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; String afterCtx = url.substring(ctxIdxStart + 4, url.length());</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; int idxCtxEnd = afterCtx.length();</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; if(afterCtx.contains("&amp;amp;")){</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;idxCtxEnd = afterCtx.indexOf("&amp;amp;");&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; }&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; afterCtx = afterCtx.substring(idxCtxEnd, afterCtx.length());</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; url = url.substring(0, ctxIdxStart) + "3ctx=258" + afterCtx; // -&amp;gt; Different create page</p>
+
+			<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; // remove modalprev parameter so that next modify page opens correctly in a modal</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; int modalPrevIdxStart = url.lastIndexOf("3modalprev=") -2; // remove 2 for the 'o' and ampersand</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; String afterModalPrev = url.substring(modalPrevIdxStart + 13, url.length());</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; int idxModalPrevEnd = afterModalPrev.length();</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; if(afterModalPrev.contains("&amp;amp;")){</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;idxModalPrevEnd = afterModalPrev.indexOf("&amp;amp;");&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; }&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; afterModalPrev = afterModalPrev.substring(idxModalPrevEnd, afterModalPrev.length());</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; url = url.substring(0, modalPrevIdxStart) + afterModalPrev;&nbsp;</p>
+
+			<p>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; }else{ // scenario 2 - all well, back to last saved link &nbsp; &nbsp; &nbsp;</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; // forward on to last saved link</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; String rpu = rh.getRequestItem(curam.omega3.request.ParameterTypeRegistry.PREFIX_RETURN_PAGE).getValue();</p>
+
+			<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; // change screen context so that the page opens correctly in a tab&nbsp;&nbsp; &nbsp;&nbsp;</p>
+
+			<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; int ctxIdxStart = rpu.lastIndexOf("3ctx="); // add 4 for length of string&nbsp;&nbsp; &nbsp;&nbsp;</p>
+
+			<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; String afterCtx = rpu.substring(ctxIdxStart + 4, rpu.length());&nbsp;&nbsp; &nbsp;&nbsp;</p>
+
+			<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; int idxCtxEnd = afterCtx.length();&nbsp;&nbsp; &nbsp;&nbsp;</p>
+
+			<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(afterCtx.contains("&amp;amp;")){&nbsp;&nbsp; &nbsp;&nbsp;</p>
+
+			<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; idxCtxEnd = afterCtx.indexOf("&amp;amp;");&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;</p>
+
+			<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }&nbsp;&nbsp; &nbsp;&nbsp;</p>
+
+			<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; afterCtx = afterCtx.substring(idxCtxEnd, afterCtx.length());&nbsp;&nbsp; &nbsp;&nbsp;</p>
+
+			<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; rpu = rpu.substring(0, ctxIdxStart) + "3ctx=258" + afterCtx; // -&amp;gt; leave me alone!</p>
+
+			<p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; String pageName = rpu;</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; pageName += "&amp;amp;o3" + "modalprev=Evidence_DynamicEvidence_resolveNextPageAfterCreate";</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; pageName += "&amp;amp;o3frame=modal";</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; url = context + pageName;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+
+			<p>&nbsp;&nbsp; &nbsp;&nbsp; }</p>
+
+			<p>&nbsp; &nbsp; &nbsp; response.sendRedirect(response.encodeRedirectURL(url));&nbsp; &nbsp; &nbsp;<br />
+			<br />
+			<span style="font-family: &quot;courier new&quot;, courier, monospace;">&nbsp; &nbsp; &nbsp;&lt;/JSP_SCRIPTLET&gt;</span><br />
+			<br />
+			&nbsp;</p>
+
+			<p>&nbsp;[...]</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center;">Code snippet of&nbsp;HTML Output Resolve page</p>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 1.6em; line-height: normal; color: rgb(0, 0, 0) !important; padding: 2px !important; border: none !important;">&nbsp;</p>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 1.6em; line-height: normal; color: rgb(0, 0, 0) !important; padding: 2px !important; border: none !important;">&nbsp;</p>
+
+<p dir="ltr"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</strong><u><strong> &nbsp; &nbsp;</strong></u><a id="Evidence_DynamicEvidence_resolveNextPageAfterCreateSaveAndNew" name="Evidence_DynamicEvidence_resolveNextPageAfterCreateSaveAndNew"><u><strong>Evidence_DynamicEvidence_resolveNextPageAfterCreateSaveAndNew</strong></u></a></p>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 1.6em; line-height: normal; color: rgb(0, 0, 0) !important; padding: 2px !important; border: none !important;"><img style="width: 900px; height: 723px; margin-left: 50px; margin-right: 50px;" lconnwikiparamattachmentname="FlowResolvePageSaveandNew.png" src="Fix%20for%20double%20load%20after%20modal%20submit._ATTACHMENTS_/FlowResolvePageSaveandNew.png" lconnwikiparamwikipage="Fix for double load after modal submit" lconnwikimacro="image" alt=""></img></p>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 1.6em; line-height: normal; color: rgb(0, 0, 0) !important; padding: 2px !important; border: none !important;">&nbsp;</p>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 1.6em; line-height: normal; color: rgb(0, 0, 0) !important; padding: 2px !important; border: none !important;">&nbsp;</p>
+
+<table align="center" border="0" dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; background-color: rgb(240, 245, 245); width: 1236px;">
+	<tbody>
+		<tr>
+			<td style="width: 500px;">
+			<p>From &nbsp;/Curam-CEFBase/components/DynamicEvidence/Evidence/ Evidence_DynamicEvidence_resolveNextPageAfterCreateSaveAndNew.uim</p>
+
+			<p>[...]</p>
+
+			<p><span style="font-family: &quot;courier new&quot;, courier, monospace;">&nbsp; &nbsp; &nbsp;</span></p>
+
+			<p class="p1">&nbsp; &nbsp; // change screen context bits so that next create page opens correctly in a modal</p>
+
+			<p class="p1">&nbsp; &nbsp; <span class="s1">int</span> ctxIdxStart = url.lastIndexOf("3ctx="); // add 4 for length of string</p>
+
+			<p class="p1">&nbsp; &nbsp; String afterCtx = url.substring(ctxIdxStart + 4, url.length());</p>
+
+			<p class="p1">&nbsp; &nbsp; <span class="s1">int</span> idxCtxEnd = afterCtx.length();</p>
+
+			<p class="p1">&nbsp; &nbsp; if(afterCtx.contains("&amp;amp;")){</p>
+
+			<p class="p1">&nbsp; &nbsp; &nbsp; idxCtxEnd = afterCtx.indexOf("&amp;amp;");</p>
+
+			<p class="p1">&nbsp; &nbsp; }</p>
+
+			<p class="p1">&nbsp; &nbsp; afterCtx = afterCtx.substring(idxCtxEnd, afterCtx.length());</p>
+
+			<p class="p1">&nbsp; &nbsp; <span class="s1">url</span> = url.substring(0, ctxIdxStart) + "3ctx=258" + afterCtx; // -&amp;gt; Different create page</p>
+
+			<p class="p2">&nbsp;</p>
+
+			<p class="p1">&nbsp; &nbsp; // remove <span class="s1">modalprev</span> parameter so that next modify page opens correctly in a modal</p>
+
+			<p class="p1">&nbsp; &nbsp; <span class="s1">int</span> modalPrevIdxStart = url.lastIndexOf("3modalprev=") -2; // remove 2 for the 'o' and ampersand</p>
+
+			<p class="p1">&nbsp; &nbsp; String afterModalPrev = url.substring(modalPrevIdxStart + 13, url.length());</p>
+
+			<p class="p1">&nbsp; &nbsp; <span class="s1">int</span> idxModalPrevEnd = afterModalPrev.length();</p>
+
+			<p class="p1">&nbsp; &nbsp; if(afterModalPrev.contains("&amp;amp;")){</p>
+
+			<p class="p1">&nbsp; &nbsp; &nbsp; idxModalPrevEnd = afterModalPrev.indexOf("&amp;amp;");</p>
+
+			<p class="p1">&nbsp; &nbsp; }</p>
+
+			<p class="p1">&nbsp; &nbsp; afterModalPrev = afterModalPrev.substring(idxModalPrevEnd, afterModalPrev.length());</p>
+
+			<p class="p1">&nbsp; &nbsp; <span class="s1">url</span> = url.substring(0, modalPrevIdxStart) + afterModalPrev;</p>
+
+			<p class="p2">&nbsp;</p>
+
+			<p class="p1">&nbsp; &nbsp; response.sendRedirect(response.encodeRedirectURL(<span class="s1">url</span>));</p>
+
+			<p class="p1">&nbsp;</p>
+
+			<p>&nbsp;[...]</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center;">Code snippet of&nbsp;HTML Output Resolve page</p>
+
+<h2 dir="ltr" id="ii12" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 1.6em; line-height: normal; color: rgb(0, 0, 0) !important; padding: 2px !important; border: none !important;">Use cases</h2>
+
+<table border="1" dir="ltr" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; line-height: normal; margin: 4px; width: 782px; border-collapse: collapse !important;">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 63px;"><strong>Role/Actor</strong></td>
+			<td style="padding: 4px; width: 325px;"><strong>Description</strong></td>
+			<td style="padding: 4px; width: 253px;"><strong>Expected Behavior</strong></td>
+			<td style="padding: 4px; width: 104px;"><strong>Tested</strong></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 63px;">User</td>
+			<td style="padding: 4px; width: 325px;">
+			<p>Modal dialog is closed when a submit button is clicked redirecting the user to the&nbsp;specified link.&nbsp;</p>
+			</td>
+			<td style="padding: 4px; width: 253px;">Redirect the main content area of the parent page to the URL of the selected link. Only one request should be made to the selected link.</td>
+			<td style="padding: 4px; width: 104px;">Manual</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 63px;">User</td>
+			<td style="padding: 4px; width: 325px;">
+			<p>Modal dialog is closed when a submit button <span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">with the link property DISMISS_MODAL set to true and&nbsp;</span>redirects&nbsp;the user to the&nbsp;specified link.&nbsp;</p>
+			</td>
+			<td style="padding: 4px; width: 253px;">Redirect the main content area of the parent page to the URL of the selected link. Only one request should be made to the selected link.</td>
+			<td style="padding: 4px; width: 104px;"><span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">Manual</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 63px;">User</td>
+			<td style="padding: 4px; width: 325px;">Modal dialog is not closed and it is redirected to the specified link when a submit button is clicked. In this case, the link property DISMISS_MODAL must be set to false.&nbsp;</td>
+			<td style="padding: 4px; width: 253px;">Redirect the current modal page to the specified link.</td>
+			<td style="padding: 4px; width: 104px;"><span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">Manual</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 63px;">User</td>
+			<td style="padding: 4px; width: 325px;">
+			<p>Modal dialog is closed when a submit button is clicked without having a link specified within UIM.</p>
+			</td>
+			<td style="padding: 4px; width: 253px;">Reload the background page updating the fields where applied</td>
+			<td style="padding: 4px; width: 104px;"><span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">Manual</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 63px;">User</td>
+			<td style="padding: 4px; width: 325px;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">Wizard Page submitting values to the next step.</span></td>
+			<td style="padding: 4px; width: 253px;">Modal Dialog should not be closed, redirect to the next step and the data should be updated.</td>
+			<td style="padding: 4px; width: 104px;"><span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">Manual</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 63px;">User</td>
+			<td style="padding: 4px; width: 325px;">Wizard Page submitted at the last step without a link defined.</td>
+			<td style="padding: 4px; width: 253px;">Modal Dialog should be closed and the background page should be reloaded with the data updated.</td>
+			<td style="padding: 4px; width: 104px;"><span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">Manual</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 63px;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">User</span></td>
+			<td style="padding: 4px; width: 325px;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">Wizard Page submitted at the last step with a link defined and DISMISS_MODAL set to true.</span></td>
+			<td style="padding: 4px; width: 253px;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">Modal Dialog should be closed and the background page should be redirected to the specified link.</span></td>
+			<td style="padding: 4px; width: 104px;"><span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">Manual</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 63px;">User</td>
+			<td style="padding: 4px; width: 325px;">Submit a Dynamic UIM Page opened as a modal with a link defined to the same page and DISMISS_MODAL set to false.</td>
+			<td style="padding: 4px; width: 253px;">Modal Dialog should not be closed and the modal dialog is redirected to the same page with its contents updated.</td>
+			<td style="padding: 4px; width: 104px;"><span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">Manual</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 63px;">User</td>
+			<td style="padding: 4px; width: 325px;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">Submit a Dynamic UIM Page opened as a modal without having a link specified.</span></td>
+			<td style="padding: 4px; width: 253px;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">Reload the background page updating the fields where applied.</span></td>
+			<td style="padding: 4px; width: 104px;"><span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">Manual</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 63px;">User</td>
+			<td style="padding: 4px; width: 325px;">
+			<p><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">A search button is clicked and the user clicks on the edit button of&nbsp;an item of the list. The edit page will be opened on a modal dialog. The user saves the changes and&nbsp;the modal dialog is closed, reloading/keeping the list.</span></p>
+			</td>
+			<td style="padding: 4px; width: 253px;">Reload the list automatically using the same filters used in the previous search.</td>
+			<td style="padding: 4px; width: 104px;"><span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">Manual</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 63px;">User</td>
+			<td style="padding: 4px; width: 325px;">Cover resolve pages that change manually the Screen Context attribute.</td>
+			<td style="padding: 4px; width: 253px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Modal Dialog should be closed and the background page should</span>&nbsp;be redirected to<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"> the specified link.</span></td>
+			<td style="padding: 4px; width: 104px;"><span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">Manual</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 63px;"><span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">User</span></td>
+			<td style="padding: 4px; width: 325px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Click on the button Save/Save and Exit/Finish in a Dynamic Evidence Page opened as a modal having a link specified.</span></td>
+			<td style="padding: 4px; width: 253px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Modal Dialog should be closed and the background page should</span>&nbsp;be redirected to<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"> the specified link. The double load is not applied in this case.Then, the modal and the parent page will request the same page. The double will happen in this moment. See item #4&nbsp;</span></td>
+			<td style="padding: 4px; width: 104px;"><span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">Manual</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 63px;"><span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">User</span></td>
+			<td style="padding: 4px; width: 325px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Click on the button Save and Next/Save and Exit a Dynamic Evidence Page opened as a modal having a link specified.</span></td>
+			<td style="padding: 4px; width: 253px;"><span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">Modal Dialog should not be closed and the modal dialog is redirected to the same page with its contents updated.</span></td>
+			<td style="padding: 4px; width: 104px;"><span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">Manual</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 63px;">User</td>
+			<td style="padding: 4px; width: 325px;">IEG script Universal Access &nbsp;Application</td>
+			<td style="padding: 4px; width: 253px;">&nbsp;</td>
+			<td style="padding: 4px; width: 104px;"><span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">Manual</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 63px;"><span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">User</span></td>
+			<td style="padding: 4px; width: 325px;">Create, Edit or Delete the Dynamic Evidence&nbsp;</td>
+			<td style="padding: 4px; width: 253px;">The double load solution shouldn't be applied. See item #4 Dynamic Evidence Resolve Pages&nbsp;<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;set the&nbsp;Screen Context and RPU&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: 18.24px; orphans: 1; text-align: center;">- impacted</span></td>
+			<td style="padding: 4px; width: 104px;"><span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">Manual</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 63px;"><span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">User</span></td>
+			<td style="padding: 4px; width: 325px;"><span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">IEG script caseworker application&nbsp;</span></td>
+			<td style="padding: 4px; width: 253px;">&nbsp;</td>
+			<td style="padding: 4px; width: 104px;"><span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">Manual</span></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; line-height: 0.19in; orphans: 1;">&nbsp;</p>
+
+<h2 dir="ltr" id="ii8" style="margin-top: 0.05in; margin-bottom: 0in; line-height: 0.19in; orphans: 1;"><strong style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;"><span style="font-size: 18px;">Implementation Notes</span></strong></h2>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 0.19in; orphans: 1;"><font color="#222222">The design defined to solve this problem is to create a Post Processing logic in the CuramAction that will be invoked at the end of the <span style="font-family:courier new,courier,monospace;">execute()</span> method call.</font></p>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 0.19in; orphans: 1;"><font color="#222222"><font face="Helvetica Neue, Helvetica, Arial, sans-serif">An Executor class, i.e.&nbsp;<span style="font-family:courier new,courier,monospace;">PostProcessActionExecutor</span>, is called to verify which post processing needs to be invoked, all the available processors are inside the enumerator&nbsp;<span style="font-family:courier new,courier,monospace;">PostProcessActionFactory</span>.</font></font></p>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 0.19in; orphans: 1;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Each&nbsp;processor&nbsp;</span>must extend&nbsp;the abstract class <span style="font-family:courier new,courier,monospace;">PostProcessAction</span> and override the methods <span style="font-family:courier new,courier,monospace;">shouldProcess(...)</span> and <span style="font-family:courier new,courier,monospace;">process(...)</span> with its<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;own logic to define whether it should be run and what the processing involves.</span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<div dir="ltr"><font color="#222222"><font face="Helvetica Neue, Helvetica, Arial, sans-serif">The processor used to solve&nbsp;this problem is&nbsp;the&nbsp;<span style="font-family:courier new,courier,monospace;">ModalDialogSubmitPostAction</span>. The&nbsp;shouldProcess(...) </font></font>if the request comes from a Modal, <font color="#222222"><font face="Helvetica Neue, Helvetica, Arial, sans-serif">then&nbsp;compares the previous Modal ID&nbsp;(parameter&nbsp;<em>o3modalprev</em>) with the Target Page ID:&nbsp;if these values are not the same it means that we are dealing with a redirect and the modal should be closed, so the process(...) should be run.</font></font>&nbsp;This method&nbsp;writes a new tiny HTML page with some Javascript logic to call the method <span style="font-family:courier new,courier,monospace;">curam.dialog.initModal(...)</span>&nbsp;into the response object. The initModal(...) method is the responsible for closing the modal, avoiding&nbsp;loading the Target Page into the Modal.</div>
+
+<p dir="ltr">The solve the impact with the dynamic evidence, there is the clause to check if it is a dynamic evidence into the method <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">shouldProcess(...)&nbsp;</span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; line-height: 0.15in; orphans: 1;"><font color="#222222"><font face="Helvetica Neue, Helvetica, Arial, sans-serif"><strong>Note:</strong> In cases that the target page should be rendered in the same modal (DISMISS_MODAL="false"), the parameter "o3modalprev" won't be present&nbsp;and the shouldProcess() will return false.</font></font></p>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; line-height: 0.15in; orphans: 1;">&nbsp;</p>
+
+<h2 dir="ltr" id="ii9" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; line-height: normal;"><strong><span style="font-size: 18px;">Application Impact</span></strong></h2>
+
+<p dir="ltr"><span style="font-size:12px;">In these wiki pages, there </span><span style="font-size:12px;">is</span><span style="font-size:12px;"> the list of UIMs impacted and not impacted with the double load solution for each stream. </span></p>
+
+<p dir="ltr"><strong><span style="font-size: 18px;">&nbsp; &nbsp; -&nbsp;<a lconnwikimacro="wikilink" href="Fix%20for%20double%20load%20after%20modal%20submit/BIZINF%20resolve%20pages.html" lconnwikiparamwikipage="BIZINF resolve pages" target="_blank">BIZ&nbsp;INF&nbsp;resolve&nbsp;pages</a></span></strong></p>
+
+<p dir="ltr"><strong><span style="font-size: 18px;">&nbsp; &nbsp; - <a lconnwikimacro="wikilink" href="Fix%20for%20double%20load%20after%20modal%20submit/CEF%20and%20CEF_Widgets%20resolve%20pages.html" lconnwikiparamwikipage="CEF and CEF_Widgets resolve pages">CEF&nbsp;and&nbsp;CEF&nbsp;Widgets&nbsp;resolve&nbsp;pages</a></span></strong></p>
+
+<p dir="ltr"><strong><span style="font-size: 18px;">&nbsp; &nbsp; -&nbsp;<a lconnwikimacro="wikilink" href="Fix%20for%20double%20load%20after%20modal%20submit/ENT%20MODS%20resolve%20pages.html" lconnwikiparamwikipage="ENT MODS resolve pages">ENT&nbsp;MODS&nbsp;resolve&nbsp;pages</a></span></strong></p>
+
+<p dir="ltr"><strong><span style="font-size: 18px;">&nbsp;&nbsp; &nbsp;-&nbsp;<a lconnwikimacro="wikilink" href="Fix%20for%20double%20load%20after%20modal%20submit/HCR%20resolve%20pages.html" lconnwikiparamwikipage="HCR resolve pages">HCR&nbsp;resolve&nbsp;pages</a></span></strong></p>
+
+<p dir="ltr"><strong><span style="font-size: 18px;">&nbsp;&nbsp; &nbsp;-&nbsp;<a lconnwikimacro="wikilink" href="Fix%20for%20double%20load%20after%20modal%20submit/CFSS%20resolve%20pages.html" lconnwikiparamwikipage="CFSS resolve pages">CFSS resolve pages</a></span></strong></p>
+
+<p dir="ltr"><strong><span style="font-size: 18px;">&nbsp; &nbsp; &nbsp;</span></strong></p>
+
+<p dir="ltr">​​</p>
+
+<h3 dir="ltr" id="ii13" style="font-size: 1.4em; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; color: rgb(0, 0, 0) !important; padding: 2px !important; border: none !important;">Testing</h3>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;"><strong>Automated testing</strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">Javascript: A test case suite was created using intern and selenium. The tests were created inside the file&nbsp;dialogTestCase.js</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">Java&nbsp;unit tests:&nbsp;CuramActionTestCase.java, PageUtilsTestCase.java, ModalDialogSubmitPostActionTestCase.java&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;"><strong>Manual testing</strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">Manual tests were made using TabTestApp for&nbsp;the scenarios referenced on the Use Case topic of this design page.</p>
+
+<p dir="ltr" style="font-size: 1.6em; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; color: rgb(0, 0, 0) !important; padding: 2px !important; border: none !important;">&nbsp;</p>
+
+<h2 dir="ltr" id="ii14" style="font-size: 1.6em; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; color: rgb(0, 0, 0) !important; padding: 2px !important; border: none !important;">Documentation/How To Use Feature</h2>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">As this implementation was just a bug fix this item may not apply, however, a&nbsp;Post Process Action engine was developed as part of the solution.</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">This mechanism gives us the possibility to plug in new Conditional Post Process Actions.</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; line-height: 0.19in; orphans: 1;"><span style="font-size:12px;"><font color="#222222"><font face="Helvetica Neue, Helvetica, Arial, sans-serif"><b>Configuring a new Action into the Post Processing Action Chain</b></font></font></span></p>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; line-height: 0.19in; orphans: 1">&nbsp;</p>
+
+<ol dir="ltr">
+	<li>
+	<p style="margin-top: 0.05in; margin-bottom: 0in; border: none; padding: 0in; line-height: 0.19in; orphans: 1;"><span style="font-size:12px;"><font color="#222222"><font face="Helvetica Neue, Helvetica, Arial, sans-serif">Implement a new Post Process Action that will inherit from PostProcessAction</font></font></span></p>
+	</li>
+	<li>
+	<p style="margin-top: 0.05in; margin-bottom: 0in; border: none; padding: 0in; line-height: 0.19in; orphans: 1;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 18.24px; orphans: 1;">Override process(...) method with all the logic that should be applied</span></p>
+	</li>
+	<li>
+	<p style="margin-top: 0.05in; margin-bottom: 0in; border: none; padding: 0in; line-height: 0.19in; orphans: 1;"><span style="font-size:12px;"><font color="#222222"><font face="Helvetica Neue, Helvetica, Arial, sans-serif">Override shouldProcess(...) method to identify when the process&nbsp;should be invoked</font></font></span></p>
+	</li>
+	<li>
+	<p style="margin-top: 0.05in; margin-bottom: 0in; border: none; padding: 0in; line-height: 0.19in; orphans: 1;"><span style="font-size:12px;"><font color="#222222"><font face="Helvetica Neue, Helvetica, Arial, sans-serif">Register the Post Process Action into the PostProcessActionFactory enum</font></font></span></p>
+	</li>
+</ol>
+
+<p dir="ltr" style="margin-top: 0.05in; margin-bottom: 0in; border: none; padding: 0in; line-height: 0.19in; orphans: 1;">&nbsp;</p>
+
+<h2 dir="ltr" id="ii15" style="font-size: 1.6em; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; color: rgb(0, 0, 0) !important; padding: 2px !important; border: none !important;">Work Estimation</h2>
+
+<h3 dir="ltr" id="ii16" style="font-size: 1.4em; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; color: rgb(0, 0, 0) !important; padding: 2px !important; border: none !important;">&nbsp;Task list</h3>
+
+<table border="1" dir="ltr" style="margin: 4px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; width: 822px; border-collapse: collapse !important;">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 701px;"><strong>Task</strong></td>
+			<td style="padding: 4px; width: 105px;"><strong>Estimate (days)</strong></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 701px;">Design discussions</td>
+			<td style="padding: 4px; width: 105px;"><span style="background-color:#FF0000;">5</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 701px;">Post Process Action Implementation</td>
+			<td style="padding: 4px; width: 105px;">1</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 701px;">Adapt dialog javascript infrastructure to this new behavior</td>
+			<td style="padding: 4px; width: 105px;">1</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 701px;">Manual Tests</td>
+			<td style="padding: 4px; width: 105px;">2</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 701px;">Unit Tests</td>
+			<td style="padding: 4px; width: 105px;">1</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 701px;">Documentation</td>
+			<td style="padding: 4px; width: 105px;"><span style="background-color:#FF0000;">1</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 701px;"><strong>Total</strong></td>
+			<td style="padding: 4px; width: 105px;"><b><span style="background-color:#FF0000;">11</span></b></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

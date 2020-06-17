@@ -1,0 +1,88 @@
+<!--
+Creates the layered javascript file
+
+1. Sort out properties
+2. Call CDEJ's "build-javascript-layers" target
+3. Inform user where generated files have been saved to (so they can replace the source control versions)
+
+-->
+<project name="build-layer-file" default="build.layer.file">
+
+  <property environment="sysenv."/>
+  
+  <taskdef resource="net/sf/antcontrib/antlib.xml">
+    <classpath>
+      <pathelement location="${sysenv.CURAMCDEJ}/lib/ext/jar/ant-contrib.jar"/>
+    </classpath>
+  </taskdef>
+
+  <!--
+    Call CDEJ infrastructure to build the layer file, then tell the user where the output was saved to.
+  -->
+  <target name="build.layer.file">
+  
+    <path id="dojo.path">
+      <fileset dir="${sysenv.CURAMCDEJ}/lib/curam/web/jscript">
+        <include name="dojo-ibm*.zip"/>
+      </fileset>  
+    </path>
+    
+    <path id="idx.path">
+      <fileset dir="${sysenv.CURAMCDEJ}/lib/curam/web/jscript">
+      
+        <include name="ibm_idx_source*.zip"/>
+      </fileset>  
+    </path>
+    
+    <loadfile property="cdevenv.version.file" srcFile="${sysenv.CURAM_DIR}/ActualVersions/CdevenvVersion.txt"/>    
+    
+    <property name="dojo.file" refid="dojo.path"/>    
+    <property name="idx.file" refid="idx.path"/>    
+	<property name="sources.directory" value="${component.dir}/jscript/"/>
+	<property name="target.directory" value="${sysenv.CURAM_DIR}/webclient/build/_temp_generated_layer_file"/>	
+    
+    <propertyregex property="dojo.zip.num" input="${dojo.file}" regexp=".dojo-ibm-V(.*).zip" select="\1" />    
+    
+    <propertyregex property="idx.zip.num" input="${idx.file}" regexp=".ibm_idx_source_(.*).zip" select="\1" />    
+    
+    <propertyregex property="cdej.zip.num" input="${cdevenv.version.file}" regexp="zip.version=(.*)\r\n" select="\1" />    
+    
+    <property name="app.component.dependencies" value="dojo-sourceibm_${dojo.zip.num}_nophp.zip,ibm_idx_source_${idx.zip.num}.zip,CuramCDEJ${cdej.zip.num}_js_src.zip"/>  
+	  
+    <ant antfile="${sysenv.CURAMCDEJ}/bin/build-javascript-layers.xml" target="create-javascript-layers">
+      <property name="basedir" value="${basedir}"/>
+      <property name="layer-name" value="${component.name}-layer"/>
+      <property name="layer-build-configuration" value="${component.dir}/jscript/profile.js"/>
+      <property name="app-component-dependencies" value="${app.component.dependencies}"/>
+      <property name="sources-directory" value="${component.dir}/jscript/"/>
+      <property name="target-directory" value="${sysenv.CURAM_DIR}/webclient/build/_temp_generated_layer_file"/>
+    </ant>
+    
+    <copy todir="${sources.directory}">
+      <fileset dir="${target.directory}">
+        <include name="${component.name}-layer.js"/>
+        <include name="${component.name}-layer.js.uncompressed.js"/>
+      </fileset>
+    </copy>    
+    
+    <!--<copy todir="${sysenv.CURAM_DIR}/webclient/components/core/jscript/dojotk/dojo/nls">
+      <fileset dir="${output.directory}/nls">
+        <include name="*.js"/>
+      </fileset>
+    </copy>    -->
+    
+  </target>
+
+  <!--
+    Zip our source files and copy zip to tiny
+  -->
+  <target name="create.source.zip">
+    <fail unless="versionNo">zip.label was not defined. Please use "-DversionNo=&lt;zip label&gt;".
+zip.label should be the same label as the current release zip (e.g. "-DversionNo=6_0_5_2_iFix006_001".)</fail>
+    <property name="zip.full.filename" value="UniversalAccess_${versionNo}_js_src.zip"/>
+    <delete file="${output.directory}/${zip.full.filename}"/>
+    <zip destfile="${output.directory}/${zip.full.filename}" basedir="${sources.directory}" excludes="${layer.name}.js, dojotk\dojo\nls\*"/>
+    <copy file="${output.directory}/${zip.full.filename}" tofile=".\${zip.full.filename}"/>
+  </target>
+
+</project>

@@ -1,0 +1,1065 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Misalignment of text input fields for default width</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Misalignment of text input fields for default width";
+    pageId="urn:lsid:ibm.com:td:3f9def2b-a285-4d48-ac78-a25bb5bbcc73";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Misalignment of text input fields for default width</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><div contenteditable="false" name="intInfo" style="border-radius: 6px; margin: 8px; padding: 4px; display: block; width: auto;background-color: #ffc;">Table of Contents:
+<ul style="list-style-type:none !important;">
+	<li style="list-style-type:none;"><a href="#ii3" style="display: block;">Stakeholders</a></li>
+	<li style="list-style-type:none;"><a href="#ii4" style="display: block;">Background</a></li>
+	<li style="list-style-type:none;"><a href="#ii5" style="display: block;">Requirements</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii6" style="display: block;">Requirement Decisions</a></li>
+		<li style="list-style-type:none;"><a href="#ii7" style="display: block;">Non Functional Requirements</a></li>
+	</ul>
+	</li>
+	<li style="list-style-type:none;"><a href="#ii8" style="display: block;">Design Options</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii9" style="display: block;">Design</a></li>
+	</ul>
+	</li>
+	<li style="list-style-type:none;"><a href="#ii10" style="display: block;">Architecture/Design Decisions</a></li>
+	<li style="list-style-type:none;"><a href="#ii13" style="display: block;">Design Specifics</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii19" style="display: block;">Design User Interface</a></li>
+		<li style="list-style-type:none;"><a href="#ii21" style="display: block;">Design Validations.</a></li>
+		<li style="list-style-type:none;"><a href="#ii22" style="display: block;">Design Metadata Changes</a></li>
+		<li style="list-style-type:none;"><a href="#ii23" style="display: block;">Design Logical Data Model Changes.</a></li>
+		<li style="list-style-type:none;"><a href="#ii24" style="display: block;">Design Resilience Measures</a></li>
+		<li style="list-style-type:none;"><a href="#ii25" style="display: block;">Design Logging</a></li>
+		<li style="list-style-type:none;"><a href="#ii26" style="display: block;">Design Accessibility</a></li>
+		<li style="list-style-type:none;"><a href="#ii27" style="display: block;">Third Party Software and Legal Requirements</a></li>
+	</ul>
+	</li>
+	<li style="list-style-type:none;"><a href="#ii28" style="display: block;">Use Cases</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii11" style="display: block;">TabTest Use cases</a></li>
+	</ul>
+	</li>
+	<li style="list-style-type:none;"><a href="#ii15" style="display: block;">Implementation Notes</a></li>
+	<li style="list-style-type:none;"><a href="#ii16" style="display: block;">Application Impact</a></li>
+	<li style="list-style-type:none;"><a href="#ii17" style="display: block;">Configuration Transport Manager</a></li>
+	<li style="list-style-type:none;"><a href="#ii12" style="display: block;">Scenario Tests</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii18" style="display: block;">Scenario 1 : For Use Case 1.1</a></li>
+		<li style="list-style-type:none;"><a href="#ii29" style="display: block;">Scenario 2 : For Use Case 1.2</a></li>
+		<li style="list-style-type:none;"><a href="#ii30" style="display: block;">Scenario 3 : For Use Case 1.3</a></li>
+		<li style="list-style-type:none;"><a href="#ii31" style="display: block;">Scenario 4 : For Use Case 1.4</a></li>
+		<li style="list-style-type:none;"><a href="#ii32" style="display: block;">Scenario 5 : For Use Case 1.5</a></li>
+		<li style="list-style-type:none;"><a href="#ii33" style="display: block;">Scenario 6 : For Use Case 1.6</a></li>
+		<li style="list-style-type:none;"><a href="#ii34" style="display: block;">Scenario 7 : For Use Case 1.7</a></li>
+	</ul>
+	</li>
+	<li style="list-style-type:none;"><a href="#ii20" style="display: block;">Check Lists</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii1" style="display: block;">IEG Check List</a></li>
+		<li style="list-style-type:none;"><a href="#ii2" style="display: block;">Workflow Check List</a></li>
+	</ul>
+	</li>
+</ul>
+</div>
+
+<p dir="ltr">&nbsp;</p>
+
+<h1 dir="ltr"><span style="font-size:20px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Design Page for </strong></span><span class="floatingTable" dojoattachpoint="floatingTableNode"><span class="titleTextArea" dojoattachpoint="titleTextAreaNode"><span class="TitleText" dojoattachpoint="_titleTextNode" tabindex="0">247387</span></span></span><span style="font-size:20px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"> - </strong></span>User Interface: Misalignment of text input fields for default width</h1>
+
+<h2 dir="ltr" id="ii3">Stakeholders</h2>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Refer to the following Org Chart to ensure you are engaging the correct people. The table below indicates the current contacts for each area.
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://ibm.biz/BdsuKd">https://ibm.biz/BdsuKd</a></li>
+	</ul>
+	</li>
+</ul>
+
+<table border="1" dir="ltr" style="width: 500px;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Role</span></strong></td>
+			<td style="width: 120px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Name</span></strong></td>
+			<td style="width: 168px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Sign Off if Applicable</span></strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Customer</td>
+			<td style="width: 120px;">&nbsp;Ontario</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Business Owner/Product Owner</td>
+			<td style="width: 120px;">Denise Dunne</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Architect</td>
+			<td style="width: 120px;">Fergal Gavin</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Developer(s)</td>
+			<td style="width: 120px;">&nbsp;Barry O Sullivan</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">FVT</td>
+			<td style="width: 120px;">&nbsp;Vamsi Mukollu</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">SVT</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Information Developer</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">UX Design</td>
+			<td style="width: 120px;">Darran McCague/ April Haeun Jin</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Legal</td>
+			<td style="width: 120px;">Deirdre Dolan/Jim Rook</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii4">Background</h2>
+
+<p dir="ltr">On create/edit screens in the application, the text input field is not aligned correctly with other form controls when it is being displayed using it's default width i.e the WIDTH attribute is not set on that field in UIM/VIM. It should align with other fields on a screen that has other form controls. It seems that this was a defect for V7.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The source of the issue is that 20 pixles are subtracted from the width of 100%. The following CSS selectors control the layout of the text input field in a cluster (curam_form_controls_text_input.css):</p>
+
+<p dir="ltr">body.soria div.list table tbody td.field input.text,<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+body.soria div.cluster table tbody td.field input.text,<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+body.soria div.cluster table tbody td.field input.password,<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+body.soria div.cluster table tbody td.address input.text,<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+body.soria div.cluster table tbody td.batch input.text {<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;width: calc(100% - 20px);<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+}</p>
+
+<h2 dir="ltr" id="ii5">Requirements</h2>
+
+<p dir="ltr">When there is no WIDTH specified on a text FIELD (the fields domain is based on CURAM_STRING) element in UIM/VIM) it should be aligned with other form controls on a create/edit screen in the application.</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=247387">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=247387</a>.</li>
+</ul>
+
+<h3 dir="ltr" id="ii6">Requirement Decisions</h3>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">There may be some outstanding questions/decisions made as regards to the requirements. These decisions should be documented here.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="156" width="860">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement Decision Title</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Issue or Problem Statement</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Assumptions</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Motivation</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Alternatives</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Decision</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Justification</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Implications</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Status</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Date</strong></span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<h3 dir="ltr" id="ii7">Non Functional Requirements</h3>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. Do the following non functional requirements apply to the enhancement being created and if so, minor details should be provided here. We can fill in N/A if the specified non functional requirement is not applicable to the feature being delivered.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" width="671">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">NFR</strong></td>
+			<td style="width: 537px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Accessibility</td>
+			<td style="width: 537px;">&nbsp;No impact to accessibility</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Availability &amp; Resilience</td>
+			<td style="width: 537px;">No impact to availibility and Resilience</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Development Resource</td>
+			<td style="width: 537px;">&nbsp;Not applicable</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Evolution</td>
+			<td style="width: 537px;">Potential evolution may include an enhancement to auto size modals to fit the content. This doe snot affect such an enhancement.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Internationalisation</td>
+			<td style="width: 537px;">No impact</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Location</td>
+			<td style="width: 537px;">Not applicable</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Performance and Scalability</td>
+			<td style="width: 537px;">Not applicable</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Regulation</td>
+			<td style="width: 537px;">Not applicable</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Security</td>
+			<td style="width: 537px;">Not applicable</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Usability</td>
+			<td style="width: 537px;">Not applicable</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii8">Design Options</h2>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:18px;">Option 1</span></strong></p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; On the text input field, remove the 20 pixels so that is juts left at 100%</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:18px;">Option 2</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">Leave the text input field as is but instead update the CSS for the other form control e.g for date, dropdown fields, subtract an additional 20 pixels so that they are all aligned.</p>
+
+<p dir="ltr" style="margin-left: 80px;">&nbsp;</p>
+
+<h3 dir="ltr" id="ii9">Design</h3>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. This should outline in detail the design chosen with all of the various areas for the component covered.</p>
+
+<h2 dir="ltr" id="ii10">Architecture/Design Decisions</h2>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<table border="1" dir="ltr" height="156" width="860">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Architecture Decision Title</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Issue or Problem Statement</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Assumptions</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Motivation</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Alternatives</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Decision</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Justification</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Implications</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Status</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Date</strong></span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">Open/In Progress/Closed</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii13">Design Specifics</h2>
+
+<p dir="ltr">Option 1:</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CDEJ:</strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CSS Changes</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; body.soria div.list table tbody td.field input.text,<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; body.soria div.cluster table tbody td.field input.text,<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; body.soria div.cluster table tbody td.field input.password,<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; body.soria div.cluster table tbody td.address input.text,<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; body.soria div.cluster table tbody td.batch input.text {<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <s>width: calc(100% - 20px);</s></p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>width: 100%;</strong><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<h3 dir="ltr" id="ii14">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+
+<h3 dir="ltr" id="ii19">&nbsp;&nbsp;&nbsp; Design User Interface</h3>
+
+<p dir="ltr">&nbsp;&nbsp; The change does include a slight alternation to UI page that have input text fields in a form. It is a bug fix really rather than an enhancement.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp; The change to be made has already been covered in the design specifics. Tablet support, and RTL are both being considered.</p>
+
+<h3 dir="ltr" id="ii21">&nbsp;&nbsp; Design Validations.&nbsp;&nbsp;</h3>
+
+<p dir="ltr">&nbsp;&nbsp; NA</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii22">&nbsp;&nbsp; Design Metadata Changes</h3>
+
+<p dir="ltr" id="ii35">&nbsp;&nbsp; NA</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<h3 dir="ltr" id="ii23" style="margin-left: 40px;">Design Logical Data Model Changes.&nbsp;&nbsp;</h3>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NA</p>
+
+<h3 dir="ltr" id="ii24" style="margin-left: 40px;">Design Resilience Measures</h3>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">What happens if something expected/unexpected goes wrong? <strong>This should be observed in FVT testing as many behaviors are covered but in worst possible scenario we could give customer custom CSS to apply.</strong></li>
+	<li style="margin-left: 40px;">What happens to the system? <strong>It's UI no intended behaviour</strong></li>
+	<li style="margin-left: 40px;">Will the user be able to take corrective action in the system without the need to resort to application logs/SQL searching/data manipulation outside of the system. <strong>Yes</strong></li>
+	<li style="margin-left: 40px;">Will the data be left in a consistent state within the system after the exception is thrown? <strong>No</strong></li>
+	<li style="margin-left: 40px;">Will there be messages given to the user? What will these messages be? <strong>No</strong></li>
+	<li style="margin-left: 40px;">Will there something written to the logs? What will this be? <strong>No</strong></li>
+	<li style="margin-left: 40px;">Does the feature require some of the exception data to be captured and an admin function provided to allow the situation to be re-mediated? <strong>No</strong></li>
+</ul>
+
+<h3 dir="ltr" id="ii25" style="margin-left: 40px;">Design Logging</h3>
+
+<p dir="ltr" style="margin-left: 40px;">NA</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<h3 dir="ltr" id="ii26" style="margin-left: 40px;">Design Accessibility</h3>
+
+<p dir="ltr" style="margin-left: 40px;">NA</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<h3 dir="ltr" id="ii27" style="margin-left: 40px;">Third Party Software and Legal Requirements</h3>
+
+<p dir="ltr" style="margin-left: 40px;">NA</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii28">Use Cases</h2>
+
+<h3 dir="ltr" id="ii11">TabTest Use cases</h3>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="341" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</strong></td>
+			<td style="width: 336px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1.1</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Name</td>
+			<td style="width: 336px;">Page has default text input and other form controls in <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1 column cluster</strong> in main content area</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Actor</td>
+			<td style="width: 336px;">Citizen</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Description</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The user does some action to navigate to the page</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Preconditions</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Define a &lt;CLUSTER&gt; element.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">It should have several FIELD elements with target connections of different domains but 1 should have a domain based on a string and should <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">NOT</strong> have the WIDTH attribute set on the FIELD element.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Flow</td>
+			<td style="width: 336px;">The user does some action to navigate to the page</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Expected</td>
+			<td style="width: 336px;">The text input field(s) should be aligned with the other form controls on the page</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="341" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</strong></td>
+			<td style="width: 336px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1.2</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Name</td>
+			<td style="width: 336px;">Page has default text input and other form controls in<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"> multiple</strong> <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">column cluster</strong> in main content area</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Actor</td>
+			<td style="width: 336px;">Citizen</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Description</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The user does some action to navigate to the page</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Preconditions</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Define a &lt;CLUSTER&gt; element with NUM_COLS attribute set to more than 1.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">It should have several FIELD elements with target connections of different domains but 1 in each column should have a domain based on a string and should <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">NOT</strong> have the WIDTH attriute set on the FIELD element.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Flow</td>
+			<td style="width: 336px;">The user does some action to navigate to the page</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Expected</td>
+			<td style="width: 336px;">The text input field(s) should be aliogned with the other form controls on the page</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="341" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</strong></td>
+			<td style="width: 336px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1.3</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Name</td>
+			<td style="width: 336px;">Page has default text input and other form controls in a multi column cluster<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"> in a modal</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Actor</td>
+			<td style="width: 336px;">Citizen</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Description</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The user does some action to navigate to a modal</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Preconditions</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Define a &lt;CLUSTER&gt; element in&nbsp; modal page</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">It should have several FIELD elements with target connections of different domains but 1 should have a domain based on a string and should <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">NOT</strong> have the WIDTH attriute set on the FIELD element.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Flow</td>
+			<td style="width: 336px;">The user does some action to navigate to the page</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Expected</td>
+			<td style="width: 336px;">The text input field(s) should be aligned with the other form controls on the page</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="341" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</strong></td>
+			<td style="width: 336px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1.4</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Name</td>
+			<td style="width: 336px;">Page has text input fields with WIDTH set and other form controls in a multi column cluster</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Actor</td>
+			<td style="width: 336px;">Citizen</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Description</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The user does some action to navigate to a modal</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Preconditions</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Define a &lt;CLUSTER&gt; element</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">It should have several FIELD elements with target connections of different domains but 1 should have a domain based on a string and should have the WIDTH attriute set on the FIELD element.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Flow</td>
+			<td style="width: 336px;">The user does some action to navigate to the page</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Expected</td>
+			<td style="width: 336px;">The text input field(s) that has it's WIDTH attribute set should NOT be aligned with the other form controls</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="341" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</strong></td>
+			<td style="width: 336px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1.5</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Name</td>
+			<td style="width: 336px;">Page has default text input and other form controls in a multi column cluster<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"> on tablet</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Actor</td>
+			<td style="width: 336px;">Citizen</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Description</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The user does some action to navigate to a modal</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Preconditions</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Define a &lt;CLUSTER&gt; element in&nbsp; modal page</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">It should have several FIELD elements with target connections of different domains but 1 should have a domain based on a string and should <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">NOT</strong> have the WIDTH attriute set on the FIELD element.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Flow</td>
+			<td style="width: 336px;">The user does some action to navigate to the page</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Expected</td>
+			<td style="width: 336px;">The text input field(s) should be aligned with the other form controls on the page when on tablet</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="341" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</strong></td>
+			<td style="width: 336px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1.6</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Name</td>
+			<td style="width: 336px;">Page has default text input and other form controls in a multi column cluster<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"> in Arabic</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Actor</td>
+			<td style="width: 336px;">Citizen</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Description</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The user does some action to navigate to a modal when application in Arabic locale</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Preconditions</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Define a &lt;CLUSTER&gt; element in&nbsp; modal page</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">It should have several FIELD elements with target connections of different domains but 1 should have a domain based on a string and should <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">NOT</strong> have the WIDTH attriute set on the FIELD element.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Flow</td>
+			<td style="width: 336px;">The user does some action to navigate to the page</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Expected</td>
+			<td style="width: 336px;">The text input field(s) should be aligned with the other form controls on the page and should be <strong>LTR mode</strong></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="341" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</strong></td>
+			<td style="width: 336px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1.7</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Name</td>
+			<td style="width: 336px;">Page has default text input and other form controls in a multi column cluster<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"> in Dynamic UIM</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Actor</td>
+			<td style="width: 336px;">Citizen</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Description</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The user does some action to navigate to a modal when application in Arabic locale</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Preconditions</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Define a &lt;CLUSTER&gt; element in a <strong>Dynamic UIM page</strong></p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">It should have several FIELD elements with target connections of different domains but 1 should have a domain based on a string and should <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">NOT</strong> have the WIDTH attriute set on the FIELD element.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Flow</td>
+			<td style="width: 336px;">The user does some action to navigate to the page</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Expected</td>
+			<td style="width: 336px;">The text input field(s) should be aligned with the other form controls on the page.</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2 dir="ltr" id="ii15">Implementation Notes</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">optional</strong>. Any notes related to the actual implementation can be described here. These can be related to some questions related to the implementation, the way some part of the implementation was completed etc.</p>
+
+<h2 dir="ltr" id="ii16">Application Impact</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. If there is no impact, then this is as simple as saying so. If there is impact, then this may describe the impact in detail and outline the upgrade path. If the feature is related to a CLE, this section can be a link to that CLE (and hence the documentation associated with the CLE will suffice).</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="74" width="1124">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 125px;"><span style="font-size:16px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:16px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Components Affected</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:16px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actions</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:16px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Comments</strong></span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2 dir="ltr" id="ii17">Configuration Transport Manager</h2>
+
+<p dir="ltr">NA</p>
+
+<h2 dir="ltr" id="ii12">Scenario Tests</h2>
+
+<p dir="ltr">These are all scenario tests in the TabTest application.</p>
+
+<h3 dir="ltr" id="ii18">Scenario 1 : For Use Case 1.1</h3>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1</strong>. Log in to TabTest application as unautheticated/case worker</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2.</strong> From the home page, click on the '<span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">STATIC UIM Elements Tab</span></span>' link</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3.</strong> Select 'Main Content'/'Layout'/<span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">'One column read input cluster'<span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;"> </span>link.</span></span></p>
+
+<p dir="ltr"><span style="font-size:14px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">Expected:</span></span><span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;"> </span><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">The page should <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">open in the main content area</strong>. The cluster should have all the fiield aligned - except for the date time field.</span></span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii29">Scenario 2 : For Use Case 1.2</h3>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1</strong>. Log in to TabTest application as unautheticated/case worker</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2.</strong> From the home page, click on the '<span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">STATIC UIM Elements Tab</span></span>' link</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3.</strong> Select 'Main Content'/'Layout'/<span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">''Two column input cluster (number of fields IS divisible by two)<span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">' </span><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;"> </span>link.</span></span></p>
+
+<p dir="ltr"><span style="font-size:14px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">Expected:</span></span><span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;"> </span></span></p>
+
+<p dir="ltr"><span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">- The page should <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">open in the main content area</strong> and have 2 clusters. </span></span></p>
+
+<p dir="ltr"><span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">- The top cluster should have all the fiield aligned - except for the date time field.</span></span></p>
+
+<h3 dir="ltr" id="ii30">Scenario 3 : For Use Case 1.3</h3>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1</strong>. Log in to TabTest application as unautheticated/case worker</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2.</strong> From the home page, click on the '<span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">STATIC UIM Elements Tab</span></span>' link</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3.</strong> Select 'Modal'/'Layout'/<span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">''Two column input cluster (number of fields IS divisible by two)<span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">' </span><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;"> </span>link.</span></span></p>
+
+<p dir="ltr"><span style="font-size:14px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">Expected:</span></span><span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;"> </span></span></p>
+
+<p dir="ltr"><span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">- The page should <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">open in a modal dialog</strong> and have 2 clusters. </span></span></p>
+
+<p dir="ltr"><span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">- The top cluster should have all the fiield aligned - except for the date time field.</span></span></p>
+
+<h3 dir="ltr" id="ii31">Scenario 4 : For Use Case 1.4</h3>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1</strong>. Log in to TabTest application as unautheticated/case worker</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2.</strong> From the home page, click on the '<span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">STATIC UIM Elements Tab</span></span>' link</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3.</strong> Select 'Main Content'/'Layout'/<span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">''Two column input cluster (number of fields IS divisible by two)<span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">' </span><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;"> </span>link.</span></span></p>
+
+<p dir="ltr"><span style="font-size:14px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">Expected:</span></span><span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;"> </span></span></p>
+
+<p dir="ltr"><span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">- The page should <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">open in the main content area</strong> and have 2 clusters. </span></span></p>
+
+<p dir="ltr"><span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">- The top cluster should have all the field aligned - except for the date time field.</span></span></p>
+
+<p dir="ltr"><span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">- The bottom cluster should have; 1 text input field being 60% of the same one field in the top cluster, and a second one being 50% of the same ione in the top cluster.</span></span></p>
+
+<h3 dir="ltr" id="ii32">Scenario 5 : For Use Case 1.5</h3>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Same steps as for Sceanrio 2 in tablet e.g Ipad/MS Surface.</strong></p>
+
+<h3 dir="ltr" id="ii33">Scenario 6 : For Use Case 1.6</h3>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1</strong>. Log in to TabTest application as arabic user</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2.</strong> From the home page, click on the '<span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">STATIC UIM Elements Tab</span></span>' link</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3.</strong> Select 'Main Content'/'Layout'/<span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">''Two column input cluster (number of fields IS divisible by two)<span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">' </span><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;"> </span>link.</span></span></p>
+
+<p dir="ltr"><span style="font-size:14px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">Expected in <strong>LTR mode</strong>:</span></span><span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;"> </span></span></p>
+
+<p dir="ltr"><span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">- The page should <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">open in the main content area</strong> and have 2 clusters. </span></span></p>
+
+<p dir="ltr"><span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">- The top cluster should have all the field aligned - except for the date time field.</span></span></p>
+
+<h3 dir="ltr" id="ii34">Scenario 7 : For Use Case 1.7</h3>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1</strong>. Log in to TabTest application as arabic user</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2.</strong> From the home page, click on the<strong> '<span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">DYNAMIC UIM Elements Tab</span></span>'</strong> link</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3.</strong> Select 'Main Content'/'Layout'/<span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">''Two column input cluster (number of fields IS divisible by two)<span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">' </span><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;"> </span>link.</span></span></p>
+
+<p dir="ltr"><span style="font-size:14px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">Expected:</span></span><span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;"> </span></span></p>
+
+<p dir="ltr"><span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">- The page should <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">open in the main content area</strong> and have 2 clusters. </span></span></p>
+
+<p dir="ltr"><span style="font-size:12px;"><span style="color: rgb(0, 0, 0); font-family: HelvNeueMediumforIBM, Helvetica, Arial; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">- The top cluster should have all the field aligned - except for the date time field.</span></span></p>
+
+<h2 dir="ltr" id="ii20">Check Lists</h2>
+
+<h3 dir="ltr" id="ii1">IEG Check List</h3>
+
+<table border="1" dir="ltr" style="width: 658px;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Check List Item</strong></td>
+			<td style="width: 314px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Notes</strong></td>
+			<td style="width: 157px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">Navigation</td>
+			<td style="width: 314px;">Is the feature being introduced going to have an affect on IEG navigation (fast path, disabling sections, page navigation, looping, visited pages, summary pages and links from them). Ensure tests cases in place for all of these.</td>
+			<td style="width: 157px;">&nbsp; <strong>NA</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">Different Running Modes</td>
+			<td style="width: 314px;">IEG can be run in a tab, in a modal and in a page, consider the affect your new feature will have in all these running modes? Also External and Internal Mode.</td>
+			<td style="width: 157px;">&nbsp;<strong>NA</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">Localizable Text</td>
+			<td style="width: 314px;">Is there any localizable text in the new feature being added?</td>
+			<td style="width: 157px;">&nbsp;<strong>NA</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">Layout Impact</td>
+			<td style="width: 314px;">The feature you are adding may be used in many different contexts. Ensure you consider all of the places that this new feature can be used (examining the schema could give you a good idea of places where the metadata element/attribute can be used etc.). The actual way the feature is displayed in all of the different contexts should also be considered here.</td>
+			<td style="width: 157px;"><strong>&nbsp;Yes</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">Data Storage</td>
+			<td style="width: 314px;">Consider the new feature with regards to the data (datastore entities) that it is manipulating (IEG Engine functionality). Ensure that the new feature will have no adverse affect on this.</td>
+			<td style="width: 157px;"><strong>NA</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">RTL Requirements</td>
+			<td style="width: 314px;">Consider the new feature being added with regards to right to left requirements and feed these into the use cases</td>
+			<td style="width: 157px;"><strong>&nbsp;Yes</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">Code Line</td>
+			<td style="width: 314px;">Consider the new feature with regards to the code line policy for IEG</td>
+			<td style="width: 157px;">&nbsp;<strong>Yes</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">ERD</td>
+			<td style="width: 314px;">Does the feature require updates to the ERD. If so, then it should be mocked up to see the relationships between the new feature and existing functionality at the ERD level. This may highlight some design features in the new data structures being added.</td>
+			<td style="width: 157px;">&nbsp;<strong>NA</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">CPT</td>
+			<td style="width: 314px;">Should this feature be added to the V7 CPT?</td>
+			<td style="width: 157px;"><strong>&nbsp;No</strong></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii2">Workflow Check List</h3>
+
+<table border="1" dir="ltr">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Check List Item</strong></td>
+			<td style="width: 314px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Notes</strong></td>
+			<td style="width: 157px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">PDT Page-level Validations</td>
+			<td style="width: 314px;">Are there new ones required?</td>
+			<td style="width: 157px;">&nbsp;NA</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">PDT Process-level Validations</td>
+			<td style="width: 314px;">Are the process-level validation messages sensible when run on the command line?</td>
+			<td style="width: 157px;">&nbsp;<strong>NA</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">PDT "Valid" Indicators</td>
+			<td style="width: 314px;">Are there any pages where WDO attributes are displayed and if so do they need valid indicator fields?</td>
+			<td style="width: 157px;">&nbsp;<strong>NA</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">Localizable Text</td>
+			<td style="width: 314px;">Is there any localizable text in the new feature being added (and if so the section of the PDT that allows a process developer to localize text must be updated)?</td>
+			<td style="width: 157px;">&nbsp;<strong>NA</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">Context WDOs</td>
+			<td style="width: 314px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Does the feature involve the creation of a Context WDO? If so, the following points must be considered.</p>
+
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tests that the WDO is created and used properly</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tests that the WDO gets cleaned-up properly</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tests that the WDO is audited properly</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tests for "rainy day" scenarios (e.g. you just added a WDO that appears when a deadline expires, does it work when the deadline *doesn't* expire?).</li>
+			</ul>
+			</td>
+			<td style="width: 157px;">&nbsp;<strong>NA</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">Existing Context WDOs</td>
+			<td style="width: 314px;">Does the feature interact with any existing Context WDOS? (e.g. is it mutually-exclusive to a WDO?)</td>
+			<td style="width: 157px;">&nbsp;<strong>NA</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">Workflow Auditing</td>
+			<td style="width: 314px;">Does the feature introduce a new auditable workflow "event" (WORKFLOWHISTORY record)?</td>
+			<td style="width: 157px;"><strong>&nbsp;NA</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">PDT Web Tests</td>
+			<td style="width: 314px;">Does the feature need PDT Web Tests?</td>
+			<td style="width: 157px;">&nbsp;<strong>NA</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">Code Line</td>
+			<td style="width: 314px;">Consider the new feature with regards to the code line policy for Workflow</td>
+			<td style="width: 157px;">&nbsp;<strong>NA</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">ERD</td>
+			<td style="width: 314px;">Does the feature require updates to the ERD. If so, then it should be mocked up to see the relationships between the new feature and existing functionality at the ERD level. This may highlight some design features in the new data structures being added.</td>
+			<td style="width: 157px;">&nbsp;<strong>NA</strong></td>
+		</tr>
+	</tbody>
+</table></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

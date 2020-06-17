@@ -1,0 +1,707 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>JavaScript Unit Testing and Coverage</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="JavaScript Unit Testing and Coverage";
+    pageId="urn:lsid:ibm.com:td:4063f812-3b4c-4457-92e7-2cac97ff2509";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">JavaScript Unit Testing and Coverage</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h2 dir="ltr">Dojo</h2>
+
+<p dir="ltr">Latest version of SPM built on top of Dojo 1.10.&nbsp; Dojo 2.0 will be released shortly: <a href="https://dojotoolkit.org/community/roadmap/vision.html">https://dojotoolkit.org/community/roadmap/vision.html</a></p>
+
+<p dir="ltr">This shows the migration path from Dojo 1.x to Dojo 2.0 : <a href="https://dojotoolkit.org/reference-guide/1.9/releasenotes/migration-2.0.html">https://dojotoolkit.org/reference-guide/1.9/releasenotes/migration-2.0.html</a></p>
+
+<p dir="ltr">Intern</p>
+
+<p dir="ltr">Currently use Intern for Unit Testing: <a href="https://theintern.github.io/">https://theintern.github.io/</a>. It is run on top of Selenium web driver.</p>
+
+<h2 dir="ltr">Intern Recorder</h2>
+
+<p dir="ltr"><a href="https://www.sitepen.com/blog/2015/08/06/introducing-intern-recorder/">https://www.sitepen.com/blog/2015/08/06/introducing-intern-recorder/</a></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr"><strong>Best Practices for Unit Testing using Intern</strong></h2>
+
+<h3 dir="ltr">1-&nbsp;Write Isolated Test Cases and Suites</h3>
+
+<p dir="ltr"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;">The order of execution&nbsp;must be independent between test cases and suites.</span></p>
+
+<p dir="ltr">All intern&nbsp;test suites&nbsp;are executed in a single page context, it is necessary to clean&nbsp;the used resources after each test <span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;">to avoid impacts on other suites</span>.</p>
+
+<p dir="ltr">Clean&nbsp;after use:</p>
+
+<ul dir="ltr">
+	<li>Global Variables;</li>
+	<li>
+	<p dir="ltr">Dojo Topic Subscribers;</p>
+	</li>
+	<li>
+	<p dir="ltr">DOM.</p>
+	</li>
+</ul>
+
+<p dir="ltr">It is possible to clean the resources either directly on the test case or using the intern utilities methods&nbsp;<strong><em>teardown()</em> </strong>and <strong><em>beforeEach()</em></strong>.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr">2-Single Assert per Test Case</h3>
+
+<ul dir="ltr">
+	<li>The test will fail in only one situation giving a clear picture about it;</li>
+	<li>Easier&nbsp;to read and maintain;</li>
+	<li>Easier to choose a more descriptive test name.</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">Tip:&nbsp;Write the assertion first, so the purpose of the test will be more clear;</p>
+
+<h3 dir="ltr">3-Asynchronous tests</h3>
+
+<p dir="ltr">Each test case runs synchronously and they are finished after the executor reaches the last line of the test function or after an assertion fails/exception thrown.&nbsp;</p>
+
+<p dir="ltr">If a test has asserts within an asynchronous execution callback, it won't be properly evaluated unless you deal with it explicitly.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Examples of asynchronous executions:</p>
+
+<ul dir="ltr">
+	<li>Timeouts</li>
+	<li>Topic Subscribers</li>
+	<li>XHR</li>
+</ul>
+
+<p dir="ltr"><strong>None of the examples below will evaluate their asserts and these tests will never fail.</strong></p>
+
+<div dir="ltr">&nbsp;</div>
+
+<div dir="ltr">
+<div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;">
+<table border="0" style="border: 0;background-color:rgb(240, 245, 245);line-height:14.4px;width:100%;">
+	<tbody>
+		<tr>
+			<td style="width: 500px;">
+			<p style="line-height: 14.4px;"><span style="font-family: 'courier new', courier, monospace;"><span style="color: rgb(0, 0, 255);">'test ModalDialog iframe unloaded'</span>&nbsp;: function() {<br />
+			&nbsp; &nbsp;<span style="color: rgb(0, 128, 128);">// Open a new modal</span><br />
+			&nbsp; &nbsp;var modal = new modalDialog({<br />
+			&nbsp; &nbsp;&nbsp; href :&nbsp;<span style="color: rgb(0, 0, 255);">'README.md'</span>,<br />
+			&nbsp; &nbsp;&nbsp; width : 250,<br />
+			&nbsp; &nbsp;&nbsp; height : 250,<br />
+			&nbsp; &nbsp;});</span></p>
+
+			<p style="line-height: 14.4px;">&nbsp;</p>
+
+			<p style="line-height: 14.4px;"><span style="font-family: 'courier new', courier, monospace;"><span style="color: rgb(0, 128, 128);">&nbsp; &nbsp;//Simulate an&nbsp;iframe unloaded event</span><br />
+			&nbsp; &nbsp;curam.util.getTopmostWindow().dojo.publish(<br />
+			&nbsp; &nbsp; &nbsp; &nbsp;<span style="color: rgb(0, 0, 255);">"/curam/dialog/iframeUnloaded"</span>, [ modal.id ]);<br />
+			&nbsp; &nbsp;</span></p>
+
+			<p style="line-height: 14.4px;"><span style="font-family: 'courier new', courier, monospace;">&nbsp; &nbsp;</span><span style="color: rgb(0, 128, 128); font-family: 'courier new', courier, monospace; line-height: 14.4px; background-color: rgb(240, 245, 245);">//Wait 200ms for the modal hiding process&nbsp;</span><span style="font-family: 'courier new', courier, monospace;"> &nbsp; &nbsp; &nbsp;&nbsp;<br />
+			&nbsp; &nbsp;setTimeout(function(){<br />
+			&nbsp; &nbsp; &nbsp; assert.equal(domStyle.getComputedStyle(modal.iframe).visibility,</span></p>
+
+			<p style="line-height: 14.4px;"><span style="font-family: 'courier new', courier, monospace;"><span style="color: rgb(0, 0, 255);">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'hidden'</span>,&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: rgb(0, 0, 255);">'iframe visibility should be set to hidden'</span>);<br />
+			&nbsp; &nbsp; &nbsp; }, </span></p>
+
+			<p style="line-height: 14.4px;"><span style="font-family: 'courier new', courier, monospace;">&nbsp; &nbsp; 200);<br />
+			},&nbsp;</span></p>
+
+			<div>&nbsp;</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+</div>
+
+<p dir="ltr" style="text-align: center;"><span style="font-size:10px;">​Code: Timeout callback - The assert&nbsp;won't be evaluated. The test ends before the executor reaches the timeout function</span></p>
+
+<p dir="ltr" style="text-align: center;">&nbsp;</p>
+
+<p dir="ltr" style="text-align: center;">&nbsp;</p>
+
+<div dir="ltr">
+<div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;">
+<table border="0" style="background-color:rgb(240, 245, 245);border:0px;line-height:14.4px;width:100%;">
+	<tbody>
+		<tr>
+			<td style="width: 500px;">
+			<p style="line-height: 14.4px;"><span style="font-family: 'courier new', courier, monospace;"><span style="color: rgb(0, 0, 255);">'test ModalDialog&nbsp;Visible after the&nbsp;AfterDisplay&nbsp;event'</span>&nbsp;: function() {<br />
+			&nbsp; &nbsp;var modal = new modalDialog({<br />
+			&nbsp; &nbsp; &nbsp;href :&nbsp;<span style="color: rgb(0, 0, 255);">'README.md'</span>,<br />
+			&nbsp; &nbsp; &nbsp;width : 150,<br />
+			&nbsp; &nbsp; &nbsp;height : 150,<br />
+			&nbsp; &nbsp;});</span></p>
+
+			<p>&nbsp;</p>
+
+			<p><span style="font-family: 'courier new', courier, monospace;">&nbsp; &nbsp;<span style="color: rgb(0, 128, 128);">//Wait for the "AfterDisplay" event</span><br />
+			&nbsp; &nbsp;var topic = window.top.dojo.subscribe(<span style="color: rgb(0, 0, 255);">"/curam/dialog/AfterDisplay"</span>,<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;this,&nbsp;function(dialogID) {</span></p>
+
+			<p><span style="font-family: 'courier new', courier, monospace;">&nbsp; &nbsp; &nbsp; var displayProperty = domStyle.getComputedStyle(</span></p>
+
+			<p><span style="font-family: 'courier new', courier, monospace;">&nbsp; &nbsp; &nbsp; &nbsp; dom.byId(modal.id)).display;</span><br />
+			&nbsp;</p>
+
+			<p><span style="font-family: 'courier new', courier, monospace;">&nbsp; &nbsp; &nbsp;&nbsp;<span style="color: rgb(0, 128, 128);">// Clean up</span><br />
+			&nbsp; &nbsp; &nbsp; window.top.dojo.unsubscribe(topic);<br />
+			&nbsp; &nbsp; &nbsp; modal.destroy();</span></p>
+
+			<p><span style="font-family: 'courier new', courier, monospace;">&nbsp; &nbsp;&nbsp; &nbsp;</span></p>
+
+			<p><span style="font-family: 'courier new', courier, monospace;"><span style="color: rgb(0, 128, 128);">&nbsp; &nbsp; &nbsp; // Asserts</span><br />
+			&nbsp; &nbsp;&nbsp; &nbsp;assert.equal(displayProperty,&nbsp;<span style="color: rgb(0, 0, 255);">'block'</span>,<br />
+			&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;<span style="color: rgb(0, 0, 255);">'Modal.style.display should be "block".'</span>);<br />
+			&nbsp; &nbsp;});<br />
+			},</span></p>
+
+			<div>&nbsp;</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+</div>
+
+<p dir="ltr" style="text-align: center;"><span style="font-size:10px;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px; text-align: center;">Code:&nbsp;Topic subscriber -&nbsp;The assert</span><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px; text-align: center;">&nbsp;won't be evaluated. The test ends before the executor reaches the subscriber callback function</span></span></p>
+
+<p dir="ltr" style="text-align: center;">&nbsp;</p>
+
+<p dir="ltr" style="text-align: center;">&nbsp;</p>
+
+<div dir="ltr">
+<table border="0" dir="ltr" style="border:0; background-color:rgb(240, 245, 245);border:0px;font-family:helvetica neue,helvetica,arial,sans-serif;line-height:14.4px;width:100%;">
+	<tbody>
+		<tr>
+			<td style="width: 500px;">
+			<p style="line-height: 14.4px;">&nbsp;&nbsp;<span style="font-family: 'courier new', courier, monospace;">&nbsp;&nbsp;<span style="color: rgb(0, 0, 255);">'test request.get&nbsp;Json'</span>: function() {</span></p>
+
+			<p style="line-height: 14.4px;"><span style="font-family: 'courier new', courier, monospace;">&nbsp; &nbsp; &nbsp;&nbsp;<span style="color: rgb(0, 128, 128);">//Asynchronous function&nbsp;</span></span><span style="color: rgb(0, 128, 128); font-family: 'courier new', courier, monospace; line-height: 14.4px;">callback&nbsp;</span></p>
+
+			<p style="line-height: 14.4px;"><span style="color: rgb(0, 128, 128); font-family: 'courier new', courier, monospace; line-height: 14.4px;">&nbsp;</span><span style="font-family: 'courier new', courier, monospace;">&nbsp; &nbsp; &nbsp;var successCallback = function (response, ioargs){<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; assert.isTrue(equals.equalsObject(<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {&nbsp;<span style="color: rgb(0, 0, 255);">"firstName"</span>:&nbsp;<span style="color: rgb(0, 0, 255);">"John"</span>,&nbsp;<span style="color: rgb(0, 0, 255);">"lastName"</span>:&nbsp;<span style="color: rgb(0, 0, 255);">"Doe"</span>&nbsp;}, &nbsp;&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; response)); &nbsp;&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; };<br />
+			&nbsp; &nbsp; &nbsp;&nbsp;<br />
+			&nbsp; &nbsp; &nbsp;&nbsp;<span style="color: rgb(0, 128, 128);">//Asynchronous Call</span><br />
+			&nbsp; &nbsp; &nbsp; request.get({<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; url:&nbsp;<span style="color: rgb(0, 0, 255);">'/person.do'</span>,<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; headers: {&nbsp;<span style="color: rgb(0, 0, 255);">"Content-Encoding"</span>:&nbsp;<span style="color: rgb(0, 0, 255);">"UTF-8"</span>&nbsp;},<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; handleAs: &nbsp;<span style="color: rgb(0, 0, 255);">"json"</span>,<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; load:&nbsp;successCallback,<br />
+			&nbsp; &nbsp; &nbsp; });<br />
+			&nbsp; &nbsp; }</span></p>
+
+			<div>&nbsp;</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<p dir="ltr" style="text-align: center;"><span style="font-size:10px;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px; text-align: center;">Code: XHR success callback -&nbsp;The assert</span><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px; text-align: center;">&nbsp;won't be evaluated. The test ends before the executor reaches the XHR success callback function</span></span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Intern Promises</strong></p>
+
+<p dir="ltr">Asynchronous tests in Intern are based on promises.&nbsp;If a test returns a promise then the&nbsp;intern runner will wait for its&nbsp;resolution.</p>
+
+<ul dir="ltr">
+	<li>Resolving the promise indicates a passing test;</li>
+	<li>A Promise timeout or rejection indicates a failed test.</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Intern Api:</strong></p>
+
+<ul dir="ltr">
+	<li>this.async(timeout) - Creates a new Deferred object with an expiration time in milliseconds (If not provided,&nbsp;the timeout will be set to&nbsp;30 seconds.)</li>
+	<li>Deferred.callback(function) - The easiest way to complete an asynchronous test, it resolves the Deferred automatically. If the callback&nbsp;function has an assertion fail/throw an error, the Deferred will be rejected with that error instead.&nbsp;</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Examples:</strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">1-Callback: The test will be evaluated within the callback function. The test case will fail either if&nbsp;an assert fails or if an exception is thrown.&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="0" dir="ltr" style="border:0; background-color:#f0f5f5;width:100%;">
+	<tbody>
+		<tr>
+			<td style="width: 500px;">
+			<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;">&nbsp; <span style="font-family:courier new,courier,monospace;">&nbsp; <span style="color:#0000FF;">'test request.get()&nbsp;Json returned'</span>: function() {<br />
+			&nbsp; &nbsp; &nbsp; <strong>var deferred = this.async(500);&nbsp;</strong></span></p>
+
+			<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;">&nbsp;</p>
+
+			<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;"><span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; <span style="color:#008080;">&nbsp; //Asynchronous function&nbsp;</span></span><span style="color: rgb(0, 128, 128); font-family: 'courier new', courier, monospace; line-height: 14.4px; background-color: rgb(240, 245, 245);">callback&nbsp;</span></p>
+
+			<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;"><span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; var successCallback = function (response, ioargs){<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; assert.isTrue(equals.equalsObject(<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { <span style="color:#0000FF;">"firstName"</span>: <span style="color:#0000FF;">"John"</span>, <span style="color:#0000FF;">"lastName"</span>: <span style="color:#0000FF;">"Doe"</span> }, &nbsp;&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; response)); &nbsp;&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; };<br />
+			&nbsp; &nbsp; &nbsp;&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; <span style="color:#008080;">//Asynchronous Call</span><br />
+			&nbsp; &nbsp; &nbsp; request.get({<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; url: <span style="color:#0000FF;">'/person.do'</span>,<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; headers: { <span style="color:#0000FF;">"Content-Encoding"</span>: <span style="color:#0000FF;">"UTF-8"</span> },<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; handleAs: &nbsp;<span style="color:#0000FF;">"json"</span>,<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; load: <strong>deferred.callback(successCallback)</strong>,<br />
+			&nbsp; &nbsp; &nbsp; });</span></p>
+
+			<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;"><br />
+			<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; <strong>return deferred;</strong><br />
+			&nbsp; &nbsp; }</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="text-align: center;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 10px; text-align: center; line-height: 14.4px;">Code: Deferred Callback as a&nbsp;XHR success callback</span></p>
+
+<p dir="ltr">2-It is also possible to handle the&nbsp;promise manually:</p>
+
+<div dir="ltr">&nbsp;</div>
+
+<div dir="ltr">
+<table border="0" style="border:0; background-color:rgb(240, 245, 245);font-family:helvetica neue,helvetica,arial,sans-serif;line-height:14.4px;width:100%;">
+	<tbody>
+		<tr>
+			<td style="width: 500px;">
+			<p style="line-height: 14.4px;">&nbsp;&nbsp;<span style="font-family: 'courier new', courier, monospace;">&nbsp;&nbsp;<span style="color: rgb(0, 0, 255);">'</span></span><span style="color: rgb(0, 0, 255); font-family: 'courier new', courier, monospace; line-height: 14.4px; background-color: rgb(240, 245, 245);">test request.get()&nbsp;Json returned</span><span style="font-family: 'courier new', courier, monospace;"><span style="color: rgb(0, 0, 255);">'</span>: function() {<br />
+			&nbsp; &nbsp; &nbsp;&nbsp;<strong>var deferred = this.async(500);&nbsp;</strong></span></p>
+
+			<p style="line-height: 14.4px;">&nbsp;</p>
+
+			<p style="line-height: 14.4px;"><span style="font-family: 'courier new', courier, monospace;">&nbsp; &nbsp;&nbsp;<span style="color: rgb(0, 128, 128);">&nbsp; //Asynchronous function callback</span></span></p>
+
+			<p style="line-height: 14.4px;"><span style="font-family: 'courier new', courier, monospace;">&nbsp; &nbsp; &nbsp; var successCallback = function (response, ioargs){&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></p>
+
+			<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px; background-color: rgb(240, 245, 245);"><span style="font-family: 'courier new', courier, monospace;">&nbsp; &nbsp; &nbsp; &nbsp; if(JSON.stringify(</span></p>
+
+			<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px; background-color: rgb(240, 245, 245);"><span style="font-family: 'courier new', courier, monospace;">&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span style="font-family: 'courier new', courier, monospace; line-height: 14.4px; background-color: rgb(240, 245, 245);">{</span><span style="font-family: 'courier new', courier, monospace; line-height: 14.4px; color: rgb(0, 0, 255); background-color: rgb(240, 245, 245);">"firstName"</span><span style="font-family: 'courier new', courier, monospace; line-height: 14.4px; background-color: rgb(240, 245, 245);">:&nbsp;</span><span style="font-family: 'courier new', courier, monospace; line-height: 14.4px; color: rgb(0, 0, 255); background-color: rgb(240, 245, 245);">"John"</span><span style="font-family: 'courier new', courier, monospace; line-height: 14.4px; background-color: rgb(240, 245, 245);">,&nbsp;</span><span style="font-family: 'courier new', courier, monospace; line-height: 14.4px; color: rgb(0, 0, 255); background-color: rgb(240, 245, 245);">"lastName"</span><span style="font-family: 'courier new', courier, monospace; line-height: 14.4px; background-color: rgb(240, 245, 245);">:&nbsp;</span><span style="font-family: 'courier new', courier, monospace; line-height: 14.4px; color: rgb(0, 0, 255); background-color: rgb(240, 245, 245);">"Doe"</span><span style="font-family: 'courier new', courier, monospace; line-height: 14.4px; background-color: rgb(240, 245, 245);">}</span><span style="font-family: 'courier new', courier, monospace;">) ===<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;JSON.stringify(response)){</span></p>
+
+			<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px; background-color: rgb(240, 245, 245);"><strong><span style="font-family: 'courier new', courier, monospace;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;deferred.resolve();</span></strong></p>
+
+			<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px; background-color: rgb(240, 245, 245);"><span style="font-family: 'courier new', courier, monospace;">&nbsp; &nbsp; &nbsp; &nbsp; } else {</span></p>
+
+			<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px; background-color: rgb(240, 245, 245);">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="font-family:courier new,courier,monospace;"><strong>deferred.reject({message: 'Not Equal'});</strong></span></p>
+
+			<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px; background-color: rgb(240, 245, 245);"><span style="font-family: 'courier new', courier, monospace;">&nbsp; &nbsp; &nbsp; &nbsp; }</span></p>
+
+			<p style="line-height: 14.4px;"><span style="font-family: 'courier new', courier, monospace;">&nbsp;&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; };<br />
+			&nbsp; &nbsp; &nbsp;&nbsp;<br />
+			&nbsp; &nbsp; &nbsp;&nbsp;<span style="color: rgb(0, 128, 128);">//Asynchronous Call</span><br />
+			&nbsp; &nbsp; &nbsp; request.get({<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; url:&nbsp;<span style="color: rgb(0, 0, 255);">'/person.do'</span>,<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; headers: {&nbsp;<span style="color: rgb(0, 0, 255);">"Content-Encoding"</span>:&nbsp;<span style="color: rgb(0, 0, 255);">"UTF-8"</span>&nbsp;},<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; handleAs: &nbsp;<span style="color: rgb(0, 0, 255);">"json"</span>,<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; load:&nbsp;successCallback,<br />
+			&nbsp; &nbsp; &nbsp; });</span></p>
+
+			<p style="line-height: 14.4px;"><br />
+			<span style="font-family: 'courier new', courier, monospace;">&nbsp; &nbsp; &nbsp;&nbsp;<strong>return deferred;</strong><br />
+			&nbsp; &nbsp; }</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px; text-align: center;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 10px; line-height: 14.4px; text-align: center;">Code: Manually Resolving the Deferred object</span></p>
+
+<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;"><span style="line-height: 14.4px;">3-Working with timeouts:</span></p>
+
+<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;">&nbsp;</p>
+
+<div>
+<table border="0" style="border: 0; background-color:rgb(240, 245, 245);font-family:helvetica neue,helvetica,arial,sans-serif;line-height:14.4px;width:100%;">
+	<tbody>
+		<tr>
+			<td style="width: 500px;">
+			<p style="line-height: 14.4px;"><span style="font-family:courier new,courier,monospace;">&nbsp;&nbsp;&nbsp;</span></p>
+
+			<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;"><span style="font-family:courier new,courier,monospace;"><span style="color:#0000FF;">&nbsp; &nbsp; 'test ModalDialog iframe unloaded'</span> : function() {<br />
+			&nbsp; &nbsp; &nbsp; <strong>var deferred = this.async(500);</strong></span></p>
+
+			<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;"><span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; <span style="color:#008080;">// Open a new modal</span><br />
+			&nbsp; &nbsp; &nbsp; var modal = new modalDialog({<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; href : <span style="color:#0000FF;">'README.md'</span>,<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; width : 250,<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; height : 250,<br />
+			&nbsp; &nbsp; &nbsp; });</span></p>
+
+			<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;">&nbsp;</p>
+
+			<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;"><span style="font-family:courier new,courier,monospace;"><span style="color:#008080;">&nbsp; &nbsp; &nbsp; //Simulate an&nbsp;iframe unloaded event</span><br />
+			&nbsp; &nbsp; &nbsp; curam.util.getTopmostWindow().dojo.publish(<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color:#0000FF;">"/curam/dialog/iframeUnloaded"</span>, [ modal.id ]);<br />
+			&nbsp; &nbsp; &nbsp; </span></p>
+
+			<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;"><span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; <span style="color:#008080;">//Wait 200ms for the modal hiding process&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span><br />
+			&nbsp; &nbsp; &nbsp; setTimeout(<strong>deferred.callback(</strong>function(){<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;assert.equal(domStyle.getComputedStyle(modal.iframe).visibility, </span></p>
+
+			<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;"><span style="font-family:courier new,courier,monospace;"><span style="color:#0000FF;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'hidden'</span>,&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color:#0000FF;">'iframe visibility should be set to hidden'</span>);<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</span><strong style="font-family: 'courier new', courier, monospace; line-height: 14.4px; background-color: rgb(240, 245, 245);">)</strong><span style="font-family:courier new,courier,monospace;">, 200);<br />
+			&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></p>
+
+			<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;"><span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; return <strong>deferred</strong>;<br />
+			&nbsp; &nbsp; },&nbsp;</span></p>
+
+			<div>&nbsp;</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px; text-align: center;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 10px; line-height: 14.4px; text-align: center;">Code: Deferred Callback as a&nbsp;</span><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 10px; line-height: 14.4px; text-align: center;">timeout callback</span></p>
+
+<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;">4-Working with dojo topic subscribers:&nbsp;</p>
+
+<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;">&nbsp;</p>
+
+<div>
+<div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;">
+<table border="0" style="border: 0; background-color:rgb(240, 245, 245);line-height:14.4px;width:100%;">
+	<tbody>
+		<tr>
+			<td style="width: 500px;">
+			<p style="line-height: 14.4px;"><span style="font-family: 'courier new', courier, monospace;"><span style="color:#0000FF;">'</span></span><span style="color: rgb(0, 0, 255); font-family: 'courier new', courier, monospace; line-height: 14.4px; background-color: rgb(240, 245, 245);">test ModalDialog&nbsp;Visible after the&nbsp;AfterDisplay&nbsp;event</span><span style="font-family: 'courier new', courier, monospace;"><span style="color:#0000FF;">'</span> : function() {<br />
+			&nbsp; &nbsp;<strong>var deferred = this.async(1000);</strong></span></p>
+
+			<p style="line-height: 14.4px;">&nbsp;</p>
+
+			<p><span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;var modal = new modalDialog({<br />
+			&nbsp; &nbsp; &nbsp;href : <span style="color:#0000FF;">'README.md'</span>,<br />
+			&nbsp; &nbsp; &nbsp;width : 150,<br />
+			&nbsp; &nbsp; &nbsp;height : 150,<br />
+			&nbsp; &nbsp;});</span></p>
+
+			<p>&nbsp;</p>
+
+			<p><span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;<span style="color:#008080;">//Wait for the "AfterDisplay" event</span><br />
+			&nbsp; &nbsp;var topic = window.top.dojo.subscribe(<span style="color:#0000FF;">"/curam/dialog/AfterDisplay"</span>,<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;this, <strong>deferred.callback(</strong>function(dialogID) {</span></p>
+
+			<p><span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; var displayProperty = domStyle.getComputedStyle(</span></p>
+
+			<p><span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; dom.byId(modal.id)).display;</span><br />
+			&nbsp;</p>
+
+			<p><span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; <span style="color:#008080;">// Clean up</span><br />
+			&nbsp; &nbsp; &nbsp; window.top.dojo.unsubscribe(topic);<br />
+			&nbsp; &nbsp; &nbsp; modal.destroy();</span></p>
+
+			<p><span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;&nbsp; &nbsp;</span></p>
+
+			<p><span style="font-family:courier new,courier,monospace;"><span style="color:#008080;">&nbsp; &nbsp; &nbsp; // Asserts</span><br />
+			&nbsp; &nbsp;&nbsp; &nbsp;assert.equal(displayProperty, <span style="color:#0000FF;">'block'</span>,<br />
+			&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;<span style="color:#0000FF;">'Modal.style.display should be "block".'</span>);<br />
+			&nbsp; &nbsp;}<strong>)</strong>);</span></p>
+
+			<p><br />
+			<span style="font-family:courier new,courier,monospace;"><strong>&nbsp; &nbsp;return deferred;</strong><br />
+			},</span></p>
+
+			<div>&nbsp;</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px; text-align: center;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px; text-align: center; font-size: 10px;">Code: Deferred Callback as a&nbsp;</span><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px; text-align: center; font-size: 10px;">Topic Subscriber Callback</span></p>
+</div>
+</div>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">4-Mocking AMD Modules</h3>
+
+<p dir="ltr">To guarantee a proper isolation of the code being tested, sometimes it is necessary to mock data from other modules referenced by the test.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Example: Test an AMD Dojo Module that uses the module "dojo/_base/xhr" for ajax calls</strong></p>
+
+<p dir="ltr">In this scenario it is a good idea to change the actual "dojo/_base/xhr" for a mock module that simulates ajax request.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Steps:</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>1-</strong>Create a mock module for XHR's:</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><img lconnwikiparamattachmentname="file.png" src="JavaScript%20Unit%20Testing%20and%20Coverage._ATTACHMENTS_/file.png" lconnwikiparamwikipage="JavaScript Unit Testing and Coverage" lconnwikimacro="image" alt=""></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<div dir="ltr">
+<div dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;">
+<div style="line-height: 14.4px;">
+<table border="0" style="border: 0px; line-height: 14.4px; width: 1164.8px; background-color: rgb(240, 245, 245);">
+	<tbody>
+		<tr>
+			<td style="width: 500px;">
+			<p><span style="font-family:courier new,courier,monospace;">define([<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; <span style="color:#0000FF;">'dojo/Deferred'</span>],&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; function(Deferred) {<br />
+			&nbsp;&nbsp;<br />
+			<span style="color:#008080;">&nbsp; /*<br />
+			&nbsp; &nbsp;* Private<br />
+			&nbsp; &nbsp;*/</span><br />
+			&nbsp; var _getQueryStringParameter = function(url, paramName){<br />
+			&nbsp; &nbsp; paramName = paramName.replace(<span style="color:#0000FF;">/[\[]/, "\\["</span>).replace(<span style="color:#0000FF;">/[\]]/, "\\]"</span>);<br />
+			&nbsp; &nbsp;&nbsp;<br />
+			&nbsp; &nbsp; var regex = new RegExp(<span style="color:#0000FF;">"[\\?&amp;]"</span> + paramName + <span style="color:#0000FF;">"=([^&amp;#]*)"</span>);<br />
+			&nbsp; &nbsp; var results = regex.exec(url);&nbsp;<br />
+			&nbsp; &nbsp;&nbsp;<br />
+			&nbsp; &nbsp; return results === null ? <span style="color:#0000FF;">""</span> : decodeURIComponent(results[1].replace(<span style="color:#0000FF;">/\+/g, " "</span>));&nbsp;<br />
+			&nbsp; };<br />
+			&nbsp;&nbsp;<br />
+			&nbsp;&nbsp;<br />
+			&nbsp; return {<br />
+			&nbsp; &nbsp;&nbsp;<br />
+			&nbsp; &nbsp; get : function(args){<br />
+			&nbsp; &nbsp; &nbsp; var deferred = new Deferred();&nbsp;</span></p>
+
+			<p><span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; setTimeout(function(){<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; if(args.url.indexOf(<span style="color:#0000FF;">'/person.do'</span>) &gt; -1 ||&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; args.url.indexOf(<span style="color:#0000FF;">'/personPage.do'</span>) &gt; -1){<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var response = {&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color:#0000FF;">"firstName"</span>: _getQueryStringParameter(args.url, <span style="color:#0000FF;">'firstName'</span>) || <span style="color:#0000FF;">'John'</span>,&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color:#0000FF;">"lastName"</span> : _getQueryStringParameter(args.url, <span style="color:#0000FF;">'lastName'</span>) || <span style="color:#0000FF;">'Doe'</span><br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; };&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(args.handleAs !== <span style="color:#0000FF;">'json'</span>){<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; response = JSON.stringify(response);<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color:#008080;">//Success</span><br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(args.handle){<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; args.handle(response);<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; deferred.resolve(args.load(response));&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; }else {&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color:#008080;">//Fail</span><br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(args.handle){<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; args.handle({message : <span style="color:#0000FF;">'Path not found.'</span>});&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; deferred.resolve(args.error(<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {message : <span style="color:#0000FF;">'Path not found.'</span>},&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {xhr : {responseText: <span style="color:#0000FF;">'Path not found.'</span>}}));<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; }&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; }, 100);</span></p>
+
+			<p><span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; return deferred.promise;<br />
+			&nbsp; &nbsp; },<br />
+			&nbsp; &nbsp;&nbsp;<br />
+			&nbsp; &nbsp; post : function(args){<br />
+			&nbsp; &nbsp; &nbsp; var deferred = new Deferred();&nbsp;</span></p>
+
+			<p><span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; setTimeout(function(){<br />
+			&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; if(args.url.indexOf(<span style="color:#0000FF;">'/person.do'</span>) &gt; -1 ||&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; args.url.indexOf(<span style="color:#0000FF;">'/personPage.do'</span>) &gt; -1){<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var response = {&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color:#0000FF;">"firstName"</span>: args.content.firstName || <span style="color:#0000FF;">'John'</span>,&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color:#0000FF;">"lastName"</span> : args.content.lastName || <span style="color:#0000FF;">'Doe'</span><br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; };&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(args.handleAs !== <span style="color:#0000FF;">'json'</span>){<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; response = JSON.stringify(response);<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color:#008080;">//Success</span><br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(args.handle){<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; args.handle(response);<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; deferred.resolve(args.load(response));&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; }else {<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color:#008080;">//Fail</span><br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(args.handle){<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; args.handle({message : <span style="color:#0000FF;">'Path not found.'</span>});&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; deferred.resolve(args.error(<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {message : <span style="color:#0000FF;">'Path not found.'</span>}, &nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {xhr : {responseText: <span style="color:#0000FF;">'Path not found.'</span>}}));<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+			&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; }, 100);</span></p>
+
+			<p><span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; return deferred.promise;<br />
+			&nbsp; &nbsp; },&nbsp;<br />
+			&nbsp; &nbsp;&nbsp;<br />
+			&nbsp; };<br />
+			});</span></p>
+
+			<div>&nbsp;</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<p style="line-height: 14.4px; text-align: center;"><span style="line-height: 14.4px; font-size: 10px;">Code: xhr.js - Mocking get and post requests</span></p>
+
+<p style="line-height: 14.4px; text-align: center;">&nbsp;</p>
+
+<p style="line-height: 14.4px; margin-left: 40px;"><strong style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;">2-</strong><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;">Use the module <strong>amdMocker </strong>in the test to load the module replacing the dependency "dojo/_base/xhr" &nbsp;with your new mock module:</span></p>
+
+<p style="line-height: 14.4px; margin-left: 40px;">&nbsp;</p>
+
+<div>&nbsp;</div>
+
+<div>
+<div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px;">
+<table border="0" style="border: 0px; line-height: 14.4px; width: 1164.8px; background-color: rgb(240, 245, 245);">
+	<tbody>
+		<tr>
+			<td style="width: 500px;">
+			<p><span style="font-family:courier new,courier,monospace;">define([<span style="color:#0000FF;">'intern!object'</span>,&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; <span style="color:#0000FF;">'intern/chai!assert'</span>,<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; <span style="color:#0000FF;">'dojo/Deferred'</span>,&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; <span style="color:#0000FF;">'dojox/mvc/equals'</span>, &nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; <span style="color:#0000FF;">'cdej/support/amdMocker'</span>], function( &nbsp;<br />
+			&nbsp; &nbsp; registerSuite, assert,&nbsp;Deferred,&nbsp;<br />
+			&nbsp; &nbsp; equals, amdMocker) {<br />
+			&nbsp;<br />
+			&nbsp;<span style="color:#008080;">/**<br />
+			&nbsp; * curam/util/Request instance<br />
+			&nbsp; */</span><br />
+			<strong>&nbsp; var request;</strong></span></p>
+
+			<p><br />
+			<span style="font-family:courier new,courier,monospace;">&nbsp; registerSuite({<br />
+			&nbsp; &nbsp; name : <span style="color:#0000FF;">'Request Test Case'</span>,&nbsp;<br />
+			&nbsp; &nbsp;&nbsp;<br />
+			&nbsp; &nbsp; setup : function(){&nbsp;<br />
+			<span style="color:#008080;">&nbsp; &nbsp; &nbsp; /*<br />
+			&nbsp; &nbsp; &nbsp; &nbsp;* Inject curam/util/Request but replacing the dependency dojo/_base/xhr&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp;* with a mocked xhr module.<br />
+			&nbsp; &nbsp; &nbsp; &nbsp;*/</span><br />
+			&nbsp; &nbsp; &nbsp; <strong>return amdMocker.mock('curam/util/Request', {<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; 'dojo/_base/xhr': 'cdej/mocks/dojo/_base/xhr',&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; }).then(function (mocked) {<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; request = mocked; &nbsp;<br />
+			&nbsp; &nbsp; &nbsp; }); &nbsp;</strong><br />
+			&nbsp; &nbsp; },<br />
+			&nbsp; &nbsp;&nbsp;<br />
+			&nbsp; &nbsp;<span style="color:#008080;">&nbsp;</span>teardown : function(){<br />
+			&nbsp; &nbsp; &nbsp; <span style="color:#008080;">//Remove the instance of Request with mocks from the Dojo Loader Cache</span><br />
+			&nbsp; &nbsp; &nbsp; <strong>require.undef('curam/util/Request');</strong><br />
+			&nbsp; &nbsp; },<br />
+			&nbsp; &nbsp;&nbsp;<br />
+			&nbsp; &nbsp;&nbsp;<br />
+			&nbsp;<span style="color:#008080;"> &nbsp; /**<br />
+			&nbsp; &nbsp; &nbsp;* Unit Test<br />
+			&nbsp; &nbsp; &nbsp;* &nbsp;<br />
+			&nbsp; &nbsp; &nbsp;* Method Name: curam/util/Request.get&nbsp;<br />
+			&nbsp; &nbsp; &nbsp;*&nbsp;<br />
+			&nbsp; &nbsp; &nbsp;* Success Condition:&nbsp;<br />
+			&nbsp; &nbsp; &nbsp;* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-JSON { "firstName": "John", "lastName": "Doe" }&nbsp;<br />
+			&nbsp; &nbsp; &nbsp;* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;returned asynchronously to the success callback&nbsp;<br />
+			&nbsp; &nbsp; &nbsp;*/</span><br />
+			&nbsp; &nbsp; <span style="color:#0000FF;">'test "get" Json success'</span>: function() {<br />
+			&nbsp; &nbsp; &nbsp; var deferred = this.async(2000);&nbsp;</span></p>
+
+			<p><span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp;&nbsp;var successCallback = function (response, ioargs){<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; assert.isTrue(equals.equalsObject(<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { <span style="color:#0000FF;">"firstName"</span>: <span style="color:#0000FF;">"John"</span>, <span style="color:#0000FF;">"lastName"</span>: <span style="color:#0000FF;">"Doe"</span> }, &nbsp;&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; response)); &nbsp;&nbsp;<br />
+			&nbsp; &nbsp; &nbsp; };<br />
+			&nbsp; &nbsp; &nbsp;&nbsp;<br />
+			&nbsp; &nbsp; &nbsp;&nbsp;<strong>request</strong>.get({<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; url: <span style="color:#0000FF;">'/person.do'</span>,<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; headers: {<span style="color:#0000FF;"> "Content-Encoding"</span>: <span style="color:#0000FF;">"UTF-8"</span> },<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; handleAs: &nbsp;<span style="color:#0000FF;">"json"</span>,<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; load: deferred.callback(successCallback),<br />
+			&nbsp; &nbsp; &nbsp; });</span></p>
+
+			<p><br />
+			<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &nbsp; return deferred;<br />
+			&nbsp; &nbsp; }</span></p>
+
+			<div><span style="font-family:courier new,courier,monospace;">&nbsp; });<br />
+			});</span></div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 14.4px; text-align: center;"><span style="line-height: 14.4px; font-size: 10px;">Code: RequestTestCase.js - Mocking Xhr Module</span></p>
+</div>
+
+<div>&nbsp;</div>
+
+<p style="line-height: 14.4px; margin-left: 40px;"><strong>NOTE:&nbsp;</strong>As a good practice, It is recommended to remove the mocked module from the Dojo Loader Cache in the teardown method of the test suite.</p>
+
+<p style="line-height: 14.4px; margin-left: 40px;">&nbsp;</p>
+
+<p style="line-height: 14.4px;">&nbsp;</p>
+
+<p style="line-height: 14.4px;"><strong>See Also:</strong></p>
+</div>
+</div>
+
+<p dir="ltr">Best Practices for testing:&nbsp;<a href="https://www.sitepen.com/blog/2014/07/11/testable-code-best-practices/">https://www.sitepen.com/blog/2014/07/11/testable-code-best-practices/</a></p>
+
+<p dir="ltr">Mock Data: <a href="https://www.sitepen.com/blog/2014/07/14/mocking-data-with-intern/">https://www.sitepen.com/blog/2014/07/14/mocking-data-with-intern/</a></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

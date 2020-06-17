@@ -1,0 +1,101 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>CDEJ JavaScript test and coverage infrastructure</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="CDEJ JavaScript test and coverage infrastructure";
+    pageId="urn:lsid:ibm.com:td:b6eac109-5829-4222-b4b3-1ef64915f1b4";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">CDEJ JavaScript test and coverage infrastructure</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Overview</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">DoH Based Tests</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii3">Intern Based Tests</a></div>
+
+<h2 dir="ltr" id="ii1">Overview</h2>
+
+<ul dir="ltr">
+	<li>DoH vs. Intern</li>
+	<li>coverage of CDEJ code</li>
+</ul>
+
+<h2 dir="ltr" id="ii2">DoH Based Tests</h2>
+
+<ul dir="ltr">
+	<li>Generic documentation here: <a href="http://ibmurl.hursley.ibm.com/N2SO">http://ibmurl.hursley.ibm.com/N2SO</a></li>
+	<li>JDE specific steps:
+	<ul>
+		<li>update JavaScriptTestConfig.properties to match your setup, if needed</li>
+		<li>initialize target directory by running "test-javascript" target once (it will fail)
+		<ul>
+			<li>build -f client\components\client-inf\build.xml test-javascript</li>
+		</ul>
+		</li>
+		<li>set Tomcat context for client-inf project</li>
+		<li>start Tomcat</li>
+		<li>run "test-javascript" target again</li>
+	</ul>
+	</li>
+	<li>show a sample of test
+	<ul>
+		<li>sync</li>
+		<li>async</li>
+	</ul>
+	</li>
+	<li>coverage
+	<ul>
+		<li>build -f client\components\client-inf\build.xml test-javascript-coverage</li>
+		<li>it currently doesn't work on TI_MAIN</li>
+	</ul>
+	</li>
+</ul>
+
+<h2 dir="ltr" id="ii3">Intern Based Tests</h2>
+
+<ul dir="ltr">
+	<li>start by initializing the project like in DoH based case above
+	<ul>
+		<li>build -f client\components\mobile-sdk\build.xml test-javascript</li>
+	</ul>
+	</li>
+	<li>start selenium server
+	<ul>
+		<li>build -f build_scripts\client.xml selenium-start</li>
+	</ul>
+	</li>
+	<li>run tests from Eclipse</li>
+	<li>or debug them using the other external tool target</li>
+	<li>demo</li>
+	<li>show the build target for automated testing</li>
+	<li>upgrading Intern / selenium / node</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

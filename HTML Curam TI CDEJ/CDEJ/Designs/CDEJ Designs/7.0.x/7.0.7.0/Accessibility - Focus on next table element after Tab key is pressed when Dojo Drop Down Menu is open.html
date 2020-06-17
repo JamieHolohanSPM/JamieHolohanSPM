@@ -1,0 +1,1042 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Accessibility - Focus on next table element after Tab key is pressed when Dojo Drop Down Menu is open</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Accessibility - Focus on next table element after Tab key is pressed when Dojo Drop Down Menu is open";
+    pageId="urn:lsid:ibm.com:td:fcb4dcfd-e60a-4e6d-a831-6e4822df75c1";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Accessibility - Focus on next table element after Tab key is pressed when Dojo Drop Down Menu is open</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><div contenteditable="false" name="intInfo" style="border-radius: 6px; margin: 8px; padding: 4px; display: block; width: auto;background-color: #ffc;">Table of Contents:
+<ul style="list-style-type:none !important;">
+	<li style="list-style-type:none;"><a href="#ii3" style="display: block;">Stakeholders</a></li>
+	<li style="list-style-type:none;"><a href="#ii4" style="display: block;">Background</a></li>
+	<li style="list-style-type:none;"><a href="#ii5" style="display: block;">Requirements</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii7" style="display: block;">Non Functional Requirements</a></li>
+	</ul>
+	</li>
+	<li style="list-style-type:none;"><a href="#ii8" style="display: block;">Design Options</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii9" style="display: block;">Design</a></li>
+	</ul>
+	</li>
+	<li style="list-style-type:none;"><a href="#ii10" style="display: block;">Architecture/Design Decisions</a></li>
+	<li style="list-style-type:none;"><a href="#ii11" style="display: block;">Class Diagram</a></li>
+	<li style="list-style-type:none;"><a href="#ii13" style="display: block;">Design Specifics</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii14" style="display: block;">Design User Interface</a></li>
+		<li style="list-style-type:none;"><a href="#ii24" style="display: block;">Design Resilience Measures</a></li>
+		<li style="list-style-type:none;"><a href="#ii26" style="display: block;">Design Accessibility</a></li>
+	</ul>
+	</li>
+	<li style="list-style-type:none;"><a href="#ii28" style="display: block;">Use Cases</a></li>
+	<li style="list-style-type:none;"><a href="#ii15" style="display: block;">Implementation Notes</a></li>
+	<li style="list-style-type:none;"><a href="#ii16" style="display: block;">Application Impact</a></li>
+	<li style="list-style-type:none;"><a href="#ii18" style="display: block;">Testing</a></li>
+	<li style="list-style-type:none;"><a href="#ii19" style="display: block;">Documentation/How To Use Feature</a></li>
+</ul>
+</div>
+
+<p dir="ltr">&nbsp;</p>
+
+<h1 dir="ltr"><span style="font-size:20px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Accessiblity - Focus On Drop Downs</strong></span></h1>
+
+<h2 dir="ltr" id="ii3">Stakeholders</h2>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Refer to the following Org Chart to ensure you are engaging the correct people. The table below indicates the current contacts for each area.
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://ibm.biz/BdsuKd">https://ibm.biz/BdsuKd</a></li>
+	</ul>
+	</li>
+</ul>
+
+<table border="1" dir="ltr" style="width: 500px;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Role</span></strong></td>
+			<td style="width: 120px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Name</span></strong></td>
+			<td style="width: 168px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Sign Off if Applicable</span></strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Customer</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Business Owner/Product Owner</td>
+			<td style="width: 120px;">Shane McFadden/Sonya Purcell</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Architect</td>
+			<td style="width: 120px;">Fergal Gavin</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Developer(s)</td>
+			<td style="width: 120px;">James Darcy</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">FVT</td>
+			<td style="width: 120px;">Satya Minnekanti</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">SVT</td>
+			<td style="width: 120px;">John Redmond/Sean Cleary</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Information Developer</td>
+			<td style="width: 120px;">Annette Sohor</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">UX Design</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Legal</td>
+			<td style="width: 120px;">Deirdre Dolan/Jim Rook</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii4">Background</h2>
+
+<p dir="ltr"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=242058" rel="noopener noreferrer" target="_blank">Defect&nbsp;242058</a>&nbsp;was raised in regards to tabbing issues with drop down menus in SPM. Currently in the application, when a drop down menu is opened and is currently in focus, when Tab is pressed on the keyboard, the focus returns to the base node of the drop down widget. For example, currently when a dojo DropDownButton is pressed or clicked, a dropdown menu will appear. When the Tab button is pressed, the dropdown menu will close and the focus will return to the button node. This is the default behaviour of any dojo widget which uses the _HasDropDown.js mixin.</p>
+
+<h2 dir="ltr" id="ii5">Requirements</h2>
+
+<p dir="ltr">The list of requirements below are based on the behaviour seen on the example dropdown menu seen on the&nbsp;following page:<br />
+<a href="https://www.w3.org/TR/wai-aria-practices/examples/menubar/menubar-1/menubar-1.html">https://www.w3.org/TR/wai-aria-practices/examples/menubar/menubar-1/menubar-1.html</a></p>
+
+<p dir="ltr">List of Requirements</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement 1: When a drop down menu is opened and the TAB key is pressed, the focus shall move to the next tabable element.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement 2: When a drop down menu is opened and the SHIFT-TAB key is pressed, the focus shall move to the previous tabable element.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement 3: When a drop down menu is opened and the ESC key is pressed, the focus shall return to the base node of the widget.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement 4: When the focus moves to the next element, the element should be correctly read out by a screen-reader.</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=242058" rel="noopener noreferrer" target="_blank">RTC&nbsp;Defect&nbsp;242058</a> - Accessibility - Tabbing issue with Menu- Focus not visible.</li>
+</ul>
+
+<h3 dir="ltr" id="ii7">Non Functional Requirements</h3>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" width="671">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">NFR</strong></td>
+			<td style="width: 537px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Accessibility</td>
+			<td style="width: 537px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">When a TAB or SHIFT-TAB is pressed when a drop down menu is open, the focus shall move to the next tabable element. When ESC is pressed, the focus shall return to the base node of the widget. The above shall also be compatible with supported screen-readers&nbsp;<br />
+			The tabbing behaviour will be the same as what is seen on the menu on the following page:<br />
+			<a href="https://www.w3.org/TR/wai-aria-practices/examples/menubar/menubar-1/menubar-1.html">https://www.w3.org/TR/wai-aria-practices/examples/menubar/menubar-1/menubar-1.html</a></p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Availability &amp; Resilience</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Development Resource</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Evolution</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Internationalisation</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Location</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Performance and Scalability</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Regulation</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Security</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Usability</td>
+			<td style="width: 537px;">The change shall adhere to the industry standards that are in place for when a user is navigating using a keyboard.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii8">Design Options</h2>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:18px;">Option 1</span></strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 80px;">Create a Curam version of the dijit._HasDropDown mixin and plug that into any widget affected by the tabbing issue.</li>
+	<li style="margin-left: 80px;">Pros of choosing this option.
+	<ul>
+		<li style="margin-left: 80px;">We have control over where the custom _HasDropDown mixin is plugged into, minimising unexpected client behaviour.</li>
+		<li style="margin-left: 80px;">Can be tested using the UIToolkit.</li>
+		<li style="margin-left: 80px;">Replacing the dijit.layout.TabContainer with the CuramTabContainer gives us additional extension/customisation points in the application.</li>
+	</ul>
+	</li>
+	<li style="margin-left: 80px;">Cons of choosing this option
+	<ul>
+		<li style="margin-left: 80px;">In order for the _ScrollingTabControllerButton to be updated, a new Curam version of this needs to be defined in the Curam ScrollingTabController. The CuramTabContainer which references the Curam&nbsp;ScrollingTabController then needs to replace the dijit.layout.TabContainer that's used in the&nbsp;InPageNavRenderer.java and NavigationTabRenderer.java renderers. This requires additional testing effort.</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:18px;">Option 2</span></strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 80px;">Create a dojo-overrides version of the _HasDropDown.js</li>
+	<li style="margin-left: 80px;">Pros of choosing this option.
+	<ul>
+		<li style="margin-left: 80px;">No need to replace dijit.layout.TabContainer with curam.layout.CuramTabContainer in&nbsp;InPageNavRenderer.java and NavigationTabRenderer.java.</li>
+	</ul>
+	</li>
+	<li style="margin-left: 80px;">Cons of choosing this option
+	<ul>
+		<li style="margin-left: 80px;">Will affect any widget that uses _HasDropDown mixin, unless the closeDropDown()&nbsp;and OpenDropDown() functions are ovewritten at a higher level.</li>
+		<li style="margin-left: 80px;">Change could also affect external version of the application as idx widgets as they can use dijit._HasDropDown mixin</li>
+		<li style="margin-left: 80px;">Cannot be currently tested using UIToolkit as it does not pull in dojo-overrides changes into test environment.</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 80px;">&nbsp;</p>
+
+<h3 dir="ltr" id="ii9">Design</h3>
+
+<p dir="ltr"><strong>Chosen Option: Option 1</strong><br />
+Create a Curam version of the dijit._HasDropDown mixin and plug that into any widget affected by the tabbing issue.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>What element are tabable?</strong></p>
+
+<p dir="ltr">The following elements can be tabbed to using the keyboard:</p>
+
+<ul dir="ltr">
+	<li>input</li>
+	<li>select</li>
+	<li>object</li>
+	<li>iframe</li>
+	<li>area</li>
+	<li>textarea</li>
+	<li>button (with the exception of dijitTabCloseButtons. These should not be tabbed to)</li>
+	<li>Anything with a href</li>
+	<li>Anything with a tabindex greater than -1.</li>
+</ul>
+
+<p dir="ltr"><strong>Considerations that need to be taken into account:</strong></p>
+
+<ul dir="ltr">
+	<li>If a widget that has a dropdown is the first tabable element in an iframe&nbsp;and SHIFT-TAB is pressed.
+	<ul>
+		<li>focus will move to the last tabable element in the parent window.</li>
+	</ul>
+	</li>
+	<li>If an iframe is the next tabable element
+	<ul>
+		<li>Get all the tabable elements within the iframe and move the focus to the first one.</li>
+	</ul>
+	</li>
+	<li>If a widget that has a dropdown is the first tabable element in the top window and SHIFT-TAB is pressed.
+	<ul>
+		<li>focus will return to the base node of the widget</li>
+	</ul>
+	</li>
+	<li>If a widget that has a dropdown is the last tabable element in the window and TAB is pressed.
+	<ul>
+		<li>focus will return to the base node of the widget</li>
+	</ul>
+	</li>
+	<li>If an element is tabable but is hidden using styling
+	<ul>
+		<li>Move to the next tabable element that is visible</li>
+	</ul>
+	</li>
+	<li>If an element is not hidden using styling, but a parent element is
+	<ul>
+		<li>Move to the next tabable element that is visible (and not hidden by a parent element)</li>
+	</ul>
+	</li>
+	<li>If the ESC button is pressed
+	<ul>
+		<li>focus will return to the base node of the widget</li>
+	</ul>
+	</li>
+	<li>Internal IEG player will also need to be tested.</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">To expand on the cases where the drop down menu is the first tabable element in the top window and SHIFT-TAB is pressed, or when it is the last tabable element in the window and TAB is pressed, the next tabable element in these cases would be the browser address bar when using the native browser tab navigation. However, as the _HasDropDown is setting the focus, it does not appear to be possible to set the focus on the browser address bar programatically. Therefore, in the event an edge case like these occurs, the focus will return to the base node of the widget instead (which is current behaviour). The user can then press TAB or SHIFT-TAB once more and the focus will then move to the address bar.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">In the case where an element is not hidden itself by styling but a parent or ancestor element is&nbsp;causing it to be hidden from view, it is tough to fully determine if that element is hidden programatically. The proposed fix tries to cover all basis, but there may be edge cases where a hidden element may steal focus.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>What about the external application:</strong></p>
+
+<p dir="ltr">The external application, including external IEG scripts,&nbsp;uses&nbsp;the oneui/idx dojo toolkit and this toolkit also uses the _HasDropDown mixin in places. Therefore drop down menus/popups that have a drop down may suffer from the same accessibility defect.</p>
+
+<h2 dir="ltr" id="ii10">Architecture/Design Decisions</h2>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<table border="1" dir="ltr" height="156" style="width: 1064px;" width="860">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 131px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Architecture Decision Title</strong></span></td>
+			<td style="width: 117px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Issue or Problem Statement</strong></span></td>
+			<td style="width: 115px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Assumptions</strong></span></td>
+			<td style="width: 116px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Motivation</strong></span></td>
+			<td style="width: 100px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Alternatives</strong></span></td>
+			<td style="width: 94px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Decision</strong></span></td>
+			<td style="width: 156px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Justification</strong></span></td>
+			<td style="width: 156px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Implications</strong></span></td>
+			<td style="width: 48px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Status</strong></span></td>
+			<td style="width: 51px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Date</strong></span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 131px;">Fix the issue in external application.</td>
+			<td style="width: 117px;">The external application dojo library (oneui/idx) also uses _HasDropDown mixin and menus using the functionality from this will suffer the same issue.</td>
+			<td style="width: 115px;">The external application hasn't been heavily tested for this, but one instance has been found in the "Create an account" page of the Citizen Portal</td>
+			<td style="width: 116px;">The external application should also adhere to the same accessibility standards as the internal application.</td>
+			<td style="width: 100px;">Do not fix in external application.</td>
+			<td style="width: 94px;">Do not fix in external application.</td>
+			<td style="width: 156px;">It is not worth the effort to make the same fix in the external application. This would require using a dojo-overrides version of the _HasDropDown mixin, which will have effect across the board, and will also be untestable using UIToolkit as dojo-overrides versions are not brought into the testing environment at this moment. Also due to the adaption of Citizen Engagement, it is not worth the development effort.</td>
+			<td style="width: 156px;">When drop down menus in the external applications are opened, if the TAB button is pressed, the focus will return to the base node of the widget.</td>
+			<td style="width: 48px;">Closed</td>
+			<td style="width: 51px;">01/05/19</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 131px;">What happens when the next tabable element is the browser address bar?</td>
+			<td style="width: 117px;">There is an edge case where&nbsp;the next tabable element is the browser search bar when the drop down menu is the first tabable element in the top window and SHIFT-TAB is pressed, or when it is the last tabable element in the window and TAB is pressed,</td>
+			<td style="width: 115px;">Different browsers have different behaviours. Some browsers may tab to a different element other than the address bar.</td>
+			<td style="width: 116px;">When tabbing through the application normally (i.e not tabbing from a dropdown menu) the focus can go to the browser address bar after TAB is pressed on the last tabable element, or SHIFT-TAB is pressed on the first tabable element.</td>
+			<td style="width: 100px;">Try to find a hacky way of setting the focus on the browser address bar.</td>
+			<td style="width: 94px;">Do not attempt to programatically set the focus on the browser address bar. Instead reset the focus on the base node of the widget, which is the same as the current behaviour.</td>
+			<td style="width: 156px;">It does not seem possible to programatically set the focus on the browser address bar using Javascript. Even if a hacky solution was implemented, different browsers behave differently and it could end up having multiple different solutions for each browser, which may be brittle and break after browser updates.</td>
+			<td style="width: 156px;">Users will have to press the TAB or SHIFT-TAB button an additional time to focus on the browser address bar</td>
+			<td style="width: 48px;">Closed</td>
+			<td style="width: 51px;">01/05/19</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 131px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 115px;">&nbsp;</td>
+			<td style="width: 116px;">&nbsp;</td>
+			<td style="width: 100px;">&nbsp;</td>
+			<td style="width: 94px;">&nbsp;</td>
+			<td style="width: 156px;">&nbsp;</td>
+			<td style="width: 156px;">&nbsp;</td>
+			<td style="width: 48px;">&nbsp;</td>
+			<td style="width: 51px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 131px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 115px;">&nbsp;</td>
+			<td style="width: 116px;">&nbsp;</td>
+			<td style="width: 100px;">&nbsp;</td>
+			<td style="width: 94px;">&nbsp;</td>
+			<td style="width: 156px;">&nbsp;</td>
+			<td style="width: 156px;">&nbsp;</td>
+			<td style="width: 48px;">&nbsp;</td>
+			<td style="width: 51px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii11">Class Diagram</h2>
+
+<p dir="ltr"><img lconnwikiparamattachmentname="Screenshot 2019-05-15 at 16.13.55.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Accessibility%20-%20Focus%20on%20next%20table%20element%20after%20Tab%20key%20is%20pressed%20when%20Dojo%20Drop%20Down%20Menu%20is%20open._ATTACHMENTS_/Screenshot%202019-05-15%20at%2016.13.55.png" alt="" style="width: 1000px; height: 647px;" lconnwikiparamwikipage="Accessibility - Focus on next tabable element after Tab key is pressed when Dojo Drop Down Menu is open" lconnattachedresourcetype="page"></img></p>
+
+<h2 dir="ltr" id="ii12">&nbsp;</h2>
+
+<h2 dir="ltr" id="ii13">Design Specifics</h2>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CDEJ:</strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">HTML Changes</strong>
+
+	<ul>
+		<li style="margin-left: 40px;">Adding a Curam version of the ScrollingTabController.html. The only difference between this and the OOTB Dojo version is it references the newly defined curam.layout._ScrollingTabControllerMenuButton as a data-dojo-type instead of dijit.layout._ScrollingTabControllerMenuButton</li>
+	</ul>
+	</li>
+	<li style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Widget Changes</strong>
+	<ul>
+		<li style="margin-left: 40px;">Adding a Curam version of the dijit._HasDropDown.js which overrides the closeDropDown() function. Also overrides the onCancel() function defined within the openDropDown() function, to pass an evt object to&nbsp;closeDropDown().</li>
+		<li style="margin-left: 40px;">Editing the dojo-overrides dijit.popup.js to pass an evt object into the popup.onCancel().</li>
+		<li style="margin-left: 40px;">Edit Curam DeferredDropDownButton and&nbsp;DropDownButton to use newly added Curam&nbsp;_HasDropDown mixin.</li>
+		<li style="margin-left: 40px;">Edit Curam ScrollingTabController to no longer call this.updateTabStyle(), and to define&nbsp;curam.layout._ScrollingTabControllerMenuButton, which uses&nbsp;newly added Curam&nbsp;_HasDropDown mixin.</li>
+		<li style="margin-left: 40px;">Update references to dijit.layout.TabContainer in&nbsp;InPageNavRenderer.java and NavigationTabRenderer.java to curam.layout.CuramTabContainer, which uses the curam.layout.ScrollingTabController.</li>
+	</ul>
+	</li>
+</ul>
+
+<h3 dir="ltr" id="ii14">Design User Interface</h3>
+
+<p dir="ltr" style="margin-left: 40px;">There will be no changes to the UI. The user experience while navigating with the keyboard will be enhanced.</p>
+
+<h3 dir="ltr" id="ii24" style="margin-left: 40px;">Design Resilience Measures</h3>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">What happens if something expected/unexpected goes wrong?
+	<ul>
+		<li style="margin-left: 40px;">If the next tabable element is not found, the focus will return to the base node, which is the current behaviour.</li>
+	</ul>
+	</li>
+	<li style="margin-left: 40px;">What happens to the system?
+	<ul>
+		<li style="margin-left: 40px;">N/A</li>
+	</ul>
+	</li>
+	<li style="margin-left: 40px;">Will the user be able to take corrective action in the system without the need to resort to application logs/SQL searching/data manipulation outside of the system.
+	<ul>
+		<li style="margin-left: 40px;">N/A</li>
+	</ul>
+	</li>
+	<li style="margin-left: 40px;">Will the data be left in a consistent state within the system after the exception is thrown?
+	<ul>
+		<li style="margin-left: 40px;">N/A</li>
+	</ul>
+	</li>
+	<li style="margin-left: 40px;">Will there be messages given to the user? What will these messages be?
+	<ul>
+		<li style="margin-left: 40px;">N/A</li>
+	</ul>
+	</li>
+	<li style="margin-left: 40px;">Will there something written to the logs? What will this be?
+	<ul>
+		<li style="margin-left: 40px;">N/A</li>
+	</ul>
+	</li>
+	<li style="margin-left: 40px;">Does the feature require some of the exception data to be captured and an admin function provided to allow the situation to be re-mediated?
+	<ul>
+		<li style="margin-left: 40px;">N/A</li>
+	</ul>
+	</li>
+</ul>
+
+<h3 dir="ltr" id="ii26" style="margin-left: 40px;">Design Accessibility</h3>
+
+<p dir="ltr" style="margin-left: 40px;">As mentioned in previous sections, tabbing from a drop down menu will now adhere to accessibility standards. An example menu can be found on the following page:<br />
+<a href="https://www.w3.org/TR/wai-aria-practices/examples/menubar/menubar-1/menubar-1.html">https://www.w3.org/TR/wai-aria-practices/examples/menubar/menubar-1/menubar-1.html</a><br />
+<br />
+A screen reader is also expected to call out correctly the newly focused element.</p>
+
+<h2 dir="ltr" id="ii28">Use Cases</h2>
+
+<p dir="ltr"><strong>Note:</strong>&nbsp;</p>
+
+<p dir="ltr">The below list are some examples of widgets which use drop down menus that use the _HasDropDown mixin. These can all be found in the TabTest.</p>
+
+<ol dir="ltr">
+	<li>Application bar preferences menu (DropDownButton)</li>
+	<li>Context pane level menu (DeferredDropDownButton)</li>
+	<li>List row item menu (DeferredDropDownButton)</li>
+	<li>Tab navigation menu (appears on Application, Navigation and In-page Navigation tabs when there are too many tabs to fit on the screen) (_ScrollingTabControllerButton)</li>
+</ol>
+
+<p dir="ltr">The below Use Cases can be performed with a screen reader and the screen reader will read out the current focusable element after the menu has been closed. Please note, when the screenreader has been turned on (JAWS), a user will not be able to open the Tab Navigation menu using the keyboard. This is existing behaviour in the application. When the screen-reader is not activated, you can open the Tab Navigation menu using the usual keys (SPACE, ENTER, DOWN)</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Use Case ID</td>
+			<td style="width: 336px;">1.1</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Name</td>
+			<td style="width: 336px;">Press TAB when drop down menu is open</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Actor</td>
+			<td style="width: 336px;">Caseworker</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Description</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Where a&nbsp;drop down menu has been opened from a widget, e.g DropDownButton in the Curam internal application, when a user presses TAB the focus shall move to the next tabable element.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Preconditions</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">A widget that has a drop down menu, which uses the _HasDropDown mixin in the Curam internal application.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Flow</td>
+			<td style="width: 336px;">The citizen navigates to the widget using the keyboard and presses SPACE/ENTER/DOWN-ARROW to open the drop down menu. While the menu is open and the focus is on a menu item, the user presses TAB</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Expected</td>
+			<td style="width: 336px;">The drop down menu closes and the focus moves to the next tabable element.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Use Case ID</td>
+			<td style="width: 336px;">1.2</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Name</td>
+			<td style="width: 336px;">Press TAB when drop down menu is open and the next tabable element is an iframe</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Actor</td>
+			<td style="width: 336px;">Caseworker</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Description</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Where a&nbsp;drop down menu has been opened from a widget, e.g DropDownButton in the Curam internal application, when a user presses TAB the focus shall move to the next tabable element.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Preconditions</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">A widget that has a drop down menu, which uses the _HasDropDown mixin in the Curam internal application. The next tabable element is an iframe</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Flow</td>
+			<td style="width: 336px;">The citizen navigates to the widget using the keyboard and presses SPACE/ENTER/DOWN-ARROW to open the drop down menu. While the menu is open and the focus is on a menu item, the user presses TAB</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Expected</td>
+			<td style="width: 336px;">The drop down menu closes and the focus moves to the first tabable element within the iframe.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Use Case ID</td>
+			<td style="width: 336px;">1.3</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Name</td>
+			<td style="width: 336px;">Press TAB when drop down menu is open and the next tabable element is hidden from view</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Actor</td>
+			<td style="width: 336px;">Caseworker</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Description</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Where a&nbsp;drop down menu has been opened from a widget, e.g DropDownButton in the Curam internal application, when a user presses TAB the focus shall move to the next tabable element.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Preconditions</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">A widget that has a drop down menu, which uses the _HasDropDown mixin in the Curam internal application. The next tabable element is hidden from view.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Flow</td>
+			<td style="width: 336px;">The citizen navigates to the widget using the keyboard and presses SPACE/ENTER/DOWN-ARROW to open the drop down menu. While the menu is open and the focus is on a menu item, the user presses TAB</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Expected</td>
+			<td style="width: 336px;">The drop down menu closes, the hidden element is disregarded and the focus moves to the first tabable element within the iframe.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Use Case ID</td>
+			<td style="width: 336px;">1.4</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Name</td>
+			<td style="width: 336px;">Press TAB when drop down menu is open and there are no more tabable elements proceeding the drop down widget</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Actor</td>
+			<td style="width: 336px;">Caseworker</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Description</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Where a&nbsp;drop down menu has been opened from a widget, e.g DropDownButton in the Curam internal application, when a user presses TAB the focus shall return to the base node of the widget if there are no proceeding tabable elements.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Preconditions</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">A widget that has a drop down menu, which uses the _HasDropDown mixin in the Curam internal application. The drop down widget is the last tabable element on the page</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Flow</td>
+			<td style="width: 336px;">The citizen navigates to the widget using the keyboard and presses SPACE/ENTER/DOWN-ARROW to open the drop down menu. While the menu is open and the focus is on a menu item, the user presses TAB</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Expected</td>
+			<td style="width: 336px;">The drop down menu closes and the focus returns to the base node of the drop down widget e.g the drop down button</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Use Case ID</td>
+			<td style="width: 336px;">1.5</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Name</td>
+			<td style="width: 336px;">Press SHIFT-TAB when drop down menu is open</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Actor</td>
+			<td style="width: 336px;">Caseworker</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Description</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Where a&nbsp;drop down menu has been opened from a widget, e.g DropDownButton in the Curam internal application, when a user presses SHIFT-TAB the focus shall move to the previous tabable element.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Preconditions</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">A widget that has a drop down menu, which uses the _HasDropDown mixin in the Curam internal application.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Flow</td>
+			<td style="width: 336px;">The citizen navigates to the widget using the keyboard and presses SPACE/ENTER/DOWN-ARROW to open the drop down menu. While the menu is open and the focus is on a menu item, the user presses SHIFT-TAB</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Expected</td>
+			<td style="width: 336px;">The drop down menu closes and the focus moves to the previous tabable element.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Use Case ID</td>
+			<td style="width: 336px;">1.6</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Name</td>
+			<td style="width: 336px;">Press SHIFT-TAB when drop down menu is open and the previous tabable element is an iframe</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Actor</td>
+			<td style="width: 336px;">Caseworker</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Description</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Where a&nbsp;drop down menu has been opened from a widget, e.g DropDownButton in the Curam internal application, when a user presses SHIFT-TAB the focus shall move to the previous tabable element.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Preconditions</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">A widget that has a drop down menu, which uses the _HasDropDown mixin in the Curam internal application. The previous&nbsp;tabable element is an iframe</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Flow</td>
+			<td style="width: 336px;">The citizen navigates to the widget using the keyboard and presses SPACE/ENTER/DOWN-ARROW to open the drop down menu. While the menu is open and the focus is on a menu item, the user presses SHIFT-TAB</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Expected</td>
+			<td style="width: 336px;">The drop down menu closes and the focus moves to the last tabable element within the iframe.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Use Case ID</td>
+			<td style="width: 336px;">1.7</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Name</td>
+			<td style="width: 336px;">Press SHIFT-TAB when drop down menu is open and the previous tabable element is hidden from view</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Actor</td>
+			<td style="width: 336px;">Caseworker</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Description</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Where a&nbsp;drop down menu has been opened from a widget, e.g DropDownButton in the Curam internal application, when a user presses SHIFT-TAB the focus shall move to the previous tabable element.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Preconditions</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">A widget that has a drop down menu, which uses the _HasDropDown mixin in the Curam internal application. The previous tabable element is hidden from view.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Flow</td>
+			<td style="width: 336px;">The citizen navigates to the widget using the keyboard and presses SPACE/ENTER/DOWN-ARROW to open the drop down menu. While the menu is open and the focus is on a menu item, the user presses SHIFT-TAB</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Expected</td>
+			<td style="width: 336px;">The drop down menu closes, the hidden element is disregarded and the focus moves to the previous tabable element within the iframe.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Use Case ID</td>
+			<td style="width: 336px;">1.8</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Name</td>
+			<td style="width: 336px;">Press SHIFT-TAB when drop down menu is open and there are no more tabable elements preceeding the drop down widget</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Actor</td>
+			<td style="width: 336px;">Caseworker</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Description</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Where a&nbsp;drop down menu has been opened from a widget, e.g DropDownButton in the Curam internal application, when a user presses SHIFT-TAB the focus shall return to the base node of the widget if there are no preceding tabable elements.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Preconditions</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">A widget that has a drop down menu, which uses the _HasDropDown mixin in the Curam internal application. The drop down widget is the first tabable element on the page</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Flow</td>
+			<td style="width: 336px;">The citizen navigates to the widget using the keyboard and presses SPACE/ENTER/DOWN-ARROW to open the drop down menu. While the menu is open and the focus is on a menu item, the user presses SHIFT-TAB</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Expected</td>
+			<td style="width: 336px;">The drop down menu closes and the focus returns to the base node of the drop down widget e.g the drop down button</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Use Case ID</td>
+			<td style="width: 336px;">1.9</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Name</td>
+			<td style="width: 336px;">Press ESC when drop down menu is open</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Actor</td>
+			<td style="width: 336px;">Caseworker</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Description</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Where a&nbsp;drop down menu has been opened from a widget, e.g DropDownButton in the Curam internal application, when a user presses ESC the focus shall return to the base node of the widget.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Preconditions</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">A widget that has a drop down menu, which uses the _HasDropDown mixin in the Curam internal application.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Flow</td>
+			<td style="width: 336px;">The citizen navigates to the widget using the keyboard and presses SPACE/ENTER/DOWN-ARROW to open the drop down menu. While the menu is open and the focus is on a menu item, the user presses ESC</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Expected</td>
+			<td style="width: 336px;">The drop down menu closes and the focus returns to the base node of the drop down widget e.g the drop down button</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Use Case ID</td>
+			<td style="width: 336px;">1.10</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Name</td>
+			<td style="width: 336px;">Click outside the menu when drop down menu is open</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Actor</td>
+			<td style="width: 336px;">Caseworker</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Description</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Where a&nbsp;drop down menu has been opened from a widget, e.g DropDownButton in the Curam internal application, when a user clicks the menu shall close and the focus go to where was clicked</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Preconditions</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">A widget that has a drop down menu, which uses the _HasDropDown mixin in the Curam internal application.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Flow</td>
+			<td style="width: 336px;">The citizen navigates to the widget using the keyboard and presses SPACE/ENTER/DOWN-ARROW to open the drop down menu. While the menu is open and the focus is on a menu item, the user clicks outside of the menu.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Expected</td>
+			<td style="width: 336px;">The drop down menu closes and the focus go to where was clicked.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Use Case ID</td>
+			<td style="width: 336px;">1.11</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Name</td>
+			<td style="width: 336px;">When drop down menu is open. a user uses a directional arrow key to navigate the menu</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Actor</td>
+			<td style="width: 336px;">Caseworker</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Description</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Where a&nbsp;drop down menu has been opened from a widget, e.g DropDownButton in the Curam internal application, when a user uses a directional arrow key to navigate the menu, the focus shall remain within the menu, focussing on the node the user navigated to.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Preconditions</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">A widget that has a drop down menu, which uses the _HasDropDown mixin in the Curam internal application.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Flow</td>
+			<td style="width: 336px;">The citizen navigates to the widget using the keyboard and presses SPACE/ENTER/DOWN-ARROW to open the drop down menu. While the menu is open and the focus is on a menu item, the user uses a directional arrow key to navigate the menu.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Expected</td>
+			<td style="width: 336px;">The drop down menu remains open and the focus moves to where the user navigated to.</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2 dir="ltr" id="ii15">Implementation Notes</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">optional</strong>. Any notes related to the actual implementation can be described here. These can be related to some questions related to the implementation, the way some part of the implementation was completed etc.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii16">Application Impact</h2>
+
+<p dir="ltr">No Application Impact expected.</p>
+
+<h2 dir="ltr" id="ii18">Testing</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. An outline of all of the testing required by the feature should be present here. This may tie in with the use cases outlined above. Describe the framework being used and the kinds of tests being written:</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">Unit Tests
+	<ul>
+		<li style="margin-left: 40px;">TI/client/components/client-inf/jscript/tests/cdej/widget/DropdownButtonTestCase.js has been added to test the new changes</li>
+	</ul>
+	</li>
+	<li style="margin-left: 40px;">FVT Required?
+	<ul>
+		<li style="margin-left: 40px;">Yes</li>
+	</ul>
+	</li>
+	<li style="margin-left: 40px;">SVT Required?
+	<ul>
+		<li style="margin-left: 40px;">No</li>
+	</ul>
+	</li>
+</ul>
+
+<h2 dir="ltr" id="ii19">Documentation/How To Use Feature</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. This should describe how to use the feature added. Again this may differ from component to component but there are some general headings to consider:</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Where the feature fits in the overall component?</p>
+
+	<ul>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">This is an infrastructure change in the CDEJ, and will affect DropDownButton, DeferredDropDownButton and ScrollingTabControllerButtons.</p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The dijit TabContainer has also been replaced with the CuramTabContainer in&nbsp;InPageNavRenderer.java and NavigationTabRenderer.java, affecting Application Tabs, Navigation Tabs and In-page Navigation Tabs.</p>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">How it may be accessed (i.e. created/authored)?</p>
+
+	<ul>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">See above answer.</p>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">What does it do (may be linked to the use cases above)?</p>
+
+	<ul>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Changes the behaviour of drop down menus for DropDownButton, DeferredDropDownButton and ScrollingTabControllerButtons, so when a user presses TAB key, the focus will move to the next tabable element and not return the focus to the base node of the widget.</p>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Advantages of using the feature?</p>
+
+	<ul>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Brings it in-line with accessibility standards.</p>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Any limitations associated with the feature?</p>
+
+	<ul>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">If a drop down menu button/widget is the last tabable element on the page, if the TAB key is pressed when the drop down menu is open, the focus will return to the base node of the widget where as if natively navigating in the application using the TAB key, the focus would jump back to the Browser Address Bar.</p>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">A description of how the feature should be used etc.? This may also include a description of a contract between the various teams using the feature and will incorporate some details of the design.</p>
+
+	<ul>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Users should expect to navigate using&nbsp;the keyboard as usual when a drop down menu is opened.</p>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

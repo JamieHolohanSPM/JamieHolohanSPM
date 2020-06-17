@@ -1,0 +1,166 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Word Integration Spike</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../wiki.css" />
+<script type="text/javascript" src="../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Word Integration Spike";
+    pageId="urn:lsid:ibm.com:td:f5a3b96a-1b7f-44be-b49e-28f499efb08c";
+    toRoot="../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Word Integration Spike</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">The aim of this spike was to look at the possibilities to keep up (at least temporarily) with the existing solution just adopting it for Chrome which stops supporting the NPAPI. Additionally, the position of the different browser vendors needed to be estimated regarding the applet (Java) support in foreseeable future and the alternatives to the applets suggested by them.</p>
+
+<h1 dir="ltr">Changing the existing solution</h1>
+
+<h2 dir="ltr">Current solution and the bottlenecks</h2>
+
+<p dir="ltr">The current situation sees the Word control application as Java applet loaded in the context of a browser and taking care of MS Word managing as COM object - launching, intercepting events and submitting the changed contents back to the server.<br />
+The logic in place is as follows:</p>
+
+<ul dir="ltr">
+	<li>once the Word document (template) contents are loaded, it is saved into the temporary location, and then Word application is opened and pointed into that location to open the document - either the new template based one, or the existing document on its own.</li>
+	<li>Once the Word document becomes available via COM, its fields (properties) are filled in from the additional XML coming from the server. After this the user performs editing/saving/quiting operations in Word.</li>
+	<li>Every user save operation results in the Word document contents read via com into the applet form field and applet submitting the form with those contents back to the server. This is also true for any Word autosaves at a regular interval;</li>
+	<li>finally the Word document is saved and submitted back to the server when closing Word; the temporary copy then gets deleted.</li>
+	<li>If the process is interrupted at any stage by closing any other part of the chain (applet, main application), the temporary document is left where it is and could be saved locally; no changes are submit to the server.</li>
+</ul>
+
+<p dir="ltr">The first slide in the attached presentations captures the current situation. The bottlenecks coould be summarized as follows:</p>
+
+<ol dir="ltr">
+	<li>looping through the windows to establish the bridge even though the applet window is already known to the opener window (but this reference is unusable in COM)
+	<p>The applet is opened by the browser via JavaScript; however the newly opened window is unaware of its opened in terms of the operating system, there is no handle for the opener window, so all the windows need to be re-discovered by looping through the currently open windows and recognizing the parts of the Word Integration bridge using the window properties available to COM. This on its own takes time and as the recent cases show is not completely reliable operation.</p>
+	</li>
+	<li>Delay in Word document opening due to the field initialization on startup (a problem when there are numerous fields, as the document would not be shown until fully initialized).</li>
+	<li>Submit with every save-autosave of the document. This is the problem from the point of view of server load (multiple post requests) and also problematic from the security point of view since every form submit requires a new security token from the server (so the applet should reload its contents if I get it right).</li>
+	<li>Possibility to control each of the 3 components (windows) of the bridge separately. thus providing for process breaking situation.<br />
+	The main application, applet and the Word with the open document are the 3 parts with their own UI and the ability to be closed on its own, focused on its own and should be separately managed.</li>
+	<li>The necessity to detect the Java plug-in version to make sure the version is secure enough and could be used for the applet; the security settings of the plug-in could change on their own, thus resulting in at least the additional warnings or Word bridging errors.</li>
+	<li>The necessity for the signed applet, since the applet needs access to the local file system to load the temporary file and save it.</li>
+	<li>Licensing issues of the library used. We use JNI based Java-to-COM bridge called jacob, which is licensed under GNU Library or Lesser General Public License version 2.0 (LGPLv2) license and we need an exemption to use it, since it is one of the licenses which IBM finds too demanding.</li>
+</ol>
+
+<h2 dir="ltr">Change for Chrome: the Native Message API</h2>
+
+<p dir="ltr">Chrome drops the support for NPAPI soon and this means the applet running in Chrome is not possible.</p>
+
+<p dir="ltr">Chrome is alone in their intention though (see below), with Mozilla just making it more difficult to work with the applets, and Microsoft not changing this area (no announcements on this).</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">At the same time Google introduces the Native Massaging API which is based on Chrome extension talking to the predefined and register host application capable of running on an OS.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li>The extension talks to the application via the standart input and receives data back from the application via the standard out of the application.</li>
+	<li>The exchange format is strict, JSON based and the data being exchanged is limited in size. The host application is made known to Chrome via registering it on the OS (Windows registry on Windows).</li>
+	<li>I have managed to get the Java application working as a host and the message exchange working.</li>
+</ul>
+
+<p dir="ltr">However, much more needs to be addressed.</p>
+
+<p dir="ltr">(First of all is the size of the message. It does not seem to be suitable to pass back the Word document contents after these are changed. On the other hand, this could be potentially worked around by allowing the host application itself to do the required post requests. We need to think the sync token renewing mechanizm though.<br />
+On the other hand the multiple submit mechanism itself is questionable. A scenario could be considered where the document is submit back just when closing Word and not with every save/autosave. This would result in better interaction, better response times of the application and since the autosave and save would be still available (just to the local file), users would not loose their data. At the same time we could do with just one sync token which would mean better integration with Curam application.)<br />
+To summarize, the suggested Chrome solution gives us certain advantages over the existing solution provided some additional problems are resolved. The following list looks at the above listed bottlenecks to compare with what the Native Messaging gives or takes out:</p>
+
+<ol dir="ltr">
+	<li>&nbsp;no need to loop through the windows, since Chrome keeps the link with the host application and the internal API is responsible for establishing that channel.</li>
+	<li>Initializing fields. This is still a problem, unless we would find it acceptable to display the document with the 'wait' status message until the field values are finally displayed (so the approach change might be considered).</li>
+	<li>As already discussed, while on it's own the switch to the Messaging API and host application rather poses a problem in that it would require the sync token OK and needs to pass back the changed document contents independently.<br />
+	On the other hand, the change of the approach where we just aim to have one final submit of the changed document could prove beneficial and facilitate the issues here.</li>
+	<li>There is one less control to break since the host application runs in the background and does not have the UI to be closed by the user; therefore there are bigger chances that the document edit process is terminated in the correct way; we also could consider (even for the existing solution) additional COM control on the browser application preventing it from being closed while there's an edit in place.</li>
+	<li>Chrome user would need to install a dedicated extension in order to use the Native Massaging API and the host application will just be controlled by the properly identified and register extension.<br />
+	However the difference here is in the absence of the signing which could be seen an advantage since it would take out the effort for the signing/certificate renewal and the certificate renewal.</li>
+	<li>We could well reuse the same approach with Jacob COM port once we have an exemption for it or might review it. In the small demo the alternative mechanism called JNA (Java Native Access) is used to launch Word and open the document. JNA does also look more compact than JNI (Java Native Interface) which Jacob is based upon as there is no boilerplate code. The JNA license is LGPLv2.1 or later, and (from version 4.0 onward) the Apache Software License, version 2.0. so this should be reviewed to see if it is more acceptable. Furthermore. being more modern, JNA is still under active development and so far I could not find a mechanism to intercept the Word application events to register the necessary callbacks (there is some work in progress though which might become available later). But, as said before, we might just stick to the existing technology.</li>
+</ol>
+
+<p dir="ltr">Finally, the same - just modified - approach could be useful to consider for the IE, if we could manage to somehow launch a standalone application (the same standalone application) when the Word edit widget is loaded..<br />
+This is more complicated though, since there is no initial linking in this case; however if we manage to find a feasible approach, we could achieve better stability, consistency and better reusing of the same code across the browsers, and also some of the advantages from the above list.</p>
+
+<h1 dir="ltr">The external situation</h1>
+
+<p dir="ltr">This is best summarized by the FireBreath plug-in vendors (they have a different purpose and we do not need support video streaming which I guess is their problem, but the rest describes the situation more or less adequately):</p>
+
+<h2 dir="ltr">Google Native Client / NaCl</h2>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp; What it is:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NaCl uses a special C/C++ compiler and the Pepper API (PPAPI) to allow the creation of mostly-native code that can run "safely" in your browser.<br />
+&nbsp;&nbsp;&nbsp; Pros:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Code should run pretty much at native speed<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sufficiently powerful graphics capabilities to run Flash<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Can be packaged fully inside an extension and thus doesn't require a traditional installer<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; They are working towards a portable version (PNaCl) for mobile devices in the future.<br />
+&nbsp;&nbsp;&nbsp; Cons:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Only works on Google Chrome<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Does not allow raw TCP/UDP<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Other browser vendors seem to have no interest in adding support<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No synchronous javascript API; all communication with the web page is through asynchronous "messages"</p>
+
+<h2 dir="ltr">Google Native Messaging</h2>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp; What it is:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Native Messaging allows a Chrome Extension to exchange messages with native applications. From the docs: "Native applications that support this feature must register a native messaging host that knows how to communicate with the extension. Chrome starts the host in a separate process and communicates with it using standard input and standard output streams."<br />
+&nbsp;&nbsp;&nbsp; Pros:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Allows running of native code, which presumably has full hardware access, native TCP/UDP access, etc<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; It should be possible to create an asynchronous bridge and abstraction to make this fairly painless from Javascript<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Launches the application from the browser, so the user does not have to start anything themselves<br />
+&nbsp;&nbsp;&nbsp; Cons:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Only works on Google Chrome, no analogue in Firefox, Safari, or Internet Explorer<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Two separate installers; the application (native code) has to be installed, and the extension needs to be installed.&nbsp; The same installer could probably install the extension, but it then needs to be accepted by the user in the browser.</p>
+
+<h2 dir="ltr">Mozilla Extensions js-ctypes (link)</h2>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp; What it is:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; js-ctypes allows application and extension code to call back and forth to native code written in C. Basically it allows you to call into a DLL or similar from your javascript extension.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The probable method of using this would be to create an analogue for Google Native Messaging that works in Firefox<br />
+&nbsp;&nbsp;&nbsp; Pros:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Allows calling native code from a Mozilla add-on without using NPAPI<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Libraries may be included in the add-on bundle or located on the host system<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Supports Javascript callbacks<br />
+&nbsp;&nbsp;&nbsp; Cons:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Only works on Mozilla products (Firefox/Thunderbird)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Requires shims for executing C++ methods<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Life-cycle of library objects initialized within the "shims" is per method execution (deconstructor for objects is called after each method execution)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No support for large chunks of binary data<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No drawing support</p>
+
+<h2 dir="ltr">Web Sockets and an external application</h2>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp; What it is:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In theory, we could use websockets to connect to an application running on the local system and communicate with it, thus allowing that application to provide us with services that are otherwise unavailable in the browser, such as native TCP/UDP socket access, hardware access, etc.<br />
+&nbsp;&nbsp;&nbsp; Pros:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Allows us to communicate with native code<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Works on the latest versions of the major browsers (Chrome, Firefox, IE, Safari, Opera, and their mobile derivatives)<br />
+&nbsp;&nbsp;&nbsp; Cons:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The application would need to be launched some how<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Possible security warnings with SSL sites since local server wouldn't be SSL<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Only works on newer web browsers</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

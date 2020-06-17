@@ -1,0 +1,90 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Process for Migrating UIToolkit Tools</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Process for Migrating UIToolkit Tools";
+    pageId="urn:lsid:ibm.com:td:0a98bf79-5c2c-49f8-bcc6-93c7cd529521";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Process for Migrating UIToolkit Tools</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">A new Ant script was created that will facilitate to download the dependencies needed, in this initial version just the Intern and Selenium are being updated.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The script uses NPM (that comes from NodeJS installation) to download the dependencies needed, zip them into a compressed file and send them into the same network location that&nbsp;CEF_MAIN and TI_MAIN streams use. So next time that you build your CEF_MAIN or TI_MAIN (if the same versions are configured in UIToolkit script, CEF and TI_MAIN) the correct dependencies will be used.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Below you can find an explanation on how to run the new script and where to configure the version for the dependencies.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">First of all we need to have&nbsp;<strong>NodeJS</strong> installed in the machine and&nbsp;in order to download and install it&nbsp;please go to<strong>&nbsp;<a href="https://nodejs.org/">https://nodejs.org/</a>&nbsp;</strong>and follow the installation instructions.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>After you have NodeJS</strong> <strong>installed</strong> in the machine you will be able to run the Ant script&nbsp;created to download the dependencies.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Configuring versions</strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<ol dir="ltr">
+	<li>Navigate using explorer to your <strong>TI_MAIN\TIVOB\build_scripts</strong> folder</li>
+	<li>Edit the file<strong>&nbsp;uitoolkit_properties.xml</strong> with the correct version of the dependencies that you need and save it</li>
+</ol>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Running the Script</strong></p>
+
+<ol dir="ltr">
+	<li>Open a console window</li>
+	<li>Navigate&nbsp;to your&nbsp;<strong>TI_MAIN\TIVOB</strong> folder</li>
+	<li>Run the following command:&nbsp;<strong>build -f build_scripts\upgrade_uitoolkit.xml buildNpmDependencies</strong></li>
+	<li>Check that a new artifact, with the version configured in your property file,&nbsp;was created in the following folders:
+	<ol>
+		<li><strong>​\\tiny\ProductDevelopment\TechInf\Development_Tools\intern</strong></li>
+		<li><strong>\\tiny\ProductDevelopment\TechInf\Development_Tools\selenium-standalone</strong></li>
+	</ol>
+	</li>
+</ol>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

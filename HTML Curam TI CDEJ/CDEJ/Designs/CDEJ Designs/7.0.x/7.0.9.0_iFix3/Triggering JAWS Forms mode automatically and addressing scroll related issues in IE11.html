@@ -1,0 +1,1519 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Triggering JAWS Forms mode automatically and addressing scroll related issues in IE11</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Triggering JAWS Forms mode automatically and addressing scroll related issues in IE11";
+    pageId="urn:lsid:ibm.com:td:0c8b02d1-45d4-44c3-a48e-2e99d38e4bae";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Triggering JAWS Forms mode automatically and addressing scroll related issues in IE11</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h1 dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Design Page for triggering JAWS Forms mode automatically and addressing scroll related issues&nbsp;in IE11 </strong></h1>
+
+<h2 dir="ltr" id="ii3">Stakeholders</h2>
+
+<table border="1" dir="ltr">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Role</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Sign Off if Applicable</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Customer</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">MSD, MCSS</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Business Owner/Product Owner</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Shane McFadden/Sonya Purcell</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Architect</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Fergal Gavin</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Developer(s)</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">James Darcy</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">FVT</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Satya Minnekanti</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">SVT</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">John Redmond/Sean Cleary</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Information Developer</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Annette Sohor</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">UX Design</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Legal</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Deirdre Dolan/Jim Rook</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii4">Background</h2>
+
+<p dir="ltr"><strong>**Note**:&nbsp;</strong>From here on in, I use the terms focusable field/element or editable field/element. The difference between the two is, a focusable field is any field that the util.doSetFocus() function determines to be the focusField. An editable field, is a focusable field that requires Forms Mode to be enabled. But there are certain field types that require user interaction, but do not trigger Forms Mode. Examples of these are checkboxes and&nbsp;radio buttons, All editable fields are focusable fields. Not all focusable fields are editable fields. Below I've listed some examples of these:<br />
+<br />
+<u>Focusable field</u>: Text input field, dropdown widget, a select, a radio button, a checkbox, an anchor element, a text area, a Browse button<br />
+<u>Editable field</u>: Text input field, dropdown widget, a select, a text area</p>
+
+<p dir="ltr"><br />
+A support ticket was raised by MCSS in relation to forms mode not being triggered for the first editable field for&nbsp;JAWS users in IE11 when a page has loaded. JAWS has the automatic forms mode setting switched on by default, so usually when an editable field receives focus (through tabbing/using JAWS virtual cursor) forms mode would be triggered, which would allow the user to interact with the field. For example, they may type into the field, or expand a drop down menu.<br />
+But in Curam, when the page loaded and the first focusable element was an editable field, forms mode was not being automatically triggered and therefore users were not able to interact with the field initially.<br />
+A fix for this was put into 7.0.5.0 as part of&nbsp;<a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=225885">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=225885</a>.<br />
+The fix was to include a one second delay in setting the focus in IE11 when a page had loaded. This almost consistently (though not 100% of the time) triggered forms mode for JAWS users.<br />
+<br />
+Since this fix was added to the codebase, a number of issues related to the change have been raised. For example:<br />
+<a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=255274">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=255274</a>&nbsp;was raised as if a user began typing in another field, the focus would jump back to the first focusable field after one second. This was addressed by detecting if the user had focused on another field, and if so, refrain from setting the focus on the default focusable field.<br />
+<a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/L2%20Support#action=com.ibm.team.workitem.viewWorkItem&amp;id=258299">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/L2%20Support#action=com.ibm.team.workitem.viewWorkItem&amp;id=258299</a>&nbsp;and&nbsp;<a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/L2%20Support#action=com.ibm.team.workitem.viewWorkItem&amp;id=259828">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/L2%20Support#action=com.ibm.team.workitem.viewWorkItem&amp;id=259828</a>&nbsp;were raised as if a user began to scroll immediately after the page loaded, when the first focusable element was focused, the page would jump back towards the top of the page. This was interrupting the user's scrolling and causing frustration for customers.<br />
+<br />
+A TestFix (7.0.7.0_iFix5_TestFix_260301) was given to MSD to address the scrolling issues, where the position of the page was stored before setting focus and then immediately after setting focus it would scroll to that point. The customer was not satisfied with this fix as they said it did not work for modal/popup pages and for non-modal pages in IE11, there was a noticeable flicker after the focus had been set.<br />
+<br />
+It was decided that the 1 second delay in focus should be removed for IE11 as it was causing a number of usability issues for all users.<br />
+This design page details in the investigation that was carried out in order to try find an alternative solution for triggering forms mode automatically in IE11 after a page has loaded and a field receives focus.</p>
+
+<h2 dir="ltr" id="ii5">Requirements</h2>
+
+<p dir="ltr">List of Requirements</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement 1: Users shall be able to scroll down a page without the scrolling action being interrupted by a field receiving automatic focus</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement 2: JAWS users should be able to automatically interact with the initially focused editable field&nbsp;after a page has loaded.</li>
+</ul>
+
+<p dir="ltr">RTC Ticket</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=260214">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=260214</a></li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii6">Requirement Decisions</h3>
+
+<p dir="ltr">There may be some outstanding questions/decisions made as regards to the requirements. These decisions should be documented here.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="156" style="width: 1123px;" width="860">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 116px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement Decision Title</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 78px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Issue or Problem Statement</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 103px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Assumptions</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 110px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Motivation</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 136px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Alternatives</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 144px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Decision</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 146px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Justification</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 169px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Implications</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 98px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Status</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 9px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Date</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 116px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 78px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 103px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 110px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 136px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 144px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 146px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 169px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 98px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 9px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 116px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 78px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 103px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 110px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 136px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 144px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 146px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 169px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 98px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 9px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 116px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 78px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 103px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 110px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 136px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 144px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 146px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 169px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 98px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 9px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii7">Non Functional Requirements</h3>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. Do the following non functional requirements apply to the enhancement being created and if so, minor details should be provided here. We can fill in N/A if the specified non functional requirement is not applicable to the feature being delivered.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" style="width: 930px;" width="671">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">NFR</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+			<td style="width: 298px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Details</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Accessibility</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to be used by people with disabilities. When new technologies are being used for the UI very careful consideration should be given to whether screen readers can be used with the technologies. This applies specifically to usage of JavaScript, Flex and SVG. The use of colors to provide functionality should be considered (and avoided), along with resolutions that will be used by vision impaired users.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Both desktop application and tablet devices should be considered in this effort.</p>
+			</td>
+			<td style="width: 298px;">The removal of the 1 second delay will impact JAWS users as this was originally added in 7.0.5 to address an issue where Forms Mode is not triggered when the page loads and focus is on an editable field. An alternative is required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Availability &amp; Resilience</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to be fully or partly operational as and when required and to effectively handle failures that could affect system availability. This should be considered when working outside of the normal infrastructure and deployment. For example, the XML Server is not deployed in an application server and has special handling for fail-over and load balancing. Careful consideration should be taken before adding new components, e.g. EJB Beans, MDBs, to the infrastructure.</td>
+			<td style="width: 298px;">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Development Resource</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to be designed, built, deployed and operated within known constraints of people, budget, time, etc. In general there is not much information required here, however where special skill sets or people with siloed knowledge are required to work on the change/enhancement, this should be detailed here.</td>
+			<td style="width: 298px;">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Evolution</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to be flexible in the face of the inevitable change that all systems experience after deployment, balanced against the costs of providing such flexibility. Consideration should be given to future proofing the change, including considering how to upgrade to any changes or enhancements provided in the future. Specifically designs should accommodate elements such as localisation (text, dates, etc.), customization, configurability, and componentization. Providing these features in future releases, when not considered up front, has caused impacts for customers in the past and has prevented us from providing the features in some cases.</td>
+			<td style="width: 298px;">When support for IE11 is dropped, any IE11 focus specific changes should be removed from the product.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Internationalisation</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to be independent from any particular language, country or cultural group. Localisation and internationalisation are a large concern for Cúram. Support should always be provided to view information in multiple locales, based on the user and server locale, along with support for working in multiple time zones.</td>
+			<td style="width: 298px;">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Location</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to overcome problems brought about by the absolute location of its elements and the distances between them. For the most part this is not a major concern, however we should never design based on the assumption that the customer will use a default configuration</td>
+			<td style="width: 298px;">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Performance and Scalability</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to predictably execute within its mandated performance profile and to handle increased processing volumes. Performance and scalability are a concern and should always be considered during design. Where necessary, the Performance and Benchmarking teaming should be engaged early to help with determining impact of potential changes.</td>
+			<td style="width: 298px;">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Regulation</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to conform to locale and international laws, quasi-legal regulations, company policies and other rules and standards. Regulation includes the usages of third party tools and the licensing issues associated with these. New jars should never be introduced without considering the legal implications and licensing of the jars. This includes usage of GPL licensed code. Also, usage of code freely provided on the web and not properly licensed should be avoided.</td>
+			<td style="width: 298px;">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Security</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to reliably control, monitor and audit who can perform what actions on what resources and to detect and recover from failures in security mechanisms. This is a concern where new features are added that are not contained within the normal Cúram security.</td>
+			<td style="width: 298px;">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Usability</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ease with which people who interact with the system can work effectively. How the change will affect the user and how they use the application/feature should always be considered. Where necessary the business analysts and our user interface experts should be engaged early to ensure we meet usability requirements. e.g. printing.</td>
+			<td style="width: 298px;">Removal of the 1 second delay will improve usability for IE11 users. They can now interact with the field immediately and not have any scrolling actions interrupted.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii8">Design Options</h2>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Option 1 (chosen)</strong></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Remove 1 second delay in setting focus.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Pros of choosing this option.
+	<ul>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Focus will be set on the first focusable field much faster.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Improved usability in IE11</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">No impact to user's scrolling actions</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Cons of choosing this option
+	<ul>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">It will be difficult to trigger Forms Mode in JAWS for screen reader user when the page is loaded.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">We have no control over JAWS.</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Option 2</strong></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Only focus on a field when a user has not scrolled.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Pros of choosing this option.
+	<ul>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Can keep 1 second delay and have minimal impact to JAWS users</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Cons of choosing this option
+	<ul>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">No field would receive focus when a user has scrolled</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">If a user accidentally scrolls, then no field would receive focus unless we choose an arbitrary amount the user has to scroll by before deciding not to set the focus</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Option 3</strong></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Store user's position before focus is set, and scroll back to that point before setting focus.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Pros of choosing this option.
+	<ul>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Can keep 1 second delay and have minimal impact to JAWS users</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Lesser impact to user's scrolling actions</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Cons of choosing this option
+	<ul>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">A version of this was already given to the customer in a Testfix and they said it did not work for modals and caused a flicker on the screen in IE11</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Option 4</strong></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use the MicroSoft specific setActive() function to focus on the field but not scroll</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://developer.mozilla.org/en-US/docs/Mozilla/Gecko/Chrome/API/Browser_API/setActive">https://developer.mozilla.org/en-US/docs/Mozilla/Gecko/Chrome/API/Browser_API/setActive</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Pros of choosing this option.
+	<ul>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">No impact to user's scrolling actions</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Cons of choosing this option
+	<ul>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">This function in considered non-standard and should not be used in production</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">It only worked for IE.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1 second delay would still be required to activate Forms Mode.</li>
+	</ul>
+	</li>
+</ul>
+
+<h3 dir="ltr" id="ii9">Design</h3>
+
+<p dir="ltr"><strong>Design 1:</strong></p>
+
+<p dir="ltr">The one second delay in setting the focus in IE11 will be removed from the product. This has caused a number of issues since it was introduced and it's removal will boost the usability performance of the product in IE11.<br />
+It was originally added to address an issue where Forms Mode was not triggered for JAWS users when a page loaded. An alternative solution is needed to address this.<br />
+The scrolling issues MSD reported were caused by the significant amount of time it took before a field received focus, Users were able to scroll down the page before this one second threshold, and when the focusable field received focus, the page would move from the current position to the position of the focused element.</p>
+
+<h2 dir="ltr" id="ii10">Architecture/Design Decisions</h2>
+
+<table border="1" dir="ltr" height="156" style="width: 1139px;" width="860">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 116px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Architecture Decision Title</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 113px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Issue or Problem Statement</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 112px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Assumptions</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 143px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Motivation</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 142px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Alternatives</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 248px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Decision</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 226px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Justification</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 213px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Implications</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 64px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Status</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 56px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Date</strong></td>
+		</tr>
+		<tr>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 116px;">Remove the 1 second delay in setting the focus in IE11</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 113px;">Remove the 1 second in setting the focus in IE11 as it has caused a number of issues since it was introduced</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 112px;">While it will improve usability in IE11, an alternative solution will be required to trigger Forms Mode.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 143px;">The 1 second in setting the focus in IE11 should be removed as it has caused a number of issues since it was introduced</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 142px;">Leave the 1 second delay in place and find alternative solution to address scrolling issue.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 248px;">Remove 1 second delay</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 226px;">It has caused a number of issues so far and may cause more in the future. It also reduces the usability standards of the product in IE11.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 213px;">JAWS users will be impacted as Forms Mode won't be triggered at all unless an alternative solution is found</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 64px;">Complete</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 56px;">12/05/2020</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 116px;">If a user scrolls, should a field be focussed at all?</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 113px;">Should focussing on a field be disabled when a user has immediately scrolled after the page loaded.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 112px;">If a user is scrolling immediately, they are not interested in interacting with the first focusable field</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 143px;">It would be an easy way to address the issue with the page position moving when a field receives focus, while also keeping the 1 second delay in place for users who haven't scrolled and therefore not impacting JAWS auto switching to Forms Mode</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 142px;">The first focusable element should always receive focus on page load.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 248px;">The first focusable field should receive focus on page load.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 226px;">If a user has scrolled even slightly or accidentally, the first field wouldn't receive focus</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 213px;">The first focusable field needs to receive focus before a user can scroll</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 64px;">Complete</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 56px;">12/05/2020</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 116px;">Should the inline styling applied to modals and pages before they are revealed to users be updated?</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 113px;">The inline styling applied to modals and pages before they are visible to users is affecting JAWS' ability to enter Forms Mode</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 112px;">The change in styling won't cause any changes functionally or visibly. Or audibly to screen-reader users</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 143px;">When a modal is constructed, it's constructed off screen and a "visibility: hidden" styling is applied before it's revealed. The same styling is applied to the iframe of the content panel when opening a new tab/refreshing the content of a tab. This styling causes difficulty for JAWS entering Forms Mode in IE11.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 142px;">Don't update the stying and keep the 1 second delay in setting the focus.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 248px;">Update the styling. Use "opacity: 0" to hide the screens visually and only use "visibility: hidden" to hide particular elements.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 226px;">The styling changes are preferable to the 1 second delay.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 213px;">The help button and hidden "Close Modal" text will need to have "visibility: hidden" applied to them when they're being constructed and then removed when they're being revealed as if they did not, JAWS reads these before they are visually displayed.<br />
+			The pages/iframes themselves will need to have the "opacity: 1" styling applied in order to be revealed now.<br />
+			The difference between visibility and opacity is that opaque elements can technically receive focus and be interactive, whereas invisible elements cannot. But because this styling is only applied before the page is loaded and removed when it's finished loading, it should have no impact.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 64px;">Complete</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 56px;">12/05/2020</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 116px;">A delay is setting focus is still required to improve the consistency of JAWS entering Forms Mode</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 113px;">The delay in setting focus cannot be fully removed. A delay is setting focus is still required to improve the consistency of JAWS entering Forms Mode.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 112px;">Having a smaller threshold for the delay in setting the focus won't impact the scrolling actions of users</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 143px;">With the styling changes in place but without any delay in setting focus in IE11, JAWS was inconsistent when it came to entering Forms Mode. While adding a delay &lt; 1 second, helps improve the consistency, it does not cause JAWS to act consistently 100% of the time.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 142px;">Have no delay and completely avoid any risk of impacting user's scrolling abilities.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 248px;">Have a short delay in setting the focus.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 226px;">We want to lessen the impact of the fix on our accessibility users</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 213px;">We have to be careful not to impact the scrolling actions of users who have scrolled immediately after page load. The first focused field should receive focus before a user can conceivably scroll.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 64px;">Complete</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 56px;">12/05/2020</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 116px;">The styling applied to popup menus when they're hidden is causing difficulties for JAWS entering Forms Mode</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 113px;">The styling applied to popup menus when they're hidden is causing difficulties for JAWS entering Forms Mode. Immediately after popup menu is hidden, a "display:none" styling is applied to the menu. The JAWs virtual cursor appears to remain on the selected menu item and Forms Mode is not triggered a lot of the time. When this styling is not applied, JAWS behaves more consistently (but not 100% of the time)</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 112px;">The change in styling won't cause any changes functionally or visibly. Or audibly to screen-reader users</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 143px;">A styling change is required in order to improve the consistency in which JAWS enters Forms Mode for screen reader users</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 142px;">Don't apply the styling changes and keep a 1 second delay in setting the focus.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 248px;">Apply the styling changes in IE11 only</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 226px;">We want to lessen the impact of the fix on our accessibility users.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 213px;">The popup menu will be visually hidden when they're closed. And an aria-hidden applied to it to prevent the screenreader from being aware of it when it's hidden.<br />
+			After a short amount of time, e.g 200ms, if the menu is still hidden, then apply the original styling to it.<br />
+			If the popup is reopened within 200ms, the visually hidden stylings that were applied should be removed.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 64px;">Complete</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 56px;">12/05/2020</td>
+		</tr>
+		<tr>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 116px;">Use the MicroSoft specific JS function "setActive()" instead of "focus()"</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 113px;">Using the MS specific setActive function would focus the field but not scroll the page</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 112px;">The 1 second delay would still be required to trigger Forms Mode</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 143px;">This immediately addresses the scrolling issues in IE11</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 142px;">Continue to use .focus()</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 248px;">Continue to use .focus()</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 226px;">setActive() is non standard and is advised not to be used in production. See<br />
+			<a href="https://developer.mozilla.org/en-US/docs/Mozilla/Gecko/Chrome/API/Browser_API/setActive">https://developer.mozilla.org/en-US/docs/Mozilla/Gecko/Chrome/API/Browser_API/setActive</a><br />
+			for details on this function.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 213px;">An alternative is needed for preventing the browser from scrolling when focus is set.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 64px;">Complete</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 56px;">12/05/2020</td>
+		</tr>
+		<tr>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 116px;">Store the user's position on the screen before focussing and the immediately scroll back to this position after focussing.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 113px;">Store the user's position on the screen before focussing and the immediately scroll back to this position after focussing.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 112px;">There will be no visual impact to the user and no impact to their scrolling action.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 143px;">The 1 second delay can remain, so screenreader users are not impacted</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 142px;">Set the focus before the user can scroll</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 248px;">Set the focus before the user can scroll.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 226px;">A version of this solution was given in a TestFix to the customer already, and they said it did not work for modals and caused a flicker on the screen in IE11 for non-modal pages</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 213px;">The focus will need to be set before the user can scroll</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 64px;">Complete</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 56px;">12/05/2020</td>
+		</tr>
+		<tr>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 116px;">Create a hidden input field and focus on that before focussing on the first focusable field</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 113px;">Create a hidden input field and focus on that before focussing on the first focusable field. This helps JAWS enter Forms Mode when the page in question loads.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 112px;">There will be no impact visually, functionally or audibly. This input is not included when a form is submitted</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 143px;">This helps JAWS enter forms mode</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 142px;">Don't create a hidden input field.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 248px;">Create a hidden input field when the focusable field is one that requires Forms Mode to be switched on. Once focus leaves this hidden input field, it is to be removed.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 226px;">This helps JAWS enter forms mode and has no&nbsp;envisaged impact on the application.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 213px;">The hidden input needs to be hidden visually and audibly (for screen reader users). It must be created outside of the form in order to ensure it is not submitted as part of a form submission. It also needs to be removed as soon as focus leaves the input. It's only purpose is to help trigger Forms Mode.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 64px;">Complete</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 56px;">12/05/2020</td>
+		</tr>
+		<tr>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 116px;">The focus delay should change depending on the field type</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 113px;">The focus delay should change depending on the element type as certain elements don't require Forms Mode.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 112px;">Anywhere a user is required to enter text or expand a dropdown menu requires Forms Mode. Other elements such as links, buttons, spans, error messages do not.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 143px;">This will improve the usability for users in cases where the first focusable element doesn't require Forms Mode.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 142px;">Have either no delay for all elements, or a delay for all elements.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 248px;">The focus delay should change depending on the field type</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 226px;">It doesn't make sense to wait for a number of milliseconds before focussing on an element that doesn't require Forms Mode to be enabled.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 213px;">The elements that do require Forms Mode should have a delay before focus</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 64px;">Complete</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 56px;">12/05/2020</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr"><br />
+Design Specifics</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CDEJ:</strong></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">HTML Changes</strong>
+
+	<ul>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TI/client/components/client-inf/jscript/src/internal/curam/layout/resources/Dialog.html
+		<ul>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Added inline styling of "visibility:hidden" to close button. This is removed when button modal is revealed.</li>
+		</ul>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TI/client/components/client-inf/jscript/src/internal/curam/layout/resources/ModalUIMController.html
+		<ul>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Added inline styling of "visibility:hidden" to end of modal&nbsp;span. This is removed when button modal is revealed.</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Widget Changes</strong>
+	<ul>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TI/client/components/client-inf/jscript/src/internal/curam/ModalDialog.js
+		<ul>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Refactored _setFocusHandler,&nbsp;removed common&nbsp;focus logic and moved to new method :&nbsp;curam.util.setFocusOnField()</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Added check for&nbsp;suppressCuramModalFocusTimeout flag. If present, immediately focus on focusField.</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">At end of method, remove&nbsp;suppressCuramModalFocusTimeout if present.</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Updated inline styling so modal container has opacity of 0 when being constructed. This is set to 1 when modal is revealed.</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Modal is no longer constructed off screen.</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Close button, help button and end of modal span have visibility:hidden removed when modal is revealed.&nbsp;</li>
+		</ul>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TI/client/components/client-inf/jscript/src/internal/curam/util.js
+		<ul>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Added&nbsp;curam.util.setFocusOnField(focusField, isModal, localizedModalFrameTitle) and&nbsp;curam.util._createHiddenInputField(focusField) methods.</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">curam.util.setFocusOnField(focusField, isModal, localizedModalFrameTitle) handles all common focus functionality that's shared by curam.util.setFocus() and ModalDialog._setFocusHandler().</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Reduced timeout for setting focus - there are different timeouts depending on the element type.</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">A hidden input field is created, focussed on and removed before focus is set on focusable field. This helps to trigger Forms Mode in JAWS. This is done in&nbsp;curam.util._createHiddenInputField(focusField).</li>
+		</ul>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TI/client/components/client-inf/jscript/src/internal/curam/util/TabNavigation.js
+		<ul>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Updated inline styling so content panel iframe has opacity of 0 when being loaded. This is set to 1 when iframe&nbsp;is loaded.</li>
+		</ul>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TI/client/dojo-overrides/jscript/src/dijit/popup.js
+		<ul>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Updated the hide() function to visually hide a popup window in IE11 instead of setting "display:none". Then if the menu is still hidden after 200ms, the "display:none" styling is applied and the visually hidden stylings are removed. An aria-hidden=true&nbsp;is also set when the menu is visually hidden.</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Updated the open() function to remove the visually hidden stylings if it is only visually hidden. It also will set aria-hidden=false.&nbsp;Otherwise it will just open as before.</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<h2 dir="ltr" id="ii28"><span style="color:#000000;">Use Cases</span></h2>
+
+<p dir="ltr">I've split the use cases in to multiple categories:</p>
+
+<p dir="ltr"><strong>Scroll related:</strong></p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1.1</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Regular modal scrolling</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actor</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Opening a modal that has a focusable field and where the content is long enough that a scrollbar is present</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Preconditions</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The page has a focusable field and where the content is long enough that a scrollbar is present</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Flow</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<ol>
+				<li>Login as a caseworker.</li>
+				<li>Register a Person.</li>
+				<li>Navigate to the Evidence tab on the Person page and add new Relationship evidence.</li>
+				<li>When the modal opens, immediately scroll down the page.</li>
+			</ol>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Expected</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The page should not jump back to the top due to the focus being set on the first editable field.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1.2</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Search page scrolling</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actor</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Opening a search page&nbsp;that has a focusable field and where the content is long enough that a scrollbar is present</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Preconditions</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The page has a focusable field and where the content is long enough that a scrollbar is present</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Flow</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<ol>
+				<li>Login as a caseworker.</li>
+				<li>Click on the Cases and Outcomes workspace tab.</li>
+				<li>Select Person under Searches in the shortcuts panel.</li>
+				<li>On the Person search page, populate the necessary search fields in order to return a large number of results.</li>
+				<li>When the search results are returned, immediately scroll to the bottom of the page.</li>
+			</ol>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Expected</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The page should not jump back towards the top of the page due to the focus being set on the search button after a user performs a search.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1.3</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Modal scrolling where modal refreshes on page load</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actor</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Opening a modal that has a focusable field and where the content is long enough that a scrollbar is present</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Preconditions</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The page has a focusable field and where the content is long enough that a scrollbar is present</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Flow</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<ol>
+				<li>Login as a hcrcaseworker.</li>
+				<li>Create an Income Support IC.</li>
+				<li>Login as a eligibilityworker.</li>
+				<li>Open Income Support IC and go to the Evidence Dashboard.</li>
+				<li>Select New Evidence from page level actions menu on Evidence Dashboard</li>
+				<li>Observe how the page re-loads immediately after it opens.</li>
+				<li>Scroll when the page has re-loaded.</li>
+			</ol>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Expected</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The page should not jump back towards the top of the page due to the focus being set on the drop down menu after the page re-loads.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1.4</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Modal scrolling where modal refreshes on page load</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actor</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Opening a modal that has a focusable field and where the content is long enough that a scrollbar is present</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Preconditions</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The page has a focusable field and where the content is long enough that a scrollbar is present</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Flow</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<ol>
+				<li>Login as a hcrcaseworker.</li>
+				<li>Create an Income Support IC.</li>
+				<li>Login as a eligibilityworker.</li>
+				<li>Open Income Support IC and go to the Evidence Dashboard.</li>
+				<li>Select Transfer Evidence from page level actions menu on Evidence Dashboard</li>
+				<li>Observe how the page re-loads immediately after it opens.</li>
+				<li>Scroll when the page has re-loaded.</li>
+			</ol>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Expected</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The page should not jump back towards the top of the page due to the focus being set on the drop down menu after the page re-loads.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr"><strong>Initial focused field related:</strong></p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2.1</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Focus goes to combobox in a modal</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actor</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Opening a page where the focusable field is a combobox</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Preconditions</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The page has a focusable field</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Flow</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<ol>
+				<li>Login as a ccsintakeworker</li>
+				<li>Create a new Intake.</li>
+			</ol>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Expected</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The focus should go to the Category drop down field with a 200ms delay</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2.2</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Focus goes to text field in a modal</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actor</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Opening a page where the focusable field is an input text field</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Preconditions</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The page has a focusable field</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Flow</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<ol>
+				<li>Login as a ccsintakeworker</li>
+				<li>Create a new Intake.</li>
+				<li>Open intake and add a new participant</li>
+			</ol>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Expected</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p>The focus should go to the First Name field with a 200ms delay</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2.3</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Focus goes to a select element in a modal</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actor</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Opening a page where the focusable field is a select element</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Preconditions</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The page has a focusable field</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Flow</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<ol>
+				<li>Login as a ccsintakeworker</li>
+				<li>Create a new Intake.</li>
+				<li>Open intake and add a new participant</li>
+				<li>Click on calendar icon beside date of birth field.</li>
+			</ol>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Expected</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The focus should go to the Month drop down field with a 200ms delay</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2.4</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Focus goes to a checkbox in a modal</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actor</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Opening a page where the focusable field is a checkbox</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Preconditions</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The page has a focusable field</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Flow</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<ol>
+				<li>Login as a ccsintakeworker</li>
+				<li>Create a new Intake.</li>
+				<li>Open intake and add a new participant.</li>
+				<li>Add a new Relationship</li>
+			</ol>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Expected</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The focus should go to a checkbox in the Participant field with no delay</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2.5</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Focus goes to a text field in a non-modal page</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actor</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Opening a page where the focusable field is a text input field</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Preconditions</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The page has a focusable field</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Flow</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<ol>
+				<li>Login as a caseworker.</li>
+				<li>Click on the Cases and Outcomes workspace tab.</li>
+				<li>Select Person under Searches in the shortcuts panel.</li>
+			</ol>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Expected</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The focus should go to the Reference&nbsp;field&nbsp;with a 500ms delay</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2.6</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Focus goes to the Search button</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actor</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Running a search on&nbsp;a search page</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Preconditions</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The page is a search page</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Flow</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<ol>
+				<li>Login as a caseworker.</li>
+				<li>Click on the Cases and Outcomes workspace tab.</li>
+				<li>Select Person under Searches in the shortcuts panel.</li>
+				<li>Populate some fields in order to return search results.</li>
+			</ol>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Expected</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The focus should go to the search button with no delay</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2.7</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Focus goes to the informational message field</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actor</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Running a search on&nbsp;a search page with no search criteria in order to return an informational message</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Preconditions</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The page is a search page</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Flow</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<ol>
+				<li>Login as a caseworker.</li>
+				<li>Click on the Cases and Outcomes workspace tab.</li>
+				<li>Select Person under Searches in the shortcuts panel.</li>
+				<li>Don't enter any text in any of the fields and click search.</li>
+			</ol>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Expected</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The focus should go to the informational message with no delay</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2.8</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Focus goes to a textarea</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actor</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Opening a page where the focusable field is a textarea</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Preconditions</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The page has a focusable field</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Flow</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<ol>
+				<li>Login as a ccsintakeworker</li>
+				<li>Go to Inbox Tab.</li>
+				<li>Create a new Task.</li>
+				<li>Open task and from page level actions menu, select Add Comment.</li>
+			</ol>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Expected</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The focus should go to the comments field with a 1 second delay</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Popup related:</strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3.1</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Application banner popup menu opens page when menuitem selected</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actor</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Application banner popup menu opens page when menuitem selected</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Preconditions</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The page is opened from an application banner popup menu</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Flow</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<ol>
+				<li>Login as a ccsintakeworker</li>
+				<li>Go to Application bar dropdown menu.</li>
+				<li>Expand menu and click on preferences</li>
+			</ol>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Expected</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The popup closes and the Preferences modal opens.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3.2</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Page level popup menu opens page when menuitem selected</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actor</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Page level popup menu opens page when menuitem selected</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Preconditions</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The page is opened from a page level popup menu</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Flow</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<ol>
+				<li>Login as a ccsintakeworker</li>
+				<li>Go to Person Search.</li>
+				<li>Expand page level actions menu and click on Register Person</li>
+			</ol>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Expected</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The popup closes and the Register Person modal opens.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3.3</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Row level popup menu opens page when menuitem selected</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actor</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Row level popup&nbsp;menu opens page when menuitem selected</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Preconditions</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The page is opened from a row level popup&nbsp;menu</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Flow</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<ol>
+				<li>Login as a ccsintakeworker</li>
+				<li>Go to Person Search.</li>
+				<li>Search for James Smith</li>
+				<li>Expand row level actions menu on the result and click New Case</li>
+			</ol>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Expected</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The popup closes and the New Case modal opens.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3.4</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Application banner popup menu re-opens when dropdown menu button clicked rapidly</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actor</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Application banner popup menu re-opens when dropdown menu button clicked rapidly</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Preconditions</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">There is an application banner popup menu</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Flow</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<ol>
+				<li>Login as a ccsintakeworker</li>
+				<li>Go to Application bar dropdown menu.</li>
+				<li>Expand menu.</li>
+				<li>Close it rapidly and open it again.</li>
+			</ol>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Expected</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The popup closes and re-opens.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3.5</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Page level popup menu re-opens when dropdown menu button clicked rapidly</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actor</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Page level popup menu re-opens when dropdown menu button clicked rapidly</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Preconditions</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">There is&nbsp;a page level popup menu</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Flow</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<ol>
+				<li>Login as a ccsintakeworker</li>
+				<li>Go to Person Search.</li>
+				<li>Expand page level actions menu.</li>
+				<li>Close it rapidly and open it again.</li>
+			</ol>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Expected</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The popup closes and re-opens.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3.6</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Row level popup menu re-opens when dropdown menu button clicked rapidly</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actor</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Row level popup&nbsp;menu re-opens when dropdown menu button clicked rapidly</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Preconditions</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">There is a row level popup&nbsp;menu</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Flow</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<ol>
+				<li>Login as a ccsintakeworker</li>
+				<li>Go to Person Search.</li>
+				<li>Search for James Smith</li>
+				<li>Expand row level actions menu.</li>
+				<li>Close it rapidly and open it again.</li>
+			</ol>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Expected</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The popup closes and re-opens.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>JAWS forms mode related:</strong></p>
+
+<p dir="ltr">Perform the above tests with JAWS enabled. If forms mode is not triggered automatically on the focused editable field after the page has loaded, press TAB and SHIFT-TAB in order to trigger forms mode.</p>
+
+<p dir="ltr"><strong>Scenarios that Satya has noted where JAWS doesn't switch to forms mode automatically in most cases after removal of 1 second delay:</strong></p>
+
+<ol data-indent="0" data-stringify-type="ordered-list" dir="ltr">
+	<li>Person Tab - Administration tab — Roles — click on Register in New Role link,&nbsp;select new Role ( ex: Information provider) in Participant Role combobox on Register Participant Role.Test dialog and on press Enter on Next button, focus is on Reference field but JAWS not switching to forms mode</li>
+	<li>Person Tab - Administration tab — Duplicates — click on Mark New Duplicate link,&nbsp;search for a person on Duplicate Person Search dialog, select the User on Duplicate Person Search dialog and on press Enter on Next button, focus is on Reason combobox but JAWS not switching to forms mode</li>
+	<li>Create a new Intake and add Participant and from Tab Actions menu click on Open Intake. From Tab Actions menu select Update Narrative, focus goes to CK Editor but JAWS not switching to forms mode.</li>
+	<li>Create a new Intake and add Participant and from Tab Actions menu click on Open Intake. Go to Administration tab -&gt; User Roles and click on New Supervisor link to open New Supervisor dialog. Click on Search icon to open User Search dialog, focus goes to First Name text field in User Search dialog&nbsp;but JAWS not switching to forms mode.</li>
+	<li>Insurance Affordability AC/IC. Go to Evidence dashboard and Open New Income modal fill in details and click on Save &amp; New button.. JAWS not switching to Forms mode after latest fix..</li>
+	<li>On any Search Page (ex: Person Search) after clicking on Reset button focus goes back to Reference field but JAWS not switching to Forms mode</li>
+</ol>
+
+<p dir="ltr">I have tested the above scenarios and they work most of the time on my VM, using the same docker image as Satya. This is an example of the inconsistencies that JAWS presents when switching to Forms Mode.</p>
+
+<h2 dir="ltr" id="ii15">Implementation Notes</h2>
+
+<p dir="ltr"><strong>General thoughts:</strong></p>
+
+<p dir="ltr">Triggering Forms Mode is out of our control. We have no control overs JAWS, we can only "entice it" to behave in the expected manner.<br />
+I tried many different types of solutions in order to address this issue but none work as well as the one second delay. In my opinion, I believe the 1 second delay only works almost consistently (but not 100% of the time) because it is such a large threshold, that after 1 second all processing on the page (DOM, JS related etc) has finished or has been significantly reduced, and in that time JAWS has finished analysing the page. Then when the focus is placed, JAWS detects this and Forms Mode is triggered. At certain times the&nbsp;JAWS virtual cursor remains on the previously clicked element, even after a new page has loaded and the first editable field has received focus. These elements are read out correctly, but not interactive. This happened seldomly with the 1 second delay, but happens more consistently without it. I don't think we can get this working 100% of the time.<br />
+All IE11 focus related changes should be removed once support for IE11 is dropped!!</p>
+
+<p dir="ltr"><strong>Removing 1 second delay:</strong></p>
+
+<p dir="ltr">I originally planned on removing it completely, and all fixes that were put into the product to address issues with the 1 second delay.<br />
+After numerous hours of testing on my own VM, on multiple streams, docker images, and sending it to Satya for early testing, it was decided that a delay was required as JAWS was acting too inconsistently.<br />
+Therefore I restored the timeouts and any changes that were put in place to address the issues with the 1 second delay (such as don't auto set focus if user has manually places the focus elsewhere)<br />
+<br />
+There are now different thresholds set&nbsp;when focusing on certain types of fields.<br />
+<br />
+<u>Modals:</u><br />
+Any editable field within a modal will receive focus in 200ms<br />
+Any field that doesn't require Forms mode will receive focus instantly.<br />
+Any textarea will receive focus in 1 second as any threshold below 1 second did not work. Satya and I could not think of any use case where there is a textarea as the first element and where that page has a scroll bar.</p>
+
+<p dir="ltr"><u>Non-Modals:</u><br />
+Any editable field within a modal will receive focus in 500ms<br />
+Any field that doesn't require Forms mode will receive focus instantly.<br />
+Any textarea will receive focus in 1 second as any threshold below 1 second did not work. Satya and I could not think of any use case where there is a textarea as the first element and where that page has a scroll bar.<br />
+<br />
+<strong>Hidden input field:</strong></p>
+
+<p dir="ltr">A hidden input field is created and focused on immediately when the first focusable field is an editable field. This helps JAWS trigger forms mode from our experience in testing.<br />
+This logic exists in both ModalDialog._setFocusHandler() and util.setFocus()<br />
+Once the onblur event is triggered on this field (when focus&nbsp;leaves the element), this field is destroyed. For extra safety, this field is created outside of the form incase there are use cases where the page is reloaded as soon as it loads (An example of this can be seen when creating New Evidence on a IC. There is custom JS in for the Evidence_NewEvidence.uim page that reloads the page as soon as it loads as it populates a list of evidences. The dropdown on this page also has an onchange event linked to it that will reload the page when a new value is selected)<br />
+This hidden input field is visually hidden using inline stylings and also has an aria-hidden and no labels in order to prevent it from being announced by JAWS.<br />
+<br />
+To visually hide an element, I used the following stylings:<br />
+position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); white-space: nowrap;<br />
+<br />
+<strong>Styling changes:</strong></p>
+
+<p dir="ltr">The styling changes applied as part of this fix appear to be key in getting JAWS to trigger forms mode. Before they were applied, anything threshold below 1 second did not work at all in my experience.<br />
+The styling changes for modals and tab navigation involve using opacity: 0 as opposed to visibility: hidden.<br />
+I discovered this&nbsp;after creating a custom webpage (I was trying to determine if it was a JAWS defect after seeing&nbsp;<a href="https://github.com/FreedomScientific/VFO-standards-support/issues/167?">https://github.com/FreedomScientific/VFO-standards-support/issues/167?</a> or if our HTML structure was invalid)&nbsp;which simulated opening a modal (I kept the same HTML structure as we have in Curam and used timeouts to simulate long page loading times). JAWS triggered forms mode consistently there even when there were no timeouts in setting focus.<br />
+I then installed a browser plugin into IE11 which disabled all styling, both inline and CSS. I noticed that Forms Mode was triggered in the Tab Test in the use cases I tried (again with no timeouts), but as soon as styling was re-added, it no longer worked. For modals, I eventually narrowed it down to the visibility:hidden styling&nbsp;being applied and that it was being constructed 10000px off screen. Removing these stylings addressed the issues with modals. I applied a similar fix to Tab navigation.<br />
+Unfortunately it wasn't the silver bullet as although JAWS triggered Forms Mode in a lot of cases, it didn't work as consistent as before.</p>
+
+<p dir="ltr"><strong>Changes to popups:</strong></p>
+
+<p dir="ltr">I noticed that after all other changes had been applied, there were still issues with Forms Mode when opening modals from popup menus. I noticed this is where JAWS acted most inconsistently even with the 1 second delay.<br />
+I noticed that once a menu item is clicked, the menu is hidden using inline "display:none" styling, but the JAWS virtual cursor appeared to stay on the menu item. As a test, I updated the popup.js in the dojo-overrides package, to not hide the menu at all and from then on JAWS switched to Forms Mode consistently. I then decided to visually hide the menu instead of using "display:none" and this helped JAWS with switching to Forms Mode. But I discovered issues while testing, as although visually hidden, users could still potentially navigate to the hidden menu with JAWS or with the TAB button (setting the tabIndex to -1 was problematic). So I added some logic, where if the menu is not re-opened after 200ms, then the original "display:none" styling is applied to it. If it is reopened, within 200ms, then the stylings that visually hide the menu are removed.<br />
+I was reluctant to make this change as it needed to take place in the popup.js file in the dojo-overrides package. Since it is a dojo-override, it is used not only by Curam code but also by dojo code too.<br />
+I made sure that these changes only happen&nbsp;in IE11 in order to narrow any potential impact.</p>
+
+<p dir="ltr">To visually hide an element, I used the following stylings:<br />
+position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); white-space: nowrap;<br />
+<br />
+<strong>Note on IEG:</strong></p>
+
+<p dir="ltr">I investigated whether IEG was affected by the focus timeout changes in IE11. IEG has it's own javascript class that sets the focus on it's form fields, so it does not require any changes. IEG also has a timeout for setting focus and it sets the focus on element after 250ms.<br />
+The IEG focus javascript class is:&nbsp;/BIZINF/webclient/components/IntelligentEvidenceGathering/jscript/src/ieg/ieg-focus.js</p>
+
+<p dir="ltr"><strong>CKEditor:</strong></p>
+
+<p dir="ltr">CKEditor/Rich&nbsp;text editors are rendered differently to the rest of our form elements. They are first rendered as textareas and then the RTE is rendered in place of that text area. The RTE is not rendered by the time the focus functions are called in order to set focus dynamically.&nbsp;The CKEditor code is responsible for setting the focus within the RTE. If the RTE is the first/only focusable element on the page, a flag can be passed in&nbsp;the UIM to set the focus on this element.<br />
+Screens where the RTE is the first focusable element may have issues with JAWS entering forms mode.<br />
+<br />
+<strong>New Evidence (IC) and Transfer Evidence UIM screens:</strong></p>
+
+<p dir="ltr">There were additional scrolling issues with the New Evidence (IC) and Transfer Evidence modal UIM screens. This was due to these screens having custom JS applied where the page is re-loaded as soon as it first loads in order to populate a list. There is also an onchange eventlistener added to the combo box on the page, so if a new value is selected, the page will reload. This caused scrolling issues as users could select a new value and then scroll before the page had fully re-loaded and before the focus had been set after 200ms. The only way to address this was to suppress the focus delay completely for these modals. To do this, in the custom JS for the pages, I set a property in the sessionStorage called "suppressCuramModalFocusTimeout" to "true". Then in the ModalDialog.js, before setting the focus by calling curam.util.setFocusOnField(focusField, isModal, localizedModalFrameTitle), I check to see if this flag has been set. If it is set, I then suppress the timeout. After the focus has been set, this flag is then removed.<br />
+An additional change needed to be added to the custom JS where the form is submitted,&nbsp;This change involved wrapping the submit function in a timeout with 0ms threshold. This was done because when I tried setting the&nbsp;suppressCuramModalFocusTimeout flag and didn't have the timeout, I was getting a JS error saying that I couldn't "execute the code from a freed script". This usually occurs when you call a function that was created in a window or frame that no longer exists. So I believe this was happening in the custom JS because when setting a property in the sessionstorage, that property is going to be available globally and not just within the scope of the current frame. But as the page is submitted immediately after loading and therefore the frame is re-loaded, the function to set the property in the sessionstorage was not fully completed. So by setting a timeout of 0ms on the submit function, this adds that function to the end of the event queue and allows for the sessionstorage property to be set properly. This does not appear to have any impact on the functionality or UX of the page.</p>
+
+<p dir="ltr"><strong>Other solutions that were attempted:</strong></p>
+
+<p dir="ltr">The following is a list of alternative solutions that were attempted but were not successful. A lot of the time these were shots in the dark:<br />
+<br />
+Using setActive(); -&nbsp;<a href="https://developer.mozilla.org/en-US/docs/Mozilla/Gecko/Chrome/API/Browser_API/setActive">https://developer.mozilla.org/en-US/docs/Mozilla/Gecko/Chrome/API/Browser_API/setActive</a><br />
+An onscroll listener which did not set the focus if a user had scrolled.<br />
+Scroll back to the user's position when the field is focused.<br />
+Varying levels of timeout thresholds for setting the focus (when there were no styling changes applied)<br />
+Using HTML autofocus attribute.<br />
+Using JS topics to set the focus at a later point.<br />
+Detecting if the readystate of the iframe is loaded/complete and then set the focus.<br />
+Running util.setFocus()/ModalDialog._setFocusHandler() as part of the onload event when an iframe has loaded.<br />
+Setting focus on a non-input field (e.g hidden span)&nbsp;before focussing on the focusable field.<br />
+Adding timeout delay to setFocus() and _setFocusHandler() functions themselves.<br />
+Calling setFocus() when&nbsp;various topics which are published during the loading of a page (e.g when an iframe is loaded, displayed, within a postiframeloadhandler function). I tried in multiple places&nbsp;throughtout the JS code. Examples of such topics which I tried to leverage are "/curam/application/tab/revealed", "curam/tab/contextRefresh", "/curam/main-content/page/loaded"<br />
+Calling .click() on the focusField.<br />
+Emitting an event which simulated pressing "ENTER" or "SPACE" on the field in order to try trigger Forms Mode.<br />
+Editing various roles and aria-roles on HTML elements in case they were being used incorrectly.<br />
+Try see was it a JAWS defect. I saw a similar defect raised with them,&nbsp;<a href="https://github.com/FreedomScientific/VFO-standards-support/issues/167?">https://github.com/FreedomScientific/VFO-standards-support/issues/167?</a>, but as I was unable to reproduce the error in a custom webapge with our HTML structure, I did not raise a defect with JAWS.<br />
+Removing the curam.util.setFocus() javascript from forms within gen-jsp.xsl and manually call the function using a topic.</p>
+
+<h2 dir="ltr" id="ii16">Application Impact</h2>
+
+<p dir="ltr">There is no application impact.</p>
+
+<h2 dir="ltr" id="ii17">Testing</h2>
+
+<p dir="ltr">Unit Tests</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">JS tests were updated to reflect the reduced threshold for setting focus in IE11</li>
+</ul>
+
+<p dir="ltr">Is it just functional tests or are further performance tests required:</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">FVT Required?
+	<ul>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Yes - both usability and accessibility testing is required.</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">SVT Required?
+	<ul>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">No</li>
+	</ul>
+	</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

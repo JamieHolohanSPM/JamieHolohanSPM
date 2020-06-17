@@ -1,0 +1,360 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Behaviour Back button before to listen to the beforeunload event</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Behaviour Back button before to listen to the beforeunload event";
+    pageId="urn:lsid:ibm.com:td:6ee699ed-741f-4396-8fce-f97c17960d30";
+    toRoot="../../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Behaviour Back button before to listen to the beforeunload event</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h2 dir="ltr">7.0.0.0 - Behaviour Back button before to listen to the beforeunload event</h2>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr"><span style="font-size:12px;"><strong>Caseworker application</strong></span></p>
+
+<p dir="ltr"><span style="font-size:12px;"><strong>Browser: Chrome</strong></span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" style="width: 980px;">
+	<tbody>
+		<tr>
+			<td style="width: 250px;"><strong>Scenario</strong></td>
+			<td style="width: 655px;"><strong>Behavior</strong></td>
+			<td style="width: 57px;">IEG</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-Navigates into the applications sections</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-click on 'Back' button&nbsp;</span></p>
+			</td>
+			<td style="width: 655px;">
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Inconsistent behaviour.</p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The application goes to the login page(if the user only navigate between the section)</p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">However, if the user does different actions between applications section, like create the person, open modal dialog&nbsp;or navigate between the content area tab navigation bar. The application is not refreshed for the first time, only after&nbsp;a click&nbsp;the back button more than once.</p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Sometimes, t</span>he tab content is refreshed&nbsp;</p>
+			</td>
+			<td style="width: 57px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-Navigates to the section shortcut panel and -click on two or more shortcut menu item.&nbsp;</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-click on 'Back' button&nbsp;</span></p>
+			</td>
+			<td style="width: 655px;">
+			<p>Inconsistent behaviour.</p>
+
+			<p>The application goes to the login page</p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">However, if the user does different actions between navigating between the section shortcut, like create the person, open modal&nbsp;</span>dialog<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">. The application is not refreshed for the first time, only after&nbsp;a click&nbsp;the back button more than once.</span></p>
+			</td>
+			<td style="width: 57px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-Navigates to the section shortcut panel and -click on two or more shortcut menu item.&nbsp;</p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">- Create a person</p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-click on two or more in-page navigations tabs.&nbsp;</span></p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-click on 'Back' button&nbsp;</p>
+			</td>
+			<td style="width: 655px;">
+			<p>The application is redirected to the previous tab accessed.</p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The top-level window is not refreshed.</span></p>
+			</td>
+			<td style="width: 57px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-Navigates to the search person</p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-click on 'Back' button&nbsp;</p>
+			</td>
+			<td style="width: 655px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The full application is refreshed&nbsp;</span></td>
+			<td style="width: 57px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-Navigates to the search person, click on the Calendar component</p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-from the modal&nbsp;</span> dialog, <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;click on 'Back' button&nbsp;</span></p>
+			</td>
+			<td style="width: 655px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The modal dialog is closed and the full application is refreshed</span></td>
+			<td style="width: 57px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-Navigates to the search person, and select an option from the Tab Action Menu(example register person)</p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-from the modal dialog, click on 'Back' button&nbsp;</p>
+			</td>
+			<td style="width: 655px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The modal&nbsp;</span> dialog <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;is closed and the full application is refreshed</span></td>
+			<td style="width: 57px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-Navigates to the internal navigational tabs of any tab in the person page</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;and </span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-click on 'Back' button in the middle of navigational tabs</span></p>
+			</td>
+			<td style="width: 655px;">
+			<p>The application goes back to the previous tab accessed.&nbsp;</p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The top-level window is not refreshed.</span></p>
+			</td>
+			<td style="width: 57px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">- Search to a person and click to detail it </span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">- From the Tab action menu (context panel), click to edit the person</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-from the modal&nbsp;</span> dialog <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">, click on 'Back' button&nbsp;</span></p>
+			</td>
+			<td style="width: 655px;">The modal dialog is closed and the full application is refreshed</td>
+			<td style="width: 57px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">- Search to a person and click to detail it</p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">- From the Page ActionControl options, select an option that should open a modal dialog&nbsp;(example: create case)</p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-from the modal&nbsp;</span> dialog<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">, click on 'Back' button&nbsp;</span></p>
+			</td>
+			<td style="width: 655px;">
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The modal&nbsp;</span> dialog <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;still open and the tab behind is refreshed</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The top-level window is not refreshed.</span></p>
+			</td>
+			<td style="width: 57px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-Navigates to the starting page of internal IEG script by Registering a person and</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-click on browser ‘Back’ button in the</span>&nbsp;first <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;page of IEG script</span></p>
+			</td>
+			<td style="width: 655px;">
+			<p>The modal dialog is closed and the application is refreshed.</p>
+
+			<p>However, if the user clicks on the modal dialog&nbsp;(insert data) and click on the back button, the modal dialog is not closed and tab behind is refreshed</p>
+			</td>
+			<td style="width: 57px; background-color: rgb(0, 255, 255);">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Navigates from Internal Wizards, then navigate to the second step</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-from the modal&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span> dialog<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">,&nbsp;click on 'Back' button&nbsp;</span></p>
+			</td>
+			<td style="width: 655px;">
+			<p>The application goes back to the first step</p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The top-level window is not refreshed.</span></p>
+			</td>
+			<td style="width: 57px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Open a page which contains in-page nav menu items. Navigate through a few of them and click on the Back button&nbsp;</span></td>
+			<td style="width: 655px;">
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The actual tab</span>&nbsp;<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">is refreshed.</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The top-level window is not refreshed.</span></p>
+			</td>
+			<td style="width: 57px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-Navigation from an internal page with an informational/warning message(search person)/&nbsp;Navigation from a Modal with an informational/warning message(create person)</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-click on 'Back' button&nbsp;</span></p>
+			</td>
+			<td style="width: 655px;">The tab or the modal dialog is refreshed</td>
+			<td style="width: 57px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">&nbsp;</td>
+			<td style="width: 655px;">&nbsp;</td>
+			<td style="width: 57px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">&nbsp;</td>
+			<td style="width: 655px;">&nbsp;</td>
+			<td style="width: 57px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>External application</strong></p>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>Browser: Chrome</strong></p>
+
+<table border="1" dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; width: 929px;">
+	<tbody>
+		<tr>
+			<td style="width: 250px;"><strong>Scenario</strong></td>
+			<td style="width: 597px;"><strong>Behavior</strong></td>
+			<td style="width: 64px;">IEG</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">
+			<p>- Log on in the application and Navigates to the home page</p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-click on 'Back' button&nbsp;</span></p>
+			</td>
+			<td style="width: 597px;">The full application is refreshed.</td>
+			<td style="width: 64px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-Navigates to create an account</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-click on 'Back' button&nbsp;</span></p>
+			</td>
+			<td style="width: 597px;">
+			<p>The application goes back to the previous page</p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The top-level window is not refreshed.</span></p>
+			</td>
+			<td style="width: 64px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">- <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Once the user created an account and navigates to&nbsp;</span>first<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;page of IEG script and clicks on browser 'Back' button&nbsp;</span></td>
+			<td style="width: 597px;">
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The application goes back to the previous page.</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Sometimes, the application goes out of the IEG script. The application is redirected to the homepage.</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The top-level window is not refreshed.</span></p>
+			</td>
+			<td style="width: 64px; background-color: rgb(0, 255, 255);">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">
+			<p>- Login as Jamessmith and go to home page.</p>
+
+			<p>- Click on the button "Apply for benefits" and&nbsp; click the "Withdraw" link from the application</p>
+
+			<p>- In the withdraw page, click on the back button</p>
+			</td>
+			<td style="width: 597px;">
+			<p>The application goes back to the previous page.</p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The top-level window is not refreshed.</span></p>
+			</td>
+			<td style="width: 64px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">- Login as Jamessmith and go to home page.-- Navigates from a Modal with an informational/warning message(Withdraw application or Activities)</p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-click on 'Back' button&nbsp;</p>
+			</td>
+			<td style="width: 597px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The modal&nbsp;</span>dialog is<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"> refreshed.</span></td>
+			<td style="width: 64px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">
+			<p>&nbsp;</p>
+			</td>
+			<td style="width: 597px;">&nbsp;</td>
+			<td style="width: 64px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Observations:</strong></p>
+
+<p dir="ltr">- When the user clicks on the back button:</p>
+
+<p dir="ltr">&nbsp; &nbsp; 1) In the scenarios tested, only one beforeunload&nbsp;event is fired. So, it is no longer a problem. It should be a problem for the "Leave button".</p>
+
+<p dir="ltr">&nbsp; &nbsp; 2) In scenarios where the user open a modal dialog inside the other modal.</p>
+
+<p dir="ltr">&nbsp; &nbsp;When the last modal is closed and the user clicks on the back button is modal dialog, the beforeunload event is not fired in the first click(the page still with the same state) only during the second click on the back button</p>
+
+<p dir="ltr">&nbsp; &nbsp;3) Because we don't support the leave button, probably we don't need to take care of what it is happening in the back history from the browser.</p>
+
+<p dir="ltr">&nbsp;&nbsp;</p>
+
+<p dir="ltr">- Main trouble:</p>
+
+<p dir="ltr"><strong>&nbsp; &nbsp; &nbsp;1) When the user submits&nbsp;the page, there are&nbsp;cases where multiple iframes are unloaded. In this case, all the beforeunload need to be stopped.</strong></p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp;2) The modal dialog is closed - only one beforeunload is fired</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp;3) Moving between content area tab navigation bar,&nbsp;<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">page group navigation bar -&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">only one beforeunload is fired</span></p>
+
+<p dir="ltr"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp; &nbsp; &nbsp;4)&nbsp;Moving between page group navigation bar -&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">only one beforeunload is fired</span></p>
+
+<p dir="ltr"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp; &nbsp; &nbsp;5) Refresh, Close, Cancel buttons&nbsp;</span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Scenarios that fire beforeunload without click on the back button from the browser:</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">1) Submit the form and refresh iframes</p>
+
+<p dir="ltr">2) Submit the&nbsp;form and not refresh iframes</p>
+
+<p dir="ltr">3) Click on the buttons: close, cancel from the modal dialog</p>
+
+<p dir="ltr">&nbsp; &nbsp;- achieved - publishing the topic on&nbsp;
+
+_modalClosedHandler from ModalDialog.js to stop the browserdialg and active it again on the unload event.</p>
+
+<p dir="ltr">4) Main content and Tab - click on refresh</p>
+
+<p dir="ltr">3) Navigation in pages already opened.&nbsp;<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Moving between content area tab navigation bar,&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">page group navigation bar</span></p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

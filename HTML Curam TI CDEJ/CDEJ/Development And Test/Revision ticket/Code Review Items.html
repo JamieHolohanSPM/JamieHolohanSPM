@@ -1,0 +1,319 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Code Review Items</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Code Review Items";
+    pageId="urn:lsid:ibm.com:td:ed2069b9-9a05-4279-8b86-a922b0530ff7";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Code Review Items</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">The following table contains a list of items to look out when performing code reviews. It is not an exhaustive list, feel free to add to the list as you see items during reviews.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" style="width: 918px;">
+	<tbody>
+		<tr>
+			<td style="width: 65px;">&nbsp;</td>
+			<td style="width: 837px;"><strong>Requirements</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">R1</td>
+			<td style="width: 837px;">Reread the ticket/requirements so you know if the changes are appropriate for the issue in question</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">&nbsp;</td>
+			<td style="width: 837px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">&nbsp;</td>
+			<td style="width: 837px;"><strong>Data Model</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">DM1</td>
+			<td style="width: 837px;">Each entity and attribute has been documented correctly, including business examples.</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">DM2</td>
+			<td style="width: 837px;">DB constraints should be in place for all entities/attributes, e.g. foreign keys, indices, unique indices for soft keys, etc...</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">DM3</td>
+			<td style="width: 837px;">Optimistic locked should be enabled, if it's not required a technical reason must be provided in the entity documentation.</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">DM4</td>
+			<td style="width: 837px;">All entity operations must have a description, except for standard operations (read, insert, update)</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">DM5</td>
+			<td style="width: 837px;">NULLS_OK must be set for each attribute, the default value should not be used (forces developer to think about value)</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">DM6</td>
+			<td style="width: 837px;">Physical deletes should not be allowed unless valid reasons are provided</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">DM7</td>
+			<td style="width: 837px;">When using localizable text, nulls should NOT be allowed for the foreign key to the localizable text record, also a foreign key should exist to enforce data integrity. The reason the ID must not be null is because the application always expects a value to be present even if the text field is optional.</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">DM8</td>
+			<td style="width: 837px;">Check text fields&nbsp;on an entity (e.g. name or description fields) use LocalizableTextIDs and not Strings</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">&nbsp;</td>
+			<td style="width: 837px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">&nbsp;</td>
+			<td style="width: 837px;"><strong>DMX</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">DMX1</td>
+			<td style="width: 837px;">Only ship data that is necessary for the application to work - Any data that is not required for the application to function correctly or used for demos should <strong>not </strong>be shipped. Test/demo data should be separate to initial data and should not be shipped. <strong>(FIXME AB Might require rewrite for TI)</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">DMX2</td>
+			<td style="width: 837px;">Ensure data is in under the correct folder structure (initial, demo, test) <strong>(</strong><strong style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">FIXME AB</strong><strong> Probably not accurate for TI)</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">&nbsp;</td>
+			<td style="width: 837px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">&nbsp;</td>
+			<td style="width: 837px;"><strong>Codetables</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">CD1</td>
+			<td style="width: 837px;">Name of code table file should correspond to the name of the code table</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">CD2</td>
+			<td style="width: 837px;">Appropriate package name has been assigned to the code table file (don't use 'curam.codetable' for project specific codetables). See <a wiki="Wd51dcbf36150_43ea_a9da_d9f96522e2f0" href="https://w3-connections.ibm.com/wikis/home?lang=en#!/wiki/Wd51dcbf36150_43ea_a9da_d9f96522e2f0/page/Packages%2C%20Code%20Tables%20and%20Message%20Files" id="wikiLink1374480494990" page="Packages, Code Tables and Message Files">tech&nbsp;note</a> on packages.</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">CD3</td>
+			<td style="width: 837px;">Display name value has been specified and makes sense</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">CD4</td>
+			<td style="width: 837px;">Correct range has been used for code values (<a wiki="Wd51dcbf36150_43ea_a9da_d9f96522e2f0" href="https://w3-connections.ibm.com/wikis/home?lang=en#!/wiki/Wd51dcbf36150_43ea_a9da_d9f96522e2f0/page/ID%20allocation%20across%20projects" id="wikiLink1374480494991" page="ID allocation across projects">id&nbsp;allocation</a>)</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">&nbsp;</td>
+			<td style="width: 837px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">&nbsp;</td>
+			<td style="width: 837px;"><strong>Messages</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">MS1</td>
+			<td style="width: 837px;">Correct name format has been assigned to each message</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">MS2</td>
+			<td style="width: 837px;">Appropriate package name has been assigned to the message file (don't use 'curam.message' for project specific messages). See <a wiki="Wd51dcbf36150_43ea_a9da_d9f96522e2f0" href="https://w3-connections.ibm.com/wikis/home?lang=en#!/wiki/Wd51dcbf36150_43ea_a9da_d9f96522e2f0/page/Packages%2C%20Code%20Tables%20and%20Message%20Files" id="wikiLink1374480494992" page="Packages, Code Tables and Message Files">tech&nbsp;note</a> on packages</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">MS3</td>
+			<td style="width: 837px;">Ensure placeholders are correctly used</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">MS4</td>
+			<td style="width: 837px;">Ensure message name and description provide enough context for a translator to be able to translate the message appropriately. Additional comments may be required<strong> </strong>and should be added above the description.</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">&nbsp;</td>
+			<td style="width: 837px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">&nbsp;</td>
+			<td style="width: 837px;"><strong>Properties</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">PR1</td>
+			<td style="width: 837px;">Sufficient comments and doc comments have been provided for each property</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">PR2</td>
+			<td style="width: 837px;">Display name is appropriate</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">PR3</td>
+			<td style="width: 837px;">Use of application property is appropriate</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">&nbsp;</td>
+			<td style="width: 837px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">&nbsp;</td>
+			<td style="width: 837px;"><strong>Model</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">M1</td>
+			<td style="width: 837px;">Facade classes and operations have appropriate documentation including javadoc</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">M2</td>
+			<td style="width: 837px;">Access levels have been set correctly (<a wiki="Wd51dcbf36150_43ea_a9da_d9f96522e2f0" href="https://w3-connections.ibm.com/wikis/home?lang=en#!/wiki/Wd51dcbf36150_43ea_a9da_d9f96522e2f0/page/No%20Source%20%26%20Documentation" id="wikiLink1374480494993" page="No Source &amp; Documentation">no&nbsp;source&nbsp;&amp;&nbsp;documentation</a> &amp; <a wiki="Wd51dcbf36150_43ea_a9da_d9f96522e2f0" href="https://w3-connections.ibm.com/wikis/home?lang=en_US#!/wiki/Wd51dcbf36150_43ea_a9da_d9f96522e2f0/page/Access%20Rules" id="wikiLink1374480494994" page="Access Rules">access rules</a>)</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">M3</td>
+			<td style="width: 837px;">Each entity and façade layer class should be placed in its own model package within the appropriate area of the model.</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">&nbsp;</td>
+			<td style="width: 837px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">&nbsp;</td>
+			<td style="width: 837px;"><strong>Source</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">S1</td>
+			<td style="width: 837px;">Package and/or access levels are in place (<a wiki="Wd51dcbf36150_43ea_a9da_d9f96522e2f0" href="https://w3-connections.ibm.com/wikis/home?lang=en#!/wiki/Wd51dcbf36150_43ea_a9da_d9f96522e2f0/page/No%20Source%20%26%20Documentation" id="wikiLink1374480494995" page="No Source &amp; Documentation">no&nbsp;source&nbsp;&amp;&nbsp;documentation</a> &amp; <a wiki="Wd51dcbf36150_43ea_a9da_d9f96522e2f0" href="https://w3-connections.ibm.com/wikis/home?lang=en_US#!/wiki/Wd51dcbf36150_43ea_a9da_d9f96522e2f0/page/Access%20Rules" id="wikiLink1374480494996" page="Access Rules">access rules</a>)</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">S2</td>
+			<td style="width: 837px;">Visibility of classes/interfaces is correct. Only make public what is absolutely necessary, the standard should be to package protect classes/interfaces.</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">S3</td>
+			<td style="width: 837px;">PI Implementation visibility guidelines - All PI implementation classes (including DAO implementations) should be package protected. There should be no private operations within the implementation classes all private operations should be changed to default. This allows customers to extend our implementations (as a last resort) and reduces the surface area of customizations that customers may need to make. The constructor on the DAO implementation should be default, no need for a constructor on the interface implementation class.</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">S4</td>
+			<td style="width: 837px;">Appropriate PI events have been raised for significant operations</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">S5</td>
+			<td style="width: 837px;">Classes and operations have proper javadoc that describes in detail what the class or operation does. All parameters, returns and exceptions should be documented correctly.</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">S6</td>
+			<td style="width: 837px;">DAO implementations should be singletons</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">S7</td>
+			<td style="width: 837px;">No warnings in the code - both checkstyle and eclipse warnings should not be present in code</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">S8</td>
+			<td style="width: 837px;">IDs should not be passed around, instead the entity interface objects should be used</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">S9</td>
+			<td style="width: 837px;">Façade layer implementation classes should be declared abstract so that they can't be created using new, creating an instance of a façade layer class using new will cause logging not to work for that class. The façade layer implementation classes should also have a protected constructor which allows them to be sub-classed. All methods that are not modeled should be protected so that they can be overridden by sub-classes.</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">S10</td>
+			<td style="width: 837px;">No empty mandatoryValidations(), crossFieldValidations(), crossEntityValidations() allowed without a comment explaining why validations are not required.</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">S11</td>
+			<td style="width: 837px;">No empty catch clauses, unless documented why this is acceptable.</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">&nbsp;</td>
+			<td style="width: 837px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">&nbsp;</td>
+			<td style="width: 837px;"><strong>Tests</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">T1</td>
+			<td style="width: 837px;">Test coverage should be above 80% for the classes/packages being reviewed, however more importantly ensure that all key paths and scenarios are tested correctly</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">T2</td>
+			<td style="width: 837px;">Ensure unit tests use test data and don't insert data in order to test view/update functionality</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">T3</td>
+			<td style="width: 837px;">Unit tests should be independent -
+			<ul>
+				<li>Tests should <strong>test only one thing</strong> at a time. Multiple assertions are okay as long as they are all testing one feature/behavior. When a test fails, it should pinpoint the location of the problem.</li>
+				<li>Tests <strong>should not rely on each other</strong> - Isolated. No assumptions about order of test execution.</li>
+			</ul>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">T4</td>
+			<td style="width: 837px;">Don't assert the number of items in a list, this will cause breaks when new test data is added, instead check the size of the list before and check that it is has changed when you add/remove items.</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">T5</td>
+			<td style="width: 837px;">The test class should be in the same package as the impl class it is testing (i.e do not use curam.foo.test, use&nbsp;<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">same package structure as impl class.</span>) This allows easy testing of default operations and prevents duplication of test classes.</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">T6</td>
+			<td style="width: 837px;">Failure message should be provided with asserts. This helps people understand what we're testing.</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">T7</td>
+			<td style="width: 837px;">Test methods should have javadoc to explain what exactly the method is testing.</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">&nbsp;</td>
+			<td style="width: 837px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">&nbsp;</td>
+			<td style="width: 837px;"><strong>Screens</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">UIM1</td>
+			<td style="width: 837px;">All overridden client screens should be placed in an overridden folder following the same structure as the component that they were overridden from</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">UIM2</td>
+			<td style="width: 837px;">Each field should have a help value</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">UIM3</td>
+			<td style="width: 837px;">No wrapping of RPX text at the minimum supported resolution (1024 x 768)&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 65px;">&nbsp;</td>
+			<td style="width: 837px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

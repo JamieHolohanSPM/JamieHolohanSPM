@@ -1,0 +1,175 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>MS Word Integration Issues</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="MS Word Integration Issues";
+    pageId="urn:lsid:ibm.com:td:beaeb5be-d9e5-4842-a7a1-22933f024a77";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">MS Word Integration Issues</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><div dir="ltr">
+<div class="iiFragment iiRenderToc" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", render: "toc", dataSrcObj: { noAutoLoad: true }, renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Support Case List</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">Common Must Gather Information</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii3">Common Resolutions</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii6">Supported JRE versions</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii7">Supported Word versions</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii9"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Session control popup not appearing</span></a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii10"><span style="line-height: 1.5;">Accepting digital signature of the applet</span></a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii11">FILE_EDIT complains about missing JRE</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii5">Main app window greys out, session control popup appears, but Word doesn't start</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii12">Document opens on its own when user logs back in or refreshes browser</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii4">Additional Information</a> <a id="Enabling JRE trace log" name="Enabling JRE trace log">Enabling JRE trace log</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii13">Examining the document locally</a></div>
+</div>
+
+<div dir="ltr">
+<h1 dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">MS Word Integration Issues</h1>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Cúram provides the FILE_EDIT widget which allows a user to edit a Microsoft Word document on their&nbsp;local computer and then save it to the server&nbsp;<span style="line-height: 1.5;">without the need to download/re-upload files manually.</span></p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><span style="line-height: 1.5;">This feature is highly appreciated by customers, but also inherently brittle due to reliance on software and setup on the user machines which are generally not under our control.</span></p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><span style="line-height: 1.5;">This page relates to the current version of FILE_EDIT, which is based on a Java applet and supports the full range of Cúram browsers. Previously (versions before Cúram 6 SP1) the FILE_EDIT widget used the Microsoft ActiveX technology and was limited to IE browser only.</span></p>
+
+<h2 dir="ltr" id="ii1" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Support Case List</h2>
+
+<table border="1" dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; width: 821px;">
+	<tbody>
+		<tr>
+			<td style="width: 91px;"><strong>PMR</strong></td>
+			<td style="width: 85px;"><strong>Customer</strong></td>
+			<td style="width: 253px;"><strong>Problem</strong></td>
+			<td style="width: 223px;"><strong>Resolution</strong></td>
+			<td style="width: 135px;"><strong>Notes</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 91px;">75961,999,649</td>
+			<td style="width: 85px;">MCSS</td>
+			<td style="width: 253px;">Word edit applet failing to open Word document correctly.</td>
+			<td style="width: 223px;">&nbsp;</td>
+			<td style="width: 135px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 91px;">78622,999,649</td>
+			<td style="width: 85px;">MCSS</td>
+			<td style="width: 253px;">Issues editing Word templates in sysadmin application</td>
+			<td style="width: 223px;">&nbsp;</td>
+			<td style="width: 135px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 91px;">&nbsp;</td>
+			<td style="width: 85px;">&nbsp;</td>
+			<td style="width: 253px;">&nbsp;</td>
+			<td style="width: 223px;">&nbsp;</td>
+			<td style="width: 135px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2 dir="ltr" id="ii2" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Common Must Gather Information</h2>
+
+<ul dir="ltr">
+	<li style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Detailed steps to reproduce the issue with screenshots. If there are multiple issues, get steps for each issue separately!</li>
+	<li style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Is the issue intermittent or happens every time steps are followed?</li>
+	<li style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Does the issue happen on one specific user machine, a group of machines or all machines?</li>
+	<li style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">If it is not all the machines, what is common to the affected machine/group that differs from the other machines where there is no issue?</li>
+	<li>Conversely - Is the problem reproducible on other machines with the same configuration?</li>
+	<li style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Machine specific details
+	<ul>
+		<li style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Version of the OS on the <span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">affected user machine(s)</span>.</li>
+		<li style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Version of all JREs installed on the&nbsp;<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">affected user machine(s)</span>, you can use this site <a href="http://www.java.com/en/download/installed.jsp">http://www.java.com/en/download/installed.jsp</a></li>
+		<li>The privilege level of the Windows OS user which performed the JRE installation.</li>
+		<li style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Version of Web browser used in the test scenario</span>, the exact version e.g. IE 10.0.9200.16750</li>
+		<li style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Version of MS Word installed on the&nbsp;affected user machine(s)</span>, the exact version e.g. MS Word 2003 (11.8409.8405) SP3</li>
+		<li style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">The privilege level of the Windows OS user which performs&nbsp;<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">the test scenario.</span></li>
+	</ul>
+	</li>
+	<li style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">​Editing session trace log - get the customer to <a href="#Enabling JRE trace log">enable&nbsp;trace&nbsp;log</a>, reproduce the issue and send us the output for analysis.</span></li>
+</ul>
+
+<h2 dir="ltr" id="ii3" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Common Resolutions</h2>
+
+<h3 dir="ltr" id="ii6" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Supported JRE versions</h3>
+
+<p dir="ltr">See the <a href="http://www-01.ibm.com/support/docview.wss?uid=swg27036661#plugins">Plugins&nbsp;section&nbsp;in&nbsp;the&nbsp;official&nbsp;supported&nbsp;prerequisites&nbsp;document</a>.</p>
+
+<h3 dir="ltr" id="ii7">Supported Word versions</h3>
+
+<p dir="ltr"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">See the&nbsp;</span><a href="http://www-01.ibm.com/support/docview.wss?uid=swg27036661#applications" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Applications&nbsp;section&nbsp;in&nbsp;the&nbsp;official&nbsp;supported&nbsp;prerequisites&nbsp;document</a><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">.</span></p>
+
+<h3 dir="ltr" id="ii9"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Session control popup not appearing</span></h3>
+
+<p dir="ltr">The FILE_EDIT widget uses a small popup window to coordinate Cúram in browser with the Word application during the editing session.&nbsp;<span style="line-height: 1.5;">You need to disable the popup blocker feature of your browser for the Cúram site so that Word integration can function as expected.</span></p>
+
+<h3 dir="ltr" id="ii10"><span style="line-height: 1.5;">Accepting digital signature of the applet</span></h3>
+
+<p>The&nbsp;<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">FILE_EDIT widget&nbsp;</span>uses a Java applet to control the editing session.</p>
+
+<p>The first time the widget is used on a machine you will be presented with one or more popup dialogs related to the digital signature on the Word Integration applet. In general you need to accept all of them in order to use FILE_EDIT.</p>
+
+<h3 id="ii11">FILE_EDIT complains about missing JRE</h3>
+
+<ul>
+	<li>Verify if Java applet support is enabled in your browser and if the JRE plugin is installed and enabled. Steps will be different by browser.</li>
+	<li>It is possible that there are multiple JRE versions installed on the machine. This is generally not recommended (<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">although it may work in some cases</span>).<br />
+	Remove all JRE versions and install only the one you will be using, which should always be the latest available update for security reasons.</li>
+	<li>The Java plugin in the browser does certain level of version management by itself and it can happen that it refuses to run with an outdated JRE version or it asks the user for permission in the little popup window. In those cases it is possible that the user misses the prompt and the situation results in a "missing JRE" error from our widget. Thsoe situations often also lead to the "_setOverlay()" type errors.</li>
+	<li>We had cases where installing the JRE with administrator privileges, but running FILE_EDIT with ordinary user privileges caused this problem.<br />
+	Reinstall JRE as ordinary user.</li>
+</ul>
+
+<h3 id="ii5">Main app window greys out, session control popup appears, but Word doesn't start</h3>
+
+<p>This is frequently caused by stray IE or Word processes from previous session.</p>
+
+<p>Use Windows Task Manager to kill any such stray processes and retry.</p>
+
+<h3 id="ii12">Document opens on its own when user logs back in or refreshes browser</h3>
+
+<p>This is a known issue related to the user interface session management.</p>
+
+<p>What happens is that under certain circumstances (mostly in edge/error cases) the screen with FILE_EDIT widget is recorded as the last visited page and gets opened again when the UI session is restored after login or browser refresh.</p>
+
+<p>With normal page flow where the editing session is properly ended this should not happen. If the user gets into this situation they should simply close the Word document that opened for them and continue working with the application. The next time they log in or refresh it will not happen again.</p>
+
+<h2 dir="ltr" id="ii4" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Additional Information</h2>
+
+<h3 dir="ltr" id="ii8" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><a id="Enabling JRE trace log" name="Enabling JRE trace log">Enabling JRE trace log</a></h3>
+
+<p dir="ltr">It is possible to create a trace log file on the user machine by setting the <span style="font-size:10px;"><span style="font-family:courier new,courier,monospace;">Control Panel -&gt; Java -&gt; Advanced -&gt; Debugging -&gt; Enable logging</span></span> option.</p>
+
+<p dir="ltr">If logging is enabled this way, the trace messages will be output <span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">(</span><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">in Windows 7</span><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">)&nbsp;</span>to <span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">C:\Users\&lt;user_home&gt;\AppData\LocalLow\Sun\Java\Deployment</span>.</p>
+
+<h3 dir="ltr" id="ii13">Examining the document locally</h3>
+
+<ul>
+	<li style="margin: 0px; padding: 0px; border: 0px; outline: 0px; font-size: 13px; vertical-align: baseline; font-family: Arial, sans-serif; color: rgb(51, 51, 51); line-height: 15.360000610351563px;">Navigate to the TEMP folder for the user currently logged into Windows e.g. C:\Users\&lt;USER-NAME&gt;\AppData\Local\Temp\ or C:\Documents and Settings\&lt;USER-NAME&gt;\Local Settings\temp (USER-NAME is the user currently logged into WIndows)</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; outline: 0px; font-size: 13px; vertical-align: baseline; font-family: Arial, sans-serif; color: rgb(51, 51, 51); line-height: 15.360000610351563px;">Delete all Word documents from this folder</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; outline: 0px; font-size: 13px; vertical-align: baseline; font-family: Arial, sans-serif; color: rgb(51, 51, 51); line-height: 15.360000610351563px;">Open the Word document from the Cúram application</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; outline: 0px; font-size: 13px; vertical-align: baseline; font-family: Arial, sans-serif; color: rgb(51, 51, 51); line-height: 15.360000610351563px;">Now go back to the TEMP folder</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; outline: 0px; font-size: 13px; vertical-align: baseline; font-family: Arial, sans-serif; color: rgb(51, 51, 51); line-height: 15.360000610351563px;">You should see a word document here e.g. document-1.doc</li>
+	<li style="margin: 0px; padding: 0px; border: 0px; outline: 0px; font-size: 13px; vertical-align: baseline; font-family: Arial, sans-serif; color: rgb(51, 51, 51); line-height: 15.360000610351563px;">Make a copy of this document for examination by support</li>
+</ul>
+
+<p style="margin: 0px; padding: 0px; border: 0px; outline: 0px; font-size: 13px; vertical-align: baseline; font-family: Arial, sans-serif; color: rgb(51, 51, 51); line-height: 15.360000610351563px;">&nbsp;</p>
+</div></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

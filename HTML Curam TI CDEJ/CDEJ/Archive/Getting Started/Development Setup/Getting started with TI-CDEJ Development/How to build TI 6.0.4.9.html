@@ -1,0 +1,351 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>How to build TI 6.0.4.9</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="How to build TI 6.0.4.9";
+    pageId="urn:lsid:ibm.com:td:2b02d157-6ecc-4b99-9081-d0df43745f0a";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">How to build TI 6.0.4.9</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h2 dir="ltr">Overview</h2>
+
+<ul dir="ltr">
+	<li style="margin-bottom:0cm;margin-bottom:.0001pt;text-autospace:none;">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">These guidelines allow to build the TI 6.0.4.9 and set up WebSphere;</span></p>
+	</li>
+	<li style="margin-bottom:0cm;margin-bottom:.0001pt;text-autospace:none;"><span style="font-size:14px;"><span style="color: black;">Note: </span><span style="color: black;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Windows is required</strong>. Follow <a href="https://apps.na.collabserv.com/wikis/home?lang=en-us#!/wiki/Wb97a93d58cb7_4315_ab88_531471934654/page/Getting%20a%20Virtual%20Machine" rel="noopener noreferrer" target="_blank">Getting&nbsp;a&nbsp;Virtual&nbsp;Machine</a> to get the Windows enviroment</span></span></li>
+</ul>
+
+<p dir="ltr" style="margin-bottom:0cm;margin-bottom:.0001pt;text-autospace:none;">&nbsp;</p>
+
+<h2 dir="ltr" style="margin-bottom: 0.0001pt;"><span style="font-size:24px;"><span style="color: black;">Set up the development enviroment and the application</span></span></h2>
+
+<p dir="ltr"><span style="font-size:14px;">Follow these instructions to cretate a new development environment for your snapshot view:</span></p>
+
+<ul dir="ltr">
+	<li style="margin-bottom: 0.0001pt;"><span style="font-size:14px;"><span style="color: black;"><a href="https://apps.na.collabserv.com/wikis/home?lang=en-us#!/wiki/Wb97a93d58cb7_4315_ab88_531471934654/page/Getting%20a%20Virtual%20Machine" rel="noopener noreferrer" target="_blank">&nbsp; </a></span>Create a file named&nbsp;<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">setenv.bat</strong> with the JAVA_HOME variable that contains the location of your JDK folder (such as <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">set JAVA_HOME=C:\Program Files\Java\jdk1.8.0_201)</strong>, and save it&nbsp; at <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">C:\Users\Administrator\workspace\TI-Integration-6.0.4.9_iFix5\TI </strong></span></li>
+	<li style="margin-bottom: 0.0001pt;"><span style="font-size:14px;">Run <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">setenv.bat</strong></span></li>
+	<li style="margin-bottom: 0.0001pt;"><span style="font-size:14px;">From <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">C:\Users\Administrator\workspace\TI-Integration-6.0.4.9_iFix5\TI\devenv\setup, </strong>run: <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">setup.bat</strong></span></li>
+	<li style="margin-bottom: 0.0001pt;"><span style="font-size:14px;">Update <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">setenv.bat</strong>:</span>
+	<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li style="margin-bottom: 0.0001pt;"><span style="font-size:14px;">Set the <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">JAVA_HOME,</strong> this variable must point to the java folder inside the devenv folder (such as<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"> C:\Users\Administrator\workspace\TI-Integration-6.0.4.9_iFix5\TI\devenv\tools\java</strong>)</span></li>
+		<li style="margin-bottom: 0.0001pt;"><span style="font-size:14px;">Set the <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">ANT_HOME</strong> variable according to the ant folder inside the devenv (e.g. <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">C:\Users\Administrator\workspace\TI-Integration-6.0.4.9_iFix5\TI\devenv\tools\ant</strong></span></li>
+		<li style="margin-bottom: 0.0001pt;"><span style="font-size:14px;">Include the <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">ANT_HOME </strong>in the <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">path </strong>variable, use the following code: <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">set path=%ANT_HOME%\bin;%PATH%</strong></span></li>
+	</ol>
+	</li>
+	<li style="margin-bottom: 0.0001pt;"><span style="font-size:14px;">From <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">C:\Users\Administrator\workspace\TI-Integration-6.0.4.9_iFix5\TI, </strong>run <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">setenv.bat</strong></span></li>
+	<li style="margin-bottom: 0.0001pt;"><span style="font-size:14px;">From <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">C:\Users\Administrator\workspace\TI-Integration-6.0.4.9_iFix5\TI, </strong>run <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">install_appserver.bat was</strong><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"> </strong></span></li>
+	<li style="margin-bottom: 0.0001pt;"><span style="font-size:14px;">Update <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">setenv.bat</strong> as shown below:</span>
+	<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li style="margin-bottom: 0.0001pt;"><span style="font-size:14px;">Update the <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">JAVA_HOME</strong>, this variable must point to the java folder inside websphere (such as <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">C:\Users\Administrator\workspace\TI-Integration-6.0.4.9_iFix5\TI\devenv\tools\websphere\java</strong>)</span></li>
+		<li style="margin-bottom: 0.0001pt;"><span style="font-size:14px;">Define<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"> WAS_HOME</strong>, this variable points to the websphere folder (e.g. <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">set WAS_HOME=</strong><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">C:\Users\Administrator\workspace\TI-Integration-6.0.4.9_iFix5\TI\devenv\tools\</strong><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">websphere</strong>)</span></li>
+		<li style="margin-bottom: 0.0001pt;"><span style="font-size:14px;">Define <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">J2EE_JAR,</strong> this variable stores the location of the<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"> jee.jar, </strong>which is inside the <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">lib</strong> folder in <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">websphere</strong> (e.g. <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">set J2EE_JAR=</strong><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">C:\Users\Administrator\workspace\TI-Integration-6.0.4.9_iFix5\TI\devenv\tools\</strong><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">websphere\lib\j2ee.jar </strong></span></li>
+		<li style="margin-bottom: 0.0001pt;"><span style="font-size:14px;">Set up the&nbsp;<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><tt sandbox="allow-forms allow-same-origin allow-scripts allow-popups">coreinf\properties\Bootstrap.properties</tt></strong>&nbsp;and&nbsp;<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><tt sandbox="allow-forms allow-same-origin allow-scripts allow-popups">coreinf\properties\AppServer.properties</tt></strong>&nbsp;files. Create these files by copying the sample files located in the same directory and editing them as appropriate. If you have an existing development stream for another project, you can copy them from there and make any necessary changes.</span></li>
+	</ol>
+	</li>
+</ul>
+
+<ol dir="ltr">
+	<li style="list-style-type: none;">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">sample <em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Bootstrap.properties</em> file </strong>(change the bold paths with yours)</span></p>
+	</li>
+	<li style="list-style-type: none;">
+	<table border="1" height="649" width="679">
+		<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<td style="width: 617px;">
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">curam.environment.bindings.location=<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">C:/Users/Administrator/workspace/TI-Integration-TI_6_0_4_9_iFix5/TI/coreinf/properties</strong><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				curam.environment.tnameserv.port=900</span></p>
+
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;"># DB2</span></p>
+
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">curam.db.type=DB2<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				curam.db.name=DATABASE<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				curam.db.servername=localhost<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				curam.db.serverport=50000<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				curam.db.username=db2admin<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				curam.db.password=5itAmT5UzH7wR6kvkYqkTw==<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				db2.is.remote=true<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				#curam.dmx.locale=en_US</span></p>
+
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;"># H2</span></p>
+
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">#curam.db.servername=localhost<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				# curam.db.type=H2<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				# curam.db.name=Curam_TI_6_0_4_9_iFix5<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				# curam.db.username=h2admin<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				#curam.db.password=HlIxprF/66CsSSm6PON5+A==<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				#curam.db.h2.directory=<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">C:/Users/Administrator/workspace/TI-Integration-TI_6_0_4_9_iFix5/TI/H2</strong><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				#curam.db.h2.mode=embedded<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				#curam.db.serverport=9092</span></p>
+
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<span style="font-size:14px;"># Needed for Eclipse/RWD only<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				curam.testing.datasets=<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">C:/Users/Administrator/workspace/TI-Integration-TI_6_0_4_9_iFix5/TI/TestDatasets</strong><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				dbtojms.credentials.encr.text=b8nbWgbJtUFIZ25vODA4Vw==</span></p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p dir="ltr"><span style="font-size:14px;">To check the encrypted password If you get any error building the DB, regenerate your password running <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">build encrypt -Dpassword=password </strong>and update the <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">curam.db.password</strong> property inside the<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"> Boostrap.properties file</strong></span></p>
+	</li>
+	<li style="list-style-type: none;">
+	<p dir="ltr"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Note: </strong>DB2 instance in the example is localhost. </span></p>
+	</li>
+	<li style="list-style-type: none;">
+	<p dir="ltr"><span style="font-size:14px;">DB2 can be installed locally:</span></p>
+	</li>
+	<li style="list-style-type: none;">
+	<p dir="ltr"><span style="font-size:14px;"><a wiki="W2cd6a20b72ee_40ab_b2fb_4d2d8b992039" rel="noopener noreferrer" page="Installing DB2 10.5FP7 on your local dev machine" id="wikiLink1549459962514" href="https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/W2cd6a20b72ee_40ab_b2fb_4d2d8b992039/page/Installing%20DB2%2010.5FP7%20on%20your%20local%20dev%20machine" target="_blank">Installing&nbsp;DB2&nbsp;10.5FP7&nbsp;on&nbsp;your&nbsp;local&nbsp;dev&nbsp;machine</a></span></p>
+	</li>
+	<li style="list-style-type: none;">
+	<p dir="ltr"><span style="font-size:14px;">or can be run on a Docker container:</span></p>
+	</li>
+	<li style="list-style-type: none;">
+	<p dir="ltr"><span style="font-size:14px;"><a wiki="W47749e13a6b3_43a7_9ecc_30ea756f969b" rel="noopener noreferrer" page="Database in a Container" id="wikiLink1549459962515" href="https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/W47749e13a6b3_43a7_9ecc_30ea756f969b/page/Database%20in%20a%20Container" target="_blank">Database&nbsp;in&nbsp;a&nbsp;Container</a></span></p>
+	</li>
+	<li style="list-style-type: none;">
+	<pre sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+<span style="font-size:14px;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.5;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">sample&nbsp;<em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">AppServer.properties</em> file</strong><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">:</em></span>
+</span></pre>
+	</li>
+	<li style="list-style-type: none;">
+	<table border="1" style="width: 627px;">
+		<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<td style="width: 672px;">
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;"># Property to indicate whether WLS or WAS was installed.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				as.vendor=IBM</span></p>
+
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;"># The username and password for admin server.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				security.username=websphere<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				security.password=XOVRjjVTebM8gV953LGMLQ==</span></p>
+
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;"># The name of the WebSphere Node or WebLogic Domain Name.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				node.name=PRIMENode01<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				# node.name=dubxpcvm412Node1</span></p>
+
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;"># The name of the server on which the application will be hosted.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				curam.server.name=CuramServer<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				#curam.server.port=9810<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				curam.server.port=2809</span></p>
+
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">############################################<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				## THE FOLLOWING PROPERTY IS FOR WAS ONLY ##<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				############################################<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				# The alias that should be used for the database authorisation<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				curam.db.auth.alias=databaseAlias</span></p>
+
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;"># HTTP Port for the server on which the client<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				# will be accessed<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				curam.client.httpport=9044</span></p>
+
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;"># HTTP Port for the server on which the Web services<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				# will be accessed<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				curam.webservices.httpport=9082</span></p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	</li>
+</ol>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">From <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">C:\Users\Administrator\workspace\TI-Integration-6.0.4.9_iFix5\TI, </strong>run <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">setenv.bat</strong></span></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">Build the server &amp; client:</span>
+	<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">run <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">build.bat server client</strong></span></li>
+	</ol>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">Build <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">ClientMockApp</strong>:</span>
+	<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">From <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">C:\Users\Administrator\workspace\TI-Integration-6.0.4.9_iFix5\TI, </strong>run <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">build.bat clientmockapp</strong></span></li>
+	</ol>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">Create the Eclipse project files for the client "<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">component</strong>" projects:</span>
+	<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">run <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">build.bat -f client\components\build.xml eclipse</strong></span></li>
+	</ol>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">Create the Eclipse project files for the client "<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">JDECommons</strong>" projects:</span>
+	<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">run <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">build.bat -f commons\build.xml eclipse</strong></span></li>
+	</ol>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">Build <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TabTest application </strong>&amp; <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Database</strong>:</span>
+	<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">run <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">build.bat tabtestapp tabtestdatabase</strong></span></li>
+	</ol>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">Start Eclipse using&nbsp;<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><tt sandbox="allow-forms allow-same-origin allow-scripts allow-popups">devenv\eclipse.bat</tt></strong></span></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">In Eclipse, import the preferences file&nbsp;<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><tt sandbox="allow-forms allow-same-origin allow-scripts allow-popups">devenv\eclipseenv\curam.epf</tt></strong>. Select&nbsp;<em sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">File-&gt;Import</strong>...</em>, expand the&nbsp;<em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">General</em>&nbsp;node in the tree in the&nbsp;<em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Import</em>&nbsp;dialog box, and double-click&nbsp;<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Preferences</em></strong>. Browse to the preferences file, ensure&nbsp;<em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Import all</em>&nbsp;is selected and click&nbsp;<em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Finish</em>. This will provide the basic settings for your classpath variables and other preferences. Note: If you have a lot of custom editor preferences set in another copy of Eclipse that you would rather not have to set all over again, you can export those preferences from that copy of Eclipse and import them into your new copy of Eclipse&nbsp;<em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">before</em>&nbsp;importing the&nbsp;<tt sandbox="allow-forms allow-same-origin allow-scripts allow-popups">curam.epf</tt>&nbsp;file. (You can always re-import&nbsp;<tt sandbox="allow-forms allow-same-origin allow-scripts allow-popups">curam.epf</tt>&nbsp;last, if you started in the wrong order.)</span></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">Select&nbsp;<em sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">File-&gt;Import</strong>...</em>&nbsp;from the main menu and double-click&nbsp;<em sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">General/Existing Projects</strong> into Workspace</em>. Use the&nbsp;<em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Select root directory</em>&nbsp;option and&nbsp;<em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Browse...</em>&nbsp;to the<tt sandbox="allow-forms allow-same-origin allow-scripts allow-popups"> TI</tt> directory (e.g. <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">C:\Users\Administrator\workspace\TI-Integration-6.0.4.9_iFix5)</strong>. Check the " <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Search for nested project</strong>" properties inside <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Options</strong> and click finish. </span></li>
+</ul>
+
+<ul dir="ltr" style="font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif;">
+	<li class="gap">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">The minimum set of projects required to run the Tab Test App is as follows:</span></p>
+	</li>
+</ul>
+
+<p class="gap" dir="ltr" style="margin-left: 80px;"><img lconnwikiparamattachmentname="minimum-projects.png" lconnwikimacro="image" src="../Getting%20started%20with%20TI-CDEJ%20Development._ATTACHMENTS_/minimum-projects.png" alt="" width="191" lconnwikiparamwikipage="How to Set Up a JDE Development Stream for the CDEJ Project" height="352"></img></p>
+
+<p class="gap" dir="ltr" style="margin-left: 80px;">&nbsp;</p>
+
+<ul dir="ltr" style="font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif;">
+	<li class="gap">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">You may need these others depending on what areas you are working in:</span></p>
+
+	<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">AppInf</span></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">client-inf</span></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">client-persistence</span></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">ClientMockApp</span></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">commons-testing</span></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">CoreInf</span></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">duim-generator</span></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">general-plug-ins</span></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">Generator</span></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">JDECommons</span></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">mobile-sdk (<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">required just for TI_MAIN stream copies</strong>)</span></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">plug-in-core</span></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">plug-in-framework</span></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">renderer-model</span></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">renderer-plug-ins</span></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">resource-manager</span></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">ServerCore</span></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">TabTestClient</span></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">TabTestServer</span></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">test-framework</span></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">TestModel</span></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">Tooling (<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Needed for TI_6_0_FP stream and newer streams</strong>)</span></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">UnitTests</span></p>
+		</li>
+	</ol>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">You may have Java errors due to some missing Classpath variables:</span></p>
+
+	<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">Select <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Windows</strong> -&gt; <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Preferences</strong></span></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">Select <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Java</strong> -&gt; <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Build Path</strong> -&gt; <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Classpath Variable</strong></span></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">Create classpath variables in according to the image below</span><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+		<img lconnwikiparamattachmentname="Screenshot 2019-02-06 at 11.33.11.png" lconnwikimacro="image" lconnresourcetype="attachment" src="How%20to%20build%20TI%206.0.4.9._ATTACHMENTS_/Screenshot%202019-02-06%20at%2011.33.11.png" alt="" width="962" lconnwikiparamwikipage="How to build TI 6.0.4.9" lconnattachedresourcetype="page" height="485"></img></li>
+	</ol>
+	</li>
+</ul>
+<dr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+<h2 dir="ltr" style="margin-bottom: 0.0001pt;"><span style="font-size:24px;"><span style="color: black;">Set up Websphere</span></span></h2>
+
+<p dir="ltr"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Prerequisites:</strong> <u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">all the steps above are required with the exception of the ones about the eclipse configuration.</u></span></p>
+
+<p dir="ltr"><span style="font-size:14px;">Note: This steps show how to set up Websphere and deploy ClientMockApp on it.</span></p>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">From <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">C:\Users\Administrator\workspace\TI-Integration-6.0.4.9_iFix5\TI, </strong>run <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">setenv.bat</strong></span></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">Run <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">build.bat configure *</strong></span></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">Run <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">build.bat clientmockapp-build-deploy-websphere, </strong>this command allows to build and deploy the ClientMockApp on Websphere. We can deploy on Websphere other project using the following commands:</span>
+	<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">build.bat wasclientdeploy</strong> : Deploys the test client application on Websphere</span></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">build.bat wasdeploy</strong> : Deploys the in-container test application on Websphere</span></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">build.bat wasextclientdeploy</strong> : Deploys the test client external application on Websphere</span></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">build.bat wastabtestruntests</strong> : Deploys and runs tests on the Tab Test Application for WebSphere; Undeploying when finished</span></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">build.bat wastabtestrunwebspectests</strong> : Deploys and runs tests on the Tab Test Application for WebSphere. Undeploying when finished</span></li>
+	</ol>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">Access the application at <a href="http://localhost:9080/ClientMockApp/">http://localhost:9080/ClientMockApp/</a></span></p>
+	</li>
+</ol>
+
+<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">* If you have some errors while running this command you may already have a Websphere profile or an instance of Websphere is running:</span></p>
+
+<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">From <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">C:\Users\Administrator\workspace\TI-Integration-6.0.4.9_iFix5\TI\deveng\tools\websphere\bin</strong>, run <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">stopServer.bat CuramServer</strong></span></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">Remove the Websphere profile, run <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">manageprofiles.bat –delete –profileName AppSrv01</strong></span></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:14px;">Try again to run <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">build.bat configure </strong>inside the TI folder.</span></li>
+</ol>
+
+<p dir="ltr">&nbsp;</p>
+</dr></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,339 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Three column date picker</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Three column date picker";
+    pageId="urn:lsid:ibm.com:td:ef044686-70a3-4834-88b2-ed8206c00c24";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Three column date picker</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h1 dir="ltr">Three column Date picker</h1>
+
+<h2 dir="ltr">Background</h2>
+
+<p dir="ltr">Currently the date edit control usually consists of the textual input and the pop-up calendar which allows to select the updated date graphically.</p>
+
+<p dir="ltr">There is also a way to edit the date by the manual text input directly in the textual input, which however requires user to follow the format and might easily result in mistakes/validation failures.</p>
+
+<p dir="ltr">The pop-up calendar is convenient when the date to be input falls into the close region to the current date; however, where the more distant values (e.g., birth dates) need to be selected, it requires either the text input which updates the calendar so the already selected day and month values are reset; any other calendar based solution do require extensive and long scrolling to get to the required year value.</p>
+
+<p dir="ltr">Therefore, a more convenient input is needed for the more distant dates.</p>
+
+<h2 dir="ltr">Requirements</h2>
+
+<p dir="ltr">Provide the date input alternative, where all the parts of the new or updated date are independently selected from the list of available and valid values. This would mean 3 separate value lists witch the appropriate hints/prompts which would allow for easily change/enter new dates by selecting the values from just the required lists.</p>
+
+<p dir="ltr">Technically this task means writing a separate renderer to output the date input HTML in a different way; this also means writing the structured date management plug-in (marshal) to correctly deal with the data parts and assemble the data back into one value once the editing is finished. There are already the renderers like this in the infrastructure to manage the date and time data and to display the address data, so a similar approach should be used making the adjustments as necessary.</p>
+
+<h3 dir="ltr">Tickets</h3>
+
+<p dir="ltr">TEC-18434 - Create new IEG 3 Drop Down style datepicker</p>
+
+<h3 dir="ltr">Non Functional Requirements</h3>
+
+<p dir="ltr">This is mandatory. We can fill in N/A if the specified non functional requirement is not applicable to the feature being delivered, otherwise some notes must be entered here covering the particular area.</p>
+
+<table border="1" dir="ltr" style="width: 873px;">
+	<tbody>
+		<tr>
+			<td style="width: 250px;"><strong>NFR</strong></td>
+			<td style="width: 610px;"><strong>Note</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">Accessibility</td>
+			<td style="width: 610px;">The new date picker should be full accessible with the logically implied tab order, the list should be displayed and values selected by keyboard as opposed to mouse and the appropriate texts to be announced by the screen reader for the corresponding date input (and the option being selected).</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">Availability &amp; Resilience</td>
+			<td style="width: 610px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">Development Resource</td>
+			<td style="width: 610px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">Evolution</td>
+			<td style="width: 610px;">Not much evolution foreseen as regards the data structure, however the possible directions to consider would be adding the configuration for the style and maybe year input range (an additional renderer property)</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">Internationalisation</td>
+			<td style="width: 610px;">The additional properties for the date picker localized texts required. RTL support required for the displayed texts (prompts) and month names.</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">Location</td>
+			<td style="width: 610px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">Performance and Scalability</td>
+			<td style="width: 610px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">Regulation</td>
+			<td style="width: 610px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">Security</td>
+			<td style="width: 610px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">Usability</td>
+			<td style="width: 610px;">The date picker list ordering should match the specified application date format; the month naming should also match the specified format (either digits, shortened month names or full month names)</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2 dir="ltr">Notes on NFR</h2>
+
+<ol dir="ltr">
+	<li>
+	<p>If the date picker presents the date fields in the correct order. We are aware that there is some flexibility here but we would prefer to get this right from the offset. For example the usual date format for Qatar and Saudi Arabia is displayed as dd/mm/yyyy in a LTR environment (for Islamic and Gregorian calendars). But in a RTL environment should the date fields be also presented RTL? I suspect that the images abovein the screen grabs below are incorrect.</p>
+	</li>
+	<li>
+	<p>Also I am concerned about their use of separators in certain fields. I am concerned that these separators will not be conducive to translations.</p>
+	</li>
+	<li>
+	<p>Answers:</p>
+
+	<ol>
+		<li>
+		<p>I don"t know about standards in Arabic countries, but for Hebrew we would expect the same display of Gregorian date in LTR and RTL screens. Important point is that numerics shaping is different in LTR and RTL screens for Arabic, but according to what I could understand from attachment that is not your concern.</p>
+		</li>
+	</ol>
+	</li>
+</ol>
+
+<h1 dir="ltr">Design</h1>
+
+<p dir="ltr">The three column date picker consists of three selection lists grouped together which allows for selection of the day, month and year values separately. The same picker for the new dates should display prompt texts to indicate which selection list is intended for which date parts. The date picker part order should correspond to the application date format as specified in the <em>ApplicationConfiguration.properties</em> in use and the options displayed to the user should follow the date format in use - month names should be displayed as either the digits, short or full month names and be localized (using the same month localization mechanism as throughout the application).<br />
+The date picker texts should correctly render for the locale in use so that the textual part (prompts, title/alt texts and month names) are correctly displayed either left-to-right or right to left.</p>
+
+<p dir="ltr">Depending on the resolution and the browser window size the date picker lists might take part of the available field space or exceed it (or exceed it as a result of resizing). It would seem that the right alignment of the lists would be most appropriate; where the picker size exceeds&nbsp; the available space, no select wrapping should occur but the texts/values within the selects should be truncated with the alt texts displayed on hovering.</p>
+
+<p dir="ltr">The following specifications have been provided by the UX team for the internal and external applications.</p>
+
+<p dir="ltr"><strong>Internal Application:</strong></p>
+
+<p dir="ltr"><img alt="" src="Three%20column%20date%20picker._ATTACHMENTS_/calendar-form-spec-application.png" style="width: 800px; border-width: 1px; border-style: solid;"></img></p>
+
+<p dir="ltr"><strong>External Application:</strong></p>
+
+<p dir="ltr"><img alt="" src="Three%20column%20date%20picker._ATTACHMENTS_/calendar-form-spec-external.png" style="width: 800px; height: 193px; border-width: 1px; border-style: solid;"></img></p>
+
+<h3 dir="ltr">Modeling</h3>
+
+<p dir="ltr">A new domain should be introduced OOTB for displaying the date picker the new way. It should inherit from SVR_DATE.</p>
+
+<p dir="ltr">Update 16/09: Domain <em>THREE_FIELD_DATE</em> has been configured.</p>
+
+<h3 dir="ltr">Plug-in configuration</h3>
+
+<p dir="ltr">The options here are to a) configure the new domain to be always rendered by the new date picker or b) leave the configuration to the application or solution to configure, falling back to the default date picker where no appropriate configuration is specified at the app level.</p>
+
+<p dir="ltr">Update 16/09: <em>THREE_FIELD_DATE</em> has been bound to the new Renderer and Marshal. The following properties are configurable in plug-ins-config.xml for the Renderer:</p>
+
+<ul dir="ltr">
+	<li><em>wrapperCssClass </em>- this CSS class (or classes) is applied to the TABLE element surrounding the three drop down fields.</li>
+	<li><em>selectCssClass </em>- this CSS class (or classes) is applied to each SELECT element nested in the above table.</li>
+	<li><em>dojoType </em>(optional) - if set, a dojoType attribute with this value is applied to the SELECT elements nested in the above table.</li>
+</ul>
+
+<p dir="ltr">The look and feel as per internal application specs can be achieved by configuring as follows:</p>
+
+<ul dir="ltr">
+	<li><em>wrapperCssClass </em>= alternate-date-container</li>
+	<li><em>selectCssClass </em>= alt-date-component</li>
+	<li><em>dojoType </em>= dijit.form.Select</li>
+</ul>
+
+<h3 dir="ltr">Renderer</h3>
+
+<p dir="ltr">A new renderer class inheriting from the <em>AbstractEditRenderer </em>should be implemented which correctly interprets the incoming date and displays the required selection lists correctly initialized with either the source value, the values from the request when the form validation fails or the prompts where no initial selection is available. The renderer is also responsible for examining the current application date format and choosing the list output ordering as well as for any localization of the texts in use.<br />
+The rendered lists should not allow for manual textual input but only the selection from the pre-defined values.</p>
+
+<p dir="ltr">Update 16/09: The new renderer is <em>BirthdateEditRenderer</em>.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr">Marshal</h3>
+
+<p dir="ltr">A new marshal class should be implemented to handle the underlying data management, including parsing the data comming from the server and providing parts of this data to the renderer as queried using the agreed paths. The marshal should take care of invoking the other date domain plug-ins to insure the correct incomming and outgoing date formats; ir should take care of reconstructing the date value from the user selection triggering an error if this reconstruction fails.<br />
+The marshal should follow the general rules for the plug-ins of that type in the renderer framework.</p>
+
+<p dir="ltr">No more plug-in changes/implementations should be required since the date format on the system remains the same, therefore the existing conversion/comparizon/default plug-ins should be used; no independent conversion/comparison logic should be placed in the aforementioned implementations (unlesss the necessity to do so is proven).</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr">CDEJResources.properties</h3>
+
+<p dir="ltr">Since the date parts should now be announced and hinted as opposed to just full date as used before, these parts should be associated with the properly localized texts and accessed separately, therefore three new entries for the day, month and year should be introduced in the default CDEJResources.properties file. These properties are accessed by the renderer and used to display the textual prompts when no initial date information is available as well as the title/alt texts for the corresponding selection lists. The might also be used for the additional accessibility related markup (whoever implements the accessibility could have more details to fill-in here).</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">Use cases</h2>
+
+<p dir="ltr">1. <u>User edits the existing date and chooses the valid date.</u><br />
+&nbsp;&nbsp; &nbsp;The three HTML select controls should be displayed for the date field properly initialized with the previous day, month and year values (if there were any).<br />
+&nbsp;&nbsp; &nbsp;The month names in the list should follow the application date format. The user chooses one of the values from the necessary lists and submits the updated date result.<br />
+&nbsp;&nbsp; &nbsp;The form submit should succeed, the updated date correctly assembled under the hood and passed to the server for persisting; the page flow goes to the configured next page. The updated date is displayed either on the next page or repeatedly opening the same page.<br />
+&nbsp;&nbsp; &nbsp;<br />
+2. <u>User edits the existing date and chooses the invalid date.</u><br />
+&nbsp;&nbsp; &nbsp;The three HTML select controls should be displayed for the date field properly initialized with the previous day, month and year values (if there were any).<br />
+&nbsp;&nbsp; &nbsp;The month names in the list should follow the application date format. The user chooses the wrong values from the necessary lists (e.g., 31 February) and submits the updated date result.<br />
+&nbsp;&nbsp; &nbsp;The form submit should fail with the validation message displayed on the reloaded form. The validation message should correctly indicate what was wrong (the invalid date failure to be converted).<br />
+&nbsp;&nbsp; &nbsp;All the date picker lists should contain the user selected values (including the wrong ones).&nbsp;&nbsp; &nbsp;</p>
+
+<p dir="ltr">&nbsp;&nbsp; &nbsp;User edits the existing date correctly but leaves another mandatory field on the form not filled or removes the previous value from it.<br />
+&nbsp;&nbsp; &nbsp;Same as the previous use case, the form re-displayes with the failed validation message for the mandatory field, however the date picker selection lists should contain the values entered by the user.<br />
+&nbsp;&nbsp;&nbsp;</p>
+
+<p dir="ltr">3. <u>User enters new valid date.</u><br />
+&nbsp;&nbsp; &nbsp;The three HTML select controls should be displayed for the date field and each of them displays the correctly localized prompt text (left-to right or right to left for month names if short/full month names are displayed).<br />
+&nbsp;&nbsp; &nbsp;The user chooses one of the values from the necessary lists and submits the updated date result.<br />
+&nbsp;&nbsp; &nbsp;The form submit should succeed, the updated date correctly assembled under the hood and passed to the server for persisting; the page flow goes to the configured next page. The updated date is displayed either on the next page or repeatedly opening the same page.<br />
+&nbsp;&nbsp; &nbsp;<br />
+4. <u>User enters new invalid date.</u><br />
+&nbsp;&nbsp; &nbsp;The case is the same as 2 so that the submit date fails conversion: the form re-displays with the informative validation message stating that the entered date was invalid.<br />
+&nbsp;&nbsp; &nbsp;<br />
+5. <u>User enters new date just partially (leaves prompt i one or two fields).</u><br />
+&nbsp;&nbsp;&nbsp; The form submit fails and the form page reloads&nbsp;&nbsp; &nbsp;with the validation message. The options here:<br />
+&nbsp;&nbsp; &nbsp;&nbsp; a) the validation message for the (first) failing part, saying that the entered value could not be converted - the current situation. Inconvenient if the user chooses to just correct one of the values leaving another part still 'blank' (not realistic though)).<br />
+&nbsp;&nbsp; &nbsp;&nbsp; b) the validation messages for all the failed parts in one go (should be better but might require deeper review of the validation chain);<br />
+&nbsp;&nbsp; &nbsp;&nbsp; c) the general validation message stating that the entered date failed to be converted but not detailing particular fields and the entered values. Requires a new runtime validation message to be added (at least I could not find the suitable one). In any case this sounds the best option since the cause of the failure should be obvious to even inexperienced user and the date field should be perceived as a whole.<br />
+&nbsp;&nbsp; &nbsp;<br />
+6. <u>User does not enter optional date (leaves all three lists with the prompts), either new or pre-existing.</u><br />
+&nbsp;&nbsp; &nbsp;In the situation like this the form submit should succeed (this is not yet implemented and falls back to the failing part validation). However, only the scenario where all three parts are blank should be considered to be valid in this case - any value other than prompt should cause the validation error even for the optional date.<br />
+&nbsp;&nbsp; &nbsp;<br />
+7. <u>User does not enter the mandatory date</u><br />
+&nbsp;&nbsp; &nbsp;Pretty much the same as previous, however in addition the validation is triggered for all three values not selected.<br />
+&nbsp;&nbsp; &nbsp;<br />
+The question with the optional and mandatory date validation is again the validation message. It would seem better to have separate messages for the mandatory field validation failure as opposed to the optional date validation failure because of the partial data entered; this however requires more complex marshaling logic and subsequently more experimeting/testing - the gains should be weighted against the additional resources required.</p>
+
+<h2 dir="ltr">Application Impact</h2>
+
+<p dir="ltr">No impact as the new domain/renderer comes as an addition and will just be used once explicitly configured by the application developers.</p>
+
+<h2 dir="ltr">Testing</h2>
+
+<h3 dir="ltr">Renderer tests</h3>
+
+<p dir="ltr">A new renderer test should be written to test the renderer behavior when using different incoming values. The test should follow the general renderer test approaches and rules and should be run by the developer when testing the functional changes to the renderer and also as part of the nightly build process (same way the other renderer tests are).</p>
+
+<h3 dir="ltr">Manual testing</h3>
+
+<p dir="ltr">The purpose of the manual testing is to check the renderer look-and feel as well as the functionality in the browser environment. In order to carry out such tests, a new page should be added to the TabTest application in the appropriate section.<br />
+The page should contain the new date renderer which should be pre-initialized with the existing date as well as another renderer without the initial value. Depending on the necessity to support optional date, there could be the third date picker for the new date on the page, binding one of them to the mandatory date and the other to the optional date. In any case there should be the additional mandatory field on the page to test the renderer behavior when the form validation fails.</p>
+
+<p dir="ltr">The particular testing scenarios are to be described on the corresponding tickets and depends on the location and name of the page to be introduced; the testing scenarios in general should include verifying that the existing date correctly pre-populates the renderer and the new date renderer(s) correctly display the prompts; different user input should be tested, both correct and incorrect (non-existing date/partial date, leaving parts of the mandatory and optional date picker lists blank, leaving the side mandatory field blank etc.), in general three areas - initialization, unsuccessful form submit, successful form submit.</p>
+
+<h2 dir="ltr">Documentation/How To Use Feature</h2>
+
+<p dir="ltr">The usage of the feature should be self explanatory and should not require the extensive usage documentation. The configuration in order to get the new date picker displayed instead of the previosu one as well as any further configuration (i.e., range configuration) should be included as well.</p>
+
+<h2 dir="ltr">Check List</h2>
+
+<table border="1" dir="ltr" height="92" width="751">
+	<tbody>
+		<tr>
+			<td style="width: 125px;"><strong>Check List Item</strong></td>
+			<td style="width: 299px;"><strong>Notes</strong></td>
+			<td style="width: 99px;"><strong>Considered</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 125px;">Layout</td>
+			<td style="width: 299px;">Should match the format of the application wide data, just a different way to display the same</td>
+			<td style="width: 99px;">Yes</td>
+		</tr>
+		<tr>
+			<td style="width: 125px;">RTL</td>
+			<td style="width: 299px;">Should display the prompt texts and the month names in the right direction for the given locale</td>
+			<td style="width: 99px;">Yes</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">Work Estimation</h2>
+
+<h3 dir="ltr">&nbsp;Task list</h3>
+
+<table border="1" dir="ltr" style="width: 822px;">
+	<tbody>
+		<tr>
+			<td style="width: 701px;"><strong>Task</strong></td>
+			<td style="width: 105px;"><strong>Estimate (days)</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 701px;">Initial (prototype) design/requirements etc.</td>
+			<td style="width: 105px;">1</td>
+		</tr>
+		<tr>
+			<td style="width: 701px;">Design documentation</td>
+			<td style="width: 105px;">2</td>
+		</tr>
+		<tr>
+			<td style="width: 701px;">Renderer prototype implementation/experimentation/development testing</td>
+			<td style="width: 105px;">3</td>
+		</tr>
+		<tr>
+			<td style="width: 701px;">Marshal plug-in implementation/experimentation/testing</td>
+			<td style="width: 105px;">3</td>
+		</tr>
+		<tr>
+			<td style="width: 701px;">Test pages and renderer tests</td>
+			<td style="width: 105px;">2</td>
+		</tr>
+		<tr>
+			<td style="width: 701px;">Styling&nbsp;</td>
+			<td style="width: 105px;">1-2</td>
+		</tr>
+		<tr>
+			<td style="width: 701px;">RTL support</td>
+			<td style="width: 105px;">2-3</td>
+		</tr>
+		<tr>
+			<td style="width: 701px;">Accessibility</td>
+			<td style="width: 105px;">2-3</td>
+		</tr>
+		<tr>
+			<td style="width: 701px;">Testing</td>
+			<td style="width: 105px;">1</td>
+		</tr>
+		<tr>
+			<td style="width: 701px;"><strong>Total</strong></td>
+			<td style="width: 105px;">17-20</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr"><br />
+&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

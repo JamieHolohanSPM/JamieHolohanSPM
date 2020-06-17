@@ -1,0 +1,990 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Smart Navigator - Hook Points</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Smart Navigator - Hook Points";
+    pageId="urn:lsid:ibm.com:td:694b7cf3-ab18-408b-81ba-06bfe6ba5bec";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Smart Navigator - Hook Points</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><div contenteditable="false" name="intInfo" style="border-radius: 6px; margin: 8px; padding: 4px; display: block; width: auto;background-color: #ffc;">Table of Contents:
+<ul style="list-style-type:none !important;">
+	<li style="list-style-type:none;"><a href="#ii3" style="display: block;">Stakeholders</a></li>
+	<li style="list-style-type:none;"><a href="#ii4" style="display: block;">Background</a></li>
+	<li style="list-style-type:none;"><a href="#ii5" style="display: block;">Requirements</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii7" style="display: block;">Non Functional Requirements</a>
+		<ul style="list-style-type:none !important;">
+			<li style="list-style-type:none;"><a href="#ii30" style="display: block;">Availability &amp; Resilience</a></li>
+			<li style="list-style-type:none;"><a href="#ii33" style="display: block;">Development Resource</a></li>
+			<li style="list-style-type:none;"><a href="#ii37" style="display: block;">Evolution</a></li>
+			<li style="list-style-type:none;"><a href="#ii38" style="display: block;">Internationalisation</a></li>
+			<li style="list-style-type:none;"><a href="#ii39" style="display: block;">Location</a></li>
+			<li style="list-style-type:none;"><a href="#ii40" style="display: block;">Performance and Scalability</a></li>
+			<li style="list-style-type:none;"><a href="#ii41" style="display: block;">Regulation</a></li>
+			<li style="list-style-type:none;"><a href="#ii42" style="display: block;">Security</a></li>
+			<li style="list-style-type:none;"><a href="#ii51" style="display: block;">Usability</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li style="list-style-type:none;"><a href="#ii8" style="display: block;">Design Options</a></li>
+	<li style="list-style-type:none;"><a href="#ii9" style="display: block;">Design</a>
+	<ul style="list-style-type:none !important;">
+		<li>
+		<ul style="list-style-type:none !important;">
+			<li style="list-style-type:none;"><a href="#ii36" style="display: block;">Shared responsibility</a></li>
+			<li style="list-style-type:none;"><a href="#ii34" style="display: block;">High level flow</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li style="list-style-type:none;"><a href="#ii10" style="display: block;">Architecture/Design Decisions</a></li>
+	<li style="list-style-type:none;"><a href="#ii11" style="display: block;">System Context Diagram</a></li>
+	<li style="list-style-type:none;"><a href="#ii12" style="display: block;">Architecture/Design Context Diagram</a></li>
+	<li style="list-style-type:none;"><a href="#ii13" style="display: block;">Design Specifics</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii43" style="display: block;">AD-001 - Provide customers a means to add custom processing, including user interaction, between click of a Smart Navigation result and the rendering of the associated page</a></li>
+		<li style="list-style-type:none;"><a href="#ii45" style="display: block;">AD-002 - Javascript hooks should be required in a way that provides a standard for future development</a></li>
+		<li style="list-style-type:none;"><a href="#ii46" style="display: block;">AD-003 - Hook Contract required to provide the appropriate information relating to navigation item</a>
+		<ul style="list-style-type:none !important;">
+			<li style="list-style-type:none;"><a href="#ii50" style="display: block;">Contract: Pass URL, and where applicable, ConcernRoleID.</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li style="list-style-type:none;"><a href="#ii47" style="display: block;">General Design Specifics</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii14" style="display: block;">Design User Interface</a></li>
+		<li style="list-style-type:none;"><a href="#ii21" style="display: block;">Design Validations</a></li>
+		<li style="list-style-type:none;"><a href="#ii22" style="display: block;">Design Metadata Changes</a></li>
+		<li style="list-style-type:none;"><a href="#ii23" style="display: block;">Design Logical Data Model Changes</a></li>
+		<li style="list-style-type:none;"><a href="#ii24" style="display: block;">Design Resilience Measures</a></li>
+		<li style="list-style-type:none;"><a href="#ii25" style="display: block;">Design Logging</a></li>
+		<li style="list-style-type:none;"><a href="#ii26" style="display: block;">Design Accessibility</a></li>
+		<li style="list-style-type:none;"><a href="#ii27" style="display: block;">Third Party Software and Legal Requirements</a></li>
+	</ul>
+	</li>
+	<li style="list-style-type:none;"><a href="#ii28" style="display: block;">Use Cases</a></li>
+	<li style="list-style-type:none;"><a href="#ii15" style="display: block;">Implementation Notes</a></li>
+	<li style="list-style-type:none;"><a href="#ii16" style="display: block;">Application Impact</a></li>
+	<li style="list-style-type:none;"><a href="#ii17" style="display: block;">Configuration Transport Manager</a></li>
+	<li style="list-style-type:none;"><a href="#ii18" style="display: block;">Testing</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii2" style="display: block;">Hook Implementation for Testing in non-shippable Test Component</a></li>
+	</ul>
+	</li>
+	<li style="list-style-type:none;"><a href="#ii19" style="display: block;">Documentation/How To Use Feature</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii6" style="display: block;">Check Lists</a></li>
+		<li style="list-style-type:none;"><a href="#ii1" style="display: block;">IEG Check List</a></li>
+		<li style="list-style-type:none;"><a href="#ii54" style="display: block;">Workflow Check List</a></li>
+	</ul>
+	</li>
+</ul>
+</div>
+
+<p dir="ltr">&nbsp;</p>
+
+<h1 dir="ltr"><span style="font-size:20px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Design Page Smart Navigator - Hook Points</strong></span></h1>
+
+<h2 dir="ltr" id="ii3">Stakeholders</h2>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Refer to the following Org Chart to ensure you are engaging the correct people. The table below indicates the current contacts for each area.
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://ibm.biz/BdsuKd">https://ibm.biz/BdsuKd</a></li>
+	</ul>
+	</li>
+</ul>
+
+<table border="1" dir="ltr" style="width: 500px;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Role</span></strong></td>
+			<td style="width: 120px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Name</span></strong></td>
+			<td style="width: 168px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Sign Off if Applicable</span></strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Customer</td>
+			<td style="width: 120px;">MSD</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Business Owner/Product Owner</td>
+			<td style="width: 120px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Angela Brady</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Amy Dunne</p>
+			</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Architect</td>
+			<td style="width: 120px;">Fergal Gavin</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Developer(s)</td>
+			<td style="width: 120px;">Andrew Thomason</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">FVT</td>
+			<td style="width: 120px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Aoife Lennon</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Satya Minnekanti</p>
+			</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">SVT</td>
+			<td style="width: 120px;">Christiana Tosarelli</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Information Developer</td>
+			<td style="width: 120px;">Annette Sohor</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">UX Design</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Legal</td>
+			<td style="width: 120px;">Jim Rook</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii4">Background</h2>
+
+<p dir="ltr"><span class="keyword">The Smart Navigator</span> increases caseworkers' productivity by enabling them to go quickly and easily to the pages they want without navigating through multiple pages. <span class="keyword">Smart Navigator</span> delivers a caseworker experience that is consistent with modern applications and supports the <span class="keyword">IBM Cúram Social Program Management</span> release 7 user interface, both on PCs and on tablet computers.</p>
+
+<p class="p" dir="ltr">Using <span class="keyword">Smart Navigator</span>, caseworkers enter some person search criteria along with a keyword that defines a specific target page. As the caseworker types in the <span class="ph uicontrol">Search</span> field, a list of pages help the caseworker identify where to navigate to in the application. When caseworkers see the page that they require, they select that entry and are brought directly to that page. This feature is available within the application banner, so caseworkers can access it from anywhere in the application.</p>
+
+<p class="p" dir="ltr">Previously, going to a specific page might involve navigation through a specific path of multiple pages. <span class="keyword">Smart Navigator</span> takes caseworkers to the required page in one step.</p>
+
+<p class="p" dir="ltr">However, it is this very behavior which now bypasses a critical piece of functionality for MSD. The users of their application always start from the person home page and are directed to other pages from that page. The reason for this is that from that page, the user is presented with a confirmation dialog which alerts the case worker if the client has a special caution against them and more importantly if that client is actually in the office. The caseworker must action this dialog which then sends a communication to a supervisor to alert them to this fact. Once actioned, the user may then proceed to use the application as normal.</p>
+
+<p class="p" dir="ltr">As the smart navigator redirects these same caseworkers now to individual pages within the application, this alerting mechanism is not being executed. Therefore, the customer needs some way of providing this functionality to their caseworkers as part of the adaption and roll out of the smart navigator feature within their environment.</p>
+
+<h2 dir="ltr" id="ii5">Requirements</h2>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Provide customers a&nbsp;&nbsp;means to add&nbsp;custom processing, including user interaction, between click of a Smart Navigation result and the rendering of the associated page.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The custom code must be provided with sufficient information so it can retrieve further relevant information. For example, if navigating to a Person provide an&nbsp;indicator that the navigation is to a Person as well as the relevant ConcernRoleID.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The solution must support customisation of Smart Navigator, for example, customers can provide their own custom keyword searches.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability to add custom processing must be optional and turned off OOTB</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">OOTB must provide a default implementation in a non-shippable component that proves usage via display of a Modal. Full requirements around what this should do are to be defined further here.</li>
+</ol>
+
+<h3 dir="ltr" id="ii7">Non Functional Requirements</h3>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span sandbox="allow-forms allow-same-origin allow-scripts allow-popups">AD-003: Standard Javascript Hook Point approach to be defined&nbsp;</span></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span sandbox="allow-forms allow-same-origin allow-scripts allow-popups">AD-004: </span>Hook Contract required to provide the appropriate information relating to navigation item Accessibility</li>
+</ul>
+
+<p dir="ltr">Decision: <u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Applicable</u></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The hook should invoke in exactly the same way regardless of how the smart navigator result is navigated to i.e. whether from keyboard or mouse.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Customers should&nbsp;consider this NFR in terms of their custom implementation.</li>
+</ul>
+
+<h4 dir="ltr" id="ii30">Availability &amp; Resilience</h4>
+
+<p dir="ltr">Decision: Not Applicable</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The enhancement provides only the means to inject behaviour between click of&nbsp;Smart Navigator result and navigation to the related page. As such, there is no system impact for the Product code.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Customers should&nbsp;consider this NFR in terms of their custom implementation.</li>
+</ul>
+
+<h4 dir="ltr" id="ii33">Development Resource</h4>
+
+<p dir="ltr">Decision: <u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Applicable</u></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The hook development requires JavaScript skills and some familiarity with TI and CEF Widgets as well as the CEF component Smart Navigator.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Customers will require at a minimum&nbsp;JavaScript resources to implement their custom implementation.</li>
+</ul>
+
+<h4 dir="ltr" id="ii37">Evolution</h4>
+
+<p dir="ltr">Decision: <u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Applicable</u></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The hook does not directly address MSD requirements (the driver for the enhancement) but instead&nbsp;provides a generic&nbsp;product hook&nbsp;that allows&nbsp;MSD to implement their requirements. The intention is that by keeping the hook generic it will allow for MSD requirements to change in the future without need for further product changes while also making the enhancement potentially useful to other customers who may not have the exact same requirements.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">This has been achieved by taking MSD's requirement that user warnings are given when navigating to citizens with special caution flags, and delivery a generic hook that provides the ability to do custom processing, including user interaction, between click of a Smart Navigator result and rendering of the page that result relates to.</li>
+</ul>
+
+<h4 dir="ltr" id="ii38">Internationalisation</h4>
+
+<p dir="ltr">Decision: Not Applicable</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The enhancement provides only the means to inject behaviour between click of&nbsp;Smart Navigator result and navigation to the related page. As such, there is no internationalisation&nbsp;for the Product code.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Customers should &nbsp;consider this NFR in terms of their custom implementation.</li>
+</ul>
+
+<h4 dir="ltr" id="ii39">Location&nbsp;&nbsp; &nbsp;</h4>
+
+<p dir="ltr">Decision: Not Applicable</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The enhancement provides only the means to inject behaviour between click of&nbsp;Smart Navigator result and navigation to the related page. As such, there is no location impact for the Product code.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Customers should &nbsp;consider this NFR in terms of their custom implementation.</li>
+</ul>
+
+<h4 dir="ltr" id="ii40">Performance and Scalability</h4>
+
+<p dir="ltr">Decision: Not Applicable</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The enhancement provides only the means to inject behaviour between click of&nbsp;Smart Navigator result and navigation to the related page. As such, there is no performance impact for the Product code.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Customers should &nbsp;consider this NFR in terms of their custom implementation.</li>
+</ul>
+
+<h4 dir="ltr" id="ii41">Regulation</h4>
+
+<p dir="ltr">Decision: Not Applicable</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The enhancement provides only the means to inject behaviour between click of&nbsp;Smart Navigator result and navigation to the related page. As such, there is no regulatory impact for the Product code.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Customers should &nbsp;consider this NFR in terms of their custom implementation.</li>
+</ul>
+
+<h4 dir="ltr" id="ii42">Security</h4>
+
+<p dir="ltr">Decision: <u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Applicable</u></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">From a security perspective consideration has been given to what information we are passing to the custom hook
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">URL being navigated to (freely available by inspecting the page)</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">ConcernRoleID (where applicable) that the result relates to (freely available by inspecting the page)</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">We do not consider there are any security implications, therefore, as a result of this enhancement. Customers, of course, must consider security in their implementation of the hook as they would with any other customisation, nothing new is introduced here that customers&nbsp;wouldn't typically consider.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The justification for this is discussed in <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Design Specifics - AD-003 Hook Contract</strong></li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Customers should also&nbsp;consider this NFR in terms of their custom implementation.</li>
+</ul>
+
+<h4 dir="ltr" id="ii51">Usability</h4>
+
+<p dir="ltr">Decision: Not Applicable</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The enhancement provides only the means to inject behaviour between click of&nbsp;Smart Navigator result and navigation to the related page. As such, there is no user impact for the Product code.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Customers should &nbsp;consider this NFR in terms of their custom implementation.</li>
+</ul>
+
+<h2 dir="ltr" id="ii8">Design Options</h2>
+
+<p dir="ltr">Three options were under consideration</p>
+
+<p dir="ltr">1) Enhanced icons to indicate to the user if an individual had a special caution (extensible to other conditions)</p>
+
+<p dir="ltr">2) Context style view on hover to provide detailed information.</p>
+
+<p dir="ltr">3) Mechanism to interrupt navigation to allow custom processing including user interaction before completing navigation.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The third option is the customer requirement. The first two were originally suggested before it was clear whether their ultimate goal was feasible. While the first two options are in themselves useful they are not considered necessary to satisfactorily address the customer's requirement and so instead are out-of-scope and recommended instead for product backlog.</p>
+
+<p dir="ltr">This was validated with MSD (interestingly they then put (3) above (2) in terms of priority, the latter not seemingly important to them)</p>
+
+<ul dir="ltr">
+</ul>
+
+<h2 dir="ltr" id="ii9"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Design</strong></h2>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Provide a hook but up to custom implementation to provide all processing.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">We do not take an opinion on what processing might be required so simply provide the mechanism to interrupt the navigation</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Custom implementation free to do whatever they want before returning control to us at which point we navigate</li>
+</ul>
+
+<h4 dir="ltr" id="ii36"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Shared responsibility</strong></h4>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Customer should use Modal approach to block page if requiring user interaction as part of hook implementation</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Custom code must indicate back to product when complete so navigation can continue – (otherwise user becomes stuck and needs to refresh page to recover)</li>
+</ul>
+
+<h4 dir="ltr" id="ii34"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">High level flow</strong></h4>
+
+<p dir="ltr"><img lconnwikiparamattachmentname="Spike1JavascriptHook.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Smart%20Navigator%20-%20Hook%20Points._ATTACHMENTS_/Spike1JavascriptHook.png" alt="" style="width: 75%; height: 75%;" lconnwikiparamwikipage="Smart Navigator - Hook Points" lconnattachedresourcetype="page"></img></p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Technical implementation covered in </em></strong><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Appendix I - Spike Option 3 - Javascript Hook Point - Technical Implementation (see child page)</em></strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+</ul>
+
+<p dir="ltr">The following diagram shows an example hook implementation to illustrate how the hook could be used. The example is based loosely on MSD's requirements to conditionally display more information to the user before navigating to the result selected.</p>
+
+<p dir="ltr"><img lconnwikiparamattachmentname="Screenshot 2019-03-04 at 10.56.21.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Smart%20Navigator%20-%20Hook%20Points._ATTACHMENTS_/Screenshot%202019-03-04%20at%2010.56.21.png" alt="" style="width: 75%; height: 76%; border-width: 1px; border-style: solid;" lconnwikiparamwikipage="Smart Navigator - Hook Points" lconnattachedresourcetype="page"></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii10">Architecture/Design Decisions</h2>
+
+<table border="1" dir="ltr" height="156" style="width: 1356px;" width="860">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Architecture Decision Title</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Issue or Problem Statement</strong></span></td>
+			<td style="width: 144px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Assumptions</strong></span></td>
+			<td style="width: 134px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Motivation</strong></span></td>
+			<td style="width: 94px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Alternatives</strong></span></td>
+			<td style="width: 137px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Decision</strong></span></td>
+			<td style="width: 208px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Justification</strong></span></td>
+			<td style="width: 201px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Implications</strong></span></td>
+			<td style="width: 90px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Status</strong></span></td>
+			<td style="width: 84px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Date</strong></span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;">AD-001</td>
+			<td style="width: 125px;">Provide customers a&nbsp;&nbsp;means to add&nbsp;custom processing, including user interaction, between click of a Smart Navigation result and the rendering of the associated page.</td>
+			<td style="width: 144px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">MSD have the technical ability and willingness to take on the responsibility for the remainder of the work required to fulfil their requirements.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">MSD's requirements are not shared by other customers</p>
+			</td>
+			<td style="width: 134px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Support MSD without tying the solution to their specific requirement.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			&nbsp;</p>
+			</td>
+			<td style="width: 94px;">Enhanced icons and pop up on hover were considered but neither would address MSD's requirement</td>
+			<td style="width: 137px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Enhance the Smart Navigator Javascript Module, CuramSearchMultipleTextBox, to provide a hook that customers can optionally implement. The hook will sit between the click of the result link and the navigation to the page.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">This will be achieved through a Dojo Topic providing a pub/sub mechanism to hand off control to the hook implementation and listen for completion before continuing navigation.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The approach makes no assumption about what it will be used for</p>
+			</td>
+			<td style="width: 208px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The only option considered that satisfies MSD's requirements fully.&nbsp;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Keeping the hook generic and not engaging with the specifics of MSD's requirements as these are specific to them as a customer and not relevant more broadly.</p>
+			</td>
+			<td style="width: 201px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Communication with MSD required to confirm assumptions.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">A Curam JS Hook Pattern should be agreed and followed.</p>
+			</td>
+			<td style="width: 90px;">In Progress</td>
+			<td style="width: 84px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;">AD-002</td>
+			<td style="width: 125px;">Javascript hooks should be required in a way that provides a standard for future development</td>
+			<td style="width: 144px;">No pattern currently exists for Javascript hooks in Curam</td>
+			<td style="width: 134px;">Standards</td>
+			<td style="width: 94px;">None considered.</td>
+			<td style="width: 137px;">TBD - discussion under Design Specifics</td>
+			<td style="width: 208px;">Provides customers with standard, familiar approach for any future JS hooks</td>
+			<td style="width: 201px;">Decision should be documented and communicated for broader Curam development adoption</td>
+			<td style="width: 90px;">In Progress</td>
+			<td style="width: 84px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;">AD-003</td>
+			<td style="width: 125px;">Hook Contract required to provide the appropriate information relating to navigation item&nbsp;</td>
+			<td style="width: 144px;">It is assumed a) the url and concernroleid are sufficient for a customer to make appropriate decisions in the hook</td>
+			<td style="width: 134px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">MSD will require pulling further information related to the case or individual to determine what to display to the Case Worker</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Customer's are free to implement their own Keyword searches</p>
+			</td>
+			<td style="width: 94px;">Contract options discussed in detail below.</td>
+			<td style="width: 137px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Hook contract will pass url and where person or target of person then also concernRoleID</p>
+			</td>
+			<td style="width: 208px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Decision discussed in detail below. It should also be noted that if new use cases become available this can be revisited with more information being passed but at this point we do not have justification for doing so.</p>
+			</td>
+			<td style="width: 201px;">The contract should be reviewed with MSD to make sure they can implement their requirements.</td>
+			<td style="width: 90px;">In Progress</td>
+			<td style="width: 84px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2 dir="ltr" id="ii11">System Context Diagram</h2>
+
+<p dir="ltr">The diagram below shows a high level view of Smart Navigator and how the results are retrieved based on the query input.</p>
+
+<p dir="ltr"><img lconnwikiparamattachmentname="SmartNavFlow.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Smart%20Navigator%20-%20Hook%20Points._ATTACHMENTS_/SmartNavFlow.png" alt="" style="width: 75%; height: 75%; margin-top: 1px; margin-bottom: 1px;" lconnwikiparamwikipage="Smart Navigator - Hook Points" lconnattachedresourcetype="page"></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The proposed enhancement is to add a hook so that when any result is clicked, custom JavaScript code is invoked and only on completion will Smart Navigator complete navigation by saving user history and loading the page for the result clicked.</p>
+
+<h2 dir="ltr" id="ii12">Architecture/Design Context Diagram</h2>
+
+<p dir="ltr">The following diagram complements the high level context diagram above by showing the sequence of JavaScript steps invoked when the result is clicked. This shows the flow when the hook point has been implemented.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><img lconnwikiparamattachmentname="JSSequence1.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Smart%20Navigator%20-%20Hook%20Points._ATTACHMENTS_/JSSequence1.png" alt="" style="width: 75%; height: 75%;" lconnwikiparamwikipage="Smart Navigator - Hook Points" lconnattachedresourcetype="page"></img></p>
+
+<h2 dir="ltr" id="ii13">Design Specifics</h2>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<h3 dir="ltr" id="ii43">AD-001 -&nbsp;Provide customers a&nbsp;&nbsp;means to add&nbsp;custom processing, including user interaction, between click of a Smart Navigation result and the rendering of the associated page</h3>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">In the Javascript that handles the Smart Navigator navigation, prior to navigating, check if hook has been provided (see AD-002).</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">If not then continue with the normal navigation.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">If an extension has been provided then subscribe to Dojo/topic and&nbsp;call the function defined</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The hook is free to do any processing, including user interaction and server side calls and hands control back by publishing the appropriate Dojo/topic message</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Custom implementations that interact with the user should block other screen interaction in a Modal stye approach</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Technical implementation details
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Hook callout to be made at&nbsp;curam.widget.SearchMultipleTextBox _openLinkAndSaveHistory (TI Javascript Widget&nbsp;&nbsp;SearchMultipleTextBox.js).</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Dojo/topic message to be defined during implementation e.g.&nbsp;/searchmultipletextbox/pre/openlink/completed</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr"><img lconnwikiparamattachmentname="Spike1JavascriptHook.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Smart%20Navigator%20-%20Hook%20Points._ATTACHMENTS_/Spike1JavascriptHook.png" alt="" style="width: 75%; height: 75%; border-width: 1px; border-style: solid;" lconnwikiparamwikipage="Smart Navigator - Hook Points" lconnattachedresourcetype="page"></img></p>
+
+<h3 dir="ltr" id="ii45">AD-002 -&nbsp;Javascript hooks should be required in a way that provides a standard for future development</h3>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The spike implementation in Appendix I placed a function,&nbsp;smartNavigatorPreNavigationHook, in module&nbsp;curam.util.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">A standard approach to providing extension points in Javascript that customers can optionally implement should be considered.</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">This proved difficult to agree, the general consensus being that the approach would be specific to the hook being provided.</p>
+
+<p dir="ltr">The approach taken here in agreement with Sharunas and Luciano is to</p>
+
+<p dir="ltr">- Create a new module to provide the hook point(s) for&nbsp;SearchMultipleTextBox called&nbsp;SearchMultipleTextBoxHookPoints</p>
+
+<p dir="ltr">- This new module provides a skeleton of the hook function(s) but they are commented out so undefined.</p>
+
+<p dir="ltr">- SearchMultipleTextBox JS module uses dojo/require to dynamically include this module from the runtime path and then checks to see if the hook method has been defined in this module and will only call it where that is the case.</p>
+
+<p dir="ltr">- An example implementation will be provided in the CEF exprod component.</p>
+
+<h3 dir="ltr" id="ii46">AD-003 -&nbsp;Hook Contract required to provide the appropriate information relating to navigation item</h3>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Custom function should know information that can allow them to do further processing.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">There are four types of links consider
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1) Search by reference: Numeric search result (e.g. search 257)</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2) Search person name or alternate id: Person link (e.g. search Mary Smith)</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3)&nbsp; Keyword related to a Person search (e.g. search Mary Smith Case)</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">4) Keyword not related to a Person search (e.g. search Register Person)</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">The following analysis is based on the&nbsp;<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">assumption</strong>&nbsp;that</p>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The contract should contain only the information that is relevant for the hook for the usual reasons including OOTB flexibility for future change and security</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The information should be provided in a consistent manner&nbsp;</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">IDs &nbsp;may not always correspond to one table. For example, when searching by case reference the result may be from the CaseHeader or Application (Intake adds this as a custom implementation and we must assume customers will also have similar requirements)</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Customers can extend the solution in the following ways
+	<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Implement their own Search by reference (SearchByReference)</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Person search (though not&nbsp;implementable that is probably an oversight, either way we &nbsp;should&nbsp;provide a solution that would support this being implementable) (SmartNavigatorPersonSearch)</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Keyword searches, whether person related or not, can be provided (TargetObjectSearch)</li>
+	</ol>
+	</li>
+</ol>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" style="border-collapse: collapse; border-color: rgb(105, 105, 105); width: 750px;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="border-color: rgb(105, 105, 105); width: 73px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Result type</strong></td>
+			<td style="border-color: rgb(105, 105, 105); width: 163px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Example search / result</strong></td>
+			<td style="border-color: rgb(105, 105, 105); width: 143px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">How to identify</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="border-color: rgb(105, 105, 105); width: 73px;">Search by Reference</td>
+			<td style="border-color: rgb(105, 105, 105); width: 163px;">257 / Insurance Affordability, 257</td>
+			<td style="border-color: rgb(105, 105, 105); width: 143px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">item.action.type=NO_REQUIREMENT</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">AND</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">item.action.value is ""</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="border-color: rgb(105, 105, 105); width: 73px;">Person name search</td>
+			<td style="border-color: rgb(105, 105, 105); width: 163px;">M Smith / Mary Smith</td>
+			<td style="border-color: rgb(105, 105, 105); width: 143px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">item.person defined</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">AND</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">item.action is null</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="border-color: rgb(105, 105, 105); width: 73px;">Person keyword search</td>
+			<td style="border-color: rgb(105, 105, 105); width: 163px;">M Smith Case / Mary Smith -&gt; Insurance Affordability, 257</td>
+			<td style="border-color: rgb(105, 105, 105); width: 143px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">item.person defined</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">AND</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">item.action is not null</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="border-color: rgb(105, 105, 105); width: 73px;">Non-Person keyword search</td>
+			<td style="border-color: rgb(105, 105, 105); width: 163px;">Reg / Register Person</td>
+			<td style="border-color: rgb(105, 105, 105); width: 143px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">item.action.type=NO_REQUIREMENT</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">AND</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">item.action.value&nbsp;is not ""</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<ul dir="ltr">
+</ul>
+
+<p dir="ltr">Also see&nbsp;<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Appendix III Smart Nav JS Results (in child page)</strong></p>
+
+<h4 dir="ltr" id="ii50">Contract: Pass URL, and where applicable, ConcernRoleID.&nbsp;</h4>
+
+<p dir="ltr">While not the simplest approach for the implementor of the hook it has the advantage of removing any burden from those extending SmartNav who do not care about this hook which is considered a far more likely scenario.</p>
+
+<p dir="ltr">The approach here has been spiked (See Appendix I (in child page)).&nbsp;</p>
+
+<p dir="ltr">The approach is to</p>
+
+<p dir="ltr">- always pass URL, customers can parse this if they need to know anything about the particular case/person/shortcut&nbsp;being navigated to.</p>
+
+<p dir="ltr">- pass concernRoleID where available i.e. when clicking on a person or on a target of a person.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Options&nbsp;rejected</strong></p>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Pass the URL and leave it up to the hook implementation to parse and decipher. Rejected: URL is not stable - some targets may have url change on configuration a) difficult to map all urls b) unexpected behaviour of changing url config impacting this area of code likely to trip up customers</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Pass the URL and provide a server side api (non-facade so not exposed to client) that can be called by custom server side code to parse the url to give table/column identifiers. Rejected: has same downside as option 1 but just shifts the logic to the server and shares responsibility with OOTB (presuming we provide mechanism to parse what we can and hook out what we can't)</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Enhance Smart Nav to send details of column name / table name. Rejected: security</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Enhance Smart Nav to send ID in it's own field and key value that can be documented for table lookup. Rejected: requires introducing new concepts to map the result type. This would put an additional burden on anyone implementing a target search or extending Smart Nav which is rejected given that for initial implementation the use case is very specific to MSD.</li>
+</ol>
+
+<h2 dir="ltr" id="ii47">General Design Specifics</h2>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">IEG/Workflow/CDEJ/SDEJ: Not Applicable</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Smart Navigator JS Module</strong> to be modified:&nbsp;/TI/client/components/client-inf/jscript/src/internal/curam/widget/SearchMultipleTextBox.js</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tests</strong> to be added to&nbsp;/TI/client/components/client-inf/jscript/tests/cdej/widget/SearchMultipleTextBoxTestCase.js</p>
+
+<h3 dir="ltr" id="ii14" style="margin-left: 40px;">Design User Interface</h3>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">Not applicable</li>
+</ul>
+
+<h3 dir="ltr" id="ii21" style="margin-left: 40px;">Design Validations</h3>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">Not applicable</li>
+</ul>
+
+<h3 dir="ltr" id="ii22" style="margin-left: 40px;">Design Metadata Changes</h3>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">Not applicable</li>
+</ul>
+
+<h3 dir="ltr" id="ii23" style="margin-left: 40px;">Design Logical Data Model Changes</h3>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">Not applicable</li>
+</ul>
+
+<h3 dir="ltr" id="ii24" style="margin-left: 40px;">Design Resilience Measures</h3>
+
+<p dir="ltr" style="margin-left: 40px;">If the hook errors then a message should be written to the browser console and navigation should continue.&nbsp;</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">There will be no timeout on the hook given it could be used for user interaction.</li>
+</ul>
+
+<h3 dir="ltr" id="ii25" style="margin-left: 40px;">Design Logging</h3>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">Not applicable</li>
+</ul>
+
+<h3 dir="ltr" id="ii26" style="margin-left: 40px;">Design Accessibility</h3>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">Not applicable</li>
+</ul>
+
+<h3 dir="ltr" id="ii27" style="margin-left: 40px;">Third Party Software and Legal Requirements</h3>
+
+<p dir="ltr" style="margin-left: 40px;">Dojo/topic 1.10 -&nbsp;<a href="https://dojotoolkit.org/reference-guide/1.10/dojo/topic.html">https://dojotoolkit.org/reference-guide/1.10/dojo/topic.html</a>&nbsp;(already included in product)</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii28">Use Cases</h2>
+
+<p dir="ltr">Defined in RTC, see&nbsp;<a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=243123">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=243123</a></p>
+
+<h2 dir="ltr" id="ii15">Implementation Notes</h2>
+
+<p dir="ltr">The non-shippable implementation is to be defined in conjunction with business and test; documented under Testing below.</p>
+
+<h2 dir="ltr" id="ii16">Application Impact</h2>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">No impact</strong></p>
+
+<h2 dir="ltr" id="ii17">Configuration Transport Manager</h2>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Not applicable</li>
+</ul>
+
+<h2 dir="ltr" id="ii18">Testing</h2>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Unit Tests: JS Unit tests required to prove the hook is called where implemented and navigation continues when hook completes or where hook not implemented</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Process Tests: Not applicable</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">End to End Tests: Not applicable</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Functional/Business Flow Tests: Not applicable</li>
+</ul>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">FVT Required: Yes - test with custom implementation of hook (to be defined - see Test Component below)</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">SVT Required: No</li>
+</ul>
+
+<h3 dir="ltr" id="ii2">Hook Implementation for Testing in non-shippable Test Component</h3>
+
+<p dir="ltr">An implementation of the hook must be provided in the CEF ExProd&nbsp;component: /CEF/CEFBase/EJBServer/components/ExProd and&nbsp;/CEFBase/webclient/components/ExProd.</p>
+
+<p dir="ltr">The implementation should prove</p>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The hook can&nbsp;open a modal on conditional logic based on the results of a facade call</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The Modal can load information about the concern passed</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The hook implementation can save data back to the database based on user confirmation prior to handing back control to Smart Nav</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The hook behaviour should be configurable in some way so that FVT can turn it on/off.</li>
+</ol>
+
+<p dir="ltr">This has been implemented in:&nbsp;CEF/CEFBase/webclient/components/ExProd/WebContent/CDEJ/jscript/curam/widget/SearchMultipleTextBoxHookPoints.js</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Comments taken from this file describing implementation:</p>
+
+<pre dir="ltr" style="margin-left: 40px;">
+<span style="font-size:10px;">/**
+ * *** TO TURN HOOK ON SET DEBOUNCE to -1 (SYSADMIN property curam.smartnavigator.search.debounce.timeout) ***
+ * 
+ * &lt;p/&gt;
+ * @name curam.widget.SearchMultipleTextBoxHookPoints
+ * @description Non-shippable example implementation of SearchMultipleTextBoxHookPoints.preNavigationHook
+ *
+ * &lt;p/&gt;Provided to prove that the hook provided in SearchMultipleTextBoxHook (Smart Navigator) is implementable.
+ *
+ * &lt;p/&gt;&lt;strong&gt;Implementation details&lt;/strong&gt;
+ *
+ * &lt;p/&gt;This implementation will open a modal confirmation dialog when navigating to a person or a keyword
+ * person result from a Smart Navigator search under the following conditions:
+ *
+ * &lt;ul&gt;
+ * &lt;li&gt;Property curam.smartnavigator.search.debounce.timeout set to -1
+ * (this means Smart Navigator returns results only if you hit enter. This is not
+ * the default behavior which is to fire off the query every 500ms. We've used
+ * the debounce behavior to turn this feature on/off so that a) it is off by default so
+ * as not to impact other testing and b) to avoid introducing any new concepts purely for
+ * the sake of turning this test implementation on and off. &lt;/li&gt;
+ * &lt;li&gt;The implementation reads back the Smart Navigator Search History using the existing
+ * Smart Navigator API and looks for whether this person is in any of the existing search history
+ * i.e. if any link related to the person is in the user's search history.
+ * &lt;/ul&gt;
+ *
+ * This implementation allows us to prove that we can conditionally interrupt the navigation
+ * based on server side calls.
+ */</span>
+</pre>
+
+<h2 dir="ltr" id="ii19">Documentation/How To Use Feature</h2>
+
+<p dir="ltr">The Smart Navigator increases caseworkers' productivity by enabling them to go quickly and easily to the pages they want without navigating through multiple pages. However, navigating directly to a page may, in some situations, result in important information not being displayed. This hook addresses this problem by providing&nbsp;a mechanism to insert custom logic between the click of the result and navigation to the related page. As an example, a custom implementation may open a modal when the result is clicked to display information that may be considered important but would otherwise be bypassed by linking directly to a page such as a Product Delivery. Once the user dismisses the modal then the page selected loads.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Hook</strong></p>
+
+<p dir="ltr">Customers should follow the steps below to provide an implementation of the hook</p>
+
+<p dir="ltr">1) Create&nbsp;SearchMultipleTextBoxHookPoints.js In&nbsp;webclient/components/custom/WebContent/CDEJ/jscript/curam/widget</p>
+
+<p dir="ltr">2) Copy the following and in to that file and provide the custom implementation within the preNavigationHook function.</p>
+
+<pre dir="ltr">
+<span style="font-size:9px;">/</span><span style="font-size:10px;">**
+ * @name curam.widget.SearchMultipleTextBoxHookPoints
+ * 
+ * API for implementing hook points exposed by SearchMultipleTextBox (Smart Navigator).
+ * 
+ */
+define([
+        "dojo/topic"], function(topic) {
+  curam.define.singleton("curam.widget.SearchMultipleTextBoxHookPoints", {
+  /**
+    * Implement this function in order to add custom processing between 
+    * click of a Smart Navigator result and the rendering of the page.
+    * 
+    * This hook cannot alter navigation,  Smart Navigator is responsible 
+    * for completing navigation, that is, saving to history and rendering 
+    * the URL.
+    * 
+    * If this hook is used to interact with the user then a modal approach 
+    * should be used to prevent page navigation given when this hook 
+    * completes the URL will be rendered by Smart Navigator.
+    * 
+    * @param data Object holding:
+    * url being navigated to
+    * concernRoleId: the concernRoleID of the individual if the result being navigated to is a person or keyword of a person.
+    * 
+    * @return publish message '/smartnavigator/prenavigationhook/completed' to hand control back to Smart Navigator.
+    */
+    preNavigationHook: function(data){
+   
+&nbsp;     // Custom implementation goes here
+
+      // On completion, publish message to hand control back to smart navigator.
+      topic.publish('/smartnavigator/prenavigationhook/completed');
+    }
+   });
+  return curam.widget.SearchMultipleTextBoxHookPoints;
+});</span></pre>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Example usage</strong></p>
+
+<p dir="ltr">The following shows the code from the sample implementation provided in ExProd and described above</p>
+
+<pre dir="ltr" style="margin-left: 40px;">
+/**
+&nbsp;* *** TO TURN HOOK ON SET DEBOUNCE to -1 (SYSADMIN property curam.smartnavigator.search.debounce.timeout) ***
+&nbsp;*&nbsp;
+&nbsp;* &lt;p/&gt;
+&nbsp;* @name curam.widget.SearchMultipleTextBoxHookPoints
+&nbsp;* @description Non-shippable example implementation of SearchMultipleTextBoxHookPoints.preNavigationHook
+&nbsp;*
+&nbsp;* &lt;p/&gt;Provided to prove that the hook provided in SearchMultipleTextBoxHook (Smart Navigator) is implementable.
+&nbsp;*
+&nbsp;* &lt;p/&gt;&lt;strong&gt;Implementation details&lt;/strong&gt;
+&nbsp;*
+&nbsp;* &lt;p/&gt;This implementation will open a modal confirmation dialog when navigating to a person or a keyword
+&nbsp;* person result from a Smart Navigator search under the following conditions:
+&nbsp;*
+&nbsp;* &lt;ul&gt;
+&nbsp;* &lt;li&gt;Property curam.smartnavigator.search.debounce.timeout set to -1
+&nbsp;* (this means Smart Navigator returns results only if you hit enter. This is not
+&nbsp;* the default behavior which is to fire off the query every 500ms. We've used
+&nbsp;* the debounce behavior to turn this feature on/off so that a) it is off by default so
+&nbsp;* as not to impact other testing and b) to avoid introducing any new concepts purely for
+&nbsp;* the sake of turning this test implementation on and off. &lt;/li&gt;
+&nbsp;* &lt;li&gt;The implementation reads back the Smart Navigator Search History using the existing
+&nbsp;* Smart Navigator API and looks for whether this person is in any of the existing search history
+&nbsp;* i.e. if any link related to the person is in the user's search history.
+&nbsp;* &lt;/ul&gt;
+&nbsp;*
+&nbsp;* This implementation allows us to prove that we can conditionally interrupt the navigation
+&nbsp;* based on server side calls.
+&nbsp;*/
+define([
+&nbsp; "dojo/_base/lang",
+&nbsp; "dojo/topic",
+&nbsp; "curam/cdsl/connection/SimpleAccess",
+&nbsp; "curam/cdsl/connection/CuramConnection",
+&nbsp; "curam/debug"
+], function(lang, topic, simpleAccess, curamConnection, debug) {
+
+&nbsp; curam.define.singleton("curam.widget.SearchMultipleTextBoxHookPoints", {
+
+&nbsp; &nbsp; /**
+&nbsp; &nbsp; &nbsp;* @name curam.widget.SearchMultipleTextBoxHookPoints.preNavigationHook
+&nbsp; &nbsp; &nbsp;* @description hook allowing custom behavior between click of a Smart Navigator link and
+&nbsp; &nbsp; &nbsp;* the display of the resulting page.
+&nbsp; &nbsp; &nbsp;*
+&nbsp; &nbsp; &nbsp;* @param data Object holding:
+&nbsp; &nbsp; &nbsp;* &nbsp;&nbsp; &nbsp;url being navigated to
+&nbsp; &nbsp; &nbsp;* &nbsp;&nbsp; &nbsp;concernRoleId: the concernRoleID of the individual if the result being navigated to is a person or keyword of a person.
+&nbsp; &nbsp; &nbsp;*/
+&nbsp; &nbsp; preNavigationHook: function(data) {
+
+
+&nbsp; &nbsp; &nbsp; // If concernRoelId not passed then this is either a reference result
+&nbsp; &nbsp; &nbsp; // or a non-person keyword (shortcut) neither of which we are going to
+&nbsp; &nbsp; &nbsp; // display a modal for in this implementation of the hook.
+&nbsp; &nbsp; &nbsp; if (!data.concernRoleId) {
+&nbsp; &nbsp; &nbsp; &nbsp; return curam.widget.SearchMultipleTextBoxHookPoints._preNavigationHookCompleted();
+&nbsp; &nbsp; &nbsp; }
+
+&nbsp; &nbsp; &nbsp; simpleAccess.initConnection(new curamConnection(curam.util.retrieveBaseURL() + '/dataservice'));
+
+&nbsp; &nbsp; &nbsp; // First get the configuration to decide if the hook should be on or off.
+&nbsp; &nbsp; &nbsp; var configPromise = curam.widget.SearchMultipleTextBoxHookPoints._getHookPointConfiguration();
+&nbsp; &nbsp; &nbsp; configPromise.then(lang.hitch(this, function(isTurnedOn) {
+
+&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;// If not configured on simply hand control back to Smart Navigator
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (!isTurnedOn) {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return curam.widget.SearchMultipleTextBoxHookPoints._preNavigationHookCompleted();
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Hook is configured on so get the history and based on that conditionally display a modal.
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var historyPromise = simpleAccess.makeRequest('SmartNavigatorFacade', 'searchUserHistory');
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; historyPromise.then(lang.hitch(this, function(historyData) {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; curam.widget.SearchMultipleTextBoxHookPoints._doHookImplementation(data.concernRoleId, historyData);
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }));
+&nbsp; &nbsp; &nbsp; &nbsp; }),
+
+&nbsp; &nbsp; &nbsp; &nbsp; //Error Callback
+&nbsp; &nbsp; &nbsp; &nbsp; function(err) {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; debug.log('Unable to _getHookPointConfiguration to complete hook point logic, modal will not display', err);
+&nbsp; &nbsp; &nbsp; &nbsp; });
+&nbsp; &nbsp; },
+
+&nbsp; &nbsp; // Private method returning true if hook is configured on, false otherwise.
+&nbsp; &nbsp; _getHookPointConfiguration: function() {
+&nbsp; &nbsp; &nbsp; var promise = simpleAccess.makeRequest('SmartNavigatorFacade', 'getSearchConfiguration');
+
+&nbsp; &nbsp; &nbsp; return promise.then(
+
+&nbsp; &nbsp; &nbsp; &nbsp; //Success Callback
+&nbsp; &nbsp; &nbsp; &nbsp; function(configData) {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return configData[0].debounceTimeout === "-1";
+&nbsp; &nbsp; &nbsp; &nbsp; },
+
+&nbsp; &nbsp; &nbsp; &nbsp; //Error Callback
+&nbsp; &nbsp; &nbsp; &nbsp; function(err) {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; debug.log('Unable to _getSearchConfiguration to complete hook point logic, modal will not display', err);
+&nbsp; &nbsp; &nbsp; &nbsp; });
+&nbsp; &nbsp; },
+
+&nbsp; &nbsp; // Private method to open modal if concernRoleId not found in search history.
+&nbsp; &nbsp; _doHookImplementation: function(concernRoleId, historyData) {
+
+&nbsp; &nbsp; &nbsp; if (!curam.widget.SearchMultipleTextBoxHookPoints._smartNavPreviouslyViewed(historyData, concernRoleId)) {
+
+&nbsp; &nbsp; &nbsp; &nbsp; // We have not previously viewed so display the moda and attatch a close handler
+&nbsp; &nbsp; &nbsp; &nbsp; // to publish the dojo/topic to inform Smart Nav we have completed.
+&nbsp; &nbsp; &nbsp; &nbsp; var url = "SmartNav_preNavHookPage.do?concernRoleID=" + concernRoleId;
+&nbsp; &nbsp; &nbsp; &nbsp; var dialogObject = curam.util.UimDialog.openUrl(url);
+&nbsp; &nbsp; &nbsp; &nbsp; dialogObject.registerBeforeCloseHandler(function() {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return curam.widget.SearchMultipleTextBoxHookPoints._preNavigationHookCompleted();
+&nbsp; &nbsp; &nbsp; &nbsp; });
+&nbsp; &nbsp; &nbsp; } else {
+&nbsp; &nbsp; &nbsp; &nbsp; return curam.widget.SearchMultipleTextBoxHookPoints._preNavigationHookCompleted();
+&nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; },
+
+&nbsp; &nbsp; // Private method to hand control back to Smart Navigator through publishing message.
+&nbsp; &nbsp; _preNavigationHookCompleted: function() {
+&nbsp; &nbsp; &nbsp; return topic.publish('/smartnavigator/prenavigationhook/completed');
+&nbsp; &nbsp; },
+
+&nbsp; &nbsp; // Private helper method to inspect search history to see if concernRoleId contained within.
+&nbsp; &nbsp; _smartNavPreviouslyViewed: function(data, concernRoleId) {
+&nbsp; &nbsp; &nbsp; var history = data[0];
+&nbsp; &nbsp; &nbsp; if (history.dtls &amp;&amp; history.dtls.length &gt; 0) {
+&nbsp; &nbsp; &nbsp; &nbsp; for (i = 0; i &lt; history.dtls.length; i++) {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (history.dtls[i].searchConcernRoleId === concernRoleId) {
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return true;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; }
+&nbsp; &nbsp; &nbsp; return false;
+&nbsp; &nbsp; }
+
+&nbsp; });
+
+&nbsp; return curam.widget.SearchMultipleTextBoxHookPoints;
+
+});
+
+</pre>
+
+<h3 dir="ltr" id="ii6">Check Lists</h3>
+
+<h3 dir="ltr" id="ii1">IEG Check List</h3>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Not applicable</li>
+</ul>
+
+<h3 dir="ltr" id="ii54">Workflow Check List&nbsp;</h3>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Not applicable</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

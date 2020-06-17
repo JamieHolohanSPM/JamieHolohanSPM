@@ -1,0 +1,817 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Address conditional mandatory fields</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Address conditional mandatory fields";
+    pageId="urn:lsid:ibm.com:td:de3021d6-1039-42a8-9491-d0b345d968e6";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Address conditional mandatory fields</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<h1 dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Design Page for&nbsp;</strong><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=243579">243579</a>&nbsp;- Conditional mandatory fields in address fields</h1>
+
+<h2 dir="ltr">Stakeholders</h2>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Refer to the following Org Chart to ensure you are engaging the correct people. The table below indicates the current contacts for each area.
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://ibm.biz/BdsuKd">https://ibm.biz/BdsuKd</a></li>
+	</ul>
+	</li>
+</ul>
+
+<table border="1" dir="ltr">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Role</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Sign Off if Applicable</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Customer</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Scottish Government</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Business Owner/Product Owner</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Sonya Purcell</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Architect</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Fergal Gavin</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Developer(s)</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Fabrice Niclot, Clara Mannion</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">FVT</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Satya Minnekanti</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">SVT</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">John Redmond/Sean Cleary</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Information Developer</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">UX Design</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Legal</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">Background</h2>
+
+<p dir="ltr">The address widget using the OOTB US address format has cross-validations input fields (either Apt/Suite <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">or</strong> Street 1 are required to be filled out) that the user is not made aware of until the submit button in the page is hit. In the context of making our application fully compliant with accessibility requirements, the current address widget behaviour for the OOTB US address format is not satisfactory. The address widget is present on many pages of the application at different context levels: core (employer, person, case, prospect person subfolders), CPM, intake, simpleOutcomeManagement, ISproduct, ISscreening.&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+The current markup for mandatory/required&nbsp;fields * (required) used in Curam is not suitable in the situation where the US address format is used as either Apt/Suite or Street 1 are required fields. The current state of the application does not provide a mechanism to indicate the user in advance that either fields are mandatory. It is only when the user tries to validate his inputs and that neither the Apt/Suite nor Street 1 fields are filled in that a warning message is being thrown. The first issue here is that the application is not informative enough to both regular and blind users and that causes an accessibility gap. In the same way the screenreader is missing to inform a blind user. This is the second issue that causes a further accessibility gap.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">Requirements</h2>
+
+<p dir="ltr">Goal: The application should provide to all users (including users using screenreaders) with enough information so that the user knows what input field are&nbsp;required before a validation check is processed by the application. In regards to the high number of UIM files involved for a global fix, it has been decided <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">to implement the fix at the address widget level</strong>.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">List of Requirements</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement 1: Informative description text available on the top of the address widget (table header) for non-impaired users which can be used when cross-validations on address input fields occur.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement 2: Informative text read out by a screenreader when the user tabs to the conditional mandatory input fields. Note: OOTB, the only default address format with conditional mandatory&nbsp;fields is the US address format.</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=243579">243579</a>- Cross-mandatory input fields for the address widget are not explicitly rendered visually or by screen-reader</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii6">Requirement Decisions</h3>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="156" style="width: 1322px;" width="860">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement Decision Title</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Issue or Problem Statement</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Assumptions</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 90px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Motivation</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 50px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Alternatives</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 146px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Decision</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 223px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Justification</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 150px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Implications</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 114px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Status</strong></td>
+			<td style="width: 92px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Date</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Where to implement the solution of a informative description text</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">High number of UIM and VIM files containing the address fields</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 90px;">A centeralized fix would be best</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 50px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 146px;">Use new parameters in the address format and address element configuration to identify the fields that are conditional mandatory</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 223px;">The best solution for a global fix.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 150px;">OOTB for US address format</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 114px;">Closed</td>
+			<td style="width: 92px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 90px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 50px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 146px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 223px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 150px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 114px;">&nbsp;</td>
+			<td style="width: 92px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 90px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 50px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 146px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 223px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 150px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 114px;">&nbsp;</td>
+			<td style="width: 92px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii7">Non Functional Requirements</h3>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" width="671">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">NFR</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Accessibility</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">How we inform the visually impaired user is very important. As the address fields are in a modal dialog, the natural use of a form is to tab when using the keyboard navigation, therefore the user will not read a&nbsp;description text and should be notified when they tab to the conditional mandatory address input field.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Availability &amp; Resilience</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Ideally the solution would be resilient to incorrect configuration (however, correctly in curam-config.xml there are no build time validations and the solution builds successfully).&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			Also, the solution must work with past address format configurations, or if a properties is missing from CDEJResources.properties.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Development Resource</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Evolution</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Internationalisation</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">This is an issue for this defect, because we cannot guarantee that the translation team will update the description text to reflect the first two address labels in the US format.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			Therefore, in the ERN, we will clearly outline how to update the description in the CDEJResources.properties</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Location</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">As we know the Scottish Government customer that raised this APAR, is using their own address format, the OOTB solution on the US address format will not fix their solution OOTB. Therefore, we will carefully document the external release note and point them towards the new documentation in the knowledge center on how to configure the Address Format in curam-config.xml</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Performance and Scalability</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Regulation</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Security</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Usability</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">N/A</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2 dir="ltr" id="ii8"><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Design Options</h2>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Option 1</strong></p>
+
+<p dir="ltr">The first design option was to fix this defect for the Private Mailing Address cluster mentioned in the exact scenario in the support ticket.&nbsp;The considerations were to update the UIM by either adding a &lt;DESCRIPTION&gt; or &lt;SUMMARY&gt; tag.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Then, as this was expanded to all the address clusters.</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Pros of choosing this option:
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">N/A</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Cons of choosing this option:
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The fix is too manual and not a centralised fix for the customer.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Testing scope is too large</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Option 2</strong></p>
+
+<p dir="ltr">Our second design option (that we are going with), is to update the Address Format configuration and to update the renders that render the html of the address fields based on the configuration.</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Pros of choosing this option:
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Centralised fix</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">OOTB for the US format</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Cons of choosing this option:
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Translation for the customer will probably have to be updated by the customer again, as we cannot guarantee the translation team will correctly translate the address label's to the description string.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Not the 'perfect' solution</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+	</ul>
+	</li>
+</ul>
+
+<h2 dir="ltr" id="ii10">Architecture/Design Decisions</h2>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="156" style="width: 1313px;" width="860">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 137px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Architecture Decision Title</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 258px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Issue or Problem Statement</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 1px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Assumptions</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 144px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Motivation</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 16px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Alternatives</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 248px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Decision</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 278px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Justification</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 42px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Implications</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 54px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Status</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 76px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Date</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 137px;">Distinguishing between different types of users</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 258px;">We cannot distinguish between Person, Prospect Person, Employer etc at the render.&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 1px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 144px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 16px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 248px;">We will render the description at the top of all addresses</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 278px;">We have the same logic for all address fields</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 42px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 54px;">Closed</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 76px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 137px;">Distinguishing between different address types</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 258px;">We cannot distinguish between rendering a Private, Business, Mailing, Rented, Registered or Institutional address,</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 1px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 144px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 16px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 248px;">We will render the description at the top of all addresses</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 278px;">We have the same logic for all address fields</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 42px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 54px;">Closed</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 76px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 137px;">Aria-labelledBy vs aria-describedBy vs aria-label</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 258px;">The correct aria attribute is aria-describedBy (is used where one element is used to provide an accessible description for a widget element.) The aria-describedBy points to an ID selector, but we cannot create a unique ID for the description text as the renderer has no context of how many address will be rendered on a page.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 1px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 144px;">Aria-describedBy is the correct aria attribute to use. Using the aria-label would be incorrect, and also fail the new accessibility guidelines for <a href="https://www.ibm.com/able/guidelines/ci162/label_in_name_71.html">aria-label</a> next year.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 16px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 248px;">We will use the aria-label</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 278px;">We have no alternative and the experience for the screenreader (JAWS) will be the same. To make the aria-label unique, we will add the label of the field plus description. Eg, aria-label="Street 1 Please enter at least Street 1 or Street 2".</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 42px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 54px;">Closed</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 76px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 137px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 258px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 1px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 144px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 16px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 248px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 278px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 42px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 54px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 76px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">Technical analysis</h2>
+
+<p dir="ltr">(This was&nbsp;done before requirements could be defined)<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;</p>
+
+<p dir="ltr"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">List of all files which renders the address widget - see Technical analysis.docx file attached. <a href="Address%20conditional%20mandatory%20fields._ATTACHMENTS_/Technical%20analysis.docx" lconnwikiparamwikiattachment="Technical analysis.docx">Click here.</a></em></p>
+
+<p dir="ltr"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">NOTE: The above is *For information only* as none of the files listed are modified for the fix because the fix is implemented at the widget level rather than at uim page levels.</em></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Potential solutions - see Potential solutions.docx file attached. <a href="Address%20conditional%20mandatory%20fields._ATTACHMENTS_/Potential%20solutions.docx" lconnwikiparamwikiattachment="Potential solutions.docx">Click here.</a></em></p>
+
+<p dir="ltr"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">NOTE: All potential solutions were listed before taking the decision to modify the address widget behavior.</em></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Address formats available OOTB with mapping. <a href="Address%20conditional%20mandatory%20fields._ATTACHMENTS_/locale_testing.xlsx" lconnwikiparamwikiattachment="locale_testing.xlsx">Click here.</a><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;</p>
+
+<h2 dir="ltr" id="ii11">Design Specifics</h2>
+
+<h3 dir="ltr" id="ii14">Design Validations</h3>
+
+<p dir="ltr">To notify the user of two conditional mandatory fields, we couldn't have another asterix&nbsp; (*) as we currently have in the application to inform the user of mandatory fields. Therefore, we agreed to have a description to convey the information to the user.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii22">Design Metadata Changes</h3>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The customer sets the values of the new </strong><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CONDITIONAL_MANDATORY</strong> <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">property in curam-config.xml for each of the address elements as required.</strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">curam-config.xml </strong>will be updated to contain two new parameters:</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">DESCRIPTION
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">This parameter will contain the label for the string&nbsp;that will be stored in CDEJResources.properties. This string from CDEJResources.properties will be displayed on top of&nbsp;the address fields.</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CONDITIONAL_MANDATORY
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">This parameter will contain a 'true' or 'false' string (letter case is irrelevant) that indicates that this address element is conditionally mandatory. For example, in the xml sample below the CONDITIONAL_MANDATORY attribute is set to 'true' for Apt/Suite and Street1 address elements. This means that the user must enter text in at least one of these fields.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+		&nbsp;</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">&lt;ADDRESS_CONFIG</p>
+
+<p dir="ltr">&nbsp; &nbsp; DEFAULT_COUNTRY_CODE="US"</p>
+
+<p dir="ltr">&nbsp; &nbsp; DEFAULT_FORMAT="US"</p>
+
+<p dir="ltr">&nbsp; &gt;</p>
+
+<p dir="ltr">&nbsp; &nbsp; &lt;ADDRESS_FORMAT NAME="US" DESCRIPTION="Address.Description"&gt;</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &lt;ADDRESS_ELEMENT</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; LABEL="Address.Label.AptSuite"</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; NAME="ADD1"</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; CONDITIONAL_MANDATORY="true"</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; /&gt;</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &lt;ADDRESS_ELEMENT</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; LABEL="Address.Label.Street.1"</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; NAME="ADD2"</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; CONDITIONAL_MANDATORY="true"</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; /&gt;</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &lt;!-- END, CR00082120&nbsp; --&gt;</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &lt;ADDRESS_ELEMENT</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; LABEL="Address.Label.Street.2"</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; NAME="ADD3"</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; /&gt;</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &lt;ADDRESS_ELEMENT</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; LABEL="Address.Label.City"</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; NAME="CITY"</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; /&gt;</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &lt;ADDRESS_ELEMENT</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; CODETABLE="AddressState"</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; LABEL="Address.Label.State"</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; NAME="STATE"</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; /&gt;</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &lt;ADDRESS_ELEMENT</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; LABEL="Address.Label.Zip"</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; NAME="ZIP"</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; /&gt;</p>
+
+<p dir="ltr">&nbsp; &nbsp; &lt;/ADDRESS_FORMAT&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&lt;/ADDRESS_CONFIG&gt;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The customer defines</strong> a text string in CDEJResources.properties as a value for the Address.Description property. This is the text&nbsp; to be displayed above the address widget.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Address.Description</strong>=<span style="color:#ff0000;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Please enter at least&nbsp;Apt/Suite or Street 1.</strong></span></p>
+
+<p dir="ltr" style="margin-left: 40px;">Note: if no string is defined, no text is displayed on the address widget.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii23">Design Resilience Measures</h3>
+
+<p dir="ltr">Unfortunately there's no existing schema for the configuration xml, and therefore there's no build time validations.&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;</p>
+
+<h3 dir="ltr" id="ii25">Design Logging</h3>
+
+<p dir="ltr">Unfortunately, there is no logging set up the the TextEditRenderer or the DefaultAddressEditRenderer classes to faciliate logging output. Ideally, if there is configuration in the xml for the CONDITIONAL_MANDATORY attribute but none for the DESCRIPTION or no string was found in the CDEJResources.properties,&nbsp;&nbsp;we should log that a description is expected.&nbsp;</p>
+
+<h3 dir="ltr" id="ii26">&nbsp;</h3>
+
+<h2 dir="ltr" id="ii15">Implementation Notes</h2>
+
+<p dir="ltr"><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TI stream:&nbsp;</strong></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CDEJResources.properties&nbsp;</strong>&nbsp;- stores description text</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CuramConfig.java - </b>updated for the&nbsp;new DESCRIPTION and CONDITIONAL_MANDATORY configuration attributes</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">AddressFormat.java - </b>update for new DESCRIPTION attribute</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">AddressElement.java - </b>updated for the new CONDITIONAL_MANDATORY attribute</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">curam-clusters.css&nbsp;</b></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TextEditRenderer.java - </b>updated to render the aria-label for when CONDITIONAL_MANDATORY&nbsp;is true and a description text exists</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">AddressFormatResolver.java -</b> updated for new attributes</li>
+</ul>
+
+<p dir="ltr"><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CEFWidgets stream:</strong></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">DefaultAddressEditRenderer.java </strong>- updated to render the description text and update new field CONDITIONAL_MANDATORY parameter if element is conditional mandatory</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CanadianAddressEditRenderer.java </strong>- updated to cater for CACIVIC address layout</li>
+</ul>
+
+<p dir="ltr"><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CEF stream:</strong></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">curam-config.xml </b>- updated the OOTB configuration for the US address format</li>
+</ul>
+
+<p dir="ltr"><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+HTML output to display the description text "Please enter at least Apt/Suite or Street 1" and the aria-label. Screenshot of a Register person page:</p>
+
+<p dir="ltr"><img lconnwikiparamattachmentname="Register Person modal address cluster.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Address%20conditional%20mandatory%20fields._ATTACHMENTS_/Register%20Person%20modal%20address%20cluster.png" alt="" style="width: 1000px;" lconnwikiparamwikipage="Address conditional mandatory fields" lconnattachedresourcetype="page"></img><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Screenshot of an Edit Address modal:</p>
+
+<p dir="ltr" style="margin-left: 80px;">&nbsp;</p>
+
+<p dir="ltr"><img lconnwikiparamattachmentname="Edit address modal.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Address%20conditional%20mandatory%20fields._ATTACHMENTS_/Edit%20address%20modal.png" alt="" style="width: 1000px;" lconnwikiparamwikipage="Address conditional mandatory fields" lconnattachedresourcetype="page"></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii16">Application Impact</h2>
+
+<p dir="ltr">N/A</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii18">Testing</h2>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Unit tests on TI stream:</b><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+	&nbsp;
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp; /**</p>
+
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;&nbsp; * Test the aria-label for the field is set correctly when the&nbsp;conditional mandatory attribute is set to true and description&nbsp;attribute exists on address format.</p>
+
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;&nbsp; */</p>
+	TextEditRendererTestCase.<i sandbox="allow-forms allow-same-origin allow-scripts allow-popups">testAriaLabelWhenConditionalMandatoryIsTrue()</i><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+	&nbsp;
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp; /**</p>
+
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;&nbsp; * Test the aria-label for the field is set correctly when the&nbsp;conditional mandatory attribute is set to false.</p>
+
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;&nbsp; */</p>
+	TextEditRendererTestCase.<i sandbox="allow-forms allow-same-origin allow-scripts allow-popups">testAriaLabelWhenConditionalMandatoryIsFalse()</i><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+	&nbsp;
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp; /**</p>
+
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;&nbsp; * Test the aria-label for the field is not set when the conditional mandatory attribute is set to true but no&nbsp;description is set in address format.</p>
+
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;&nbsp; */</p>
+
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TextEditRendererTestCase.<i sandbox="allow-forms allow-same-origin allow-scripts allow-popups">testAriaLabelWhenConditionalMandatoryIsTrueButDescriptionNotSetInFormat</i>()</p>
+	<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+	// This test sets all the default parameters, and also checks the new CONDITIONAL_MANDATORY parameter on the field parameter.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+	FieldParamatersTestCase<i sandbox="allow-forms allow-same-origin allow-scripts allow-popups">.testDefaultParameters()</i></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">No unit tests on CEFWidgets stream due to the java renderers updated are in the client&nbsp;</b></li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">Test scenarios&nbsp;</h2>
+
+<p dir="ltr"><u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Initial test cases</u> (1 to 7)<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Refer to</b> <b sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="Address%20conditional%20mandatory%20fields._ATTACHMENTS_/Test%20Scenarios%20for%20Crossfield%20Mandatory%20Validations.docx" id="jazz_ui_ResourceLink_282" widgetid="jazz_ui_ResourceLink_282">Test Scenarios for Crossfield Mandatory Validations.docx</a></b>.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Further test cases</u></p>
+
+<p dir="ltr"><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Ask developer:</b> <u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Change conditional mandatory fields to be <b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Apt/Suite or Street 2</b> for US address format. Test with<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"> </strong><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Address.Description=At least </strong><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Apt/Suite</b><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"> or&nbsp;</strong><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Street 2</b><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"> must be entered</strong></u>.</p>
+
+<p dir="ltr"><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Note: Do not check the validation message on server side as it will only throw a message if either Apt/Suite or Street 1 are not filled. We only want to check that the cross-mandatory fields in this customized configuration are rendered by JAWS.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Test Case 8 </u><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<i sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Re-run all tests from<span style="color:#40e0d0;"> </span>Test Scenarios document above<span style="color:#0000ff;"> </span>and check at same time:</i><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+1. Screen-reader should read out <b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">the label AND the title again</b> <b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">when cross-mandatory input fields Apt/Suite and Street 2</b> are hit using the tab key.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+2. Navigate again through the Address tables, <b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">using the down-arrow key</b> and <b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">check that the title and Apt/Suite </b><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">are not highlighted</b> in block.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<span style="color:#000000"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Ask developer:</b> <u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Change to EN address format</u></span><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Test Case 9</u><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<i sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Re-run all tests from Test Scenarios document above and check that<b sandbox="allow-forms allow-same-origin allow-scripts allow-popups"> </b></i><i sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">no title should appear</b>.</i><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<span style="color:#000000"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Ask developer:</b> <u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Change to UK address format</u></span><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Test Case 10</u><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<i sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Re-run all tests from Test Scenarios document above and check that<b sandbox="allow-forms allow-same-origin allow-scripts allow-popups"> </b></i><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><i sandbox="allow-forms allow-same-origin allow-scripts allow-popups">no title should appear.</i></b><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<span style="color:#000000"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Ask developer:</b> <u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use customized UK address </u></span><u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">with address line 2 and address line 3 conditional mandatory. Test with<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"> </strong><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Address.Description=</strong></u><u sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">At least </strong><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Address Line 2</b><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"> or </strong><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Address Line 3</strong></b><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"> must be entered</strong></u>.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><u sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="color:#000000">Test Case 11</span></u></p>
+
+<p dir="ltr"><i sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Re-run all tests from Test Scenarios document above and check at same time:</i><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+1. Screen-reader should read out <b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">the label AND the title again</b> <b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">when input fields Address line 2 and</b> <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Address line 3 </strong>are hit using the tab key.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+2. Navigate again through the Address tables, <b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">using the down-arrow key</b> and <b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">check that the title and Address line 1 are not highlighted</b> in block.</p>
+
+<p dir="ltr"><span style="color:#000000">&nbsp;</span></p>
+
+<p dir="ltr"><u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Test Case 12</u></p>
+
+<p dir="ltr">Try to hit a page with <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">an address widget</strong><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"> cluster within another cluster </strong>to check the page title alignment. Check with Aoife.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;</p>
+
+<h2 dir="ltr" id="ii19">Documentation/How To Use Feature<br />
+&nbsp;</h2>
+
+<p dir="ltr"><a href="https://www.ibm.com/support/knowledgecenter/en/SS8S5A_7.0.7/com.ibm.curam.content.doc/WebClientReference/r_WEBCREF_Specific1Addresses1.html">https://www.ibm.com/support/knowledgecenter/en/SS8S5A_7.0.7/com.ibm.curam.content.doc/WebClientReference/r_WEBCREF_Specific1Addresses1.html</a><br />
+The Addresses documentation in the knowledge centre needs to be updated with the following text. The <span style="color:#ff0000;">red text</span> is the new text to be included in the original text.<br />
+&nbsp;</p>
+
+<p dir="ltr">The ADDRESS_DATA domain type maps to a tag for entering and displaying addresses. Although the user sees several fields, addresses are stored as a single string field. By default, each of the fields are text input fields except for the state field,which is drop-down field.</p>
+
+<p dir="ltr">To parse the address and display it, the elements that make up the address have to be defined in the&nbsp;curam-config.xml&nbsp;file. Different address configurations for different locales in the Cúram application can be defined. The following address configuration demonstrates how to set this configuration using the&nbsp;<samp>ADDRESS_CONFIG</samp>&nbsp;element.</p>
+
+<pre dir="ltr">
+<code data-clipboard-id="codeblock0">&lt;ADDRESS_CONFIG&gt;
+  &lt;LOCALE_MAPPING LOCALE="en_US"
+          ADDRESS_FORMAT_NAME="US"/&gt;
+  &lt;LOCALE_MAPPING LOCALE="en_GB"
+          ADDRESS_FORMAT_NAME="UK"/&gt;
+  &lt;ADDRESS_FORMAT NAME="US" COUNTRY_CODE="US" <span style="color:#ff0000;">DESCRIPTION="Address.Description"</span>&gt;
+    &lt;ADDRESS_ELEMENT LABEL="Address.Label.AptSuite"
+                     NAME="ADD1"
+&nbsp;                    <span style="color:#ff0000;">CONDITIONAL_MANDATORY="true"</span>/&gt;
+    &lt;ADDRESS_ELEMENT LABEL="Address.Label.Street.1"
+                     NAME="ADD2"
+                     <span style="color:#ff0000;">CONDITIONAL_MANDATORY="true"</span>/&gt;
+    &lt;ADDRESS_ELEMENT LABEL="Address.Label.Street.2"
+                     NAME="ADD3"/&gt;
+    &lt;ADDRESS_ELEMENT LABEL="Address.Label.City"
+                     NAME="CITY"/&gt;
+    &lt;ADDRESS_ELEMENT CODETABLE="AddressState"
+                     LABEL="Address.Label.State"
+                     NAME="STATE"/&gt;
+    &lt;ADDRESS_ELEMENT LABEL="Address.Label.Zip"
+                     NAME="ZIP"/&gt;
+  &lt;/ADDRESS_FORMAT&gt;
+
+  &lt;ADDRESS_FORMAT NAME="UK" COUNTRY_CODE="GBR"&gt;
+    &lt;ADDRESS_ELEMENT LABEL="Address.Label.Address.1"
+                     MANDATORY="true" NAME="ADD1"/&gt;
+    &lt;ADDRESS_ELEMENT LABEL="Address.Label.Address.2"
+                     NAME="ADD2"/&gt;
+    &lt;ADDRESS_ELEMENT LABEL="Address.Label.Address.3"
+                     NAME="ADD3"/&gt;
+    &lt;ADDRESS_ELEMENT LABEL="Address.Label.Address.4"
+                     NAME="ADD4"/&gt;
+    &lt;ADDRESS_ELEMENT LABEL="Address.Label.County"
+                     NAME="ADD5"/&gt;
+    &lt;ADDRESS_ELEMENT LABEL="Address.Label.City"
+                     NAME="CITY"/&gt;
+    &lt;ADDRESS_ELEMENT LABEL="Address.Label.PostCode"
+                     NAME="POSTCODE"/&gt;
+    &lt;ADDRESS_ELEMENT CODETABLE="Country"
+                     LABEL="Address.Label.Country"
+                     NAME="COUNTRY"/&gt;
+  &lt;/ADDRESS_FORMAT&gt;
+&lt;/ADDRESS_CONFIG&gt;</code><a href="" id="copy-btn-0"><img alt="Copy" height="26" src="https://www.ibm.com/support/knowledgecenter/images/icons/copy.png" title="Copy" width="26"></img></a></pre>
+
+<p dir="ltr">The&nbsp;<samp>ADDRESS_CONFIG</samp>&nbsp;element is built using multiple&nbsp;<samp>LOCALE_MAPPING</samp>&nbsp;and&nbsp;<samp>ADDRESS_FORMAT</samp>&nbsp;elements. In Cúram application deployments with multiple locales, a developer may wish to use a different address format for each locale. To do this we use the<samp>LOCALE_MAPPING</samp>&nbsp;element. This element contains a&nbsp;<samp>LOCALE</samp>&nbsp;attribute which defines the locale and an&nbsp;<samp>ADDRESS_FORMAT_NAME</samp>&nbsp;attribute which defines the&nbsp;<samp>ADDRESS_FORMAT</samp>&nbsp;element to be mapped. By default, the OOTB Cúram application has a number of&nbsp;<samp>ADDRESS_FORMAT</samp>elements defined which are mapped to specific locales. As these locales are already mapped it is not required to define&nbsp;<samp>LOCALE_MAPPING</samp>elements for them, however customers are free to modify these or create new configuration(s) as per their implementation needs. Figure 76 above illustrates how the&nbsp;<samp>LOCALE_MAPPING</samp>&nbsp;element is used for the US and UK address formats. The following address formats and their corresponding locale mappings are available OOTB.</p>
+
+<table dir="ltr" id="d1e1__d1e1311" summary="">
+	<caption>Table 1. Address Format configurations</caption>
+	<colgroup>
+	</colgroup>
+	<thead>
+		<tr>
+			<th id="d1092874e112">
+			<p>Address Format Name</p>
+			</th>
+			<th id="d1092874e118">
+			<p>Locale Mapping</p>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td headers="d1092874e112 ">
+			<p>US</p>
+			</td>
+			<td headers="d1092874e118 ">
+			<p>en_US</p>
+			</td>
+		</tr>
+		<tr>
+			<td headers="d1092874e112 ">
+			<p>UK</p>
+			</td>
+			<td headers="d1092874e118 ">
+			<p>en_GB</p>
+			</td>
+		</tr>
+		<tr>
+			<td headers="d1092874e112 ">
+			<p>DE</p>
+			</td>
+			<td headers="d1092874e118 ">
+			<p>de</p>
+			</td>
+		</tr>
+		<tr>
+			<td headers="d1092874e112 ">
+			<p>CA</p>
+			</td>
+			<td headers="d1092874e118 ">
+			<p>en_CA</p>
+			</td>
+		</tr>
+		<tr>
+			<td headers="d1092874e112 ">
+			<p>KR</p>
+			</td>
+			<td headers="d1092874e118 ">
+			<p>ko</p>
+			</td>
+		</tr>
+		<tr>
+			<td headers="d1092874e112 ">
+			<p>JP</p>
+			</td>
+			<td headers="d1092874e118 ">
+			<p>ja</p>
+			</td>
+		</tr>
+		<tr>
+			<td headers="d1092874e112 ">
+			<p>TW</p>
+			</td>
+			<td headers="d1092874e118 ">
+			<p>zh_TW</p>
+			</td>
+		</tr>
+		<tr>
+			<td headers="d1092874e112 ">
+			<p>CN</p>
+			</td>
+			<td headers="d1092874e118 ">
+			<p>zh_CN</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">The&nbsp;<samp>ADDRESS_FORMAT</samp>&nbsp;has an optional&nbsp;<samp>COUNTRY_CODE</samp>&nbsp;attribute which is used in the address header when an address is first created. If it is not set, the&nbsp;<samp>COUNTRY_CODE</samp>&nbsp;defaults to&nbsp;<samp>GBR</samp>&nbsp;when the address format specified is&nbsp;<samp>UK</samp>&nbsp;and to&nbsp;<samp>US</samp>&nbsp;for everything else. The&nbsp;<samp>COUNTRY_CODE</samp>&nbsp;is not used by the infrastructure. It is one of the fields in the address string used by the application, but infrastructure provides an initial value for it. <span style="color:#ff0000;">The&nbsp;&nbsp;<samp>ADDRESS_FORMAT</samp>&nbsp;also has another optional&nbsp;&nbsp;<samp>DESCRIPTION&nbsp;</samp>attribute. This attribute refers to the property&nbsp;contained in the CDEJResources.properties file. This string provides an information text that is displayed above the address fields.</span></p>
+
+<p dir="ltr">The&nbsp;<samp>ADDRESS_FORMAT</samp>&nbsp;elements contain&nbsp;<samp>ADDRESS_ELEMENT</samp>&nbsp;elements which defines the fields in the address tag. The&nbsp;<samp>ADDRESS_ELEMENT&nbsp;</samp>element has a&nbsp;<samp>LABEL</samp>&nbsp;attribute which refers to properties contained in the&nbsp;CDEJResources.properties&nbsp;file. The address is then built using&nbsp;<samp>ADDRESS_ELEMENT</samp>&nbsp;tags which must be given a name and label. Note that a code table can also be specified for each&nbsp;<samp>ADDRESS_ELEMENT</samp>. When a code table is specified, a drop-down list will display the code table entries and the default code will be pre-selected.</p>
+
+<p dir="ltr">The optional&nbsp;<samp>MANDATORY</samp>&nbsp;attribute specifies if an address element is required to be filled in. The Mandatory indicator is an asterisk beside the field label as shown in the example above. Please note, that in order for&nbsp;<samp>MANDATORY</samp>&nbsp;settings in&nbsp;curam-config.xml&nbsp;to work, the field supplying the address data should be marked mandatory in application model.<br />
+<span style="color:#ff0000;">The optional <samp>CONDITIONAL_MANDATORY</samp>&nbsp;attribute specifies if an address element is partially mandatory. For the US address format, at least the</span>&nbsp;first two address fields must be filled out in a form. <span style="color:#ff0000;">When this <samp>CONDITIONAL_MANDATORY&nbsp;</samp>attribute is set on an <samp>ADDRESS_ELEMENT</samp><samp>,&nbsp;</samp>an aria-label is set on this field with the description text to inform the visually impaired user that&nbsp;uses the screenreader of this information.&nbsp;Please note that the <samp>DESCRIPTION&nbsp;</samp>attribute must is set on the <samp>ADDRESS_FORMAT&nbsp;</samp>to supply the aria-label with the text.&nbsp;</span><br />
+&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

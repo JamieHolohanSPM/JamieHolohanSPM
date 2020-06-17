@@ -1,0 +1,209 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>JDE Next Generation - Reduce Manual Configuration</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="JDE Next Generation - Reduce Manual Configuration";
+    pageId="urn:lsid:ibm.com:td:80e4d132-c54c-4661-ba72-09f676228d53";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">JDE Next Generation - Reduce Manual Configuration</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h2 dir="ltr">Background</h2>
+
+<p dir="ltr">As time goes by customers demand and expect more from software platforms and frameworks. The Curam SPM platform is no different and is not exempt from such expectations.</p>
+
+<p dir="ltr">The infrastructure underpinning Curam was very relevant 10 years ago but in light of customers expectations like; user experience, flexibility, and a fully full responsive website - the infrastructure&nbsp;needs to analyzed to determine if it can still meet these demands.<br />
+When we consider the above requirements, there are some relationships between them but we can start by analyzing each and then thinking about the relationships between them.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">Flexibility</h2>
+
+<p dir="ltr">So how flexible is the Curam framework? So in order to answer this we need to think about what a developer on a customer site needs to do to build new screens for a new process i.e CRUD screens for new customer process.</p>
+
+<p dir="ltr"><br />
+They would need to do the following (assuming they know all business requirements):<br />
+(1) Do modelling for new screens e.g new domains, structs, entities, facades e.t.c.<br />
+(2) Implement business logic in new facades<br />
+(3) Server and database business<br />
+(4) Create UIM (XML files) or IEG scripts to define screens.<br />
+(5) Client build<br />
+(6) Builds to builds EARS and deploy to app server.</p>
+
+<p dir="ltr"><strong>It would probably take a few days to do this</strong>.</p>
+
+<p dir="ltr"><br />
+The developer user experience might have been fine 10 years ago but how does it measure up today? Well lets look at other frameworks out there. For example lets consider <strong>JHipster (https://jhipster.github.io/)</strong>. It is used by large multinational developers to quickly build their own web applications.<br />
+It uses Spring Boot on the back-end and Angular V1 on the front-end. There is also a plethora of other technologies (and alternative choices) available.<br />
+So by comparison , if a developer using JHipster wanted to create similar CRUD screens for a new process what would they need to do?</p>
+
+<p dir="ltr">They would need to do the following (assuming they have JHipster installed and configured which is very easy to do):<br />
+(1) At command line simply anwser questions about the entities they want i.e names of entities, relationships between them, data type<br />
+(2) At command line answer some quick question aabout screen ie. pagination requuired, sorted lists e.t.c<br />
+(3) At command line answer somw question about technolgogy choices, Gradle or Maven, Angular or React, Database type PostGres or DB2 e.t.c<br />
+(4) Answer question about tests they want automically included perfromance tests, unit tests e.t.c<br />
+(5) Once happy they enter Y to go ahead and generate these..</p>
+
+<p dir="ltr">The new tables get generated in the database, backend servcies with default business logic get created, client screens are genereted, unit tests and performancde tests generated.</p>
+
+<p dir="ltr"><strong>This takes about 5 to minutes to do!!</strong></p>
+
+<p dir="ltr">Just to note that the developer has other options to publish this to Cloud and deploy as Micro Service - just following a few soimple steps!!</p>
+
+<p dir="ltr">So I think it's fair to say that the developer user experience is quite different if we compare these 2 infrastructures!!<br />
+Also JHipster is very flexible, it allows for different technologies to be used. Skin can be easily cusomtized e.t.c</p>
+
+<p dir="ltr">NOTE: I think Dynamic Evidence was a similar concept to JHipster except that the former got feedabck from user a about what they wanted to configure based on flex drag and drop..</p>
+
+<p dir="ltr"><strong><span style="font-size:14px;">What can be done to improve the development user experience of Curam?</span></strong><br />
+<strong>(1) Could we get rid of modelling by generating domains based on some simple user feedback?</strong><br />
+&nbsp; &nbsp; This is really a question for SDEJ but I know that there is some dynamic domain generation done for dynamic evidence. I would imagine that it is not possible<br />
+&nbsp;&nbsp; &nbsp;to totally remove the need for modelling but the pssibility should at leat be investigated.<br />
+<strong>(2) Can we remove/reduce the need for cusomter developer to write the businss logic witin facades?</strong><br />
+&nbsp; &nbsp; I think some of the Business logic in Curam is quite complex and there will always have to be some hook points there to allow for this but perhaps some of the logic could be generated.<br />
+<strong>(3) Reduce build times dramatically?</strong><br />
+&nbsp; &nbsp; &nbsp;SDEJ would be answer this question in relation to server side scripts but for SDEJ scripts the build time could be dramatically reduced if we could gen rid of UIM to JSPX generation and layering Dojo.<br />
+(<strong>4) Is IEG (internal and Exteral) fit for purpose anymore? What are the alternatives?</strong></p>
+
+<p dir="ltr">&nbsp; &nbsp; IEG Scripts (XML) gives developers the ability to configure the content, layout and flow of their IEG screens.&nbsp;<br />
+&nbsp;&nbsp; &nbsp;At runtime the IEG infrastructure is a hierearchy of various renderers that output the HTML (Dojo JavaScript and CSS too) for each of XML elements in the script.<br />
+&nbsp;&nbsp; &nbsp;<br />
+&nbsp;&nbsp; &nbsp;IEG is not flexible at all as the renderer infrastructure is explicitly mapped to the IEG scripts hence there are no configuration alternatives! Two things need to be analyzed here<br />
+&nbsp;&nbsp; &nbsp;to determine how can IEG be made more flexible, the IEG configuration&nbsp;and the IEG infrastructure. In terms of the infrastructure, IEG is essentially a single page application. There&nbsp;are alot of new &nbsp;SPA (single page application) frameworks over the last few years that should be considered instead of the renderer framework e.g Angular, React, Aurelia e.t.c.<br />
+&nbsp;&nbsp; &nbsp;<br />
+&nbsp; &nbsp; I think a move to one of these frameworks (rather than renderer framework) will determine the future need for IEG Scripts..</p>
+
+<p dir="ltr">&nbsp; &nbsp; In my opinion we should introduce ReactJS for creating IEG widgets instead of Dijits (from Dojo Toolkit). Why React? Well it's standout selling point is<br />
+&nbsp; &nbsp; it's brilliant performance. When updates are made to the data, only the DOM that needs to change is updated - not the whole DOM. Additionally it designed to be used with<br />
+&nbsp; &nbsp; othere JavaScript frameworks like Dojo.&nbsp;&nbsp; &nbsp;For more info, refer to <a href="https://facebook.github.io/react/">https://facebook.github.io/react/</a>. Because React only addresses the View (Model View ViewModel - MVVM) part of the application, &nbsp;another technology would be needed for maintaing state like Redux or Flux.<br />
+&nbsp;&nbsp; &nbsp;<br />
+&nbsp; &nbsp; Additionally if we use React for out of the box widgets it should be easy to allow these widgets to be quite complex for the customer developer to use or re-configure.<br />
+&nbsp;&nbsp; &nbsp;For example a new widget or feature in React is usually encapsulated in a JSX (contains both HTML and JavaScript) file or a series of JSX files. If we were to design IEG widgets &nbsp;such a way that we create a simple HTML template that is used in the JSX file. Then if the customer so wishes they could use another technology and all they would simply be doing under the hood is updating the plain HTML template instead of using the JSX file.<br />
+&nbsp;&nbsp; &nbsp;<br />
+&nbsp;&nbsp; &nbsp;Another benefit of using React is that the IEG Navigator now bceomes reduntant as the react router is reponsible for maintaing the flow through the IEG scripts.<br />
+&nbsp;&nbsp; &nbsp;<br />
+<strong>(5) Is UIM fit for purpose anymore? What are the alternatives?</strong></p>
+
+<p dir="ltr">&nbsp; &nbsp; Before considering if it fit for purpose of not we must first explore what is the purpose of UIM in the application. Basically it is used to configure the;<br />
+&nbsp;&nbsp; &nbsp;content, layout and flow of screens with various parts of the application. The UIM is converted to JSPX file by a generator within the infrastructure. At runtime<br />
+&nbsp; &nbsp; The JSPXs define the content and layout (renders, custom tags, static HTML, CSS e.t.c) and the flow though the screens is controlled by the Request Processor which looks up the<br />
+&nbsp; &nbsp; struts configuration. Additionally each request made in UIM is linked to other configuration e.g. tabs, shortcuts panel, conttext panel e.t.c</p>
+
+<p dir="ltr">&nbsp; &nbsp; Peronally I find UIM quite cumbersome and over complicated to use. I think there are two aspects that to not make it a good developer user experience.<br />
+&nbsp;&nbsp; &nbsp;(1) In order to write quie simple screens the amount of UIM needed seems too verbose. I think in particular what makes it cumbersome is having to wire up the connection end points between each page and like e.g page connections, and link connections, in page navigation connection endpoins and having to pass all parameters.<br />
+&nbsp;&nbsp; &nbsp;(2) In order to see changes reflected in the UI, you need to do a client build which can take quite a substantial period of time.<br />
+&nbsp;&nbsp; &nbsp;<br />
+&nbsp;&nbsp; &nbsp;I think that Watson Care Manager (WCM) have started to get rid of UIM or have started a plan to get rid of it and instead just genetrate RESTFUL APIs which are consumed by JavaScript to mark up the data on the screens.<br />
+&nbsp;&nbsp; &nbsp;In my opinion this could be the future direction for SPM too where we would get rid of UIM and just either let developers configure screens using JavaScript or better still generate the JavaScript configuration for them!<br />
+&nbsp;&nbsp; &nbsp;<br />
+&nbsp;&nbsp; &nbsp;Lets take an example UIM here to explore in further detail, refer to: <a href="https://ibm.biz/BdiYKN">https://ibm.biz/BdiYKN</a>&nbsp;to compare a UIM Page versus a React JSX file for the Person Home page in the application</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr">User Experience</h3>
+
+<p dir="ltr">The User Experience is baked into the design of User Interface when the product is first released. In order for the user experience to keep pace with modern trends and customer expectation there must be continuous investment in design and re-design of the UI.<br />
+&nbsp;The Universal Access product was first relesed 5 years ago and the UI has not been re-designed since that time, so it has fallen behind with current standards in User Interface expectations.<br />
+&nbsp;<br />
+&nbsp;In order to get the UA interface in line with current UI expectations, &nbsp;UX re-design investment is needed. A fully responsive web design should form part of this.<br />
+&nbsp;<br />
+&nbsp;Each widget in UA should be a component in the UI that is optimally designed OOTB but can be customized by the customer e.g customer can change it's appearance easily, change it layout or dimensions e.t.c<br />
+&nbsp;<br />
+&nbsp;Currently the customer can change the look and feel of the external application using custom CSS. However this takes some analysis of the HTML structure on the customers&nbsp;behalf so the user experience of doing this is NOT good.<br />
+&nbsp;In the UI modernization project for the reskin of the internal application we did make use of variables to allow easy customization of the look and feel of the application.<br />
+&nbsp;<br />
+&nbsp;With some minor tweaks to the application we could significantly improve the customer developer experience of re-skinning their application. We could adopt the same approach for the external application.<br />
+&nbsp;<br />
+&nbsp;Futhermore, we could look at using CSS pre-processors (like SASS) or CSS Post processors (like CSS Next) to really optimize the customers user experience for customizing the OOTB skin or altering the dimension of each UI component.&nbsp;</p>
+
+<h3 dir="ltr"><br />
+&nbsp;Mobile</h3>
+
+<p dir="ltr">When UA was designed it was NEVER designed to be fully responsive which means that only a limited amount of device can be supported. In this day and age the customers expect that websites will be fully responsive.<br />
+&nbsp;<br />
+&nbsp;As always it is not trivial to retrofit fully responsiveness into a a website that was never designed that way.<br />
+&nbsp;<br />
+Going back to our observations about flexibility, a modern infrastructure should be designed with a targeted range of support for devices (not possible to all as massive range) but it customers should have the option to take an OOTB UI component and be able to adjust it responsiveness e.g they may want to support it on smaller devices than we do OOTB.<br />
+&nbsp;<br />
+&nbsp;The onus would be on the customer to ensure that ant extended/customized responsivess UI component would integreate appropiately with others.<br />
+&nbsp;<br />
+&nbsp;In terms of the infrastructure needed to make it fully responsive (or what we decide is full responsive), we could use with plain CSS (i.e. grid view, Flexbox view) or&nbsp;<br />
+&nbsp;employ the use of a third party RWD (responsive web design) framework like Boostrap or <a href="W3.css">W3.css</a>. I would propose using plain CSS rather than a framework because if the latter was used you would be locked into using it and ultimately you would need to apply many customizations to it anyway. All that these frameworks do is hide the complexity of doing in in plain CSS through neat little CSS class names and JavaScript hooks. Once an approach was decided it would then be a case of just updating the CSS across the infrastructure where needed e.g stylesheets, renderers, UIM generator, custom Dojo, custom OneUI e.t.c</p>
+
+<h3 dir="ltr"><br />
+&nbsp;SUMMARY</h3>
+
+<p dir="ltr"><strong>See architecture diagram (ultimate vision) of proposal here: rough draft :&nbsp;</strong><a href="https://ibm.biz/BdiYNE">https://ibm.biz/BdiYNE</a></p>
+
+<p dir="ltr"><br />
+&nbsp;So to summarize the LONG TERM vision I'm proposing is that we can vastly improve the developer user experience of developing Curam by:</p>
+
+<ul dir="ltr">
+	<li>&nbsp; - Removing alot (most likely not always possible) of the manual configuration that a developer currently has to do e.g Domain Modelling, Business Logic, writing UIM, render mapping configuration e.t.c.</li>
+</ul>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;We could do this by removing the need for domain modelling and auto generating DB tables, and REST backend services. Additionally we could remove the need to configure&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;the screens in UIM by auto generating the screens in React using plain HTML templates. This would mean that ultimately we would not generate JSPX and deploying them in the Web Container, instead we would deploy JSX files that host React.&nbsp;&nbsp; &nbsp;</p>
+
+<ul dir="ltr">
+	<li>&nbsp;Build the UI components in such a way that each is a self contained unit OOTB that can be easily customized and is very flexible. For example as already stated they could&nbsp;style it whatever way they wished, or even make it more responsive! Further still they would have alot of flexibility in that they could even decide that they did not want to use React in which case they could use the plain HTML template underpinning a React UI component and simply use that to Bootstrap it with a new technology like Angular, Ember e.t.c</li>
+	<li>&nbsp;In addition to solving problems like user experience, flexibility, and mobile, we need to consider addressing other issues - like performance. Performance is a <strong>KEY</strong> non functional requirements these days. Customers expect a website to be very performant and will not tolerate using one that does not perform adequately. We have at making performance as past as can be. React is a good technology choice for this but if things like IFrames are still holding back the performance then we must have long term strategy for removing them from the HTML in the application. When modernizing the infrastructure&nbsp;graceful degradation and&nbsp;progressive enhancements should be baked into the infrastructure to help the user experience on non optimal technologies.</li>
+	<li>&nbsp;Finally when thinking about a long term vision for a modernized infrastructure, we must think about current trends like the cloud, micro services architecture, cognitive computing. JHipster enables a customer to deploy their application to the Cloud and build &nbsp;Micro Servcies. We should think similarly how we can achieve these goals with a modernized infrastructure. Watson is a key technology within IBM. We should also think of ways where we could potentially build in Watson APIs to the infrastructure which would be a unique selling point for customers.</li>
+</ul>
+
+<p dir="ltr">&nbsp;&nbsp; &nbsp;<br />
+&nbsp;&nbsp; &nbsp;<br />
+<strong>Obviously&nbsp;what is being proposed here is a long term vision but how could this be achieved in stages? I think it could be done in the following order as follows:</strong><br />
+(1) To resolve flexibility issues, we could first start looking at IEG (both internal&nbsp;and external) and the possibililty of using Rest APIs and React components (with Redux for managing state) instead of IEGScripts.<br />
+(2) If the possibility of using React UI component in IEG was successful we could look at using them in the UIM generator for standard UIM.&nbsp;</p>
+
+<p dir="ltr">&nbsp; &nbsp; There are two possible avenues of investigation here:<br />
+&nbsp;&nbsp; &nbsp;(i) Update the parts of the UIM generator that produces static HTML for very common UI components like Lists and Clusters (and the different flavours of them). Over time we could convert all static HTML generation to React UI components.<br />
+&nbsp; &nbsp; &nbsp; &nbsp; The problem with this approach is that there are application Widgets that depend on the current HTML structure of these so if that React changed that structure then these application widgets would break.&nbsp; &nbsp; &nbsp; &nbsp;<br />
+&nbsp;&nbsp; &nbsp;(ii) Provide infrastructure to let customers configure ReactJS components (selected components e.g List &amp; Cluster) as a flexible alternative to what is configured OOTB box through UIM.&nbsp;We could potentially do it in such a way that they could even use any technology they wish for Lists and Clusters!</p>
+
+<p dir="ltr">(3) In order to provide fully responsive UI components we would need to to enhance our CSS with a RWD framework or enhanced plain CSS. In order to<br />
+&nbsp; &nbsp; enable the customer to EASILY re-skin a UI component as they wish we could either look at exposing part of our current CSS variables or look at using a CSS pre/post processor.</p>
+
+<p dir="ltr">(4) Investigate how we can gradually rmeove Iframes from HTML in application if they are impeding the performance.</p>
+
+<p dir="ltr">(5) Explore the possibility of removing the need to manually configure domains so that with some simple feedback from user about screen they would like we could<br />
+&nbsp; &nbsp; auto generate backend services and REST APIs - similar to what they do in JHipster.</p>
+
+<p dir="ltr">(6) Look at the possibility of replacing JSPX (and hence UIM to JSPX generator) with JSX files (React). As this would be a big deviation from the current architecture<br />
+&nbsp;where JSPXs are stringly coupled with structs configuration, tab navaigation, shortcuts e.t.c this may not be so easy to do.<br />
+(7) Explore how we could build in smarts to the infrastructure like cloud and micro servcies deployment.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">This vsision may seem ambitious but with the advancement of new technologies alot of this is possible over time with enough investment and commitment. Watson Care Management have already<br />
+used some of this architecture so we could communicate with htem for some technical direction.</p>
+
+<p dir="ltr">&nbsp;&nbsp; &nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

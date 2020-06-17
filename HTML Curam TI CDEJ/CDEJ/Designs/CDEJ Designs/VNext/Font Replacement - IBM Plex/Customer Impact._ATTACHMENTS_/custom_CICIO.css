@@ -1,0 +1,1218 @@
+/* RTC Defect 4499 */
+body.soria.curam table.transfer-list select {
+    min-height: 120px;
+}
+
+/* RTC - 4482 - START */
+
+body.curam.soria div.preview-contact-log-wrapper table tr.even td.first-field,
+body.curam.soria div.preview-contact-log-wrapper table tr.odd td.first-field {
+  border-bottom: 1px solid #B6B6B6 !important;
+  border-left: 1px solid #B6B6B6 !important;
+  border-right: 1px solid #B6B6B6 !important;
+  border-top: 1px solid #B6B6B6 !important;
+}
+
+body.curam.soria div.preview-contact-log-wrapper table tr.even-last-row td.first-field,
+body.curam.soria div.preview-contact-log-wrapper table tr.odd-last-row td.first-field {
+  border-top: 1px solid #B6B6B6 !important;
+  border-right: 1px solid #B6B6B6 !important;
+}
+
+/* RTC - 4482 - END */
+
+/* RTC Defect 4464 */
+body.curam.soria .pod-container .pod-container-actions .refresh {
+	background: url("../../themes/curam/images/Refresh_Blue50_20px.png") no-repeat center;
+}
+
+body.curam.soria .pod-container .pod-container-actions .refresh:hover, 
+body.curam.soria .pod-container .pod-container-actions .refresh:focus  {
+	background: url("../../themes/curam/images/Refresh_Hover_Blue60_20px.png") no-repeat center;
+}
+
+/* CR-22 font size change*/
+div.NARRATIVETEXT-ONLY .rich-text {
+    font-size: 14px;
+}
+
+/* CR-22 font size change */
+body.curam.soria div.CCSNARRATIVETEXT-ONLY.cluster table tr td.field {
+    font-size: 14px;
+}
+
+
+/* CR-22 font size change */
+body.curam.soria div.SPECIALCAUTION-TEXT-ONLY.cluster table tr td.field textarea {
+   font-size: 14px;
+}
+
+
+/* CR-22 font size change */
+body.curam.soria div.SPECIALCAUTION-TEXTVIEW-ONLY.cluster table tr td.field {
+    font-size: 14px;
+}
+
+
+/*RTC 3394 -Print preview overlapping issue is fixed*/
+@media print {
+	body.soria .page-title-bar {
+		display:none;
+	}
+}
+
+body.curam.soria .mandatory-icon-help {
+	font-size:100%;
+	margin-top:17px; /*RTC 3703*/
+}
+/* RTC-3703 */
+body.modal.soria.curam .mandatory-icon-help {
+   margin-top: 7px;
+}
+
+
+body.soria.curam #app-banner .program-name-div {
+    float: left;
+    text-align: left;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+body.soria.curam #app-banner .program-name-div .program-name-text-div span {
+    font-weight: 600;
+    line-height: 17px;
+    font-size: 20px;
+    font-family: "Arial";
+}
+
+/*RTC-3662*/
+body.modal.soria.curam .page-description {
+    margin-top: 0px;
+}
+
+
+body.soria.curam .page-description {
+    margin-top: -17px;
+}
+
+
+/*RTC 3464*/
+body.soria.curam div.disposeallegationdropdown table colgroup col:nth-child(1){
+width:20%;
+}
+body.soria.curam div.disposeallegationdropdown table colgroup col:nth-child(2){
+width:25%;
+}
+body.soria.curam div.disposeallegationdropdown table colgroup col:nth-child(4){
+width:40%;
+}
+
+/*RTC 3408-Overlapping Text - Recent Notifications Pod*/
+.pod-recentnotification-css div.list-info-header span.list-info{
+margin-top:30px;
+}
+
+body.curam.soria .pod-availableTask-css .iconWrapper button.dojoxPortletIcon {
+	display:none;
+}
+
+/*RTC-3301 Ongoing-case context panel */
+body.soria.curam .container-panel .image-panel-content div.participant-details-divider {
+    margin-left: 4px;
+    margin-right: 2px;
+    height:11px;
+    /*border-color:black;*/
+}
+
+/* RTC 3451 - fix for alignment issue in last row of search results in new participant */
+tr.even-last-row td.first-field, tr.odd-last-row td.first-field, 
+tr.even-last-row td.field, tr.odd-last-row td.field, 
+tr.even-last-row td.last-field, tr.odd-last-row td.last-field{
+height:auto;
+}
+
+
+/* Home Page - POD Collapse Icon Alignment Fix - RTC 3408 */
+body.curam.soria .dojoxPortlet .dijitClosed .dojoxArrowDown,
+body.curam.soria .dndCover .dijitClosed .dojoxArrowDown {
+    margin: 0px 0 0 0;
+}
+
+
+/*Case Search Page-Fixed:Owner field overlapping HR */
+body.curam.soria  span.casesearch-pageonly  span.popup-field{
+	margin-top:0px;
+}
+/* as per ICSE00003598  we need to override the curam_common.css property for this container to display properly in IE7 */ 
+span.container span.popup-field{
+  margin:-2px 0px 0px 0px;
+  border-left: 4px solid #EBEDF2;
+}
+
+/*media all*/
+body.soria.curam ul.messages:focus {
+    border: none;
+   	box-shadow:none;
+}
+
+body.soria.curam ul.messages {
+    background-color: white;
+    border-left: none;
+}
+/* highlight errors in yellow */
+body.soria.curam ul.messages li.level-0 {
+    background-color: Yellow;
+}
+body.soria.curam ul.messages li.level-1 {
+   background-color: Yellow;
+}
+/* highlight warnings in green */
+body.soria.curam ul.messages li.level-2 {
+    background-color: LightGreen;
+}
+
+/* border for Checkboxed - list in Intake -New Allegation*/
+body.soria.curam div.checkboxed-list{
+border: 1px solid #5a5a5a; 
+}
+
+span.container span.desc1 {
+  display: inline;
+  height: 500px;
+}
+/* Hamed Mohammed Dated: May 09,2017 -FIXED Defect#2411 :changed this custom css because, it was causing spacing issue in narrative text while displaying it in view screens (details row screen.)*/
+div.rich-text{
+	white-space:normal;
+}
+
+/*
+* The reason we have changed this because it was not allowing to show in page menu.
+* Hiding anchor tags wrongly displayed using the tab key (TEC-12184).
+*
+*/
+a.ac.in-page-link.in-page-current-link,
+a.ac.in-page-link {
+  display:inline;
+}
+
+.filters .task-filter-title .filter-content {
+    width: 45%
+}
+
+.filters .portlet-controls {
+    width: 40%;
+    padding-top: 5px
+}
+
+body#Curam_Person_listCase table.breadcrumb {
+	margin-left: 2ex;
+}
+
+/* Curam V7 - Screen Size - Page Title */
+
+body.curam.soria div.modalDialog div.dijitDialogTitleBar span.dijitDialogTitle {
+	font-size:15px;
+	padding-bottom:0px;
+}
+
+body.curam.soria .page-title-bar {
+	margin:0px 40px 0px 40px;
+	height:30px;
+	background-color:#ffffff;
+	background-image:none;
+	position:relative;
+	height:26px;
+	border:none;
+	padding:0px;
+}
+
+body.curam.soria div.cluster div.header-wrapper h3.collapse, 
+body.curam.soria div.cluster div.header-wrapper h3,
+body.curam.soria div.list div.header-wrapper h3, 
+body.curam.soria div.list div.header-wrapper h3.collapse,
+body.curam.soria div.cluster table td.field div.header-wrapper h3, 
+body.curam.soria div.list table td.field div.header-wrapper h3 {
+	font-size:13px;
+	line-height:6px;
+	min-height:6px;
+	font-family:HelvNeueLightforIBM, Helvetica, Arial;
+	font-weight:normal;
+	color:#1d3649;
+	border-bottom:1px solid #e0e0e0;
+	padding-left:10px;
+	padding-top:0px;
+	margin-top:-3px;
+	padding-bottom:5px;
+	background-color:transparent;
+}
+
+body.curam.soria div.list div.header-wrapper h3.collapse .collapse-title,
+body.curam.soria div.list div div.header-wrapper h3 span.collapse-title,
+body.curam.soria div.cluster div div.header-wrapper h3.collapse span.collapse-title,
+body.curam.soria div.list div div.header-wrapper h3.collapse span.collapse-title,
+body.curam.soria div.list div div.header-wrapper h3 span.collapse-title {
+	margin-bottom:0px;
+	margin-top:9px;
+}
+
+body.curam.soria div.cluster p.description,
+body.curam.soria div.list p.description {
+	color:#464646;
+	font-family:HelvNeueRomanforIBM, Helvetica, Arial;
+	font-size:12px;
+	line-height:14px;
+	min-height:0px;
+	padding-left:10px;
+	margin:10px 0px;
+	padding-top:0px;
+}
+
+body.curam.soria div.cluster table th.label {
+	font-family:HelvNeueMediumforIBM, Helvetica, Arial;
+	font-size:12px;
+	line-height:20px;
+	min-height:20px;
+	color:#464646;
+	padding:5px 15px !important;
+	background-color:transparent;
+}
+
+body.curam.soria div#content div.list table th a,
+body.curam.soria div#content table div.list table th a:hover,
+body.curam.soria div#content table div.list table th a:focus {
+	font-size:12px;
+	line-height:16px;
+	display:inline-block;
+}
+
+/* RTC-3558 Provider > Credentials> Licenses >  */
+body.curam.soria div#content div.listlicensestyleonly table th a
+{
+	display:block;
+	padding-right:5px;
+}
+
+
+body.curam.soria li.dijitMenuItem,
+body.curam.soria div.list table td.codetable input,
+body.curam.soria div.cluster table td.codetable input {
+	font-size:12px;
+}
+
+body.curam.soria div.cluster table td.field,
+body.curam.soria div.cluster table td.container,
+body.curam.soria div.cluster table td.codetable,
+body.curam.soria div.cluster table td.address {
+	font-size:12px;
+	padding-top:2px;
+	padding-right:0px;
+	padding-bottom:4px;
+}
+
+body.curam.soria div.cluster div.list table td.field {
+	padding-bottom:6px;
+	padding-left:0px;
+}
+
+body.basic .title-exists {
+	top:26px;
+}
+
+/* Search Pages Space from top */
+body.basic .title-exists.desc-exists {
+	top:40px;
+}
+
+/* text area padding and font-size */
+body.curam.soria textarea {
+	padding:0px 1px !important;
+	font-size:12px;
+}
+
+/* text area padding - removed left side padding on focus and hovering */
+body.curam.soria div.cluster table tbody td.field textarea:hover,
+body.curam.soria div.cluster table tbody td.field textarea:focus {
+	padding-left:1px !important;
+}
+
+body.soria.curam div#content td.codetable label.ct-radio {
+    padding-left:0px;
+	margin-right:5px;
+}
+
+body.soria div#content td.codetable label.ct-radio {
+    margin-left: 0px;
+}
+
+/* Select Box - Font size and removed left side padding */
+body.curam .input-cluster .codetable input.dijitInputInner {
+	padding:0px 0px 0px 1px !important;
+	font-size:12px;
+}
+
+/* Select Box - removed left side padding */
+body.curam.soria div.list table tbody td.field input.text,
+body.curam.soria div.cluster table tbody td.field input.text,
+body.curam.soria div.cluster table tbody td.field input.password,
+body.curam.soria div.cluster table tbody td.address input.text,
+body.curam.soria div.cluster table tbody td.batch input.text,
+body.curam.soria div.cluster input.text,
+body.curam.soria .calendar input {
+	padding:0px 1px;
+}
+
+/* Input Date Box - removed left side padding */
+body.curam.soria div.cluster table .date td.input-date input.date,
+body.curam.soria table.date td.input-date input,
+body.curam.soria .input-date .dijitTextBox {
+	padding:0px 1px;
+}
+
+/* Input Date Box - removed left side padding */
+body.curam.soria div.cluster table .date td.input-date input.date:hover,
+body.curam.soria div.cluster table .date td.input-date input.date:focus,
+body.curam.soria table.date td.input-date input.date:hover,
+body.curam.soria table.date td.input-date input.date:focus,
+body.curam.soria .input-date .dijitTextBoxHover,
+body.curam.soria .input-date .dijitTextBoxFocused {
+	padding-left:1px !important;
+}
+
+/* Input Date Box - Resize of font and removed left, right side padding */
+body.curam.soria div#content table.date-time td.input-date input.date {
+	padding:0px 1px 0px 1px;
+	font-size:12px;
+}
+
+/* Input Date Box - removed left side padding at the time of hovering or focus */
+body.curam.soria div#content table.date-time td.input-date input.date:hover,
+body.curam.soria div#content table.date-time td.input-date input.date:focus {
+	padding-left:1px;
+}
+
+/* Input box - text alignment */
+body.curam.soria div.list table tbody td.field input.text:hover,
+body.curam.soria div.cluster table tbody td.field input.text:hover,
+body.curam.soria div.cluster table tbody td.field input.password:hover,
+body.curam.soria div.cluster table tbody td.address input.text:hover,
+body.curam.soria div.cluster table tbody td.batch input.text:hover,
+body.curam.soria div.list table tbody td.field input.text:focus,
+body.curam.soria div.cluster table tbody td.field input.text:focus,
+body.curam.soria div.cluster table tbody td.field input.password:focus,
+body.curam.soria div.cluster table tbody td.address input.text:focus,
+body.curam.soria div.cluster table tbody td.batch input.text:focus,
+body.curam.soria div.cluster input.text:hover,
+body.curam.soria div.cluster input.text:focus,
+body.curam.soria .calendar input:hover,
+body.curam.soria .calendar input:focus {
+	padding-left:1px;
+}
+
+body.curam.soria table.transfer-list select,
+body.curam.soria select[multiple].codetable {
+	overflow:auto;
+	font-family:HelvNeueRomanforIBM, Helvetica, Arial;
+	font-size:12px;
+	background:#ffffff;
+	border:1px solid #5a5a5a;
+}
+
+/* box border size - For ex. Placement Review - Concerning */
+body.curam.soria .list table tr.even-last-row td.first-field,
+body.curam.soria .list table tr.odd-last-row td.first-field{
+	border-bottom:1px solid #e0e0e0;
+}
+
+body.curam.soria .list table tr.even-last-row td.last-field,
+body.curam.soria .list table tr.odd-last-row td.last-field {
+	border-bottom:1px solid #e0e0e0;
+}
+
+/* Modal page close Icon */
+body.curam.soria div.modalDialog .dijitDialogHelpIcon,
+body.curam.soria div.modalDialog .dijitDialogCloseIcon {
+	width:30px;
+	height:26px;
+	top:6px;
+}
+
+/* Modal (pop up) page heading space */
+body.curam.soria div.dijitDialogTitleBar {
+padding:7px 0px 20px 0px;
+height:11px !important;
+background:#ffffff;
+}
+
+/* Search page header font size  */
+body.curam.soria .tab-wrapper .summaryPane .detailsPanel-bc .detailsTitleText {
+font-family:HelvNeueLightforIBM, Helvetica, Arial;
+font-size:15px;
+padding-top:0px;
+}
+
+/* Search page header size */
+body.curam.soria .tab-wrapper .summaryPane .detailsPanel-bc .detailsPanelTitleBar.dijitTitlePaneTitle {
+height:28px;
+}
+
+/* Context Panel */
+body.curam.context-panel.details .context-panel-wrapper .container-panel {
+  min-width: 1110px;
+  height: 172px;
+}
+
+/* Context Panel - Reference Number */
+body.curam .cfss-case-reference-inv-casenumber,
+body.curam .case-reference-adoptioncasenumber,
+body.curam .cfss-case-reference-ongoing-casenumber {
+  font-family: HelvNeueMediumforIBM, Helvetica, Arial;
+  font-size: 12px;
+  color: #264a60;
+  text-align: right;
+  line-height: 10px;
+  margin-top: -10px;
+  padding: 0px;
+  right: 30px;
+}
+
+/* Context Panel - Title */
+body.curam .case-reference-with-invtitle,
+body.curam .case-reference-with-sub-title,
+body.curam .case-reference-with-adoptiontitle,
+body.curam .case-reference-with-ongoingtitle {
+  font-size: 14px;
+  line-height: 16px;
+}
+
+/* Context Panel - Case name details line height */
+body.curam.soria .pd-container-panel .image-panel-content .name-one-title a,
+body.curam.soria .container-panel .image-panel-content .name-one-title a {
+  line-height: 14px;
+  height: 20px;
+  font-size: 12px;
+}
+
+/* Context Panel - Case name details font and Email Address font */
+body.curam.context-panel div.content-panel-detail a,
+body.curam.context-panel .container-panel-serviceorreferral .serviceorreferral-details .link.tab-link,
+body.curam.context-panel .container-panel-serviceorreferral .serviceorreferral-details .link.tab-link a {
+  font-size: 12px !important;
+}
+
+/* SUbtitle font size */
+body.curam.soria .page-title-bar .title h2 {
+	font-size:15px;
+}
+
+body.curam.soria div.list table td {
+	font-size:12px;
+	padding-bottom:6px;
+	padding-left:0px;
+}
+
+body.curam.soria tr.even-last-row td.first-field,
+body.curam.soria tr.odd-last-row td.first-field {
+	padding-left:0px !important;
+}
+
+/*RTC-3629 */
+body.curam.soria .list table thead tr th span,
+body.curam.soria .cda-typical-picture-editor table.list th span {
+	padding: 0px 7px 0px 0px;
+}
+
+body.curam.soria .page-level-menu .disabled-link,
+body.curam.soria .page-level-menu a,
+body.curam.soria .page-title-bar .one a {
+	font-size:12px;
+}
+
+/* Main Header height size for ex. Home  Supervisor workspace etc. */
+body.curam.soria #app-sections-container-dc_tablist {
+	height:36px !important;
+}
+
+/* Main Header height size for ex. Home  Supervisor workspace etc. */
+body.curam.soria .app-sections-container #app-sections-container-dc_tablist > .dijitTabListWrapper .dijitTab {
+	padding:5px 10px 3px 10px;
+}
+
+/* Actions Menu (Pop up) menu item */
+body.curam div.dijitPopup.dijitMenuPopup table.tab-actions-menu-bar .dijitMenuItemLabel {
+	font-family:HelvNeueRomanforIBM, Helvetica, Arial;
+	font-size:11px;
+}
+
+/* START - The following changes are for link with box - For ex. Ongoing -> Legal -> Legal Actions (App for Review) -> Court actions/Secondary Legal actions etc.
+body.curam.basic div#content .action-set {
+	min-height:22px;
+}
+
+body.curam.basic div#content .action-set a.ac,
+body.curam.soria div#content div.cluster table .meeting-view.multi-select a {
+	padding:0px 10px;
+}
+
+body.curam.basic div#content .action-set.blue-action-set .middle {
+	font-size:11px;
+}
+END - The following changes are for link with box */
+
+/* Context Panel - Provider */
+body.curam.soria div#content div.provider-container div.content-panel-detail.provider-details-panel div.content-name {
+    font-size: 15px !important;
+    line-height: 18px !important;
+} 
+
+body.curam.soria div#content div.provider-container div.content-panel-detail.provider-details-panel {
+    margin-top: 0px;
+}
+
+div.provider-image-panel {
+  top: -8px;
+}
+
+body.curam.soria div#content div.provider-container div.content-panel-detail.provider-links-panel .provider-status {
+    font-size: 15px !important;
+    line-height: 12px !important;
+}
+
+body.curam.soria div#content div.provider-container div.provider-details-panel div.content-contacts div.phonenumber,
+body.curam.soria div#content div.provider-container div.provider-details-panel div.content-contacts div.email,
+body.curam.soria div#content div.provider-container div.provider-details-panel div.content-contacts div.webaddress {
+    font-size: 12px !important;
+}
+
+body.curam .cfss-case-tab-invdetails,
+body.curam .cfss-case-tab-adoptiondetails,
+body.curam .cfss-case-tab-ongoingdetails {
+  border: 0px;
+  height: 120px;
+  background-color: transparent;
+}
+
+/* POD TITLE TEXT */
+body.curam.soria .pod-container .dojoxPortlet .dijitTitlePaneTitle span.dijitTitlePaneTextNode, 
+body.curam.soria .dndCover .dojoxPortlet .dijitTitlePaneTitle span.dijitTitlePaneTextNode { 
+    margin: 0px 10px;
+	font-size: 15px;
+}
+
+/* POD COLLAPSE ICON */
+body.curam.soria .dojoxPortlet .dijitOpen .dojoxArrowDown,
+body.curam.soria .dndCover .dijitOpen .dojoxArrowDown {
+    margin: 0px 0 0 0;
+}
+
+/* POD CLOSE ICON */
+body.curam.soria .pod-container .dojoxPortlet .dojoxCloseNode, 
+body.curam.soria .dndCover .dojoxPortlet .dojoxCloseNode  { 
+    margin: 0px 0 0 0;
+}
+
+/* POD TITLE CONTAINER */
+body.curam.soria .pod-container .pod-styling  .dijitTitlePaneTitle, 
+body.curam.soria .dndCover .pod-styling  .dijitTitlePaneTitle {
+    height: 19px; 
+}
+
+/** POD - QUICK LINKS **/
+body.curam.soria .pod-styling .pod-list.list-body {
+	font-size: 11px;
+}
+
+body.curam.soria .pod-container .pod-styling  .pod-body, 
+body.curam.soria .dndCover  .pod-styling  .pod-body  {  
+  padding: 0px 10px 0px 10px !important;
+}
+
+body.curam.soria .pod-body .weekly-calendar {
+	font-size: 10px;
+}
+
+body.curam.soria .dijitTitlePaneContentInner {
+  padding: 0px 5px 0px 5px;
+}
+
+/* For pods without the north region - For ex. My Organisation Units */
+body.curam.soria .pod-container .pod-styling .pod-body > div > div.list-info-header .list-info, 
+body.curam.soria .dndCover .pod-styling .pod-body > div > div.list-info-header .list-info {
+    padding-bottom: 4px;
+}
+
+body.curam.soria .pod-body span.list-info {
+	top: -27px;
+    font-size: 11px;
+} 
+
+/* POD LISTS */
+body.curam.soria .pod-body .list-body { 
+    font-size: 11px;
+}
+
+body.curam.soria .pod-body a.pod-home-link-text {
+    font-size: 11px;
+}
+
+body.curam.soria .pod-body .list-body tbody[visibleitems="1"] td.field, 
+body.curam.soria .pod-body .list-body tbody[visibleitems="1"] td.action-menu-col {
+    font-size: 11px;
+}
+
+ body.curam.soria .pod-body .button-link { 
+    font-size: 11px;
+ }
+ 
+ div.pod-container-actions {
+    height: 32px; 
+}
+
+body.curam.soria .expand-list-control td.dijitMenuItemLabel,
+body.curam.soria .expand-list-control tr.dijitMenuItem{
+font-size:11px;
+}
+
+/* POD - EDIT / PENCIL - ICON */
+body.curam.soria .pod-container .dojoxPortlet .dojoxPortletSettingsIcon,
+body.curam.soria .dndCover .dojoxPortletSettingsIcon  {
+    margin: 0px 8px 0 0;
+}
+
+body.curam.soria .pod-body .button-link .actioncontrol-button-center a {  
+    padding: 0 30px 7px 0;  
+}
+
+body.curam.soria .pod-container .gridContainerZone .pod-styling .filter-font, 
+body.curam.soria .dndCover .pod-styling .filter-font {
+    font-size: 11px;
+}
+
+body.curam.soria .pod-container .gridContainerZone .pod-styling .filters select,
+body.curam.soria .dndCover .pod-styling .filters select {
+    font-size: 11px;
+}
+
+body.curam.soria .pod-container .gridContainerZone .pod-styling .filters .portlet-controls .filter-button,
+body.curam.soria .dndCover .pod-styling .filters .portlet-controls .filter-button {
+	font-size:11px;
+}
+
+/* MY TASKS POD - OVERDUE */
+body.curam.soria .pod-body .north .overdue { 
+    margin: 7px 0px 0px 0px;
+    font-size: 11px;
+} 
+
+/* MY TASKS POD - list font size */
+body.curam.soria div#content div#PT2017_pane table#PT2017_table tr td {
+  font-size: 11px;
+}
+
+/* Admin - Org. Summary POD Fonts */
+body.curam.soria div#PT2025_body div.org-summ-background table.summary-content td,
+body.curam.soria div#PT2025_body div.org-summ-background table.summary-content-loc td {
+    font-size: 11px;
+    padding: 3px 0;
+}
+
+/* Admin - Org. Summary Heading Fonts */
+body.curam.soria div#PT2025_body div.org-summ-background table.summary-title th {
+    font-size: 12px;
+    padding-bottom: 2px;
+}
+
+/* POD Settings */
+body.curam.soria .pod-container .selection-table .checkbox-container .checkbox-label {
+	font-size:11px;
+    vertical-align: -5px;
+    margin-left: 2px;
+} 
+
+body.curam.soria .pod-container .selection-table .checkbox-container, dijitContentPane div {
+    margin-bottom: 3px;
+}
+
+body.curam.soria .pod-container div.pod-select-pane div.customize-actions {
+    padding-bottom: 7px;
+    padding-top: 2px;  
+}
+
+/* Context Panel - Investigation - Right side details font */
+body.curam .cfss-case-details-table th.field.horiz-body-first-cell {
+  font-size: 12px;
+}
+
+/* Context Panel - Investigation - Right side details font */
+body.curam .cfss-case-details-table td.field.horiz-body-last-cell {
+  font-size: 12px;
+}
+
+/* Number of Allegations Font Size */
+body.curam .cfss-case-invdetails .allegation-normal-text {
+  font-size: 12px;
+  padding: 5px 10px 0px 0px;
+}
+
+/* Context Panel - Person - Person Name Font size */
+body.curam div.content-panel-detail.person-details-panel .content-name,
+body.curam div.content-panel-detail.person-details-panel .cfss-content-name,
+body.curam div.content-panel-detail.pd-content-panel-onecol .pd-reference,
+body.curam div.content-panel-detail.cfss-person-details-panel-no-links .cfss-content-name,
+body.curam div.content-panel-detail.cfss-person-details-panel-onecol .cfss-content-name,
+body.curam div.content-panel-detail.cfss-person-details-panel .cfss-content-name {
+  font-size: 14px;
+}
+
+/* Context Panel - Person - Person Reference Number Font size */
+body.curam div.content-panel-detail.person-details-panel div.cfss-content-participant-id,
+body.curam div.content-panel-detail.cfss-person-details-panel-no-links .cfss-content-participant-id,
+body.curam div.content-panel-detail.cfss-person-details-panel-onecol .cfss-content-participant-id,
+body.curam div.content-panel-detail.cfss-person-details-panel .cfss-content-participant-id {
+	font-size: 12px;
+}
+
+/* Context Panel - Person - Address, sex, age, phone/fax number font size */
+body.curam div.content-panel-detail.cfss-person-details-panel-no-links tr td.cfss-content-address, 
+body.curam div.content-panel-detail.cfss-person-details-panel-no-links div.cfss-content-address, 
+body.curam div.content-panel-detail.cfss-person-details-panel-no-links div.cfss-content-sex,
+body.curam div.content-panel-detail.cfss-person-details-panel-no-links div.cfss-content-age,
+body.curam div.content-panel-detail.cfss-person-details-panel-no-links div.cfss-phonenumber, 
+body.curam div.content-panel-detail.cfss-person-details-panel-no-links div.cfss-faxnumber,
+body.curam div.content-panel-detail.cfss-person-details-panel-no-links div.cfss-email,
+body.curam div.content-panel-detail.cfss-person-details-panel-onecol div.cfss-content-address,
+body.curam div.content-panel-detail.cfss-person-details-panel-onecol div.cfss-content-sex,
+body.curam div.content-panel-detail.cfss-person-details-panel-onecol div.cfss-content-age,
+body.curam div.content-panel-detail.cfss-person-details-panel-onecol div.cfss-phonenumber,
+body.curam div.content-panel-detail.cfss-person-details-panel-onecol div.cfss-faxnumber,
+body.curam div.content-panel-detail.person-details-panel div.cfss-content-map, 
+body.curam div.content-panel-detail.person-details-panel div.cfss-email,
+body.curam div.content-panel-detail.person-details-panel tr td.cfss-content-address, 
+body.curam div.content-panel-detail.person-details-panel div.cfss-content-address, 
+body.curam div.content-panel-detail.person-details-panel div.cfss-content-sex,
+body.curam div.content-panel-detail.person-details-panel div.cfss-content-age,
+body.curam div.content-panel-detail.person-details-panel div.cfss-phonenumber, 
+body.curam div.content-panel-detail.person-details-panel div.cfss-faxnumber,
+body.curam div.content-panel-detail.cfss-person-details-panel div.cfss-email,
+body.curam div.content-panel-detail.cfss-person-details-panel tr td.cfss-content-address, 
+body.curam div.content-panel-detail.cfss-person-details-panel div.cfss-content-address, 
+body.curam div.content-panel-detail.cfss-person-details-panel div.cfss-content-sex,
+body.curam div.content-panel-detail.cfss-person-details-panel div.cfss-content-age,
+body.curam div.content-panel-detail.cfss-person-details-panel div.cfss-phonenumber, 
+body.curam div.content-panel-detail.cfss-person-details-panel div.cfss-faxnumber {
+	font-size: 12px;
+}
+
+/* Context Panel - Person, Person Prospect - image resize from 100% */ 
+.image-panel-content div.participant-image img {
+  height:95%;
+  width:95%;
+}
+
+
+/* Context Panel - Person - Participant Image - Remove unnecessary space over the image*/
+body.curam div.content-panel-detail.case-participant-panel,
+body.curam div.content-panel-detail.cfss-person-image-panel {
+  top: 5px;
+}
+
+/* Context Panel - Person - Participant Details - Remove unnecessary space over the details*/
+body.curam div.content-panel-detail.person-details-panel,
+body.curam div.content-panel-detail.cfss-person-details-panel-onecol,
+body.curam div.content-panel-detail.cfss-person-details-panel {
+  top: 5px;
+}
+
+/* Context Panel - Person - Right side details - Remove unnecessary space over the details*/
+/* Size and positioning of links panel */
+body.curam div.content-panel-detail.pd-links-panel-onecol,
+body.curam div.content-panel-detail.cfss-person-links-panel {
+  top: 5px;
+}
+
+/* Context Panel - Prospect Person - Participant Image - Remove unnecessary space over the image*/
+body.curam div.content-panel-detail.person-image-panel {
+  top: 5px;
+}
+
+/* Context Panel - Prospect Person - Participant Details - Remove unnecessary space over the details*/
+body.curam div.content-panel-detail.person-details-panel-no-links {
+  top: 1px;
+}
+
+/* Context Panel - Prospect Person - Person name font size */
+body.curam div.content-panel-detail.person-details-panel-no-links .content-name,
+body.curam div.content-panel-detail.person-details-panel-onecol .content-name,
+body.curam div.content-panel-detail.person-details-panel .content-name,
+body.curam div.content-panel-detail.person-details-panel .content-person-name {
+  font-size:15px;
+  padding-bottom:0px;
+}
+
+/* Context Panel - Prospect Person - Person Reference Number font size */
+body.curam div.content-panel-detail.person-details-panel-no-links .content-participant-id,
+body.curam div.content-panel-detail.person-details-panel-onecol .content-participant-id,
+body.curam div.content-panel-detail.person-details-panel .content-participant-id {
+	font-size:13px;
+}
+
+/* Context Panel - Prospect Person - Person Reference Number - Remove unnecessary space over the details */
+.content-participant-id {
+  top: 1px;
+}
+
+/* Context Panel - Prospect Person - Address, sex, age, phone/fax number font size */
+body.curam div.content-panel-detail.person-details-panel-no-links tr td.content-address,
+body.curam div.content-panel-detail.person-details-panel-no-links div.content-address,
+body.curam div.content-panel-detail.person-details-panel-no-links div.content-sex,
+body.curam div.content-panel-detail.person-details-panel-no-links div.content-age,
+body.curam div.content-panel-detail.person-details-panel-no-links div.phonenumber,
+body.curam div.content-panel-detail.person-details-panel-no-links div.faxnumber,
+body.curam div.content-panel-detail.person-details-panel-no-links div.email,
+body.curam div.content-panel-detail.person-details-panel-onecol div.content-address,
+body.curam div.content-panel-detail.person-details-panel-onecol div.content-sex,
+body.curam div.content-panel-detail.person-details-panel-onecol div.content-age,
+body.curam div.content-panel-detail.person-details-panel-onecol div.phonenumber,
+body.curam div.content-panel-detail.person-details-panel-onecol div.faxnumber,
+body.curam div.content-panel-detail.person-details-panel-onecol div.email,
+body.curam div.content-panel-detail.person-details-panel div.email,
+body.curam div.content-panel-detail.person-details-panel tr td.content-address,
+body.curam div.content-panel-detail.person-details-panel div.content-address,
+body.curam div.content-panel-detail.person-details-panel div.content-sex,
+body.curam div.content-panel-detail.person-details-panel div.content-age,
+body.curam div.content-panel-detail.person-details-panel div.phonenumber,
+body.curam div.content-panel-detail.person-details-panel div.faxnumber {
+	font-size:12px;
+}
+
+/* Context Panel - Prospect Person - PROSPECT font size */
+body.curam div.content-panel-detail.person-details-panel-no-links .tab-details div.watermark,
+body.curam div.content-panel-detail.person-details-panel-onecol .tab-details div.watermark,
+body.curam div.content-panel-detail.person-details-panel .tab-details div.watermark {
+    font-size: 12px;
+}
+
+/* Context Panel - Prospect Person - Email and Phone moving up */
+body.curam.details div.content-panel-detail.person-details-panel-no-links div.content-contacts,
+body.curam.details div.content-panel-detail.person-details-panel-onecol div.content-contacts,
+body.curam.details div.content-panel-detail.person-details-panel div.content-contacts {
+  top: 101px;
+}
+
+/* Context Panel - Person - Email and Phone moving up */
+body.curam.details div.content-panel-detail.cfss-person-details-panel-no-links div.cfss-content-contacts,
+body.curam.details div.content-panel-detail.cfss-person-details-panel-onecol div.cfss-content-contacts,
+body.curam.details div.content-panel-detail.cfss-person-details-panel div.cfss-content-contacts {
+  top: 101px;
+}
+
+/* Font size for Input Text */
+body.curam.soria div.list table tbody td.field input.text,
+body.curam.soria div.cluster table tbody td.field input.text,
+body.curam.soria div.cluster table tbody td.field input.password,
+body.curam.soria div.cluster table tbody td.address input.text,
+body.curam.soria div.cluster table tbody td.batch input.text,
+body.curam.soria div.cluster input.text,
+body.curam.soria .calendar input {
+	font-size:12px;
+}
+
+/* Hyperlink - Font Size */
+body.curam.soria div#content div.cluster table td a {
+	font-size:12px;
+}
+
+/* Input Date box - Font Size */
+body.curam.soria div.cluster table .date td.input-date input.date,
+body.curam.soria table.date td.input-date input,
+body.curam.soria .input-date .dijitTextBox {
+	font-size:12px;
+}
+
+/*Hamed - Increased the action menu seperator height*/ 
+body.curam.soria .dijitMenuSeparator {
+	height:2px;
+}
+
+/* Sub Menu Items Font and padding - For ex. Provider - Credentials */
+body.curam div.child-nav-items ul li div.link {
+	font-size:11px;
+}
+
+/* Context Panel - Ongoing - Fix for two participants - Details panel */
+body.curam .cfss-case-content-panel {
+  width: 350px;
+}
+
+/* Context Panel - Investigation - Fix for two participants - Image panel */
+body.curam.soria .container-panel #stackCon-threeimages {
+  height: 160px;
+}
+
+/* Search Pop up Box - removed left side padding */
+body.curam.soria span.popup-field span.desc {
+	padding:0px 1px 0px 1px;
+}
+
+/* Font size for checkbox list */
+body.curam.soria div.checkboxed-list div span {
+	padding-left:0px;
+	font-size:12px;
+}
+
+/* Padding for checkboxd list */
+body.curam.soria div.checkboxed-list div,
+body.curam.soria div.checkboxed-list div.unchecked {
+	padding:2px 0px 2px 5px;
+}
+
+
+/* Font size for heading font in cluster's list For ex. Admin -> Case -> Product Delivery Cases -> New/Edit Benefit Product */
+body.curam.soria div.cluster div.cluster div.header-wrapper h3.collapse,
+body.curam.soria div.cluster div.list div.header-wrapper h3 {
+	font-size:13px;
+}
+
+/* Drop Down - Font size */
+body.curam .dijitTextBox.dijitComboBox.codetable {
+	font-size:12px;
+}
+
+/* Inbox - Task - Context Panel - Font, padding */
+body.curam.soria .task-context-header {
+  padding-bottom: 1px;
+  padding-top: 2px;
+  font-size: 14px;
+  line-height: 24px;  
+}
+
+/* Inbox - Task - Context Panel - Font */
+body.curam.soria .task-context-table table td.field,
+body.curam.soria .task-context-table table th.field {
+  font-size: 12px;
+}
+
+body.curam.soria .task-context-subject-label {
+  font-size: 12px;
+}
+
+body.curam.soria .task-context-subject-details {
+  bottom: 80px;
+}
+
+/* Investigation Context Panel - Fix for two participants - Details - Horizontal scroll bar */
+body.curam .container-panel.investigation-case .cfss-case-content-panel {
+  width: 354px;
+}
+
+/* Investigation Context Panel - Fix for two participants - Horizontal scroll bar */
+body.curam.soria div#content div.context-panel-wrapper div.container-panel.investigation-case {
+  width: auto;
+  min-width: 0px;
+}
+
+/* New Placement - Search box alignment */ 
+body.curam.soria span.Placement-PageOnly span.popup-field
+{
+	padding-right:6px;
+	margin-top:0px;
+}
+
+/* Investigation Context Panel - Fix for single participants - Vertical scroll bar */ 
+body.curam .container-panel.investigation-case .content-panel-detail.cfss-case-participant-panel .image-panel-content {
+  margin-top: 7px;
+}
+
+/* Ongoing case > Plans > visitation plan > New - Fix for Visiting Header alignment */
+body.soria.curam div.visitationheader table tr {
+    vertical-align: auto;
+}
+
+
+/* PODs - Fix for EDIT Pencil ICON move - RTC 3407 */ 
+body.curam.soria .pod-container .dojoxPortlet .dojoxPortletSettingsIcon.dojoxPortletSettingsIconHover, 
+body.curam.soria .dndCover .dojoxPortletSettingsIcon.dojoxPortletSettingsIconHover { 
+    margin: 0px 8px 0 0;
+}
+
+
+/* PODs - Fix for EDIT Pencil ICON move - RTC 3407 */
+body.curam.soria .pod-container .dojoxPortlet .dojoxPortletSettingsIcon.dojoxPortletSettingsIconSelect,
+body.curam.soria .dndCover .dojoxPortletSettingsIcon.dojoxPortletSettingsIconSelect { 
+    margin: 0px 8px 0 0;
+}
+
+/* RTC 3512 - Action Menu Item Not Visible - Remove unnecessary space */
+
+body.curam table.dijitMenuTable.dijitReset tr.dijitMenuItem {
+	height:9px !important;
+}
+
+body.curam.soria div.dijitPopup.dijitMenuPopup tr.dijitMenuItem td.dijitMenuArrowCell {
+	padding:0px 5px 0px 4px;
+}
+
+body.curam div.dijitPopup.dijitMenuPopup .dijitMenuItem,
+body.curam div.dijitPopup.dijitMenuPopup .dijitMenuItem .dijitMenuItemLabel,
+body.curam div.dijitPopup.dijitMenuPopup .dijitMenuItem .dijitMenuArrowCell {
+	height:18px;
+}
+
+body.curam div.dijitPopup.dijitMenuPopup .dijitMenuItem .dijitMenuItemLabel {
+	padding:0px 5px 0px 8px;
+	height:18px !important;
+}
+
+/* This change is for Top Menu Items */
+body.curam div.dijitPopup.dijitMenuPopup table.tab-actions-menu-bar .dijitMenuItem {
+	height:9px !important;
+}
+
+/* End - RTC 3512 */
+
+/* START - Fix for RTC 3616 */
+div.outer-cluster-borderless {
+  padding-left: 1px;
+}
+
+body.curam.soria div.licenseCancellation table tr th:first-child,
+body.curam.soria div.licenseCancellation table tr td:first-child,
+body.curam.soria div.cluster div.licenseCancellation table tr td.top.first-col {
+	padding-left:3px;
+}
+/* END - Fix for RTC 3616 */
+
+/* START - Fix for RTC 3525 */
+body.curam#Curam_ProviderManagement_browseCompartments .orgContentPanel .lazyTree {
+	padding: 0px 0 0 6px;
+}
+
+body.curam .in-page-nav-tabContainer .dijitTabContainerTop-tabs {
+	top:-2px !important;
+}
+/* End - Fix for RTC 3525 */
+
+body.curam.soria span.reporterPopBox span.popup-field {
+	margin-top:0px;
+}
+
+/* START - Fix for RTC 4252 */
+body.curam.soria .pod-body .list-body th.table-header { 
+    padding: 0 0 3px 0;
+}
+
+body.curam.soria .pod-body .list-body td.field,
+body.curam.soria .pod-body .list-body td.action-menu-col {
+    padding: 2px 0 !important;
+}
+
+/* END - Fix for RTC 4252 */
+
+/* START - Fix for RTC 4280 */
+body.curam .dijitTooltipDialogPopup .tooltip-inner-panel {
+  font-size: 10px;
+  padding-left: 5px;
+}
+
+.tooltip-address {
+  padding-left: 0px;
+}
+
+.details-tooltip-width {
+  width: auto;
+}
+
+.investig-tooltip-width {
+  width: auto;
+}
+/* END - Fix for RTC 4280 */
+
+body.curam.soria .hiddingCluster{
+display:none;
+}
+
+/* Defect#4470: Increases the file name length */
+body.soria.curam input.selectedFile {
+ width: 1000px;
+}
+/* Defect#4487: Remove the before and after line in page level action menu */
+body.curam.soria .page-title-bar .page-level-menu .dijitDropDownButton:after {
+display:none;
+}
+body.curam.soria .page-title-bar .page-level-menu .dijitDropDownButton:before {
+display:none;
+}
+/* Defect#4514: Remove the  line before the "Refresh" button after page level action menu */
+body.curam.soria .page-level-menu a:last-child::after,
+body.curam.soria .page-level-menu > span + a::after {
+background-color:#ffffff;
+}
+/* HomeStudies > Contact Log toggle */
+body.curam.soria div.homeStudy_ContactLog_toggle col.list-row-expand-col {
+    width: 10px;
+}
+
+body.curam.soria div.homeStudy_ContactLog_toggle col.field {
+    width: 21%;
+}
+
+/* Provider Assessment Contact Log - View Details */
+body.curam.soria div.NARRATIVETEXT-ONLYFORPACONTACTLOG table colgroup col:nth-child(1){
+	width:0%;
+}
+
+body.curam.soria div.NARRATIVETEXT-ONLYFORPACONTACTLOG table colgroup col:nth-child(2){
+	width:100%;
+}
+
+/* Defect 5464 - Home Study Contact Log Narrative Details*/
+.cluster div.rich-text ol, .cluster div.rich-text ul{
+  padding-left: 29px;
+}
+
+/* Defect 5467 */
+body.curam.soria .dijitPopup.dijitComboBoxMenuPopup .dijitComboBoxMenu .dijitMenuItem {
+padding-right: 8px !important;
+}
+
+/* Defect 6283 */
+span.disabled-link {
+	color:#000000 
+}
+
+/* CUSTOM STYLES FOR MANDATORY AND HELP ICON */
+/* Adds the mandatory asterisk to any cluster title with the style "cluster-mandatory" applied to it in the UIM */
+
+div[class*="cluster-mandatory"] > div > div > h3 > span::after
+
+{
+
+      content: " ";
+
+      background-image: url(../themes/curam/images/Asterisk_Red70_10x20.png);
+
+    background-repeat: no-repeat;
+
+    padding-left: 10px;
+
+}
+
+ 
+
+/* Adds the help icon to any cluster title with the style "cluster-help-icon" applied to it in the UIM */
+
+div[class*="cluster-help-icon"] > div > div > h3 > span::after
+
+{
+
+      content: " ";
+
+      background-image: url(../../servlet/resource?r=help_nor_external);
+
+    background-repeat: no-repeat;
+
+      padding-left: 40px;
+
+    background-position-x: 20px;
+
+    background-position-y: 3px;
+}

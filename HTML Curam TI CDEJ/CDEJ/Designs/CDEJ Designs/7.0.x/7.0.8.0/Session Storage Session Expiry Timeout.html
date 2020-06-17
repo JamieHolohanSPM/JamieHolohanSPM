@@ -1,0 +1,806 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Session Storage Session Expiry Timeout</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Session Storage Session Expiry Timeout";
+    pageId="urn:lsid:ibm.com:td:4f19222b-a4e7-4dbd-a518-d46d0a4c1b4d";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Session Storage Session Expiry Timeout</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<h1 dir="ltr"><span style="font-size:20px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Design Page for replacing the Cookie sessionExpiry with sessionStorage object.</strong></span></h1>
+
+<h2 dir="ltr" id="ii3">Stakeholders</h2>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Refer to the following Org Chart to ensure you are engaging the correct people. The table below indicates the current contacts for each area.
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://ibm.biz/BdsuKd">https://ibm.biz/BdsuKd</a></li>
+	</ul>
+	</li>
+</ul>
+
+<table border="1" dir="ltr" style="width: 500px;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Role</span></strong></td>
+			<td style="width: 120px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Name</span></strong></td>
+			<td style="width: 168px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Sign Off if Applicable</span></strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Customer</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Business Owner/Product Owner</td>
+			<td style="width: 120px;">Sonya Purcell</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Architect</td>
+			<td style="width: 120px;">Fergal Gavin</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Developer(s)</td>
+			<td style="width: 120px;">Giuliana Giuffrida</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">FVT</td>
+			<td style="width: 120px;">Satya Minnekanti</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">SVT</td>
+			<td style="width: 120px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">John Redmond/</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Sean Cleary</p>
+			</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Information Developer</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">UX Design</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Legal</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii4">Background</h2>
+
+<p dir="ltr">A support ticket is opened about the issue that session timeout warning HttpOnly to be off. Some concern about security has been raised by the customer.</p>
+
+<p dir="ltr"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/L2%20Support#action=com.ibm.team.workitem.viewWorkItem&amp;id=241222">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/L2%20Support#action=com.ibm.team.workitem.viewWorkItem&amp;id=241222</a></p>
+
+<p dir="ltr">Security team has suggested that Local Storage or Session Storage can be used to replace cookies. Session storage is much suitable for SPM environment (to replace sessionExpiry cookie) and it's much secure than cookies.</p>
+
+<p dir="ltr">WebStorage documentation can be found here <a href="https://www.w3schools.com/HTML/html5_webstorage.asp">https://www.w3schools.com/HTML/html5_webstorage.asp</a></p>
+
+<p dir="ltr">CE already uses sessionStorage to store some loggedin user account info.</p>
+
+<h2 dir="ltr" id="ii4">Problem</h2>
+
+<p dir="ltr">The Session Timeout Warning feature requires HttpOnly to be off, but _only_ for the 'sessionExpiry' cookie.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+* The 'sessionExpiry' cookie contains timestamp information, only i.e. the session expiry time and the time the cookie was created. No other data is stored.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+* The 'sessionExpiry' cookie data is used by the client side logic to understand when/if the warning dialog should be displayed.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+* If the cookie is not present and/or cannot be accessed e.g. if the HttpOnly flag is turned on; the Session Timeout Warning feature will not be available.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+We should not recommend the client to lower any security settings. In long term we need to discuss with CDEJ team to explore other mechanisms of storing and retrieving the session expiry information so as not to use cookies which are affected by HttpOnly setting.</p>
+
+<h2 dir="ltr" id="ii5">Requirements</h2>
+
+<p dir="ltr">Replace the existing sessionExpiry cookie with sessionStorage object. The behaviour needs to be the same as before.</p>
+
+<h2 dir="ltr">RTC Tickets</h2>
+
+<p dir="ltr">Support ticket <a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/L2%20Support#action=com.ibm.team.workitem.viewWorkItem&amp;id=241222">241222</a></p>
+
+<p dir="ltr">Story <a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=245742&amp;tab=com.ibm.team.workitem.tab.releasenote.task.story.epic"><span class="floatingTable" dojoattachpoint="floatingTableNode"><span class="titleTextArea" dojoattachpoint="titleTextAreaNode"><span class="FloatingSummary TitleText"><span class="SummaryNode TitleText" dojoattachpoint="_floatingSummary">245742</span></span></span></span></a></p>
+
+<p dir="ltr"><span class="floatingTable" dojoattachpoint="floatingTableNode"><span class="titleTextArea" dojoattachpoint="titleTextAreaNode"><span class="FloatingSummary TitleText"><span class="SummaryNode TitleText" dojoattachpoint="_floatingSummary">Changesets </span></span><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=249782"><span class="TitleText" dojoattachpoint="_titleTextNode" tabindex="0">249782 , </span></a><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=249783"><span class="TitleText" dojoattachpoint="_titleTextNode" tabindex="0">249783 , </span></a><span class="TitleText" dojoattachpoint="_titleTextNode" tabindex="0"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=250220">250220</a>, <a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=250407">250407</a></span></span></span></p>
+
+<h2 dir="ltr">Technical analysis</h2>
+
+<p dir="ltr">In the filter class curam.omega3.RequestFilter cookie is added in</p>
+
+<p dir="ltr">{{{</p>
+
+<p dir="ltr">private void addSessionTimeoutCookie(final ServletResponse response,<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; final ServletRequest request) {</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp; final HttpServletRequest httpReq = (HttpServletRequest) request;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; final HttpServletResponse httpResp = (HttpServletResponse) response;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; final HttpSession session = httpReq.getSession();<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; final String cookieName = "sessionExpiry";<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; String cookieValue;</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp; final long currTime = System.currentTimeMillis();<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; final long expiryTime =<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; currTime + session.getMaxInactiveInterval() * 1000;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; // The cookie value will be in the following format: expiryTime-currentTime<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; // e.g 1403796345162-1403796345677<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; // This value need to be checked on the client side to ensure that this is<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; // in the expected to ensure that the data has not been manipulated<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; // maliciously<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; // The sole purpose of the second piece of information (after the hyphen) is<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; // to indicate the time that the cookie was set so that the offset between<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; // the server and client can be calculated later on..<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; cookieValue = expiryTime + "-" + currTime;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; final Cookie cookie = new Cookie(cookieName, cookieValue);<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; cookie.setPath("/");<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; // if this is secure HTTP then set the secure attribute on cookie so that<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; // the cookie only available to HTTPS<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; if (httpReq.isSecure()) {<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cookie.setSecure(true);<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; }<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; httpResp.addCookie(cookie);<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; }</p>
+
+<p dir="ltr">}}}</p>
+
+<p dir="ltr">The value of sessionExpiry cookie is read by&nbsp; the function _doCheckExp in the/client-inf/jscript/src/internal/curam/util/SessionTimeout.js. that is called periodically to check if the exipre time is approaching and opens the warning dialog in that case.</p>
+
+<p dir="ltr"><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+The same mechanism is used for internal and external and external applications.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii18">Potential changes</h2>
+
+<p dir="ltr">remove the method addSessionTimeoutCookie in <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">curam.omega3.RequestFilter </strong>and replace it with a method that would write the same information on the response header instead of creating a Cookie object.</p>
+
+<p dir="ltr">It would look something like:</p>
+
+<p dir="ltr"><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+private void addSessionStorageTimeoutHeader(final ServletResponse response,<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; final ServletRequest request) {<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; final HttpServletRequest httpReq = (HttpServletRequest) request;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; final HttpServletResponse httpResp = (HttpServletResponse) response;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; final HttpSession session = httpReq.getSession();<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; final String sessionStorageKey = "sessionExpiry";<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; String sessionStorageValue;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; final long currTime = System.currentTimeMillis();<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; final long expiryTime =<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; currTime + session.getMaxInactiveInterval() * 1000;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; sessionStorageValue = expiryTime + "-" + currTime;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; httpResp.setHeader(sessionStorageKey, sessionStorageValue);<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; }</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">2. /client-inf/jscript/src/internal/curam/util/SessionTimeout.js. The function _doCheckExp would need to be changed from<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">var freshSessionExpiryString = util.getCookie('sessionExpiry');</b></p>
+
+<p dir="ltr">to<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var freshSessionExpiryString = '';<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; if (typeof(Storage) !== "undefined") {<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; if (sessionStorage.sessionExpiry) {<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;freshSessionExpiryString = sessionStorage.sessionExpiry;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; }<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; }</strong></p>
+
+<p dir="ltr">The following methods name and/or variable names inside of those methods in /client-inf/jscript/src/internal/curam/util/SessionTimeout.js should be renamed to reflect the change:</p>
+
+<p dir="ltr">_validateCookie</p>
+
+<p dir="ltr">_invalidateIdleClock</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">3. Since the sessionExpiry info is not created by the filter anymore we would need to read it from javascript to set to the latest current value for each request.</p>
+
+<p dir="ltr">We have three options for this part.</p>
+
+<h1 dir="ltr">Option 1</h1>
+
+<h3 dir="ltr">Update ClientDataAccessor.js</h3>
+
+<p dir="ltr">The javascript file /client-inf/jscript/src/internal/curam/ui/ClientDataAccessor.js would need to be modified with this purpose.</p>
+
+<p dir="ltr">We could add in the handleClientDataAccessorSuccess the following logic:</p>
+
+<p dir="ltr"><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; handleClientDataAccessorSuccess: function(response, ioargs) {<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var sessionExp = ioargs.xhr.getResponseHeader('sessionExpiry');<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sessionStorage.setItem("sessionExpiry", sessionExp);<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; curam.debug<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .log("curam.ui.ClientDataAccessor.handleClientDataAccessorSuccess : "<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; + response);<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; }</p>
+
+<h2 dir="ltr">IEG scripts</h2>
+
+<p dir="ltr">The IEG scripts use additional XHR calls to interact with the server. The java script file that deal with the main actions (link, back, next, save and exit) is Curam/components/IntelligentEvidenceGathering/jscript/src/ieg/ieg-xhr.js on the BIZ-INF stream.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The same change for data accessor could be implemented to populate the session storage at the beginning of the load function:</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;load: function(response, args) {</p>
+
+<div dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;setSessionExpiryStorageString(args);</div>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp; function setSessionExpiryStorageString(args)<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; {<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (typeof(Storage) !== "undefined") {<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var sessionExp = args.xhr.getResponseHeader('sessionExpiry');<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sessionStorage.setItem("sessionExpiry", sessionExp);<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; }</p>
+
+<p dir="ltr">Population of the dropdowns is handled in codetable-hierarchy.js that will use calls inside ieg-ajax.js. The loadFuntion within need to be updated as well.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">Portal Navigation</h2>
+
+<p dir="ltr">The dynamic content to go from a screen to another is managed by a component called dijit.layout.ContentPane that contains among other things the calls to the server to get the specific content.</p>
+
+<p dir="ltr">Within the _load function of ContentPane component, we have the xhr.gets.<br />
+&nbsp;_load gets called at the beginning and every time it changes the main content.<br />
+We've already overridden /TI/client/dojo-overrides/jscript/src/dijit/layout/ContentPane.js so it would be possible to add something like<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;hand.then(<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;function(html){<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (typeof(Storage) !== "undefined") {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var sessionExp =&nbsp; self._xhrDfd.ioArgs.xhr.getResponseHeader('sessionExpiry');<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sessionStorage.setItem("sessionExpiry", sessionExp);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;returnedHtml = html;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;try{<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;self._isDownloaded = true;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;return self._setContent(html, false);<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}catch(err){<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;self._onError('Content', err); // onContentError<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;},</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">CEF WIDGETS</h2>
+
+<h2 dir="ltr">Advisor</h2>
+
+<p dir="ltr">The advisor performs additional calls using the javascript file RefreshAdvisor.js. It has a ping function and the response is available through the load function within.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr">DataClientAccessor.js</h3>
+
+<p dir="ltr">Following the relevant code:</p>
+
+<p dir="ltr">&nbsp; var servletURL = '/Curam/servlet/PathResolver?r=j&amp;p=/smartpanel/data/advisor/ping['<br />
+&nbsp;&nbsp;&nbsp; + adviceContextID + "]["+ timeStamp +"]";<br />
+&nbsp;&nbsp; &nbsp;<br />
+&nbsp; //Only ping the server if we have valid values<br />
+&nbsp; if(adviceContextID !== "" &amp;&amp; timeStamp !== "") {<br />
+&nbsp;&nbsp;&nbsp; dojo.xhrPost({<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; url: servletURL,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; headers: { "Content-Type": "text/json" },<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; handleAs: 'json',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; load: function(response, args) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; args.xhr.getResponseHeader("sessionExpiry")<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (counter &lt; advisorpollingfrequency) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(response.hasAdviceChanged == "true") {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Advisor.loadAdvice();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else {</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h1 dir="ltr">Option 2</h1>
+
+<h3 dir="ltr">Updte Request.js</h3>
+
+<p dir="ltr">curam/util/Request is a wrapper for ajax calls. It will be possible to</p>
+
+<p dir="ltr">change to the method _xhr = function(method, args) { with the following logic.</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var loadHandler = args.load;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; args.load = function(response, ioargs) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (typeof(Storage) !== "undefined") {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var sessionExp = ioargs.xhr.getResponseHeader('sessionExpiry');<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sessionStorage.setItem("sessionExpiry", sessionExp);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // make sure custom load handler gets called, if there is one<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (loadHandler) {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; loadHandler(response, ioargs);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; };</p>
+
+<p dir="ltr">The idea is: whatever is the existing ajax call we<br />
+1. save the original load function from the arguments.<br />
+2. call a local load and then<br />
+3. go ahead and call the original one.</p>
+
+<h2 dir="ltr">IEG scripts</h2>
+
+<p dir="ltr">The IEG scripts use additional XHR calls to interact with the server. The java script file that deal with the main actions (link, back, next, save and exit) is Curam/components/IntelligentEvidenceGathering/jscript/src/ieg/ieg-xhr.js on the BIZ-INF stream.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr">refactor IEG ajax calls to use Request.js wrapper.</h3>
+
+<p dir="ltr">Update&nbsp; ieg-xhr.js from define(["dojo/dom", "ieg/update-manager", "ieg/mandatory-behaviour",<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "curam/widget/ProgressSpinner", "ieg/ieg-dialog", "dojo/dom-attr", "dojo/_base/html"],<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; function(dom, updateManager, mandatory, progressSpinner, iegDialog, domAttr, html) {</p>
+
+<p dir="ltr">to</p>
+
+<p dir="ltr">define(["dojo/dom", "ieg/update-manager", "ieg/mandatory-behaviour",<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "curam/widget/ProgressSpinner", "ieg/ieg-dialog", "dojo/dom-attr", "dojo/_base/html", "curam/util/Request"],<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; function(dom, updateManager, mandatory, progressSpinner, iegDialog, domAttr, html, curamRequest) {</p>
+
+<p dir="ltr">and changed the calls like<br />
+dojo.xhrGet(xhrArgs);</p>
+
+<p dir="ltr">to<br />
+// send request<br />
+curamRequest.get(xhrArgs);</p>
+
+<p dir="ltr">and</p>
+
+<p dir="ltr">dojo.xhrPost(xhrArgs);</p>
+
+<p dir="ltr">to</p>
+
+<p dir="ltr">curamRequest.post(xhrArgs);</p>
+
+<p dir="ltr">Similar changes need to be applied to</p>
+
+<h4 dir="ltr">ieg-ajax-internal.js</h4>
+
+<h4 dir="ltr">ieg-ajax.js</h4>
+
+<h4 dir="ltr">for testing purposes xhr_mock.js</h4>
+
+<h3 dir="ltr">refactor refreshAdvisor.js ajax calls to use Request.js wrapper.</h3>
+
+<p dir="ltr">add</p>
+
+<p dir="ltr">dojo.require("curam.util.Request");</p>
+
+<p dir="ltr">and replace the</p>
+
+<p dir="ltr">dojo.xhrPost</p>
+
+<p dir="ltr">to</p>
+
+<p dir="ltr">curam.util.Request.post</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">evidenceflow.js</h2>
+
+<p dir="ltr">Assuming the option 2 is chosen the following change would be needed</p>
+
+<p dir="ltr">require(["curam/util/UimDialog", "curam/tab"]);</p>
+
+<p dir="ltr">would be changed to</p>
+
+<p dir="ltr">require(["curam/util/UimDialog", "curam/tab", "curam/util/Request"]);</p>
+
+<p dir="ltr">and the 5 calls</p>
+
+<p dir="ltr">&nbsp;dojo.xhrPost({</p>
+
+<p dir="ltr">to</p>
+
+<p dir="ltr">curam.util.Request.post</p>
+
+<h2 dir="ltr">PodContainer.js</h2>
+
+<p dir="ltr">require(["curam/cefwidgets/GridContainer/dojox/layout/GridContainerLayer"]);</p>
+
+<p dir="ltr">to</p>
+
+<p dir="ltr">require(["curam/cefwidgets/GridContainer/dojox/layout/GridContainerLayer"]);</p>
+
+<p dir="ltr">dojo.require("curam.util.Request");</p>
+
+<p dir="ltr">and the two calls</p>
+
+<p dir="ltr">&nbsp;dojo.xhrPost({</p>
+
+<p dir="ltr">to</p>
+
+<p dir="ltr">curam.util.Request.post</p>
+
+<p dir="ltr">To Test</p>
+
+<p dir="ltr">just check that pods on the&nbsp; home page of the user are loading as usual.</p>
+
+<h2 dir="ltr">RemoveItemsActionControl.js</h2>
+
+<p dir="ltr">&nbsp;require(["dijit/_Widget","dijit/_Templated"]);</p>
+
+<p dir="ltr">to</p>
+
+<p dir="ltr">&nbsp;require(["dijit/_Widget","dijit/_Templated", "curam/util/Request"]);</p>
+
+<p dir="ltr">and the call</p>
+
+<p dir="ltr">&nbsp;dojo.xhrPost({</p>
+
+<p dir="ltr">to</p>
+
+<p dir="ltr">curam.util.Request.post</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">SPMEntMods</h2>
+
+<h2 dir="ltr">AddStandaloneOutcomePlanFactor.js</h2>
+
+<p dir="ltr">require(["dojo/data/ItemFileWriteStore","dojox/xml/parser"]);</p>
+
+<p dir="ltr">to</p>
+
+<p dir="ltr">require(["dojo/data/ItemFileWriteStore","dojox/xml/parser", "curam/util/Request"]);</p>
+
+<p dir="ltr">and the call</p>
+
+<p dir="ltr">dojo.xhrGet({</p>
+
+<p dir="ltr">to curam.util.Request.get</p>
+
+<h3 dir="ltr">Similar changes would need to be applied to</h3>
+
+<h4 dir="ltr">Agreement.js</h4>
+
+<h4 dir="ltr">AssessmentAnswerCondition.js</h4>
+
+<h4 dir="ltr">AjaxCombo.js</h4>
+
+<h4 dir="ltr">AjaxHandler.js</h4>
+
+<h4 dir="ltr">ContrastModeChooser.js</h4>
+
+<h4 dir="ltr">refreshProgramRecommendation.js</h4>
+
+<h4 dir="ltr">services_by_type_googlemap.js</h4>
+
+<h4 dir="ltr">OutcomePlanParticipation.js</h4>
+
+<h4 dir="ltr">SaveIntakeQuickNotes.js</h4>
+
+<h4 dir="ltr">ServiceRecipientAddresses.js</h4>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr">CEF</h3>
+
+<p dir="ltr">no specific ajax calls</p>
+
+<h3 dir="ltr">CREOLE</h3>
+
+<p dir="ltr">no specific ajax calls</p>
+
+<h3 dir="ltr">CWC</h3>
+
+<p dir="ltr">no specific ajax calls</p>
+
+<h3 dir="ltr">HCR</h3>
+
+<h4 dir="ltr">HCRAjaxHandler.js</h4>
+
+<p dir="ltr">TBD</p>
+
+<h3 dir="ltr">CFSS</h3>
+
+<h4 dir="ltr">⁨CFSS⁩/webclient⁩/components⁩/ChildServices⁩/WebContent⁩/cefwidgets⁩/ckeditor⁩/plugins⁩/autosave⁩/plugin.js</h4>
+
+<p dir="ltr">add dojo.require("curam.util.Request");</p>
+
+<p dir="ltr">and call curam.util.Request.get instead of dojo.xhrGet</p>
+
+<p dir="ltr">In addition autosave functionality uses send instead of load so the following change would be necessary:</p>
+
+<p dir="ltr">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; if ( ( xhrObject.xhr.status &gt;= 200 &amp;&amp; xhrObject.xhr.status &lt; 300 ) ||<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;xhrObject.xhr.status == 304 || xhrObject.xhr.status === 0<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;||&nbsp; xhrObject.xhr.status == 1223 )<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (typeof(Storage) !== "undefined") {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;var sessionExp = xhrObject.xhr.getResponseHeader('sessionExpiry');<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;sessionStorage.setItem("sessionExpiry", sessionExp);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">To test</p>
+
+<p dir="ltr">open any ckEditor within child services and verifiy there are not errors on the page.</p>
+
+<p dir="ltr">Then verify that ticket 244337 is still working.</p>
+
+<p dir="ltr">Verify that autosave is working for the intake smart panel and doesn't make appear the</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h4 dir="ltr">‎⁨⁨CFSS⁩/webclient⁩/components⁩/ChildServices⁩/WebContent⁩/⁨CDEJ⁩/SaveIntakeNarrative.js</h4>
+
+<p dir="ltr">add dojo.require("curam.util.Request");</p>
+
+<p dir="ltr">and call curam.util.Request.post instead of curam.util.curam.util.Request.post in SaveIntakeNarrative function dojo.xhrPost</p>
+
+<h1 dir="ltr">Option 3 Introduce an ajax interceptor - Preferred option</h1>
+
+<h3 dir="ltr">Navigation and Modals - TI</h3>
+
+<p dir="ltr">To intercept all ajax calls, probably the safest option is to introduce an ajax interceptor that will intercept all ajax calls and update the sessionEpiryDate.</p>
+
+<p dir="ltr">The advantage would be that no other changes would be necessary for this second step and all calls would update the time .</p>
+
+<p dir="ltr">We would need to introduce an new method in /client-inf/jscript/src/internal/curam/util.js</p>
+
+<p dir="ltr">extendXHR : function(){<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var protoTypeOpen = XMLHttpRequest.prototype.open;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; XMLHttpRequest.prototype.open = function() {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.addEventListener('load', function() {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (typeof(Storage) !== "undefined") {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var sessionExp = this.getResponseHeader('sessionExpiry');<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sessionStorage.setItem("sessionExpiry", sessionExp);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; });<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; protoTypeOpen.apply(this, arguments);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; };<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</p>
+
+<p dir="ltr">Then we need to make it available in every context we need.</p>
+
+<p dir="ltr">1. /client-inf/jscript/src/internal/curam/dialog.js on the initModal</p>
+
+<p dir="ltr">2. /client-inf/jscript/src/internal/curam/util/ui/ApplicationTabbedUiController.js in the constructor</p>
+
+<p dir="ltr">we add the call to util.extendXHR();</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr">Portal Navigation - SPMEntMods</h3>
+
+<p dir="ltr">We wil need to call curam.util.extendXHR in _init function of /SPM-EntMods/webclient/components/CitizenWorkspace/WebContent/CDEJ/jscript/curam/app/ExternalApplication.js</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr">IEG scripts - BIZ-INF</h3>
+
+<p dir="ltr">We wil need to call curam.util.extendXHR in ready function of /BIZINF/webclient/components/IntelligentEvidenceGathering/jscript/src/ieg/ieg-bootstrap.js</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr">CFSS</h3>
+
+<p dir="ltr">⁨We will need to call curam .util.extendXHR in init function of CFSS⁩/webclient⁩/components⁩/ChildServices⁩/WebContent⁩/cefwidgets⁩/ckeditor⁩/plugins⁩/autosave⁩/plugin.js</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">List of files making ajax calls by stream</h2>
+
+<h3 dir="ltr">TI</h3>
+
+<p dir="ltr"><br />
+1. /TI/client/components/client-inf/jscript/src/external/curam/util/Request.js (curam.util.Request) wrapper for dojo/_base/xhr. It should be used for all requests within the application. dojo/_base/xhr has been deprecated in favor of dojo/request/xhr. We should consider an update and also update the comment to explain its use.</p>
+
+<p dir="ltr">2. /TI/client/components/client-inf/jscript/src/internal/curam/tab/TabSessionManager.js The tab session manager handles the list of open tabs. It doesn't have a direct ajax call but uses new curam.ui.ClientDataAccessor().getRaw to manage the tabs.</p>
+
+<p dir="ltr">3. /TI/client/components/client-inf/jscript/src/internal/curam/ui/ClientDataAccessor.js uses curam.util.Request to make the ajax calls for server calls servlet/PathResolver</p>
+
+<p dir="ltr">4. /TI/client/components/client-inf/jscript/src/internal/curam/ui/UIController.js&nbsp; uses curam.util.Request to resolve uim pages if curam.ui.UIController.RESOLVE_PAGES[uimPageRequest.pageID] is true</p>
+
+<p dir="ltr">5. /TI/client/components/client-inf/jscript/src/internal/curam/util/UIMFragment.js&nbsp; uses curam.util.Request to submitForm in UIM pages with COMPONENT_TYPE of PAGE_FRAGMENT.</p>
+
+<p dir="ltr">6. /TI/client/components/client-inf/jscript/src/internal/curam/widget/FramesetWidget.js renders the widget with tree control on the left<br />
+&nbsp;&nbsp; *&nbsp;&nbsp;&nbsp; and the content panel on the right. It uses curam.util.Request to get data from server.<br />
+&nbsp; &nbsp;<br />
+7. /TI/client/components/client-inf/jscript/src/internal/curam/widget/SearchMultipleTextBox.js smartnavigator. it uses a different system for ajax calls. It needs to be clarified.</p>
+
+<p dir="ltr">8. /TI/client/CoreInf/CuramCDEJ/lib/curam/web/jsp/FEBase-head.jsp. It uses curam.util.Request for function forget() and getDefaultPage() and dojo/request/xhr for function clearSession. We should consider replacing dojo/request/xhr with curam.util.Request.<br />
+9. /TI/client/CoreInf/CuramCDEJ/lib/curam/web/jsp/file-edit-chrome-applet.jsp uses dojo/request/xhr for the following function getContents(), getDetails() and commitDoc(). We should consider replacing dojo/request/xhr with curam.util.Request.<br />
+10. /TI/client/CoreInf/CuramCDEJ/lib/curam/web/jsp/file-edit-chrome.jsp uses dojo/request/xhr for the following function getContents(), getDetails() and commitDoc(). We should consider replacing dojo/request/xhr with curam.util.Request.<br />
+11. /TI/client/dojo-overrides/jscript/src/dijit/layout/ContentPane.js is the dojo components used mostly for the navigation within the portal. Ajax calls are used in _load() function called also for refresh(). Dojo documentation advises that for extended script execution there is an extension of ContentPane <code class="docutils literal"><span class="pre">dojox/layout/ContentPane</span></code> which provides script execution, among other things. <a href="https://dojotoolkit.org/reference-guide/1.10/dijit/layout/ContentPane.html">https://dojotoolkit.org/reference-guide/1.10/dijit/layout/ContentPane.html</a></p>
+
+<p dir="ltr">12. /TI/tests/CuramSampleMobileApp/apps/CuramSampleMobileApp/common/framework/cdsl.js. It contains API to perform FacadeMethodCall. Also used by Smart Navigator.</p>
+
+<p dir="ltr">13. /TI/tests/CuramSampleMobileApp/apps/CuramSampleMobileApp/common/framework/ext/modules/auth/CoreAuthentication.js. A direct XMLHttpRequest.open is done in function LMCAuthenticate</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Additional ajax calls are made directly by dojo/i18n. '*now':function(r){r(['dojo/i18n!*preload*dojo/nls/cdej*["ar","ca","cs","da","de","el","en-gb","en-us","es-es","fi-fi","fr-fr","he-il","hu","it-it","ja-jp","ko-kr","nl-nl","nb","pl","pt-br","pt-pt","ru","sk","sl","sv","th","tr","zh-tw","zh-cn","ROOT"]']);} that gets executed every time. We don't seem to control this specific execution. It's one of the reason why I would think that an interceptor would be a "safer" fix.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr">BIZ-INF</h3>
+
+<p dir="ltr">1. /BIZINF/webclient/components/IntelligentEvidenceGathering/jscript/src/ieg/ieg-xhr.js. It contains the calls for the main navigation within the IEG scripts ie link, back, next, save and exit. Three direct dojo.xhrPost are made. They are in function doSubmit, doSaveAndExit and doExit.<br />
+We could replace the dojo.xhrPost({ with curam.util.Request.post. Two direct dojo.xhrGet are made. They are in function iegLink and doBack.<br />
+We could replace the dojo.xhrGet with curam.util.Request.get.<br />
+2. /BIZINF/webclient/components/IntelligentEvidenceGathering/jscript/src/ieg/ieg-ajax.js. Deals with codetable hierarchies (population of the dropdowns is handled in codetable-hierarchy.js. One direct dojo.xhrPost call is made. It's in function IEGAJAXCall.prototype.doRequest. We could replace the dojo.xhrPost with curam.util.Request.post<br />
+3. /BIZINF/webclient/components/IntelligentEvidenceGathering/jscript/src/ieg/ieg-ajax-internal.js. Same as before&nbsp; One direct dojo.xhrPost calls is made. It's in function IEGAJAXCall.prototype.doRequest. We could replace the dojo.xhrPost with curam.util.Request.post<br />
+4. /BIZINF/webclient/components/IntelligentEvidenceGathering/intern-config/intern-config.js. It's the configuration for the tests. It contains the mapping 'dojo/_base/xhr': 'mocks/dojo/_base/xhr_mock'. We should consider to update or add curam.util.Request mock.</p>
+
+<h3 dir="ltr">CEFWidget</h3>
+
+<p dir="ltr">1. /CEFWidgets/webclient/components/CEFWidgets/jscript/evidenceflow.js. Five direct dojo.xhrPost calls are made. They are in function addStack, modifyStack, removeStack and two in ping.&nbsp; We could replace the dojo.xhrPost with curam.util.Request.post<br />
+2. /CEFWidgets/webclient/components/CEFWidgets/jscript/refreshAdvisor.js. Two direct dojo.xhrPost calls are made. They are in function loadAdvice and ping. We could replace the dojo.xhrPost with curam.util.Request.post<br />
+3. /CEFWidgets/webclient/components/CEFWidgets/jscript/RemoveItemsActionControl.js. One direct dojo.xhrPost calls is made. It's in function _removeItems. We could replace the dojo.xhrPost with curam.util.Request.post<br />
+4. /CEFWidgets/webclient/components/CEFWidgets/WebContent/CDEJ/jscript/curam/cefwidgets/pods/PodContainer.js.uncompressed.js. Two direct dojo.xhrPost calls are made. They are in function recordPodPosChange and recordPodListSizeChange. We could replace the dojo.xhrPost({ with curam.util.Request.post</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr">SPMEntMods</h3>
+
+<p dir="ltr">1. /SPM-EntMods/webclient/components/Appeal/LegalAction/WebContent/CDEJ/jscript/AjaxCombo.js.&nbsp; One direct dojo.xhrGett call is made. It's in function AJAXInteraction. We could replace the dojo.xhrPost({ with curam.util.Request.get<br />
+2. /SPM-EntMods/webclient/components/AssessmentPlanning/Administration/Conditions/AssessmentAnswerCondition.js. Two direct dojo.xhrGet are made. They are in function getAnswersForQuestion and getQuestionsForAssessment. We could replace the curam.util.get{ with curam.util.Request.get.<br />
+3. /SPM-EntMods/webclient/components/AssessmentPlanning/Delivery/OutcomePlan/Participation/OutcomePlanParticipation.js. Two direct dojo.xhrGet are made. They are in function getActivities and getClientsForActivity. We could replace the curam.util.get{ with curam.util.Request.get.<br />
+4. /SPM-EntMods/webclient/components/AssessmentPlanning/jscript/AddStandaloneOutcomePlanFactor.js. One direct dojo.xhrGet is made. It is in function getClassifications. We could replace the dojo.xhrGet with curam.util.Request.get.<br />
+5. /SPM-EntMods/webclient/components/AssessmentPlanning/jscript/Agreement.js. One direct dojo.xhrGet is made. It is in function getRecipientAddressAndEmailDetails. We could replace the dojo.xhrGet with curam.util.Request.get.<br />
+6. /SPM-EntMods/webclient/components/AssessmentPlanning/WebContent/CDEJ/jscript/ibmidxtk/idx/gridx/modules/Printer.js. It uses dojo/_base/xhr.get in function loadStyleFiles. We could replace the dojo/_base/xhr.get with curam.util.Request.get.<br />
+7. /SPM-EntMods/webclient/components/AssessmentPlanning/WebContent/CDEJ/jscript/ibmidxtk/idx/widget/PersonCard.js. The object is defined by either dojo.xhr or dojo/_base/xhr. And the call of type POST is made in function _setQueryAttr. Apart from replacing dojo/_base/xhr with curam.util.Request we should think if&nbsp; var version = (window["dojo"] &amp;&amp; dojo.version); if(version &amp;&amp; version.major == 1 &amp;&amp; version.minor == 6) is still valid.<br />
+8. /SPM-EntMods/webclient/components/AssessmentPlanning/WebContent/CDEJ/jscript/ibmidxtk/idx/util.js. Same as before. The object is defined by either dojo.xhr or dojo/_base/xhr. And the call dXhr.xhrGet is made in function iUtil.getVersion. Apart from replacing dojo/_base/xhr with curam.util.Request we should think&nbsp; the var version = (window["dojo"] &amp;&amp; dojo.version); if(version &amp;&amp; version.major == 1 &amp;&amp; version.minor == 6)<br />
+9. /SPM-EntMods/webclient/components/AssessmentPlanning/WebContent/CDEJ/jscript/ibmidxtk/idx/app/AppMarquee.js. Same as before. The object is defined by either dojo.xhr or dojo/_base/xhr. And the call dXhr.xhrGet is made in function _updateAppDOM and _updateVendorDOM. Apart from replacing dojo/_base/xhr with curam.util.Request we should think&nbsp; the var version = (window["dojo"] &amp;&amp; dojo.version); if(version &amp;&amp; version.major == 1 &amp;&amp; version.minor == 6)<br />
+10. /SPM-EntMods/webclient/components/CitizenWorkspace/WebContent/CDEJ/jscript/cwtk/widget/ContrastModeChooser.js. It uses dojo.xhrGet in function setHighContrastEnabled. We could replace the dojo.xhrGet with curam.util.Request.get.<br />
+11. /SPM-EntMods/webclient/components/Intake/jscript/services_by_type_googlemap.js. It uses dojo.xhrGet in function getMapData. We could replace the dojo.xhrGet with curam.util.Request.get.<br />
+12. /SPM-EntMods/webclient/components/CitizenWorkspace/WebContent/jscript/citizenworkspace/services_by_type_googlemap.js.&nbsp; It uses dojo.xhrGet in function getMapData. We could replace the dojo.xhrGet with curam.util.Request.get.<br />
+13. /SPM-EntMods/webclient/components/CitizenWorkspace/WebContent/CDEJ/jscript/cwtk/util/AjaxHandler.js. It makes a dojo.xhrPost call in the method call. We could replace the dojo.xhrPost with curam.util.Request.post<br />
+14. /SPM-EntMods/webclient/components/CPM/ServiceDelivery/Providers/ServiceRecipientAddresses.js. It makes a dojo.xhrGet call in the method getAddressForRecipient. We could replace the dojo.xhrPost with curam.util.Request.get<br />
+15. /SPM-EntMods/webclient/components/CREOLEProgramRecommendation/jscript/refreshProgramRecommendation.js. Two direct dojo.xhrPost calls are made. They are in function onLoadHandler and ping. We could replace the dojo.xhrPost with curam.util.Request.post.<br />
+16. /SPM-EntMods/webclient/components/AssessmentPlanning/WebContent/CDEJ/jscript/ibmidxtk/idx/widget/TypeAhead.js The object is defined by either dojo.xhr or dojo/_base/xhr. And the call dXhr.xhrGet is made in function remoteLoadSuggestions. Apart from replacing dojo/_base/xhr with curam.util.Request we should think&nbsp; the var version = (window["dojo"] &amp;&amp; dojo.version); if(version &amp;&amp; version.major == 1 &amp;&amp; version.minor == 6)<br />
+17. /SPM-EntMods/webclient/components/Intake/SaveIntakeQuickNotes.js. It makes a dojo.xhrPost call in the method save. We could replace the dojo.xhrPost with curam.util.Request.post<br />
+18. /SPM-EntMods/webclient/components/AssessmentPlanning/WebContent/CDEJ/jscript/ibmidxtk/idx/oneui/demos/demoutils.js. It uses dojo/_base/xhr to make a get call in the method _onShow. We could replace the dojo/_base/xhr.get with curam.util.Request.get.<br />
+19. /SPM-EntMods/webclient/components/AssessmentPlanningCareManagementCommon/WebContent/CDEJ/jscript/curam/smartercare/ipsum/util/store/BatchCuramStore.js. It uses ConnectionService.makeRequest to make server requests. Needs more investigation.<br />
+20. The following tests js make also direct Ajax calls.<br />
+/SPM-EntMods/webclient/components/AssessmentPlanning/WebContent/CDEJ/jscript/ibmidxtk/idx/gridx/tests/support/stores/JsonRest.js<br />
+/SPM-EntMods/webclient/components/AssessmentPlanning/WebContent/CDEJ/jscript/ibmidxtk/idx/gridx/tests/support/stores/JsonRestStore.js<br />
+/SPM-EntMods/webclient/components/AssessmentPlanning/WebContent/CDEJ/jscript/ibmidxtk/idx/gridx/tests/support/stores/test_jsonRestStore.js<br />
+/SPM-EntMods/webclient/components/AssessmentPlanning/WebContent/CDEJ/jscript/ibmidxtk/idx/gridx/tests/support/stores/test_tree_jsonRestStore.js<br />
+/SPM-EntMods/webclient/components/AssessmentPlanning/WebContent/CDEJ/jscript/ibmidxtk/idx/gridx/tests/support/stores/TreeJsonRestStore.js<br />
+/SPM-EntMods/webclient/components/AssessmentPlanning/WebContent/CDEJ/jscript/ibmidxtk/idx/gridx/tests/support/XQueryReadStore.js.</p>
+
+<h3 dir="ltr"><br />
+HCR</h3>
+
+<p dir="ltr">1. /HCR/webclient/components/HCROnline/Common/jscript/hcr/HCRAjaxHandler.js. It makes a direct dojo.xhrPost in method call. We could replace the dojo.xhrPost with curam.util.Request.post</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr">CFSS</h3>
+
+<p dir="ltr">1. /CFSS/webclient/components/ChildServices/WebContent/CDEJ/SaveIntakeNarrative.js. It makes a direct dojo.xhrPost.&nbsp; We could replace the dojo.xhrPost with curam.util.Request.post<br />
+2. /CFSS/webclient/components/ChildServices/WebContent/cefwidgets/ckeditor/plugins/autosave/plugin.js. It's the ckeditor autosave plugin. It makes a dojo.xhrGet in isIntakeFrozen and a XMLHttpRequest.open("POST" to save the data.</p>
+
+<h2 dir="ltr" id="ii18">Testing</h2>
+
+<h3 dir="ltr">Manual Testing</h3>
+
+<p dir="ltr">Please see all the Tests listed for this feature in the page ( &nbsp;<a lconnwikimacro="wikilink" href="Session%20Storage%20Session%20Expiry%20Timeout/Tests%20for%20Session%20Timeout.html" lconnwikiparamwikipage="Tests for Session Timeout">Tests for Session Timeout</a>&nbsp;) which is a child of this page.</p>
+
+<p dir="ltr"><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">• Automate</strong><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+• Javascript tests for sessionTimeout.js in the file SessionTimeoutTestCase.js</p>
+
+<p dir="ltr">•&nbsp;Javascript tests for ieg-xhr.js in the file iegXhrTestCase.js<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+• Unit Tests for the class TabLayoutResolver and JspUtil in files TabLayoutResolverTestcase and JspUtilTestCase</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The scenarios need to be run on the following browsers:</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Internal Application:</strong></p>
+
+<p dir="ltr">Google Chrome 73&nbsp;and future fix packs<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Microsoft Edge 41 and future fix packs<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Microsoft Internet Explorer 11 and future fix packs</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Universal Access:</strong></p>
+
+<p dir="ltr">Apple Safari 11 and future fix packs<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Google Chrome 73&nbsp;and future fix packs<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Microsoft Edge 41 and future fix packs<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Microsoft Internet Explorer 11 and future fix packs<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Mozilla Firefox 65 and future fix packs</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">SVT Testing</strong></h3>
+
+<p dir="ltr">Run the above Use Cases against the following environments and ensure there are no issues:</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">WAS 9/DB2 11
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Priority: High risk, this environment must be covered. Should be covered implicitly by Use Cases above.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Reason: Uses IBM J2EE7(Servlet 3.1)</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">WLS 12.1.3/Ora 12
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Priority: Medium risk as the application server will implement session management different to WAS</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Reason: Uses Oracle J2EE6(Servlet 3.0)</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">WAS 8.5.5/DB2 11
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Priority: Optional, low risk as expected&nbsp;to pass if it passes against WAS 9</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Reason: Uses IBM J2EE6(Servlet 3.0)</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">IHS/WAS 9/DB2 11
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Priority: Optional, low risk as expected&nbsp;to pass if it passes against WAS 9</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Reason: Ensure there are no issues with IHS integration</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Minimal risk as the session functionality is handled by the application server</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">The tests should also run in the topology described by the customer in the support ticket.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/L2%20Support#action=com.ibm.team.workitem.viewWorkItem&amp;id=241222">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/L2%20Support#action=com.ibm.team.workitem.viewWorkItem&amp;id=241222</a></p>
+
+<p dir="ltr" style="margin-left: 40px;">Production environment is a clustered deployment with 2 Web HTTP Servers and 2 Websphere Application Servers.</p>
+
+<p dir="ltr" style="margin-left: 40px;">Both Restrict cookies to HTTPS sessions and Set session cookies to HTTPOnly to help prevent cross-site scripting attacks need to be enabled on WebSphere application servers.</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

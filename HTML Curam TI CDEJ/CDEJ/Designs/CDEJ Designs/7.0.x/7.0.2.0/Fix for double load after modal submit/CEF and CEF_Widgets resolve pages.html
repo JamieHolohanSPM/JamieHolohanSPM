@@ -1,0 +1,241 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>CEF and CEF_Widgets resolve pages</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="CEF and CEF_Widgets resolve pages";
+    pageId="urn:lsid:ibm.com:td:ad0135bc-1700-4d47-b05f-aa7225dc4338";
+    toRoot="../../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">CEF and CEF_Widgets resolve pages</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr"><strong><span style="font-size:18px;">Impacted</span></strong></p>
+
+<hr dir="ltr"></hr>
+<p dir="ltr" style="text-align: center;">&nbsp;</p>
+
+<p dir="ltr" style="text-align: center;"><strong style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center;"><span style="font-size: 16px;">CEF</span></strong></p>
+
+<table border="1" dir="ltr" style="width: 1216px;">
+	<tbody>
+		<tr>
+			<td style="width: 58px;"><strong><span style="background-color: rgb(255, 255, 0);">Scenario</span></strong></td>
+			<td style="width: 199px;"><strong><span style="background-color: rgb(255, 255, 0);">Resolve Page</span></strong></td>
+			<td style="width: 250px;"><strong><span style="background-color: rgb(255, 255, 0);">UIM tested</span></strong></td>
+			<td style="width: 344px;"><strong><span style="background-color:#FFFF00;">Why Impacted</span></strong></td>
+			<td style="width: 332px;"><strong><span style="background-color: rgb(255, 255, 0);">Steps to reproduce</span></strong></td>
+		</tr>
+		<tr>
+			<td style="width: 58px;">3</td>
+			<td style="width: 199px;">System_resolveRefreshSearch.uim</td>
+			<td style="width: 250px;">
+			<p class="p1"><span style="background-color:#00FF00;">System_confirmExecuteBatchProcess.uim</span></p>
+
+			<p class="p1"><span style="background-color:#00FF00;">System_executeBatchProcess.uim</span></p>
+
+			<p class="p1"><span style="background-color:#00FF00;">System_removeBatchProcessRequest.uim</span></p>
+			</td>
+			<td style="width: 344px;">
+			<p>Resolve page using JavaScript to close the modal dialog and refresh the parent page.&nbsp;</p>
+
+			<p>Inserted dismiss_modal=false</p>
+			</td>
+			<td style="width: 332px;">SysAdmin -&gt;Shortcuts -&gt; Batch -&gt; Process Groups -&gt; Create a Process Group and add Process -&gt; execute &nbsp; &nbsp;Request -&gt; Delete&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 58px;">3</td>
+			<td style="width: 199px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">System_resolveRefreshSearch.uim</span></td>
+			<td style="width: 250px;">
+			<p class="p1"><span style="background-color:#00FF00;">System_cancelCodetable.uim</span></p>
+
+			<p class="p1"><span style="background-color:#00FF00;">System_createCodetable.uim</span></p>
+
+			<p class="p1"><span style="background-color:#00FF00;">System_createCodetableItem.uim</span></p>
+
+			<p class="p1"><span style="background-color:#00FF00;">System_modifyCodetableNameFromList.uim</span></p>
+			</td>
+			<td style="width: 344px;">
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Resolve page using JavaScript to close the modal dialog and refresh the parent page.&nbsp;</p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Inserted dismiss_modal=false</p>
+			</td>
+			<td style="width: 332px;">Sysadmin -&gt; shortcuts -&gt; application data -&gt; codetables -&gt; search&nbsp;<br />
+			you will get list of codetables - 1: create a new codetable, edit, translate, delete and create a new item&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 58px;">3</td>
+			<td style="width: 199px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">System_resolveRefreshSearch.uim</span></td>
+			<td style="width: 250px;">
+			<p class="p1"><span style="background-color:#00FF00;">System_createProperty.uim</span></p>
+
+			<p class="p1"><span style="background-color:#00FF00;">System_deleteProperty.uim</span></p>
+
+			<p class="p1"><span style="background-color:#00FF00;">System_editProperty.uim</span></p>
+
+			<p class="p1"><span style="background-color:#00FF00;">System_resetProperties.uim</span></p>
+
+			<p class="p1"><span style="background-color:#FFD700;">System_translateProperty.uim</span></p>
+			</td>
+			<td style="width: 344px;">
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Resolve page using JavaScript to close the modal dialog and refresh the parent page.&nbsp;</p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Inserted dismiss_modal=false</p>
+			</td>
+			<td style="width: 332px;">Sysadmin -&gt; shortcuts -&gt; application data -&gt; Propert administrator &nbsp;- &gt; realize all the operations<br />
+			<br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; background-color: rgb(255, 215, 0);">System_translateProperty.uim is deprecated, not accesible through deployed applicaiton</span></td>
+		</tr>
+		<tr>
+			<td style="width: 58px;">3</td>
+			<td style="width: 199px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">System_resolveRefreshSearch.uim</span></td>
+			<td style="width: 250px;"><span style="font-family: Helvetica;"><span style="background-color:#00FF00;">UIAdminApplication_create.uim</span></span></td>
+			<td style="width: 344px;">
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Resolve page using JavaScript to close the modal dialog and refresh the parent page.&nbsp;</p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Inserted dismiss_modal=false</p>
+			</td>
+			<td style="width: 332px;">Shortcuts -&gt; User Interface -&gt; Application Management &nbsp;- Create Internal</td>
+		</tr>
+		<tr>
+			<td style="width: 58px;">3</td>
+			<td style="width: 199px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">System_resolveRefreshSearch.uim</span></td>
+			<td style="width: 250px;"><span style="font-family: Helvetica;"><span style="background-color:#00FF00;">External_createApplicationDetails.uim</span></span></td>
+			<td style="width: 344px;">
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Resolve page using JavaScript to close the modal dialog and refresh the parent page.&nbsp;</p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Inserted dismiss_modal=false</p>
+			</td>
+			<td style="width: 332px;">Shortcuts -&gt; User Interface -&gt; Application Management - Create External</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="text-align: center;">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Not Impacted</span></strong></p>
+
+<hr dir="ltr"></hr>
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="text-align: center;"><strong><span style="font-size:16px;">CEF</span></strong></p>
+
+<table border="1" dir="ltr" style="width: 1186px;">
+	<tbody>
+		<tr>
+			<td style="width: 57px;"><strong><span style="background-color:#FFFF00;">Scenario</span></strong></td>
+			<td style="width: 413px;"><strong><span style="background-color:#FFFF00;">Resolve Page</span></strong></td>
+			<td style="width: 275px;"><strong><span style="background-color:#FFFF00;">UIM tested</span></strong></td>
+			<td style="width: 227px;"><strong><span style="background-color:#FFFF00;">Why no impacted</span></strong></td>
+			<td style="width: 245px;"><strong><span style="background-color:#FFFF00;">Steps to reproduce</span></strong></td>
+		</tr>
+		<tr>
+			<td style="width: 57px;">3</td>
+			<td style="width: 413px;">DynamicEvidence_modifyEvidenceTypeVersion.uim</td>
+			<td style="width: 275px;"><span style="background-color:#00FF00;">DynamicEvidence_listEvidenceTypeVersions1.uim</span></td>
+			<td style="width: 227px;">No Modal dialog/ Tab context</td>
+			<td style="width: 245px;">Login as Admin -&gt; Go to shortcuts -&gt; Rules and Evidence -&gt;Dynamic Evidence -&gt; Click in toggle button of Address item</td>
+		</tr>
+		<tr>
+			<td style="width: 57px;">3</td>
+			<td style="width: 413px;">DynamicEvidence_viewEvidenceTypeVersion.uim</td>
+			<td style="width: 275px;"><span style="background-color:#00FF00;">DynamicEvidence_listEvidenceTypeVersions.uim</span></td>
+			<td style="width: 227px;">No Modal dialog/ Tab context</td>
+			<td style="width: 245px;">Login as Admin -&gt; Go to shortcuts -&gt; Rules and Evidence -&gt;Dynamic Evidence -&gt; Click in toggle button of Address item - &gt; select one version -&gt; Action buttons click "View Metadata"</td>
+		</tr>
+		<tr>
+			<td style="width: 57px;">4</td>
+			<td style="width: 413px;">Evidence_DynamicEvidence_resolveNextPageAfterCreate.uim</td>
+			<td style="width: 275px;"><span style="background-color:#00FF00;">Generated UIMs</span></td>
+			<td style="width: 227px;">The application doesn't apply the double load solution for dynamic evidence</td>
+			<td style="width: 245px;">Log as superuser, Search for Smith, Create a new case, Menu evidence, Create a new evidence "email address" and save</td>
+		</tr>
+		<tr>
+			<td style="width: 57px;">4</td>
+			<td style="width: 413px;">Evidence_DynamicEvidence_resolveNextPageAfterCreateSaveAndNew.uim</td>
+			<td style="width: 275px;"><span style="background-color:#00FF00;">Generated UIMs</span></td>
+			<td style="width: 227px;">The application doesn't apply the double load solution for dynamic evidence</td>
+			<td style="width: 245px;">Log as superuser, Search for Smith, Create a new case, Menu evidence, Create a new evidence "email address" and save and new</td>
+		</tr>
+		<tr>
+			<td style="width: 57px;">4</td>
+			<td style="width: 413px;">Evidence_DynamicEvidence_resolveNextPageAfterModify.uim</td>
+			<td style="width: 275px;"><span style="background-color:#00FF00;">Generated UIMs</span></td>
+			<td style="width: 227px;">The application doesn't apply the double load solution for dynamic evidence</td>
+			<td style="width: 245px;">Log as superuser, Search for Smith, Create a new case, Menu evidence, Edit the evidence "email address" insert the date "01/01/1900"</td>
+		</tr>
+		<tr>
+			<td style="width: 57px;">&nbsp;</td>
+			<td style="width: 413px;">&nbsp;</td>
+			<td style="width: 275px;">&nbsp;</td>
+			<td style="width: 227px;">&nbsp;</td>
+			<td style="width: 245px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center;"><strong><span style="font-size: 16px;">CEF Widgets</span></strong></p>
+
+<table border="1" dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; width: 1211px;">
+	<tbody>
+		<tr>
+			<td style="width: 58px;"><strong><span style="background-color: rgb(255, 255, 0);">Scenario</span></strong></td>
+			<td style="width: 267px;"><strong><span style="background-color: rgb(255, 255, 0);">Resolve Page</span></strong></td>
+			<td style="width: 176px;"><strong><span style="background-color: rgb(255, 255, 0);">UIM tested</span></strong></td>
+			<td style="width: 295px;"><strong><span style="background-color: rgb(255, 255, 0);">Why Impacted</span></strong></td>
+			<td style="width: 388px;"><strong><span style="background-color: rgb(255, 255, 0);">Steps to reproduce</span></strong></td>
+		</tr>
+		<tr>
+			<td style="width: 58px;">2</td>
+			<td style="width: 267px;">PodContainer_redirect.uim</td>
+			<td style="width: 176px;"><span style="background-color: rgb(0, 255, 0);">PodContainer_redirect.uim</span></td>
+			<td style="width: 295px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">No Modal dialog/ Tab context</span></td>
+			<td style="width: 388px;">
+			<p>Login as superuser<br />
+			Go to Shortcuts -&gt; Testing Shortcuts -&gt; Pod only<br />
+			Click on the Customize button<br />
+			Select any checkbox and click Save button</p>
+
+			<p>Expected: The application will be reloaded</p>
+
+			<p>Login as superuser<br />
+			Go to the Home tab<br />
+			On the right side, click the Customize button.<br />
+			The application will show the pod options.<br />
+			Select the one or more pod checkbox option and click Save button.</p>
+
+			<div>&nbsp;</div>
+			</td>
+		</tr>
+	</tbody>
+</table></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

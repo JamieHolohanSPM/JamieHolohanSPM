@@ -1,0 +1,138 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>MS Word Integration Certificates FAQ</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="MS Word Integration Certificates FAQ";
+    pageId="urn:lsid:ibm.com:td:63479aab-f4c1-4a64-a424-452e429ddb7d";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">MS Word Integration Certificates FAQ</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr"><strong>Introduction</strong></p>
+
+<p dir="ltr">Internet Explorer and the current Java version (Java 8) still supports Java applets, and the Word Integration functionality in this browser is applet-based.</p>
+
+<p dir="ltr">The applet solution comes in the form of the few jar libraries downloaded to the user's machine from the server the first time the Word Integration is requested and then run by the JRE on the user's machine.</p>
+
+<p dir="ltr">JRE security requirements for the downloadable Java apps run in the browser context are pretty strict because of the privileged access these Java apps have compared to the regular pages/scripts from the web. The downloaded JARs therefore should be signed and trusted, and the signature should be verified by the recognized certification authority (CA).</p>
+
+<p dir="ltr">On the first run the user is prompted to trust the certificate of the applet code coming from IBM and trusted by the CA. On the subsequent runs that trust is assumed automatically, however the certificate validity is always checked to see if the code signature is not longer trusted by the CA (the certificate hasn't been renewed or has been revoked).</p>
+
+<p dir="ltr"><strong>1. How often do we need to sign those applet jars?</strong></p>
+
+<p dir="ltr">The new (updated) code signing certificates (CSC) are purchased from Symantec each year and are valid for 1 year. They usually expire around June/July. Both SHA-1 and SHA-2 hashing algorithms based CSC are currently obtained (the plan is to stick to just SHA-2 starting with 2018).</p>
+
+<p dir="ltr">Because of the time stamping as described below, signing with the currently valid CSC is just required <u>when the Word Integration functionality changes</u>. Therefore it is the usual situation to carry over the jars to the subsequent versions without re-signing them regardless of their original CSC validity.</p>
+
+<p dir="ltr">The third party libraries under normal circumstances are to be signed again <em>just if changed/upgraded - so quite rarely</em>. One of the occasions where signing them might be required are the additional security requirements for their manifests being introduced, even though the rest of the code remaining unchanged.</p>
+
+<p dir="ltr">There is no need and would be counter-productive to sign the jars for each release (especially given the fact that these jars are usually cached by the JRE on each user machine and work as long as these caches are not flushed).</p>
+
+<p dir="ltr"><strong>2. What is time stamping?</strong></p>
+
+<p dir="ltr">Time stamping is the way of prolongation of the the original CSC validity period. It is the signature verification mechanism where the additional certificate from the CA authority or the time stamping service from this authority is used.</p>
+
+<p dir="ltr">Time stamping the freshly signed jar "seals" it in the sense of confirming that the CSC was valid at the moment of time stamping. Therefore, if the code signature can be verified (the hash sums of the code did not change=the code hasn't been tampered with), it is accepted as valid by the JRE, if there is also the valid time stamp from the CA - even if the CSC itself has expired.</p>
+
+<p dir="ltr">The time stamping certificate on its own has certain (much longer than CSC) validity period; the time stamping service does not have the validity period (presumably, anybody aware of the opposite please update).</p>
+
+<p dir="ltr">The build scripts used to sign our jars automatically include the time stamping and use time stamping service. If necessary to see if the jar has been time stamped, the jar could be verified as described in <a href="https://blogs.oracle.com/mullan/how-to-determine-if-a-signed-jar-is-timestamped">https://blogs.oracle.com/mullan/how-to-determine-if-a-signed-jar-is-timestamped.</a></p>
+
+<p dir="ltr"><strong>3. What to do if signing the jars is required - either for the internal reasons mentioned or for the Customer reporting expired certificates?</strong></p>
+
+<p dir="ltr">In either case the first thing is to get the jar versions to sign.</p>
+
+<p dir="ltr">The v6.1 and later Word Integration solution uses 3 jars - one OOTB Word Integration functionality and two third-party libraries, <span style="font-family:courier new,courier,monospace;">jacob</span>.<span style="font-family:courier new,courier,monospace;">jar</span> and <span style="font-family:courier new,courier,monospace;">commons-codec.jar</span>; the pre-6.1 solution in addition uses <span style="font-family:courier new,courier,monospace;">commons-io.jar</span>.</p>
+
+<hr dir="ltr"></hr>
+<p dir="ltr"><strong>Note</strong>: while the third-party jars for both solutions should be the same, the OOTB <span style="font-family:courier new,courier,monospace;">word-file-edit </span>jars are not compatible and it is vital to use the right version of the <span style="font-family:courier new,courier,monospace;">word-file-edit.jar</span>. It is also recommended to use the third-party jars from the matching stream as well - to avoid issues with the jar manifests.</p>
+
+<hr dir="ltr"></hr>
+<p dir="ltr">If there were changes in the functionality, the JDE or at least the <span style="font-family:courier new,courier,monospace;">word-file-edit </span>project in the client component should be built before any attempt to re-sign jars.</p>
+
+<p dir="ltr">As it is mentioned in the answer 2, the third-party libraries used do not need signing under normal circumstances so the only jar would be the OOTB <span style="font-family:courier new,courier,monospace;">word-file-edit.jar</span>.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The full steps for signing this jar would be (please note, this is for Windows machine (or VM)):</p>
+
+<ol dir="ltr">
+	<li>Once the right stream is located and JDE built (it is safer to build it even if the Word Integration functionality did not change), go to <span style="font-family:courier new,courier,monospace;">TI/client/components/word-file-edit/target</span>. Copy the <span style="font-family:courier new,courier,monospace;">word-file-edit.jar </span>in a separate location (or directly into the signing folder as step 3 instructs).</li>
+	<li>Mount the <span style="font-family:courier new,courier,monospace;">\\tiny\ProductDevelopment\TechInf\WordIntegration</span> folder as a disk drive. Note, the folder is closed for general use and you might need to get the access rights to get inside. If this is the situation, these should be requested; in the case of urgency contact Sharunas Kovanas or Andrey Zhereschin, they were signing those jars before and it might be simply quicker to ask them to do it then to wait the access rights to be granted. The same applies to the certificate store password required to both update the certificates in the store and use them. Once you are tasked with the jar signing, get the password from either of the two mentioned person and keep it safe - it is propagated on the need-to-know basis.</li>
+	<li>Copy the <span style="font-family:courier new,courier,monospace;">word-file-edit.jar</span> to the root folder of the mentioned folder in Windows Explorer.</li>
+	<li>Open the command prompt and get into your newly mounted drive.</li>
+	<li>Set up the <span style="font-family:courier new,courier,monospace;">JAVA_HOME</span> environment variable and <span style="font-family:courier new,courier,monospace;">PATH</span> variable to include the J<span style="font-family:courier new,courier,monospace;">AVA_HOME\bin</span>. Note, the JDK should be 1.7u51 - 1.8 (the current one at the time of writing).</li>
+	<li>Run the script <span style="font-family:courier new,courier,monospace;">sign-applet.bat</span>. It will prompt you for the certificate store password.&nbsp; Enter the password obtained in step 2, click Enter and wait. Once the script runs, the console log shows if it was able to do the signings. If there is a failure, the most likely cause is the JDK not available, correct this if needed.</li>
+	<li>In case of success the word-file-edit disappears from the root and the signed versions are placed in <span style="font-family:courier new,courier,monospace;">./target/sha-1</span> and <span style="font-family:courier new,courier,monospace;">./target/sha-2</span> subfolders of the same folder; the original, unsigned jar version is moved to the <span style="font-family:courier new,courier,monospace;">./target</span> folder. You can instantly see the jar size increase for the signed files. In order to make sure the signatures are correct, open up the jars in <span style="font-family:courier new,courier,monospace;">sha-1</span> or <span style="font-family:courier new,courier,monospace;">sha-2</span> folders in any zip viewer and look at their manifest files, you will see the digest sums for every class inside and the algorithm name mentioned for each of them.</li>
+	<li>Copy the signed jars back to the stream (and check them in if you have the change set). The location for that would be <span style="font-family:courier new,courier,monospace;">TI/client/components/word-file-edit/lib/presigned-jars</span> (and <span style="font-family:courier new,courier,monospace;">sha-1</span> or <span style="font-family:courier new,courier,monospace;">sha-2</span> folders correspondingly).</li>
+</ol>
+
+<hr dir="ltr"></hr>
+<p dir="ltr">NOTE: Step 8 implies that the JRE is rebuilt with the freshly signed files (for the second time). If this is not the case, the target location would be <span style="font-family:courier new,courier,monospace;">CuramCDEJ/lib/curam/jar/signed</span> and again <span style="font-family:courier new,courier,monospace;">sha-1</span> and <span style="font-family:courier new,courier,monospace;">sha-2</span> subfolders. However, note that you need to manually rename the <span style="font-family:courier new,courier,monospace;">word-file-edit.jar</span> into <span style="font-family:courier new,courier,monospace;">WordIntegrationApplet.jar</span>.</p>
+
+<hr dir="ltr"></hr>
+<p dir="ltr"><strong>4. How do I sign the third party jars?</strong></p>
+
+<p dir="ltr">If for whichever reason you need to sign the third party jars, you still need the access to the folder with the certificate store and the certificate store password as answer 3 describes.</p>
+
+<p dir="ltr">The signing process is slightly different though.</p>
+
+<p dir="ltr">The steps for doing this procedure are as follows:</p>
+
+<ol dir="ltr">
+	<li>Go to the <span style="font-family:courier new,courier,monospace;">TI/client/CoreInf/CuramCDEJ/lib/ext/jar</span> of the right stream.</li>
+	<li>Copy commons-codec-1.5.jar and jacob.jar for &gt;=v6.1, and commons-codec-1.5.jar, jacob.jar and commons-io-2.4.jar to a separate location, or directly under <span style="font-family:courier new,courier,monospace;">\\tiny\ProductDevelopment\TechInf\WordIntegration\sha1 </span><span style="font-family:arial,helvetica,sans-serif;">and</span><span style="font-family:courier new,courier,monospace;"> \\tiny\ProductDevelopment\TechInf\WordIntegration\sha-2 </span><span style="font-family:arial,helvetica,sans-serif;">(you will need copies in both folders until the sha-1 is out of use). Replace any of the previous versions which might be left over from the previous signings.</span><span style="font-family:courier new,courier,monospace;"> </span></li>
+	<li><span style="font-family:arial,helvetica,sans-serif;">Manually rename </span><span style="font-family:courier new,courier,monospace;">jacob.jar</span><span style="font-family:arial,helvetica,sans-serif;"> into </span><span style="font-family:courier new,courier,monospace;">jacob-1.15-M4.jar</span> in both folders.</li>
+	<li><span style="font-family:arial,helvetica,sans-serif;">Examine the </span><span style="font-family:courier new,courier,monospace;">sign-all.bat</span><span style="font-family:arial,helvetica,sans-serif;"> in each of the folders to make sure that the attempted to sign jar names match what you have in the folder.</span> <span style="font-family:courier new,courier,monospace;">rem</span> any of the jar names which are not needed/not present (like <span style="font-family:courier new,courier,monospace;">commons-io.jar</span> for the v6.1&gt;).</li>
+	<li>Open the command prompt and go to the mapped drive (step 2 from the answer 3 is the potential prerequisite to this).</li>
+	<li>Do the <span style="font-family:courier new,courier,monospace;">JAVA_HOME</span> set up and <span style="font-family:courier new,courier,monospace;">PATH</span> adjustment as described by step 5 of the answer 3.</li>
+	<li>Launch <span style="font-family:courier new,courier,monospace;">sign-all.bat</span>. Again, it will ask the certificate store password which you should enter in order to sign the files (see step 2 in answer 3).</li>
+	<li>If the <span style="font-family:courier new,courier,monospace;">JAVA_HOME</span> was set up correctly, the jars will be signed one by one, and the signed copies replace the original ones (with the bigger size).</li>
+	<li>Once you have all the jars signed, copy them over to either <span style="font-family:courier new,courier,monospace;">TI/client/components/word-file-edit/lib/presigned-jars/&lt;sha-1_or_sha-2&gt;</span>, or <span style="font-family:courier new,courier,monospace;">CuramCDEJ/lib/ext/jar/signed/&lt;sha-1_or_sha-2&gt;</span>. If you have the active work item, do not forget to check in the new jar versions in the <span style="font-family:courier new,courier,monospace;">word-file-edit</span> project.</li>
+</ol>
+
+<p dir="ltr"><strong>5. How to deliver the updated jars to the Customer?</strong></p>
+
+<p dir="ltr">This depends on the release vehicle available. The normal way would be to get the updated jars checked in on the stream during the sprint, and they will reach the Customer along with the other changes. There is always the take-on procedure on the Customer site (they are usually aware of it) - the JRE and IE caches on each user machine need to be cleared to pick up the updated versions.</p>
+
+<p dir="ltr">The urgent way would be a TestFix where just the necessary files are zipped and the Customer is instructed about the take-on.</p>
+
+<p dir="ltr">The note on the question 3 describes the packaging structure where the Customer is willing to rebuild the application so that the new jars are deployed on the application server. The test fix zip then repeats CuramCDEJ structure: <span style="font-family:courier new,courier,monospace;">CuramCDEJ/lib/curam/jar/signed</span> (for the word integration jar) and <span style="font-family:courier new,courier,monospace;">CuramCDEJ/lib/ext/jar/signed</span> (for the third-party jars).</p>
+
+<p dir="ltr">The quicker way and sometimes necessary (especially if there is the necessity to verify the fix) is patching the runtime location (the deployed application). This is done by simply dropping the jars directly in the location from where they are downloaded. The runtime location is the <span style="font-family:courier new,courier,monospace;">webclient/WebContent/applet-lib</span> of the deployed application.</p>
+
+<p dir="ltr">In both 'shortcut' cases (CDEJ or runtime location) watch for the OOTB JAR name. It should be renamed into the <span style="font-family:courier new,courier,monospace;">WordIntegrationApplet.jar</span> to be picked up correctly.</p>
+
+<hr dir="ltr"></hr>
+<p dir="ltr"><strong>NOTE</strong>: Our build scripts take care of the right jar version for the Customer. If the runtime patch is advised on, it should be specifically mentioned that the jars are to be copied from <span style="font-family:courier new,courier,monospace;">sha-2</span> folder (or the zip with files to be dropped is prepared from <span style="font-family:courier new,courier,monospace;">sha-2</span> folder). <span style="font-family:courier new,courier,monospace;">sha-1</span> versions are just left for backward compatibility and will be removed completely in the next releases. While the certificates on them are still valid, the algorithm is going to be sunset soon. In the newer and properly patched releases <span style="font-family:courier new,courier,monospace;">sha-1</span> folder is not released at all.</p>
+
+<hr dir="ltr"></hr>
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,364 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Conditional Codetable Hierarchy</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Conditional Codetable Hierarchy";
+    pageId="urn:lsid:ibm.com:td:f5582102-9ca7-4b04-8a65-6a70ebce2ad5";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Conditional Codetable Hierarchy</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h1 dir="ltr"><span style="font-size:20px;"><strong>Design Page for Conditional Codetable Hierarchy</strong></span></h1>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Background</span></strong></h2>
+
+<p dir="ltr">At present, the codetable hierarchy is static by design, i.e. it must be specified in a single CTX file, and cannot reference other codetables. An enhancement to the supervisor workspace depends on a hierarchy of case categories and case types, however, due to the existing design of the infrastructure, a series of search pop-ups are used to mimic the hierarchy.</p>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Requirements</span></strong></h2>
+
+<ul dir="ltr">
+	<li><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=107360" target="_blank">Task&nbsp;107360</a> - Conditional dropdown for the codetable files which are coming from different components</li>
+</ul>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Non Functional Requirements</span></strong></h2>
+
+<p dir="ltr">This is <strong>mandatory</strong>. We can fill in N/A if the specified non functional requirement is not applicable to the feature being delivered, otherwise some notes must be entered here covering the particular area.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" width="671">
+	<tbody>
+		<tr>
+			<td style="width: 118px;"><strong>NFR</strong></td>
+			<td style="width: 537px;"><strong>Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Accessibility</td>
+			<td style="width: 537px;">This enhancement only affects how dropdowns are populated, and should reuse existing widgets as much as possible for a uniform look-and-feel and accessibility.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Availability &amp; Resilience</td>
+			<td style="width: 537px;">The ability of the system to be fully or partly operational as and when required and to effectively handle failures that could affect system availability.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Development Resource</td>
+			<td style="width: 537px;">Knowledge of the existing codetable and codetable hierarchy infrastructure recommended.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Evolution</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Internationalisation</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Location</td>
+			<td style="width: 537px;">Positioning of dropdowns should follow the existing codetable hierarchy - vertical or horizontal parent-child or grandparent-parent-child layout.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Performance and Scalability</td>
+			<td style="width: 537px;">A codetable can potentially have a large number of elements. This should be handled in the most effective manner, so as not to regrade the performance of the application.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Regulation</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Security</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Usability</td>
+			<td style="width: 537px;">Moving away from a series of search screens to a codetable hierarchy - a series of dropdowns.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Design Options</span></strong></h2>
+
+<ul dir="ltr">
+	<li>
+	<h3 dir="ltr">Option 1</h3>
+
+	<ul>
+		<li>Add markup to existing UIM elements to specify <s>search endpoints (using existing codetables)</s> a filter class, which follows a contract set out by the infrastructure
+
+		<ul>
+			<li>The filter class can be invoked for regular codetables to allow display of a subset of values, or for codetable hierarchies, to achieve the same.</li>
+		</ul>
+		</li>
+		<li>Application developers are responsible for filtering the results to meet their business requirements</li>
+	</ul>
+	</li>
+	<li>
+	<h3>Option 2</h3>
+
+	<ul>
+		<li>Add a new UIM <s>element</s> widget to handle the dynamic filtered codetable hierarchies
+
+		<ul>
+			<li>Also requires a filter class to be provided by the application developers for the filtering functionality.</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<h3>Option 3</h3>
+
+	<ul>
+		<li>Add markup to existing Codetables to establish a relationship</li>
+		<li>REJECTED
+		<ul>
+			<li>This would be identical to how codetable hierarchy currently works, and not dynamic as required</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<h3>Option 4</h3>
+
+	<ul>
+		<li>Create a wrapper codetable hierarchy for existing codetables</li>
+		<li>REJECTED
+		<ul>
+			<li>This would be identical to how codetable hierarchy currently works, and not dynamic as required</li>
+			<li>This would require model changes, including a new Domain Definition, and updates to Struts.</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Design</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">This is <strong>mandatory</strong>. This should outline in detail the design chosen with all of the various areas for the component covered.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">UML Diagram/Class Architecture Diagram/Schematic Architecture Diagram</span></strong></p>
+
+<p dir="ltr">If applicable, a diagram should be constructed and placed here to display to the reader at a glance the architecture of the new feature or at the very least the relationship between the various classes that make up the new feature. It may also be applicable to construct a schematic to highlight the feature within the overall product that the feature is being applied to (i.e. where does this new feature fit into the overall offering etc.)</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">This will differ from component to component so the sub headings here will reflect that.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Component A</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Component B</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Validations</span></strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">Validations Required</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Data Model Changes and Required Indexes</span></strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">Describe any changes required to the data model, entities, operations, indexes etc.</li>
+	<li style="margin-left: 40px;"><strong>Also important here that if new tables/indexes are being added, check to ensure that the primary key/index lenght does not exceed the maximum allowed for DB2</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Resilience</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><br />
+This is <strong>mandatory</strong>. Some thought should be given to how resilient the new feature is.</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">&nbsp;&nbsp;&nbsp; What happens if something expected/unexpected goes wrong?</li>
+	<li style="margin-left: 40px;">&nbsp;&nbsp;&nbsp; What happens to the system?</li>
+	<li style="margin-left: 40px;">&nbsp;&nbsp;&nbsp; Will the user be able to take corrective action in the system without the need to resort to application logs/SQL searching/data manipulation outside of the system.</li>
+	<li style="margin-left: 40px;">&nbsp;&nbsp;&nbsp; Will the data be left in a consistent state within the system after the exception is thrown?</li>
+	<li style="margin-left: 40px;">&nbsp;&nbsp;&nbsp; Will there be messages given to the user? What will these messages be?</li>
+	<li style="margin-left: 40px;">&nbsp;&nbsp;&nbsp; Will there something written to the logs? What will this be?</li>
+	<li style="margin-left: 40px;">&nbsp;&nbsp;&nbsp; Does the feature require some of the exception data to be captured and an admin function provided to allow the situation to be re-mediated?</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Q &amp; A</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">This is <strong>optional</strong>. There may be some outstanding questions as regards to the design. These questions and the answers when they become available may be recorded here.</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Use Cases</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. The various use cases for the feature must be outlined here. They can be in whatever format deemed appropriate (i.e. verbose description or in a tabular format with actors and actions etc.). Below is an example of how use cases may be documented in a tabular format.</p>
+
+<table border="1" dir="ltr" style="width: 638px;">
+	<tbody>
+		<tr>
+			<td><strong>Role/Actor</strong></td>
+			<td><strong>Description</strong></td>
+			<td><strong>Expected Behavior</strong></td>
+			<td style="width: 256px;"><strong>Tested</strong></td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td>Does Something</td>
+			<td>What happens when this action is taken?</td>
+			<td style="width: 256px;">How is this tested, manual or automatically?</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Implementation Notes</span></strong></p>
+
+<p dir="ltr">This is <strong>optional</strong>. Any notes related to the actual implementation can be described here. These can be related to some questions related to the implementation, the way some part of the implementation was completed etc.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Application Impact</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. If there is no impact, then this is as simple as saying so. If there is impact, then this may describe the impact in detail and outline the upgrade path. If the feature is related to a CLE, this section can be a link to that CLE (and hence the documentation associated with the CLE will suffice).</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">CTM</span></strong></p>
+
+<p dir="ltr">This is <strong>optional</strong>. Consideration should be given to whether this feature adds or changes administration data. If new administration data is being added, are new CTM business objects required to transport this data. If existing administration data is being modified, will this require changes to existing CTM BOM instances?</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">JMX</span></strong></p>
+
+<p dir="ltr">This is <strong>optional</strong>. Consideration should be given to whether this feature should be instrumented to add JMX metrics. Normally, this is applicable to larger features and at the infrastructure level, there are few places where this is required. Nonetheless, some thought should be given to this item during the design phase.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Testing</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. An outline of all of the testing required by the feature should be present here. This may tie in with the use cases outlined above. This may differ from component to component so the sub headings here will reflect that.</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Unit tests</p>
+	</li>
+	<li>
+	<p>Manual Test Plans</p>
+	</li>
+	<li>
+	<p>Automated tests</p>
+	</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Documentation/How To Use Feature</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. This should describe how to use the feature added. Again this may differ from component to component but there are some general headings to consider:</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Where the feature fits in the overall component?</p>
+	</li>
+	<li>
+	<p>How it may be accessed (i.e. created/authored)?</p>
+	</li>
+	<li>
+	<p>What does it do (may be linked to the use cases above)?</p>
+	</li>
+	<li>
+	<p>Advantages of using the feature?</p>
+	</li>
+	<li>
+	<p>Any limitations associated with the feature?</p>
+	</li>
+	<li>
+	<p>A description of how the feature should be used etc.? This may also include a description of a contract between the various teams using the feature and will incorporate some details of the design.</p>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Check List</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Basically this is a quick check list of items that should be considered when doing a design for that particular component.</p>
+
+<table border="1" dir="ltr" style="width: 658px;">
+	<tbody>
+		<tr>
+			<td style="width: 166px;"><strong>Check List Item</strong></td>
+			<td style="width: 314px;"><strong>Notes</strong></td>
+			<td style="width: 157px;"><strong>Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">????</td>
+			<td style="width: 314px;">?????.</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Work Estimation</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Again, the actual items listed in the estimate breakdown may vary from task to task and component to component.</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Work Estimates</p>
+
+	<ul>
+		<li>
+		<p>Design: ? Days</p>
+		</li>
+		<li>
+		<p>Prototype: ? Days</p>
+		</li>
+		<li>
+		<p>Implementation: ? Days</p>
+		</li>
+		<li>
+		<p>Testing: ? Days</p>
+		</li>
+		<li>
+		<p>Documentation: ? Days</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Total: ? Days</p>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><br />
+&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

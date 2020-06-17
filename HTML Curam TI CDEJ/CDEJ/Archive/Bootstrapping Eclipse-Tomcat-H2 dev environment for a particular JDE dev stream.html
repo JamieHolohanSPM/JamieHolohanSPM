@@ -1,0 +1,199 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Bootstrapping Eclipse-Tomcat-H2 dev environment for a particular JDE dev stream</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../wiki.css" />
+<script type="text/javascript" src="../../wiki.js" ></script>
+<script type="text/javascript" src="../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Bootstrapping Eclipse-Tomcat-H2 dev environment for a particular JDE dev stream";
+    pageId="urn:lsid:ibm.com:td:6cf46796-924d-4831-b118-d6a5e76746a2";
+    toRoot="../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Bootstrapping Eclipse-Tomcat-H2 dev environment for a particular JDE dev stream</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h1 dir="ltr">Overview</h1>
+
+<p dir="ltr">This document details steps to set up development environment for JDE with Eclipse, Tomcat as application server and H2 as a database.</p>
+
+<p dir="ltr">This also assumes you use the IBM JDK from a local Websphere installation.</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii9" name="intInfo" style="border-radius: 6px;">
+<div id="ii9info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii9" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Pull down a JDE development stream</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">Create setenv.bat</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii3">Create Bootstrap.properties</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii3">Create AppServer.properties</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii4">Run the bootstrap script</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii5">Build SDEJ: the "server" target</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii6">Build CDEJ: the "client" taget</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii7">Build TabTestApp</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii8">Build ClientMockApp</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii0">Create Eclipse project configurations</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii0">Start Eclipse</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii10">Work around checkstyle_plugin issue</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii11">Setup variables</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii12">Setup Tomcat</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii15">To avoid out of memory errors when running tests</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii13">Import Projects</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii14">Start TabTest app</a></div>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii1">Pull down a JDE development stream</h2>
+
+<p dir="ltr">As a prerequisite you need to pull down one of the JDE development streams, using ClearCase (CC). There is a section dedicated to doing this so I will not go into any details.<br />
+The JDE source code will end up in a specific directory on your harddrive, I will call it <span style="font-family:courier new,courier,monospace;">&lt;CURAMJDE_ROOT&gt;</span>, which is the standard name you will see used in batch scripts, etc. as well.</p>
+
+<p dir="ltr">Your <span style="font-family:courier new,courier,monospace;">&lt;</span><span style="font-family:courier new,courier,monospace;">CURAMJDE_ROOT</span><span style="font-family:courier new,courier,monospace;">&gt;</span> is at the TIVOB directory for your stream, e.g. <span style="font-family:courier new,courier,monospace;">CURAMJDE_ROOT</span>=<span style="font-family:courier new,courier,monospace;">C:\CC\mvlk_TI_6_0_5_FD_DOJO_MERGE2\TIVOB</span></p>
+
+<h2 dir="ltr" id="ii2">Create setenv.bat</h2>
+
+<ul dir="ltr">
+	<li>In your &lt;<span style="font-family:courier new,courier,monospace;">CURAMJDE_ROOT</span>&gt; there is a file called <span style="font-family:courier new,courier,monospace;">setenv.bat.sample</span></li>
+	<li>Make a copy of this file and call it <span style="font-family:courier new,courier,monospace;">setenv.bat</span>, also remove the read-only flag from the file.</li>
+	<li>Edit the <span style="font-family:courier new,courier,monospace;">setenv.bat</span> file and make the following changes, substituting sample paths with paths from your actual machine.</li>
+	<li>Setup paths to IBM Java in the following way:<br />
+	<span style="font-family:courier new,courier,monospace;">if "%as.vendor%" == "IBM" (<br />
+	&nbsp; set WAS_HOME=C:\Exclude\IBM\WebSphere8<br />
+	&nbsp; set JAVA_HOME=%WAS_HOME%\java<br />
+	&nbsp; set J2EE_JAR=%WAS_HOME%\lib\j2ee.jar<br />
+	)</span></li>
+	<li>Add a path to where you want your Development Environment to reside (different location than your JDE stream):<br />
+	<span style="font-family:courier new,courier,monospace;">set DEVENV_HOME=C:\Exclude\DevEnvXYZ</span></li>
+</ul>
+
+<h2 dir="ltr" id="ii3">Create Bootstrap.properties</h2>
+
+<ul dir="ltr">
+	<li>Add a file <span style="font-family:courier new,courier,monospace;">Bootstrap.properties</span> into <span style="font-family:courier new,courier,monospace;">&lt;</span><span style="font-family:courier new,courier,monospace;">CURAMJDE_ROOT</span><span style="font-family:courier new,courier,monospace;">&gt;\coreinf\properties</span> with the following content<br />
+	(substitute <span style="font-family:courier new,courier,monospace;">&lt;XYZ&gt;</span> variables appropriately):<br />
+	<br />
+	<span style="font-family:courier new,courier,monospace;">curam.environment.bindings.location=&lt;</span><span style="font-family:courier new,courier,monospace;">CURAMJDE_ROOT</span><span style="font-family:courier new,courier,monospace;">&gt;/coreinf/properties<br />
+	curam.environment.tnameserv.port=900<br />
+	curam.db.type=H2<br />
+	curam.db.username=&lt;your_user_name&gt;<br />
+	curam.db.password=&lt;encrypted_password&gt;<br />
+	curam.db.name=&lt;your_db_name&gt;<br />
+	curam.db.h2.mode=embedded<br />
+	curam.db.h2.lockout=30000<br />
+	curam.db.serverport=50000<br />
+	curam.db.servername=doorstep.mul.ie.ibm.com<br />
+	curam.testing.datasets=&lt;</span><span style="font-family:courier new,courier,monospace;">CURAMJDE_ROOT</span><span style="font-family:courier new,courier,monospace;">&gt;/TestDatasets<br />
+	disable.jscompress=true<br />
+	curam.environment.tnameserv.port=900</span></li>
+	<li>encrypted version of your password of choice can be obtained by doing <span style="font-family:courier new,courier,monospace;">build encrypt -Dpassword=&lt;your_password&gt;</span> form the &lt;<span style="font-family:courier new,courier,monospace;">CURAMJDE_ROOT</span>&gt;</li>
+	<li>Your DB name can be anything, but keep it short rather than overly long.</li>
+</ul>
+
+<h2 dir="ltr" id="ii3">Create AppServer.properties</h2>
+
+<ul dir="ltr">
+	<li>Add a file AppServer<span style="font-family:courier new,courier,monospace;">.properties</span> into <span style="font-family:courier new,courier,monospace;">&lt;</span><span style="font-family:courier new,courier,monospace;">CURAMJDE_ROOT</span><span style="font-family:courier new,courier,monospace;">&gt;\coreinf\properties</span> with the following content<br />
+	(substitute <span style="font-family:courier new,courier,monospace;">&lt;XYZ&gt;</span> variables appropriately):<br />
+	as.vendor=IBM<br />
+	security.username=websphere<br />
+	security.password=XOVRjjVTebM8gV953LGMLQ==<br />
+	node.name=&lt;your_host_name&gt;<br />
+	curam.server.name=C1<br />
+	profile.name=JDE<br />
+	curam.server.port=2809<br />
+	curam.db.auth.alias=databaseAlias<br />
+	curam.server.ipaddress=localhost<br />
+	curam.db.driver=db2<br />
+	curam.webservices.httpport=9082<br />
+	curam.client.httpport=9044</li>
+</ul>
+
+<h2 dir="ltr" id="ii4">Run the bootstrap script</h2>
+
+<ul dir="ltr">
+	<li>Open command shell in Admin mode (assuming Windows 7 and later)</li>
+	<li><span style="font-family:courier new,courier,monospace;">cd</span> into your &lt;<span style="font-family:courier new,courier,monospace;">CURAMJDE_ROOT</span>&gt;</li>
+	<li>set <span style="font-family:courier new,courier,monospace;">CURAMJDE_ROOT=.</span></li>
+	<li>execute <span style="font-family:courier new,courier,monospace;">setenv.bat</span></li>
+	<li>execute <span style="font-family:courier new,courier,monospace;">devenv\setup\setup.bat</span></li>
+</ul>
+
+<h2 dir="ltr" id="ii5">Build SDEJ: the "server" target</h2>
+
+<p dir="ltr">[TBD]</p>
+
+<h2 dir="ltr" id="ii6">Build CDEJ: the "client" taget</h2>
+
+<p dir="ltr">[TBD]</p>
+
+<h2 dir="ltr" id="ii7">Build TabTestApp</h2>
+
+<p dir="ltr">[TBD]</p>
+
+<h2 dir="ltr" id="ii8">Build ClientMockApp</h2>
+
+<p dir="ltr">[TBD]</p>
+
+<h2 dir="ltr" id="ii0">Create Eclipse project configurations</h2>
+
+<ul dir="ltr">
+	<li><span style="font-family:courier new,courier,monospace;">cd</span> into your &lt;<span style="font-family:courier new,courier,monospace;">CURAMJDE_ROOT</span>&gt;</li>
+	<li>build -f commons/build.xml eclipse</li>
+	<li>build -f client/components/build.xml eclipse</li>
+</ul>
+
+<h2 dir="ltr" id="ii0">Start Eclipse</h2>
+
+<p dir="ltr">[TBD]</p>
+
+<h3 dir="ltr" id="ii10">Work around checkstyle_plugin issue</h3>
+
+<p dir="ltr">We have a Checkstyle plugin issue that exhibits an issue when using a new DevEnv stream – this plugin behaves fine where your Eclipse has used a previous version of the plugin.<br />
+The symptoms are that it fails to load and causes all other plugins not to be loaded into your Eclipse.<br />
+This issue is logged against Checkstyle plugin in <a href="http://sourceforge.net/tracker/?func=detail&amp;aid=3309222&amp;group_id=80344&amp;atid=559494">http://sourceforge.net/tracker/?func=detail&amp;aid=3309222&amp;group_id=80344&amp;atid=559494</a><br />
+<br />
+To work around the issue you need to roll back to the earlier Checkstyle plugin by changing the file (keep backup of old content!)<br />
+<span style="font-family:courier new,courier,monospace;">TIVOB\devenv\setup\installers\checkstyle_plugin.properties</span><br />
+<br />
+To use<br />
+<br />
+<span style="font-family:courier new,courier,monospace;">tool.version=5.2.0.201010072021<br />
+tool.location=eclipseenv/eclipse-extensions<br />
+tool.archive.name=net.sf.eclipsecs-${tool.version}-updatesite.zip</span><br />
+<br />
+Then run <span style="font-family:courier new,courier,monospace;">deveenv\setup\setup.bat</span><br />
+Start Eclipse and all your plugins should be available again.<br />
+You should then go back to the other Checkstyle plugin by reverting the changed file to it's original content.<br />
+<br />
+And things will continue to be fine!<br />
+&nbsp;</p>
+
+<h2 dir="ltr" id="ii11">Setup variables</h2>
+
+<p dir="ltr">[TBD]</p>
+
+<h2 dir="ltr" id="ii12">Setup Tomcat</h2>
+
+<p dir="ltr">[TBD]</p>
+
+<h3 dir="ltr" id="ii15">To avoid out of memory errors when running tests</h3>
+
+<ul dir="ltr">
+	<li>close Eclipse</li>
+	<li>open&nbsp;<span style="font-family:courier new,courier,monospace;">the &lt;</span><span style="font-family:courier new,courier,monospace;">CURAMJDE_ROOT</span><span style="font-family:courier new,courier,monospace;">&gt;\devenv\eclipseenv\workspace\.metadata\.plugins\org.eclipse.core.runtime\.settings</span>\<span style="font-family:courier new,courier,monospace;">com.sysdeo.eclipse.tomcat.prefs</span> file</li>
+	<li>find the line starting with "<span style="font-family:courier new,courier,monospace;">jvmParameters=</span>"</li>
+	<li>replace the whole line with: <span style="font-family:courier new,courier,monospace;">jvmParameters=-Xmx750M;-XX%3AMaxPermSize%3D128m;-XX%3A%2BUseConcMarkSweepGC;-XX%3A%2BCMSClassUnloadingEnabled;</span></li>
+</ul>
+
+<h2 dir="ltr" id="ii13">Import Projects</h2>
+
+<p dir="ltr">[TBD]</p>
+
+<h2 dir="ltr" id="ii14">Start TabTest app</h2>
+
+<p dir="ltr">[TBD]</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

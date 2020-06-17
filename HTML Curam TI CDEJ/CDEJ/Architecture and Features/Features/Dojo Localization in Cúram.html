@@ -1,0 +1,114 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Dojo Localization in Cúram</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Dojo Localization in Cúram";
+    pageId="urn:lsid:ibm.com:td:f64917c2-a059-4e8e-9ab3-1ddab232853b";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Dojo Localization in Cúram</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h1 dir="ltr">Overview</h1>
+
+<p dir="ltr"><em>Dojo Toolkit</em> is a JavaScript library used in Cúram's web-browser-based user interface. This document describes how is Dojo Toolkit integrated into Cúram with regards to localizable resources.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Basic Definitions / Terminology</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">Cúram Localization Process</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii3">Dojo Localization</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii4">Preloading of Dojo localization bundle roll-ups</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii5">A known issue with certain locale combinations</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii6">Cúram Application JavaScript Localization</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii7">Resources</a></div>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii1"><strong>Basic Definitions / Terminology</strong></h2>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">At the highest level both Cúram and Dojo come with its own set of <em>localizable resources</em> and these are translated into multiple different languages/<em>locales</em>. Cúram localizable resources use the Java *.properties file format while Dojo localizable resources use JSON format. In both cases the localizable resources essentially take the form of key-value pairs.</p>
+
+<p dir="ltr">Both Dojo and Cúram also have it's own build system used to transform the source code into executable format.</p>
+
+<p dir="ltr">For the purpose of this document we have to recognize two separate phases of Cúram build - <em>JDE build</em> and <em>application build</em>. JDE build creates the infrastructure which is shipped to customers and used there for building custom Cúram applications.</p>
+
+<p dir="ltr">Dojo is built at JDE build time and shipped in built form.<br />
+The main purpose of Dojo build is to optimize application bandwidth and resource usage in the browser by concatenating a number of required JavaScript modules into a single <em>"layer" file</em> which is also compressed. This layer file is then included into application pages.</p>
+
+<p dir="ltr">Similarly Dojo has a way of concatenating localized resources for all modules included in a layer file into a so called <em>roll-up bundle</em>. Roll-up bundles are created at Dojo build time, one per locale/layer combination. When layer file is loaded in a page the roll-up bundles are <em>preloaded</em> as well so that the required localizable resources are available without further network requests.</p>
+
+<h2 dir="ltr" id="ii2"><strong>Cúram Localization Process</strong></h2>
+
+<p dir="ltr">In Cúram localizable resources (*.properties files) exist at both JDE and application levels. Cúram developers produce English versions only, translation into other languages is done separately and delivered as a separate <em>application component</em>. The Cúram application is typically built for a limited set of locales, rather than the full set supported by Cúram. The selection of locales to build for is done at application build time and the resulting application only supports the locales selected at build time.</p>
+
+<h2 dir="ltr" id="ii3"><strong>Dojo Localization</strong></h2>
+
+<p dir="ltr">Dojo Toolkit is heavily used in the Cúram application infrastructure and it comes with translations for the set of messages/widgets it contains.<br />
+As of 6.0.5.3 we rely on the default translations provided by Dojo on the assumption the supported locales (there is 29 of them: ar,ca,cs,da,de-de,el,en-gb,en-us,es-es,fi-fi,fr-fr,he-il,hu,it-it,ja-jp,ko-kr,nl-nl,nb,pl,pt-br,pt-pt,ru,sk,sl,sv,th,tr,zh-tw,zh-cn) cover the languages we need for Cúram.</p>
+
+<p dir="ltr">As will be shown below this assumption holds only partially, because in some cases Dojo provided locale variants are too specific and don't match variants needed by Cúram.</p>
+
+<h2 dir="ltr" id="ii4"><strong>Preloading of Dojo localization bundle roll-ups</strong></h2>
+
+<p dir="ltr">Until 6.0.5.2 the selection of locales for Cúram application build does not affect the creation and preloading of Dojo roll-up bundles. These are created at JDE build time and are configured to be created and preloaded for every layer file and every Dojo locale. This is because at JDE build time we can't make any assumptions about the locales the application will be built for so we have to include the full list.</p>
+
+<p dir="ltr">In 6.0.5.3 we are introducing an improvement that limits preloading of roll-up bundles to only the locales selected for the Cúram application being built. This will speed up preloading by leaving out locales that are not required for a specific application build.</p>
+
+<h3 dir="ltr" id="ii5">A known issue with certain locale combinations</h3>
+
+<p dir="ltr">The above mechanism however only works if locales selected for Cúram application build match the roll-up bundles available in the JDE. This is because in some cases Dojo provided locale variants are too specific and don't match variants needed by Cúram.</p>
+
+<p dir="ltr">It will work if Cúram application is built for "de_DE" locale, because it directly matches the "de-de" roll-up bundle.<br />
+It will work if Cúram application is built for "cs_CZ" locale, because it matches "cs" roll-up bundle by locale fallback.<br />
+But it will <em>not</em> work if Cúram application is built for "fr_CA" locale, because no roll-up module will match (there is only "fr-fr" available). Such a failure will result in parts of application UI falling back to English.</p>
+
+<p dir="ltr">Currently in order to avoid this issue the missing locale must be added to the JDE, which requires translation effort and a JDE release.</p>
+
+<p dir="ltr">We plan to further improve the Cúram build and translation processes to let us modify/add to the list of Dojo locales without requiring a JDE release. This is tracked in <a href="http://jira.curamsoftware.com:8080/browse/TEC-13223">TEC-13223</a>.</p>
+
+<p dir="ltr"><img src="/wikis/form/api/wiki/6900d1bd-a7e2-4fc9-973f-bca6c088b6b1/page/349ef194-b3aa-492c-9c3c-73a6d89c45ce/attachment/21d5fd4c-1f61-4e67-915c-78abef5eaba1/media/Dojo%20Locales%20in%20C%c3%baram%20Overview.png?preventCache=1462791800252"></img></p>
+
+<h2 dir="ltr" id="ii6"><strong>Cúram Application JavaScript Localization</strong></h2>
+
+<p dir="ltr">JDE provides a way to externalize localizable resources from custom application JavaScript into *.properties format and these are then converted to standard Dojo localizable bundles in JSON format as part of the application build. This is a convenience for Cúram translation teams that prefer to work with localizable resources in *.properties format.</p>
+
+<p dir="ltr">The resulting bundles in JSON format are loaded in JavaScript code with the standard Dojo API (dojo.requireLocalization()) and then used via a defined Cúram API (curam.util.ResourceBundle).</p>
+
+<p dir="ltr">More information here: <a href="http://curzilla.curamsoftware.com/EJB/TechInf/ClientTeam/ArchitectureAndDesign/ExternalizeMessagesFromApplicationJavaScript">http://curzilla.curamsoftware.com/EJB/TechInf/ClientTeam/ArchitectureAndDesign/ExternalizeMessagesFromApplicationJavaScript</a></p>
+
+<p dir="ltr">This mechanism is using the standard Dojo way of loading localizable resources and is not currently integrated with our layer files or roll-up modules.</p>
+
+<h2 dir="ltr" id="ii7"><strong>Resources</strong></h2>
+
+<ul dir="ltr">
+	<li>dojo\i18n.js file comments from the Dojo source distribution</li>
+	<li><a href="http://dojotoolkit.org/reference-guide/1.7/dojo/requireLocalization.html#dojo-requirelocalization">http://dojotoolkit.org/reference-guide/1.7/dojo/requireLocalization.html#dojo-requirelocalization</a></li>
+	<li><a href="http://dojotoolkit.org/reference-guide/1.7/dojo/i18n.html">http://dojotoolkit.org/reference-guide/1.7/dojo/i18n.html</a></li>
+	<li><a href="http://dojotoolkit.org/documentation/tutorials/1.7/i18n/">http://dojotoolkit.org/documentation/tutorials/1.7/i18n/</a></li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

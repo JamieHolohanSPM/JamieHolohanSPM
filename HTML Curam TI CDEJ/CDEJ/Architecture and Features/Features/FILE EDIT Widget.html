@@ -1,0 +1,517 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>FILE EDIT Widget</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="FILE EDIT Widget";
+    pageId="urn:lsid:ibm.com:td:df95391d-922b-4fdd-9325-15f2bb193ec9";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">FILE EDIT Widget</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><div contenteditable="false" name="intInfo" style="border-radius: 6px; margin: 8px; padding: 4px; display: block; width: auto;background-color: #ffc;">Table of Contents:
+<ul style="list-style-type:none !important;">
+	<li style="list-style-type:none;"><a href="#ii33" style="display: block;">Overview</a></li>
+	<li style="list-style-type:none;"><a href="#ii1" style="display: block;">What is "Word Integration"</a></li>
+	<li style="list-style-type:none;"><a href="#ii2" style="display: block;">High Level Design</a></li>
+	<li style="list-style-type:none;"><a href="#ii34" style="display: block;">IE Based Solution</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii35" style="display: block;">Overview</a></li>
+		<li style="list-style-type:none;"><a href="#ii36" style="display: block;">Source</a></li>
+		<li style="list-style-type:none;"><a href="#ii46" style="display: block;">Deliverables</a></li>
+		<li style="list-style-type:none;"><a href="#ii37" style="display: block;">How to Build</a></li>
+		<li style="list-style-type:none;"><a href="#ii48" style="display: block;">Signing the JARs</a></li>
+		<li style="list-style-type:none;"><a href="#ii38" style="display: block;">Environment Set Up</a></li>
+		<li style="list-style-type:none;"><a href="#ii39" style="display: block;">Testing</a></li>
+	</ul>
+	</li>
+	<li style="list-style-type:none;"><a href="#ii40" style="display: block;">Chrome Based Solution</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii41" style="display: block;">Overview</a></li>
+		<li style="list-style-type:none;"><a href="#ii47" style="display: block;">Source</a></li>
+		<li style="list-style-type:none;"><a href="#ii42" style="display: block;">Deliverables</a></li>
+		<li style="list-style-type:none;"><a href="#ii43" style="display: block;">How to Build</a></li>
+		<li style="list-style-type:none;"><a href="#ii44" style="display: block;">Environment Set Up</a></li>
+		<li style="list-style-type:none;"><a href="#ii45" style="display: block;">Testing</a></li>
+		<li style="list-style-type:none;"><a href="#ii3" style="display: block;">Debugging</a></li>
+	</ul>
+	</li>
+</ul>
+</div>
+
+<h2 dir="ltr" id="ii33">Overview</h2>
+
+<p dir="ltr">The following page contains the basic details on what the current Word Integration solution is and what are the basic details required to allow it to be built, delivered and tested. There are currently two different solutions at play here, an applet based solution which works on the IE browser and a Chrome based solution which requires a native messaging host and a Chrome extension etc.</p>
+
+<h2 dir="ltr" id="ii1">What is "Word Integration"</h2>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User Perspective</strong>: open Word doc from Cúram, edit and save without manual download/upload</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">AdminPerspective</strong>: make doc templates and define where to put data, upload to Cúram DB</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Developer Perspective</strong>: put FILE_EDIT widget in a UIM, connect to a BPO that provides template (doc) and data (xml) from DB</li>
+</ul>
+
+<h2 dir="ltr" id="ii2">High Level Design</h2>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">We need to automate: download, open in Word, fill in data, let user edit, on save upload back to DB</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">This is done with a Java applet that orchestrates the editing session</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">This talks to Cúram app in browser (Java-&gt;JavaScript) via LiveConnect API in Java plugin</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">This controls Word and IE via COM or pure JS for other browsers</li>
+</ul>
+
+<h2 dir="ltr" id="ii34">IE Based Solution</h2>
+
+<h3 dir="ltr" id="ii35">Overview</h3>
+
+<p dir="ltr">The IE based solution is described in some of the child pages associated with this page. However, it should be noted that some that content is legacy but can be referred to for an overall view on the solution.</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://ibm.biz/Bdzd2s" rel="noopener noreferrer" target="_blank">Legacy&nbsp;-&nbsp;File&nbsp;Edit&nbsp;Widget&nbsp;on&nbsp;IE</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://ibm.biz/Bdzd2Z" rel="noopener noreferrer" target="_blank">Legacy&nbsp;-&nbsp;Signing&nbsp;Code&nbsp;Certificates&nbsp;in&nbsp;Pictures</a></li>
+</ul>
+
+<h3 dir="ltr" id="ii36">Source</h3>
+
+<p dir="ltr">The following describes the source code for the IE based solution.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="70" style="table-layout: fixed; overflow-wrap: break-word; border-collapse: collapse; border-color: rgb(105, 105, 105);" width="1064">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 228px; border-color: rgb(105, 105, 105);"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Name</span></strong></td>
+			<td style="overflow: hidden; width: 389px; border-color: rgb(105, 105, 105);"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Source Location</span></strong></td>
+			<td style="overflow: hidden; width: 418px; border-color: rgb(105, 105, 105);"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Comments</span></strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 228px; border-color: rgb(105, 105, 105);">commons-codec-1.5.jar</td>
+			<td style="overflow: hidden; width: 389px; border-color: rgb(105, 105, 105);">TI\client\components\word-file-edit\lib\presigned-jars\sha-2</td>
+			<td style="overflow: hidden; width: 418px; border-color: rgb(105, 105, 105);">Signed copy of an OSS JAR</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 228px; border-color: rgb(105, 105, 105);">commons-io-2.4.jar</td>
+			<td style="overflow: hidden; width: 389px; border-color: rgb(105, 105, 105);">TI\client\components\word-file-edit\lib\presigned-jars\sha-2</td>
+			<td style="overflow: hidden; width: 418px; border-color: rgb(105, 105, 105);">Signed copy of an OSS JAR. <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">This is legacy and not needed for the current solution.</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 228px; border-color: rgb(105, 105, 105);">jacob-1.15-M4.jar</td>
+			<td style="overflow: hidden; width: 389px; border-color: rgb(105, 105, 105);">TI\client\components\word-file-edit\lib\presigned-jars\sha-2</td>
+			<td style="overflow: hidden; width: 418px; border-color: rgb(105, 105, 105);">Signed copy of an OSS JAR</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 228px; border-color: rgb(105, 105, 105);">word-file-edit.jar</td>
+			<td style="overflow: hidden; width: 389px; border-color: rgb(105, 105, 105);">TI\client\components\word-file-edit\lib\presigned-jars\sha-2</td>
+			<td style="overflow: hidden; width: 418px; border-color: rgb(105, 105, 105);">Built from the source code located in the TI\client\components\word-file-edit client component, signed and then the resultant JAR copied into here. It is then renamed as part of the client build to WordIntegrationApplet.jar and copied into it's deliverable location in the CDEJ</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 228px; border-color: rgb(105, 105, 105);">Multiple Files</td>
+			<td style="overflow: hidden; width: 389px; border-color: rgb(105, 105, 105);">TI\client\components\word-file-edit\src</td>
+			<td style="overflow: hidden; width: 418px; border-color: rgb(105, 105, 105);">The source and test files for the solution. Note there are both IE and Chrome specific files in here i.e. some files are shared between both solutions.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 228px; border-color: rgb(105, 105, 105);">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;- FEBase-body.jsp</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;- FEBase-head.jsp</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;- file-edit-chrome.jsp (Chrome version)</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;- file-edit-chrome-applet.jsp <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">(legacy)</strong></p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;- file-edit-dialog.jsp (main JSP)</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;- file-edit-ie.jsp (IE version)</p>
+			</td>
+			<td style="overflow: hidden; width: 389px; border-color: rgb(105, 105, 105);">TI\client\CoreInf\CuramCDEJ\lib\curam\web\jsp</td>
+			<td style="overflow: hidden; width: 418px; border-color: rgb(105, 105, 105);">These are manual handcrafted JSPs which manage the Word Integration process and are shown to the end user.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 228px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+			<td style="overflow: hidden; width: 389px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+			<td style="overflow: hidden; width: 418px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii46">Deliverables</h3>
+
+<p dir="ltr">The following describes the deliverables for the IE based solution.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="70" style="table-layout: fixed; overflow-wrap: break-word; border-collapse: collapse; border-color: rgb(105, 105, 105);" width="1064">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 207px; border-color: rgb(105, 105, 105);"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Name</span></strong></td>
+			<td style="overflow: hidden; width: 294px; border-color: rgb(105, 105, 105);"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Delivered Location</span></strong></td>
+			<td style="overflow: hidden; width: 508px; border-color: rgb(105, 105, 105);"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Comments</span></strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 207px; border-color: rgb(105, 105, 105);">WordIntegrationApplet.jar</td>
+			<td style="overflow: hidden; width: 294px; border-color: rgb(105, 105, 105);">CuramCDEJ\lib\curam\jar\signed\sha-2</td>
+			<td style="overflow: hidden; width: 508px; border-color: rgb(105, 105, 105);">Built as part of the client build as it renames the file-edit.jar file which is already signed</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 207px; border-color: rgb(105, 105, 105);">commons-codec-1.5.jar</td>
+			<td style="overflow: hidden; width: 294px; border-color: rgb(105, 105, 105);">CuramCDEJ\lib\ext\jar\signed\sha-2</td>
+			<td style="overflow: hidden; width: 508px; border-color: rgb(105, 105, 105);">Built as part of the client build. Just moved from it's source location. This JAR is signed</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 207px; border-color: rgb(105, 105, 105);">jacob-1.15-M4.jar</td>
+			<td style="overflow: hidden; width: 294px; border-color: rgb(105, 105, 105);">CuramCDEJ\lib\ext\jar\signed\sha-2</td>
+			<td style="overflow: hidden; width: 508px; border-color: rgb(105, 105, 105);">Built as part of the client build. Just moved from it's source location. This JAR is signed.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 207px; border-color: rgb(105, 105, 105);">commons-io-2.4.jar</td>
+			<td style="overflow: hidden; width: 294px; border-color: rgb(105, 105, 105);">CuramCDEJ\lib\ext\jar\signed\sha-2</td>
+			<td style="overflow: hidden; width: 508px; border-color: rgb(105, 105, 105);">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Built as part of the client build. Just moved from it's source location.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">This is a LEGACY jar and no longer required. This JAR is signed.</strong></p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 207px; border-color: rgb(105, 105, 105);">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;- FEBase-body.jsp</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;- FEBase-head.jsp</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;- file-edit-chrome.jsp (Chrome version)</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;- file-edit-chrome-applet.jsp <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">(legacy)</strong></p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;- file-edit-dialog.jsp (main JSP)</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;- file-edit-ie.jsp (IE version)</p>
+			</td>
+			<td style="overflow: hidden; width: 294px; border-color: rgb(105, 105, 105);">CuramCDEJ\lib\curam\web\jsp</td>
+			<td style="overflow: hidden; width: 508px; border-color: rgb(105, 105, 105);">These are manual handcrafted JSPs which manage the Word Integration process and are shown to the end user.</td>
+		</tr>
+	</tbody>
+</table>
+
+<h3 dir="ltr" id="ii37">How to Build</h3>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Once the source code and related changes have been made to the files in the "TI\client\components\word-file-edit\src" directory, navigate to that directory, set the required environment variables (ANT, JAVA if required) and run the command to build the word-file-edit.jar file (ant -f build.xml jar). This will build the JAR into the "TI\client\components\word-file-edit\target" directory.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">That new JAR needs to be signed and checked into the "TI\client\components\word-file-edit\lib\presigned-jars\sha-2" directory.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The standard "appbuild client" then renames the "word-file-edit.jar" to "WordIntegrationApplet.jar" and copies it and the other required JARs into the required deliverable directories (see above).</li>
+</ol>
+
+<h3 dir="ltr" id="ii48">Signing the JARs</h3>
+
+<p dir="ltr">The word-file-edit.jar (each time it is built) and related JARs (if their versions are being updated) are required to be signed by an IBM signing process (to ensure they pass the security checks when the applet is being loaded in the browser). The basic steps to perform this are:</p>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The JARs involved in this step are the following:
+	<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The previously compiled <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">file-word-edit.jar</strong> file which is taken from the <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TI\client\components\word-file-edit\target</strong> directory.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The following three JARs taken from the <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TI\client\CoreInf\CuramCDEJ\lib\ext\jar</strong> directory. Note if the versions of these three JARs has not changed previously and the signing algorithm is the same, it may not be required to sign them again for each change. In most cases however, it is prudent to do so as it will keep everything consistent and ensure that there are no incompatibilities.
+		<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">commons-codec-1.5.jar</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">commons-io-2.4.jar</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">jacob.jar</li>
+		</ol>
+		</li>
+	</ol>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Navigate to the following link: <a href="https://pgawdccosig01.sl.bluecloud.ibm.com/">https://pgawdccosig01.sl.bluecloud.ibm.com/</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Ensure you have an account for the signing service (contact your manager if you do not).</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Log in using your intranet username and password and click on the Cloud Sign link.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">On this page, there is no requirement to populate the build number field, select the Certificate to be used (normally only one available anyway) and click the Browser button to select the JARs to be signed.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">You can sign one or more JARs at a time.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">When you have selected the JARs, the page will state "x Files Selected". Click Sign Code.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The user will then be brought to a page where the signed JAR(s) will be present in a zip file. This can then be downloaded and signed JARs extracted.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The JARs should then be placed into the required source directory - <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TI\client\components\word-file-edit\lib\presigned-jars\sha-2</strong>
+	<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Note as part of this process, if the <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">jacob.jar</strong> file has been signed, it needs to be renamed to <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">jacob-1.15-M4.jar</strong> as part of the this process.</li>
+	</ol>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The standard "appbuild client" target will then produce the required deliverables for the IE Word solution once this process has been followed.</li>
+</ol>
+
+<h3 dir="ltr" id="ii38">Environment Set Up</h3>
+
+<p dir="ltr">The following are the steps required to set up the Windows environment for testing the IE based Word Integration solution.</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:12px;"><span style="font-family:Arial,Helvetica,sans-serif;"><span lang="EN-US">Ensure Microsoft Word (2007 or higher) is installed on the test machine. Check <a href="https://www.ibm.com/software/reports/compatibility/clarity-reports/report/html/prereqsForProduct?deliverableId=5ABDD150BD9B11E88857DCC2171712A1#sw-6">Curam Prerequisites</a> for Supported versions (Word 2007, 2010 and 2013 are the currently supported versions for Curam v7)</span></span></span></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-family:Arial,Helvetica,sans-serif;"><span lang="EN-US">Ensure IE 11 is installed on your test server. Please note that Windows 10 will contain newer minor versions of IE 11 so it is recommended that the minor version of IE 11 be noted when testing</span></span></p>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:12px;"><span style="font-family:Arial,Helvetica,sans-serif;"><span lang="EN-US">Ensure the Java version on the windows machine is 1.8.x or higher. </span></span></span> (Make sure it's the 32-bit version of the JRE - the 64-bit version seems to get installed by ISSI and doesn't work)</p>
+
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span lang="EN-US" style="font-size:11.0pt"><span style="font-family:&quot;Cambria&quot;,&quot;serif&quot;"><span style="font-size:12px;"><span style="font-family:Arial,Helvetica,sans-serif;">Java is available from -https://java.com/en/download/&nbsp; Check&nbsp;<a href="https://www.ibm.com/software/reports/compatibility/clarity-reports/report/html/prereqsForProduct?deliverableId=5ABDD150BD9B11E88857DCC2171712A1#sw-6">Curam Prerequisites</a></span></span> <span style="font-size:12px;"><span style="font-family:Arial,Helvetica,sans-serif;">for the version of Java that supported (usually latest version available at time of release)</span></span></span></span></p>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:12px;"><span style="font-family:Arial,Helvetica,sans-serif;"><span lang="EN-US">On Internet Explorer go to </span><a href="https://www.java.com/en/download/installed.jsp"><span lang="EN-US">https://www.java.com/en/download/installed.jsp</span></a><span lang="EN-US"> to verify the version of Java you have installed</span></span></span></p>
+	</li>
+</ul>
+
+<h3 dir="ltr" id="ii39">Testing</h3>
+
+<p dir="ltr">The following are the list of tests (and steps) which can be used to test the IE based Word Integration solution.</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">See the&nbsp;<a href="FILE%20EDIT%20Widget._ATTACHMENTS_/Word%2BIntegration%2BVerification%2BTest.docx">attached&nbsp;document</a> for testing steps</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">====================================================================================================================================================================================</p>
+
+<h2 dir="ltr" id="ii40">Chrome Based Solution</h2>
+
+<h3 dir="ltr" id="ii41">Overview</h3>
+
+<p dir="ltr">The Chrome based solution is described in some of the child pages associated with this page:</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://ibm.biz/BdzdYC" rel="noopener noreferrer" target="_blank">Enabling&nbsp;the&nbsp;File&nbsp;Edit&nbsp;Widget&nbsp;on&nbsp;Chrome</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://ibm.biz/BdzdYQ" rel="noopener noreferrer" target="_blank">Generating&nbsp;the&nbsp;MSI&nbsp;Installer&nbsp;for&nbsp;Host&nbsp;Component</a></li>
+</ul>
+
+<h3 dir="ltr" id="ii47">Source</h3>
+
+<p dir="ltr">The following describes the source code for the Chrome based solution.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="70" style="table-layout: fixed; overflow-wrap: break-word; border-collapse: collapse; border-color: rgb(105, 105, 105);" width="1064">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 238px; border-color: rgb(105, 105, 105);"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Name</span></strong></td>
+			<td style="overflow: hidden; width: 291px; border-color: rgb(105, 105, 105);"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Location</span></strong></td>
+			<td style="overflow: hidden; width: 520px; border-color: rgb(105, 105, 105);"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Comments</span></strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 238px; border-color: rgb(105, 105, 105);">Multiple Files</td>
+			<td style="overflow: hidden; width: 291px; border-color: rgb(105, 105, 105);">TI\client\components\word-file-edit\src</td>
+			<td style="overflow: hidden; width: 520px; border-color: rgb(105, 105, 105);">The source and test files for the solution. Note there are both IE and Chrome specific files in here i.e. some files are shared between both solutions.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 238px; border-color: rgb(105, 105, 105);">Bat files for launching and installing the Word Bridge</td>
+			<td style="overflow: hidden; width: 291px; border-color: rgb(105, 105, 105);">TI\client\components\word-file-edit\lib\native-bridge</td>
+			<td style="overflow: hidden; width: 520px; border-color: rgb(105, 105, 105);">Further files which are packaged up in the installer</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 238px; border-color: rgb(105, 105, 105);">Updating_MSI_installer.txt</td>
+			<td style="overflow: hidden; width: 291px; border-color: rgb(105, 105, 105);">TI\client\components\word-file-edit\lib</td>
+			<td style="overflow: hidden; width: 520px; border-color: rgb(105, 105, 105);">Instructions on how to build the .msi installer</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 238px; border-color: rgb(105, 105, 105);">IBMCuramWordIntegrationAssistant.msi</td>
+			<td style="overflow: hidden; width: 291px; border-color: rgb(105, 105, 105);">TI\client\components\word-file-edit\lib</td>
+			<td style="overflow: hidden; width: 520px; border-color: rgb(105, 105, 105);">The Chrome Word Bridge Installer. This is built from the chrome-bridge-installer.zip file which is generated using the standard "appbuild client" target. It is checked in and is updated when a change is made which affects this logic and a new installer is required.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 238px; border-color: rgb(105, 105, 105);">Multiple Files including the "manifest.json" file which describes the JSON file to be produced for the Chrome extension</td>
+			<td style="overflow: hidden; width: 291px; border-color: rgb(105, 105, 105);">TI\client\BrowserPlugins\chrome-bridge</td>
+			<td style="overflow: hidden; width: 520px; border-color: rgb(105, 105, 105);">This is the source for the Chrome extension</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 238px; border-color: rgb(105, 105, 105);">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;- chrome-bridge.crx</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;- chrome-bridge.pem</p>
+			</td>
+			<td style="overflow: hidden; width: 291px; border-color: rgb(105, 105, 105);">TI\client\BrowserPlugins\lib\chrome-bridge-ext</td>
+			<td style="overflow: hidden; width: 520px; border-color: rgb(105, 105, 105);">The compiled Chrome extension checked in and present in the chrome bridge zip file that is built by the "appbuild client" target.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 238px; border-color: rgb(105, 105, 105);">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;- build.xml</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;- document.ico</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;- hostmanifest.json</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;- WordBridge.ism</p>
+			</td>
+			<td style="overflow: hidden; width: 291px; border-color: rgb(105, 105, 105);">TI\non_source\msi_stage</td>
+			<td style="overflow: hidden; width: 520px; border-color: rgb(105, 105, 105);">Files used to build the .msi installer.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">As part of the client build, all of the required built artifacts for the Chrome solution are built into the "<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">chrome-bridge-installer.zip</strong>" file located in <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TI\client\components\word-file-edit\lib</strong>. This file is then</p>
+
+<p dir="ltr">used to build the installer file and it is the installer file which is under source control and delivered. The zip file contains the following:</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">chrome-bridge.crx - the Chrome extension</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">chrome-native-host.jar</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">commons-codec-1.5.jar</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">installbridge.bat</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">jacob.jar</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">jacob-1.15-M4-x64.dll</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">jacob-1.15-M4-x86.dll</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">JSON4J-Apache.jar</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">launchbridge.bat</li>
+</ul>
+
+<h3 dir="ltr" id="ii42">Deliverables</h3>
+
+<p dir="ltr">The following are the deliverables for the Chrome based solution.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="70" style="table-layout: fixed; overflow-wrap: break-word; border-collapse: collapse; border-color: rgb(105, 105, 105);" width="1064">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 241px; border-color: rgb(105, 105, 105);"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Name</span></strong></td>
+			<td style="overflow: hidden; width: 283px; border-color: rgb(105, 105, 105);"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Location</span></strong></td>
+			<td style="overflow: hidden; width: 525px; border-color: rgb(105, 105, 105);"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Comments</span></strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 241px; border-color: rgb(105, 105, 105);">IBMCuramWordIntegrationAssistant.msi</td>
+			<td style="overflow: hidden; width: 498px; border-color: rgb(105, 105, 105);">The Chrome Word Bridge Installer.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 241px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+			<td style="overflow: hidden; width: 283px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+			<td style="overflow: hidden; width: 525px; border-color: rgb(105, 105, 105);">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">When this installer is run, it installs the following files under %Userprofile% which is the default installation directory (%UserProfile\IBM\WordBridge):</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;- jacob\jacob-1.15-M4-x64.dll</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;- jacob\jacob-1.15-M4-x86.dll</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;- chrome-native-host.jar</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;- commons-codec-1.5.jar</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;- hostmanifest.json</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;- jacob.jar</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;- JSON4J_Apache.jar</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;- launchbridge.bat</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">This is what a customer would have to do on each client machine in order to use the Chrome version of this feature. The Chrome extension would also have to be downloaded from the Chrome store and installed into the Chrome browser on the client machine.</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii43">How to Build</h3>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Once the source files have been updated, perform the standard "appbuild client" step. This will compile all of the required source and build the "<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">chrome-bridge-installer.zip</strong>" file which includes all of the deliverables for the Chrome Word Integration solution.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The files for building the Chrome deliveable are also copied to the following location: <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TI\non_source\msi_stage</strong></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Perform the steps outlined <a href="https://ibm.biz/BdzdYQ" rel="noopener noreferrer" target="_blank">here </a>to build the resultant&nbsp;<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">IBMCuramWordIntegrationAssistant.msi</strong> installer. This is the final deliverable for the Chrome solution.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">IBMCuramWordIntegrationAssistant.msi</strong> is also checked in and placed under source control (and hence should be part of any resultant change set).</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">If it is required to build and release a new version of the Chrome extension, the source for this is located in "<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TI\client\BrowserPlugins\chrome-bridge</strong>" and follow the standard documentation for building Chrome extensions (i.e. just Google Building Chrome Extension!!).
+	<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">There may a new key produced when this extension if produced.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">This new key may need to be added into the bridge bat file which generates a JSON file for the Chrome Word Bridge to function with the Chrome extension.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The bat file to be updated is the following: <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TI\client\components\word-file-edit\lib\native-bridge\installbridge.bat</strong>
+		<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The following line needs to be updated with the newly generated key:</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&gt;&gt;%hmanifestfile% echo."chrome-extension:<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">//legdjfnmdmcapoeifgelafpoeljdlbmc</strong>/"</em></li>
+		</ol>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">This key normally takes the following format in the generated json file:</li>
+	</ol>
+	</li>
+</ol>
+
+<p dir="ltr">{{{</p>
+
+<p dir="ltr">&nbsp; "allowed_origins": [<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; "chrome-extension://legdjfnmdmcapoeifgelafpoeljdlbmc/"</p>
+
+<p dir="ltr">}}}</p>
+
+<p dir="ltr">See <a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" rel="noopener noreferrer" page="Generating MSI Installer for Host component" id="wikiLink1555010455182" href="FILE%20EDIT%20Widget/Enabling%20the%20FILE_EDIT%20widget%20for%20Google%20Chrome/Generating%20MSI%20Installer%20for%20Host%20component.html" target="_blank">here </a>for instructions on how to build the .msi file after all of the changes have been made, checked in and passed the CI build on that particular stream.</p>
+
+<h3 dir="ltr" id="ii44">Environment Set Up</h3>
+
+<p dir="ltr">The following are the steps required to set up the Windows environment for testing the Chrome based Word Integration solution.</p>
+
+<p class="MsoBodyText" dir="ltr" style="margin-left:36.05pt">•&nbsp;&nbsp; &nbsp;<span style="font-size:12px;"><span style="font-family:Arial,Helvetica,sans-serif;"><span lang="EN-US">Ensure Microsoft Word (2007 or higher) is installed on the test machine. Check <a href="https://www.ibm.com/software/reports/compatibility/clarity-reports/report/html/prereqsForProduct?deliverableId=5ABDD150BD9B11E88857DCC2171712A1#sw-6">Curam Prerequisites</a> for Supported versions (Word 2007, 2010 and 3013 are the currently supported versions for Curam v7)</span></span></span></p>
+
+<p class="MsoBodyText" dir="ltr" style="margin-left:36.05pt">•&nbsp;&nbsp; &nbsp;<span style="font-family:Arial,Helvetica,sans-serif;"><span lang="EN-US">Ensure Chrome&nbsp;is installed on your test server - Take note of the version of Chrome you are testing with as this should be in sync with the supported&nbsp;Chrome version for the Curam release you are testing (</span></span><span style="font-size:12px;"><span style="font-family:Arial,Helvetica,sans-serif;"><span lang="EN-US">Check <a href="https://www.ibm.com/software/reports/compatibility/clarity-reports/report/html/prereqsForProduct?deliverableId=5ABDD150BD9B11E88857DCC2171712A1#sw-6">Curam Prerequisites</a>)</span></span></span></p>
+
+<p class="MsoBodyText" dir="ltr" style="margin-left:36.05pt">•&nbsp;&nbsp; &nbsp;Install the IBMCuramWordIntegrationAssistant which is an .msi installer that's located in IBM/Curam/Development/CuramCDEJ/lib/curam/installers on a Curam Deployment<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+•&nbsp;&nbsp; &nbsp;On your Chrome browser install the Curam File Edit Native Messaging Bridge extension from the Chrome Web Store. Instructions on how to do this can be found <a href="https://support.google.com/chrome_webstore/answer/2664769?hl=en" rel="noopener noreferrer" target="_blank">here.</a></p>
+
+<p class="MsoBodyText" dir="ltr" style="margin-left:36.05pt">•&nbsp;&nbsp; &nbsp;Ensure the Java version on the windows machine is 1.8.x or higher. (Make sure it's the 32-bit version of the JRE - the 64-bit version seems to get installed by ISSI and doesn't work)</p>
+
+<ul dir="ltr">
+	<li class="MsoBodyText" style="margin-left: 36.05pt;">Java is available from -https://java.com/en/download/&nbsp;&nbsp;Check&nbsp;<span lang="EN-US" style="font-size:11.0pt"><span style="font-family:&quot;Cambria&quot;,&quot;serif&quot;"><span style="font-size:12px;"><span style="font-family:Arial,Helvetica,sans-serif;">&nbsp;<a href="https://www.ibm.com/software/reports/compatibility/clarity-reports/report/html/prereqsForProduct?deliverableId=5ABDD150BD9B11E88857DCC2171712A1#sw-6">Curam Prerequisites</a></span></span></span></span> for the version of Java that supported (usually latest version available at time of release)&nbsp;</li>
+</ul>
+
+<p class="MsoBodyText" dir="ltr" style="margin-left:36.05pt">•&nbsp;&nbsp; &nbsp;Set a JRE_HOME Environment variable to point to the location of the installed JRE<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+•&nbsp;&nbsp; &nbsp;Reboot your test server if you install/update Java</p>
+
+<h3 dir="ltr" id="ii45">Testing</h3>
+
+<p dir="ltr">The following are the list of tests (and steps) which can be used to test the Chrome based Word Integration solution.</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">See the <a href="FILE%20EDIT%20Widget._ATTACHMENTS_/Word%2BIntegration%2BVerification%2BTest.docx">attached&nbsp;document</a> for testing steps</li>
+</ul>
+
+<h3 dir="ltr" id="ii3">Debugging</h3>
+
+<p dir="ltr">The Chrome solution employs <a href="https://developer.chrome.com/apps/nativeMessaging" rel="noopener noreferrer" target="_blank">native&nbsp;messaging</a> via the extension. There are a few ways to debug issues:</p>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Using the developer tools console to debug JavaScript in <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">pageToExtn.js</strong>. This communicates between the browser and the extension.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">By navigating to the extension's details page in chrome://extensions and turning on Developer mode. Then you will see a link to the <em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">background page</em> which when accessed will open up another developer tools console where you can debug through <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">extToNative.js</strong>. This communicates with pageToExtn and the native host (the java application)</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">To debug the native host java application, in C:\Users\&lt;user&gt;\IBM\WordBridge\launchbridge.bat append the <span style="font-family:Courier New,Courier,monospace;">-debug</span> flag to the end of the java command as below. This will then create a log file in the same directory called NativeMessagingBridge.log&nbsp;</li>
+</ol>
+
+<pre dir="ltr" style="margin-left: 40px;">
+"%JRE_HOME%/bin/java.exe" -cp jacob.jar;commons-codec-1.5.jar;JSON4J_Apache.jar;chrome-native-host.jar curam.util.tools.fileedit.nativehost.NativeMessagingBridge -debug</pre>
+
+<ol dir="ltr" start="4">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Chrome itself can be started in debug mode by appending the options: <span style="font-family:Courier New,Courier,monospace;">--enable-logging --v=1</span>. This will output logs to "%LOCALAPPDATA%\Google\Chrome\User Data\chrome_debug.log". This will also show any native messaging errors.</li>
+</ol>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

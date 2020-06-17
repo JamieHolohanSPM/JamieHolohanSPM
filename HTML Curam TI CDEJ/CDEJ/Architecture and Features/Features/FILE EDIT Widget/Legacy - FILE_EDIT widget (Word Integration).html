@@ -1,0 +1,570 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Legacy - FILE_EDIT widget (Word Integration)</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../wiki.css" />
+<script type="text/javascript" src="../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Legacy - FILE_EDIT widget (Word Integration)";
+    pageId="urn:lsid:ibm.com:td:36fb9f83-60da-41f8-b93f-e2984f08d8b9";
+    toRoot="../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Legacy - FILE_EDIT widget (Word Integration)</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">Table of Contents:
+<ul style="list-style-type:none !important;">
+	<li style="list-style-type:none;"><a href="#ii32" style="display: block;">Overview</a></li>
+	<li style="list-style-type:none;"><a href="#ii1" style="display: block;">What is "Word Integration"</a></li>
+	<li style="list-style-type:none;"><a href="#ii2" style="display: block;">High Level Design</a></li>
+	<li style="list-style-type:none;"><a href="#ii9" style="display: block;">Workflow</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii3" style="display: block;">Opening Document</a></li>
+		<li style="list-style-type:none;"><a href="#ii4" style="display: block;">Editing Document</a></li>
+		<li style="list-style-type:none;"><a href="#ii5" style="display: block;">Saving Document Back to Cúram</a></li>
+		<li style="list-style-type:none;"><a href="#ii6" style="display: block;">Search Functionality</a></li>
+	</ul>
+	</li>
+	<li style="list-style-type:none;"><a href="#ii7" style="display: block;">Java plugin, security, etc.</a></li>
+	<li style="list-style-type:none;"><a href="#ii8" style="display: block;">History</a></li>
+	<li style="list-style-type:none;"><a href="#ii10" style="display: block;">Future</a></li>
+	<li style="list-style-type:none;"><a href="#ii12" style="display: block;">Implementation</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii13" style="display: block;">introduction</a></li>
+		<li style="list-style-type:none;"><a href="#ii14" style="display: block;">FILE_EDIT widget</a></li>
+		<li style="list-style-type:none;"><a href="#ii15" style="display: block;">Server Side</a></li>
+		<li style="list-style-type:none;"><a href="#ii16" style="display: block;">word-file-edit.jsp</a></li>
+		<li style="list-style-type:none;"><a href="#ii17" style="display: block;">Applet</a></li>
+		<li style="list-style-type:none;"><a href="#ii18" style="display: block;">curam/util/WordFileEdit JS module</a></li>
+		<li style="list-style-type:none;"><a href="#ii19" style="display: block;">Automated Testing</a></li>
+		<li style="list-style-type:none;"><a href="#ii31" style="display: block;">Manual testing - machine matrix</a></li>
+		<li style="list-style-type:none;"><a href="#ii20" style="display: block;">Development</a></li>
+		<li style="list-style-type:none;"><a href="#ii21" style="display: block;">Signining JARs</a></li>
+	</ul>
+	</li>
+	<li style="list-style-type:none;"><a href="#ii22" style="display: block;">Issues and Technical Debt</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii23" style="display: block;">Support</a></li>
+		<li style="list-style-type:none;"><a href="#ii28" style="display: block;">Demo</a></li>
+		<li style="list-style-type:none;"><a href="#ii24" style="display: block;">Common Environment Issues</a></li>
+		<li style="list-style-type:none;"><a href="#ii25" style="display: block;">Known Defects</a></li>
+		<li style="list-style-type:none;"><a href="#ii26" style="display: block;">How to Diagnose Problems</a></li>
+	</ul>
+	</li>
+	<li style="list-style-type:none;"><a href="#ii29" style="display: block;">Debugging</a></li>
+	<li style="list-style-type:none;"><a href="#ii30" style="display: block;">Testing</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii27" style="display: block;">Technical Debt</a></li>
+	</ul>
+	</li>
+	<li style="list-style-type:none;"><a href="#ii11" style="display: block;">Resources</a></li>
+	<li style="list-style-type:none;"><a href="#ii11" style="display: block;">JRE Levels</a></li>
+</ul>
+</div>
+
+<h2 dir="ltr" id="ii1">What is "Word Integration"</h2>
+
+<ul dir="ltr">
+	<li><strong>user perspective</strong>: open Word doc from Cúram, edit and save without manual download/upload</li>
+	<li><strong>admin perspective</strong>: make doc templates and define where to put data, upload to Cúram DB</li>
+	<li><strong>developer perspective</strong>: put FILE_EDIT widget in a UIM, connect to a BPO that provides template (doc) and data (xml) from DB</li>
+</ul>
+
+<h2 dir="ltr" id="ii2">High Level Design</h2>
+
+<ul dir="ltr">
+	<li>we need to automate: download, open in Word, fill in data, let user edit, on save upload back to DB</li>
+	<li>done with Java applet that orchestrates the editing session</li>
+	<li>talks to Cúram app in browser (Java-&gt;JavaScript) via LiveConnect API in Java plugin</li>
+	<li>it controls Word and IE via COM or pure JS for other browsers</li>
+</ul>
+
+<h2 dir="ltr" id="ii9">Workflow</h2>
+
+<h3 dir="ltr" id="ii3">Opening Document</h3>
+
+<ul dir="ltr">
+	<li>user loads UIM screen with FILE_EDIT widget</li>
+	<li>template / or document data and XML data are loaded into page
+	<ul>
+		<li><span style="color:#0000FF;"><span style="background-color: rgb(255, 255, 255);">what's the mechanism of pre-populating Word fields? Any Word API used for that?</span></span> (yes, setDocumentProperties or similar, via COM interface)</li>
+	</ul>
+	</li>
+	<li>a separate popup is launched that loads a hand crafted JSP with applet
+	<ul>
+		<li>JavaScript is used to pop-up the applet window</li>
+		<li>separate browser window is opened - this is to ensure multiple form submits with every document save/autosave
+		<ul>
+			<li>A separate handling is coded into the struts action generated for file edit widget - a submit always ends up in the LOOP (pass to itself) action.</li>
+			<li>I guess this is to leave the word integration control (applet) page aside, just for the interaction - the applet should not be relaunched-reloaded with every form submit.</li>
+		</ul>
+		</li>
+		<li>the separate window is also used for the historical reasons, there were considerations to move that to the application context (more controllable environment)</li>
+	</ul>
+	</li>
+	<li>applet gets document from page and saves it locally to temporary folder (temp)</li>
+	<li>applet launches Word with the local document</li>
+	<li>applet gets XML data from page and updates fields in document
+	<ul>
+		<li>might cause performance issues, see TEC-18217 for an example.</li>
+	</ul>
+	</li>
+	<li>applet saves the document back to Cúram
+	<ul>
+		<li>this corresponds to the form submit and might take time.</li>
+	</ul>
+	</li>
+</ul>
+
+<h3 dir="ltr" id="ii4">Editing Document</h3>
+
+<ul dir="ltr">
+	<li>user then edits document as usual</li>
+	<li>on save or close the doc is saved back to Cúram
+	<ul>
+		<li>the local temporary copy is deleted after user closes the document</li>
+		<li><span style="color:#0000FF;">what about the interrupted session? the temporary copy is left in the folder? (yes, this must be the case, however depending on how it is interupted the user might be prompted to save their changes into the local copy).</span></li>
+	</ul>
+	</li>
+</ul>
+
+<h3 dir="ltr" id="ii5">Saving Document Back to Cúram</h3>
+
+<ul dir="ltr">
+	<li>applet is hooked into Word save and close actions via COM</li>
+	<li>it'll let Word save on local disk, then grab document and update the page with new content</li>
+	<li>applet will then submit the page and wait for it to finish loading
+	<ul>
+		<li>this is the reason applet has to be in separate window, because page is getting repeatedly submitted as part of the editing session</li>
+	</ul>
+	</li>
+	<li>only after page finishes loading the system is ready for further editing</li>
+</ul>
+
+<h3 dir="ltr" id="ii6">Search Functionality</h3>
+
+<ul dir="ltr">
+	<li>in some use cases it is necessary that caseworker can search in Cúram app while editing Word doc</li>
+	<li>this is clearly possible with FILE_EDIT</li>
+	<li>so there is an additional parameter that opens a specified UIM page in another separate popup and provides copy/paste facility into Word</li>
+</ul>
+
+<p dir="ltr"><span style="color:#0000FF;">I think the possible interruption scenarios need to be described as well (closing the applet/main app/word document in the process) - how it is handled</span></p>
+
+<h2 dir="ltr" id="ii7">Java plugin, security, etc.</h2>
+
+<ul dir="ltr">
+	<li>The applet based solution relies on Java plugin technology, which in turn relies on NPAPI for browser integration.</li>
+	<li>In order to allow the applet to access local resources its JAR must be digitally signed.</li>
+	<li>Overall security of the Java plugin has been bad, resulting in frequent updates and changes to the way it works.</li>
+	<li>Also, the industry is now moving away from NPAPI because its own security problems.</li>
+</ul>
+
+<h2 dir="ltr" id="ii8">History</h2>
+
+<ul dir="ltr">
+	<li>ActiveX control in place of applet</li>
+	<li>The story of the search functionality
+	<ul>
+		<li>something which hasn't been announced, but leaked to the Customers, which was implemented with the ActiveX control version but not implemented in the applet version</li>
+		<li><span style="color:#0000FF;">do we have JIRA number for that enhancement to put in here for reference?</span></li>
+	</ul>
+	</li>
+</ul>
+
+<h2 dir="ltr" id="ii10">Future</h2>
+
+<ul dir="ltr">
+	<li>NPAPI support ending for most browsers, fr example Chrome is going to drop it Summer this year (2015)</li>
+	<li>We want to move away from interactive document editing.</li>
+	<li>Replacing with template based document generation</li>
+</ul>
+
+<h2 dir="ltr" id="ii12">Implementation</h2>
+
+<h3 dir="ltr" id="ii13">introduction</h3>
+
+<ul dir="ltr">
+	<li>main components at high level
+	<ul>
+		<li>main page, FILE_EDIT widget</li>
+		<li>server side, BPO</li>
+		<li>control popup, word-file-edit.jsp, applet</li>
+	</ul>
+	</li>
+	<li>demo + describe what goes on in a typical editing session</li>
+</ul>
+
+<h3 dir="ltr" id="ii14">FILE_EDIT widget</h3>
+
+<ul dir="ltr">
+	<li>see CWCRM: Cúram Web Client Reference -&gt; UIM Reference -&gt; for Widgets -&gt; FILE_EDIT</li>
+	<li>params: source and target document, XML data, optionally search UIM page ID</li>
+	<li>implemented by curam.omega3.taglib.widget.FileEditTag class</li>
+	<li>responsibility: Embeds an word integration control in the page and supplies it with hidden fields containing the document and template data used to create or edit file with MS Word.</li>
+	<li>outputs a bunch of JS code and hidden fields with data</li>
+	<li>also a unique ID is created for the editing session, to be used for control applet window identification</li>
+	<li>when page loads, JS opens the control applet popup</li>
+	<li>optionally also search window</li>
+</ul>
+
+<h3 dir="ltr" id="ii15">Server Side</h3>
+
+<ul dir="ltr">
+	<li>standard BPO, provided by app devs</li>
+	<li>provides source and target document, XML data (format is described in&nbsp; Curam WebClient Reference Manual)</li>
+	<li>server interface for the ACTION phase must allow multiple invocations for the same editing session and it must save the document to the database on each invocation</li>
+</ul>
+
+<h3 dir="ltr" id="ii16">word-file-edit.jsp</h3>
+
+<ul dir="ltr">
+	<li>loaded in the control popup window</li>
+	<li>parameters: controlId, doc and details fields to look for in the main page</li>
+	<li>sets window title so that it can be identified by applet
+	<ul>
+		<li>done this way historically, could be improved</li>
+	</ul>
+	</li>
+	<li>uses deployJava.js API to detect JRE and to load applet
+	<ul>
+		<li>curam.util.WordFileEdit.runApplet(jsControlId);</li>
+	</ul>
+	</li>
+	<li>all code in curam/util/WordFileEdit module</li>
+	<li>still contains code for using ActiveX if needed, but untested/unmaintained now - need removing (next session)
+	<ul>
+		<li><span style="color:#0000FF;">still not covered a few words or separate short talk needed</span></li>
+	</ul>
+	</li>
+	<li>contains localization strings for applet messages (CDEJResources.properties)
+	<ul>
+		<li>[explain how this is maintained]</li>
+	</ul>
+	</li>
+</ul>
+
+<h3 dir="ltr" id="ii17">Applet</h3>
+
+<ul dir="ltr">
+	<li>implemented by curam.util.tools.fileedit.WordIntegrationApplet</li>
+	<li>uses netscape.javascript.JSObject and friends (LiveConnect API) to talk to JS in main app (through curam/util/WordFileEdit)</li>
+	<li>uses Jacob API to talk to Word and IE via COM
+	<ul>
+		<li>Jacob not approved by IBM, we have exemption atm.</li>
+	</ul>
+	</li>
+	<li>main classes:
+	<ul>
+		<li>applet</li>
+		<li>WordIntegrationLogic</li>
+		<li>WordFileEditServices</li>
+		<li>Word</li>
+		<li>WindowUtils</li>
+		<li>COM event sinks</li>
+		<li>WordFileEditJavaScript</li>
+		<li>JacobDLLUtil</li>
+	</ul>
+	</li>
+</ul>
+
+<h3 dir="ltr" id="ii18">curam/util/WordFileEdit JS module</h3>
+
+<ul dir="ltr">
+	<li>used both in control popup and in main page
+	<ul>
+		<li>probably should split up the code...</li>
+	</ul>
+	</li>
+	<li>in control popup
+	<ul>
+		<li>handle JRE detection and applet load</li>
+		<li>provides JS API for applet to talk to</li>
+		<li>get/set relevant fields in main page</li>
+		<li>submit page to save document</li>
+		<li>listen to page events where we can't use COM (non-IE)</li>
+	</ul>
+	</li>
+	<li>in main page
+	<ul>
+		<li>open/close control popup and search window</li>
+		<li>grey out app window during editing session</li>
+	</ul>
+	</li>
+</ul>
+
+<h3 dir="ltr" id="ii19">Automated Testing</h3>
+
+<ul dir="ltr">
+	<li>code designed as testable, but never time to write tests</li>
+</ul>
+
+<h3 dir="ltr" id="ii31">Manual testing - machine matrix</h3>
+
+<ul dir="ltr">
+	<li>You need to keep an eye on the machines with different versions of Word and browser installed so that you can test on various versions if need be.</li>
+	<li>FVT have some such machines - Ivan Egan can provide info - and we use latestjde as test machine as well.</li>
+	<li>I have traditionally kept IE8 on my Dev machine and latest IE on my TP.</li>
+	<li>As for Word versions, I always just use whatever I have for development. The actual Word interface is quite stable and we don't see issues due to unsupported Word versions.</li>
+	<li>It might make sense to formalize this a little so that we can respond to testing needs.</li>
+	<li>Also note the IBM automated update tool will force you to latest version of Word so you may need to get an expemption.</li>
+</ul>
+
+<h3 dir="ltr" id="ii20">Development</h3>
+
+<ul dir="ltr">
+	<li>typical develoment workflow</li>
+</ul>
+
+<h3 dir="ltr" id="ii21">Signining JARs</h3>
+
+<ul dir="ltr">
+	<li>signing certs maintenance
+	<ul>
+		<li>this requires a separate chapter (below)</li>
+	</ul>
+	</li>
+	<li>actual signing process
+	<ul>
+		<li>there is a folder on tiny where all the relevant files and scrips are held, \\tiny.curamsoftware.com\ProductDevelopment\TechInf\WordIntegration\Java Applet</li>
+		<li>The folder access is granted on need-to use basis and the password used for signing is also granted on need-to-know basis</li>
+		<li>There is also a local folder associated with every stream (from which version?) where signing could be done</li>
+		<li>most of the signing is a simple batch file launch.</li>
+		<li>we need to do the signing twice for both SHA1 and SHA2 certificates</li>
+	</ul>
+	</li>
+	<li>getting exemption for Jacob
+	<ul>
+		<li><span style="color:#0000FF;"><span style="background-color: rgb(255, 255, 255);">still needs to be described</span></span></li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr"><span style="font-size:14px;"><strong>Obtaining/renewing the certificates</strong></span></p>
+
+<p dir="ltr">Since applet is used and it needs access to the local file system, it needs to be digitally signed. In order to do that we need valid certificates obtained from the validation authority.</p>
+
+<p dir="ltr">A certificate is issued for a year and should be renewed annually. However, our applet signatures are also timestamped so there is no need for Customers to obtained the freshly signed version.</p>
+
+<p dir="ltr">However when they take the upgrades, they should receive the applet signed with the certificate which is valid at the time of its first run.</p>
+
+<p dir="ltr">There are two parts to obtaining/renewing the certificates: approval and the technical.</p>
+
+<p dir="ltr">The approval process is covered in TEC-14113, the current renewal (current certs expire in April 2015) JIRA is TEC-17916</p>
+
+<p dir="ltr">For the approval:</p>
+
+<ul dir="ltr">
+	<li>Make sure there is no license in IBM available already</li>
+</ul>
+
+<p dir="ltr">If not:</p>
+
+<ul dir="ltr">
+	<li>&nbsp; approval needs to be obtained to purchase the renewal (as it exceeds the sum allowed for auto approval)</li>
+	<li>&nbsp; 2 code signing certificates are needed, SHA1 and SHA2</li>
+	<li>&nbsp; they must be obtained from Symantec (all validations of our credentials have been done with this organization).</li>
+</ul>
+
+<p dir="ltr">Technically it means that once the renewed certificates are purchased, they need to be imported into the keystore (there are scripts for that).</p>
+
+<p dir="ltr">The batch files for this importing are again on \\tiny.curamsoftware.com\ProductDevelopment\TechInf\WordIntegration\Java Applet</p>
+
+<p dir="ltr">For the new certificates (not renewals) the process is (or seem to be) more complicated with first generating csr (certificate request) files based on some Base64-encoded value which is downloadable from Symantec first, then those csr files are passed back to Symantec and just then the certificates are obtained from them, which again need to be imported (MV to correct all my misunderstandings here!)</p>
+
+<p dir="ltr">It seems that for the renewal we should still go through all the process though, and fill-in all the data to apply for the certificate (CSR generation first of all).</p>
+
+<h2 dir="ltr" id="ii22">Issues and Technical Debt</h2>
+
+<h3 dir="ltr" id="ii23">Support</h3>
+
+<ul dir="ltr">
+	<li>sensitive to environmental setup
+	<ul>
+		<li>currently no tool/util to check the user environment to get all the information in one go; there might be ones, but no time invested in this yet</li>
+	</ul>
+	</li>
+	<li>issues show up as customers migrate to V6 and start using the feature en masse</li>
+	<li>lot of versions live in the wild</li>
+	<li>fixes released on various iFixes</li>
+	<li>when support case comes in it is important to know what fixes they have or not</li>
+	<li>use Jira and it's clone links for that, a picture would be good
+	<ul>
+		<li>TO DO (SK). build a graph to match the customer versions against the known issues - where and what was were resolved.</li>
+	</ul>
+	</li>
+</ul>
+
+<h3 dir="ltr" id="ii28">Demo</h3>
+
+<h3 dir="ltr" id="ii24">Common Environment Issues</h3>
+
+<p dir="ltr">&nbsp; - L3 page: <a href="http://ibmurl.hursley.ibm.com/MGSI">http://ibmurl.hursley.ibm.com/MGSI</a><br />
+<br />
+&nbsp; - CWCRM</p>
+
+<h3 dir="ltr" id="ii25">Known Defects</h3>
+
+<ul dir="ltr">
+	<li><a href="http://ibmurl.hursley.ibm.com/N0ZF">http://ibmurl.hursley.ibm.com/N0ZF</a></li>
+</ul>
+
+<h3 dir="ltr" id="ii26">How to Diagnose Problems</h3>
+
+<p dir="ltr">First of all make sure the right applet version is used and there is just one version.</p>
+
+<p dir="ltr">Make sure the Java cache is cleared. This is done in the Java Control Panel</p>
+
+<ul dir="ltr">
+	<li>Control Panel-&gt;Java Control Panel, choose the right one for Oracle JRE.</li>
+	<li>General Tab -&gt; View, lists all the jars currently in cache</li>
+	<li>delete all the WordIntegrationApplet.jar instances found, also commons libraries and jacob jars</li>
+	<li>it might also prove useful to delete the existing certificate if any (Manage Certificates, and delete the one from IBM) before testing new/updated version of the control.</li>
+</ul>
+
+<p dir="ltr">Customer has that step documented, might be an issue in test environment, but worth checking with the Customer as well.</p>
+
+<ul dir="ltr">
+	<li>phase 1: opening control popup
+	<ul>
+		<li>popup blocker might be activated, keep that in mind; Curam should be white-listed for the browser to allow this popup</li>
+	</ul>
+	</li>
+	<li>phase 2: detecting JRE, starting applet
+	<ul>
+		<li>Oracle JRE is the one used, on our test machines we would also have IBM JREs (separate control panels for them, not to be paid attention)</li>
+		<li>warning if no Java found, but also if wrong version found</li>
+		<li>multiple Java versions might exist on the user system, the latest installed would be used for the applet</li>
+		<li>wrong installation order might cause the problems even though the right JRE is also present on the system</li>
+		<li>Java Control Panel is used to examine the installed JRE versions and see which ones are active</li>
+		<li>we do not support multiple JREs installed</li>
+		<li>also check that the JRE is enabled for the browser(s) - Advanced tab of the same control panel</li>
+		<li>32/64 JRE versions might co-exist, the one used should match the browser (even though this should be picked up automatically, depends on the installation)</li>
+		<li>Security exeption: the newer JRE versions have more strict requirements for the security (medium level has been removed). This might cause the applet to be blocked with the corresponding security message. To avoid it, open the Java Control Panel, Security tab and add the application site to the security exception list at the bottom of the tab (click "Edit Site List", "Add" in the next dialog and type or paste your site address instead of the 'example.com' prompt. Click "OK", close the console, restart the application if launched and greyed out.</li>
+	</ul>
+	</li>
+	<li>phase 3: finding references to relevant windows
+	<ul>
+		<li>lots of issues there related to the COM bridge used. We loop through the windows to find the ones we need (main app and control windows?)</li>
+		<li>fresh issue where the loop encounters window not complying to the API used and cannot recognize it; fix is being put through to basically skip such windows.</li>
+	</ul>
+	</li>
+	<li>phase 4: opening Word, loading document
+	<ul>
+		<li>not many problems here, however the already mentioned recent performance issue when it takes too long to open word doc because of numerous fields to be pre-populated</li>
+		<li><span style="color:#0000FF;">Word doc is already opened but shows nothing until all those fields are properly instantiated, is this the manifestation?</span></li>
+	</ul>
+	</li>
+	<li>phase 5: saving
+	<ul>
+		<li>the issues here are related to timing. The saving since it is related to submitting (uploading) the document takes time, so next save or close operation might be prematurely initiated, this causes problems without recent fixes.</li>
+	</ul>
+	</li>
+</ul>
+
+<h2 dir="ltr" id="ii29"><span style="font-size:14px;">Debugging</span></h2>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Java Console should be enabled (<span style="color:#0000FF;">detail</span>)</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii30"><span style="font-size:14px;">Testing</span></h2>
+
+<p dir="ltr"><strong>IE9 &gt; in IE8 mode notice</strong></p>
+
+<p dir="ltr">One important thing to remember: the technology is sensitive to the browser/document mode (applies to Internet Explorer). When doing the testing on the older streams, the prerequisite document needs to be consulted to see what browser/document modes are supported.</p>
+
+<p dir="ltr">Another thing is that the usual testing way when the browser/document mode is simply changed in the Developer Tools for the later Internet Explorer versions <em>is not applicable</em> when testing the Word integration - it just sets the mode for the <em>main</em> application window, but the applet window is separate and therefore will use the default mode. This can result in various warnings/alerts.</p>
+
+<p dir="ltr">To set up the right mode correctly, Fiddler should be used. It allows for changing the settings for the requests/responses and in this case the response header needs to be set up to indicate the requirement for IE8 mode. This is done in the "Filters" tab of the Fiddler application. First of all make sure "Use Filters"&nbsp; option is selected; then, at the end of the list in the "Response Headers" section, select the option "Set Response Header" and type "X-UA-Compatible" for the name and "IE=8" for the value. This will force the browser to use IE8 mode for all the IE windows.</p>
+
+<p dir="ltr">The matrix for the machines with certain browser versions and Word (Office) installations which could be used for testing could be found <a wiki="Curam Technical Infrastructure Testing Group" page="MS Word Machine Matrix" id="wikiLink1421766360920" href="https://w3-connections.ibm.com/wikis/home?lang=en#!/wiki/Curam%20Technical%20Infrastructure%20Testing%20Group/page/MS%20Word%20Machine%20Matrix">here</a>.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii27">Technical Debt</h3>
+
+<ul dir="ltr">
+	<li>no unit tests</li>
+	<li>we're behind on alternative solution</li>
+</ul>
+
+<h2 dir="ltr" id="ii11">Resources</h2>
+
+<ul dir="ltr">
+	<li>Original <a href="http://curzilla.mul.ie.ibm.com/EJB/TechInf/ClientTeam/ArchitectureAndDesign/WordIntegrationCrossBrowser">design&nbsp;page&nbsp;on&nbsp;MoinMoin</a></li>
+	<li>test script for WI: <a href="http://curzilla.mul.ie.ibm.com/EJB/TechInf/ClientTeam/ClientTesting/ManualTests/WordIntegration?highlight=%28word%29">http://curzilla.mul.ie.ibm.com/EJB/TechInf/ClientTeam/ClientTesting/ManualTests/WordIntegration</a></li>
+</ul>
+
+<h2 dir="ltr" id="ii11">JRE Levels</h2>
+
+<p dir="ltr">The following is a matrix of JRE levels and how they relate to the various product releases.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" style="width: 638px;">
+	<tbody>
+		<tr>
+			<td style="width: 140px;"><span style="font-size:16px;"><strong>JRE Level</strong></span></td>
+			<td style="width: 98px;"><span style="font-size:16px;"><strong>6</strong></span></td>
+			<td style="width: 182px;"><span style="font-size:16px;"><strong>7 (introduced in 6.0.5.0)</strong></span></td>
+			<td style="width: 195px;"><span style="font-size:16px;"><strong>8 (introduced in 6.0.5.6)</strong></span></td>
+		</tr>
+		<tr>
+			<td style="width: 140px;"><strong><span style="font-size:16px;">Pre-Reqs Version</span></strong></td>
+			<td style="width: 98px;">&nbsp;</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 195px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 140px;">6.0</td>
+			<td style="width: 98px;">6 Update 10 and higher updates (version 6 Update 34)</td>
+			<td style="width: 182px;">7 and higher updates (Version 7 Update 51)</td>
+			<td style="width: 195px;">8 and higher updates</td>
+		</tr>
+		<tr>
+			<td style="width: 140px;">6.1.0.x</td>
+			<td style="width: 98px;">Not Supported</td>
+			<td style="width: 182px;">7.0 - most recently released version tested is Version 7 Level JRE 1.7 u51</td>
+			<td style="width: 195px;">8.0 - the most recently released version tested is Version 8 Level - JRE 1.8 u45</td>
+		</tr>
+		<tr>
+			<td style="width: 140px;">6.1.1.x</td>
+			<td style="width: 98px;">Not Supported</td>
+			<td style="width: 182px;">7.0 - most recently released version tested is Version 7 Level JRE 1.7 u51</td>
+			<td style="width: 195px;">8.0 - the most recently released version tested is Version 8 Level - JRE 1.8 u66 - do not use u60</td>
+		</tr>
+		<tr>
+			<td style="width: 140px;">6.2.0.0</td>
+			<td style="width: 98px;">Not Supported</td>
+			<td style="width: 182px;">7.0 - most recently released version tested is Version 7 Level JRE 1.7 u75</td>
+			<td style="width: 195px;">8.0 - the most recently released version tested is Version 8 Level - JRE 1.8 u66 - Do not use u60</td>
+		</tr>
+	</tbody>
+</table></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

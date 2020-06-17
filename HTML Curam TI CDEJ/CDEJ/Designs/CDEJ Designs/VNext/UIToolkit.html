@@ -1,0 +1,459 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>UIToolkit</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../wiki.css" />
+<script type="text/javascript" src="../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="UIToolkit";
+    pageId="urn:lsid:ibm.com:td:52d21c58-4b94-4193-b4c5-a32658e0bf97";
+    toRoot="../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">UIToolkit</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h2 dir="ltr"><strong>Version 1 of the UI Toolkit</strong></h2>
+
+<h3 dir="ltr"><strong><span style="font-size:18px;">Background</span></strong></h3>
+
+<p dir="ltr">Provide a toolkit that enables developers to build quality user interface. See here for more thorough explanation of the project: <a href="http://dubxpcvm065.mul.ie.ibm.com/EJB/TechInf/ClientTeam/ArchitectureAndDesign/UiToolingProject.html" target="_blank">http://dubxpcvm065.mul.ie.ibm.com/EJB/TechInf/ClientTeam/ArchitectureAndDesign/UiToolingProject.html</a></p>
+
+<h3 dir="ltr"><strong><span style="font-size:18px;">Requirements</span></strong></h3>
+
+<p dir="ltr">The main requirements here for the first version of the UI Toolkit is enable a developer to be able to unit test their JavaScript code and have a view on JavaScript code coverage.</p>
+
+<ul dir="ltr">
+	<li><a href="http://pdappsrv.mul.ie.ibm.com:8080/browse/TEC-18461" target="_blank">TEC-18461&nbsp;-&nbsp;</a>First verion of UI Toolkit</li>
+</ul>
+
+<h3 dir="ltr"><strong><span style="font-size:18px;">Non Functional Requirements</span></strong></h3>
+
+<table border="1" dir="ltr" height="263" width="671">
+	<tbody>
+		<tr>
+			<td style="width: 118px;"><strong>NFR</strong></td>
+			<td style="width: 537px;"><strong>Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Accessibility</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Availability &amp; Resilience</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Development Resource</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Evolution</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Internationalisation</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Location</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Performance and Scalability</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Regulation</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Security</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Usability</td>
+			<td style="width: 537px;">UI Developers must be able to use the unit test or view code coverage via the command line or eclipse.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr"><strong><span style="font-size:18px;">Design Options</span></strong></h3>
+
+<p dir="ltr">The UI Toolkit should be a black box toolkit that comes as a separate deliverable.</p>
+
+<ul dir="ltr">
+	<li>
+	<h4 dir="ltr"><strong><span style="font-size:18px;">Option 1</span></strong></h4>
+
+	<ul>
+		<li>Create the UI Toolkit as part of the JDE. The JDE ant scripts provide the required functionality.</li>
+	</ul>
+	</li>
+	<li>
+	<h4 dir="ltr"><strong><span style="font-size:18px;">Option 2</span></strong> (preferred)</h4>
+
+	<ul>
+		<li>Create a separate UI Toolkit deliverable (similar to ADBuildTools) that will be pulled into developer's streams. The toolkit should have ant scripts that developers that wrap JDE ant scripts that provide the required functionality.</li>
+	</ul>
+	</li>
+</ul>
+
+<h1 dir="ltr"><strong><span style="font-size:18px;">Design</span></strong></h1>
+
+<p dir="ltr">The toolkit is basically some build scripts that has dependencies on third party software i.e intern, dojo e.t.c and the cdej source. The build scripts will wrap JDE scripts where applicable.</p>
+
+<p dir="ltr">It is envisaged that this toolkit will be brought down as a new deliverable from the network into a directory called UIToolkit in developers development environment.</p>
+
+<p dir="ltr">We currently do not envisage that the UI Toolkit would be shipped to customers so having a separate deliverable makes sense. A big advantage of a separate UI Toolkit deliverable is that we could release new versions of the Toolkit between JDE releases if we wanted to (e.g. new version of Intern/Selenium e.t.c)</p>
+
+<h3 dir="ltr">UI Toolkit Delivery mechanism</h3>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp; Put the text files that control version of third party software and build scripts on the CuramRelTools VOB so that a separate can be delivered similar to ADBuildTools.<br />
+<br />
+&nbsp;&nbsp;&nbsp; Version the UIToollkit deliverable (zipped deliverable) on DevReleases directory on network similar to other releases.</p>
+
+<h3 dir="ltr">UI Toolkit structure on developers stream</h3>
+
+<p dir="ltr">DEVENV</p>
+
+<p dir="ltr">&nbsp;&nbsp; - UIToolkit</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - intern (directory that contains intern)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - selenium_standalone_server (directory that contains selenium standalone server)</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - nodejs-32bit (directory that contains node js)</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&nbsp; dojo-source (directory that contains dojo javascript source)</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - cdej-source&nbsp; (directory that contains cdej javascript source)</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - build (directory that contains output from script in toolkit being run)</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - components</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - core</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - intern-config</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - build.xml (main script in UI Toolkit)</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<h3 dir="ltr"><strong><span style="font-size:18px;">Use Cases</span></strong></h3>
+
+<p dir="ltr">This is <strong>mandatory</strong>. The various use cases for the feature must be outlined here. They can be in whatever format deemed appropriate (i.e. verbose description or in a tabular format with actors and actions etc.). Below is an example of how use cases may be documented in a tabular format.</p>
+
+<table border="1" dir="ltr" height="112" width="859">
+	<tbody>
+		<tr>
+			<td style="width: 105px;"><strong>Role/Actor</strong></td>
+			<td style="width: 240px;"><strong>Description</strong></td>
+			<td style="width: 200px;"><strong>Expected Behavior</strong></td>
+			<td style="width: 286px;"><strong>Tested</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 105px;">UI Developer</td>
+			<td style="width: 240px;">Creates a new JavaScript module in core component that has <strong>no dependencies</strong>. Creates unit test module too to test.</td>
+			<td style="width: 200px;">The user can unit test new module and view code coverage for that modules</td>
+			<td style="width: 286px;">Unit test on command line or in eclipse.</td>
+		</tr>
+		<tr>
+			<td style="width: 105px;">UI Developer</td>
+			<td style="width: 240px;">Creates a new JavaScript module in core component that <strong>has dependency on dojo module(s).</strong> Creates unit test module too to test.</td>
+			<td style="width: 200px;">The user can unit test new module and view code coverage for that modules</td>
+			<td style="width: 286px;">Unit test on command line or in eclipse.</td>
+		</tr>
+		<tr>
+			<td style="width: 105px;">UI Developer</td>
+			<td style="width: 240px;">Creates a new JavaScript module in core component that <strong>has dependency on CDEJ external module(s).</strong> Creates unit test module too to test.</td>
+			<td style="width: 200px;">The user can unit test new module and view code coverage for that modules</td>
+			<td style="width: 286px;">Unit test on command line or in eclipse.</td>
+		</tr>
+		<tr>
+			<td style="width: 105px;">UI Developer</td>
+			<td style="width: 240px;">Creates a new JavaScript module in <strong>multiple components.</strong> Creates unit test modules too to test.</td>
+			<td style="width: 200px;">The user can unit test new modules across all components on stream and view code coverage for all components on stream</td>
+			<td style="width: 286px;">Unit test on command line or in eclipse.</td>
+		</tr>
+		<tr>
+			<td style="width: 105px;">UI Developer</td>
+			<td style="width: 240px;">Creates a new JavaScript module in core component that <strong>has English localized content.</strong> Creates unit test module too to test.</td>
+			<td style="width: 200px;">The user can unit test new module and view code coverage for that modules</td>
+			<td style="width: 286px;">Unit test on command line or in eclipse.</td>
+		</tr>
+		<tr>
+			<td style="width: 105px;">UI Developer</td>
+			<td style="width: 240px;">Creates a new JavaScript module in core component that <strong>has non English localized content.</strong> Creates unit test module too to test.</td>
+			<td style="width: 200px;">The user can unit test new module and view code coverage for that modules</td>
+			<td style="width: 286px;"><strong>Beyond the scope of version 1 of the toolkit</strong></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr"><strong><span style="font-size:18px;">Implementation Notes</span></strong></h3>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr"><strong><span style="font-size:18px;">Application Impact</span></strong></h3>
+
+<p dir="ltr">This is <strong>mandatory</strong>. If there is no impact, then this is as simple as saying so. If there is impact, then this may describe the impact in detail and outline the upgrade path. If the feature is related to a CLE, this section can be a link to that CLE (and hence the documentation associated with the CLE will suffice).</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr"><strong><span style="font-size:18px;">Testing</span></strong></h3>
+
+<p dir="ltr">(1) UITOOLKIT take on. Take on the latest UIToolkit deliverable.</p>
+
+<ul dir="ltr">
+	<li>For for first release of the UIToolkit, you can put the attached version of <a href="https://ibm.biz/BdXFtq">(https://ibm.biz/BdXFtq</a>)/Attachments/UIToolkitVersion.txt in ExternalVersions directory.</li>
+	<li>Open a command line prompt, navigate to the root of the stream and run 'bootstrap.bat'. This will bring down the UIToolkit to development environment. (%DEVENV%)</li>
+</ul>
+
+<p dir="ltr">(2) Command line to CEF's Base Folder</p>
+
+<p dir="ltr">(3) Command line to webclient folder: cd webclient</p>
+
+<p dir="ltr">(4) First time configuring intern for a component project in the client:</p>
+
+<p dir="ltr">run '<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">appbuild.bat new-intern-suite -Dcomponent=&lt;&lt;component-name&gt;&gt;</span></p>
+
+<p dir="ltr"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">NOTE: 'componentPath' is optional parameter outside of Curam Context..</span></p>
+
+<p dir="ltr">eg.: appbuild.bat new-intern-suite -Dcomponent=core<br />
+&nbsp;</p>
+
+<p dir="ltr">This will build the intern configuration file and output them to the %UITOOLKIT_HOME%\tools\intern\generated\&lt;&lt;component&gt;&gt;&nbsp;directory.</p>
+
+<p dir="ltr"><br />
+(5) If this is the first time you are configuring intern then copy the generated 'intern-config' directory to webclient\components\&lt;&lt;component&gt;&gt;</p>
+
+<p dir="ltr">For example if you want to unit test JavaScript for the core component, then copy to webclient\components\core</p>
+
+<p dir="ltr"><br />
+(6) Deguging tests in eclipse.<br />
+<br />
+&nbsp;&nbsp;&nbsp; Refresh the core component in eclipse<br />
+<br />
+&nbsp;&nbsp;&nbsp; Go to the 'External Tools' menu in eclipse.<br />
+<br />
+&nbsp;&nbsp;&nbsp; From the dropdown in the 'External Tools' menu, select 'External Tools Configurations' and then underneath 'Program' menu, select 'debug-intern-tests-core'.</p>
+
+<p dir="ltr">&nbsp;This will open up an instance of a chrome and run the tests in debug mode. You should open the developers tools (F12) and ecnsure no errors on console.</p>
+
+<p dir="ltr">&nbsp;NOTE:<br />
+<br />
+&nbsp;(i) You can set a breakpoint at any place within your tests or javascript on developers tools console.<br />
+<br />
+&nbsp;(ii) If you want to debug in another browser , just open an instance of that browser and copy the url in, the tests wil then be run in that browser.</p>
+
+<p dir="ltr">(7) Running tests/coverage report<br />
+<br />
+The tests (&amp; covregae report) can be run on the command line or in eclipse.</p>
+
+<p dir="ltr">(A) To run tests and report code coverage in eclipse <strong>(CURRENTLY NOT SUPPORTED)</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">Go to the 'External Tools' menu in eclipse.<br />
+<br />
+From the dropdown in the 'External Tools' menu, select 'External Tools Configurations' and then underneath 'Program' menu, select 'run-intern-tests-core'.</p>
+
+<p dir="ltr">(B) On the command line, run '<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">appbuild.bat</span><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"> test-component-javascript&nbsp;</span>-Dcomponent=core'.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">This will run the unit tests and produce a report in webclient\components\core\intern-config\html-report\index.html. You can drill into the report to see specific branches covered.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">(8) To run all tests on the command line run the command:</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">appbuild.bat </span>test-all-javascript</p>
+
+<h3 dir="ltr"><strong><span style="font-size:18px;">Documentation/How To Use Feature</span></strong></h3>
+
+<h3 dir="ltr">Prerequisistes for JavaScript Unit testing</h3>
+
+<ol dir="ltr">
+	<li><strong>Enforced JavaScript structure per component.&nbsp;</strong> The following structure must be followed within each component<strong>.</strong></li>
+</ol>
+
+<p dir="ltr"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; jscript</strong></p>
+
+<p dir="ltr"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt;</strong> <strong>src</strong> (recommended source code location)</p>
+
+<p dir="ltr"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; curam </strong>(recommended root namespace)</p>
+
+<p dir="ltr"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; tests (</strong>recommended<strong>)</strong></p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+<ol dir="ltr">
+	<li><strong>New AMD Format.</strong> The Javascript modules<strong> must use </strong>the new AMD format<strong>: </strong><a href="http://dojotoolkit.org/reference-guide/1.8/loader/amd.html#loader-amd">http://dojotoolkit.org/reference-guide/1.8/loader/amd.html#loader-amd.&nbsp;&nbsp; </a>The modules <strong>cannot</strong> be in legacy format&nbsp;<a href="http://dojotoolkit.org/reference-guide/1.8/loader/legacy.html#loader-legacy">http://dojotoolkit.org/reference-guide/1.8/loader/legacy.html#loader-legacy. </a></li>
+	<li><strong>Dojo V2 Dom Modules.</strong> Most deprecated dojo modules can be used with the current version of intern that is being used. However the deprecated dom modules cannot be used. The new dom modules must be used instead. Please refer to the quick reference here for old syntax (V1)versus (V2): <a href="http://livedocs.dojotoolkit.org/releasenotes/migration-2.0#id4">http://livedocs.dojotoolkit.org/releasenotes/migration-2.0#id4</a></li>
+	<li>&nbsp;<strong> Java Version</strong>. Java version must be at least JDK 7.</li>
+	<li>&nbsp;<strong>Web Browser Security Settings. </strong>Protected Mode settings need to be configured correctly. For more information please see here: <strong>TODO</strong></li>
+</ol>
+
+<h3 dir="ltr">How to use feature</h3>
+
+<p dir="ltr">The very first time you want to write/run JavaScript unit tests against a webclient application component, then some configuration will be required but this will only take a minute or two. Once a component has been configured to run JavaScript unit tests then the tests (and coverage reports) can be run as often as required.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>(1) JavaScript Test Configuration. </strong></p>
+
+<p dir="ltr">In order to configure a component to be able to run JavaScript tests, open a command prompt and navigate to the webclient directory. Then run</p>
+
+<p dir="ltr">run '<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">appbuild.bat new-intern-suite -Dcomponent=&lt;&lt;component-name&gt;&gt;</span>. For example if configuring tests against core component then you would run 'appbuild.bat new-intern-suite -Dcomponent=core'.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">After you run this command, two directories will be generated:</p>
+
+<p dir="ltr"><strong>(i)&nbsp; intern-config</strong>. It will get generated in %UITOOLKIT_HOME%\tools\intern\generated\&lt;&lt;component&gt;&gt; directory. This contains the configuration of your JavaScript source and your JavaScript test files. You need to copy this to your application component that you are configuring. For example if configuring core component then you need to copy this directory (intern-config) to the root of the %CLIENT_DIR%\components\core directory.</p>
+
+<p dir="ltr"><strong>(ii) jscript.&nbsp;</strong>It will get generated in %UITOOLKIT_HOME%\tools\intern\generated\&lt;&lt;component&gt;&gt; directory. This contains a skeleton JavaScript tests suite file that will enable you to get up and running quickly with the tests. e.g jscript/tests/coreTestSuite.js. You need to copy this to your application component that you are configuring. For example if configuring core component then you need to copy this directory (jscript) to the root of the %CLIENT_DIR%\components\core directory.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Assuming that you have followed the recommended directory structure for JavaScript source code and test code then nothing further is required. However if your source are tests are in a different location then you will need to update the 'packages' configuration as appropriate within the intern-config.js file. Read here for further information on this configuration <strong>TODO</strong>:</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>(2) Debugging Tests</strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>(3) Running tests</strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>(4) Writing Tests</strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>(5) Troubleshooting</strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr"><strong><span style="font-size:18px;">Check List</span></strong></h3>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Basically this is a quick check list of items that should be considered when doing a design for that particular component.</p>
+
+<table border="1" dir="ltr" style="width: 658px;">
+	<tbody>
+		<tr>
+			<td style="width: 166px;"><strong>Check List Item</strong></td>
+			<td style="width: 314px;"><strong>Notes</strong></td>
+			<td style="width: 157px;"><strong>Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Process for Updating UIToolkit third party tools</td>
+			<td style="width: 314px;"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=147535">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=147535</a></td>
+			<td style="width: 157px; background-color: rgb(255, 165, 0);">1d - Done but needs review</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Write full unit test coverage for TI External JavaScript modules and provide mocks modules for them</td>
+			<td style="width: 314px;"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=147537">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=147537</a></td>
+			<td style="width: 157px; background-color: rgb(255, 165, 0);">3 w - In progress</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Document how AD are to upgrade legacy module to AMD</td>
+			<td style="width: 314px;">&nbsp;</td>
+			<td style="width: 157px;">3d</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Pull down UIToolkit onto CEF V7 stream</td>
+			<td style="width: 314px;"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=148514">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=148514</a></td>
+			<td style="width: 157px;">2d</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Handle JavaScript property files</td>
+			<td style="width: 314px;"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=148515">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=148515</a></td>
+			<td style="width: 157px;">1w</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Document how to use the UIToolkit</td>
+			<td style="width: 314px;">&nbsp;</td>
+			<td style="width: 157px;">2d</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Provide sample of mofdule upgrade and tests</td>
+			<td style="width: 314px;">&nbsp;</td>
+			<td style="width: 157px;">2d</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr"><strong><span style="font-size:18px;">Work Estimation</span></strong></h3>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Again, the actual items listed in the estimate breakdown may vary from task to task and component to component.</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Work Estimates</p>
+
+	<ul>
+		<li>
+		<p>Design: 5 Days</p>
+		</li>
+		<li>
+		<p>Prototype: 2 Days</p>
+		</li>
+		<li>
+		<p>Implementation: 5 weeks</p>
+		</li>
+		<li>
+		<p>Testing: 3 Day</p>
+		</li>
+		<li>
+		<p>Documentation: 4 Days</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Total: 8 Weeks</p>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

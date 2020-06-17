@@ -1,0 +1,192 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Build Targets</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../wiki.css" />
+<script type="text/javascript" src="../../wiki.js" ></script>
+<script type="text/javascript" src="../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Build Targets";
+    pageId="urn:lsid:ibm.com:td:d52467cf-eefa-48fb-8a86-6f2646529259";
+    toRoot="../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Build Targets</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">Below are some of the build targets that can be run at the TI-VOB level.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">build</strong></p>
+
+<table align="center" border="1" dir="ltr" height="310" style="width: 812px;" width="500">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 503px;">dummy</td>
+			<td style="width: 293px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 503px;">clean</td>
+			<td style="width: 293px;">clean server and client</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 503px;">cleanserver</td>
+			<td style="width: 293px;">clean ONLY the server</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 503px;">cleanclient</td>
+			<td style="width: 293px;">clean ONLY the client</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 503px;">server</td>
+			<td style="width: 293px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 503px;">client</td>
+			<td style="width: 293px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 503px;">client -Ddisable.jscompress=true</td>
+			<td style="width: 293px;">Build client but do not minify the javascript</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 503px;">client-java-only</td>
+			<td style="width: 293px;">Build only the java and jsp parts of the client build</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 503px;">client-js-only</td>
+			<td style="width: 293px;">Build only the javascript part of the client build</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 503px;">themes-only</td>
+			<td style="width: 293px;">Build only css and images</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 503px;">database</td>
+			<td style="width: 293px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 503px;">clientmockapp</td>
+			<td style="width: 293px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 503px;">tabtestapp</td>
+			<td style="width: 293px;">clean&amp;build tabtestapp server and client</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 503px;">tabtestapp -Dno.server=true</td>
+			<td style="width: 293px;">clean&amp;build tabtestapp EXCEPT cleaning the server</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 503px;">tabtestapp -Dno.client=true</td>
+			<td style="width: 293px;">clean&amp;build tabtestapp EXCEPT cleaning the client</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 503px;">tabtestapp -Dno.clean=true</td>
+			<td style="width: 293px;">build tabtestapp server and client</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 503px;">tabtestdatabase</td>
+			<td style="width: 293px;">build tabtestapp database</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 503px;">build -f commons\build.xml smoketest-check checkstyle</td>
+			<td style="width: 293px;">smoketest and checkstyle for commons project</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 503px;">build -f client\components\build.xml smoketest-check checkstyle</td>
+			<td style="width: 293px;">smoketest and checkstyle for client project</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 503px;">appbuild component-smoketest-check</td>
+			<td style="width: 293px;">smoketest for client project</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 503px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">build policing</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">subsets of policing :&nbsp;build policing.client, build server, checkstyle.server, checkstyle.client, findbugs.client, findbugs.server</p>
+			</td>
+			<td style="width: 293px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 503px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">build clientmockapp</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Start server and tomcat in eclipse</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">build test-clientmockapp-tomcat</p>
+			</td>
+			<td style="width: 293px;">ClientMockApp tests</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 503px;">devenv\tools\nodejs-32bit\bin\node.exe client/components/client-inf/intern-config/debug-server.js</td>
+			<td style="width: 293px;">Intern tests (TI_Main only)</td>
+		</tr>
+		<tr>
+			<td style="width: 503px;">test-component-javascript -Dcomponent=client-inf</td>
+			<td style="width: 293px;">runs javascript tests</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 503px;">modeltests</td>
+			<td style="width: 293px;">model tests</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 503px;">runtests.gss</td>
+			<td style="width: 293px;">GSS tests</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 503px;">refreshtestmods</td>
+			<td style="width: 293px;">Deletes and recreates the TestDatasetsMod folder</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 503px;">test</td>
+			<td style="width: 293px;">SDEJ unit tests (must run "build server database" first)</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td valign="top">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">build -f non_source\msi_stage\build.xml msi -Dinstallshield.dir=C:\path\to\InstallShield\2013 -Dinstaller.version=1.0.5</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Check out <em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">client\components\word-file-edit\lib\IBMCuramWordIntegrationAssistant.msi</em></p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">build -f non_source\msi_stage\build.xml copyToSourceControl</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Check in <em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">client\components\word-file-edit\lib\IBMCuramWordIntegrationAssistant.msi</em></p>
+			</td>
+			<td valign="top">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Generate a new MSI installer for the Chrome Native Host application.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">-Dinstallshield.dir</strong> should point to InstallShield 2013 install directory (use quotation marks where necessary)</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">-Dinstaller.version</strong> sets the version of the installed Host application. This should be incremented any time a new version is to be released.</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,457 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Documentation</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Documentation";
+    pageId="urn:lsid:ibm.com:td:8323e846-7a52-4764-8f3c-4cdb35bb40b7";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Documentation</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h2 dir="ltr" id="ii1">In-progress Documentation</h2>
+
+<p dir="ltr">This page forms the basis of documentation provided for both mobile and Curam Data Service Layer usage.</p>
+
+<p dir="ltr">Note: It has not been decided yet if the latter will be released publicly to customers, but we should document internally.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">In-progress Documentation</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">Impact</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii3">Web.xml Changes</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii4">Supported Data Types</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii10">Preferences API</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii11">Intercepting Data Hookpoint</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii12">onItem</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii13">onStruct</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii14">Error Handling</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii15">Direct Request API</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii16">Security Whitelist</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii5">Known Issues and Notes</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii6">JavaScript Documentation</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii7">Loading the CDSL API modules</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii8">Sample Application</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii9">Source code</a></div>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii2">Impact</h2>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii3">Web.xml Changes</h3>
+
+<p dir="ltr">To enable the Curam Data Service Layer, any custom web.xml files must be updated with the following:</p>
+
+<pre dir="ltr">
+  &lt;servlet&gt;
+    &lt;display-name&gt;CDSLService&lt;/display-name&gt;
+    &lt;servlet-name&gt;CDSLService&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;curam.util.cdsl.DataServiceServlet&lt;/servlet-class&gt;
+    &lt;load-on-startup&gt;5&lt;/load-on-startup&gt;
+  &lt;/servlet&gt;
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;CDSLService&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/dataservice/*&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;</pre>
+
+<p dir="ltr">This should be placed after the PathResolver servlet entry and before any customized entries.</p>
+
+<h2 dir="ltr" id="ii4">Supported Data Types</h2>
+
+<table border="1" dir="ltr" style="width: 90%;">
+	<tbody>
+		<tr>
+			<td><strong>Curam Type</strong></td>
+			<td><strong>Curam Struct Type</strong></td>
+		</tr>
+		<tr>
+			<td>SVR_CHAR</td>
+			<td>String</td>
+		</tr>
+		<tr>
+			<td>SVR_STRING</td>
+			<td>String</td>
+		</tr>
+		<tr>
+			<td>SVR_BOOLEAN</td>
+			<td>Boolean</td>
+		</tr>
+		<tr>
+			<td>SVR_INT8</td>
+			<td>Number</td>
+		</tr>
+		<tr>
+			<td>SVR_INT16</td>
+			<td>Number</td>
+		</tr>
+		<tr>
+			<td>SVR_INT32</td>
+			<td>Number</td>
+		</tr>
+		<tr>
+			<td>SVR_INT64</td>
+			<td>String</td>
+		</tr>
+		<tr>
+			<td>SVR_FLOAT</td>
+			<td>Number</td>
+		</tr>
+		<tr>
+			<td>SVR_DOUBLE</td>
+			<td>Number</td>
+		</tr>
+		<tr>
+			<td>SVR_MONEY</td>
+			<td>Number</td>
+		</tr>
+		<tr>
+			<td>SVR_DATE</td>
+			<td>JS Date Object</td>
+		</tr>
+		<tr>
+			<td>SVR_DATETIME</td>
+			<td>JS Date Object</td>
+		</tr>
+		<tr>
+			<td>SVR_BLOB</td>
+			<td>Not supported</td>
+		</tr>
+		<tr>
+			<td>SVR_CODETABLE</td>
+			<td>CuramCodetable Object</td>
+		</tr>
+		<tr>
+			<td>SVR_TIME</td>
+			<td>Not supported</td>
+		</tr>
+		<tr>
+			<td>Frequency Pattern</td>
+			<td>Not supported</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii10">Preferences API</h2>
+
+<p dir="ltr">The curam.cdsl.util.Preferences API is available to access global and user specific preferences via the CDSL Layer. Please consult the JavaScript documentation for full details. The following global preferences are available via this API:</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp; dateFormat - The date format as defined in ApplicationConfiguration.properties<br />
+&nbsp;&nbsp;&nbsp; timeFormat - The time format as defined in ApplicationConfiguration.properties<br />
+&nbsp;&nbsp;&nbsp; dateTimeFormat - Combination of date and time format as defined in ApplicationConfiguration.properties</p>
+
+<p dir="ltr">The following user specific preferences are available via this API:</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp; locale - The user locale<br />
+&nbsp;&nbsp;&nbsp; highContrast - True if the user preference for high contrast mode is enabled<br />
+&nbsp;&nbsp;&nbsp; timezone - The timezone preference for the user. The timezone value returned is the minutes required to be added to local time to get UTC time.</p>
+
+<p dir="ltr" style="margin-left: 40px;">E.g. GMT + 2 will return a value of -120.</p>
+
+<p dir="ltr">Example usage of curam.cdsl.util.Preferences:</p>
+
+<pre dir="ltr">
+// Read user preferences and display in text area
+new Preferences(connection).loadPreferences().then(
+  function(pref) {
+    var locale = pref.getPreference('userlocale');
+  },
+  function(err) {
+    // Handle error scenario
+  });</pre>
+
+<p dir="ltr">The API also contains a function to return an array of preferences names: getPreferenceNames().</p>
+
+<p dir="ltr">A curam.cdsl.util.FormatDateTime api also exists that supports a number of methods for formatting JavaScript dates using the timezone and date/time formats in the preferences object. The formatDateTime() will take a date and a pre-initialized preferences object, and return a formatted date time value, according to the user preference timezone. See the JavaScript documentation for more details on this API.</p>
+
+<h2 dir="ltr" id="ii11">Intercepting Data Hookpoint</h2>
+
+<p dir="ltr">The CDSL "Data Adapter" feature allows the JavaScript API user to specify functions that modify data as it is passed through the API to and from the server.A typical data adapter object would look like this:</p>
+
+<pre dir="ltr">
+{
+  onRequest: {
+    onItem: function(path, val) { return val; },
+    onStruct: function(data) {}
+  },
+  onResponse: {
+    onItem: function(path, val) { return val; },
+    onStruct: function(data) {}
+  }
+}</pre>
+
+<p dir="ltr">The onRequest functions will be applied to raw data being sent TO the server, after the CDSL API has processed the data. The onResponse functions will be applied to raw data being received FROM the server, before the CDSL API has processed the data.</p>
+
+<p dir="ltr">All of the above functions are optional.</p>
+
+<p dir="ltr">The data adapter object can be either passed as a "dataAdapter" option to CuramStore/CuramService or it can be passed as a "dataAdapter" option to an individual FacadeMethodCall. If an instance is passed at both of those levels, the one specified in FacadeMethodCall takes precedence. Examples follow.</p>
+
+<pre dir="ltr">
+new CuramService(myConnection, { dataAdapter: myDataAdapterObject });
+new CuramStore(myConnection, myFacadeName, { dataAdapter: myDataAdapterObject });
+new FacadeMethodCall(myFacade, myMethod, [...], { dataAdapter: myDataAdapterObject });</pre>
+
+<p dir="ltr">Please note, CuramStore now allows passing of options in a JavaScript object as an optional third constructor argument instead of the previously accepted identityApi. You can also pass the identityApi as an option, e.g. { identityApi: myIdentityApiObject }. If you pass identityApi directly it will still work as before, but we recommend using the new method via options.</p>
+
+<p dir="ltr">Similarly CuramService now takes options as an optional second constructor argument.&nbsp;</p>
+
+<h4 dir="ltr" id="ii12">onItem</h4>
+
+<pre dir="ltr">
+function(path, val) { return val; }</pre>
+
+<p dir="ltr">The onItem function takes two arguments.<br />
+The "path" argument is a fully qualified path to the data item within its Struct. For example:</p>
+
+<pre dir="ltr">
+new Struct({
+  id: 45  // path == 'id'
+  nestedStruct: { name: "some name" }  // path == 'nestedStruct.name'
+  dtls: [
+    { id: 32 }, // path == 'dtls[0].id'
+    { id: 33 }  // path == 'dtls[1].id'
+  ]
+})</pre>
+
+<p dir="ltr">The val argument contains the current value of the data item.</p>
+
+<p dir="ltr">The function is expected to return the new value for the data item. Please note you must always return a value, otherwise the data item will be undefined. By default you should return the current value.</p>
+
+<h4 dir="ltr" id="ii13">onStruct</h4>
+
+<pre dir="ltr">
+function(data) {}</pre>
+
+<p dir="ltr">The onStruct function takes one argument which provides access to the complete contained data.<br />
+You can examine or modify data as needed.</p>
+
+<p dir="ltr">No return value is expected.</p>
+
+<h2 dir="ltr" id="ii14">Error Handling</h2>
+
+<p dir="ltr">The CDSL APIs include the full server stack traces in the errors returned from the server. In addition these will be automatically pretty-printed on the browser JavaScript console.</p>
+
+<p dir="ltr">This feature is intended for development only and should be disabled in production using the existing "errorpage.stacktrace.output" property in ApplicationConfiguration.properties.</p>
+
+<p dir="ltr">When errorpage.stacktrace.output is set to false, all server errors are returned, but with no stack traces included and the errors will not be printed on the JavaScript console.</p>
+
+<p dir="ltr">In addition, the error handler function passed into Promises returned from CuramService or CuramStore methods will receive a single JavaScript Error object with a special property called "errors". This is an array of error objects in the following form:</p>
+
+<pre dir="ltr">
+{
+  type: "...", // error|validation|informational
+  message: "" // localized error message
+  stackTrace: "" // The stack trace
+  nestedError: {} // in the case server error contained nested errors
+}</pre>
+
+<p dir="ltr">Please note that informational messages from the facade calls are not supported by CDSL.</p>
+
+<h2 dir="ltr" id="ii15">Direct Request API</h2>
+
+<p dir="ltr">An API is available for accessing the CDSL layer directly, without the use of a Curam Store. A simple example detailing how to use the API is shown below:</p>
+
+<pre dir="ltr">
+SimpleAccess.initConnection(new CuramConnection("connectionURL"));
+
+// Accessing cdsl layer through curam store.
+var curamStore = SimpleAccess.buildStore(facadeClassName);
+
+// Accessing cdsl layer through direct request.
+var returnedStruct = SimpleAccess.makeRequest(facadeClassName, facadeMethodName, {concernRoleID: "256"});
+returnedStruct.then(function(data) { // do something });</pre>
+
+<h2 dir="ltr" id="ii16">Security Whitelist</h2>
+
+<p dir="ltr">A whitelist of valid facades, which can be accessed by the Curam Data Service Layer (CDSL) Servlet, must be configured.</p>
+
+<p dir="ltr">A new file, cdsl-config.txt, must be included at the root of a component e.g %CLIENT_DIR%\components\core\cdsl-config.txt. The default encoding of this file should be UTF-8.</p>
+
+<p dir="ltr">The content of each file should contain a list of facades and their methods, with each entry on a separate line and formatted correctly. E.g.</p>
+
+<pre dir="ltr">
+WSRecommendationTooltipStore.read
+WSRecommendationTooltipStore.update</pre>
+
+<p dir="ltr">Notes:</p>
+
+<ul dir="ltr">
+	<li>The client build will fail if there is a cdsl-config.txt file placed in an invalid location within a component.</li>
+	<li>The list may contain invalid facades, which will be ignored and not reported.</li>
+	<li>All of the cdsl-config.txt files found within each component will be combined, removing duplicates, within the development and runtime environments.</li>
+</ul>
+
+<h2 dir="ltr" id="ii5">Known Issues and Notes</h2>
+
+<ul dir="ltr">
+	<li>The Curam Store API uses the name of the facade/server interface to identify what will be invoked. In future iterations this will change to be a service name specified in the model and will require updates to any JavaScript code.</li>
+	<li>The FREQUENCY_PATTERN, SVR_TIME and SVR_BLOB data types are not supported at present.</li>
+	<li>Codetable content is provided as meta-data when a facade/server interface is invoked. This is proving more cumbersome during usage and is likely to change in the next iteration.</li>
+	<li>Limited error handling is available at present. Only one error is thrown, with no default handling implemented. It is exposed using the the standard error handler on the promise class.</li>
+	<li>No authorisation security is in place around invocations from the data service layer.</li>
+	<li>Only raw data types are supported via the API.</li>
+	<li>Validation of mandatory attributes is not fully supported yet. Specifically, if no value is provided in the JSON content for a mandatory field, no error is thrown.</li>
+	<li>JavaScript API has problems running on MS IE browser, please use Chrome or Firefox until we fix this in the next JDE drop.</li>
+</ul>
+
+<h2 dir="ltr" id="ii6">JavaScript Documentation</h2>
+
+<p dir="ltr">The JavaScript API documentation (HTML format) can be found zipped <a href="/wikis/form/api/wiki/12b91591-921d-435f-a01e-ba0367d5471d/page/86779bab-4995-4ba1-bcb8-fd57291d9074/attachment/5bbd9f27-2e75-4982-9341-59c987d5d91f/media/cdsl-js-doc.zip">here</a>. This is the full set of documentation and does not indicate what are public APIs and which are private. The following is a summary of what can be used in these APIs:</p>
+
+<ul dir="ltr">
+	<li><span style="color:#a9a9a9;">curam</span>
+
+	<ul>
+		<li><span style="color:#a9a9a9;">cdsl</span>
+
+		<ul>
+			<li><strong>Struct</strong></li>
+			<li><span style="color:#a9a9a9;">_base</span>
+			<ul>
+				<li><strong>FacadeMethodCall </strong>(please note the package location of this class is likely to change in the next JDE drop)</li>
+			</ul>
+			</li>
+			<li><span style="color:#a9a9a9;">connection</span>
+			<ul>
+				<li><strong>CuramConnection</strong></li>
+			</ul>
+			</li>
+			<li><span style="color:#a9a9a9;">store</span>
+			<ul>
+				<li><strong>CuramStore</strong></li>
+				<li><strong>IdentityApi</strong></li>
+			</ul>
+			</li>
+			<li><span style="color:#a9a9a9;">service</span>
+			<ul>
+				<li><strong>CuramService</strong></li>
+			</ul>
+			</li>
+			<li><span style="color:#a9a9a9;"><strong>util</strong></span>
+			<ul>
+				<li><strong>Preferences</strong></li>
+			</ul>
+			</li>
+			<li><span style="color:#a9a9a9;">types</span>
+			<ul>
+				<li><span style="color:#a9a9a9;">codetable</span>
+				<ul>
+					<li><strong>CodeTables</strong></li>
+					<li><strong>CodeTable</strong></li>
+					<li><strong>CodeTableItem</strong></li>
+				</ul>
+				</li>
+			</ul>
+			</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii7">Loading the CDSL API modules</h3>
+
+<p dir="ltr">In order to load the CDSL API in your page you need to include the following layer file:</p>
+
+<pre dir="ltr">
+    &lt;script type="text/javascript" src="CDEJ/jscript/cdsl.js"&gt;/**/&lt;/script&gt;
+</pre>
+
+<h2 dir="ltr" id="ii8">Sample Application</h2>
+
+<p dir="ltr">Here we provide a small Dojo-based application which demonstrates the basic usage of CDSL APIs.</p>
+
+<p dir="ltr">It is written as a single HTML page which only contains the gridx widget and two buttons. Gridx creates a tabular data grid where you can display and edit data. The two buttons are for adding and removing individual records from the grid.</p>
+
+<p dir="ltr"><img alt="" src="/wikis/form/api/wiki/12b91591-921d-435f-a01e-ba0367d5471d/page/86779bab-4995-4ba1-bcb8-fd57291d9074/attachment/e9facda6-0b8e-43b4-8bb9-6a287e2bffde/media/sample-app-scrnshot.png?preventCache=1526292762887" style="width: 100%;" title=""></img></p>
+
+<p dir="ltr">The application makes use of a single CuramStore instance which connects to a facade on the Curam server side. The facade must provide the following interface.</p>
+
+<p dir="ltr"><span style="font-family:times new roman;"><span style="font-size:12.0pt;"><img alt="" src="/wikis/form/api/wiki/12b91591-921d-435f-a01e-ba0367d5471d/page/86779bab-4995-4ba1-bcb8-fd57291d9074/attachment/8ceb342d-72b6-42eb-aadc-a9b94980d6d0/media/facade-intf.png?preventCache=1526292762887" title=""></img></span></span></p>
+
+<p dir="ltr">In general the current version of CuramStore API methods map onto the facade method names in the following way.</p>
+
+<table border="1" dir="ltr">
+	<thead>
+		<tr>
+			<th scope="col">CuramStore</th>
+			<th scope="col">Your facade</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>query(query)::dojo/Promise::[struct]</td>
+			<td>
+			<p><strong>listItems()</strong></p>
+
+			<p><em>Input:</em> Expected is one input struct with fields of your choice.<br />
+			<em>Output:</em> It is expected that output struct contains aggregated list of data items as dtls field.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>get(identity)::dojo/Promise::struct</td>
+			<td>
+			<p><strong>read()</strong></p>
+
+			<p><em>Input:</em> Expected is one input struct representing the data item identity.<br />
+			<em>Output:</em> A single struct representing your data item with a mandatory "id" field.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>add(struct)::dojo/Promise::identity</td>
+			<td><strong>insert()</strong>
+			<p><em>Input:</em> A single data item struct.<br />
+			<em>Output:</em> A struct representing the identity of the inserted data item.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>put(struct)::dojo/Promise::identity</td>
+			<td><strong>modify()</strong>
+			<p><em>Input:</em> A single data item struct.<br />
+			<em>Output:</em> A struct representing the identity of the modified data item.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>remove(identity)::dojo/Promise::identity</td>
+			<td><strong>remove()</strong>
+			<p><em>Input: </em>Expected is one input struct representing the data item identity.<br />
+			<em>Output:</em> A struct representing the identity of the removed data item.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>getIdentity(struct)::identity</td>
+			<td>N/A</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr"><em>Please note that in this version CuramStore only implements basic dojo/store API (as indicated above) and anything you don't see mentioned is not available.</em></p>
+
+<p dir="ltr">You can see how the sample application models and implements the facade in the attached Java file: BasicOperationsTest.java</p>
+
+<h3 dir="ltr" id="ii9">Source code</h3>
+
+<ul dir="ltr">
+	<li>HTML/JavaScript source: <a href="/wikis/form/api/wiki/12b91591-921d-435f-a01e-ba0367d5471d/page/86779bab-4995-4ba1-bcb8-fd57291d9074/attachment/5710fe71-4185-49ab-b574-f258a4141235/media/CDSLSampleApp.html">CDSLSampleApp.html</a></li>
+	<li>Java source for the sample server side facade implementation: <a href="/wikis/form/api/wiki/12b91591-921d-435f-a01e-ba0367d5471d/page/86779bab-4995-4ba1-bcb8-fd57291d9074/attachment/39484e37-cc06-4127-ad02-8069cfb5e83d/media/BasicOperationsTest.java">BasicOperationsTest.java</a></li>
+	<li>Model: you need to model the facade manually</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

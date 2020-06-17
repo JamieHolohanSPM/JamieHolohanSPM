@@ -1,0 +1,122 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Release</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../wiki.css" />
+<script type="text/javascript" src="../../wiki.js" ></script>
+<script type="text/javascript" src="../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Release";
+    pageId="urn:lsid:ibm.com:td:060f4d35-7bea-4b43-820e-93d26b238a06";
+    toRoot="../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Release</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h1 dir="ltr">Work in Progress</h1>
+
+<h2 dir="ltr">Introduction</h2>
+
+<p dir="ltr">This page describes the Technical Infrastructure process for releasing a JDE version 6.0.4.x and above. Release processes for older versions, test fixes and so on, will be documented elsewhere (TODO: provide links, split into child pages etc.).</p>
+
+<h2 dir="ltr">Roles</h2>
+
+<h3 dir="ltr">Release Owner</h3>
+
+<p dir="ltr">The release owner is responsible for:</p>
+
+<ul dir="ltr">
+	<li>Preparing the Release</li>
+	<li>Monitoring release progress</li>
+	<li>Verifying the release is ready</li>
+	<li>Packing the release</li>
+	<li>Announcing the release</li>
+</ul>
+
+<p dir="ltr">What is the process for assigning a release owner?</p>
+
+<h3 dir="ltr">Release Stakeholders</h3>
+
+<ul dir="ltr">
+	<li>SDEJ, CDEJ, BizInf</li>
+	<li>FVT</li>
+	<li>Builder Management</li>
+	<li>Release Management</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">Prep the Release</h2>
+
+<p dir="ltr">Establish\create the following;</p>
+
+<ul dir="ltr">
+	<li>Verify the version number (needed for most of the following steps....creating the release wiki page, packing etc.)</li>
+	<li>Create the Release wiki page</li>
+	<li>&nbsp;</li>
+</ul>
+
+<h2 dir="ltr">Monitor the Release</h2>
+
+<p dir="ltr">TODO: running regular status meetings with the release stakeholders (minus release management), meeting agenda, who attends, what do you "monitor", dashboards, do you know what stream is being used for the release, are there any merges from other streams. do you know the label\version number that will be used to release the JDE etc.</p>
+
+<h2 dir="ltr">Verify the Release is Ready</h2>
+
+<p dir="ltr">TODO: How do we do this today? What does the "release owner" have to do? TechInf release status meetings, dashboards, checking with FVT etc. confirm stream\version number for the pack.</p>
+
+<h2 dir="ltr">Pack the Release</h2>
+
+<p dir="ltr">The JDE is packed from the following Jenkins project:<a href="http://dslvm10.mul.ie.ibm.com:8080/view/Create%20Official%20Packs/job/PACK_JDE_ANY_VERSION/">http://dslvm10.mul.ie.ibm.com:8080/view/Create%20Official%20Packs/job/PACK_JDE_ANY_VERSION/</a></p>
+
+<ol dir="ltr">
+	<li>Click the "Build with Parameters" link on the left and you will be presented with the following:</li>
+	<li><img alt="" id="1503408124323_0" src="Release._ATTACHMENTS_/editor_image_37bcb31f-ecae-4272-815f-45849be39ee7.png"></img></li>
+	<li>Choose the appropriate stream name for the release which is established when the release was prepared earlier.</li>
+	<li>Enter the major minor version e.g. 7_0, 6_1, 6_2 e.t.c</li>
+	<li>Enter the pack label. The build will use a prefix based on the chosen stream when creating the various JDE deliverables. The example shown would create CuramCDEJ_6_2_0_6_s001_001.zip for example.</li>
+	<li>Ensure both "COPY_TO_NETWORK" and "TAG_JDE_STREAM" are selected and then click build.
+	<ul>
+		<li>Note: Scenarios where tagging, for example, are not required are not covered on this wiki page which covers "official" JDE packs. Exceptions cases will be documented elsewhere on this wiki (TODO: get example(s) once they are created.</li>
+	</ul>
+	</li>
+	<li>Once you click build, the progress will be shown in the "build history" on the left of the page. When it completes successfully a green circle will be displayed next to the build.
+	<ul>
+		<li>TODO: troubleshooting&nbsp; Jenkins build failures is outside the scope of this document. Provide a link to a troubleshooting guide....if it exists.</li>
+	</ul>
+	</li>
+	<li>The build will produce a zip for each JDE deliverable in the following locations on "tiny" which <strong>must be copied manually </strong>to their corresponding locations on the "gigantic" server
+	<ul>
+		<li>ADBuildTools:</li>
+		<li>SDEJ + CDEJ:</li>
+		<li>Globalization:</li>
+		<li>etc.</li>
+	</ul>
+	</li>
+</ol>
+
+<h2 dir="ltr">Announce the Release</h2>
+
+<p dir="ltr">Release Management have documented <a wiki="63542839-4a7e-4923-a352-cdc88212238e" target="_blank" href="https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/63542839-4a7e-4923-a352-cdc88212238e/page/84c2d7a1-947d-44e8-9a6d-4e02fd75aeeb" id="wikiLink1416302485445" page="84c2d7a1-947d-44e8-9a6d-4e02fd75aeeb">How&nbsp;to&nbsp;Announce&nbsp;an&nbsp;Internal&nbsp;Release</a>. This covers the format of the release announcement messages, what wiki pages to update and so on.</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

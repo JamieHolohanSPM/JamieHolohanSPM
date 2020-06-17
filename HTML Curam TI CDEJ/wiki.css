@@ -1,0 +1,147 @@
+body, html {
+  height: 100%;
+  font-family: sans-serif;
+  color: #292929;
+}
+
+body {
+  background-color: white;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment:fixed;
+  font: normal .75em/1.5 "Helvetica Neue", Sans-Serif,Helvetica, Arial, Roboto;
+  line-height: normal;
+
+}
+
+a {
+  color: #3C6DF0;
+  font-weight: normal !important;
+  outline: none !important;
+  text-decoration: none !important;
+}
+
+.wiki-title-container {
+  position: fixed;
+  font-size: 0.875rem;
+  width:20em;  
+}
+
+.wiki-title-pane {
+  background-color: #888;
+  margin: 0 0 0 0;
+  padding: 0.5em 0.5em 0.5em 0.5em;
+  overflow: hidden;
+}
+
+.wiki-title-text {
+  font-size: 2em;
+  width:100%;
+  text-align:left;
+  color:#fff;
+}
+
+.title-container {
+  margin: 1em 0 0 25em;
+  padding: 0 0 0 0;
+  overflow: hidden;
+}
+
+.title-pane {
+  background-color: rgba(255,255,255,0.6);
+  margin: 0 0 0 0;
+  padding: 0.5em 0.5em 0.5em 0.5em;
+  overflow: hidden;
+}
+
+.title-text {
+  font-size: 2em;
+  width:100%;
+  text-align:left;
+}
+
+.main-menu-container {
+  position: fixed;
+  width:20em;
+  top:4em;
+  background-color: #e8e8e8;
+  font-size: 0.875rem;
+  height: 100%;
+  overflow-y:auto;
+}
+
+.main-menu {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+
+.menu-item-0 {
+  list-style-type: none;
+  padding: 0.5em 0 0.5em 1em;
+}
+
+.menu-item-1 {
+  list-style-type: none;
+  padding: 0.5em 0 0.5em 2em;
+}
+
+.menu-item-2 {
+  list-style-type: none;
+  padding: 0.5em 0 0.5em 3em;
+}
+
+.menu-item-3 {
+  list-style-type: none;
+  padding: 0.5em 0 0.5em 4em;
+}
+
+.menu-item-4 {
+  list-style-type: none;
+  padding: 0.5em 0 0.5em 5em;
+}
+
+.menu-item-5 {
+  list-style-type: none;
+  padding: 0.5em 0 0.5em 6em;
+}
+
+.menu-selected {
+  background-color: #d0d0d0;
+}
+
+.main-menu a {
+  color: #292929;
+  text-decoration: none;
+}
+
+.content-container {
+  margin: 1em 0 0 24em;
+  padding: 0 0 0 0;
+  overflow: hidden;
+}
+
+.content-pane {
+  border: solid white 1px;
+  border-radius: 1em;
+  background-color: rgba(255,255,255,0.9);
+  margin: 0 0 0 0;
+  padding: 0.5em 0.5em 5em 1em;
+  overflow: hidden;
+  animation: slidein 1s;
+}
+
+.footer-container {
+  position: fixed;
+  bottom: 1em;
+  left: 1em;
+}
+
+.expander {
+  width: 1em;
+  display: inline-block;
+}
+
+.hidden {
+  display:none;
+}

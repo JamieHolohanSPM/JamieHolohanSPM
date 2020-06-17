@@ -1,0 +1,657 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>CDEJ Legacy Tags</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="CDEJ Legacy Tags";
+    pageId="urn:lsid:ibm.com:td:cc45e5fc-b095-46b4-8bc4-0bd9cc820c54";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">CDEJ Legacy Tags</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">Below is the list of the legacy JSP tags used for the HTML rendering on our pages, corresponding wrappers and renderers if any, the information on the current usage and the recommended action.</p>
+
+<p dir="ltr">A number of them is still used, some might be removed as they represent outdated and no longer supported functionality. Some others are wrapped to allow for using them without the proper converting into renderers.</p>
+
+<p dir="ltr">This means that while they are included into the renderer system, they are pseudo-renderers, and most probably not efficient.<br />
+Some of the tags could have been already replaced by the renderers (subject to checking in the configuration), some might have been re-implemented as renderers for dynamic UIM.</p>
+
+<table border="1" dir="ltr" style="width: 1500px;">
+	<tbody>
+		<tr>
+			<td style="width: 231px;"><strong>Class Name</strong></td>
+			<td style="width: 199px;"><strong>Wrapper</strong></td>
+			<td style="width: 191px;"><strong>Renderer</strong></td>
+			<td style="width: 303px;"><strong>Status</strong></td>
+			<td style="width: 543px;"><strong>Action</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">CallServerTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">GetFieldTag</td>
+			<td style="width: 199px;">
+			<p>LegacyTextViewRenderer</p>
+			</td>
+			<td style="width: 191px;">TextViewRenderer</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">JSContextVariableTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">SetFieldTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">UseTextHelperTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">GetParameterTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">BatchFunctionTag</td>
+			<td style="width: 199px;">LegacyBatchFunctionEditRenderer</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">ScheduleTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">LinkParameterTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">LinkTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">LoopTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">AddressTag</td>
+			<td style="width: 199px;">
+			<p>LegacyAddressEditRenderer</p>
+
+			<p>LegacyAddressViewRenderer</p>
+			</td>
+			<td style="width: 191px;">
+			<p>AddressViewRenderer</p>
+
+			<p>AddressEditRenderer</p>
+			</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">ButtonTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">CheckBoxTag</td>
+			<td style="width: 199px;">LegacyCheckBoxEditRenderer</td>
+			<td style="width: 191px;">CheckboxEditRenderer</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">ClipTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">FieldLabelTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">FileDownloadTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">FileUploadTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">FormTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">
+			<p>FormTag</p>
+
+			<p>(uses the legacy tag as utility)</p>
+			</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">HiddenFieldTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">HiddenInputRenderer</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">MultiSelectAllCheckBoxTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">ListMultiSelectHeaderWidgetRenderer</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">MultiSelectCheckBoxTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">
+			<p>GraphicalSingleSelectRenderer (?)</p>
+
+			<p>ListSingleSelectWidgetRenderer</p>
+
+			<p>ListMultiSelectBodyWidgetRenderer</p>
+			</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">TextInputTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">
+			<p>TextEditRenderer</p>
+
+			<p>TextEditWithPromptRenderer</p>
+
+			<p>PasswordEditRenderer</p>
+			</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">TimeSelectorTag</td>
+			<td style="width: 199px;">
+			<p>LegacyTimeSelectorViewRenderer</p>
+
+			<p>LegacyTimeSelectorEditRenderer</p>
+			</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">CTListTag</td>
+			<td style="width: 199px;">LegacyCTListEditRenderer.java</td>
+			<td style="width: 191px;">
+			<p>CodeTableEditRenderer</p>
+
+			<p>CTHierarchyListEditRenderer</p>
+
+			<p>CTListEditRenderer</p>
+
+			<p>NumberEditRenderer</p>
+
+			<p>CheckboxedSelectRenderer</p>
+			</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">CTRadioGroupTag</td>
+			<td style="width: 199px;">LegacyCTRadioGroupEditRenderer</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">SourcedListTag</td>
+			<td style="width: 199px;">LegacySourcedListSelectRenderer</td>
+			<td style="width: 191px;">ListSelectRenderer</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">StringListTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">ListSelectRenderer (?)</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">DateSelectorTag</td>
+			<td style="width: 199px;">LegacyDateSelectorEditRenderer</td>
+			<td style="width: 191px;">
+			<p>DateEditRenderer</p>
+
+			<p>BirthdateEditRenderer</p>
+			</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">DateTimeSelectorTag</td>
+			<td style="width: 199px;">LegacyDateTimeSelectorEditRenderer</td>
+			<td style="width: 191px;">
+			<p>DateTimeEditRenderer</p>
+
+			<p>TimeEditRenderer</p>
+			</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">DateTimeTextInputTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">FrequencyPatternHelperTag</td>
+			<td style="width: 199px;">LegacyFrequencyPatternEditRenderer</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">OpenPopupTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">PopupConfiguration</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">PopupReturnTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">StandardPopupTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">
+			<p>SingleSearchPopupEditRenderer</p>
+
+			<p>MultipleSearchPopupEditRenderer</p>
+			</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">StaticPopupTextTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">GetOmega3MessageTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">GetResourceTag</td>
+			<td style="width: 199px;">LegacyResourceViewRenderer</td>
+			<td style="width: 191px;">ResourceViewRenderer</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">IfOmega3MessagesExistTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">InformationalsTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">InformationalRenderer</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">Omega3MessageLoopTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">RecordNumberTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">RemoveMessagesTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">PaymentStatementTag</td>
+			<td style="width: 199px;">LegacyPaymentStatementViewRenderer</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">AccessCheckTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">IfUserPreferencesTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">JavaScriptUserPreferencesTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">UserPreferencesTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">BarChartTag</td>
+			<td style="width: 199px;">LegacyBarChartViewRenderer</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">CalendarTag</td>
+			<td style="width: 199px;">LegacyCalendarViewRenderer</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">DecisionMatrixTag</td>
+			<td style="width: 199px;">LegacyDecisionMatrixEditRenderer</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">DisplayAsImageTag</td>
+			<td style="width: 199px;">LegacyImageMapViewRenderer</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">DynamicMenuTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">EvidenceComparisonTag</td>
+			<td style="width: 199px;">LegacyEvidenceComparisonViewRenderer</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">EvidenceReviewTag</td>
+			<td style="width: 199px;">
+			<p>LegacyEvidenceReviewEditRenderer</p>
+
+			<p>LegacyEvidenceReviewViewRenderer</p>
+			</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">EvidenceTabContainerTag</td>
+			<td style="width: 199px;">LegacyEvidenceTabContainerViewRenderer</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">EvidenceTag</td>
+			<td style="width: 199px;">LegacyEvidenceViewRenderer</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">FileEditTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">FlexChartTag</td>
+			<td style="width: 199px;">LegacyFlexChartViewRenderer</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">FlexLineChartTag</td>
+			<td style="width: 199px;">LegacyLineChartViewRenderer</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">FlexPieChartTag</td>
+			<td style="width: 199px;">LegacyPieChartViewRenderer</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">HeatmapTag</td>
+			<td style="width: 199px;">LegacyHeatmapViewRenderer</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">MeetingViewTag</td>
+			<td style="width: 199px;">LegacyMeetingViewViewRenderer</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">RatesTableTag</td>
+			<td style="width: 199px;">LegacyRatesTableViewRenderer</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">RulesDynamicTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">RulesEditorTag</td>
+			<td style="width: 199px;">LegacyRulesEditorViewRenderer</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">RulesSimDataEditorTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">RulesTag</td>
+			<td style="width: 199px;">LegacyRulesViewRenderer</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">TreeControlTag</td>
+			<td style="width: 199px;">LegacyTreeControlViewRenderer</td>
+			<td style="width: 191px;">OrgTreeRenderer</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">TypicalPictureEditorTag</td>
+			<td style="width: 199px;">LegacyTypicalPictureEditorEditRenderer</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">WizardSummaryTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">WizardTag</td>
+			<td style="width: 199px;">LegacyWizardViewRenderer</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">WorkflowTag</td>
+			<td style="width: 199px;">LegacyWorkflowViewRenderer</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">IEGPlayerTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 231px;">UserPreferenceEditorTag</td>
+			<td style="width: 199px;">&nbsp;</td>
+			<td style="width: 191px;">&nbsp;</td>
+			<td style="width: 303px;">&nbsp;</td>
+			<td style="width: 543px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The actions as they could be seen:</p>
+
+<p dir="ltr">1. Review the tags which are not longer being used, represent outdated/not supported functionality, remove them and the related utility classes.</p>
+
+<p dir="ltr">2. Review the tags which are in place even though the functionality is already available in the form of renderer - these need to be checked in the configuration, removed as well.</p>
+
+<p dir="ltr">3. Review the tags which are wrapped by the wrapper classes, these should take a priority when converting them to the renderers - if needed at all.</p>
+
+<p dir="ltr">4. Review the rest of the tags to set the priorities of their conversion; consider if there are any to be left as is.<br />
+&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

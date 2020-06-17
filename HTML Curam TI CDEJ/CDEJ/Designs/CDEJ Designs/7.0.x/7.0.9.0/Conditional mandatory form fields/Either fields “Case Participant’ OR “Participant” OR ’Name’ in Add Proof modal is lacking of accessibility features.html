@@ -1,0 +1,237 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Either fields “Case Participant’ OR “Participant” OR ’Name’ in Add Proof modal is lacking of accessibility features</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Either fields “Case Participant’ OR “Participant” OR ’Name’ in Add Proof modal is lacking of accessibility features";
+    pageId="urn:lsid:ibm.com:td:57242604-0bf4-492e-a89e-710bd9ce6ad3";
+    toRoot="../../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Either fields “Case Participant’ OR “Participant” OR ’Name’ in Add Proof modal is lacking of accessibility features</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<h1 dir="ltr"><span style="font-size:20px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Design Page for conditional mandatory fields in Add Proof modal within Provided by cluster</strong></span></h1>
+
+<h2 dir="ltr" id="ii3">Stakeholders</h2>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Refer to the following Org Chart to ensure you are engaging the correct people. The table below indicates the current contacts for each area.
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://ibm.biz/BdsuKd">https://ibm.biz/BdsuKd</a></li>
+	</ul>
+	</li>
+</ul>
+
+<table border="1" dir="ltr" style="width: 500px;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Role</span></strong></td>
+			<td style="width: 120px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Name</span></strong></td>
+			<td style="width: 168px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Sign Off if Applicable</span></strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Customer</td>
+			<td style="width: 120px;"><span class="LabelValue" title="Scottish Government Technical Strategy Group (7488759)">Scottish Government Technical Strategy Group</span></td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Business Owner/Product Owner</td>
+			<td style="width: 120px;">Sonya Purcell</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Architect</td>
+			<td style="width: 120px;">Fergal Gavin</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Developer(s)</td>
+			<td style="width: 120px;">Fabrice Niclot</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">FVT</td>
+			<td style="width: 120px;">Feargal Conneely</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">SVT</td>
+			<td style="width: 120px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">John Redmond/</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Sean Cleary</p>
+			</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Information Developer</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">UX Design</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Legal</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii4">Background</h2>
+
+<p dir="ltr">The Case Participant, Participant and Name fields are presents on many modals of the application at different context levels:</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The locations of these files are as follow:</p>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TI - no files</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CEF - 8 files
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">components/<strong>Verification</strong>
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Verification Application
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Verification (1 .properties file + <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1 .uim file</strong>)</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Verification Item Provided (3 .properties file + <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3 .uim file</strong>)</li>
+			</ul>
+			</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">EntMods - 2 additionnal files
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">components/Verification (same as above)</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">components/<strong>Intake</strong>
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Application
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">ApplicationEvidence
+				<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+					<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Verification (1 .properties file + <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1 .uim file</strong>)</li>
+				</ul>
+				</li>
+			</ul>
+			</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Solutions - no additionnal files
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">components/Verification (same as above)</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">components/Intake (same as above)</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CFSS - no additional files
+	<ul>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">components/Intake (same as above)</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">components/Verification (same as above)</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CWC - no additional files
+	<ul>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">components/Intake (same as above)</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">components/Verification (same as above)</li>
+	</ul>
+	</li>
+</ol>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii4">Problem</h2>
+
+<p dir="ltr">As far as the voice over accessibility feature is concerned, there is no such feature to tell the user that either Case Participant, Participant or Name are mandatory fields. The current markup for required fields * (required) used in Curam is not suitable in this situation as either of these fields are required fields. The current state of the application does not provide a mechanism to indicate the user in advance that either fields are mandatory. It is only when the user tries to validate the missing inputs that a warning message is being thrown. The application is not informative and that causes an accessibility gap.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii5">Requirements</h2>
+
+<p dir="ltr">The application should provide to any users and more importantly to users with disabilities enough information so that the user exactly knows where his inputs will be required before a validation check can be processed by the application.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">List of Requirements</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement 1: Informative text available on the screen.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement 2: Informative text being read by a screen-reader before the either one mandatory input fields.</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Support ticket: <a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=243075">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=243075</a></li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The screenshot below shows either one mandatory fields. There is no explicit mention of it unless hitting the validation mechanism on form submission.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 160px;"><img lconnwikiparamattachmentname="Add proof.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Either%20fields%20%E2%80%9CCase%20Participant%E2%80%99%20OR%20%E2%80%9CParticipant%E2%80%9D%20OR%20%E2%80%99Name%E2%80%99%20in%20Add%20Proof%20modal%20is%20lacking%20of%20accessibility%20features._ATTACHMENTS_/Add%20proof.png" alt="" width="514" lconnwikiparamwikipage="Accessibility - When populating the ‘Verify Evidence’ form fields mandatory fields are not marked" lconnattachedresourcetype="page" height="646"></img></p>
+
+<p dir="ltr" style="margin-left: 160px;">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii18">Solution</h2>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Adding a DESCRIPTION attribute to the Assignement Details cluster populates the desired message on the .vim files.</li>
+</ol>
+
+<p dir="ltr">&nbsp; &lt;CLUSTER<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; &nbsp;<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">DESCRIPTION="Cluster.Title.ProvidedByDescription"</strong><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; LABEL_WIDTH="38.5"<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; TITLE="Cluster.Title.ProvidedBy"<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; &gt;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The DESCRIPTION attribute value being defined in the corresponding .properties files.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

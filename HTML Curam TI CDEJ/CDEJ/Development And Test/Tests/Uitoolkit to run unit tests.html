@@ -1,0 +1,127 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Uitoolkit to run unit tests</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Uitoolkit to run unit tests";
+    pageId="urn:lsid:ibm.com:td:18cc5667-3680-49a2-b9ec-fbaba59fb766";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Uitoolkit to run unit tests</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h1 dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Install </strong><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Uitoolkit</strong><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;to run javascript unit tests</strong></h1>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">By Eclipse</strong></p>
+
+<hr dir="ltr"></hr>
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">From the uitoolkit folder (/TI/reltools/uitoolkit) run:</li>
+</ol>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;PATH_TO_DEVENV/tools/nodejs-32bit/bin/npm install&nbsp;</p>
+
+<ol dir="ltr" start="2">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Go to retools/uitookit/node_modules/selenium-standalone/bin/ and run:</li>
+</ol>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PATH_TO_DEVENV/tools/nodejs-32bit/bin/node selenium-standalone install&nbsp;</p>
+
+<ol dir="ltr" start="3">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Go to PATH_TO_STREAM/TI/reltools/uitoolkit/tools/intern/templates</li>
+</ol>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;File: debug-intern-tests<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Update the paths</p>
+
+<p dir="ltr"><span style="color:#FF0000;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example:</strong></span></p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;launchConfiguration type="org.eclipse.ui.externaltools.ProgramLaunchConfigurationType"&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;stringAttribute key="org.eclipse.ui.externaltools.ATTR_LOCATION" value="/Users/CianMcCann/DevEnv/TI7030/tools/nodejs-32bit/bin/node.exe"/&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;stringAttribute key="org.eclipse.ui.externaltools.ATTR_TOOL_ARGUMENTS" value="node_modules/gulp/bin/gulp.js debug-intern-tests --webRoot /Users/CianMcCann/Streams/TI7030/TI/client/components/client-inf"/&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;stringAttribute key="org.eclipse.ui.externaltools.ATTR_WORKING_DIRECTORY" value="/Users/CianMcCann/Streams/TI7030/TI/reltools/uitoolkit"/&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/launchConfiguration&gt;</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(&nbsp;&nbsp;<span style="color:#ff0000;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Note</strong></span>: in using a Mac, do not type .exe (Windows file)&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Example:&nbsp;&lt;stringAttribute key="org.eclipse.ui.externaltools.ATTR_LOCATION" value="/Users/CianMcCann/DevEnv/TI7030/tools/nodejs-32bit/bin/<span style="color:#ff0000;">node</span>"/&gt; )<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;</p>
+
+<ol dir="ltr" start="4">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Put it in eclipse/client-inf folder and run it (This file can actually be put into any folder).</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">In eclipse, locate the file, right click, Run As, debug-intern-tests.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Once "Starting 'debug-intern-tests'..." appears in the eclipse console, Open: <a href="http://localhost:3000/node_modules/intern/client.html?config=intern-config/intern-config.js">http://localhost:3000/node_modules/intern/client.html?config=intern-config/intern-config.js</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The JS unit tests should be run against all supported browsers!</li>
+</ol>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The steps 1 to 4 only needs to be executed once.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">By command line</strong></p>
+
+<hr dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"></hr>
+<ol dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">From the uitoolkit folder (TI/reltools/uitoolkit) run:</li>
+</ol>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;PATH_TO_DEVENV/tools/nodejs-32bit/bin/npm install&nbsp;</p>
+
+<ol dir="ltr" start="2" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Go to TI/reltools/uitookit/node_modules/selenium-standalone/bin/ and run:</li>
+</ol>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PATH_TO_DEVENV/tools/nodejs-32bit/bin/node selenium-standalone install&nbsp;</p>
+
+<ol dir="ltr" start="3" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Go to TI folder and run:&nbsp; &nbsp; &nbsp;&nbsp;​</li>
+</ol>
+
+<p class="p1" dir="ltr"><span class="s1">&nbsp; &nbsp; &nbsp; </span>&nbsp;<span style="color:#ff0000;">./appbuild test-component-javascript -Dcomponent=client-inf</span><span style="color:null;">&nbsp;as this build fails when one or more js tests fail.&nbsp;</span><br />
+&nbsp;&nbsp;</p>
+
+<p class="p1" dir="ltr"><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Check javascript code coverage</strong><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Using the command line to run the tests first as it builds the coverage report (be sure to follow the first two steps to install selenium-standalone).</p>
+
+<p dir="ltr">. You can see the code coverage in: TI⁩ ▸ ⁨client⁩ ▸ ⁨components⁩ ▸ ⁨client-inf⁩ ▸ ⁨html-report⁩ ▸ index.html</p>
+
+<p dir="ltr">Note: to speedup your tests development, you can comment all the tests from the test-suite.js and leave just yours.<br />
+<br />
+<br />
+&nbsp;</p>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

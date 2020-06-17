@@ -1,0 +1,431 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Word Integration - Future</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../wiki.css" />
+<script type="text/javascript" src="../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Word Integration - Future";
+    pageId="urn:lsid:ibm.com:td:8392faff-57c9-4f54-929f-51c406c3867d";
+    toRoot="../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Word Integration - Future</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr"><span style="font-size:20px;"><strong>Design Page for - Word Integration - Future</strong></span></p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Background</span></strong></p>
+
+<h2 dir="ltr">What is it?</h2>
+
+<ul dir="ltr">
+	<li>Allows a user to edit a Microsoft Word document on their local computer and then save it to the IBM Cúram database.</li>
+	<li>Also an additional feature within the Appeals component which allows a clause to picked and automatically inserted into a Word document.</li>
+	<li>A document can be created automatically from a template where the template details can be set before the document is presented to the user for editing.</li>
+	<li>The FILE_EDIT widget uses either a Java applet to manage the interaction between the user's browser and Word (for the browsers which support Java e.g. Internet Explorer) or the Native Messaging API for Chrome.</li>
+	<li>
+	<p>The customers who use this feature like it. Some of these customers are listed below:</p>
+
+	<ul>
+		<li>
+		<p>Alberta</p>
+		</li>
+		<li>
+		<p>SAMS</p>
+		</li>
+		<li>
+		<p>CPIN</p>
+		</li>
+		<li>
+		<p>DSCIS</p>
+		</li>
+		<li>
+		<p>Hamburg</p>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<h2 dir="ltr">Recent History</h2>
+
+<ul dir="ltr">
+	<li>Pre version 6.1 of the product, there were many ongoing issues with this feature.
+	<ul>
+		<li>Performance issues.</li>
+		<li>Instabilities when using COM bridge (findWindows).</li>
+		<li>Outdated, for one-windowed/popup based application.</li>
+		<li>Multiple APARs from customers which proved difficult to reproduce, diagnose and fix due the number of moving parts within the overall feature (browser version, JRE level, Word version etc.).</li>
+	</ul>
+	</li>
+	<li>Chrome then announced they were dropping NPAPI (Java, applet) support.
+	<ul>
+		<li><a href="http://blog.chromium.org/2014/11/the-final-countdown-for-npapi.html">http://blog.chromium.org/2014/11/the-final-countdown-for-npapi.html</a></li>
+	</ul>
+	</li>
+	<li>After some discussion, this led to the building of a “Chrome specific” solution for the feature (included a stand alone Java process and a Chrome extension).</li>
+	<li>Also led to re-writing of the infrastructure to support the Java widget for Internet Explorer to ensure it was more stable and that the user experience was better.</li>
+	<li>Overall, 4-5 months of effort to achieve this.</li>
+	<li>Now have two separate implementations, one for Chrome and one for Internet Explorer.</li>
+	<li>The Widget has proved relatively stable since it was re-written/re-factored for the 6.1 release.</li>
+	<li>There are still some customer cases coming in but not of the same volume as pre the re-write.</li>
+	<li>There are some still edge case issues such as the Word application is left open when the session is terminated unexpectedly.</li>
+</ul>
+
+<h2 dir="ltr">File Edit Widget - What is Next</h2>
+
+<ul dir="ltr">
+	<li>There have been recent announcements from Microsoft that they are going to follow suit and drop the Java plugin support in their browsers in the future.</li>
+	<li>Oracle have also announced they are going to drop the browser plug-in support starting with the Java 9 release.</li>
+	<li>These changes have already begun with the Microsoft Edge browser (Windows 10) dropping support for running Java in the browser (applet support).
+	<ul>
+		<li><a href="http://answers.microsoft.com/en-us/windows/forum/apps_windows_10-msedge/ms-edge-plugins/eb4e3bed-1a0b-4d95-b437-8fdbb4482691">http://answers.microsoft.com/en-us/windows/forum/apps_windows_10-msedge/ms-edge-plugins/eb4e3bed-1a0b-4d95-b437-8fdbb4482691</a></li>
+	</ul>
+	</li>
+	<li>This change in third party policy by Microsoft means that the current file edit solution will not work on Microsoft Edge (we have ran a quick test and found this to be the case).</li>
+	<li>In addition to that, Microsoft have not yet proposed any alternative to the old functionality and at this stage, Edge is a complete black box with no allowed interaction.</li>
+	<li>Currently therefore, we could not, even if we wanted, build a bespoke alternative solution for Edge in a similar fashion to Chrome.</li>
+	<li>What are the alternatives?
+	<ul>
+		<li>Drop support for this feature altogether from the product.</li>
+		<li>Continue support for the feature in Chrome/IE and just state it will not work in Microsoft Edge.</li>
+		<li>Provide an alternative solution to solve the customer’s business use case.</li>
+		<li>Download/Upload Word Document using existing widgets.</li>
+		<li>Investigate open source alternatives?</li>
+	</ul>
+	</li>
+	<li>Further investment in this feature v the benefits. Discuss?</li>
+</ul>
+
+<h2 dir="ltr">Support Matrix for the File Edit Widget</h2>
+
+<ul dir="ltr">
+	<li>There are a number of variables to be considered in a support matrix for this feature:
+	<ul>
+		<li>Cúram version.</li>
+		<li>Browser Type and Version.</li>
+		<li>JRE Version.</li>
+		<li>Two current solutions:
+		<ul>
+			<li>Java applet and the COM bridge combination for the browsers which support applets (IE)</li>
+			<li>Native Messaging Bridge (Chrome Extension + Standalone Java Client) + Modified COM bridge for Chrome.</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li>Some significant events (some past and future) also have to be fed into the support matrix:
+	<ul>
+		<li>Chrome browser discontinue support for running Java in the browser (Sep, 2015).</li>
+		<li>Announcements from Microsoft that they are going to follow suit and drop the Java plugin support in future. Latest browser from Microsoft (Edge) already does this.</li>
+		<li>JRE 9.0 – Oracle announce that this version will drop browser plug in support (Sep, 2016).</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Requirements</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Each requirement for the feature should be defined here in as clear and concise fashion as possible. A screen shot(s) may also be provided here for clarification. A link to the case in CEMs should also be provided here:</p>
+
+<ul dir="ltr">
+	<li><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=152268" target="_blank">152268</a>: As a caseworker, I need the option to select an MS Word Document based on a template that I can edit</li>
+	<li><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=152269" target="_blank">152269</a>: As a caseworker, I need to be able to open and view MS Word communications from Cúram Communications pages</li>
+	<li><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=152275" target="_blank">152275</a>: As an Appeals user, I need to be able to search for pre-configured text that I can insert into an MS Word document</li>
+	<li><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=152276" target="_blank">152276</a>: As an Administrator, I need to be able to create standard paragraph text (clauses) that can be used to insert into an MS Word template</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Q&amp;A</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">This is <strong>optional</strong>. There may be some outstanding questions as regards to the requirements. These questions and the answers when they become available may be recorded here.</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Non Functional Requirements</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. We can fill in N/A if the specified non functional requirement is not applicable to the feature being delivered, otherwise some notes must be entered here covering the particular area.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" width="671">
+	<tbody>
+		<tr>
+			<td style="width: 118px;"><strong>NFR</strong></td>
+			<td style="width: 537px;"><strong>Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Accessibility</td>
+			<td style="width: 537px;">The ability of the system to be used by people with disabilities. When new technologies are being used for the UI very careful consideration should be given to whether screen readers can be used with the technologies. This applies specifically to usage of JavaScript, Flex and SVG. The use of colors to provide functionality should be considered (and avoided), along with resolutions that will be used by vision impaired users.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Availability &amp; Resilience</td>
+			<td style="width: 537px;">The ability of the system to be fully or partly operational as and when required and to effectively handle failures that could affect system availability. This should be considered when working outside of the normal infrastructure and deployment. For example, the XML Server is not deployed in an application server and has special handling for fail-over and load balancing. Careful consideration should be taken before adding new components, e.g. EJB Beans, MDBs, to the infrastructure.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Development Resource</td>
+			<td style="width: 537px;">The ability of the system to be designed, built, deployed and operated within known constraints of people, budget, time, etc. In general there is not much information required here, however where special skill sets or people with siloed knowledge are required to work on the change/enhancement, this should be detailed here.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Evolution</td>
+			<td style="width: 537px;">The ability of the system to be flexible in the face of the inevitable change that all systems experience after deployment, balanced against the costs of providing such flexibility. Consideration should be given to future proofing the change, including considering how to upgrade to any changes or enhancements provided in the future. Specifically designs should accommodate elements such as localisation (text, dates, etc.), customization, configurability, and componentization. Providing these features in future releases, when not considered up front, has caused impacts for customers in the past and has prevented us from providing the features in some cases.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Internationalisation</td>
+			<td style="width: 537px;">The ability of the system to be independent from any particular language, country or cultural group. Localisation and internationalisation are a large concern for Cúram. Support should always be provided to view information in multiple locales, based on the user and server locale, along with support for working in multiple time zones.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Location</td>
+			<td style="width: 537px;">The ability of the system to overcome problems brought about by the absolute location of its elements and the distances between them. For the most part this is not a major concern, however we should never design based on the assumption that the customer will use a default configuration</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Performance and Scalability</td>
+			<td style="width: 537px;">The ability of the system to predictably execute within its mandated performance profile and to handle increased processing volumes. Performance and scalability are a concern and should always be considered during design. Where necessary, the Performance and Benchmarking teaming should be engaged early to help with determining impact of potential changes.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Regulation</td>
+			<td style="width: 537px;">The ability of the system to conform to locale and international laws, quasi-legal regulations, company policies and other rules and standards. Regulation includes the usages of third party tools and the licensing issues associated with these. New jars should never be introduced without considering the legal implications and licensing of the jars. This includes usage of GPL licensed code. Also, usage of code freely provided on the web and not properly licensed should be avoided.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Security</td>
+			<td style="width: 537px;">The ability of the system to reliably control, monitor and audit who can perform what actions on what resources and to detect and recover from failures in security mechanisms. This is a concern where new features are added that are not contained within the normal Cúram security.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Usability</td>
+			<td style="width: 537px;">The ease with which people who interact with the system can work effectively. How the change will affect the user and how they use the application/feature should always be considered. Where necessary the business analysts and our user interface experts should be engaged early to ensure we meet usability requirements. e.g. printing.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Design Options</span></strong></p>
+
+<p dir="ltr">This is <strong>optional</strong>. If there are is more than one design option available and being discussed, then these should be outlined here.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Option 1</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Option 2</span></strong></p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Design</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">This is <strong>mandatory</strong>. This should outline in detail the design chosen with all of the various areas for the component covered.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">UML Diagram/Class Architecture Diagram/Schematic Architecture Diagram</span></strong></p>
+
+<p dir="ltr">If applicable, a diagram should be constructed and placed here to display to the reader at a glance the architecture of the new feature or at the very least the relationship between the various classes that make up the new feature. It may also be applicable to construct a schematic to highlight the feature within the overall product that the feature is being applied to (i.e. where does this new feature fit into the overall offering etc.)</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">This will differ from component to component so the sub headings here will reflect that.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Component A</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Component B</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Validations</span></strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">Validations Required</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Data Model Changes and Required Indexes</span></strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">Describe any changes required to the data model, entities, operations, indexes etc.</li>
+	<li style="margin-left: 40px;"><strong>Also important here that if new tables/indexes are being added, check to ensure that the primary key/index lenght does not exceed the maximum allowed for DB2</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Resilience</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><br />
+This is <strong>mandatory</strong>. Some thought should be given to how resilient the new feature is.</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">&nbsp;&nbsp;&nbsp; What happens if something expected/unexpected goes wrong?</li>
+	<li style="margin-left: 40px;">&nbsp;&nbsp;&nbsp; What happens to the system?</li>
+	<li style="margin-left: 40px;">&nbsp;&nbsp;&nbsp; Will the user be able to take corrective action in the system without the need to resort to application logs/SQL searching/data manipulation outside of the system.</li>
+	<li style="margin-left: 40px;">&nbsp;&nbsp;&nbsp; Will the data be left in a consistent state within the system after the exception is thrown?</li>
+	<li style="margin-left: 40px;">&nbsp;&nbsp;&nbsp; Will there be messages given to the user? What will these messages be?</li>
+	<li style="margin-left: 40px;">&nbsp;&nbsp;&nbsp; Will there something written to the logs? What will this be?</li>
+	<li style="margin-left: 40px;">&nbsp;&nbsp;&nbsp; Does the feature require some of the exception data to be captured and an admin function provided to allow the situation to be re-mediated?</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Q &amp; A</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">This is <strong>optional</strong>. There may be some outstanding questions as regards to the design. These questions and the answers when they become available may be recorded here.</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Use Cases</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. The various use cases for the feature must be outlined here. They can be in whatever format deemed appropriate (i.e. verbose description or in a tabular format with actors and actions etc.). Below is an example of how use cases may be documented in a tabular format.</p>
+
+<table border="1" dir="ltr" style="width: 638px;">
+	<tbody>
+		<tr>
+			<td><strong>Role/Actor</strong></td>
+			<td><strong>Description</strong></td>
+			<td><strong>Expected Behavior</strong></td>
+			<td style="width: 256px;"><strong>Tested</strong></td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td>Does Something</td>
+			<td>What happens when this action is taken?</td>
+			<td style="width: 256px;">How is this tested, manual or automatically?</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Implementation Notes</span></strong></p>
+
+<p dir="ltr">This is <strong>optional</strong>. Any notes related to the actual implementation can be described here. These can be related to some questions related to the implementation, the way some part of the implementation was completed etc.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Application Impact</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. If there is no impact, then this is as simple as saying so. If there is impact, then this may describe the impact in detail and outline the upgrade path. If the feature is related to a CLE, this section can be a link to that CLE (and hence the documentation associated with the CLE will suffice).</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">CTM</span></strong></p>
+
+<p dir="ltr">This is <strong>optional</strong>. Consideration should be given to whether this feature adds or changes administration data. If new administration data is being added, are new CTM business objects required to transport this data. If existing administration data is being modified, will this require changes to existing CTM BOM instances?</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">JMX</span></strong></p>
+
+<p dir="ltr">This is <strong>optional</strong>. Consideration should be given to whether this feature should be instrumented to add JMX metrics. Normally, this is applicable to larger features and at the infrastructure level, there are few places where this is required. Nonetheless, some thought should be given to this item during the design phase.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Testing</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. An outline of all of the testing required by the feature should be present here. This may tie in with the use cases outlined above. This may differ from component to component so the sub headings here will reflect that.</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Unit tests</p>
+	</li>
+	<li>
+	<p>Manual Test Plans</p>
+	</li>
+	<li>
+	<p>Automated tests</p>
+	</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Documentation/How To Use Feature</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. This should describe how to use the feature added. Again this may differ from component to component but there are some general headings to consider:</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Where the feature fits in the overall component?</p>
+	</li>
+	<li>
+	<p>How it may be accessed (i.e. created/authored)?</p>
+	</li>
+	<li>
+	<p>What does it do (may be linked to the use cases above)?</p>
+	</li>
+	<li>
+	<p>Advantages of using the feature?</p>
+	</li>
+	<li>
+	<p>Any limitations associated with the feature?</p>
+	</li>
+	<li>
+	<p>A description of how the feature should be used etc.? This may also include a description of a contract between the various teams using the feature and will incorporate some details of the design.</p>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Check List</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Basically this is a quick check list of items that should be considered when doing a design for that particular component.</p>
+
+<table border="1" dir="ltr" style="width: 658px;">
+	<tbody>
+		<tr>
+			<td style="width: 166px;"><strong>Check List Item</strong></td>
+			<td style="width: 314px;"><strong>Notes</strong></td>
+			<td style="width: 157px;"><strong>Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">????</td>
+			<td style="width: 314px;">?????.</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Work Estimation</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Again, the actual items listed in the estimate breakdown may vary from task to task and component to component.</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Work Estimates</p>
+
+	<ul>
+		<li>
+		<p>Design: ? Days</p>
+		</li>
+		<li>
+		<p>Prototype: ? Days</p>
+		</li>
+		<li>
+		<p>Implementation: ? Days</p>
+		</li>
+		<li>
+		<p>Testing: ? Days</p>
+		</li>
+		<li>
+		<p>Documentation: ? Days</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Total: ? Days</p>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><br />
+&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

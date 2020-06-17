@@ -1,0 +1,1318 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Generation of Word Documents on Server Side</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Generation of Word Documents on Server Side";
+    pageId="urn:lsid:ibm.com:td:b727fa03-beaa-441d-9e28-77e1f1da6040";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Generation of Word Documents on Server Side</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: 20px;"><strong>Design Page for Word Integration</strong></span></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: 20px;"><strong>Stakeholders</strong></span></p>
+
+<table border="1" dir="ltr" style="margin: 4px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; width: 500px; border-collapse: collapse !important;">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 197px;"><strong><span style="font-size: 16px;">Role</span></strong></td>
+			<td style="padding: 4px; width: 120px;"><strong><span style="font-size: 16px;">Name</span></strong></td>
+			<td style="padding: 4px; width: 168px;"><strong><span style="font-size: 16px;">Sign Off if Applicable</span></strong></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 197px;">Customer</td>
+			<td style="padding: 4px; width: 120px;">&nbsp;</td>
+			<td style="padding: 4px; width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 197px;">Business Owner/Product Owner</td>
+			<td style="padding: 4px; width: 120px;">
+			<p>Shane McFadden</p>
+
+			<p>Aleksandra Baginska</p>
+			</td>
+			<td style="padding: 4px; width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 197px;">Architect</td>
+			<td style="padding: 4px; width: 120px;">Fergal Gavin</td>
+			<td style="padding: 4px; width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 197px;">Developer(s)</td>
+			<td style="padding: 4px; width: 120px;">Guilherme Bernert</td>
+			<td style="padding: 4px; width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 197px;">FVT</td>
+			<td style="padding: 4px; width: 120px;">TBD</td>
+			<td style="padding: 4px; width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 197px;">SVT</td>
+			<td style="padding: 4px; width: 120px;">TBD</td>
+			<td style="padding: 4px; width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 197px;">Information Developer</td>
+			<td style="padding: 4px; width: 120px;">TBD</td>
+			<td style="padding: 4px; width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 197px;">UX Design</td>
+			<td style="padding: 4px; width: 120px;">TBD</td>
+			<td style="padding: 4px; width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 197px;">Legal</td>
+			<td style="padding: 4px; width: 120px;">TBD</td>
+			<td style="padding: 4px; width: 168px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Background</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Previously the Word Integration was running at the client side using applets, we would open a bridge between Cúram and Microsoft Word that would enable the customer to edit the file and save directly from the browser. The problem is that the browsers nowadays are not supporting applets anymore, so this functionality must be updated in order to work.</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">RTC Tickets:</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Docx4j Spike -&nbsp;<a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=195964">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=195964</a></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Requirements</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">List of Requirements</p>
+
+<ul dir="ltr" style="margin-bottom: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; list-style-position: outside !important; margin-top: 0px !important;">
+	<li style="margin: 0px !important;">Requirement 1: The Word Integration functionality will not be using applets.</li>
+	<li style="margin: 0px !important;">Requirement 2: The Word Integration functionality shall run from the server side without any integration with a specific text editor.</li>
+	<li style="margin: 0px !important;">Requirement 3: The Word Integration shall use the Docx4j API.</li>
+	<li style="margin: 0px !important;">Requirement 4: The Word Integration shall be done by using a download / upload method.</li>
+	<li style="margin: 0px !important;">Requirement 5: The Word Integration will support files with .dotx and .docx extensions.</li>
+	<li style="margin: 0px !important;">Requirement 6: The user shall be able to use its own templates.</li>
+</ul>
+
+<p dir="ltr" style="margin: 0px !important;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Requirement Decisions</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<table border="1" dir="ltr" height="156" style="margin: 4px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; border-collapse: collapse !important;" width="860">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 50px;"><span style="font-size: 14px;"><strong>Requirement Decision Title</strong></span></td>
+			<td style="padding: 4px; width: 125px;"><span style="font-size: 14px;"><strong>Issue or Problem Statement</strong></span></td>
+			<td style="padding: 4px; width: 50px;"><span style="font-size: 14px;"><strong>Assumptions</strong></span></td>
+			<td style="padding: 4px; width: 50px;"><span style="font-size: 14px;"><strong>Motivation</strong></span></td>
+			<td style="padding: 4px; width: 50px;"><span style="font-size: 14px;"><strong>Alternatives</strong></span></td>
+			<td style="padding: 4px; width: 50px;"><span style="font-size: 14px;"><strong>Decision</strong></span></td>
+			<td style="padding: 4px; width: 50px;"><span style="font-size: 14px;"><strong>Justification</strong></span></td>
+			<td style="padding: 4px; width: 50px;"><span style="font-size: 14px;"><strong>Implications</strong></span></td>
+			<td style="padding: 4px; width: 50px;"><span style="font-size: 14px;"><strong>Status</strong></span></td>
+			<td style="padding: 4px; width: 50px;"><span style="font-size: 14px;"><strong>Date</strong></span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 50px;">Third Party Library</td>
+			<td style="padding: 4px; width: 125px;">Definition of which third party library to use.</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">
+			<p>Docx4j</p>
+
+			<p>Apache POI</p>
+			</td>
+			<td style="padding: 4px; width: 50px;">Docx4j</td>
+			<td style="padding: 4px; width: 50px;"><a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" href="Spike%20-%20Server%20Generate-Once%20Docs.html" id="wikiLink1500467212517" page="Spike - Server Generate-Once Docs">https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/W953a3b66c398_4024_a06d_931eafd64b1e/page/Spike%20-%20Server%20Generate-Once%20Docs</a></td>
+			<td style="padding: 4px; width: 50px;">Only accepts .docx and .dotx files</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin: 0px !important;">&nbsp;</p>
+
+<p dir="ltr" style="margin: 0px !important;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Non Functional Requirements</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" style="margin: 4px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; border-collapse: collapse !important;" width="671">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 118px;"><strong>NFR</strong></td>
+			<td style="padding: 4px; width: 537px;"><strong>Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Accessibility</td>
+			<td style="padding: 4px; width: 537px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">N/A</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Availability &amp; Resilience</td>
+			<td style="padding: 4px; width: 537px;">The application will thrown an AppException and display a message to the user in case of any failures but will continue to operate normally.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Development Resource</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Evolution</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Internationalisation</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Location</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Performance and Scalability</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Regulation</td>
+			<td style="padding: 4px; width: 537px;">A new third party lib is being introduced and the legal process has already started.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Security</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Usability</td>
+			<td style="padding: 4px; width: 537px;">
+			<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The customer would be losing :-</p>
+
+			<ol dir="ltr" style="margin-bottom: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; list-style-position: outside !important; margin-top: 0px !important;">
+				<li style="margin: 0px !important;">overwrite on save</li>
+				<li style="margin: 0px !important;">overwrite on close</li>
+				<li style="margin: 0px !important;">template editing with paste-able "clauses" as in Appeals module</li>
+			</ol>
+
+			<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The customer would be gaining :-</p>
+
+			<ol dir="ltr" style="margin-bottom: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; list-style-position: outside !important; margin-top: 0px !important;">
+				<li style="margin: 0px !important;">using alternates to MSWord</li>
+				<li style="margin: 0px !important;">assuming a check-out, check-in policy, no more blocked saves due to concurrent access</li>
+			</ol>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Design</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The new functionality will be using the Docx4j API and will be done from the server side by using a download / upload mechanism. The user will inform some data in a previous screen which will then be populated automatically into the template selected (by translating the placeholders from the template into the information provided) and a .docx file will be created and saved in the database. The user will then be presented with a Download button that will enable to download a hard copy into the disk of the populated file. There the user will be able to make changes according to what he needs and upload the updated file by using the upload document feature.</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The new Word API will contain the following methods:</p>
+
+<ul dir="ltr">
+	<li style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">listProperties -&gt; This method will be responsible for listing the properties / placeholders that are present in the template.</li>
+	<li style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">generateDocument -&gt; This method will receive a list of information and the template selected and will generate a new .docx file using these inputs.</li>
+</ul>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Few things to be considered:</p>
+
+<ul dir="ltr">
+	<li style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">There won't be any integration between Cúram and any text editor.</li>
+	<li style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The application assumes that the placeholders will have the same ID as the fields from the screen used to gather the user information.</li>
+	<li style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The user must have a text editor compatible with .docx installed locally.</li>
+</ul>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Architecture/Design Decisions</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<table border="1" dir="ltr" height="156" style="margin: 4px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; border-collapse: collapse !important;" width="860">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 50px;"><span style="font-size: 14px;"><strong>Architecture Decision Title</strong></span></td>
+			<td style="padding: 4px; width: 125px;"><span style="font-size: 14px;"><strong>Issue or Problem Statement</strong></span></td>
+			<td style="padding: 4px; width: 50px;"><span style="font-size: 14px;"><strong>Assumptions</strong></span></td>
+			<td style="padding: 4px; width: 50px;"><span style="font-size: 14px;"><strong>Motivation</strong></span></td>
+			<td style="padding: 4px; width: 50px;"><span style="font-size: 14px;"><strong>Alternatives</strong></span></td>
+			<td style="padding: 4px; width: 50px;"><span style="font-size: 14px;"><strong>Decision</strong></span></td>
+			<td style="padding: 4px; width: 50px;"><span style="font-size: 14px;"><strong>Justification</strong></span></td>
+			<td style="padding: 4px; width: 50px;"><span style="font-size: 14px;"><strong>Implications</strong></span></td>
+			<td style="padding: 4px; width: 50px;"><span style="font-size: 14px;"><strong>Status</strong></span></td>
+			<td style="padding: 4px; width: 50px;"><span style="font-size: 14px;"><strong>Date</strong></span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 125px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">Open/In Progress/Closed</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 125px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 125px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 125px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;<br />
+			&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">System Context Diagram</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><img lconnwikiparamattachmentname="old_way.jpg" src="Spike%20-%20Server%20Generate-Once%20Docs._ATTACHMENTS_/old_way.jpg" lconnwikiparamwikipage="Spike - Server Generate-Once Docs" lconnwikimacro="image" alt=""></img></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><img lconnwikiparamattachmentname="new_way.jpg" src="Spike%20-%20Server%20Generate-Once%20Docs._ATTACHMENTS_/new_way.jpg" lconnwikiparamwikipage="Spike - Server Generate-Once Docs" lconnwikimacro="image" alt=""></img></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Architecture/Design Context Diagram</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin-left: 40px;">N/A</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Design Specifics</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">SDEJ:</p>
+
+<ul dir="ltr" style="margin-bottom: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; list-style-position: outside !important; margin-top: 0px !important;">
+	<li style="margin: 0px 0px 0px 40px !important;">A new API was introduced in SDEJ that will be used to execute the tasks related to MS Word Document Generation and Population on the server side by using DOCX4J V3.3.5.</li>
+	<li style="margin: 0px 0px 0px 40px !important;">The methods available in this API are:
+	<ul>
+		<li style="margin: 0px 0px 0px 40px !important;"><strong>​Map&lt;String, String&gt; getTemplateProperties(<span style="font-family: Monaco; font-size: 11px;">ByteArrayInputStream </span><span class="s1" style="font-family: Monaco; font-size: 11px;">templateStream</span><span style="font-family: Monaco; font-size: 11px;">)</span></strong>
+		<ul>
+			<li style="margin: 0px 0px 0px 40px !important;"><span style="font-family: Monaco; font-size: 11px;">​</span><span style="font-size:12px;"><span style="font-family:arial,helvetica,sans-serif;">Receives a MS Word Template in the format of an ByteArrayInputStream and iterates over the document populating a MAP with the properties available from the template.</span></span></li>
+		</ul>
+		</li>
+		<li style="margin: 0px 0px 0px 40px !important;"><span style="font-size:12px;"><span style="font-family:arial,helvetica,sans-serif;"><span style="font-size:12px;"><span style="font-family:arial,helvetica,sans-serif;">​</span></span></span></span><strong style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">​</strong><strong><span style="font-family: Monaco; font-size: 11px;">ByteArrayOutputStream generateDocument(ByteArrayInputStream&nbsp;</span><span class="s1" style="font-family: Monaco; font-size: 11px;">templateStream</span><span style="font-family: Monaco; font-size: 11px;">,&nbsp;Map&lt;String, String&gt;&nbsp;</span><span class="s1" style="font-family: Monaco; font-size: 11px;">properties</span><span style="font-family: Monaco; font-size: 11px;">)</span></strong>
+		<ul>
+			<li style="margin: 0px 0px 0px 40px !important;"><span style="font-family: Monaco; font-size: 11px;">​</span><span style="font-family: arial, helvetica, sans-serif;">Receives a MS Word Template in the format of a&nbsp;ByteArrayInputStream and a Map with the properties that needs to be populated in the document and returns a populated MS Word Document in the format of a ByteArrayOutputStream.</span></li>
+		</ul>
+		</li>
+		<li style="margin: 0px 0px 0px 40px !important;"><span style="font-family: arial, helvetica, sans-serif;">​</span><strong><span style="font-family: Monaco; font-size: 11px;">ByteArrayOutputStream generateDocument(File&nbsp;</span><span class="s1" style="font-family: Monaco; font-size: 11px;">file</span><span style="font-family: Monaco; font-size: 11px;">,&nbsp;Map&lt;String, String&gt;&nbsp;</span><span class="s1" style="font-family: Monaco; font-size: 11px;">properties</span><span style="font-family: Monaco; font-size: 11px;">)</span></strong>
+		<ul>
+			<li style="margin: 0px 0px 0px 40px !important;"><span style="font-family: Monaco; font-size: 11px;">​</span><span style="font-family: arial, helvetica, sans-serif;">Receives a MS Word Template in the format of a File&nbsp;and a Map with the properties that needs to be populated in the document and returns a populated&nbsp;</span><span style="font-family: arial, helvetica, sans-serif;">MS Word Document in the format of a ByteArrayOutputStream.</span></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr" style="margin: 0px 0px 0px 40px !important;"><span style="font-family: arial, helvetica, sans-serif;">​​​</span></p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Design User Interface</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The interaction between the user and the application in regards of MS Word Document Generation will change from what it was used to be. The document will now be generated on the server side and will be available for the user in a Download / Upload structure. Details of the flow can be found in&nbsp;<a href="Generation%20of%20Word%20Documents%20on%20Server%20Side._ATTACHMENTS_/Future%20of%20Word%20integration%20in%20SPM.ppt" lconnwikiparamwikiattachment="Future of Word integration in SPM.ppt">Future of Word integration in SPM.ppt</a></p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Design Validations</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Whenever the user decides to use the following method signature:</p>
+
+<ul dir="ltr">
+	<li style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="font-family: arial, helvetica, sans-serif;">​</span><strong style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="font-family: Monaco; font-size: 11px;">ByteArrayOutputStream generateDocument(File&nbsp;</span><span class="s1" style="font-family: Monaco; font-size: 11px;">file</span><span style="font-family: Monaco; font-size: 11px;">,&nbsp;Map&lt;String, String&gt;&nbsp;</span><span class="s1" style="font-family: Monaco; font-size: 11px;">properties</span><span style="font-family: Monaco; font-size: 11px;">)</span></strong></li>
+</ul>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">A validation will be done to make sure that the File being sent as a parameter is of a&nbsp;".dotx" or ".docx" format. (These are the only formats accepted by DOCX4J)</p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Design Resilience Measures</span></strong></p>
+
+<p dir="ltr" style="margin: 0px 0px 0px 40px !important;">&nbsp;</p>
+
+<ul dir="ltr" style="margin-bottom: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; list-style-position: outside !important; margin-top: 0px !important;">
+	<li style="margin: 0px 0px 0px 40px !important;">What happens if something expected/unexpected goes wrong?
+	<ul>
+		<li style="margin: 0px 0px 0px 40px !important;">An AppException is thrown and a message will be displayed to the user.</li>
+	</ul>
+	</li>
+	<li style="margin: 0px 0px 0px 40px !important;">What happens to the system?
+	<ul>
+		<li style="margin: 0px 0px 0px 40px !important;">The application will keep running normally but that piece of functionality won't be executed.</li>
+	</ul>
+	</li>
+	<li style="margin: 0px 0px 0px 40px !important;">Will the user be able to take corrective action in the system without the need to resort to application logs/SQL searching/data manipulation outside of the system.
+	<ul>
+		<li style="margin: 0px 0px 0px 40px !important;">Yes.</li>
+	</ul>
+	</li>
+	<li style="margin: 0px 0px 0px 40px !important;">Will the data be left in a consistent state within the system after the exception is thrown?
+	<ul>
+		<li style="margin: 0px 0px 0px 40px !important;">Yes.</li>
+	</ul>
+	</li>
+	<li style="margin: 0px 0px 0px 40px !important;">Will there be messages given to the user? What will these messages be?
+	<ul>
+		<li style="margin: 0px 0px 0px 40px !important;">Yes, the application will have 3 different messages for different scenarios:
+		<ul>
+			<li style="margin: 0px 0px 0px 40px !important;">
+			<p class="p1">The MS Word Generator could not save the document.</p>
+			</li>
+			<li style="margin: 0px 0px 0px 40px !important;">
+			<p class="p1">&nbsp;</p>
+
+			<p class="p1">The MS Word Generator could not retrieve the specified template.</p>
+			</li>
+			<li style="margin: 0px 0px 0px 40px !important;">
+			<p class="p1">&nbsp;</p>
+
+			<p class="p1">The MS Word Generator does not support the provided file type.</p>
+			</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li style="margin: 0px 0px 0px 40px !important;">Will there something written to the logs? What will this be?
+	<ul>
+		<li style="margin: 0px 0px 0px 40px !important;">No.</li>
+	</ul>
+	</li>
+	<li style="margin: 0px 0px 0px 40px !important;">Does the feature require some of the exception data to be captured and an admin function provided to allow the situation to be re-mediated?
+	<ul>
+		<li style="margin: 0px 0px 0px 40px !important;">No.</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="color:#FF0000;"><strong><span style="font-size: 18px;">Design Logging</span></strong></span></p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Document any logging requirements for the new feature being added. Does the new feature require some logging output to aid debugging in a black box environment? Think about what the logging could be to avoid revealing PI information but giving enough information to allow effective debugging to occur in the event of an unexpected issue? JMX considerations should also be added here.</p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Design Accessibility</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">N/A</p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Third Party Software and Legal Requirements</span></strong></p>
+
+<ul dir="ltr">
+	<li style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Docx4j - Version 3.3.5 -&nbsp;<a href="https://github.com/plutext/docx4j/releases/tag/docx4j-3.3.5" style="font-family: &quot;Helvetica Neue&quot;;">https://github.com/plutext/docx4j/releases/tag/docx4j-3.3.5</a></li>
+</ul>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; color: rgb(0, 0, 0); font-family: Verdana, Arial, &quot;Bitstream Vera Sans&quot;, Helvetica, sans-serif; font-size: 13px; margin-left: 80px;">docx4j is an open source (ASLv2) Java library for creating and manipulating Microsoft Open XML (Word docx, Powerpoint pptx, and Excel xlsx) files.</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; color: rgb(0, 0, 0); font-family: Verdana, Arial, &quot;Bitstream Vera Sans&quot;, Helvetica, sans-serif; font-size: 13px; margin-left: 80px;">It is similar to Microsoft's OpenXML SDK, but for Java. docx4j uses JAXB to create the in-memory object representation.</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; color: rgb(0, 0, 0); font-family: Verdana, Arial, &quot;Bitstream Vera Sans&quot;, Helvetica, sans-serif; font-size: 13px; margin-left: 80px;">Its emphasis is on power: if the file format supports it, you can do it with docx4j. But first, you'll need to take the time to understand JAXB, and the Open XML file structure</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; color: rgb(0, 0, 0); font-family: Verdana, Arial, &quot;Bitstream Vera Sans&quot;, Helvetica, sans-serif; font-size: 13px; margin-left: 80px;">docx4j was created by Plutext Pty Ltd in 2008 - using OpenXML4J for the OPC piece. Plutext still drives the project, but since then docx4j has benefited from contributions from many individuals.&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Use Cases</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<h3 dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Use Case&nbsp;Diagram</h3>
+
+<p dir="ltr"><img id="1498644743310_0" src="Generation%20of%20Word%20Documents%20on%20Server%20Side._ATTACHMENTS_/image.png"></img></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<h3 dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Use Cases Description</h3>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">1</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Name</td>
+			<td style="padding: 4px; width: 336px;">Retrieve Template Properties</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Actor</td>
+			<td style="padding: 4px; width: 336px;">Developer</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Description</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Retrieves the properties available to be populated from a specific .dotx template / .docx file.</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Preconditions</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">A valid .dotx template / .docx file must be provided.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Flow</td>
+			<td style="padding: 4px; width: 336px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The developer makes a call to getTemplateProperties method passing a template (WordProcessingMLPackage).</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected</td>
+			<td style="padding: 4px; width: 336px;">
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The method should return a map of the properties available (Map&lt;String, Property&gt; format)</span>.</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">2</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Name</td>
+			<td style="padding: 4px; width: 336px;">Generate Document</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Actor</td>
+			<td style="padding: 4px; width: 336px;">Application</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Description</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">Generates a .docx file from a .dotx template or .docx file using the docx4j API to populate its placeholders when available.&nbsp;</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Preconditions</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">A valid .dotx&nbsp;template / .docx file must be provided.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Flow</td>
+			<td style="padding: 4px; width: 336px;">Whenever the user have informed all the required data and selected a template in previous screens and a .docx document needs to be generated, the application will handle this by getting the chosen template and the data, populating the new document and saving it to the database.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected</td>
+			<td style="padding: 4px; width: 336px;">
+			<p>Having a populated .docx file saved in the database.</p>
+
+			<div>&nbsp;</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">3</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Name</td>
+			<td style="padding: 4px; width: 336px;">Edit Document</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Actor</td>
+			<td style="padding: 4px; width: 336px;">User, Application</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Description</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">Enables the user to edit information from a .docx document and update it in the database.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Preconditions</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">The database must contain a valid .docx file to edit.</p>
+
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">The Use Case #2&nbsp;- Generate Document must be available to generate the new version of the .docx file being edited.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Flow</td>
+			<td style="padding: 4px; width: 336px;">The user must choose the document to edit from a list of documents, update the information as required and submit, the application will then use the Use Case #2 - Generate Document to re-generate the document with the new information provided by the user.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected</td>
+			<td style="padding: 4px; width: 336px;">The chosen document updated in the database.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">4</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Name</td>
+			<td style="padding: 4px; width: 336px;">Copy Clause Description to Clipboard</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Actor</td>
+			<td style="padding: 4px; width: 336px;">User</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Description</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">Enables the user to select and copy to clipboard the description of the clauses available in the application with the click of a link.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Preconditions</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">The database must contain at least one clause to be listed.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Flow</td>
+			<td style="padding: 4px; width: 336px;">The user will be presented with a list of available clauses from the database and will be able to view all of its information, including at least the name and description. A copy to clipboard link will be available from each clause of the list so the user can click on it to copy its description to the clipboard.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected</td>
+			<td style="padding: 4px; width: 336px;">The description of the chosen clause should be available in the clipboard.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">5</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Name</td>
+			<td style="padding: 4px; width: 336px;">Download Document</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Actor</td>
+			<td style="padding: 4px; width: 336px;">User</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Description</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">Enables the user to download a specific .docx file from a list of documents.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Preconditions</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">The database must contain at least one document to be listed.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Flow</td>
+			<td style="padding: 4px; width: 336px;">The user will be presented with a list of available documents from the database and a Download button will be available from the row menu in order to download a copy of the .docx file to the user's hard drive.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected</td>
+			<td style="padding: 4px; width: 336px;">A copy of the .docx file should be available in the user's hard drive.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">6</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Name</td>
+			<td style="padding: 4px; width: 336px;">Upload Document</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Actor</td>
+			<td style="padding: 4px; width: 336px;">User</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Description</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">Enables the user to upload&nbsp;a new version of an existing&nbsp;.docx file&nbsp;through the User Interface.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Preconditions</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">The database must contain at least one document to be listed and updated.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Flow</td>
+			<td style="padding: 4px; width: 336px;">The user will be presented with a list of available documents from the database and a Upload button will be available from the row menu, that button will lead to a new page that will allow the user to select the .docx file from its own hard drive and submit to the application, that file will then override the one present in the database.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected</td>
+			<td style="padding: 4px; width: 336px;">A new version of the .docx file should be saved in the database.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Implementation Notes</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="color:#FF0000;"><strong><span style="font-size: 18px;">Application Impact</span></strong></span></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">This is&nbsp;<strong>mandatory</strong>. If there is no impact, then this is as simple as saying so. If there is impact, then this may describe the impact in detail and outline the upgrade path. If the feature is related to a CLE, this section can be a link to that CLE (and hence the documentation associated with the CLE will suffice).</p>
+
+<table border="1" dir="ltr" height="74" style="margin: 4px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; border-collapse: collapse !important;" width="1124">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 125px;"><span style="font-size: 16px;"><strong>Description</strong></span></td>
+			<td style="padding: 4px; width: 125px;"><span style="font-size: 16px;"><strong>Components Affected</strong></span></td>
+			<td style="padding: 4px; width: 125px;"><span style="font-size: 16px;"><strong>Actions</strong></span></td>
+			<td style="padding: 4px; width: 125px;"><span style="font-size: 16px;"><strong>Comments</strong></span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 125px;">As of today, there are few places in the application that a Microsoft Word Integration is done, this integration must be replaced with the new MS Word Generator code.</td>
+			<td style="padding: 4px; width: 125px;">
+			<p>CEF -&gt; Create communication</p>
+
+			<p>SPMEntMods -&gt; Appeals</p>
+			</td>
+			<td style="padding: 4px; width: 125px;">Replace the current MS Word Integration with calls for the new MS Word Generator API.</td>
+			<td style="padding: 4px; width: 125px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 125px;">&nbsp;</td>
+			<td style="padding: 4px; width: 125px;">&nbsp;</td>
+			<td style="padding: 4px; width: 125px;">&nbsp;</td>
+			<td style="padding: 4px; width: 125px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Configuration Transport Manager</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">N/A</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Testing</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<h3 dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Testing Scenarios</h3>
+
+<p dir="ltr">&nbsp;</p>
+
+<h4 dir="ltr">Testing Scenarios for Use Case #1 - Retrieve Template Properties</h4>
+
+<table border="1" dir="ltr" height="329" style="border-collapse:collapse !important;font-family:helvetica neue,helvetica,arial,sans-serif;height:10px;margin:4px;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">1</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Testing Scenario ID</td>
+			<td style="padding: 4px; width: 336px;">1</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Condition</td>
+			<td style="padding: 4px; width: 336px;">.dotx template / .docx file being provided is valid and contains placeholders.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected Result</td>
+			<td style="padding: 4px; width: 336px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The method should return a populated map of properties available (Map&lt;String, Property&gt; format)</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">.</span></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; height: 10px; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">1</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Testing Scenario ID</td>
+			<td style="padding: 4px; width: 336px;">2</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Condition</td>
+			<td style="padding: 4px; width: 336px;">.dotx template / .docx file being provided is null.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected Result</td>
+			<td style="padding: 4px; width: 336px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The method should return an empty map of properties (Map&lt;String, Property&gt; format)</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">.</span></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; height: 10px; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">1</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Testing Scenario ID</td>
+			<td style="padding: 4px; width: 336px;">3</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Condition</td>
+			<td style="padding: 4px; width: 336px;">.dotx template / .docx file being provided does not contain any available placeholders.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected Result</td>
+			<td style="padding: 4px; width: 336px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The method should return an empty map of properties (Map&lt;String, Property&gt; format)</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">.</span></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<h4 dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Testing Scenarios for Use Case #2&nbsp;- Generate Document</h4>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; height: 10px; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">2</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Testing Scenario ID</td>
+			<td style="padding: 4px; width: 336px;">1</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Condition</td>
+			<td style="padding: 4px; width: 336px;">.dotx template / .docx file being provided is valid and have placeholders.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected Result</td>
+			<td style="padding: 4px; width: 336px;"><font face="Helvetica Neue, Helvetica, Arial, sans-serif">A saved .docx file in the database.</font></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; padding-top: 2px; padding-bottom: 2px;">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; height: 10px; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">2</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Testing Scenario ID</td>
+			<td style="padding: 4px; width: 336px;">2</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Condition</td>
+			<td style="padding: 4px; width: 336px;">.dotx template / .docx file being provided is valid and doesn't have placeholders.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected Result</td>
+			<td style="padding: 4px; width: 336px;"><font face="Helvetica Neue, Helvetica, Arial, sans-serif">A saved .docx file in the database.</font></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; padding-top: 2px; padding-bottom: 2px;">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; height: 10px; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">2</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Testing Scenario ID</td>
+			<td style="padding: 4px; width: 336px;">3</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Condition</td>
+			<td style="padding: 4px; width: 336px;">.dotx template / .docx file being provided is null.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected Result</td>
+			<td style="padding: 4px; width: 336px;"><font face="Helvetica Neue, Helvetica, Arial, sans-serif">An error should be thrown, no file should be saved in the database and the user must be informed that a template is required.</font></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; padding-top: 2px; padding-bottom: 2px;">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; height: 10px; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">2</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Testing Scenario ID</td>
+			<td style="padding: 4px; width: 336px;">4</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Condition</td>
+			<td style="padding: 4px; width: 336px;">File being provided is of an invalid format.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected Result</td>
+			<td style="padding: 4px; width: 336px;"><font face="Helvetica Neue, Helvetica, Arial, sans-serif">An error should be thrown, no file should be saved in the database and the user must be informed that the application does not support that file format.</font></td>
+		</tr>
+	</tbody>
+</table>
+
+<h4 dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Testing Scenarios for Use Case #3&nbsp;- Edit Document</h4>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; height: 10px; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">3</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Testing Scenario ID</td>
+			<td style="padding: 4px; width: 336px;">1</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Condition</td>
+			<td style="padding: 4px; width: 336px;">
+			<p>Database contains a .docx file stored.</p>
+
+			<p>.docx file being edited&nbsp;is valid and have placeholders.</p>
+
+			<p>Placeholder value changed.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected Result</td>
+			<td style="padding: 4px; width: 336px;"><font face="Helvetica Neue, Helvetica, Arial, sans-serif">An updated .docx file is saved in the database.</font></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; padding-top: 2px; padding-bottom: 2px;">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; height: 10px; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">3</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Testing Scenario ID</td>
+			<td style="padding: 4px; width: 336px;">2</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Condition</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">Database contains a .docx file stored.</p>
+
+			<p style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">.docx file being edited&nbsp;is valid and have placeholders.</p>
+
+			<p style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">Placeholder value not changed.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected Result</td>
+			<td style="padding: 4px; width: 336px;"><font face="Helvetica Neue, Helvetica, Arial, sans-serif">The .docx file in the database will remain the same.</font></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; padding-top: 2px; padding-bottom: 2px;">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; height: 10px; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">3</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Testing Scenario ID</td>
+			<td style="padding: 4px; width: 336px;">3</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Condition</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">Database contains a .docx file stored.</p>
+
+			<p style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">.docx file being edited&nbsp;is valid and doesn't have placeholders.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected Result</td>
+			<td style="padding: 4px; width: 336px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The .docx file in the database will remain the same.</span></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; padding-top: 2px; padding-bottom: 2px;">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; height: 10px; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">3</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Testing Scenario ID</td>
+			<td style="padding: 4px; width: 336px;">4</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Condition</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">Database is empty.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected Result</td>
+			<td style="padding: 4px; width: 336px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The edit document button should be disabled.</span></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<h4 dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Testing Scenarios for Use Case #4&nbsp;- Copy Clause Description to Clipboard</h4>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; height: 10px; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">4</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Testing Scenario ID</td>
+			<td style="padding: 4px; width: 336px;">1</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Condition</td>
+			<td style="padding: 4px; width: 336px;">
+			<p>Database contains at least one clause stored.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected Result</td>
+			<td style="padding: 4px; width: 336px;"><font face="Helvetica Neue, Helvetica, Arial, sans-serif">The description should be copied to clipboard when the user clicks on the copy to clipboard link</font></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; padding-top: 2px; padding-bottom: 2px;">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; height: 10px; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">4</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Testing Scenario ID</td>
+			<td style="padding: 4px; width: 336px;">2</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Condition</td>
+			<td style="padding: 4px; width: 336px;">
+			<p>Database is empty.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected Result</td>
+			<td style="padding: 4px; width: 336px;"><font face="Helvetica Neue, Helvetica, Arial, sans-serif">No clauses will be displayed and the user won't be able to copy anything to clipboard.</font></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; padding-top: 2px; padding-bottom: 2px;">&nbsp;</p>
+
+<h4 dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Testing Scenarios for Use Case #5&nbsp;- Download&nbsp;Document</h4>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; height: 10px; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">5</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Testing Scenario ID</td>
+			<td style="padding: 4px; width: 336px;">1</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Condition</td>
+			<td style="padding: 4px; width: 336px;">
+			<p>Database contains a .docx file stored.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected Result</td>
+			<td style="padding: 4px; width: 336px;"><font face="Helvetica Neue, Helvetica, Arial, sans-serif">The user is able to download a copy of the document by clicking the Download link on the row menu actions.</font></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; padding-top: 2px; padding-bottom: 2px;">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; height: 10px; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">5</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Testing Scenario ID</td>
+			<td style="padding: 4px; width: 336px;">2</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Condition</td>
+			<td style="padding: 4px; width: 336px;">
+			<p>Database is empty.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected Result</td>
+			<td style="padding: 4px; width: 336px;">No document rows will be displayed and the user won't be able to download anything to its hard drive.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; padding-top: 2px; padding-bottom: 2px;">&nbsp;</p>
+
+<h4 dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Testing Scenarios for Use Case #6&nbsp;- Upload&nbsp;Document</h4>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; height: 10px; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">6</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Testing Scenario ID</td>
+			<td style="padding: 4px; width: 336px;">1</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Condition</td>
+			<td style="padding: 4px; width: 336px;">
+			<p>Database contains a .docx file stored.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected Result</td>
+			<td style="padding: 4px; width: 336px;"><font face="Helvetica Neue, Helvetica, Arial, sans-serif">The user is able to upload a new version of the document by clicking the Upload link on the row menu actions and selecting the document to upload on the next screen and the new version is saved to the database.</font></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; padding-top: 2px; padding-bottom: 2px;">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; height: 10px; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">6</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Testing Scenario ID</td>
+			<td style="padding: 4px; width: 336px;">2</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Condition</td>
+			<td style="padding: 4px; width: 336px;">
+			<p>Database is empty.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected Result</td>
+			<td style="padding: 4px; width: 336px;">No document rows will be displayed and the user won't be able to upload anything to the database.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif; height: 10px; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">6</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Testing Scenario ID</td>
+			<td style="padding: 4px; width: 336px;">3</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Condition</td>
+			<td style="padding: 4px; width: 336px;">
+			<p><span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">Database contains a .docx file stored.</span></p>
+
+			<p><span style="font-family: &quot;helvetica neue&quot;, helvetica, arial, sans-serif;">User tries to upload an invalid file.</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected Result</td>
+			<td style="padding: 4px; width: 336px;">An error is thrown, no file is saved on the database and the user is informed that the document provided is invalid.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; padding-top: 2px; padding-bottom: 2px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; padding-top: 2px; padding-bottom: 2px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; padding-top: 2px; padding-bottom: 2px;">This is&nbsp;<strong>mandatory</strong>. An outline of all of the testing required by the feature should be present here. This may tie in with the use cases outlined above. Describe the framework being used and the kinds of tests being written:</p>
+
+<ul dir="ltr" style="margin-bottom: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; list-style-position: outside !important; margin-top: 0px !important;">
+	<li style="margin: 0px 0px 0px 40px !important;">Unit Tests</li>
+	<li style="margin: 0px 0px 0px 40px !important;">Process Tests</li>
+	<li style="margin: 0px 0px 0px 40px !important;">End to End Tests</li>
+	<li style="margin: 0px 0px 0px 40px !important;">Functional/Business Flow Tests</li>
+</ul>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Is it just functional tests or are further performance tests required:</p>
+
+<ul dir="ltr" style="margin-bottom: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; list-style-position: outside !important; margin-top: 0px !important;">
+	<li style="margin: 0px 0px 0px 40px !important;">FVT Required?</li>
+	<li style="margin: 0px 0px 0px 40px !important;">SVT Required?</li>
+</ul>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Documentation/How To Use Feature</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">This is&nbsp;<strong>mandatory</strong>. This should describe how to use the feature added. Again this may differ from component to component but there are some general headings to consider:</p>
+
+<ul dir="ltr" style="margin-bottom: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; list-style-position: outside !important; margin-top: 0px !important;">
+	<li style="margin: 0px !important;">
+	<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">Where the feature fits in the overall component?</p>
+
+	<ul>
+		<li style="margin: 0px !important;">
+		<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">This API will be available to use throughout the application whenever a Microsoft Word file needs to be created on top of a Microsoft Word Template.</p>
+		</li>
+	</ul>
+	</li>
+	<li style="margin: 0px !important;">
+	<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;"><span style="color:#FF0000;">How it may be accessed (i.e. created/authored)?</span></p>
+	</li>
+	<li style="margin: 0px !important;">
+	<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">What does it do (may be linked to the use cases above)?</p>
+
+	<ul>
+		<li style="margin: 0px !important;">
+		<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">It generates a Microsoft Word document with its placeholders populated using a Microsoft Word Template and a map of properties.</p>
+		</li>
+	</ul>
+	</li>
+	<li style="margin: 0px !important;">
+	<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">Advantages of using the feature?</p>
+
+	<ul>
+		<li style="margin: 0px !important;">
+		<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">There will be no dependency on the Microsoft Word editor;</p>
+		</li>
+		<li style="margin: 0px !important;">
+		<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">The document will be generated at the server side;</p>
+		</li>
+		<li style="margin: 0px !important;">
+		<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">No need of a browser plugin in order to use the API;</p>
+		</li>
+	</ul>
+	</li>
+	<li style="margin: 0px !important;">
+	<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">Any limitations associated with the feature?</p>
+
+	<ul>
+		<li style="margin: 0px !important;">
+		<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">The third party tool being used (docx4j) only accepts .dotx and .docx files;</p>
+		</li>
+	</ul>
+	</li>
+	<li style="margin: 0px !important;">
+	<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;"><span style="color:#FF0000;">A description of how the feature should be used etc.? This may also include a description of a contract between the various teams using the feature and will incorporate some details of the design.</span></p>
+	</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

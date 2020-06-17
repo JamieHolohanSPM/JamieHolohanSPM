@@ -1,0 +1,54 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Feedback from External Playback - Session Timeout</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Feedback from External Playback - Session Timeout";
+    pageId="urn:lsid:ibm.com:td:2b234883-8f4e-4138-b4b4-32c6d54ce756";
+    toRoot="../../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Feedback from External Playback - Session Timeout</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">Date : 23rd November 2016</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><em>Action points following feedback from relevant stakeholders</em></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<ol dir="ltr">
+	<li><strong>Shane</strong> to check previously received feedback from NYC based on the initial delivery of session timeout warning for External to ensure we have addressed the customers needs with this second implementation. Feedback from <strong>Graham</strong> following the NYC PC Bank visit in 2015 was that when citizens use a shared PC in the PC Banks, a new user can often sit down to a message saying "your session has expired". This is confusing for the citizen as they have only just arrived in the PC Bank and not yet created a session.</li>
+	<li>The message on the homepage "your session has expired" should only be displayed to users who have performed an action on the page (e.g clicked the 'Quit' button). <strong>Bruna</strong> to ensure that this is the implemented functionality.</li>
+	<li>Customers tend not to use our login pages, we need to ensure that the process to implement this functionality on custom login pages is documented accordingly. <strong>Bruna</strong> to ensure that the relevant documentation has been completed for customers to update their own login pages.</li>
+	<li>This functionality is based on the session timeout value set on the app server, we should ensure it's tested on all supported servers and not only WAS. <strong>Bruna</strong> to test on all other relevant servers.</li>
+	<li>The 'Quit' text on the button displayed in the popup could be confusing to customers. It could lead the customer to believe that clicking 'Quit' will cause only the popup to disappear. <strong>Shane</strong> and <strong>Sara</strong> to review whether the text on the 'Quit' button is sufficient.</li>
+	<li>Although we know there is a homepage delivered in UA, we need to check whether there is any other homepages delivered in the application that we need to update for the release.</li>
+</ol></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

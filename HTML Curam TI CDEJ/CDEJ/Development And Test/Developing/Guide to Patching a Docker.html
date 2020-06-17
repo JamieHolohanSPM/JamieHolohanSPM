@@ -1,0 +1,131 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Guide to Patching a Docker</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Guide to Patching a Docker";
+    pageId="urn:lsid:ibm.com:td:80fd17e8-36db-43a2-a5f6-4a0eea1cf0c6";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Guide to Patching a Docker</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">Note:</p>
+
+<p dir="ltr">- Examples use the made up VM: <a href="mailto:root@opsdocker123.mulvm.ie.ibm.com">root@opsdocker123.mulvm.ie.ibm.com</a> and are patching cdej.js as an example.</p>
+
+<p dir="ltr">- You will be prompted for the password of the dockers VM:</p>
+
+<p dir="ltr">For this you need to generate a RSA key<br />
+<a href="https://docs.typo3.org/m/typo3/guide-contributionworkflow/master/en-us/Appendix/OSX/SSHKeyOSX.html">https://docs.typo3.org/m/typo3/guide-contributionworkflow/master/en-us/Appendix/OSX/SSHKeyOSX.html</a></p>
+
+<p dir="ltr">Copy the generated key by accessing your dashboard in fluxy and by clicking the docker logo next to your docker environment. Paste the key in there.</p>
+
+<p dir="ltr">- If copying and pasting from here watch out for formatting changes on the likes of quotation marks.</p>
+
+<p dir="ltr">- I've only done this so far with .jsp and .js files so feel free to update.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><span style="font-size:14px;"><b>Locating the file you want to patch on the docker:</b></span></p>
+
+<p dir="ltr">SSH to into the dockers VM&nbsp;(Run command from terminal on your machine):</p>
+
+<p dir="ltr">ssh <a href="mailto:root@opsdocker123.mulvm.ie.ibm.com">root@opsdocker123.mulvm.ie.ibm.com</a></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Enter the docker (Run command&nbsp;from dockers VM):</p>
+
+<p dir="ltr">docker exec -it curam_was /bin/bash</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Navigate to the opt directory (Run command from within the docker):</p>
+
+<p dir="ltr">cd /opt</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Find&nbsp;the location of the file you want to patch (Run command from within the dockers opt directory):</p>
+
+<p dir="ltr">find . -name ‘cdej.js’</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><span style="font-size:14px;"><b>Copy the file you want to edit from docker to your machine:</b></span></p>
+
+<p dir="ltr">Copy it to the tmp folder on the dockers VM first (Run command from dockers VM):</p>
+
+<p dir="ltr">docker cp curam_was:/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/installedApps/dockerCell/Curam.ear/ClientModule.war/CDEJ/jscript/cdej.js /tmp/</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Copy it from the tmp folder on the dockers VM to your own machine (Run command from terminal on your machine):</p>
+
+<p dir="ltr">exit (to exit the docker on the terminal)</p>
+
+<p dir="ltr">scp root@opsdocker123.mulvm.ie.ibm.com:/tmp/cdej.js /Users/cian/Desktop</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><span style="font-size:14px;"><b>Copying from your machine to the docker:</b></span></p>
+
+<p dir="ltr">Copy your edited file from your machine to the tmp folder on the dockers VM (Run command from terminal on your machine):</p>
+
+<p dir="ltr">scp /PathToFileOnYourMachine/cdej.js root@opsdocker123.mulvm.ie.ibm.com:/tmp/</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Copy your edited file the dockers VM to the location it lives on the docker where you want to overwrite (Run command from dockers VM):</p>
+
+<p dir="ltr">docker cp /tmp/cdej.js curam_was:/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/installedApps/dockerCell/Curam.ear/ClientModule.war/CDEJ/jscript/</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><span style="font-size:14px;"><b>Some file changes will be picked up automatically,&nbsp;some will require you to restart the docker server:</b></span></p>
+
+<p dir="ltr">/opt/IBM/Curam/Development/EJBServer/./build.sh stopserver -Dserver.name=CuramServer</p>
+
+<p dir="ltr">/opt/IBM/Curam/Development/EJBServer/./build.sh startserver -Dserver.name=CuramServer</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><span style="font-size:14px;"><b>Other file changes will require you to rebuild and reinstall a new curam.ear:</b></span></p>
+
+<ul dir="ltr">
+	<li>From /opt/IBM/Curam/Development run . ./SetEnvironment.sh</li>
+	<li>From /opt/IBM/Curam/Development/EJBServer/ run ./build.sh server</li>
+	<li>From /opt/IBM/Curam/Development/webclient/ run ./build.sh client</li>
+	<li>From /opt/IBM/Curam/Development/EJBServer/ run ./build.sh websphereEAR</li>
+	<li>From /opt/IBM/Curam/Development/EJBServer/ run ./build.sh stopserver -Dserver.name=CuramServer</li>
+	<li>From /opt/IBM/Curam/Development/EJBServer/ run ./build.sh configure</li>
+	<li>From /opt/IBM/Curam/Development/EJBServer/ run ./build.sh startserver -Dserver.name=CuramServer</li>
+	<li>From /opt/IBM/Curam/Development/EJBServer/ run ./build.sh installapp -Dserver.name=CuramServer -Dear.file=$SERVER_DIR/build/ear/WAS/Curam.ear -Dapplication.name=Curam</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

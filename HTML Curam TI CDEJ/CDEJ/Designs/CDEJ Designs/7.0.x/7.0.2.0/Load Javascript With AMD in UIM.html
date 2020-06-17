@@ -1,0 +1,724 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Load Javascript With AMD in UIM</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Load Javascript With AMD in UIM";
+    pageId="urn:lsid:ibm.com:td:f521a6d9-1090-4a90-9d6e-ce2459f5c176";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Load Javascript With AMD in UIM</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: 20px;"><strong>Design Page for Loading Javascript with AMD in UIM's&nbsp;-&nbsp;</strong></span><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=197656">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=197656</a></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: 20px;"><strong>Stakeholders</strong></span></p>
+
+<table border="1" dir="ltr" style="margin: 4px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; width: 500px; border-collapse: collapse !important;">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 197px;"><strong><span style="font-size: 16px;">Role</span></strong></td>
+			<td style="padding: 4px; width: 120px;"><strong><span style="font-size: 16px;">Name</span></strong></td>
+			<td style="padding: 4px; width: 168px;"><strong><span style="font-size: 16px;">Sign Off if Applicable</span></strong></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 197px;">&nbsp;</td>
+			<td style="padding: 4px; width: 120px;">&nbsp;</td>
+			<td style="padding: 4px; width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 197px;">Business Owner/Product Owner</td>
+			<td style="padding: 4px; width: 120px;">Shane McFadden</td>
+			<td style="padding: 4px; width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 197px;">Architect</td>
+			<td style="padding: 4px; width: 120px;">Fergal Gavin</td>
+			<td style="padding: 4px; width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 197px;">Developer(s)</td>
+			<td style="padding: 4px; width: 120px;">Guilherme Bernert</td>
+			<td style="padding: 4px; width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 197px;">FVT</td>
+			<td style="padding: 4px; width: 120px;">&nbsp;</td>
+			<td style="padding: 4px; width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 197px;">SVT</td>
+			<td style="padding: 4px; width: 120px;">&nbsp;</td>
+			<td style="padding: 4px; width: 168px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Background</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The Curam application is pretty dynamic in so far as that it has many UI widgets that has JavaScript logic that changes the behaviour of the UI in response to the user performing some action.</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Currently JavaScript can be referenced in a UIM file using the SCRIPT_FILE attribute. When UIM is converted to JSPX files during the build process 2 things happen to enable the JavaScript to be invoked on a web page at runtime:</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>(i)</strong>&nbsp;The<strong>&nbsp;JavaScript file from the component gets copied into the root of the CDEJ/jscript</strong>&nbsp;(name space is<strong>&nbsp;NOT&nbsp;</strong>respected) within the ClientModule.war file. An&nbsp;<strong>important caveat</strong>&nbsp;here is the JavaScript file must&nbsp;<strong>NOT&nbsp;</strong>be in a WebContent directory of a component in order to be used&nbsp;<strong>directly</strong>&nbsp;in UIM.</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>(ii)</strong>&nbsp;The JavaScript file gets pulled into the web page by&nbsp;<strong>including it on the generated JSPX</strong>&nbsp;file like so - where &lt;&lt;fileName&gt;&gt; is the name of JavaScript file referred to in JSCRIPT_FILE in UIM:</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;&lt;script src="../CDEJ/jscript/&lt;&lt;fileName&gt;&gt;.js" type="text/javascript"&gt;// dummy script content&lt;/script&gt;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The key points here are:</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>(1)&nbsp;</strong>When including JavaScript in a UIM&nbsp;the JavaScript can be included by referencing the file from the root&nbsp; (CDEJ/jscript).</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong>(2)&nbsp;</strong>In order to get a JavaScript file generated into the root, the JavaScript file in source can be placed anywhere<strong>&nbsp;EXCEPT</strong>&nbsp;in a WebContent directory within a component. In order to get a JavaScript file generated into the properly name spaced location, then the JavaScript file in source&nbsp;<strong>MUST</strong>&nbsp;be placed in a WebContent directory within a component.</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Requirements</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The actual requirement here is to support the inclusion of&nbsp;<strong>AMD</strong>&nbsp;Dojo modules in UIM's. The word AMD is important here. It means the code is in Asynchronous Module Definition format. More information on this the Dojo AMD format can be viewed here:&nbsp;<a href="https://dojotoolkit.org/documentation/tutorials/1.10/modules/">https://dojotoolkit.org/documentation/tutorials/1.10/modules/</a></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">In the context of this requirement, an important question is, why do we need to think about this now because the AMD format has been around for the last 5 years or so?</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The ultimate driver for this requirement is that AMD will be the only format supported for version 2 of the Dojo Toolkit. The Legacy format will&nbsp;<strong>NOT</strong>&nbsp;be supported for Dojo version 2.0. This means there is a time limit on how long long we have to convert legacy Dojo modules into AMD modules (assuming we still want to support Dojo in the future). A secondary driver is that if application developers want to unit test Dojo modules (we don't care about plain JavaScript files with no Dojo) using the UI Toolkit then they need to convert the legacy modules into AMD modules. Therefore we anticipate that in the near to medium term developers will convert legacy modules to AMD modules.</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Another important point&nbsp;bearing in mind with respect to this requirement is that because there is a mix of AMD modules and legacy Dojo modules in the application, Dojo is loaded into the application using the legacy loader instead of the AMD loader. The AMD loader loads JavaScript asynchronously and thereby improves performance. See here for more information:&nbsp;<a href="https://dojotoolkit.org/reference-guide/1.10/loader/amd.html">https://dojotoolkit.org/reference-guide/1.10/loader/amd.html</a>.</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">All of the Dojo modules need to be converted to AMD modules in the application, before the AMD loader can be turned on.</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">So what needs to be done in order to support AMD Dojo modules in UIM's (assuming that we are sticking with Dojo as one our supported JavaScript frameworks in the future)?</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">I think the key to answering is to consider the following:</p>
+
+<ul dir="ltr" style="margin-bottom: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; list-style-position: outside !important; margin-top: 0px !important;">
+	<li style="margin: 0px !important;">Do we want to turn on the AMD loader now (after all legacy modules converted) or in the future?</li>
+	<li style="margin: 0px !important;">Do we want to preserve name spaces for developers? Currently in UIM when including Dojo files on a page, the full namespace for the file is not properly respected.</li>
+</ul>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">List of Requirements</p>
+
+<ul dir="ltr" style="margin-bottom: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; list-style-position: outside !important; margin-top: 0px !important;">
+	<li style="margin: 0px !important;">Requirement 1: Validate the AMD Modules to ensure that modules are written in conform to what we expect</li>
+	<li style="margin: 0px !important;">Requirement 2: Update the UIM generator to require modules asynchronously</li>
+</ul>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<ul dir="ltr" style="margin-bottom: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; list-style-position: outside !important; margin-top: 0px !important;">
+	<li style="margin: 0px !important;"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=197656" target="_blank">RTC&nbsp;Story&nbsp;197656</a>&nbsp;- <span style="color: rgb(0, 0, 0); font-family: Arial, sans-serif; white-space: nowrap;">UIM support for AMD modules</span>.</li>
+</ul>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Requirement Decisions</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">There may be some outstanding questions/decisions made as regards to the requirements. These decisions should be documented here.</p>
+
+<table border="1" dir="ltr" height="156" style="margin: 4px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; border-collapse: collapse !important;" width="860">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 50px;"><span style="font-size: 14px;"><strong>Requirement Decision Title</strong></span></td>
+			<td style="padding: 4px; width: 125px;"><span style="font-size: 14px;"><strong>Issue or Problem Statement</strong></span></td>
+			<td style="padding: 4px; width: 50px;"><span style="font-size: 14px;"><strong>Assumptions</strong></span></td>
+			<td style="padding: 4px; width: 50px;"><span style="font-size: 14px;"><strong>Motivation</strong></span></td>
+			<td style="padding: 4px; width: 50px;"><span style="font-size: 14px;"><strong>Alternatives</strong></span></td>
+			<td style="padding: 4px; width: 50px;"><span style="font-size: 14px;"><strong>Decision</strong></span></td>
+			<td style="padding: 4px; width: 50px;"><span style="font-size: 14px;"><strong>Justification</strong></span></td>
+			<td style="padding: 4px; width: 50px;"><span style="font-size: 14px;"><strong>Implications</strong></span></td>
+			<td style="padding: 4px; width: 50px;"><span style="font-size: 14px;"><strong>Status</strong></span></td>
+			<td style="padding: 4px; width: 50px;"><span style="font-size: 14px;"><strong>Date</strong></span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 125px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 125px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 125px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 125px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+			<td style="padding: 4px; width: 50px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Non Functional Requirements</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">This is&nbsp;<strong>mandatory</strong>. Do the following non functional requirements apply to the enhancement being created and if so, minor details should be provided here. We can fill in N/A if the specified non functional requirement is not applicable to the feature being delivered.</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" style="margin: 4px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; border-collapse: collapse !important;" width="671">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 118px;"><strong>NFR</strong></td>
+			<td style="padding: 4px; width: 537px;"><strong>Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Development Resource</td>
+			<td style="padding: 4px; width: 537px;">A developer that understand about Javascript is required in order to create / convert to AMD files.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Evolution</td>
+			<td style="padding: 4px; width: 537px;">The AMD Validation was created in a way that it can be updated in the future in case some of the requirements change.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Internationalisation</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Location</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Performance and Scalability</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Regulation</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Security</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Usability</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Design Options</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">OPTION 1: (Story 197656) Validate the declared name of Dojo AMD Modules and update generator to require Module</span></strong></p>
+
+<ul dir="ltr" style="margin-bottom: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; list-style-position: outside !important; margin-top: 0px !important;">
+	<li style="margin: 0px 0px 0px 80px !important;">This means that we load up all the Dojo modules (legacy format and AMD format) using the legacy loader but enable AMD modules to be referenced in UIM and Java Renderers.</li>
+</ul>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 80px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 80px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><img alt="" id="1497365618495_0" src="../../VNext/UIToolkit/Load%20JavaScript%20from%20UIM%20asynchronously._ATTACHMENTS_/editor_image_44087b8d-8126-4a10-8613-6addf9d06139.png"></img></p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 80px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The following work would be needed:</p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 80px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Document explicitly what a developer must do when converting a non AMD module to an AMD module.</p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 80px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Write an AMD module validator that does certain validations on and existing AMD module that exist in the recommended new structure i.e jscript\src</p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 80px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Update the UIM generator to require a Dojo module in correctly</p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 80px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i.e &nbsp;&nbsp;&nbsp; &lt;script&gt;require(["&lt;&lt;fileName&gt;&gt;"], function(){ });&lt;/script&gt;&nbsp;<strong>instead of the old way&nbsp;&nbsp;</strong>&lt;script src="../CDEJ/jscript/&lt;&lt;fileName&gt;&gt;.js" type="text/javascript"&gt;// dummy script content&lt;/script&gt;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 80px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; An important consideration when doing the above is whether at this point we<strong>&nbsp;want to preserve the namespace&nbsp;</strong>at this point as we are already copying the JavaScript the full name space already into jscript directory at root of WebContent</p>
+
+<ul dir="ltr" style="margin-bottom: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; list-style-position: outside !important; margin-top: 0px !important;">
+	<li style="margin: 0px 0px 0px 80px !important;">The Pros of choosing this option are:</li>
+</ul>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 80px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Not much work needed</p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 80px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - We are doing the minimum necessary in preparing to migrate to Dojo 2.0. This could be a wise approach because we do not want to invest too much on Dojo up front considering we are not sure that this will be the JavaScript framework toolkit we will be using in the long term future.​</p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Design</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin-left: 40px;">A new ANT target was created in order to execute the validation of AMD files, so in order to run it you need to open a terminal in the TI folder and run the following command:</p>
+
+<ul dir="ltr">
+	<li style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin-left: 40px;">./appbuild validateAMD</li>
+</ul>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Architecture/Design Decisions</span></strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">N/A</p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Use Cases</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="margin: 4px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">1</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Name</td>
+			<td style="padding: 4px; width: 336px;">Validate AMD Target Passes if no file is present.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Actor</td>
+			<td style="padding: 4px; width: 336px;">Application</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Description</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">The validate AMD target is called and there are no files in the webclient/components/&lt;component&gt;/jscript.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Preconditions</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">No files present in&nbsp;<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">webclient/components/&lt;component&gt;/jscript.</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Flow</td>
+			<td style="padding: 4px; width: 336px;">Validate AMD target is called.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected</td>
+			<td style="padding: 4px; width: 336px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The build should pass whenever the validate AMD target is called and there are no files in the webclient/components/&lt;component&gt;/jscript.</span></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">2</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Name</td>
+			<td style="padding: 4px; width: 336px;">Validate AMD Target called in a UIM without Javascript</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Actor</td>
+			<td style="padding: 4px; width: 336px;">Application</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Description</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">The validate AMD target is called and there are no files in the webclient/components/&lt;component&gt;/jscript.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Preconditions</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">No files present in&nbsp;webclient/components/&lt;component&gt;/jscript.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Flow</td>
+			<td style="padding: 4px; width: 336px;">Validate AMD target is called.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected</td>
+			<td style="padding: 4px; width: 336px;">The build should pass whenever the validate AMD target is called and there are no files in the webclient/components/&lt;component&gt;/jscript.<br />
+			<br />
+			&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">3</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Name</td>
+			<td style="padding: 4px; width: 336px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Validate AMD Target called in a UIM with Javascript located in the old location.</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Actor</td>
+			<td style="padding: 4px; width: 336px;">Application</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Description</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">The validate AMD target is called and there are no files in the webclient/components/&lt;component&gt;/jscript.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Preconditions</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">No files present in&nbsp;webclient/components/&lt;component&gt;/jscript.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Flow</td>
+			<td style="padding: 4px; width: 336px;">Validate AMD target is called.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected</td>
+			<td style="padding: 4px; width: 336px;">The build should pass whenever the validate AMD target is called and there are no files in the webclient/components/&lt;component&gt;/jscript.<br />
+			<br />
+			&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">4</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Name</td>
+			<td style="padding: 4px; width: 336px;">V<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">alidate AMD Target called in a UIM with Javascript located in the new location and not in AMD format.</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Actor</td>
+			<td style="padding: 4px; width: 336px;">Application</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Description</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">The validate AMD target is called and there are no files in the webclient/components/&lt;component&gt;/jscript.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Preconditions</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">No files present in&nbsp;webclient/components/&lt;component&gt;/jscript.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Flow</td>
+			<td style="padding: 4px; width: 336px;">Validate AMD target is called.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected</td>
+			<td style="padding: 4px; width: 336px;">The build should pass whenever the validate AMD target is called and there are no files in the webclient/components/&lt;component&gt;/jscript.<br />
+			<br />
+			&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">5</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Name</td>
+			<td style="padding: 4px; width: 336px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">V</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">alidate AMD Target called in a UIM with Javascript located in the new location and in AMD format</span>.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Actor</td>
+			<td style="padding: 4px; width: 336px;">Application</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Description</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">The validate AMD target is called and there are no files in the webclient/components/&lt;component&gt;/jscript.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Preconditions</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">No files present in&nbsp;webclient/components/&lt;component&gt;/jscript.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Flow</td>
+			<td style="padding: 4px; width: 336px;">Validate AMD target is called.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected</td>
+			<td style="padding: 4px; width: 336px;">The build should pass whenever the validate AMD target is called and there are no files in the webclient/components/&lt;component&gt;/jscript.<br />
+			<br />
+			&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">6</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Name</td>
+			<td style="padding: 4px; width: 336px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">V</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">alidate AMD Target called in a UIM from PAGE level.</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Actor</td>
+			<td style="padding: 4px; width: 336px;">User</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Description</td>
+			<td style="padding: 4px; width: 336px;">Javascript should work as expected in a UIM page that contains the SCRIPT_FILE attribute within a PAGE element.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Preconditions</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">The UIM page should contain an SCRIPT_FILE attribute within the PAGE element declaration.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Flow</td>
+			<td style="padding: 4px; width: 336px;">User access a UIM page that&nbsp;<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">contains an SCRIPT_FILE attribute within the PAGE element declaration.</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected</td>
+			<td style="padding: 4px; width: 336px;">Javascript invoked through the SCRIPT_FILE works correctly.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">7</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Name</td>
+			<td style="padding: 4px; width: 336px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">V</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">alidate AMD Target called in a UIM from CONDITION level.</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Actor</td>
+			<td style="padding: 4px; width: 336px;">User</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Description</td>
+			<td style="padding: 4px; width: 336px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Javascript should work as expected in a UIM page that contains a SCRIPT element within a CONDITION element.</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Preconditions</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The UIM page should contain a&nbsp;SCRIPT&nbsp;element&nbsp;within a&nbsp;CONDITION&nbsp;element declaration.</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Flow</td>
+			<td style="padding: 4px; width: 336px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">User access a UIM page that&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">contains a SCRIPT element within a CONDITION element declaration.</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected</td>
+			<td style="padding: 4px; width: 336px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Javascript invoked through the SCRIPT/SCRIPT_FILE works correctly.</span></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">8</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Name</td>
+			<td style="padding: 4px; width: 336px;">Validate AMD Target called in a UIM from ACTION_CONTROL level.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Actor</td>
+			<td style="padding: 4px; width: 336px;">User</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Description</td>
+			<td style="padding: 4px; width: 336px;">Javascript should work as expected in a UIM page that contains a SCRIPT element within a ACTION_CONTROL element.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Preconditions</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">The UIM page should contain a&nbsp;SCRIPT&nbsp;element&nbsp;within a&nbsp;<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">ACTION_CONTROL</span>&nbsp;element declaration.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Flow</td>
+			<td style="padding: 4px; width: 336px;">User access a UIM page that&nbsp;contains a SCRIPT element within a <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">ACTION_CONTROL</span> element declaration.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected</td>
+			<td style="padding: 4px; width: 336px;">Javascript invoked through the SCRIPT/SCRIPT_FILE works correctly.<br />
+			&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">9</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Name</td>
+			<td style="padding: 4px; width: 336px;">Validate AMD Target called in a UIM from FIELD level.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Actor</td>
+			<td style="padding: 4px; width: 336px;">User</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Description</td>
+			<td style="padding: 4px; width: 336px;">Javascript should work as expected in a UIM page that contains a SCRIPT element within a <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">FIELD</span> element.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Preconditions</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">The UIM page should contain a&nbsp;SCRIPT&nbsp;element&nbsp;within a&nbsp;<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">FIELD</span>&nbsp;element declaration.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Flow</td>
+			<td style="padding: 4px; width: 336px;">User access a UIM page that&nbsp;contains a SCRIPT element within a <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">FIELD</span> element declaration.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 188px;">Expected</td>
+			<td style="padding: 4px; width: 336px;">Javascript invoked through the SCRIPT/SCRIPT_FILE works correctly.<br />
+			&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Implementation Notes</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">There were no changes done to the Build Process of the application, but we had small changes done to the Runtime Flow:</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Whenever you have a SCRIPT_FILE in a UIM page, a call to loadJavascriptFile method from&nbsp;JSPUtil will be done, that method will be responsible for verifying if the provided file exists in the new AMD location (WebContent/jscript), if it does then it will output the correct loading module approach (require(*)) to the JSPX file, otherwise it will fallback to the old non_AMD location (WebContent/CDEJ/jscript)&nbsp;to search for the file and output to the JSPX (&lt;script&gt; tag).</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><img lconnwikiparamattachmentname="Build Time Process.png" src="Load%20Javascript%20With%20AMD%20in%20UIM._ATTACHMENTS_/Build%20Time%20Process.png" lconnwikiparamwikipage="Load Javascript With AMD in UIM" lconnwikimacro="image" alt=""></img></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><img lconnwikiparamattachmentname="Runtime Process.png" src="Load%20Javascript%20With%20AMD%20in%20UIM._ATTACHMENTS_/Runtime%20Process.png" lconnwikiparamwikipage="Load Javascript With AMD in UIM" lconnwikimacro="image" alt=""></img></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">One point to note is that in order to&nbsp;</span>load and make&nbsp;javascript files compatible to AMD work correctly the UIM must also be changed to add the singleton definition name before the method call:</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p class="p1" dir="ltr">&lt;SCRIPT EVENT="ONCLICK" ACTION="<strong>curam.TestJavaScriptResourceApi.</strong>getPropertyValue(window.event || arguments[0], 'test.key.with-dots-Underscores');"/&gt;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Application Impact</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin-left: 40px;">There should be no impact as there is a fallback mechanism in place for when the AMD formatted file does not exist.</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Testing</span></strong></p>
+
+<p dir="ltr" style="margin-top: 0px !important; margin-right: 0px !important; margin-bottom: 0px !important; margin-left: 40px;">Unit Tests were written to make sure that the validation logic is correct and also to check the various scenarios it can cover.</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><strong><span style="font-size: 18px;">Check List</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin-left: 40px;">N/A</p>
+
+<p dir="ltr"><strong style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: 18px;">TO DO</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">Test the validation of AMD formatted files within Java Renderers.</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

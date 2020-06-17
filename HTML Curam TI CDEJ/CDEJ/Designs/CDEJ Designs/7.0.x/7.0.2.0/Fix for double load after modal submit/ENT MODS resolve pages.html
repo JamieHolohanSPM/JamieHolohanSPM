@@ -1,0 +1,188 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>ENT MODS resolve pages</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="ENT MODS resolve pages";
+    pageId="urn:lsid:ibm.com:td:767095d1-c78c-4314-a0da-59685246f759";
+    toRoot="../../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">ENT MODS resolve pages</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr"><strong><span style="font-size: 18px;">Impacted</span></strong></p>
+
+<hr dir="ltr"></hr>
+<p dir="ltr" style="text-align: center;">No changes.</p>
+
+<p dir="ltr" style="text-align: center;">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size: 18px;">Not Impacted</span></strong></p>
+
+<hr dir="ltr"></hr>
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="text-align: center;"><strong style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center;"><span style="font-size: 16px;">ENT MODS</span></strong></p>
+
+<table border="1" dir="ltr" style="width: 1081px;">
+	<tbody>
+		<tr>
+			<td style="width: 125px;"><strong><span style="background-color: rgb(255, 255, 0);">Scenario</span></strong></td>
+			<td style="width: 225px;"><strong><span style="background-color: rgb(255, 255, 0);">Resolve Page</span></strong></td>
+			<td style="width: 469px;"><strong><span style="background-color: rgb(255, 255, 0);">UIM tested</span></strong></td>
+			<td style="width: 146px;"><strong><span style="background-color: rgb(255, 255, 0);">Why no impacted</span></strong></td>
+			<td style="width: 285px;"><strong><span style="background-color: rgb(255, 255, 0);">Steps to reproduce</span></strong></td>
+		</tr>
+		<tr>
+			<td style="width: 125px;">2</td>
+			<td style="width: 225px;"><span style="background-color:#00FF00;">CitizenAccount_intake.uim&nbsp;</span></td>
+			<td style="width: 469px;">&nbsp;</td>
+			<td style="width: 146px;">Tab context</td>
+			<td style="width: 285px;">Login as Jamessmith, Home - applications - new application</td>
+		</tr>
+		<tr>
+			<td style="width: 125px;">2</td>
+			<td style="width: 225px;"><span style="background-color:#00FF00;">CitizenAccount_goIntake.uim</span></td>
+			<td style="width: 469px;">&nbsp;</td>
+			<td style="width: 146px;">Tab context</td>
+			<td style="width: 285px;">Login as Jamessmith, Home - applications - new application</td>
+		</tr>
+		<tr>
+			<td style="width: 125px;">2</td>
+			<td style="width: 225px;"><span style="background-color:#00FF00;">CitizenAccount_goScreening.uim</span></td>
+			<td style="width: 469px;">&nbsp;</td>
+			<td style="width: 146px;">Tab context</td>
+			<td style="width: 285px;">Login as Jamessmith, Home - applications - my screenings -&gt; start new screening</td>
+		</tr>
+		<tr>
+			<td style="width: 125px;">2</td>
+			<td style="width: 225px;"><span style="background-color:#00FF00;">CitizenAccount_goTriage.uim</span></td>
+			<td style="width: 469px;">&nbsp;</td>
+			<td style="width: 146px;">Tab context</td>
+			<td style="width: 285px;">Not used</td>
+		</tr>
+		<tr>
+			<td style="width: 125px;">2</td>
+			<td style="width: 225px;"><span style="background-color:#00FF00;">CitizenAccount_resolveRecommendations.uim</span></td>
+			<td style="width: 469px;">&nbsp;</td>
+			<td style="width: 146px;">Tab context</td>
+			<td style="width: 285px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Not used</span></td>
+		</tr>
+		<tr>
+			<td style="width: 125px;">2</td>
+			<td style="width: 225px;">Te<span style="background-color:#00FF00;">stCitizenAccount_goScreening.uim</span></td>
+			<td style="width: 469px;">&nbsp;</td>
+			<td style="width: 146px;">Tab context</td>
+			<td style="width: 285px;">
+			<p>2. Go to home page, click "Check if I am Eligible"</p>
+
+			<p>3. Create an account</p>
+
+			<p>4. When the username appears at the top of the screen, click on the username to go to the standard user home page</p>
+
+			<p>5. Find the most recent URL in live headers that looks like: http://&lt;server&gt;:&lt;port&gt;/CitizenPortal/en/UIMIFrameWrapperPage.do?uimPageID=StandardUser_home&amp;o3ctx=1048576&amp;pageParams=&amp;dojo.preventCache=1390212546713</p>
+
+			<p>6. Change "StandardUser_home" to "TestStandardUser_home" and go to the URL</p>
+
+			<p>7. On the page that appears, right-click 'Test Start a New Eligibility Screening' link and click 'Inspect Element with Firebug' to edit it</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 125px;">2</td>
+			<td style="width: 225px;">OutcomePlanActivity_resolveWorkspaceURI.uim</td>
+			<td style="width: 469px;">&nbsp;</td>
+			<td style="width: 146px;">Tab context</td>
+			<td style="width: 285px;">Not found it. Have just one JS that execute it. However the JS is not used. This context problem don't have impact</td>
+		</tr>
+		<tr>
+			<td style="width: 125px;">2</td>
+			<td style="width: 225px;">VisitationPlan_resolveVisitor.uim</td>
+			<td style="width: 469px;">&nbsp;</td>
+			<td style="width: 146px;">Tab context</td>
+			<td style="width: 285px;">Not found it. Have just one JS that execute it. However the JS is not used. This context problem don't have impact</td>
+		</tr>
+		<tr>
+			<td style="width: 125px;">2</td>
+			<td style="width: 225px;"><span style="background-color:#00FF00;">LegalAction_getCreatePageName.uim&nbsp;</span></td>
+			<td style="width: 469px;">&nbsp;</td>
+			<td style="width: 146px;">Tab context</td>
+			<td style="width: 285px;">CreateHearing/CreatePetition <a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=170145">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=170145</a> &nbsp; <a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=69308">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=69308</a></td>
+		</tr>
+		<tr>
+			<td style="width: 125px;">2</td>
+			<td style="width: 225px;">MDTExternal_resolveCurrentUserCalendar.uim</td>
+			<td style="width: 469px;">&nbsp;</td>
+			<td style="width: 146px;">Tab context</td>
+			<td style="width: 285px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 125px;">3</td>
+			<td style="width: 225px;">OutcomePlan_resolveWorkspaceTimelineEditActivity.uim</td>
+			<td style="width: 469px;"><span style="background-color:#00FF00;">OutcomePlan_updateAction.uim, ProviderManagement_editService1.uim, ProviderManagement_editReferralNotificationsSent.uim,</span> <span style="background-color:#FFD700;">ProviderManagement_editReferralNotificationsNotSent.uim</span></td>
+			<td style="width: 146px;">Link with dismiss_modal = false</td>
+			<td style="width: 285px;">
+			<p>Login as planner/ My outcomes Plan/ Create a new / Activities/Services/New services/Edit the service</p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; background-color: rgb(255, 215, 0);">ProviderManagement_editReferralNotificationsNotSent.uim- Need to set sysadmin property for Email Server.&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 125px;">3</td>
+			<td style="width: 225px;">OutcomePlan_resolveWorkspaceAddItem.uim</td>
+			<td style="width: 469px;">SimpleCreateAction.uim, OutcomePlan_createOutcomePlanExpectedOutcome.uim, OutcomePlan_createOutcomePlanExpectedOutcomeMultipleClients.uim</td>
+			<td style="width: 146px;">Link with dismiss_modal = false</td>
+			<td style="width: 285px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 125px;">3</td>
+			<td style="width: 225px;">System_editSchema.uim</td>
+			<td style="width: 469px;"><span style="background-color:#00FF00;">CitizenWorkspaceAdmin_viewIntakeApplicationType.uim,</span><br />
+			<span style="background-color:#00FF00;">CitizenWorkspaceAdmin_viewInternalIntakeApplicationType.uim,</span><br />
+			<span style="background-color:#00FF00;">componentsCitizenWorkspaceAdmin_viewScreeningType.uim, CitizenWorkspaceAdmin_viewLifeEventType.uim</span></td>
+			<td style="width: 146px;">Open a new Tab - Flash</td>
+			<td style="width: 285px;">1. Admin/ Universal Access/ Application/ Online application/ details one / Click on schema 2. Admin/ Universal Access/ Application/ Internal application/ details one / Click on schema 3. Admin/ Universal Access/ Life Events/ details one / Click on schema 4.Admin/ Universal Access/ Life Events/ details one life event/Click on schema</td>
+		</tr>
+		<tr>
+			<td style="width: 125px;">3</td>
+			<td style="width: 225px;">System_scriptEditor.uim</td>
+			<td style="width: 469px;"><span style="background-color:#00FF00;">CitizenWorkspaceAdmin_viewIntakeApplicationType.uim, CitizenWorkspaceAdmin_viewInternalIntakeApplicationType.uim,</span><br />
+			<span style="background-color:#00FF00;">CitizenWorkspaceAdmin_viewLifeEventType.uim,</span><br />
+			<span style="background-color:#00FF00;">CitizenWorkspaceAdmin_viewMotivationType.uim,</span><br />
+			<span style="background-color:#00FF00;">CitizenWorkspaceAdmin_viewScreeningType.uim</span></td>
+			<td style="width: 146px;">Open a new Tab - Flash</td>
+			<td style="width: 285px;">1.Admin/ Universal Access/ Application/ Online application/ details one / Click on script<br />
+			2. Admin/ Universal Access/ Application/ Internal application/ details one / Click on script<br />
+			3. Admin/ Universal Access/ Life Events/ details one life event/Click on script<br />
+			4. Admin/ Universal Access/ Motivation/ details one lmotivation/Click on script<br />
+			5. Admin/ Universal Access/ Screenings/ details one / Click on script</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

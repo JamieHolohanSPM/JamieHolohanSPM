@@ -1,0 +1,563 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Sample Mobile App Design</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Sample Mobile App Design";
+    pageId="urn:lsid:ibm.com:td:4ea19b75-7441-4445-b1f9-8ccf2db902f7";
+    toRoot="../../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Sample Mobile App Design</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h2 dir="ltr" id="head-bf9128e2099e5e5a323912f7f305620400e1d2e2">Description of Change</h2>
+
+<p dir="ltr">This design is to develop a Curam sample mobile application on top of the MCoc framework component in Worklight environment. It has the logon screen, payment details page, user dtails screen and logout functionality on this front end. On the backend, it will integrate with the Curam <a>TabTestApp</a> by involving database table creation, modeling etc.</p>
+
+<p dir="ltr">As part of this project, 1. Worklight development environment will added to the JDE eclipse. 2. Packing the sample app using Ant 3. Exporting a Worklight component for this sample app for the customer to deploy and develop on.</p>
+
+<p dir="ltr"><strong>Targeted Release(s):</strong> vNext</p>
+
+<p dir="ltr"><strong>CEMS Case:</strong> <a class="http" href="http://cems.curamsoftware.com:8080/browse/TEC-14938">TEC-14938</a></p>
+
+<h2 dir="ltr" id="head-6cfb4a467ae8a302e54b48996097a2eb3f5e6f51">Prerequisites</h2>
+
+<p dir="ltr">n/a</p>
+
+<h2 dir="ltr" id="head-b1f92e5346e3436b46e2ec5201532d35556a00e2">Rationale</h2>
+
+<p dir="ltr">Support the Curam mobile strategy.</p>
+
+<h2 dir="ltr" id="head-9726941b81287d5ad891a9aeedd639535ad08ab6">Requirements</h2>
+
+<ul dir="ltr">
+	<li>
+	<p>Develop sample mobile app UI according to the design spec in Worklight.</p>
+	</li>
+	<li>
+	<p>Develop backend in the Curam <a>TabTestApp</a></p>
+	</li>
+	<li>
+	<p>Integrate the app with the backend hosted in Curam <a>TabTestApp</a>.</p>
+	</li>
+	<li>
+	<p>Migrate Worklight project to the Curam eclipse</p>
+	</li>
+	<li>
+	<p>Create worklight application component for the Curam sample app.</p>
+	</li>
+</ul>
+
+<h2 dir="ltr" id="head-bf531a013630424a897f93c5c83ca0ae72de4db6">Non-Functional Requirements</h2>
+
+<div dir="ltr">
+<table>
+	<tbody>
+		<tr>
+			<td>
+			<p><strong>NFR</strong></p>
+			</td>
+			<td>
+			<p><strong>Applicable</strong></p>
+			</td>
+			<td>
+			<p><strong>Comments</strong></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Accessibility</p>
+			</td>
+			<td>
+			<p>n/a</p>
+			</td>
+			<td>
+			<p>No planned changes in this area.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Availability and Resilience</p>
+			</td>
+			<td>
+			<p>n/a</p>
+			</td>
+			<td>
+			<p>No planned changes in this area.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Dynamic UIM Impact</p>
+			</td>
+			<td>
+			<p>n/a</p>
+			</td>
+			<td>
+			<p>No planned changes in this area.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Development Resource</p>
+			</td>
+			<td>
+			<p>Yes</p>
+			</td>
+			<td>
+			<p>Good knowledge at <a class="nonexistent">JavaScript</a>, HTML, CSS, ant, etc</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Evolution</p>
+			</td>
+			<td>
+			<p>n/a</p>
+			</td>
+			<td>
+			<p>No planned changes in this area.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Internationalisation</p>
+			</td>
+			<td>
+			<p>Yes</p>
+			</td>
+			<td>
+			<p>Localize all the strings in the sample mobile app.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Location</p>
+			</td>
+			<td>
+			<p>n/a</p>
+			</td>
+			<td>
+			<p>No planned changes in this area.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Performance and Scalability</p>
+			</td>
+			<td>
+			<p>n/a</p>
+			</td>
+			<td>
+			<p>No planned changes in this area.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Regulation</p>
+			</td>
+			<td>
+			<p>n/a</p>
+			</td>
+			<td>
+			<p>No planned changes in this area.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Security</p>
+			</td>
+			<td>
+			<p>n/a</p>
+			</td>
+			<td>
+			<p>No planned changes in this area.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Usability</p>
+			</td>
+			<td>
+			<p>n/a</p>
+			</td>
+			<td>
+			<p>No planned changes in this area.</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<h2 dir="ltr" id="head-0d1b53f1efecd30398a49939fcac853d3214c603">Outstanding Issues</h2>
+
+<h2 dir="ltr" id="head-1017b46038f21431846e3c6c0bbe0d252ec39213">High-Level Design</h2>
+
+<h3 dir="ltr" id="head-8f8ff4c250aac57d9f94a701f6715f64a5f70195">UI Design</h3>
+
+<p dir="ltr">The sample app consists of the following views * Logon view - users enter their credential to log on to the mobile app. * Payments View - the default view to the user after the logon is successful. it lists all the payments that user made in the past and the next payment to make in the near future. * Payment Details View - accessed by clicking each payment on the Payment View, it lists the detailed info about each payment that the user has made. * My Details View - displays user details: name, address, phone, email, etc. * Edit Details View - allow editing the user details * App Flyout - the flyout menu on the left side of the app to access all views and logout button. * Logout button - log out the application and return users to the logon view.</p>
+
+<p dir="ltr">The development of these UIs is according to the Design spec.&lt;&lt;TODO&gt;&gt;</p>
+
+<h3 dir="ltr" id="head-e92fa28b4291b9a83e55b8d05f6b37d0622b14c5">MVC model</h3>
+
+<p dir="ltr">The sample app uses the MVC model. Each view has its own controller, and the controller fetch and update the data from/to the model. See the design details below:</p>
+
+<pre dir="ltr">
+      "models": {
+        "userDetailsModel": {
+                "modelLoader": "dojox/app/utils/mvcModel",
+            "type": "dojox/mvc/EditStoreRefListController",
+            "params":{
+                "store": {},
+                "dtls": {}
+            }
+        },
+        
+        "paymentsModel": {
+                "modelLoader": "dojox/app/utils/mvcModel",
+            "type": "dojox/mvc/EditStoreRefListController",
+            "params":{
+                "store": {},
+                "dtlsList": {}
+            }
+        },
+        
+        "paymentDetailsModel": {
+                "modelLoader": "dojox/app/utils/mvcModel",
+            "type": "dojox/mvc/EditStoreRefListController",
+            "params":{
+                "store": {},
+                "dtlsList": {}
+            }
+        }
+        },
+        
+        "defaultView" : "logon,logonHeader+logon,logonBody",
+        "defaultTransition" : "slide",
+        
+        "controller" : "framework/views/default/curamAppflyout.js",
+        "template" : "framework/views/default/curamAppflyout.html",
+        
+        "views": {
+            "logon" : {
+                "transition": "slide",
+                "views" : {
+                    "logonBody" : {
+                        "constraint" : "center",
+                                "template": "framework/views/logon/logonBody.html",
+                                "controller": "framework/views/logon/logonBody.js"
+                    },
+                    "logonHeader" : {
+                        "constraint" : "top",
+                        "template" : "framework/views/logon/logon.html",
+                        "controller" : "framework/views/logon/logon.js"
+                    }
+                }
+            },
+                
+                "editDetails": {
+                        "transition" : "slide",
+                        "views" : {
+                                "editDetailsHeader" : {
+                                        "constraint" : "top",
+                                        "template": "framework/views/editdetails/editDetails.html",
+                                        "controller": "framework/views/editdetails/editDetails.js"
+                                },
+                                
+                                "editDetailsBody" :{
+                                        "constraint" : "center",
+                                        "controller": "framework/views/editdetails/editDetailsBody.js",
+                                        "template": "framework/views/editdetails/editDetailsBody.html"
+                                }
+                        }
+                },
+                
+                "payments": {
+                        "transition" : "slide",
+                        "views" : {
+                                "paymentsHeader" : {
+                                        "constraint" : "top",
+                                        "template": "framework/views/payments/payments.html",
+                                        "controller": "framework/views/payments/payments.js"
+                                },
+                                
+                                "paymentsBody" :{
+                                        "constraint" : "center",
+                                        "controller": "framework/views/payments/paymentsBody.js",
+                                        "template": "framework/views/payments/paymentsBody.html"
+                                }
+                        }
+                },
+                
+                "paymentDetails": {
+                        "transition" : "slide",
+                        "views" : {
+                                "paymentDetailsHeader" : {
+                                        "constraint" : "top",
+                                        "template": "framework/views/payments/paymentDetails.html",
+                                        "controller": "framework/views/payments/paymentDetails.js"
+                                },
+                                
+                                "paymentDetailsBody" :{
+                                        "constraint" : "center",
+                                        "controller": "framework/views/payments/paymentDetailsBody.js",
+                                        "template": "framework/views/payments/paymentDetailsBody.html"
+                                }
+                        }
+                },
+                
+                "myDetails": {
+                        "transition" : "slide",
+                        "views" : {
+                                "myDetailsHeader" : {
+                                        "constraint" : "top",
+                                        "template": "framework/views/mydetails/myDetails.html",
+                                        "controller": "framework/views/mydetails/myDetails.js"
+                                },
+                                
+                                "myDetailsBody" :{
+                                        "constraint" : "center",
+                                        "controller": "framework/views/mydetails/myDetailsBody.js",
+                                        "template": "framework/views/mydetails/myDetailsBody.html"
+                                }
+                        }
+                }
+</pre>
+
+<h3 dir="ltr" id="head-9688b8bf92d8c8e953d66ec1ee05f1780135286e">Develop backend in TabTestApp</h3>
+
+<p dir="ltr">* Create a separate Mobile.efx file to contain the modelling changes, including creating entity(corresponding to database tables), facades, domain definition and struct, etc. * Create three dmx files to insert test data to three database tables (<a class="nonexistent">MobileUsers</a>, Payment, <a class="nonexistent">PaymentDetails</a>).</p>
+
+<h4 dir="ltr" id="head-694fd4f73023e7bfa374d7c61f0cba7fbaec9fb2">Database tables Design</h4>
+
+<p dir="ltr">MobileUsers:</p>
+
+<pre dir="ltr">
+MobileUsers (
+        id,
+        username, 
+        password,
+        firstname,
+        lastname,
+        address,
+        phone,
+        email,
+        primary key (id),
+        unique key (username)
+);
+</pre>
+
+<p dir="ltr">Payment:</p>
+
+<pre dir="ltr">
+Payment (
+        id,
+        date, 
+        method,
+        userID,
+        primary key (id),
+        foreign key (userID) references MobileUsers(id)
+);
+</pre>
+
+<p dir="ltr">PaymentDetails:</p>
+
+<pre dir="ltr">
+PaymentDetails (
+        id 
+        purpose,
+        period,
+        amount,
+        paymentID,
+        primary key (id),
+        foreign key (paymentID ) references Payment(id)
+);
+</pre>
+
+<h3 dir="ltr" id="head-5640679bfe552cadc2c777226047eab57bb472d9">Integrate the app with the backend hosted in Curam TabTestApp</h3>
+
+<ul dir="ltr">
+	<li>
+	<p>Copy over the Curam Data Service Layer to the worlight project</p>
+	</li>
+	<li>
+	<p>Integrate it with the app and use the APIs to connect to the Curam Server interfaces (facades).</p>
+	</li>
+</ul>
+
+<h3 dir="ltr" id="head-61fad62d6a377bdb4f2fbc33d75e7b984cefa1eb">Migrate Worklight project to the Curam eclipse</h3>
+
+<ul dir="ltr">
+	<li>
+	<p>Add the IBM Worklight Studio to the Curam eclipse, note: only the 6.1 version is supported by the framework, so have to download from IBM Mobile Platform community internally. The 6.2 version available on the Eclipse Marketplace is not working for the framework's transition. In order to add the Worklight Studio to the Curam eclipse, we need to put the Worklight studio plguin into the devEnv zip file.</p>
+	</li>
+	<li class="gap">
+	<p>Add the code to the source control and decide the worklight project structure in the Curam eclipse.</p>
+	</li>
+</ul>
+
+<h4 dir="ltr" id="head-855669293ec816107d8b777ce37a40b028fc087d">Choices: Worklight Project Structure</h4>
+
+<div dir="ltr">
+<table>
+	<tbody>
+		<tr>
+			<td>
+			<p>Choices</p>
+			</td>
+			<td>
+			<p>Description</p>
+			</td>
+			<td>
+			<p>Pros</p>
+			</td>
+			<td>
+			<p>Cons</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Approach One</p>
+			</td>
+			<td>
+			<p>Separate the source control files from the run-time project structure used by Worklight. In the Worklight project, create a source folder (\src), keep the project structure and place all source control files under it. The MCoC framework component will not be under source control. (Note, instead its zip file will be under source control such as we do for the Dojo zip) A build script will be used to copy all the relevant resources to the run-time location used by Worklight including the MCoC framework component</p>
+			</td>
+			<td>
+			<p>1. No need to add a bunch of MCoC framework files under source control 2. Avoid of hijacking a bunch of MCoC framework component files and errors when adding or removing the MCoC framework component in case of upgrading to a newer version</p>
+			</td>
+			<td>
+			<p>1. Additional build step required after making changes in the runtime in emulator. 2. Additional Ant Scripts</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Approach Two</p>
+			</td>
+			<td>
+			<p>No separation of the source control files from the runtime structure. MCoC framwork component files can either add to source control or not</p>
+			</td>
+			<td>
+			<p>1. No additional build step required, user can see their changes immediately 2. No build script required</p>
+			</td>
+			<td>
+			<p>1. source control files and non source control files are mixed together if the MCoC framework component files is not under source control. This can avoid by adding the MCoC framework files under source control however this will lead to the problem avoided in Pros 2 in Approach One.</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<h3 dir="ltr" id="head-df78fb489850c251ddc837d6e4fbd84d5a90f7f6">Create Worklight application component</h3>
+
+<p dir="ltr">The application component will be used as a deliverable for the sample app to the customer. At the moment, a worklight application component is able to be created via right clicking on the project and then going through a series of the screen in a wizard.</p>
+
+<p dir="ltr">We may need to consider using an Ant script to automatically pack up this component.</p>
+
+<h3 dir="ltr" id="head-377eaa0e83acb44dd579d7308d867445a9f8fdbc">Impact</h3>
+
+<p dir="ltr">n/a</p>
+
+<h4 dir="ltr" id="head-afe05770e3fb88ce1765496bc90bd4b048ff3b32">Code Line Exemption</h4>
+
+<p dir="ltr">n/a</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h4 dir="ltr" id="head-82094bc00411f5c957f05b6cbdc520656c50afff">Dependencies</h4>
+
+<p dir="ltr">n/a</p>
+
+<h2 dir="ltr" id="head-bc2afa0afec8fb859636106659b41fa8affdb7fd">Use Cases</h2>
+
+<p dir="ltr">TODO:</p>
+
+<table dir="ltr">
+	<tbody>
+		<tr>
+			<td>
+			<p><strong>Role/Actor</strong></p>
+			</td>
+			<td>
+			<p><strong>Description</strong></p>
+			</td>
+			<td>
+			<p><strong>Expected Behaviour</strong></p>
+			</td>
+			<td>
+			<p><strong>Tested</strong></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Developer</p>
+			</td>
+			<td>
+			<p>Incorrect Page IDs are included</p>
+			</td>
+			<td>
+			<p>Build failure with validation error</p>
+			</td>
+			<td>
+			<p>.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Developer</p>
+			</td>
+			<td>
+			<p>Empty Page IDs are included</p>
+			</td>
+			<td>
+			<p>Build failure with validation error</p>
+			</td>
+			<td>
+			<p>.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Developer</p>
+			</td>
+			<td>
+			<p>Correct IDs are included</p>
+			</td>
+			<td>
+			<p>Build successfully</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2 dir="ltr" id="head-bc2afa0afec8fb859636106659b41fa8affdb7fd">Documentation</h2>
+
+<p dir="ltr">TODO:</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,829 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>JDE Next Gen - UIM V React</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="JDE Next Gen - UIM V React";
+    pageId="urn:lsid:ibm.com:td:6f31b295-5332-4be4-8acd-da415c5278c7";
+    toRoot="../../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">JDE Next Gen - UIM V React</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h2 dir="ltr">UIM + VIM</h2>
+
+<p dir="ltr">&lt;PAGE<br />
+&nbsp; PAGE_ID="Person_homePage"<br />
+&nbsp; xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"<br />
+&nbsp; xsi:noNamespaceSchemaLocation="file://Curam/UIMSchema.xsd"<br />
+&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &lt;PAGE_TITLE&gt;<br />
+&nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; NAME="TEXT"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="PageTitle.StaticText1"<br />
+&nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &lt;/PAGE_TITLE&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &lt;INFORMATIONAL&gt;<br />
+&nbsp; &nbsp; &lt;!-- BEGIN, CR00114322, PA --&gt;<br />
+&nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAYINFOMESSAGE"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="informationMsgTxt"<br />
+&nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;!-- END, CR00114322, PA --&gt;<br />
+&nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="informationMsgTxt"<br />
+&nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &lt;/INFORMATIONAL&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &lt;SHORTCUT_TITLE ICON="person.icon"&gt;<br />
+&nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="description"<br />
+&nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &lt;/SHORTCUT_TITLE&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &lt;!-- BEGIN, CR00266778, MC --&gt;<br />
+&nbsp; &lt;SERVER_INTERFACE<br />
+&nbsp; &nbsp; CLASS="Person"<br />
+&nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; OPERATION="readHomePageDetailsShowTasks"<br />
+&nbsp; /&gt;<br />
+&nbsp; &lt;!-- END, CR00266778 --&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &lt;!-- BEGIN, CR00114322, PA --&gt;<br />
+&nbsp; &lt;SERVER_INTERFACE<br />
+&nbsp; &nbsp; CLASS="Person"<br />
+&nbsp; &nbsp; NAME="DISPLAYINFOMESSAGE"<br />
+&nbsp; &nbsp; OPERATION="readInformationalMessage"<br />
+&nbsp; &nbsp; PHASE="DISPLAY"<br />
+&nbsp; /&gt;<br />
+&nbsp; &lt;!-- END, CR00114322, PA --&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &lt;SCRIPT<br />
+&nbsp; &nbsp; ACTION="replaceDownloadLink()"<br />
+&nbsp; &nbsp; EVENT="ONLOAD"<br />
+&nbsp; &nbsp; SCRIPT_FILE="PersonPhoto.js"<br />
+&nbsp; /&gt;<br />
+&nbsp; &lt;ACTION_SET ALIGNMENT="CENTER"&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;!-- BEGIN,CR00101438, SB --&gt;<br />
+&nbsp; &nbsp; &lt;ACTION_CONTROL<br />
+&nbsp; &nbsp; &nbsp; IMAGE="AddPictureButton"<br />
+&nbsp; &nbsp; &nbsp; LABEL="ActionControl.Label.AddPicture"<br />
+&nbsp; &nbsp; &gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONDITION&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;IS_TRUE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="concernRoleImagesEnabledAndImageNotExistsInd"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONDITION&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;LINK<br />
+&nbsp; &nbsp; &nbsp; &nbsp; OPEN_MODAL="TRUE"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; PAGE_ID="Person_addImage"<br />
+&nbsp; &nbsp; &nbsp; &gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="concernRoleID"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;TARGET<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="PAGE"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="concernRoleID"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="description"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;TARGET<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="PAGE"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="description"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/LINK&gt;<br />
+&nbsp; &nbsp; &lt;/ACTION_CONTROL&gt;<br />
+&nbsp; &nbsp; &lt;ACTION_CONTROL<br />
+&nbsp; &nbsp; &nbsp; IMAGE="RemovePictureButton"<br />
+&nbsp; &nbsp; &nbsp; LABEL="ActionControl.Label.RemovePicture"<br />
+&nbsp; &nbsp; &gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONDITION&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;IS_TRUE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="concernRoleImagesEnabledAndImageExistsInd"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONDITION&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;LINK<br />
+&nbsp; &nbsp; &nbsp; &nbsp; OPEN_MODAL="TRUE"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; PAGE_ID="Person_removeImage"<br />
+&nbsp; &nbsp; &nbsp; &gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="concernRoleImageID"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;TARGET<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="PAGE"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="concernRoleImageID"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="description"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;TARGET<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="PAGE"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="description"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/LINK&gt;<br />
+&nbsp; &nbsp; &lt;/ACTION_CONTROL&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;!-- END,CR00101438, SB --&gt;<br />
+&nbsp; &lt;/ACTION_SET&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &lt;PAGE_PARAMETER NAME="concernRoleID"/&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &lt;!-- BEGIN, CR00110570, MR --&gt;<br />
+&nbsp; &lt;PAGE_PARAMETER NAME="caseID"/&gt;<br />
+&nbsp; &lt;PAGE_PARAMETER NAME="evidenceType"/&gt;<br />
+&nbsp; &lt;!-- END, CR00110570 --&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; NAME="PAGE"<br />
+&nbsp; &nbsp; &nbsp; PROPERTY="concernRoleID"<br />
+&nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &lt;TARGET<br />
+&nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; PROPERTY="concernRoleID"<br />
+&nbsp; &nbsp; /&gt;<br />
+&nbsp; &lt;/CONNECT&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &lt;!-- BEGIN, CR00114322, PA --&gt;<br />
+&nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; NAME="PAGE"<br />
+&nbsp; &nbsp; &nbsp; PROPERTY="concernRoleID"<br />
+&nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &lt;TARGET<br />
+&nbsp; &nbsp; &nbsp; NAME="DISPLAYINFOMESSAGE"<br />
+&nbsp; &nbsp; &nbsp; PROPERTY="concernRoleID"<br />
+&nbsp; &nbsp; /&gt;<br />
+&nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &lt;!-- END, CR00114322, PA --&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &lt;!-- BEGIN, CR00078989, AL --&gt;<br />
+&nbsp; &lt;SERVER_INTERFACE<br />
+&nbsp; &nbsp; CLASS="VerificationApplication"<br />
+&nbsp; &nbsp; NAME="DISPLAY1"<br />
+&nbsp; &nbsp; OPERATION="listPersonVerificationDetails"<br />
+&nbsp; /&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; NAME="PAGE"<br />
+&nbsp; &nbsp; &nbsp; PROPERTY="concernRoleID"<br />
+&nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &lt;TARGET<br />
+&nbsp; &nbsp; &nbsp; NAME="DISPLAY1"<br />
+&nbsp; &nbsp; &nbsp; PROPERTY="participantID"<br />
+&nbsp; &nbsp; /&gt;<br />
+&nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &lt;!-- END, CR00078989 --&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &lt;CLUSTER<br />
+&nbsp; &nbsp; LABEL_WIDTH="45"<br />
+&nbsp; &nbsp; NUM_COLS="2"<br />
+&nbsp; &nbsp; TITLE="Cluster.Label.Name"<br />
+&nbsp; &gt;<br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.Title"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="title"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.MiddleName"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="otherForename"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.Suffix"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="nameSuffix"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.FirstName"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="firstForename"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.LastName"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="surname"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.Initials"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="initials"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &lt;/CLUSTER&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &lt;CLUSTER<br />
+&nbsp; &nbsp; LABEL_WIDTH="45"<br />
+&nbsp; &nbsp; NUM_COLS="2"<br />
+&nbsp; &nbsp; TITLE="Cluster.Label.Contact"<br />
+&nbsp; &gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.Address"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="formattedAddressData"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;CONTAINER LABEL="Container.Label.Telephone"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;FIELD&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="phoneCountryCode"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/FIELD&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;FIELD&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="phoneAreaCode"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/FIELD&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;FIELD&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="phoneNumber"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/FIELD&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;FIELD&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="phoneExtension"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/FIELD&gt;<br />
+&nbsp; &nbsp; &lt;/CONTAINER&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &lt;/CLUSTER&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &lt;CLUSTER<br />
+&nbsp; &nbsp; LABEL_WIDTH="45"<br />
+&nbsp; &nbsp; NUM_COLS="2"<br />
+&nbsp; &nbsp; TITLE="Cluster.Label.Details"<br />
+&nbsp; &gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.MaritalStatus"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="maritalStatus"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;LINK PAGE_ID="Person_listRelationship"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="PAGE"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="concernRoleID"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;TARGET<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="PAGE"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="concernRoleID"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/LINK&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.BirthLastName"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="birthName"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.Gender"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="sex"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.DOB"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="dateOfBirth"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.DOD"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="dateOfDeath"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.NumChildren"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="numberOfChildren"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;LINK PAGE_ID="Person_listRelationship"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="PAGE"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="concernRoleID"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;TARGET<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="PAGE"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="concernRoleID"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/LINK&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.MothersBirthLastName"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="motherBirthSurname"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.PrefPublicOffice"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="preferredPublicOfficeName"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.RegistrationDate"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="registrationDate"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.PlaceOfBirth"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="birthPlace"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.PaymentFrequency"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="paymentFrequency"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.NextPaymentDate"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="nextPaymentDate"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.Status"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="statusCode"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.Nationality"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="nationality"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.PrefLanguage"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="preferredLanguage"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.Employer"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="employerName"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;LINK PAGE_ID="Employer_home"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="employerConcernRoleID"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;TARGET<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="PAGE"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="concernRoleID"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/LINK&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.SpecialInterest"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="specialInterest"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.DOBVerified"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="dateOfBirthVerified"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.DODVerified"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="dateOfDeathVerified"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.CountryOfBirth"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="birthCountry"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.PrefCommunication"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="prefCommMethod"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.EthnicOrigin"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="ethnicOriginCode"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;!-- BEGIN, CR00108252 PA --&gt;<br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.Race"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="race"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.IndigenousGroup"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="indigenousGroupCode"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;<br />
+&nbsp; &nbsp; &lt;!-- END, CR00108252 - PA --&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.Currency"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="currencyType"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.MethodOfPayment"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="methodOfPmtCode"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.Sensitivity"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="sensitivity"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &lt;/CLUSTER&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &lt;!-- BEGIN, CR00266778, MC --&gt;<br />
+&nbsp; &lt;CLUSTER<br />
+&nbsp; &nbsp; LABEL_WIDTH="45"<br />
+&nbsp; &nbsp; NUM_COLS="2"<br />
+&nbsp; &nbsp; TITLE="Cluster.Label.CurrentActivities"<br />
+&nbsp; &gt;<br />
+&nbsp; &nbsp; &lt;CONDITION&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;IS_TRUE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="showParticipantTasksInd"<br />
+&nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &lt;/CONDITION&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.NumOpenTasks"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="numberOfOpenTickets"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;LINK PAGE_ID="Person_listTask"&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="PAGE"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="concernRoleID"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;TARGET<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="PAGE"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="concernRoleID"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/LINK&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &lt;/CLUSTER&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &lt;!-- END, CR00266778 --&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &lt;!-- BEGIN, CR00050298, MR --&gt;<br />
+&nbsp; &lt;!-- BEGIN, HARP 64908, SP --&gt;<br />
+&nbsp; &lt;CLUSTER<br />
+&nbsp; &nbsp; SHOW_LABELS="false"<br />
+&nbsp; &nbsp; TITLE="Cluster.Title.Comments"<br />
+&nbsp; &gt;<br />
+&nbsp; &nbsp; &lt;FIELD LABEL="Field.Label.Comments"&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;!-- END, HARP 64908 --&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;!-- END, CR00050298 --&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &nbsp; &nbsp; &lt;CONNECT&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;SOURCE<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; NAME="DISPLAY"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PROPERTY="remarks"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; /&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONNECT&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;<br />
+&nbsp; &lt;/CLUSTER&gt;</p>
+
+<p dir="ltr"><br />
+&nbsp; &lt;!-- BEGIN, CR00075582, RF --&gt;<br />
+&nbsp; &lt;INCLUDE FILE_NAME="VerificationApplication_listParticipantEvidenceVerificationRequirements.vim"/&gt;<br />
+&nbsp; &lt;!-- END, CR00075582 --&gt;</p>
+
+<p dir="ltr"><br />
+&lt;/PAGE&gt;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">React component</h2>
+
+<p dir="ltr"><br />
+import React from 'react';<br />
+import {render} from 'react-dom';<br />
+import {Person} from '../containers/Persons';<br />
+import {PageToolbar} from '../components/PageToolBar';<br />
+import {PageActionControl} from '../components/ActionControls';<br />
+import {*} from '../components/UIElements';<br />
+import {*} from '../components/Informationals';<br />
+import {*} from '../components/ApplicationTitles';<br />
+import {Link} from 'react-router';<br />
+import {connect} from "react-redux";</p>
+
+<p dir="ltr"><br />
+export default class PersonHome extends React.Component {<br />
+&nbsp; //Data passed in from parent component where state handled!!<br />
+&nbsp; constructor(props) {<br />
+&nbsp; &nbsp; super(props);<br />
+&nbsp; &nbsp; this.state = {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; search: '',<br />
+&nbsp; &nbsp; &nbsp; &nbsp; person: Person.getPerson(props.person.id),<br />
+&nbsp; &nbsp; }<br />
+&nbsp; }</p>
+
+<p dir="ltr">&nbsp; &nbsp;componentDidMount() {<br />
+&nbsp; &nbsp; &nbsp;// do stuff here like show information message for person<br />
+&nbsp;&nbsp; &nbsp; e.g. Informational.showMessages();<br />
+&nbsp; &nbsp;}</p>
+
+<p dir="ltr">&nbsp; render() {<br />
+&nbsp; &nbsp; return (<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;div&gt;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &lt;PageTitle title="Home"/&gt;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &lt;PageActionControl title="Remove Picture"/&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;PageToolbar/&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;Cluster title="Home" expanded="true"&gt;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &lt;Field title="Sensitivity" data={this.state.person.sensitivity}/&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;Field title="Special Interest" data={this.state.person.specialInterest}/&gt;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &lt;Field title="Preferred Public Office" data={this.state.person.preferredOffice}/&gt;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &lt;Field title="Registration Date" data={this.state.person.regDate}/&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;/Cluster&gt;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &lt;Cluster title="Receive Deduction Payment Details" expanded="true"&gt;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;....Fields here<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &lt;/Clsuter&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;Cluster title="Pending Applications" expanded="true"&gt;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;....Fields here<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &lt;/Clsuter&gt;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;<br />
+&nbsp; &nbsp; )<br />
+&nbsp; }<br />
+}</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">Summary</h2>
+
+<p dir="ltr">The JavaScript in React needed here to configure the same screen is much neater and compact. In order to enable the use of ReactJS components like<br />
+&nbsp;this instead of using UIM, we would first have to expose the Server Interface Beans through RESTFUL APIs. Service of Engagement (SOE) team have deevloped Rest Infrastructue so we may have to look at taking this on (probably into SDEJ)! See here for info on how to configure REST APIs : <a href="https://www.ibm.com/support/knowledgecenter/SS8S5A_7.0.0/com.ibm.curam.content.doc/MSDK/msdk_t_create_simple_rest_api.html">https://www.ibm.com/support/knowledgecenter/SS8S5A_7.0.0/com.ibm.curam.content.doc/MSDK/msdk_t_create_simple_rest_api.html</a><br />
+&nbsp;<br />
+<strong>&nbsp;What would be the first steps in replacing UIM with something like React components for UI Widgets?:</strong><br />
+&nbsp;(1) Taking on an enhancing Rest APIS developed by SOE - needs collabaoration with them and possibly WCM<br />
+&nbsp;(2) Look at what features we could potentially build new infrastucture in order to make them more flexible for cusmtomer e.g list (pagianed, multisleect, sortable) and clusters maybe to start.<br />
+&nbsp;(3) Look at updated need to UIM generator to move to this new flexible way of building widgets.<br />
+&nbsp;(4) Decide what parts of applications should take on this new infrstructure.<br />
+&nbsp;<br />
+<strong>&nbsp;Impacts from moving from UIM to JavaScript to make widgets more flexible?</strong><br />
+&nbsp;In essence what we would be doing is generating the same HTML (except for Dojo HTML syntax) in the new JavaScript modules so there should be no impacts. However React does produce it's own HTML so would have to ensure there are no impacts to other solutions further up the stack or to customer&nbsp;widgets. Also would have to ensure no impacts on automated testing.</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

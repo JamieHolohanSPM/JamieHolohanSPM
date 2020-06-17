@@ -1,0 +1,361 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>CDSL White List</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="CDSL White List";
+    pageId="urn:lsid:ibm.com:td:b009d74b-d72f-477e-9f15-f418110c4a90";
+    toRoot="../../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">CDSL White List</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h2 dir="ltr">Overview</h2>
+
+<p dir="ltr">This is to sandbox the mobile project so that it can only e invoked by a predefined list of facades which are configured per application.</p>
+
+<p dir="ltr">As part of this project,</p>
+
+<ul dir="ltr">
+	<li>
+	<p>The Facades/APIS will be defined in a text file called cdsl-config.txt.</p>
+	</li>
+	<li>
+	<p>For development environment these files will be simply merged (no duplicates).</p>
+	</li>
+	<li>
+	<p>For runtime no merging, direct copy to each application EAR.</p>
+	</li>
+	<li>
+	<p>At runtime when CDSL invoked the Facade/API being invoked will be checked against the APIs on the this whitelist. If present the processing can continue..</p>
+	</li>
+</ul>
+
+<h2 dir="ltr" id="head-8c2ec87123213619675b7c5d3c23f71750e15705">Rationale</h2>
+
+<p dir="ltr">Allow only a whitelist of Facdes/APIs, so the mobile SDK architecture can be used within a limited part of the application.</p>
+
+<h2 dir="ltr" id="head-542955f3eb29ea2cf4c158fb3f3d86753d048428">Requirements</h2>
+
+<h2 dir="ltr" id="head-e8a889a91926c0462066423b7722def523091bbb">Non-Functional Requirements</h2>
+
+<div dir="ltr">
+<table>
+	<tbody>
+		<tr>
+			<td>
+			<p><strong>NFR</strong></p>
+			</td>
+			<td>
+			<p><strong>Applicable</strong></p>
+			</td>
+			<td>
+			<p><strong>Comments</strong></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Accessibility</p>
+			</td>
+			<td>
+			<p>n/a</p>
+			</td>
+			<td>
+			<p>No planned changes in this area.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Availability and Resilience</p>
+			</td>
+			<td>
+			<p>n/a</p>
+			</td>
+			<td>
+			<p>No planned changes in this area.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Dynamic UIM Impact</p>
+			</td>
+			<td>
+			<p>n/a</p>
+			</td>
+			<td>
+			<p>No planned changes in this area.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Development Resource</p>
+			</td>
+			<td>
+			<p>n/a</p>
+			</td>
+			<td>
+			<p>No planned changes in this area.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Evolution</p>
+			</td>
+			<td>
+			<p>n/a</p>
+			</td>
+			<td>
+			<p>No planned changes in this area.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Internationalisation</p>
+			</td>
+			<td>
+			<p>n/a</p>
+			</td>
+			<td>
+			<p>No planned changes in this area.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Location</p>
+			</td>
+			<td>
+			<p>n/a</p>
+			</td>
+			<td>
+			<p>No planned changes in this area.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Performance and Scalability</p>
+			</td>
+			<td>
+			<p>n/a</p>
+			</td>
+			<td>
+			<p>No planned changes in this area.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Regulation</p>
+			</td>
+			<td>
+			<p>n/a</p>
+			</td>
+			<td>
+			<p>No planned changes in this area.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Security</p>
+			</td>
+			<td>
+			<p>n/a</p>
+			</td>
+			<td>
+			<p>No planned changes in this area.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Usability</p>
+			</td>
+			<td>
+			<p>n/a</p>
+			</td>
+			<td>
+			<p>No planned changes in this area.</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<h2 dir="ltr" id="head-2a4f7a7a4bd1e6e8cabf5d81ffc4fb7ce0332d14">High-Level Design</h2>
+
+<h3 dir="ltr" id="head-86526e0f76d65fcc56f0876e2b4a5eac0f16783a">Package cdsl-config.txt into client-config-files.jar</h3>
+
+<p dir="ltr">This is something that needs to be done at build time.</p>
+
+<p dir="ltr">Two different contexts will have to be considered with respect to this task, the development environment and the runtime environment.</p>
+
+<p dir="ltr"><strong>Development Environment</strong></p>
+
+<ul dir="ltr">
+	<li>
+	<p>Update to Staging.java to simply merge all cdsl-config.txt files (i.e. just merge entries - removing any duplicates). The merged file will be output to a location where it will be jarred up into the client-config-files.jar file.</p>
+	</li>
+</ul>
+
+<p dir="ltr"><strong>TODO</strong>: Any need to validate that when we find a cdsl-config.txt file, that it is in a valid location i.e at the root of a component.</p>
+
+<p dir="ltr"><strong>Runtime Environment</strong></p>
+
+<ul dir="ltr">
+	<li>
+	<p>The deployment-packaging.xml drives the configuration of what content goes into the application EAR files. There will be a new entry <strong>per application</strong> to configure the valid CDSL facades for the mobile SDK per application. Something like the following for the Curam application:</p>
+	</li>
+</ul>
+
+<pre dir="ltr">
+&lt;custom-cdsl-config&gt;${SERVER_DIR}/components/core/cdsl-config.txt&lt;/custom-web-xml&gt;
+</pre>
+
+<ul dir="ltr">
+	<li>
+	<p>Update to AntClientCopy.java to copy this file to build/clients directory before building the client for each application.</p>
+	</li>
+	<li class="gap">
+	<p>Update to client build to exclude copy of each cdsl.-config.txt file for each component (so that no merging will happen).</p>
+	</li>
+</ul>
+
+<p dir="ltr">Ulimately what is expected here is that for application EAR file, the exact copy of the file specified in the &lt;custom-cdsl-config&gt; element for each application will end up in the client-config-files.jar of each application EAR file.</p>
+
+<p dir="ltr"><strong>TODO:</strong> - I presume that there are validations for the XML within in deployment-packaging.xml in some XSL schema file? Any need to validate the the specified value in the &lt;custom-cdsl-config&gt; element is a file in a valid location i.e at the root of component?</p>
+
+<h3 dir="ltr" id="head-d143112c41b3e6c6bef25d1edb84f2577a1de36d">CDSLFacadeListValidator.java</h3>
+
+<p dir="ltr">This object will load the APIs on demand from the cdsl-config.txt file via classloader in the client-config-files.jar file. A method will return list of valid CDSL facades.</p>
+
+<h3 dir="ltr" id="head-a8c8ea98e4b62e5c970bc64d7245b7d63358d81a">Update to DataServiceServlet.java</h3>
+
+<p dir="ltr">Before a facade is invoked in this servlet, there needs to be some validations and security checks done. The first validation/security check that should be done is to check that the facade being called is a valid one. So the facade being called should be checked against the list returned in the CDSLFacadeListValidator.java object to ensure that it valid. It would seem that this should be done in the first few lines of the callFacade() method (alternatively before the callFacade() method invoked).</p>
+
+<h2 dir="ltr" id="head-be064c72eb0c5342d20403a8afdd94f6d874402e">Outstanding Issues</h2>
+
+<p dir="ltr"><strong>TODO:</strong> - Need to inform installer team that we have new entry in deployment-packaging.xml so that they aware of it. The development installer just merges the ear entries as far as I know (and merges components for EAR entry), so this should be okay in theory and they should not have to update installer infrastructure.</p>
+
+<h3 dir="ltr" id="head-5ce439fa5ebb45dcf77d72cc278b3e904b58957e">Impact</h3>
+
+<p dir="ltr">Potential installer impact.</p>
+
+<p dir="ltr">Need to inform installer team that we have new entry in deployment-packaging.xml so that they aware of it. The development installer just merges the ear entries as far as I know (and merges components for EAR entry), so this should be okay in theory and they should not have to update installer infrastructure.</p>
+
+<h4 dir="ltr" id="head-f30bbe7b93703d83ffaf474c0f2cbf9ccd80bc48">Code Line Exemption</h4>
+
+<p dir="ltr">n/a</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h4 dir="ltr" id="head-da7524b07804e74d3de617f00c246dd9947d007a">Dependencies</h4>
+
+<p dir="ltr">n/a</p>
+
+<h2 dir="ltr" id="head-24b413c8b8768102ef5d98e7ef7319a999a911c0">Use Cases</h2>
+
+<ul dir="ltr">
+	<li>
+	<p>Create a cdsl-config.txt file in Tabtest application, core and sample components.</p>
+	</li>
+	<li>
+	<p>* Create a cdsl-config.txt file in UAtest application, core and eclient components.</p>
+	</li>
+</ul>
+
+<table dir="ltr">
+	<tbody>
+		<tr>
+			<td>
+			<p><strong>Role/Actor</strong></p>
+			</td>
+			<td>
+			<p><strong>Description</strong></p>
+			</td>
+			<td>
+			<p><strong>Expected Behaviour</strong></p>
+			</td>
+			<td>
+			<p><strong>Tested</strong></p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Developer in dev environment, <a class="nonexistent">TabTest</a> application</p>
+			</td>
+			<td>
+			<p>Hit URL for cdsl-config.txt file in <a class="nonexistent">TabTest</a> app.</p>
+			</td>
+			<td>
+			<p>The file should be merged core/sample version</p>
+			</td>
+			<td>
+			<p>.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Developer in dev environment, UATest application</p>
+			</td>
+			<td>
+			<p>Hit URL for cdsl-config.txt file in UATest app.</p>
+			</td>
+			<td>
+			<p>The file should be merged core/eclient version</p>
+			</td>
+			<td>
+			<p>.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Developer in runtime environment, <a class="nonexistent">TabTest</a> application</p>
+			</td>
+			<td>
+			<p>Hit URL for cdsl-config.txt file in <a class="nonexistent">TabTest</a> app.</p>
+			</td>
+			<td>
+			<p>The file should be core version</p>
+			</td>
+			<td>
+			<p>.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p>Developer in runtime environment, UATest application</p>
+			</td>
+			<td>
+			<p>Hit URL for cdsl-config.txt file in UATest app.</p>
+			</td>
+			<td>
+			<p>The file should be eclient version</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

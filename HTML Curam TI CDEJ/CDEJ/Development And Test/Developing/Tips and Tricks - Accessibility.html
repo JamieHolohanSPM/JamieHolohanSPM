@@ -1,0 +1,184 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Tips and Tricks - Accessibility</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Tips and Tricks - Accessibility";
+    pageId="urn:lsid:ibm.com:td:05b5478b-0cf6-4f37-86e7-9cdc5189d6ee";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Tips and Tricks - Accessibility</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>IOs - Debugging JS code&nbsp;or CSS</strong></p>
+
+<hr dir="ltr"></hr>
+<p dir="ltr">Sometimes it is hard to identify problems in the web page running in IOs devices. The safari&nbsp;browser provides a way to connect the IOs device with Safari on Mac OS x.</p>
+
+<p dir="ltr">Following the steps to enable it:</p>
+
+<p dir="ltr">1) Enable developers tools in Safari</p>
+
+<p dir="ltr">2) Enable Web inspector in IOs&nbsp;</p>
+
+<p dir="ltr">&nbsp; &nbsp; -&nbsp;Select <strong>Safari</strong> in the <strong>Settings app</strong> and tap the Advanced option. Then <strong>turn on</strong> the <strong>Web Inspector</strong>.</p>
+
+<p dir="ltr">3) Connect the IOs device with the Mac Os with a USB cable.</p>
+
+<p dir="ltr">4) Connect and debug</p>
+
+<p dir="ltr">&nbsp; &nbsp;- Open the Safari browser on both devices.</p>
+
+<p dir="ltr">&nbsp; &nbsp;-&nbsp;&nbsp;In the Develop Menu in your Mac Os, you’ll see that your iPad now appears.</p>
+
+<p dir="ltr">For more info:&nbsp;<a href="https://mattvanderpol.com/2013/08/14/how-to-debug-javascript-or-css-on-ios/">https://mattvanderpol.com/2013/08/14/how-to-debug-javascript-or-css-on-ios/</a></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Accessibility&nbsp;Inspector and simulators</strong></p>
+
+<hr dir="ltr"></hr>
+<p dir="ltr">XCode&nbsp;IDE provide tools to simulate devices. In this&nbsp;IDE, all the devices provided by Apple are available.&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Commands and Gestures on IOS</strong></p>
+
+<hr dir="ltr"></hr>
+<p dir="ltr">Here you can find a list&nbsp;of gestures and commands that can be used on IOs devices:</p>
+
+<p dir="ltr"><a href="https://www.apple.com/voiceover/info/guide/_1131.html">https://www.apple.com/voiceover/info/guide/_1131.html</a></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Page focus depending on the rotor </strong><strong>selected</strong></p>
+
+<hr dir="ltr"></hr>
+<p dir="ltr">voiceover allows the user to change the way how the voiceover navigates to the page.&nbsp;&nbsp;</p>
+
+<p dir="ltr">There is a list of option that allows the user to navigate a quick way in all the buttons, list, tables, containers and etc.&nbsp;</p>
+
+<p dir="ltr">These options may interfere when the page is opened. For example:</p>
+
+<ol dir="ltr">
+	<li>&nbsp;If the rotor is a&nbsp;text field when the page is opened the focus will be in the first text field that can receive focus</li>
+	<li>If the rotor is a table&nbsp;<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">when the page is opened the focus will be in the first&nbsp;</span> table&nbsp;<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">that can receive focus</span></li>
+</ol>
+
+<p dir="ltr">&nbsp;To learn more about voiceover rotor:&nbsp;<a href="https://support.apple.com/en-gb/HT204783">link</a></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Focus not aligned with the field with voiceover on</strong></p>
+
+<hr dir="ltr"></hr>
+<p dir="ltr">There&nbsp;are scenarios in Cúram application where the focus is not aligned with the field when the voiceover set the focus there.</p>
+
+<p dir="ltr">In some cases, we could identify&nbsp;that a css&nbsp;hidden&nbsp;is applied&nbsp;to the field(it usually happened&nbsp;with&nbsp;span).</p>
+
+<p dir="ltr">Example problem:</p>
+
+<p dir="ltr"><img alt="" src="Tips%20and%20Tricks%20-%20Accessibility._ATTACHMENTS_/calendar%20cursor%20on%20wrong%20side%20of%20screen.jpg" style="width: 300px; height: 225px; margin-left: 100px; margin-right: 100px;"></img>&nbsp;</p>
+
+<p dir="ltr">In this case, the voiceover is reading the calendar title. However, the focus is not aligned with the image.</p>
+
+<p dir="ltr"><strong>The HTML&nbsp;and CSS:</strong></p>
+
+<p dir="ltr">&lt;span class="hidden"&gt;Click here to select a Date&lt;/span&gt;</p>
+
+<div class="styles-section-title styles-selector" dir="ltr" style="min-width: 0px; min-height: 0px; box-sizing: border-box; word-wrap: break-word; cursor: text; color: rgb(48, 57, 66); font-family: Menlo, monospace; font-size: 11px;">
+<div style="min-width: 0px; min-height: 0px; box-sizing: border-box;">body.soria span.hidden, body.soria table .hidden, body.soria .dijitDialog .closeText, body.soria #app-banner-dc .hidden, body.soria div.access.hidden {<br />
+&nbsp;position: absolute;<br />
+&nbsp;left: -1000000px;<br />
+&nbsp;display: inline;<br />
+}</div>
+</div>
+
+<p dir="ltr"><strong>To fix this issue, we have applied the css below for mobile devices:</strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p class="p1" dir="ltr">body.curam.soria.mobile table.date td.input-date + td.popup-actions .hidden {</p>
+
+<p class="p1" dir="ltr">&nbsp;&nbsp; &nbsp;position: absolute;</p>
+
+<p class="p1" dir="ltr">&nbsp;&nbsp; &nbsp;left: 0px;</p>
+
+<p class="p1" dir="ltr">&nbsp;&nbsp; &nbsp;top: 0px;</p>
+
+<p class="p1" dir="ltr">&nbsp;&nbsp; &nbsp;right: 0;</p>
+
+<p class="p1" dir="ltr">&nbsp;&nbsp; &nbsp;border: 0;</p>
+
+<p class="p1" dir="ltr">&nbsp;&nbsp; &nbsp;clip: rect(0, 0, 0, 0);</p>
+
+<p class="p1" dir="ltr">&nbsp;&nbsp; &nbsp;height: 0px;</p>
+
+<p class="p1" dir="ltr">&nbsp;&nbsp; &nbsp;width: 0 px;</p>
+
+<p class="p1" dir="ltr">&nbsp;&nbsp; &nbsp;margin: 0px;</p>
+
+<p class="p1" dir="ltr">&nbsp;&nbsp; &nbsp;overflow: hidden;</p>
+
+<p class="p1" dir="ltr">&nbsp;&nbsp; &nbsp;padding: 0;</p>
+
+<p class="p1" dir="ltr">&nbsp;&nbsp; &nbsp;bottom: 0px;</p>
+
+<p class="p1" dir="ltr">&nbsp;&nbsp; &nbsp;line-height: 1px !important;</p>
+
+<p class="p1" dir="ltr">}</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Span tag </strong><strong>HTML</strong><strong>&nbsp;with role=button does not execute </strong><strong>onclick</strong><strong>&nbsp;function with Voiceover</strong></p>
+
+<hr dir="ltr"></hr>
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">A common&nbsp;scenario in the Cúram&nbsp;application is to create a button with the <strong>span HTML and add the role="button".</strong> However, it has been causing defects with voiceover. Voiceover does not execute the onclick function when this scenario is found. To fix this scenario <strong>change from span HTML to button</strong>,&nbsp;like this:</p>
+
+<p dir="ltr">Before:</p>
+
+<p dir="ltr"><span style="color:#0000FF;"><em>&nbsp; &lt;span aria-expanded="false" aria-label="3 column clusterToggle Button" </em></span></p>
+
+<p dir="ltr"><span style="color:#0000FF;"><em>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;onkeypress="if(curam.util.enterKeyPress(event)){toggleCluster(this,arguments[0]);}" </em></span></p>
+
+<p dir="ltr"><span style="color:#0000FF;"><em>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;onclick="toggleCluster(this,arguments[0]);" role="button" tabindex="0" title="Toggle"/&gt;</em></span></p>
+
+<p dir="ltr">Now:</p>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="color: rgb(0, 0, 255);"><em>&lt;button aria-expanded="false" aria-label="3 column clusterToggle Button"&nbsp;</em></span></p>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="color: rgb(0, 0, 255);"><em>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;onkeypress="if(curam.util.enterKeyPress(event)){toggleCluster(this,arguments[0]);}"&nbsp;</em></span></p>
+
+<p dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><span style="color: rgb(0, 0, 255);"><em>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;onclick="toggleCluster(this,arguments[0]);" role="button" tabindex="0" title="Toggle"/&gt;</em></span></p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

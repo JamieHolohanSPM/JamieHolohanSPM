@@ -1,0 +1,484 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>CDSL Service</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="CDSL Service";
+    pageId="urn:lsid:ibm.com:td:c3a5c4de-c73f-4f0c-8883-dd2177c65476";
+    toRoot="../../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">CDSL Service</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><div class="description" dir="ltr" id="activityPageNodeContainer4ae775bd-4e36-41b6-9cf8-71e5e086e8e9_description">
+<h1 dir="ltr">Contents</h1>
+
+<div class="iiFragment iiRenderToc" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii18">Description of Change</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii19">Prerequisites</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii20">Non-Functional Requirements</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii21">Outstanding Issues</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii22">High-Level Design</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii1">Design Details</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii15">URL Format</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii16">JSON to Curam Struct</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii17">Servlet</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii23">Service Configuration</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii30">Overview</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii31">Model Approach</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii32">Configuration File</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii33">Multiple Components</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii34">Codeline and Upgrade</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii35">Development Time</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii36">Runtime</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii37">Administration Functions</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii38">Format</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii39">Granularity</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii2">Impact</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii3">Code Line Exemption</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii4">Dependencies</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii24">Use Cases</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii25">Implementation Details</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii5">Integration Points</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii26">Test</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii6">Dependencies</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii7">Manual Application Test</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii8">Automated Tests</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii9">Comprehensive Manual Tests</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii27">Documentation</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii10">Release Notes Preview</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii28">Review Comments</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii11">Simple Comments</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii12">Extended Comments</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii13">Summary Title</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii29">Historical Information</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii14">UIM Approach</a></div>
+&nbsp;
+
+<p>&nbsp;</p>
+
+<h2 dir="ltr" id="ii18">Description of Change</h2>
+
+<p dir="ltr">This is a sub-task of the Mobile SDK design and covers specifically the Curam Data Service Layer (CDSL) Service, a servlet that handles AJAX requests and invokes the request Curam facades.</p>
+
+<p dir="ltr">This section of the design includes:</p>
+
+<ul dir="ltr">
+	<li>The servlet path support</li>
+	<li>Invocation of the Curam facades</li>
+	<li>JSON serialisation, excluding the exact data formats.</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<ul dir="ltr">
+	<li><strong>Targeted Release(s):</strong> 6.1</li>
+	<li><strong>CEMS Case:</strong> <a href="http://cems.curamsoftware.com:8080/browse/TEC-14829" target="_blank">TEC-14829</a>, <a href="http://cems.curamsoftware.com:8080/browse/TEC-14833" target="_blank">TEC-14833</a></li>
+</ul>
+
+<h2 dir="ltr" id="ii19">Prerequisites</h2>
+
+<ul dir="ltr">
+	<li>N/A</li>
+</ul>
+
+<h2 dir="ltr" id="ii20">Non-Functional Requirements</h2>
+
+<table border="1" dir="ltr" style="width: 80%;">
+	<tbody>
+		<tr>
+			<td style="width: 166px;"><strong>NFR</strong></td>
+			<td style="width: 99px;"><strong>Applicable</strong></td>
+			<td style="width: 445px;"><strong>Comment</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Accessibility</td>
+			<td style="width: 99px;">N/A</td>
+			<td style="width: 445px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Availability and Resilience</td>
+			<td style="width: 99px;">N/A</td>
+			<td style="width: 445px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Dynamic UIM Impact</td>
+			<td style="width: 99px;">N/A</td>
+			<td style="width: 445px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Development Resource</td>
+			<td style="width: 99px;">N/A</td>
+			<td style="width: 445px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Evolution</td>
+			<td style="width: 99px;">N/A</td>
+			<td style="width: 445px;">Considered as a larger item of the project</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Internationalisation</td>
+			<td style="width: 99px;">N/A</td>
+			<td style="width: 445px;">Considered as a larger item of the project.</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Location</td>
+			<td style="width: 99px;">N/A</td>
+			<td style="width: 445px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Performance and Scalability</td>
+			<td style="width: 99px;">&nbsp;</td>
+			<td style="width: 445px;">Concern here is around the JSON to Object and vice versa and how much time this can take. See details of Jackson library usage below.</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Regulation</td>
+			<td style="width: 99px;">N/A</td>
+			<td style="width: 445px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Security</td>
+			<td style="width: 99px;">&nbsp;</td>
+			<td style="width: 445px;">Considered as larger item of the project.</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Usability</td>
+			<td style="width: 99px;">N/A</td>
+			<td style="width: 445px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2 dir="ltr" id="ii21">Outstanding Issues</h2>
+
+<ul dir="ltr">
+	<li>None</li>
+</ul>
+
+<h2 dir="ltr" id="ii22">High-Level Design</h2>
+
+<p>At a very high level the Curam Data Service Layer (CDSL) is a service allowing for the invocation of Curam facades from JavaScript. This sub-design is concerned with the service implementation, which will be in the form of a servlet.</p>
+
+<p>A JavaScript AJAX call will be made to the servlet/service, providing a number of parameters in the form of a JSON struct. The service will invoke the specific facade, converting the JSON content into the relevant input/output structs. The output of the facade will be converted from a Curam struct back to JSON to return to the AJAX request.</p>
+
+<h3 dir="ltr" id="ii1">Design Details</h3>
+
+<h4 dir="ltr" id="ii15">URL Format</h4>
+
+<p dir="ltr">This section defines the format that will be accepted by the CDSL Service. The basic URL structure will be:</p>
+
+<p style="margin-left: 40px;"><em><strong>/&lt;Context Root&gt;/dataservice/&lt;Service Name&gt;/&lt;method&gt;</strong></em></p>
+
+<p>Where</p>
+
+<ul>
+	<li>&lt;Context Root&gt; is as defined for the application, e.g. Curam or TestModel. Note: It should not be assumed that this is only one level, as some customers have defined more than one level for this in the past.</li>
+	<li>&lt;Service Name&gt; is the name of the service, which maps to a facade name as part of the service configuration</li>
+	<li>&lt;method&gt; is the name of the method to be invoked.</li>
+</ul>
+
+<p>Invocation of this service will always be via a POST and input will be submitted as part of the body of the request. No parameters will be accepted as part of this service, all data and options should be contained within the body of the request.</p>
+
+<p>Information required within the body:</p>
+
+<ul>
+	<li>Configuration Options</li>
+	<li>Key and Details Structs (preserving structure)</li>
+</ul>
+
+<p>For example:</p>
+
+<pre>
+{
+ options:[],
+ input:{key:{id:123}, details:{title:"", surname:"", other:""}}
+}
+</pre>
+
+<p>Information will be returned from the form of a JSON structure and the service calls will always be successful, unless there is an error outside of the control of Curam. The JSON structure to be returned will include:</p>
+
+<ul>
+	<li>Return Struct (preserving structure)</li>
+	<li>Informational Content</li>
+	<li>Error Message Content</li>
+</ul>
+
+<p>Note: The returned structure will most likely container either/or in relation to the return information and the error message content.</p>
+
+<p>For example:</p>
+
+<pre>
+{ 
+ data:{result:{a:"", b:""}},
+ informational:[],
+ error:[]
+}</pre>
+
+<h4 dir="ltr" id="ii16">JSON to Curam Struct</h4>
+
+<p dir="ltr">How are we going to convert JSON inputs to Curam Structs and vice versa?</p>
+
+<ul dir="ltr">
+	<li>Manually using JSON4J classes to build and create JSON Struct</li>
+	<li>Use Jackson to annotate and create objects</li>
+</ul>
+
+<p>After investigating Jackson, it turns out to be a nice easy way to handle conversion of our structs instead of having to write specific code to do reflection or changing our generators to generate this code. So Jackson is being used. The changes required to enable Jackson include:</p>
+
+<ul>
+	<li>Implementing serializers and de-serializers for our complex types, including money, date, frequency pattern, etc</li>
+	<li>Change how SVR_INT64 is handled, as long is not correct. This should be handled as a string.</li>
+	<li>Ensure no extra data is returned by the structs by adding the @JsonIgnore annotation to the generated structs</li>
+</ul>
+
+<h4 dir="ltr" id="ii17">Servlet</h4>
+
+<p>The service will be handled by a servlet called CDSLService, which will be required to be added to the web.xml.</p>
+
+<p>The CDSLServer will be shipped by default with the infrastructure web.xml file, however due to the nature of other layers above us contributing to the web.xml this does not result in it being added by default OOTB. We have the choice here not to enable it by default OOTB and allow teams using it to enable it only for them. Alternatively we can force the impact up the stack.</p>
+
+<h4 dir="ltr" id="ii23">Service Configuration</h4>
+
+<p dir="ltr"><span style="color:#ff0000;"><strong>TODO: Further investigation in this area is required.</strong></span></p>
+
+<p dir="ltr">Access to the Cúram server interfaces is being exposed via a Servlet which must be configured to specify the server interfaces accessible. This is essentially a white list of the server interfaces safe to access from the API.<br />
+<br />
+This section discusses the configuration options and recommended approach.</p>
+
+<h4 dir="ltr" id="ii30"><strong>Overview</strong></h4>
+
+<p dir="ltr">The requirement here is the ability to define what can be exposed via the servlet. There are many places where this information can be specified including:</p>
+
+<ul dir="ltr">
+	<li>Marking the server interface in the model as "data service layer accessible"</li>
+	<li>Developing a UIM page to define an exposed service</li>
+	<li>Hand crafting a configuration file</li>
+</ul>
+
+<h4 dir="ltr" id="ii31"><strong>Model Approach</strong></h4>
+
+<p dir="ltr"><span style="line-height: 1.5;">Marking the server interface in the model is a very simple approach. The developer would be required to mark a server interface as usable by the data service layer by ticking a box, similar to the current approach for web services. The infrastructure would then generate the configuration file required by the servlet.</span></p>
+
+<p dir="ltr"><br />
+This approach is very neat and easy, however it requires development and is model driven. The future direction of Curam is configuration based, and while it will be a long time before server facade creation is configurable on demand, it is better to consider a configuration based approach. A configuration based approach would allow existing APIs to be enabled/disabled in the service at runtime.<br />
+<br />
+There is nothing to say that we can't do both a model driven approach and allow it to be modified at runtime, but the model driven approach would require investment in Eclipse/RAD tooling in addition to the generation steps.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><em>WebServices Note: </em>WebServices were considered as an approach to exposing the facade layer, i.e. server interfaces, to the Data Service Layer. This included existing AXIS implementation of WebServices and the new Java EE JAXB/JAX-RS support. The Java EE approach allows you to annotate the beans and automatically generate the web services, including the ability consume/produce both XML and JSON. (See tutorial <a href="http://docs.oracle.com/javaee/6/tutorial/doc/gkknj.html">here</a>.)</p>
+
+<p dir="ltr">However, this approach does not allow for control over the formatting of the data sent back and forth, or the ability to take advantage of the existing client data formating/conversion/validation. There is an aspiration that the client data formatting et al should be moved to a Common Interface Layer that can be used by both the webclient for UIM and the server for web services. However, this kind of refactoring changes the scope of this project beyond what can be catered for.</p>
+
+<h4 dir="ltr" id="ii32"><strong>Configuration File</strong></h4>
+
+<p dir="ltr">A hand crafted configuration file is a straight forward approach to configuring the server interfaces exposed in the service data layer. Such a configuration file will need to consider</p>
+
+<ul dir="ltr">
+	<li>how it is handled across multile components;</li>
+	<li>where it is stored at development time;</li>
+	<li>where and how it is accessed at runtime;</li>
+	<li>what administration functions are provided;</li>
+	<li>what is the format of the configuration file.</li>
+</ul>
+
+<h4 dir="ltr" id="ii33"><strong>Multiple Components</strong></h4>
+
+<p dir="ltr">There are two options for how mulitple components handle this file, the first is the traditional merging and the second is contribution only. Contribution only is the more recent approach, but it has resulted in some strange workarounds where components have wanted to modify and not just contribute.<br />
+<br />
+This leads to the main requirements question which will drive the choice here - will components/customers want to modify existing server interfaces exposed, even only to disable them? If so, then merging is the better option even if the more expensive implementation.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">*<strong>TODO - discuss further</strong>*</p>
+
+<h4 dir="ltr" id="ii34"><strong style="line-height: 1.5;">Codeline and Upgrade</strong></h4>
+
+<p>Depending on the choice of a granualar or simple service definition, we will have to support some level of codeline and upgrade support. This should be detailed further here.</p>
+
+<h4 dir="ltr" id="ii35"><strong>Development Time</strong></h4>
+
+<p dir="ltr">At development time, is there one file defined per server interface exposed or one single file exposing all services? And should we locate this file in the EJBServer or WebClient projects?<br />
+<br />
+EJBServer project makes some sense, given this content will most likely end up on the database. The WebClient would make more logical sense given this is exposing services in the web client. I would recommend the EJBServer project, unless some dependency on web client generated content becomes evident.</p>
+
+<h4 dir="ltr" id="ii36"><strong>Runtime</strong></h4>
+
+<p dir="ltr">Is it stored on the database? In ResourceStore database table? In table of its own? As XML Blob?</p>
+
+<h4 dir="ltr" id="ii37"><strong>Administration Functions</strong></h4>
+
+<p>Do we need to support an admin API for this feature? How complex an editor will be needed?</p>
+
+<p>&nbsp;</p>
+
+<p>If the service definition support a level of granularity on existing server interfaces, then an editor is the ideal approach. One that allows you to take an existing server interface and mark the particular parts of the interface that are exposed.</p>
+
+<p>&nbsp;</p>
+
+<p>If the service definition is just the name of the server interface and a logical name, then a very simple online editor may suffice. (i.e. in the vein of the existing administration screens.)</p>
+
+<h4 id="ii38"><strong style="line-height: 1.5;">Format</strong></h4>
+
+<p>We are essentially exposing a web service and there are a number of existing service definition langugages, including WSDL and WADL.<br />
+<br />
+WSDL is an XML-based interface description language that is used for describing the functionality offered by a web service. (http://en.wikipedia.org/wiki/Web_Services_Description_Language). WSDL describes services in terms of interface and operation, and includes schemas for the input and output structures applicable to the exposed service.<br />
+<br />
+This is very comprehensive and overkill for what we require. As it is a handcrafted file, we don't want to have to ask developers to know what the schema definition for the input and output structs is, in addition to the fact that our structs will not be represented in XML. We could consider generating this information based on the service defined, but again that may be overkill.<br />
+<br />
+WADL is a machine-readable XML description of HTTP-based web applications (typically REST web services). It was submitted to Sun in 2009 but never made a standard approach. (http://en.wikipedia.org/wiki/Web_Application_Description_Language) WADL describes services in terms of methods (GET, PUT, etc) detailing the request and response expected. The request and response outline the parameters and types that are expected.<br />
+<br />
+As with WSDL, we don't want to force developers to setup what the input and output parameters are, but we could derive this information in a "generation" step if required.<br />
+<br />
+What do we want from the format:</p>
+
+<ul dir="ltr">
+	<li>Identify the server interface to expose</li>
+	<li>Identify the methods of the server interface to expose - i.e. allow some to be hidden/private</li>
+	<li>Associate the methods with certain query parameters/ids</li>
+	<li>Identify parameters on the methods that should not be returned</li>
+</ul>
+
+<p dir="ltr" style="MARGIN-LEFT: 40px"><strong>TODO - discussion, do we want to allow this level of granuality in the service definition or leave it to the developer to create specific intefaces that don't return disallowed items?</strong></p>
+
+<h4 dir="ltr" id="ii39"><strong>Granularity</strong></h4>
+Note: Current thinking is that only the facade needs to be exposed and we will provide no granuality. That is because existing facades are not mobile ready and we are not intending on allowing them for such. This raises an additional configuration option - to differentiate between mobile apps using the API and internal widgets using the API. Mobile facades exposed *must* implement data-based security and we don't want to allow APIs for internal widgets to be used by a mobile application by accident. Can we differentiate?
+
+<h3 dir="ltr" id="ii2">Impact</h3>
+
+<ul dir="ltr">
+	<li>The web.xml files in the layers above us (optionally) need to be updated with the new CDSLService servlet, i.e.</li>
+</ul>
+
+<pre style="margin-left: 40px;">
+&nbsp; &lt;servlet&gt;
+&nbsp;&nbsp;&nbsp; &lt;display-name&gt;CDSLService&lt;/display-name&gt;
+&nbsp;&nbsp;&nbsp; &lt;servlet-name&gt;CDSLService&lt;/servlet-name&gt;
+&nbsp;&nbsp;&nbsp; &lt;servlet-class&gt;curam.util.cds.DataServiceServlet&lt;/servlet-class&gt;
+&nbsp;&nbsp;&nbsp; &lt;load-on-startup&gt;4&lt;/load-on-startup&gt;
+&nbsp; &lt;/servlet&gt;
+&nbsp; &lt;servlet-mapping&gt;
+&nbsp;&nbsp;&nbsp; &lt;servlet-name&gt;CDSLService&lt;/servlet-name&gt;
+&nbsp;&nbsp;&nbsp; &lt;url-pattern&gt;/dataservice/*&lt;/url-pattern&gt;
+&nbsp; &lt;/servlet-mapping&gt;
+</pre>
+
+<h4 dir="ltr" id="ii3">Code Line Exemption</h4>
+
+<ul dir="ltr">
+	<li>N/A</li>
+</ul>
+
+<h4 dir="ltr" id="ii4">Dependencies</h4>
+
+<ul dir="ltr">
+	<li>N/A</li>
+</ul>
+
+<h2 dir="ltr" id="ii24">Use Cases</h2>
+
+<ul dir="ltr">
+	<li>N/A</li>
+</ul>
+
+<h2 dir="ltr" id="ii25">Implementation Details</h2>
+
+<ul dir="ltr">
+	<li>N/A</li>
+</ul>
+
+<h3 dir="ltr" id="ii5">Integration Points</h3>
+
+<ul dir="ltr">
+	<li>N/A</li>
+</ul>
+
+<h2 dir="ltr" id="ii26">Test</h2>
+
+<p dir="ltr">Details of how the design will be tested.</p>
+
+<h3 dir="ltr" id="ii6">Dependencies</h3>
+
+<ul dir="ltr">
+	<li>N/A</li>
+</ul>
+
+<h3 dir="ltr" id="ii7">Manual Application Test</h3>
+
+<ul dir="ltr">
+	<li>N/A</li>
+</ul>
+
+<h3 dir="ltr" id="ii8">Automated Tests</h3>
+
+<ul dir="ltr">
+	<li>N/A</li>
+</ul>
+
+<h3 dir="ltr" id="ii9">Comprehensive Manual Tests</h3>
+
+<ul dir="ltr">
+	<li>N/A</li>
+</ul>
+
+<h2 dir="ltr" id="ii27">Documentation</h2>
+
+<ul dir="ltr">
+	<li>N/A</li>
+</ul>
+
+<h3 dir="ltr" id="ii10">Release Notes Preview</h3>
+
+<ul dir="ltr">
+	<li>N/A</li>
+</ul>
+
+<h2 dir="ltr" id="ii28">Review Comments</h2>
+
+<h3 dir="ltr" id="ii11">Simple Comments</h3>
+
+<table border="1" dir="ltr" style="width: 755px;">
+	<tbody>
+		<tr>
+			<td><strong>Reviewer</strong></td>
+			<td style="width: 345px;"><strong>Comment</strong></td>
+			<td style="width: 199px;"><strong>Action/Follow-up</strong></td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td style="width: 345px;">&nbsp;</td>
+			<td style="width: 199px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<h3 dir="ltr" id="ii12">Extended Comments</h3>
+
+<h4 dir="ltr" id="ii13">Summary Title</h4>
+
+<p dir="ltr"><strong>Reviewer:</strong> &lt;Name&gt;<br />
+<br />
+<strong>Comment:</strong> &lt;Comment&gt;<br />
+<br />
+<strong>Action/Follow-up:</strong> &lt;Details of the follow-up/action taken on the comment&gt;</p>
+
+<h2 dir="ltr" id="ii29">Historical Information</h2>
+
+<h3 id="ii14"><strong>UIM Approach</strong></h3>
+
+<p>It is worth mentioning that an approach exists already for exposing server interfaces via UIM pages. The UIM page in this case is essentially the definition of the exposed service.</p>
+
+<p dir="ltr">If we were to develop a single file per service definition, it would be worth exploring the UIM approach briefly again. Does the UIM language map well to service definitions or would it require significant changes?</p>
+
+<p dir="ltr">The current infrastructure defines the server interface in UIM as follows</p>
+
+<pre dir="ltr">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;PAGE PAGE_ID="DataServiceLongList" COMPONENT_STYLE="DATASERVICE"&gt;
+
+  &lt;SERVER_INTERFACE NAME="LISTDISPLAY" PHASE="DISPLAY" CLASS="ListTesting" OPERATION="getLongList" /&gt;
+
+&lt;/PAGE&gt;</pre>
+
+<p dir="ltr">The above defines the name of the service, i.e. DataServiceLongList, in addition to the class and operation that the service invokes.</p>
+
+<p dir="ltr">The SERVER_INTERFACE element maps to an operation and not a class, and for our purposes&nbsp;we want to expose the full class as the service and not just a single specific operation. This is not too bad, as it is a relatively small change to allow the OPERATION attribute to become optional under certain circumstances.</p>
+
+<p dir="ltr">However, one potential requirement is to expose an existing facade and narrow down what is returned to a sub-set of the original interface. This would require us to extend the UIM to support this ability and is essentially defining a new language within UIM.</p>
+
+<p>If a level of granularity is required, then potentially a file per service definition is required, but it doesn't map cleanly to UIM in my opinion and has been mostly ruled out.</p>
+
+<p>Note: It was also ruled out due to taking the modelling approach, in combination with the ability to modify this content at runtime, though the latter could have been done with Dynamic UIM if necessary.</p>
+</div>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

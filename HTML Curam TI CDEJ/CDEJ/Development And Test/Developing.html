@@ -1,0 +1,979 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Developing</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../wiki.css" />
+<script type="text/javascript" src="../../wiki.js" ></script>
+<script type="text/javascript" src="../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Developing";
+    pageId="urn:lsid:ibm.com:td:44fcd50a-145f-467d-868c-0896b417d615";
+    toRoot="../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Developing</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h1 dir="ltr">Getting Started</h1>
+
+<p dir="ltr">TI development can be done on any Windows 10 machine (virtual or physical), and requires only a 64-bit JDK and RTC SCM Tools to be available on the machine to begin.</p>
+
+<p dir="ltr"><span style="color:#EE82EE;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">[Various places in this page mix Windows and Mac syntax (e.g., forward and backward slashes).]</strong></span></p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Note:</strong> For setup of TI 7.0.8.0 on Windows (haven't tried Mac) you might want to install WAS 8.5.5.12 first and point WAS_HOME, JAVA_HOME and J2EE_JAR at that. Otherwise you may run into java version issues.</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">Table of Contents:
+<ul style="list-style-type:none !important;">
+	<li style="list-style-type:none;"><a href="#ii22" style="display: block;">Connect to Artifactory</a>
+
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii18" style="display: block;">Environment Variables</a></li>
+		<li style="list-style-type:none;"><a href="#ii19" style="display: block;">The bootstrap process</a></li>
+		<li style="list-style-type:none;"><a href="#ii20" style="display: block;">Disabling repository access</a></li>
+		<li style="list-style-type:none;"><a href="#ii21" style="display: block;">Access via browser</a></li>
+	</ul>
+	</li>
+	<li style="list-style-type:none;"><a href="#ii5" style="display: block;">Environment Setup on MAC</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii8" style="display: block;">Get your Curam-AD access id.</a></li>
+		<li style="list-style-type:none;"><a href="#ii9" style="display: block;">Install RTC</a>
+		<ul style="list-style-type:none !important;">
+			<li style="list-style-type:none;"><a href="#ii7" style="display: block;">Setup eclipse tools</a></li>
+			<li style="list-style-type:none;"><a href="#ii11" style="display: block;">Init workspace</a></li>
+		</ul>
+		</li>
+		<li style="list-style-type:none;"><a href="#ii12" style="display: block;">Troubleshooting</a></li>
+		<li style="list-style-type:none;"><a href="#ii6" style="display: block;">Eclipse</a>
+		<ul style="list-style-type:none !important;">
+			<li style="list-style-type:none;"><a href="#ii13" style="display: block;">Open Eclipse</a></li>
+			<li style="list-style-type:none;"><a href="#ii14" style="display: block;">Setup Eclipse Preferences</a></li>
+		</ul>
+		</li>
+		<li style="list-style-type:none;"><a href="#ii17" style="display: block;">Trouble Shooting Eclipse</a></li>
+	</ul>
+	</li>
+	<li style="list-style-type:none;"><a href="#ii1" style="display: block;">Environment Setup on WINDOWS</a>
+	<ul style="list-style-type:none !important;">
+		<li>
+		<ul style="list-style-type:none !important;">
+			<li style="list-style-type:none;"><a href="#ii16" style="display: block;">Troubleshooting Import Project</a></li>
+		</ul>
+		</li>
+		<li style="list-style-type:none;"><a href="#ii15" style="display: block;">Configure Sandbox &amp; Tomcat</a></li>
+	</ul>
+	</li>
+	<li style="list-style-type:none;"><a href="#ii2" style="display: block;">Development Process</a></li>
+	<li style="list-style-type:none;"><a href="#ii10" style="display: block;">Stack Zip</a></li>
+	<li style="list-style-type:none;"><a href="#ii3" style="display: block;">Tooling not delivered in DevEnv</a></li>
+	<li style="list-style-type:none;"><a href="#ii4" style="display: block;">Random Useful Info for New Starters to CDEJ</a></li>
+	<li style="list-style-type:none;"><a href="#ii1" style="display: block;">Remote Debugging Information</a></li>
+	<li style="list-style-type:none;"><a href="#ii23" style="display: block;">Archives - Info No Longer Needed</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii24" style="display: block;">Connect to Tiny</a></li>
+	</ul>
+	</li>
+</ul>
+</div>
+
+<h2 dir="ltr" id="ii22">Connect to Artifactory</h2>
+
+<p dir="ltr">With file server Tiny being retired, developer streams will now bootstrap from the Artifactory repository instead of fileserver Tiny.</p>
+
+<p dir="ltr">This page explains the steps required to switch over.</p>
+
+<h3 dir="ltr" id="ii18">Environment Variables</h3>
+
+<pre dir="ltr">
+<span style="font-family:Arial,Helvetica,sans-serif;">All developers should have access to Artifactory and must set the following four environment variables on their development machine:
+</span>
+ DEV_ARTIFACTORY_URL=https://eu.artifactory.swg-devops.com:443/artifactory/wh-spmdevops-buildservices-generic-local
+ USING_ARTIFACTORY=TRUE
+ ARTIFACTORY_USER= &lt;your IBM intranet user name in <strong>lowercase</strong>&gt;
+ ARTIFACTORY_TOKEN= &lt;your artifactory token&gt;</pre>
+
+<p dir="ltr">To get your Artifactory token: - login to Artifactory using your IBM intranet credentials - go to</p>
+
+<pre dir="ltr">
+<a href="https://eu.artifactory.swg-devops.com/artifactory/webapp/#/profile">https://eu.artifactory.swg-devops.com/artifactory/webapp/#/profile</a>
+</pre>
+
+<p dir="ltr">&nbsp; The token is in the 'API Key' field and comprises a string of approximately 70 characters.</p>
+
+<h3 dir="ltr" id="ii19">The bootstrap process</h3>
+
+<p dir="ltr">Building a stream requires zip files containing tools and lower layers to be extracted onto the local stream. This is done by an Ant script. Running an Ant script requires Ant and Java to be available on the developers machine and bootstrapping is the process of making these available. Previously a shared drive on Tiny was mounted and these were run directly from that drive. Now these are first unzipped into a local prerequisites directory (~/preReqs on Mac/Linux, C:\CC\DevEnv\preReqs on Windows) and executed from there.</p>
+
+<p dir="ltr">The four scripts to do the bootstrapping are:</p>
+
+<ul dir="ltr">
+	<li>bootstrap</li>
+	<li>bootstrap.bat</li>
+	<li>bootstrap.xml</li>
+	<li>getResource.xml</li>
+</ul>
+
+<p dir="ltr">These are being pushed out on each stream. If you need to work on a stream where they're not yet available, you can pull down a local copy of the files from here:</p>
+
+<p dir="ltr"><a href="https://eu.artifactory.swg-devops.com/artifactory/wh-spmdevops-buildservices-generic-local/ProductDevelopment/DevReleases/Bootstrap_Release/DevelopmentFilesNoTiny/">https://eu.artifactory.swg-devops.com/artifactory/wh-spmdevops-buildservices-generic-local/ProductDevelopment/DevReleases/Bootstrap_Release/DevelopmentFilesNoTiny/</a><br />
+&nbsp;</p>
+
+<h3 dir="ltr" id="ii20">Disabling repository access</h3>
+
+<p dir="ltr">If you don't need to access the repository locally - ie if you have already downloaded all the zipped components required by your stream -<br />
+you can disable the bootstrap + download step by setting environment variable SKIP_UNZIP_APPS=TRUE.</p>
+
+<p dir="ltr">This should be only used as a short term measure to avoid delays or problems accessing the repository.</p>
+
+<h3 dir="ltr" id="ii21">Access via browser</h3>
+
+<p dir="ltr">Any file in the artifactory repository can be accessed by a browser. E.g: the SDEJ zips can be downloaded from<br />
+&nbsp; <a href="https://eu.artifactory.swg-devops.com/artifactory/wh-spmdevops-buildservices-generic-local/ProductDevelopment/DevReleases/SDEJ_CDEJ_release/">https://eu.artifactory.swg-devops.com/artifactory/wh-spmdevops-buildservices-generic-local/ProductDevelopment/DevReleases/SDEJ_CDEJ_release/</a></p>
+
+<p dir="ltr">NB if you download a zip file from here, your browser may cache the zip file locally. Therefore if the file on Artifactory changes, attempting to download it again may simply fetch the old version of the file. In this case you should delete your browser cache first or use a private browser window.</p>
+
+<h2 dir="ltr" id="ii5">Environment Setup on MAC</h2>
+
+<h3 dir="ltr" id="ii8">Get your Curam-AD access id.</h3>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">In Verse (mail application) search for "Access Management Curam-AD"
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">If you <u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">weren't</u> yet granted access to&nbsp;Curam-AD, follow the instructions on&nbsp;<a href="https://apps.na.collabserv.com/wikis/home?lang=en-us#!/wiki/Wb97a93d58cb7_4315_ab88_531471934654/page/Joining%20the%20Curam%20AD%20domain" rel="noopener noreferrer" target="_blank">Joining&nbsp;the&nbsp;Curam&nbsp;AD&nbsp;domain</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">If you were granted access to Curam-AD your id should be in this email.
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Create a global file in your home directory (i.e.&nbsp;/Users/francescomariani&nbsp;) “.bash_profile" contents should include the following environment variables, use your corresponding value:<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			<span style="font-family:Courier New,Courier,monospace;">export CURAM_ACCOUNT=&lt;Value-gotten-from-Curam-AD&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			<span style="color:#006400;"># To stop the Java icon popping up in the Dock tray and set the right encoding</span><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			export JAVA_TOOL_OPTIONS='-Dapple.awt.UIElement=true -Dfile.encoding=Cp1252'</span></li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Run " <span style="font-family:courier new,courier,monospace;">. ~/.bash_profile&nbsp;</span>" to pick up the changes</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<h3 dir="ltr" id="ii9">Install RTC</h3>
+
+<p dir="ltr">If you <u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">do not have RTC</u> already installed on the workstation:</p>
+
+<ol dir="ltr">
+	<li style="margin-left: 40px;">Install Apple Java 6 from the Mac@IBM App Store, Utilities Section (needed for Eclipse)</li>
+	<li style="margin-left: 40px;"><s sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Install a JDK 7 - there is no Sun Java 6 available for Mac so we are forced to use 7 here unlike Windows Dev</s></li>
+	<li style="margin-left: 40px;">RTC install - Unzip tiny/Applications/RTC/5.0.2/RTC-Client-Mac64-5.0.2.zip to your machine and run jazz/client/eclipse/Eclipse.app</li>
+</ol>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">If you <u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">have it already</u> installed, read below.</p>
+
+<p dir="ltr">(RTC Setup described on SPM DevOps Community - <a wiki="W412ac2882a19_4d59_b700_74e4a5b51784" page="How to connect the eclipse client to a project area" id="wikiLink1474963284452" href="https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/W412ac2882a19_4d59_b700_74e4a5b51784/page/How%20to%20connect%20the%20eclipse%20client%20to%20a%20project%20area">https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/W412ac2882a19_4d59_b700_74e4a5b51784/page/How%20to%20connect%20the%20eclipse%20client%20to%20a%20project%20area</a>)</p>
+
+<p dir="ltr"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Set up the DevEnv</strong></span></p>
+
+<h4 dir="ltr" id="ii7">Setup eclipse tools</h4>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Give appbuild executable permissions</p>
+
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-family:courier new,courier,monospace;">chmod 777 appbuild</span></p>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Initialize DevEnv</p>
+
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<pre sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+export JAVA_HOME_OVERRIDE=`/usr/libexec/java_home`</pre>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">IF BUILDING AGAINST 6.0.5.10-iFix4</strong> - You need to request access to TechInf folder within Tiny
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Access to TechInf is requested via <a href="Notes://ccdc2/80256DB900325960/">Notes://ccdc2/80256DB900325960/</a></li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Create General Support Request --&gt; WH LDAP &amp; Active Directory
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Short Description: Require access to the TechInf folder on tiny</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Detail Description: I'm trying to build 6.0.5.10-iFix4 and require access to TechInf folder within ProductDevelopment</li>
+			</ul>
+			</li>
+		</ul>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<pre sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+./appbuild dummy</pre>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">If building against 6.X run:
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">./appbuild -f commons\build.xml eclipse</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">./appbuild -f client\components\build.xml</li>
+		</ul>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<pre sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+unset JAVA_HOME_OVERRIDE</pre>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Give java&nbsp; &amp; eclipse executable permissions from DevEnv folder (This will be shown in the output from ./appbuild dummy command (e.g. /Users/jamesduf/TIDevEnv_6.x</p>
+
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">If building against 6.x</p>
+
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">find ~/TIDevEnv_6.x/tools/java/ -type f -exec chmod 755 {} \;</p>
+			</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">find ~/TIDevEnv_6.x/tools/eclipse/ -type f -exec chmod 755 {} \;</p>
+			</li>
+		</ul>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Else</p>
+
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">find ~/TIDevEnv/tools/java/ -type f -exec chmod 755 {} \;</p>
+			</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">find ~/TIDevEnv/tools/eclipse/ -type f -exec chmod 755 {} \;</p>
+			</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ol>
+
+<h4 dir="ltr" id="ii11">Init workspace</h4>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Create TI/setenv.sh</strong>&nbsp; - <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="color:#FF0000;"><span style="background-color:#FFFF00;">! Every time you open new Terminal and want to build, you need to run this file in it once&nbsp;</span></span></strong><span style="color:#FF0000;"><span style="background-color:#FFFF00;">" </span><span style="font-family:courier new,courier,monospace;"><span style="background-color:#FFFF00;">. ./setenv.sh</span></span><span style="background-color:#FFFF00;"> " !</span></span>
+
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">From TI Directory</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">If building against 6.x
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Place these&nbsp;files in lib/nonrelease/&nbsp;
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a _ic_files_uuid="b33971ba-c636-42b4-8ea6-30754054d032" _ic_source="files" href="https://w3-connections.ibm.com/files/form/anonymous/api/library/a622dcb3-4bd9-4dcd-9a8d-534c2bb3b79d/document/b33971ba-c636-42b4-8ea6-30754054d032/media/was_j2ee6.jar" target="_blank" title="Download was_j2ee6.jar">​<img aria-hidden="true" class="lconn-ftype16 lconn-ftype16-jar" src="https://w3-connections.ibm.com/common/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20180614.204100"></img><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">was_j2ee6.jar</strong></a><span aria-hidden="true" class="lotusDivider" role="img">|</span><a href="https://w3-connections.ibm.com/files/app/file/b33971ba-c636-42b4-8ea6-30754054d032" target="_blank" title="View details of was_j2ee6.jar">View Details</a></li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a _ic_files_uuid="4485f019-0e1c-4057-b8fc-f99eb6acbba6" _ic_source="files" href="https://w3-connections.ibm.com/files/form/anonymous/api/library/a622dcb3-4bd9-4dcd-9a8d-534c2bb3b79d/document/4485f019-0e1c-4057-b8fc-f99eb6acbba6/media/com.ibm.ws.admin.client_8.5.0.jar" target="_blank" title="Download com.ibm.ws.admin.client_8.5.0.jar"><img aria-hidden="true" class="lconn-ftype16 lconn-ftype16-jar" src="https://w3-connections.ibm.com/common/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20180614.204100"></img><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">com.ibm.ws.admin.client_8.5.0.jar</strong></a><span aria-hidden="true" class="lotusDivider" role="img">|</span><a href="https://w3-connections.ibm.com/files/app/file/4485f019-0e1c-4057-b8fc-f99eb6acbba6" target="_blank" title="View details of com.ibm.ws.admin.client_8.5.0.jar">View Details</a></li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<pre sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+echo "export J2EE_JAR=`find $PWD -name was_j2ee6.jar`" &gt;&gt; setenv.sh
+echo "export JAVA_HOME_OVERRIDE=~/TIDevEnv_6.x/tools/java" &gt;&gt; setenv.sh
+echo "export ANT_HOME=~/TIDevEnv_6.x/tools/ant" &gt;&gt; setenv.sh</pre>
+				</li>
+			</ul>
+			</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Apply the following patch:&nbsp;<a _ic_files_uuid="e715c8be-2c44-41cd-8a07-7d02b865dc5a" _ic_source="files" href="https://w3-connections.ibm.com/files/form/anonymous/api/library/a622dcb3-4bd9-4dcd-9a8d-534c2bb3b79d/document/e715c8be-2c44-41cd-8a07-7d02b865dc5a/media/TI-6.2MacPort.patch" target="_blank" title="Download TI-6.2MacPort.patch"><img aria-hidden="true" class="lconn-ftype16 lconn-ftype16-patch" src="https://w3-connections.ibm.com/common/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20180614.204100"></img><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TI-6.2MacPort.patch</strong></a><span aria-hidden="true" class="lotusDivider" role="img">|</span><a href="https://w3-connections.ibm.com/files/app/file/e715c8be-2c44-41cd-8a07-7d02b865dc5a" target="_blank" title="View details of TI-6.2MacPort.patch">View Details</a></li>
+		</ul>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">If building against 7.x <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="color:#ff0000;"><span style="background-color:#ffff00;">REVIEW: This step&nbsp;is causing issues on macOS, not doing this step works fine.</span></span></strong>
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<pre sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+echo "export J2EE_JAR=`find $PWD -name was_j2ee6.jar`" &gt;&gt; setenv.sh
+echo "export JAVA_HOME_OVERRIDE=~/TIDevEnv/tools/java" &gt;&gt; setenv.sh</pre>
+			</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Create TI/coreinf/properties/Bootstrap.properties</strong> - <span style="color:#FF0000;">NOTE</span>: Update item in bold below to the version you're Developing against!
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Copy and paste below in Terminal from TI directory - first paste in a text editor so you can update the value</p>
+
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<pre sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+​cat &lt;&lt;EOT &gt;&gt; coreinf/properties/Bootstrap.properties
+curam.environment.bindings.location=`pwd`/coreinf/properties
+curam.environment.tnameserv.port=1221
+# H2
+curam.db.type=H2
+curam.db.name=Curam_TI_<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">6206iFix2</strong>
+curam.db.username=h2admin
+# The encrypted password is "password"
+curam.db.password=HlIxprF/66CsSSm6PON5+A==
+curam.db.h2.directory=~<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">/TIDevEnv_6.x/</strong>H2
+curam.db.h2.mode=embedded
+curam.db.serverport=9092
+curam.db.servername=localhost
+# Needed for Eclipse/RWD only
+curam.testing.datasets=`pwd`/TestDatasets
+dbtojms.credentials.encr.text=b8nbWgbJtUFIZ25vODA4Vw==
+EOT</pre>
+			</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Create TI/coreinf/properties/AppServer.properties</strong>
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Copy and paste below in Terminal from TI directory</p>
+
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<pre sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+cat &lt;&lt;EOT &gt;&gt; coreinf/properties/AppServer.properties
+# Acceptable values are IBM or BEA.
+as.vendor=IBM
+# The username and password for admin server.
+security.username=websphere
+# encrypted password 'websphere'
+security.password=RZq542wPRdtvDXdmXiln9A==
+curam.security.credentials.jms.messagedrivenbean.username=SYSTEM
+curam.security.credentials.jms.messagedrivenbean.password=hIAidlp83Q8=
+node.name=localNode
+curam.server.name=CuramServer
+# The default port for WAS is 2809, for WLS is 7001, for NAS is 50504
+curam.server.port=2809
+curam.db.auth.alias=databaseAlias
+curam.server.ipaddress=localhost
+curam.webservices.httpport=9082
+curam.client.httpport=$HTTPS_PORT
+EOT</pre>
+			</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">From TI run - </strong><span style="color:#FF0000;">NOTE</span>: The initial&nbsp;<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">"</span><span style="font-family: &quot;courier new&quot;, courier, monospace;">.&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">" is very important as it means that properties exported will persist within this shell</span>
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-family:courier new,courier,monospace;">. ./setenv.sh</span></li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-family:arial,helvetica,sans-serif;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Build!</strong></span><span style="font-family:arial,helvetica,sans-serif;"> </span>
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<pre sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+export JAVA_HOME=&lt;path-to-java-from-TI-DevEnv&gt;</pre>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<pre sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+./appbuild cleanserver cleanclient</pre>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<pre sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+./appbuild server client</pre>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<pre sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+./appbuild tabtestapp tabtestdatabase</pre>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<pre sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+./appbuild clientmockapp</pre>
+		</li>
+	</ul>
+	</li>
+</ol>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii12">Troubleshooting</h3>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">If you are getting a compiling issue about MockHttpServletRequest.java and&nbsp;MockServletContext.java when&nbsp;building client, override those two files with these&nbsp;<a _ic_files_uuid="8489595c-a657-40dd-82d1-da7a562a7f73" _ic_source="files" href="https://w3-connections.ibm.com/files/form/anonymous/api/library/475e18b9-707d-447e-b41f-9fb81311cc9d/document/8489595c-a657-40dd-82d1-da7a562a7f73/media/MockServletJavaFiles.zip" target="_blank" title="Download MockServletJavaFiles.zip"><img aria-hidden="true" class="lconn-ftype16 lconn-ftype16-zip" src="https://w3-connections.ibm.com/common/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20160722.213209"></img><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">MockServletJavaFiles.zip</strong></a><span aria-hidden="true" class="lotusDivider" role="img">|</span><a href="https://w3-connections.ibm.com/communities/service/html/communityview?communityUuid=743dad5c-0d63-4ec4-bdbb-3cc9c8b8bc1a#fullpageWidgetId=W3906e4e3f9c0_406f_89a8_51d5e62177df&amp;file=8489595c-a657-40dd-82d1-da7a562a7f73" target="_blank" title="View details of MockServletJavaFiles.zip">View Details</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">If building against 6.x you may have to comment out unknown overridden methods</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">If you see issues with building e.g. "the project cannot be built until its prerequisite is built. Cleaning and building is recommended" try deleting the .jazz5/.jazzlock file from within your top level workspace</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii6">Eclipse</h3>
+
+<h4 dir="ltr" id="ii13">Open Eclipse</h4>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Some Streams of TI come with a packaged version of eclipse. To start it, from your respective DevEnv directory run
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">find . -name Eclipse.app -type d -print0 | xargs -0 -I{} find '{}' -name eclipse -type f</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Then point your workspace to a separate location that makes most sense to you e.g<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+	~/Developer/TI/6206-iFix2</li>
+</ol>
+
+<h4 dir="ltr" id="ii14">Setup Eclipse Preferences</h4>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Open the Preferences Menu &gt; Eclipse - Preferences.
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Change the Compiler compliance level to 1.7 in Java&gt;Compiler</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Change the Installed JRE to point at the java in your dev env,&nbsp;i.e. /Users/francescomariani/RTCdev/DevEnv/TI_7.0.0.0/tools/java</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Change the Tomcat panel to point to use Tomcat 7&nbsp;and select the Tomcat DevEnv Home&nbsp;path i.e. /Users/francescomariani/RTCdev/DevEnv/TI_7.0.0.0/tools/tomcat by default. Update the JVM section with the above JRE.</li>
+	</ul>
+	</li>
+</ol>
+
+<p dir="ltr" style="margin-left: 40px;">At the end of all your Eclipse setting, run from TI folder the command <span style="font-family:courier new,courier,monospace;">./appbuild cryptoconfig</span>&nbsp;to generate&nbsp;the CryptoConfig.jar file into java\jre\lib\ext</p>
+
+<p dir="ltr" style="margin-left: 40px;">Note: If you import the generated Curam.epf, your eclipse will use the Apple Java. This may not have the CryptoConfig.jar file in it yet. &nbsp;If this is the case you will get a DB password issue on launching StartServer. &nbsp;To get around this, run<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<span style="font-family:courier new,courier,monospace;">sudo chmod +a "user:$USER allow add_file" "`/usr/libexec/java_home`/jre/lib/ext"</span></p>
+
+<p dir="ltr" style="margin-left: 40px;">enter your password<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<span style="font-family:courier new,courier,monospace;">BAK_JAVA_HOME=$JAVA_HOME<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+export JAVA_HOME="`/usr/libexec/java_home`"<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+./appbuild cryptoconfig<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+export JAVA_HOME=$BAK_JAVA_HOME<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+unset BAK_JAVA_HOME</span></p>
+
+<p dir="ltr">From here you can follow the Windows's steps below from <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Point 8</strong> with very light differences due to the different OS, and be sure to change the JRE and Tomcat.</p>
+
+<h3 dir="ltr" id="ii17"><strong>Trouble Shooting Eclipse</strong></h3>
+
+<p dir="ltr">- Currently the version of eclipse that&nbsp;&nbsp;<wbr></wbr>comes down with TI is Luna. This version has a known issue where it can crash when the console output builds up.By default TI outputs a lot of text while the application is running. If eclipse is crashing, try changing the following properties.<br />
+<br />
+TI/tests/TabTestApp/webclient/components/core/CDEJResources.properties<br />
+-TraceOn=false<br />
+-JavaScriptTraceOn=false<br />
+TI/tests/TestModelClient/JavaSource/curam/omega3/i18n/CDEJResources.properties<br />
+-TraceOn=false<br />
+TI/tests/ClientDepApp/JavaSource/curam/omega3/i18n/CDEJResources.properties<br />
+-TraceOn=false</p>
+
+<h2 dir="ltr" id="ii1">Environment Setup on WINDOWS</h2>
+
+<p dir="ltr">These steps assume that you do not have RTC already installed on the workstation.</p>
+
+<p dir="ltr">If you have RTC available, you can create the workspace (following the same naming convention) and load it from there. Pay particular attention to the sandbox location in advanced settings. Once the workspace is loaded, you can skip to step 6.</p>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Install RTC SCM Tools
+	<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Copy \\tiny.mul.ie.ibm.com\Applications\RTC\5.0.2\RTC-scmTools-Win64-5.0.2.zip to the root of the drive and extract.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Rename the 'jazz' folder to 'RTC-SCMTools'</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Add C:\RTC-SCMTools\scmtools\eclipse to the PATH environment variable</li>
+	</ol>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Create a directory to hold your RTC workspaces, e.g. C:\RTC-Dev and open a command prompt there.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+	<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+	NOTE: Steps 3/4/5 Can all be done without memorizing the commands. Use&nbsp;the&nbsp;script attached to this wiki, rtcstream.bat. &nbsp;You can run it anywhere if you have the RTC SCM Tools setup from Step 1 but it's handy to&nbsp;place it in the Windows C:\Users\&lt;username&gt; dir, as this is where 'cmd' typically launches to. This script basically prompts for each variable and then offers to run the commands inline.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+	&nbsp;</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Establish a connection to the RTC repository:
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<pre sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+scm login -r <a href="https://jazz031.hursley.ibm.com:9443/ccm">https://jazz031.hursley.ibm.com:9443/ccm</a> -n <em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">jazz031 </em>-u username@ie.ibm.com -P password</pre>
+
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Note: This depends on having a 64 bit jre on your PATH - most Curam devenvs are 32 bit. If you get this error, you are using a 32 bit variant: Failed to load the JNI shared library "..........\jvm.dll</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">jazz031</em> is a nickname for this repository connection<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			&nbsp;</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Create a workspace in one of the RTC streams (if you don't already have a repository workspace)
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<pre sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+scm create workspace -r jazz031 -s "<em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TI-Integration-6.2.0.2</em>" azh_TI_6.2.0.2</pre>
+
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TI-Integration-6.2.0.2 </em>is the name of a stream setup in RTC. Check <a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.scm.showStreams" target="_blank">HERE&nbsp;</a>for streams available to you (<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">generally, use Integration; as per Andrey: our automation then promotes any changes from Integration to a corresponding Master stream - the idea that all content delivered to the Master stream is fully tests (Smoketest + CIBuild)</strong>)</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">azh_TI_6.2.0.2</em> is the name of the repository workspace to be created
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Workspace name should follow this structure: <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">initials_component_version</strong></li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Initials can also be your short ID for Notes<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				&nbsp;</li>
+			</ul>
+			</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Load the content of the repository to your local workspace
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<pre sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+scm load -r jazz031 azh_TI_6.2.0.2 -d <em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">C:\RTC-Dev\TI_6.2.0.2</em></pre>
+
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">C:\RTC-Dev\TI_6.2.0.2 </em>is the sandbox location on the local machine for the azh_TI_6.2.0.2</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">This operation will take several minutes, as it downloads the JDE codebase.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			&nbsp;</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Set up the DevEnv
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Open a new cmd, set JAVA_HOME to an installed jre</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Set the DEVENV_HOME variable to use a shared DevEnv location. Use&nbsp;different folders according to the main&nbsp;release version,&nbsp;where pre-reqs may have changed
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<pre sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+set DEVENV_HOME=C:\DevEnv\<span style="color:#FF0000;">6.1 | 6.2 | vNext</span></pre>
+			</li>
+		</ul>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">To pull down tools (for the first time), from TI, run:
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<pre sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+appbuild dummy</pre>
+			</li>
+		</ul>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">In some cases the build may fail with a "access denied" error. This is a UAC issue. To fix this do the following steps:
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Step 1 - disable UAC (Control Panel -&gt; User Accounts -&gt; Manage User Access Control) by turning the switch to the lower position</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Step 2 - check the registry at HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System -- EnableUA should be set to 0</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Step 3 - Restart when ever prompted<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			&nbsp;</li>
+		</ul>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">You now have all of the necessary tools except for WAS, including the RTC plugin for Eclipse<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+		&nbsp;</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">From TI, run:
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<div sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">for vNext:</span> run the install-appserver.bat.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">for 6.2: </span>get-appservers websphere &nbsp;[edit: install-was appears to work on 6.2 now]<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			&nbsp;</div>
+			</li>
+		</ul>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Create TI\setenv.bat with these settings:-
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<pre sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+set DEVENV_HOME=C:\DevEnv\<span style="color:#FF0000;">6.1 | 6.2 | vNext</span>
+set WAS_HOME=%DEVENV_HOME%\tools\websphere
+set JAVA_HOME=%WAS_HOME%\java
+set J2EE_JAR=%WAS_HOME%\lib\j2ee.jar</pre>
+			</li>
+		</ul>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Create TI\coreinf\properties\Bootstrap.properties (replace highlighted text)
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<pre sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+<span style="font-family:courier new,courier,monospace;">curam.environment.bindings.location=C:/RTC-Dev/<span style="color:#FF0000;"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&lt;workspace directory&gt;</em></span>/TI/coreinf/properties
+curam.environment.tnameserv.port=900
+# H2
+curam.db.type=H2
+curam.db.name=Curam_TI_<span style="color:#FF0000;"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&lt;version&gt;</em></span>
+curam.db.username=h2admin
+# The encrypted password is "password"
+curam.db.password=HlIxprF/66CsSSm6PON5+A==
+curam.db.h2.directory=C:/Exclude/H2
+curam.db.h2.mode=embedded
+curam.db.serverport=9092
+curam.db.servername=localhost</span><span style="font-family:courier new,courier,monospace;">
+# Needed for Eclipse/RWD only
+curam.testing.datasets=C:/RTC-Dev/<span style="color:#FF0000;"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&lt;workspace directory&gt;</em></span>/TI/TestDatasets</span><span style="font-family:courier new,courier,monospace;">
+dbtojms.credentials.encr.text=b8nbWgbJtUFIZ25vODA4Vw==
+</span></pre>
+			</li>
+		</ul>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Create TI\coreinf\properties\AppServer.properties (no changes necessary, just copy the values directly into you AppServer.properties)
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<pre sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+<span style="font-family:courier new,courier,monospace;"># Acceptable values are IBM or BEA.
+as.vendor=IBM</span>
+<span style="font-family:courier new,courier,monospace;"># The username and password for admin server.
+security.username=websphere
+# encrypted password 'websphere'
+security.password=RZq542wPRdtvDXdmXiln9A==
+curam.security.credentials.jms.messagedrivenbean.username=SYSTEM
+curam.security.credentials.jms.messagedrivenbean.password=hIAidlp83Q8=
+node.name=localNode
+curam.server.name=CuramServer
+# The default port for WAS is 2809, for WLS is 7001, for NAS is 50504
+curam.server.port=2809
+curam.db.auth.alias=databaseAlias</span>
+<span style="font-family:courier new,courier,monospace;">curam.server.ipaddress=localhost</span>
+<span style="font-family:courier new,courier,monospace;">curam.webservices.httpport=9082</span>
+<span style="font-family:courier new,courier,monospace;">curam.client.httpport=$HTTPS_PORT</span></pre>
+			</li>
+		</ul>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Run setenv.bat</span></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<pre sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+appbuild.bat server database client tabtestapp tabtestdatabase</pre>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Check that the tools, properties, and environment variables have been configured correctly. Run:
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<pre sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+appbuild.bat configtest</pre>
+
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">This will also create the CryptoConfig.jar file required for decrypting the password in Bootstrap.properties</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">If your setenv sets JAVA_HOME to the WAS java as the instructions above outlined (which is necessary for some builds to work), then you will actually need to <u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">temporarily set it to your DevEnv java and run configtest again</u>&nbsp;to create&nbsp;the jar again in the DevEnv java which is used by the Curam eclipse preferences. &nbsp;The file should not be manually copied because the WAS java is an IBM version (and jar) and the DevEnv java&nbsp;is a Sun version (and jar).</li>
+		</ul>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Build the essentials for launching a TI Dev Environment:</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Start Eclipse (TI\DevEnv\vNext\tools\eclipse\eclipse.exe)<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+	&nbsp;</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Setup a repository connection:-
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Goto Team Artifacts &gt; Create a Repository Connection</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Enter&nbsp;<a href="https://jazz031.hursley.ibm.com:9443/ccm/">https://jazz031.hursley.ibm.com:9443/ccm/</a>&nbsp;in URI and your username and password</li>
+	</ul>
+	</li>
+	<li class="gap" style="margin: 0px !important;">
+	<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">Set up Tomcat</p>
+
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li class="gap" style="margin: 0px !important;">
+		<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">Go to your devenv folder and open&nbsp;tools/tomcat/RELEASE-NOTES in a text editor. &nbsp;If the version is 7.x, in eclipse&nbsp;goto Window &gt; Preferences &gt; Tomcat and set the version to&nbsp;7.x</p>
+		</li>
+		<li class="gap" style="margin: 0px !important;">
+		<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">Set Tomcat&nbsp;home as your tomcat folder in devenv e.g.&nbsp;C:\DevEnv\<span style="color: rgb(255, 0, 0);">6.1 | 6.2 | vNext</span>\tools\tomcat</p>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Import the JDE projects (File - Import - General - Existing Projects into Workspace &gt; Next )
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Browse...</strong> Select TI as the Root directory, e.g. C:\RTC-Dev\TI-6.2.0.2\TI</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Check the "Search for nested projects" option</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Deselect All</strong>, and check the desired projects.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Recommended set (for more info please see <a lconnwikimacro="wikilink" href="../Architecture%20and%20Features/Features/eclipse%20projects.html" lconnwikiparamwikipage="eclipse projects">eclipse projects</a>):
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">AppInf</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">client-inf</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">client-persistence</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">commons-testing</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CoreInf</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">duim-generator</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">general-plug-ins</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Generator</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">JDECommons</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">plug-in-core</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">plug-in-framework</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">renderer-model</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">renderer-plug-ins</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">resource-manager</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">ServerCore</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TabTestClient</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TabTestServer</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">test-framework</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tooling</li>
+		</ul>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Click <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Finish</strong></li>
+	</ul>
+	</li>
+</ol>
+
+<p dir="ltr">&nbsp;</p>
+
+<h4 dir="ltr" id="ii16"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Troubleshooting Import Project</strong></h4>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">If you can't some of the projects above run the following commands from TI folder</strong>
+
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">./appbuild -f commons\build.xml eclipse</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">./appbuild -f client\components\build.xml</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">If you get a lots of java problems(e.g. unbound classpath variables\.jar missing) go to file&gt;import&gt;preference in eclipse and import "curam.epf from&nbsp;C:\DevEnv\6.0.*\eclipseenv</li>
+</ol>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii15">Configure Sandbox &amp; Tomcat</h3>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Open Window -&gt; Preferences, and navigate to Team -&gt; Jazz Source Control -&gt; Sandboxes</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Add the location from Step 5 (e.g. C:\RTC-Dev\TI-6.2.0.2) as a Sandbox (this is going to be the folder with the .jazz5 and .metadata folders), and click OK to close the Preferences dialog.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Select all of the projects in Project Explorer, right-click, and select Team &gt; Share Project
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Select Jazz Source Control as the repository type, and click Next</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Click Finish</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">This will create the relevant mappings between projects in the Eclipse workspace and the RTC Sandbox.</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">If you can</strong> right-click the "TabTestClient" project and see the option Tomcat project</p>
+
+	<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">select&nbsp;<em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tomcat project-&gt;Update context definition</em>&nbsp;from the menu. Hit&nbsp;<em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">OK</em>&nbsp;in the confirmation dialog. That will configure&nbsp;<em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tomcat</em>&nbsp;for you.</p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">You might get an error here saying that Eclipse cannot update the context definition. Check that there the following folder exists on the filesystem (add if manually if not, just manually create empty folders) <em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">DEVENV_HOME\tools\tomcat\conf\Catalina\localhost</em></p>
+		</li>
+	</ol>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">If the Tomcat Project option <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">is not</strong> available in the context menu, right-click on the project and go to Properties. Navigate to Tomcat and update the properties to match the screenshot:</p>
+
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><img lconnwikiparamattachmentname="TomcatProperties.png" lconnwikimacro="image" src="Developing._ATTACHMENTS_/TomcatProperties.png" alt="" lconnwikiparamwikipage="Developing"></img></p>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Setup runtime configurations for&nbsp;StartServer&nbsp;&amp; RMILoginClient - both found in the&nbsp;<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TabTestServer </strong>project: <em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">src/components/core/source/(default package)</em>.</p>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Select&nbsp;<em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tomcat-&gt;Start Tomcat</em>&nbsp;from the main menu. Your&nbsp;<em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Console</em>&nbsp;view should show tomcat starting up.</p>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Point your browser to&nbsp;<span style="font-size:12px;"><tt sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="http://localhost:9080/TabTest/AppController.do">http://localhost:9080/TabTest/AppController.do</a></tt>.</span> Application should start up.</p>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Final checks:
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">In Jave EE perspective:
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Check that all projects have a repository icon (gold cylinder)</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">If missing, show view Other &gt; Jazz Source Control &gt; Pending Changes
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Any pending <em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">.project</em> changes can be safely Undone, as they only include a white-space change from the import.</li>
+			</ul>
+			</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">If missing, show view Other &gt; Work Items &gt; Work Items</li>
+		</ul>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">In Work Items perspective:
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Check that your repository workspace is now marked as loaded.</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ol>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii2">Development Process</h2>
+
+<p dir="ltr">The development process:</p>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">From RTC, take charge of an Activity or a defect. Use the "Start Progress" button to provide visibility of your work.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Target a stream version to work on.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Create a repository workspace in the target stream (you can use the Integration or Master variant, but Integration is preferred; specifically, <span style="color:#EE82EE;">as per Andrey: "Create your workspaces from the Integration streams our automation then promotes any changes from Integration to a corresponding Master stream - the idea that all content delivered to the Master stream is fully tests (Smoketest + CIBuild)")</span></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Configure the development environment, as described above.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Make your changes and add them to a change-set, as described in the <a wiki="W412ac2882a19_4d59_b700_74e4a5b51784" page="Basic Development Scenario" id="wikiLink1466633473119" href="https://w3-connections.ibm.com/wikis/home?lang=en-gb#!/wiki/W412ac2882a19_4d59_b700_74e4a5b51784/page/Basic%20Development%20Scenario">SPM&nbsp;DevOps&nbsp;wiki</a>.</li>
+</ol>
+
+<h2 dir="ltr" id="ii10">Stack Zip</h2>
+
+<p dir="ltr">When changes are made in TI under the JDE that involve the addition/removal of libs or updating the classpath in TI, these changes need to be brought into the other streams of SPM.</p>
+
+<p dir="ltr">Process:</p>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Make your changes in TI, Test and Deliver as normal</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	</ol>
+	Create a JDE StackZip in Jenkins
+
+	<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="http://dubxpcvm213.mul.ie.ibm.com:8080/view/Public/job/Public-CreateStackZIP/">http://dubxpcvm213.mul.ie.ibm.com:8080/view/Public/job/Public-CreateStackZIP/</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">After v7 you only have to release the Curame<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">JDE </strong>- an example of the parameters needed are:
+		<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="http://dubxpcvm213.mul.ie.ibm.com:8080/view/Public/job/Public-CreateStackZIP/767/parameters/">http://dubxpcvm213.mul.ie.ibm.com:8080/view/Public/job/Public-CreateStackZIP/767/parameters/</a></li>
+		</ol>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Before v7 you have to release Curam<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CDEJ </strong>and Curam<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">SDEJ -</strong> an example of the parameters needed are
+		<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CuramCDEJ - <a href="http://dubxpcvm213.mul.ie.ibm.com:8080/view/Public/job/Public-CreateStackZIP/776/parameters/">http://dubxpcvm213.mul.ie.ibm.com:8080/view/Public/job/Public-CreateStackZIP/776/parameters/</a></li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CuramSDEJ - <a href="http://dubxpcvm213.mul.ie.ibm.com:8080/view/Public/job/Public-CreateStackZIP/777/parameters/">http://dubxpcvm213.mul.ie.ibm.com:8080/view/Public/job/Public-CreateStackZIP/777/parameters/</a></li>
+		</ol>
+		</li>
+	</ol>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">You should get a notification on one of the slack channels from Jenkins on successful creation of your stack zip
+	<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">e.g. for 7013 the channel is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">coc-spm-rel-7_0_1_x</strong></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Update the release wiki with this information
+		<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">e.g. for 7013 - <a wiki="63542839-4a7e-4923-a352-cdc88212238e" page="7.0.1.3" id="wikiLink1541173814817" href="https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/63542839-4a7e-4923-a352-cdc88212238e/page/7.0.1.3">https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/63542839-4a7e-4923-a352-cdc88212238e/page/7.0.1.3</a></li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Once testing is successfully completed set the background color of the cell in the table of the release wiki to "Lime"</li>
+		</ol>
+		</li>
+	</ol>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<p dir="ltr">Next, build your CEFWidgets zip with either of the following scripts based on your OS</p>
+
+	<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TI/BuilderScripts/CIBuild.sh (mac)</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TI/BuilderScripts/CIBuild.bat (windows)</li>
+	</ol>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The result of this zip is stored under TI directory and called
+	<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CEFWidgets_Latest.zip</strong></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Take the above zip and store it in your Scratch folder on TINY</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Go to CEFWidgets to test your changes before releasing the CEFWidgets stack! CEFWidgets wiki - <a wiki="W47749e13a6b3_43a7_9ecc_30ea756f969b" page="How to build CEFWidgets" id="wikiLink1541174529991" href="https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/W47749e13a6b3_43a7_9ecc_30ea756f969b/page/How%20to%20build%20CEFWidgets">https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/W47749e13a6b3_43a7_9ecc_30ea756f969b/page/How%20to%20build%20CEFWidgets</a></li>
+	</ol>
+	</li>
+</ol>
+
+<h2 dir="ltr" id="ii3">Tooling not delivered in DevEnv</h2>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">There are some tools which you may require to complete you task, that we do not deliver in the development environment. Check the table below for tool versions, and why you might need them.</p>
+
+<table align="center" border="1" cellpadding="0" cellspacing="0" dir="ltr" height="182" width="740">
+	<thead sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<th scope="col" style="height: 30px;">Software</th>
+			<th scope="col" style="height: 30px;">Purpose</th>
+		</tr>
+	</thead>
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="text-align: center; height: 30px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" page="RSA Installation" id="wikiLink1466634341899" href="../Archive/Getting%20Started/Development%20Setup/Getting%20started%20with%20TI-CDEJ%20Development/RSA%20Installation.html" target="_blank">Rational&nbsp;Software&nbsp;Architect&nbsp;(RSA)</a><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			version depends on stream</p>
+			</td>
+			<td style="text-align: center; height: 30px;">Development / Modelling</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="text-align: center; height: 30px;">Internet Explorer 11</td>
+			<td style="text-align: center; height: 30px;">Testing / Accessibility / Investigation</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="text-align: center; height: 30px;">Chrome (Latest)</td>
+			<td style="text-align: center; height: 30px;">Testing / Investigation</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="text-align: center; height: 30px;">Firefox (Latest)</td>
+			<td style="text-align: center; height: 30px;">Testing / Accessibility / Investigation</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="text-align: center; height: 30px;">Firebug</td>
+			<td style="text-align: center; height: 30px;">Testing / Accessibility / Investigation</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="text-align: center; height: 30px;"><a wiki="W88ee03f8907c_412b_a3a8_988dabb72b35" page="Dynamic Assessment Plugin" id="wikiLink1466634341900" href="https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/W88ee03f8907c_412b_a3a8_988dabb72b35/page/Dynamic%20Assessment%20Plugin" target="_blank">Dynamic&nbsp;Assessment&nbsp;Plugin&nbsp;(DAP)</a></td>
+			<td style="text-align: center; height: 30px;">Accessibility</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="text-align: center; height: 30px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="http://swgtc.austin.ibm.com/jaws/" target="_blank">JAWS&nbsp;Screen&nbsp;Reader</a><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			version depends on stream</p>
+			</td>
+			<td style="text-align: center; height: 30px;">Accessibility</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="text-align: center; height: 30px;"><a href="https://www.paciellogroup.com/resources/contrastanalyser/" target="_blank">Colour&nbsp;Contrast&nbsp;Analyser</a></td>
+			<td style="text-align: center; height: 30px;">Accessibility</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii4">Random Useful Info for New Starters to CDEJ</h2>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Take down an extra stream and do not build it. Use this for quicker&nbsp;searches and to find the root files you're interested in.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">gen-jsp.xsd is important! UIM -&gt; XIM ---- gen-jsp----&gt; JSPX</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Sometimes searching dojo source alone is helpful. This is at DEVENV_HOME\tools\dojo-source</li>
+</ul>
+
+<h2 dir="ltr" id="ii1">Remote Debugging Information</h2>
+
+<p dir="ltr">If you have the requirement of performing a remote debugging session, the following articles may be useful.</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">WebSphere
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://www.mkyong.com/websphere/remote-debugging-with-eclipse-websphere-7/">https://www.mkyong.com/websphere/remote-debugging-with-eclipse-websphere-7/</a></li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii23">Archives - Info No Longer Needed</h2>
+
+<h3 dir="ltr" id="ii24">Connect to Tiny</h3>
+
+<p dir="ltr">Tiny (tiny.mul.ie.ibm.com) is a file server on which artifacts are available via Windows shares.</p>
+
+<p dir="ltr">Grant privileges to your Mac account to mount Tiny automatically by running the following:</p>
+
+<p dir="ltr" style="margin-left: 40px;"><span style="font-family:courier new,courier,monospace;">sudo chmod +a "$USER:allow:add_subdirectory" /Volumes</span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><span style="font-family:arial,helvetica,sans-serif;">Verify this was updated correctly by</span><span style="font-family:arial,helvetica,sans-serif;"> running </span></p>
+
+<p dir="ltr" style="margin-left: 40px;"><span style="font-family:courier new,courier,monospace;">ls -lOe /</span>&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr">You should see this&nbsp;screen</p>
+
+<p dir="ltr" style="margin-left: 40px;"><img id="1476715426883_0" src="Developing._ATTACHMENTS_/editor_image_1cce3db2-dd69-46dd-8d9c-ea417400b208.png"></img></p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr"><span style="font-family:arial,helvetica,sans-serif;">Add your credentials to the keystore: <span style="color:#FF0000;">NOTE</span> make sure you escape any special characters!</span></p>
+
+<p dir="ltr" style="margin-left: 40px;"><span style="font-family:courier new,courier,monospace;">security add-internet-password -a $CURAM_ACCOUNT -s tiny -r "smb " -w &lt;your Curam password&gt;</span></p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">I use the following to encode my pwd if needed when adding it via the cmd line</p>
+
+<p dir="ltr" style="margin-left: 40px;"><a href="https://meyerweb.com/eric/tools/dencoder/">https://meyerweb.com/eric/tools/dencoder/</a></p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><span style="font-family:courier new,courier,monospace;">If you need to delete your password run</span></p>
+
+<p dir="ltr" style="margin-left: 40px;">security delete-internet-password -a $CURAM_ACCOUNT -s tiny -r "smb "</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">In Network settings, make sure to add <em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mul.ie.ibm.com</em> to the search domains</p>
+
+<p dir="ltr" style="margin-left: 40px;"><img height="124" id="1476715567473_0" src="Developing._ATTACHMENTS_/editor_image_d6423e72-30f3-4b94-8456-6b229a3154d0.png" width="348"></img></p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,150 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Modal Dialog Infrastructure</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Modal Dialog Infrastructure";
+    pageId="urn:lsid:ibm.com:td:2ee4183b-353e-40c7-b63e-019123bbd8c8";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Modal Dialog Infrastructure</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Overview</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii5">How it Works</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii8">Screen Generator</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii7">ScreeenContext</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">curam/ModalDialog</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii3">curam/dialog</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii4">curam/util</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii6">curam/util/UimDialog and curam/util/Dialog APIs</a></div>
+
+<h2 dir="ltr" id="ii1">Overview</h2>
+
+<ul dir="ltr">
+	<li>In general see Cúram Web Client Reference Manual, the UIM Reference -&gt; UIM Reference for Pages and Views -&gt; LINKS -&gt; Modal Dialogs section</li>
+	<li>one of the very basic features of the Cúram Tabbed UI</li>
+	<li>supersedes and inherits from pre-V6 popup dialog that used separate browser window</li>
+	<li>it displays UIM (and non-UIM) pages</li>
+	<li>I took it over early in Cúram Tabbed UI development and completely rewritten to become modal and integrate with the new UI</li>
+	<li>it did took some time to stabilize, but now it is solid</li>
+</ul>
+
+<h2 dir="ltr" id="ii5">How it Works</h2>
+
+<ul dir="ltr">
+	<li>A modal dialog displays a UIM page in a dialog window, displayed above the main content.</li>
+	<li>The UIM is loaded in a separate iframe within the ModalDialog widget with MODAL screen context</li>
+	<li>it loads the curam/dialog module and calls the initModal() function</li>
+	<li>when a link / button is clicked within that page a special click handler executes and decides what needs to happen, based on configuration</li>
+	<li>for example clicking "Cancel" button (which is a regular link to parent page) will just cause the modal to close, without refreshing the parent</li>
+	<li>on submit the action class for that UIM detects modal submit (again based on screen context) and redirects to the next page as per UIM LINK value</li>
+	<li>when the next page loads, it detects it is still in the same modal and causes it to close</li>
+	<li>then it reloads itself again in the parent context where the modal was opened from</li>
+</ul>
+
+<h2 dir="ltr" id="ii8">Screen Generator</h2>
+
+<ul dir="ltr">
+	<li>contains part of the modal-specific knowledge, mainly:</li>
+	<li>if a LINK in UIM is set as OPEN_MODAL="true" gen-jsp.xsl will output specific code to open the page in modal</li>
+</ul>
+
+<h2 dir="ltr" id="ii7">ScreeenContext</h2>
+
+<ul dir="ltr">
+	<li>used to convey context information/metadata for use by the infrastructure</li>
+	<li>this metadata take form of simple flags, for example one to indicate MODAL context</li>
+	<li>passed around as URL parameter (o3ctx)</li>
+	<li>it is a value containing flags encoded into a bitfield, represented as integer
+	<ul>
+		<li>o3ctx=4096 for TAB</li>
+		<li>o3ctx=4 for RESOLVE</li>
+		<li>o3ctx=256 for MODAL</li>
+		<li>etc. - there are many of them, see the ScreenContext.js or ScreenContext.java class</li>
+		<li>for example RESOLVE|TAB would then be 4100</li>
+	</ul>
+	</li>
+</ul>
+
+<h2 dir="ltr" id="ii2">curam/ModalDialog</h2>
+
+<ul dir="ltr">
+	<li>JS class deriving from dijit/Dialog widget</li>
+	<li>it provides the windows and the "underlay" which greys out the parent window</li>
+	<li>it lives in the top level runtime context</li>
+	<li>contains lot of logic to interact with the page loaded in the modal iframe</li>
+	<li>also handles load mask</li>
+</ul>
+
+<h2 dir="ltr" id="ii3">curam/dialog</h2>
+
+<ul dir="ltr">
+	<li>initModal() - handles logic for closing modal after submit plus all initialization</li>
+	<li>dialog hierarchy concept</li>
+	<li>same URL concept</li>
+	<li>modalEventHandler() - handles clicks to determine what needs to happen
+	<ul>
+		<li>example of unit testable function</li>
+	</ul>
+	</li>
+	<li>formSubmitHandler()</li>
+</ul>
+
+<h2 dir="ltr" id="ii4">curam/util</h2>
+
+<ul dir="ltr">
+	<li>
+	<p dir="ltr" id="ii4">redirectWindow() - encapsulates the refresh logic</p>
+
+	<ul>
+		<li>lots of possibilities
+		<ul>
+			<li>handling content panel/inline pages/nested UIMs/framesets, etc.</li>
+		</ul>
+		</li>
+		<li>another example of a unit testable function</li>
+	</ul>
+	</li>
+	<li>openModalDialog() - general function for opening dialogs from CDEJ code</li>
+	<li>showModalDialog() - internal function for use within modal infrastructure, used by the above</li>
+</ul>
+
+<h2 dir="ltr" id="ii6">curam/util/UimDialog and curam/util/Dialog APIs</h2>
+
+<ul dir="ltr">
+	<li>public JS APIs into modal dialog infrastructure</li>
+	<li>two flavours, one for UIMs other for non-UIM pages</li>
+	<li>essentially builds on top of the internal dialog API in curam/util</li>
+	<li>documentation in JSDoc</li>
+</ul>
+
+<h2 dir="ltr">Future</h2>
+
+<ul dir="ltr">
+	<li>Note we are considering changing the modal infrastructure so that the same page doesn't have to be loaded twice when a page is submitted in modal.</li>
+	<li>This will involve significant changes both in JavaScript and webtier (Java) so would be good for someone to understand the infrastructure well before doing this.</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

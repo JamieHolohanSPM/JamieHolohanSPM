@@ -1,0 +1,345 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Expandable list print mode</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Expandable list print mode";
+    pageId="urn:lsid:ibm.com:td:16e1aaf4-642a-4c39-a94b-f0752cc96e66";
+    toRoot="../../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Expandable list print mode</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Design Page for Expandable list print mode</strong></p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Stakeholders</strong></p>
+
+<table border="1" dir="ltr">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Role</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Sign Off if Applicable</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Customer</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Singapore</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Business Owner/Product Owner</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Architect</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Fergal Gavin</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Developer(s)</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Bruna Dantas</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">FVT</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Feargal Conneely</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">SVT</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Information Developer</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">UX Design</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Legal</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Background</strong></p>
+
+<p dir="ltr">In an expandable list, the Users&nbsp;see more information than is displayed in a simple list, without having to navigate away from the page that contains the list.</p>
+
+<p dir="ltr">Each item from the expandable list allows the User to expand&nbsp;rows by clicking a toggle control.</p>
+
+<p dir="ltr">When the User expands the item, a page that is relevant to the row is displayed.&nbsp;</p>
+
+<p dir="ltr">For each list that is expanded, a new iframe is created to display the content of the inline-page.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Problem</strong></p>
+
+<p dir="ltr">When the expandable list is collapsed and the new iframe is created to display the in-line page, the user can not the full page, some of the fields get truncated</p>
+
+<p dir="ltr">The print functionality&nbsp;displayed the in-line page details from the expandable list gets truncated.</p>
+
+<p dir="ltr"><img lconnwikiparamattachmentname="fromScreen.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Expandable%20list%20print%20mode._ATTACHMENTS_/fromScreen.png" alt="Edit Evidence page with expandable list opened" style="width: 500px; height: 241px; margin-left: 20px; margin-right: 20px;" lconnwikiparamwikipage="Expandable list print mode" lconnattachedresourcetype="page"></img> <img lconnwikiparamattachmentname="fromPrint.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Expandable%20list%20print%20mode._ATTACHMENTS_/fromPrint.png" alt="" style="width: 400px; height: 555px; margin-left: 150px; margin-right: 150px;" lconnwikiparamwikipage="Expandable list print mode" lconnattachedresourcetype="page"></img></p>
+
+<p dir="ltr"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Screen: Edit Evidence page with expandable list opened&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Print Preview: Edit Evidence with expandable list opened missing the Comments</strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
+
+<p dir="ltr"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Support ticket:&nbsp;<a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewQueries&amp;tab=owned">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewQueries&amp;tab=owned</a></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Design</strong></p>
+
+<p dir="ltr">Here are the details of the solution:</p>
+
+<p dir="ltr">1-The application verifies if the page has any expandable list open without context panel.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+2-If so, The application recursively scans every iframe inside the expanded list.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+3-For every iframe found, the application copies the contents of the iframe to a temporary wrapper (div) in the parent iframe.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+4-Hides all the iframes inside the expanded lists.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+5-At this point we have only 1 main iframe with all the contents of the expanded list.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+6-Print the page<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+7-After the print, remove all the temporary wrappers created and show the expanded list iframes again (back to the original state).</p>
+
+<p dir="ltr">To remove impacts, this solution is only executed on pages with expandable lists with at least 1 list expanded without context panel.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Notes:&nbsp;</strong></p>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Design assigned only for the expandable list without context panel inside.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The context panel contains the CSS layout across different streams. The timeline to fix the support ticket didn't allow us to work on it in this version. However, it can be introduced in the next version</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The design solution built can be expanded for more scenarios in </strong><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">the application that involves multipl</strong><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">e iframes.&nbsp;</strong></li>
+</ol>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Implementation Notes:</strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CDEJ:</strong></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Util.js</b>
+
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">_printMainAreaWindow(window) :&nbsp;&nbsp;</p>
+
+		<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Check if the window contains an expandable list expanded</p>
+
+			<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Yes, execute the method&nbsp;_prepareContentPrint to copy the iframe content inside the wrappers(div), print the content and revert the page to the preview state</p>
+				</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">No, set the focus and print the content</p>
+				</li>
+			</ol>
+			</li>
+		</ol>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">_prepareContentPrint(window)</p>
+
+		<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Recursively, prepare content to copy the body of iframe inside a wrapper and disable the iframe when the user is printing the page.</p>
+			</li>
+		</ol>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">_deletePrintVersion</p>
+
+		<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Remove all the temporary wrappers created and show the expanded list iframes again (back to the original state).<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			&nbsp;</p>
+			</li>
+		</ol>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">curam_lists.css, v6_common.css</b>
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Styling the wrapper in the print style<b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">.</b></li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii12">Use cases</h2>
+
+<table border="1" dir="ltr">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Character/Actor</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 565px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 668px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Expected Behavior</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tested</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 565px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1.&nbsp;Register Person</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2.&nbsp;Open Evidence tab</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3. Create a Address evidence and expand the&nbsp;Address&nbsp;to view Details tab in&nbsp;the in-line&nbsp;page</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">4.&nbsp;Click on the evidence list page print icon</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">5. When the second&nbsp;print prompt appears the&nbsp;printing In-line page displayed details getting truncated</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 668px;">Print the in-line page details without truncated the list expanded</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Manual</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 565px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1.&nbsp;Register Person</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2. Create a Social Assistance case</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3. Open Evidence tab</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">4. Create a Address evidence and expand the&nbsp;Address&nbsp;to view Details tab in&nbsp;the in-line&nbsp;page</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">5.&nbsp;Click on the evidence list page print icon</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">6. When the second&nbsp;print prompt appears the&nbsp;printing In-line page displayed details getting truncated</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 668px;">Print the in-line page details without truncated the list expanded</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Manual</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 565px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1.&nbsp;Register Person</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2. Create a Social Assistance case</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3. Open Evidence tab</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">4. Create a Address evidence and expand the&nbsp;Address&nbsp;to view Corrections tab in&nbsp;the in-line&nbsp;page</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">5.&nbsp;Click on the evidence list page print icon</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">6. When the second&nbsp;print prompt appears the&nbsp;printing In-line page displayed details getting truncated</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 668px;">Print the in-line page details without truncated the list expanded</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Manual</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 565px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1.&nbsp;Register Person</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2. Create a Social Assistance case</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3. Open Contact tab</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">4. Create a new Note and insert comments.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">5. Expand the&nbsp;Notes to view details tab in&nbsp;the in-line&nbsp;page</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">6.&nbsp;Click on the print icon</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">7. When the second&nbsp;print prompt appears the&nbsp;printing In-line page displayed details getting truncated</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 668px;">Print the in-line page details without truncated the list expanded</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Manual</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 565px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1. Login as planner</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2. Outcome plans -&gt; New Outcome Plan</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3. Select a person and insert the required fields to create a new outcome plan</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">4. Click on Assessments &amp; Factors tab</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">6. Click on New button to create a new Assessment</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">7. Click on the link to view the Assessment created.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">8. From the Assessment view, click on the History tab</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">9. Open the expanded list and click on the Answers tab</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">10. Click on the print icon</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">11.&nbsp;When the second&nbsp;print prompt appears the&nbsp;printing In-line page displayed details getting truncated</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 668px;">Print the in-line page details without truncated the list expanded</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Manual</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr">Improves for 7.0.6.0:</h3>
+
+<p dir="ltr">- Create the javascript unit test to cover the new methods.</p>
+
+<p dir="ltr">- Include the scenarios where there is a context panel inside expandable lists.</p>
+
+<p dir="ltr">- Extends the solution for all the widgets that creates multiples iframes</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr">&nbsp;</h3></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,275 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Sequential Tab Order</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Sequential Tab Order";
+    pageId="urn:lsid:ibm.com:td:bcc0cf02-03fb-44cf-b6ce-4ab4264c69a7";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Sequential Tab Order</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h1 dir="ltr"><span style="font-size:20px;"><strong>Design Page for Sequential Tab Order</strong></span></h1>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Background</span></strong></h2>
+
+<p dir="ltr">MSD requested this enhancement to improve the usability for Contact Centre users, who often work with multiple clients at a time. The current Tabbed UI behaviour always adds new tabs to the end of the tab list, which can be problematic when dealing with multiple cases/persona, as the tabs may become scattered. MSD have requested that new tabs should open next to the source tab.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Requirements</span></strong></h2>
+
+<p dir="ltr">OpenTab events in Tabbed UI need to be able to insert tabs next to the source tab, rather than defaulting to the end of the list.</p>
+
+<ul dir="ltr">
+	<li>TEC-18219 - Open subsequent tabs next to the source tab instead of opening at end of all tabs</li>
+	<li>SPMP-15508 - New application property needed for TEC-18219 in the Core application component.</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Non Functional Requirements</span></strong></h2>
+
+<p dir="ltr">This is <strong>mandatory</strong>. We can fill in N/A if the specified non functional requirement is not applicable to the feature being delivered, otherwise some notes must be entered here covering the particular area.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" width="671">
+	<tbody>
+		<tr>
+			<td style="width: 118px;"><strong>NFR</strong></td>
+			<td style="width: 537px;"><strong>Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Accessibility</td>
+			<td style="width: 537px;">N/A - this enhancement only applies to the logic of where a new tab should be inserted.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Availability &amp; Resilience</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Development Resource</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Evolution</td>
+			<td style="width: 537px;">This enhancement is configured using a single application property which can be managed in the Property Administration tab by the SysAdmin user. The property allows customers to enable or disable the new tab order on a per-application basis. By default, the tabs open at the end of the tab list as previously.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Internationalisation</td>
+			<td style="width: 537px;">The property controlling the tab order needs to be localized.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Location</td>
+			<td style="width: 537px;">N/A - this enhancement only applies to the logic of where a new tab should be inserted.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Performance and Scalability</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Regulation</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Security</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Usability</td>
+			<td style="width: 537px;">New tabs will open adjacent to the source tab, rather than at the end of the tab list, so the users' workspace will remain in a logical order.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Design</span></strong></h2>
+
+<p dir="ltr" style="margin-left: 40px;">This is <strong>mandatory</strong>. This should outline in detail the design chosen with all of the various areas for the component covered. This will differ from component to component so the sub headings here will reflect that.</p>
+
+<h3 dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">CDEJ</span></strong></h3>
+
+<h4 dir="ltr" style="margin-left: 80px;">ApplicationTabbedUiController.js</h4>
+
+<p dir="ltr" style="margin-left: 120px;">A new (boolean) argument is to be added to the insertTabIntoApp() function to control whether a new tab should open next to the current tab, or at the end of the tab list.</p>
+
+<h4 dir="ltr" style="margin-left: 80px;">TabSessionManager.js</h4>
+
+<p dir="ltr" style="margin-left: 120px;">When restoring a tab session, the tab order configuration should also be restored. Otherwise, we would need to query the Application Properties every time that a tab session is restored.</p>
+
+<h4 dir="ltr" style="margin-left: 80px;">UIController.js</h4>
+
+<p dir="ltr" style="margin-left: 120px;">Pass an additional argument to ApplicationTabbedUiController.insertTabIntoApp() to control where the tab should be inserted.</p>
+
+<h4 dir="ltr" style="margin-left: 80px;">OpenTabList.java</h4>
+
+<p dir="ltr" style="margin-left: 120px;">Checks if the configuration property is set to enable sequential tab ordering. If not, falls back on the previous behaviour of adding tabs at the end of the tab list. This value is stored in the JSON object that will be consumed by the TabSessionManager</p>
+
+<h4 dir="ltr" style="margin-left: 80px;">EnvironmentConstants.xml</h4>
+
+<p dir="ltr" style="margin-left: 120px;">Declare the new property to be used by OpenTabList for controlling the tab order.</p>
+
+<h3 dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">CEF</span></strong></h3>
+
+<h4 dir="ltr" style="margin-left: 80px;">Environment.xml - Core</h4>
+
+<p dir="ltr" style="margin-left: 120px;">The new property from CDEJ/EnvironmentConstants.xml needs to be available in Property Administration OOTB, without requiring the administrator to add &amp; publish it. This file will be used to generate the Application.prx file.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Use Cases</span></strong></h2>
+
+<p dir="ltr">This is <strong>mandatory</strong>. The various use cases for the feature must be outlined here. They can be in whatever format deemed appropriate (i.e. verbose description or in a tabular format with actors and actions etc.). Below is an example of how use cases may be documented in a tabular format.</p>
+
+<table border="1" dir="ltr" style="width: 638px;">
+	<tbody>
+		<tr>
+			<td><strong>Role/Actor</strong></td>
+			<td><strong>Description</strong></td>
+			<td><strong>Expected Behavior</strong></td>
+			<td style="width: 256px;"><strong>Tested</strong></td>
+		</tr>
+		<tr>
+			<td>Internal User (e.g. caseworker)</td>
+			<td>Opens a new tab</td>
+			<td>The new tab will be opened adjacent to the currently selected tab.</td>
+			<td style="width: 256px;">Manually tested.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Application Impact</span></strong></h2>
+
+<p dir="ltr">No impact.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">CTM</span></strong></h2>
+
+<p dir="ltr">This is <strong>optional</strong>. Consideration should be given to whether this feature adds or changes administration data. If new administration data is being added, are new CTM business objects required to transport this data. If existing administration data is being modified, will this require changes to existing CTM BOM instances?</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Testing</span></strong></h2>
+
+<p dir="ltr">Manual testing required.</p>
+
+<p dir="ltr"><strong>OOTB ordering:</strong></p>
+
+<ol dir="ltr">
+	<li>Login as sysadmin.</li>
+	<li>Open the Property Administration tab. (Tab A)</li>
+	<li>Search for the property "curam.environment.enable.sequential.tabs"</li>
+	<li>Verify that default value is FALSE.</li>
+	<li>Open any two other tabs (Tabs B &amp; C)</li>
+</ol>
+
+<p dir="ltr">Expected outcome: Tabs are in in the following order: A - B - C</p>
+
+<p dir="ltr"><strong>Sequential ordering:</strong></p>
+
+<ol dir="ltr">
+	<li>Login as sysadmin</li>
+	<li>Open the Property Administration tab. (Tab A)</li>
+	<li>Find and change the "curam.environment.enable.sequential.tabs" property to TRUE.</li>
+	<li>Publish the property changes.</li>
+	<li>Close all tabs</li>
+	<li>Open any 2 tabs (Tabs A &amp; B)</li>
+	<li>Change to Tab A.</li>
+	<li>Open any new tab. (Tab C)</li>
+</ol>
+
+<p dir="ltr">Expected outcome: Tabs are in the following order: A - C - B</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Documentation/How To Use Feature</span></strong></h2>
+
+<p dir="ltr">This enhancement updates the logic used when a new tab is being opened in the application. It utilizes a feature of Dojo TabContainer, which allows us to add a new tab at a particular position in the tab list.</p>
+
+<p dir="ltr">In order to enable the new sequential ordering of tabs, the following property must be present in Property Administration and be set to TRUE: "curam.environment.enable.sequential.tabs".</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Check List</span></strong></h2>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Basically this is a quick check list of items that should be considered when doing a design for that particular component.</p>
+
+<table border="1" dir="ltr" style="width: 658px;">
+	<tbody>
+		<tr>
+			<td style="width: 166px;"><strong>Check List Item</strong></td>
+			<td style="width: 314px;"><strong>Notes</strong></td>
+			<td style="width: 157px;"><strong>Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Minimize impact on users</td>
+			<td style="width: 314px;">OOTB tab behaviour should remain as before to avoid confusion of users in case of an upgrade to a version where this enhancement is implemented.</td>
+			<td style="width: 157px; text-align: center;">Yes</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Work Estimation</span></strong></h2>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Again, the actual items listed in the estimate breakdown may vary from task to task and component to component.</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Work Estimates</p>
+
+	<ul>
+		<li>
+		<p>Design: ? Days</p>
+		</li>
+		<li>
+		<p>Prototype: ? Days</p>
+		</li>
+		<li>
+		<p>Implementation: ? Days</p>
+		</li>
+		<li>
+		<p>Testing: ? Days</p>
+		</li>
+		<li>
+		<p>Documentation: ? Days</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Total: ? Days</p>
+	</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

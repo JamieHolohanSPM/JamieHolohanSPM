@@ -1,0 +1,291 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Marking Breadcrumbs in a wizard as Mandatory</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Marking Breadcrumbs in a wizard as Mandatory";
+    pageId="urn:lsid:ibm.com:td:beaa9389-978f-4df8-8c80-9ed2a95ebd49";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Marking Breadcrumbs in a wizard as Mandatory</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr"><span style="font-size:20px;"><strong>Marking Breadcrumbs in a wizard as Mandatory</strong></span></p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Background</span></strong></p>
+
+<p dir="ltr">This is part of the Guided Evidence Management project: <a wiki="W96b34757c20f_4dc8_8415_b4904617cb62" href="https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/W96b34757c20f_4dc8_8415_b4904617cb62/page/Guided%20Evidence%20Management" id="wikiLink1444123190240" page="Guided Evidence Management">https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/W96b34757c20f_4dc8_8415_b4904617cb62/page/Guided%20Evidence%20Management</a></p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Requirements</span></strong></p>
+
+<p dir="ltr">The requirement here is for a developer to be able to specify a page or pages in a wizard which should which are considered to be mandatory. The wizard will display an asterisk next to the page name in the wizard progress bar. When an asterisk appears in the progress bar a piece of text should be displayed in the modal title bar explaining which the asterisk indicates.</p>
+
+<ul dir="ltr">
+	<li>TEC-18869 - Guided Evidence Management: Marking Breadcrumbs in a wizard as Manditory (3)</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Non Functional Requirements</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. We can fill in N/A if the specified non functional requirement is not applicable to the feature being delivered, otherwise some notes must be entered here covering the particular area.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" width="671">
+	<tbody>
+		<tr>
+			<td style="width: 118px;"><strong>NFR</strong></td>
+			<td style="width: 537px;"><strong>Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Accessibility</td>
+			<td style="width: 537px;">The mandatory icon should be "seen" by visually impaired users via a screen reader application. They must be able to determine what is implied by the presence of the icon.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Availability &amp; Resilience</td>
+			<td style="width: 537px;">n/a</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Development Resource</td>
+			<td style="width: 537px;">No special requirements</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Evolution</td>
+			<td style="width: 537px;">I'm not sure that a feature of this size could possible evolve much. Potentially the feature could be reused to convey some other message so the actual text displayed should be configurable.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Internationalisation</td>
+			<td style="width: 537px;">Enhancement should work in RTL languages.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Location</td>
+			<td style="width: 537px;">n/a</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Performance and Scalability</td>
+			<td style="width: 537px;">Enhancement should not add any significant additional load time to the wizard.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Regulation</td>
+			<td style="width: 537px;">n/a</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Security</td>
+			<td style="width: 537px;">n/a</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Usability</td>
+			<td style="width: 537px;">UX have signed off on the "design". I can't say that I agree with their decision. This is the first time that we will have displayed text like this in a title bar. I</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Design Options</span></strong></p>
+
+<p dir="ltr">These design options refer to including the mandatory indicator in the wizard progress bar.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><span style="font-size:18px;"><strong>Option 1</strong></span> - Force developer to specify the mandatory pages in the wizard configuration file.</p>
+
+<p dir="ltr" style="margin-left: 40px;">Winner! Not very invasive. Allows access to the information at the time when it is most relevant.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><span style="font-size:18px;"><strong>Option 2</strong></span> - Use UIM syntax to enable a developer to specify a screen as mandatory.</p>
+
+<p dir="ltr" style="margin-left: 40px;">This may not be the best approach because the progress bar is rendered separately from the UIM screen. There is currently no UIM syntax to specify this so new syntax would need to be introduced.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">These design options refer to including the additional text in the modal title bar.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Option 1</span></strong> - Inject HTML into parent title bar when building wizard progress bar.</p>
+
+<p dir="ltr" style="margin-left: 40px;">Discounted: less performant than including the HTML by default in the widget HTML template.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Option 2</span></strong> - Include "required" text in all title bars and only reveal when appropriate.</p>
+
+<p dir="ltr" style="margin-left: 40px;">Winner!</p>
+
+<p dir="ltr" style="margin-left: 40px;"><span style="font-size:18px;"><strong>Option 3 </strong></span>- Inspect page being loaded when constructing title page, determine whether wizard screen, determine whether page is mandatory, include "required" text if needed.</p>
+
+<p dir="ltr" style="margin-left: 40px;">Discounted: Massive change wh</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Design</span></strong></p>
+
+<p dir="ltr">There really wasn't much design involved here. The decision was made to add the property to specify the mandatory pages to the properties file rather than the associated UIM page. This seems to be a more natural fit and is less invasive than adding introducing new UIM syntax to support it.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Data Model Changes and Required Indexes</span></strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">n/a</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Use Cases</span></strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. The various use cases for the feature must be outlined here. They can be in whatever format deemed appropriate (i.e. verbose description or in a tabular format with actors and actions etc.). Below is an example of how use cases may be documented in a tabular format.</p>
+
+<table border="1" dir="ltr" height="106" width="1175">
+	<tbody>
+		<tr>
+			<td><strong>Role/Actor</strong></td>
+			<td><strong>Description</strong></td>
+			<td><strong>Expected Behavior</strong></td>
+			<td style="width: 256px;"><strong>Tested</strong></td>
+		</tr>
+		<tr>
+			<td>Developer</td>
+			<td>Sets property <span style="font-family:courier new,courier,monospace;">Wizard.Mandatory.Pages </span>property on a Wizard definition.</td>
+			<td>When the wizard is launched the specified page title(s) are seen with an '*'. The modal title includes a piece of text indicating what the '*' means.</td>
+			<td style="width: 256px;">Tested manually.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Implementation Notes</span></strong></p>
+
+<p dir="ltr">The implementation can be divided into 2 parts:</p>
+
+<p dir="ltr">1. Adding the mandatory icon into the progress bar</p>
+
+<p dir="ltr">2. Adding the explanation of the mandatory icon into the modal title.</p>
+
+<p dir="ltr"><strong>1. Adding the mandatory icon into the progress bar</strong></p>
+
+<p dir="ltr">The progress bar is generated from a single renderer, WizardProgressBarRenderer. This renderer will be updated to inspect the new property, <span style="font-family:courier new,courier,monospace;">Wizard.Mandatory.Pages</span>. As the renderer loops over the the pages it should check to see if a page is included in the list of mandatory pages and if it is the mandatory icon will be included immediately after the page title. The image used is the standard "mandatory" image. Accessiblilty should be a consideration.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>2. Adding the explanation of the mandatory icon into the modal title.</strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">This is a little trickier than than the mandatory icon. The modal title bar is constructed outside of the iFrame that hosts the wizard. For this reason the dojo publish/subscribe model will be used to display the required text. The modal template will be update to include the text, hidden, by default. This hidden text is then only displayed when appropriate. The progress bar renderer will include a piece of Javascript which listens for the "/curam/dialog/displayed" event. When this event is found it publishes a new "show/required/text" event. The listener for this event is in ModalDialog.js which removes the "hidden" class from the HTML element containing the text.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Application Impact</span></strong></p>
+
+<p dir="ltr">No impact. Wizards that do not specify the <span style="font-family:courier new,courier,monospace;">Wizard.Mandatory.Pages </span>property should continue to work in exactly the same way as they did before.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">CTM</span></strong></p>
+
+<p dir="ltr">n/a</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Testing</span></strong></p>
+
+<ul dir="ltr">
+	<li>
+	<p>Unit tests</p>
+
+	<ul>
+		<li>It should be possible to write unit test(s) in javascript to test this feature</li>
+	</ul>
+	</li>
+	<li>
+	<p>Manual Test Plans</p>
+
+	<ul>
+		<li>
+		<p>Test scenario should be added to TabTest application</p>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Documentation/How To Use Feature</span></strong></p>
+
+<p dir="ltr"><br />
+The feature will be used by developer when defining the Wizard. A new property is available to the developer to specify which page titles in the progress bar should include the mandatory '*'. When at least one page in the wizard is specified as mandatory, the modal window containing the wizard should include a configurable piece of text which will explain with the '*' mean e.g. "* Required".</p>
+
+<p dir="ltr">The new property is named Wizard.Mandatory.Pages and it's value must be a comma separated list of integers e.g. <span style="font-family:courier new,courier,monospace;">Wizard.Mandatory.Pages=2,3</span></p>
+
+<p dir="ltr">The "WIZARD_PROGRESS_BAR menu" section should be updated to include this new feature.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Check List</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Basically this is a quick check list of items that should be considered when doing a design for that particular component.</p>
+
+<table border="1" dir="ltr" style="width: 658px;">
+	<tbody>
+		<tr>
+			<td style="width: 166px;"><strong>Check List Item</strong></td>
+			<td style="width: 314px;"><strong>Notes</strong></td>
+			<td style="width: 157px;"><strong>Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">????</td>
+			<td style="width: 314px;">?????.</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Work Estimation</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Again, the actual items listed in the estimate breakdown may vary from task to task and component to component.</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Work Estimates</p>
+
+	<ul>
+		<li>
+		<p>Design: 1 Days</p>
+		</li>
+		<li>
+		<p>Prototype: 3 Days</p>
+		</li>
+		<li>
+		<p>Implementation: 3 Days</p>
+		</li>
+		<li>
+		<p>Testing: 0.5 Days</p>
+		</li>
+		<li>
+		<p>Documentation: 0.5 Days</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Total: 8 Days</p>
+	</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

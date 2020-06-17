@@ -1,0 +1,75 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>WebSphere Application Server installation</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="WebSphere Application Server installation";
+    pageId="urn:lsid:ibm.com:td:080d9e15-d3db-4d48-bfc4-774ed02acad2";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">WebSphere Application Server installation</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><ol dir="ltr">
+	<li>Install the IBM Installation Manager (if you don't have it already)<br />
+	<span style="font-family:courier new,courier,monospace;">\\tiny.mul.ie.ibm.com\Applications\WAS\8.0\InstallationManager</span><br />
+	&nbsp;</li>
+	<li>Open the Installation Manager, Navigate on File&gt;Preferences...<br />
+	&nbsp;</li>
+	<li>Add a new Repository entry specifying the <em>repository.config</em> file<br />
+	<span style="font-family:courier new,courier,monospace;">\\tiny.mul.ie.ibm.com\Applications\WAS\8.5.5\Windows\Installer\repository.config</span><br />
+	&nbsp;</li>
+	<li>Copy in your machine the FixPack from<br />
+	<span style="font-family:courier new,courier,monospace;">\\tiny.mul.ie.ibm.com\Applications\WAS\8.5.5Fixpacks\FixPack 5\All Platforms</span><br />
+	&nbsp;</li>
+	<li>Extract both and put the extracted&nbsp; part2 inside the extracted part1<br />
+	&nbsp;</li>
+	<li>In Installation Manager add a new Repository entry specifying the <em>repository.config</em> file in the extracted part1<br />
+	<span style="font-family:courier new,courier,monospace;">C:\8.5.5-WS-WAS-FP0000005-part1\repository.config</span><br />
+	&nbsp;</li>
+	<li>Deselect all the other repositories except the two you have just added<br />
+	&nbsp;</li>
+	<li>Click OK and navigate again in File&gt;Preferences... This is what you should see<img alt="" height="187" id="1430313791831_0" src="WebSphere%20Application%20Server%20installation._ATTACHMENTS_/editor_image_7d863b6c-8be9-4412-8506-f07e40150990.png" width="528"></img><br />
+	&nbsp;</li>
+	<li>Click on Install and you should see the WAS 8.5.5.5 as an available install package, select this and click Next<img alt="" height="121" id="1430313996532_0" src="WebSphere%20Application%20Server%20installation._ATTACHMENTS_/editor_image_28fa5ff8-a075-4d59-855a-d4fe1f964965.png" width="245"></img><br />
+	&nbsp;</li>
+	<li>Accept licenses<br />
+	&nbsp;</li>
+	<li>Choose an Installation Directory as C:\Exclude\WAS8555<br />
+	&nbsp;</li>
+	<li>Accept default English for “Translation”<br />
+	&nbsp;</li>
+	<li>Accept default on "Install Packages - select features to install" panel and click next.<br />
+	Note: Don’t select “Sample application” here<br />
+	<img alt="" height="202" id="1430314473122_0" src="WebSphere%20Application%20Server%20installation._ATTACHMENTS_/editor_image_20152af5-d7fc-4681-8869-493ab50f954a.png" width="344"></img><br />
+	&nbsp;</li>
+	<li>Review the Summary and click Install<br />
+	&nbsp;</li>
+	<li>Select “None” under “Which program do you want to start” and click “Finish”</li>
+</ol></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

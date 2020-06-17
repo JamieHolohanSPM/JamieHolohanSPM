@@ -1,0 +1,99 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>List Screens</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="List Screens";
+    pageId="urn:lsid:ibm.com:td:047e5360-060d-4086-8be0-d7019cd2a91b";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">List Screens</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Support Case List</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">Common Must Gather Information</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii3">Common Resolutions</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii4">Additional Information</a></div>
+
+<p dir="ltr">&nbsp;</p>
+
+<h1 dir="ltr">List Issues</h1>
+
+<p dir="ltr">This page covers support cases raised in relation to lists and common resolutions.</p>
+
+<h2 dir="ltr" id="ii1">Support Case List</h2>
+
+<table border="1" dir="ltr" style="width: 90%;">
+	<tbody>
+		<tr>
+			<td><strong>PMR</strong></td>
+			<td style="width: 101px;"><strong>Customer</strong></td>
+			<td style="width: 224px;"><strong>Problem</strong></td>
+			<td style="width: 223px;"><strong>Resolution</strong></td>
+			<td style="width: 135px;"><strong>Notes</strong></td>
+		</tr>
+		<tr>
+			<td>74496,999,649</td>
+			<td style="width: 101px;">Ontario</td>
+			<td style="width: 224px;">Browser hangs when lists with large number of records are displayed</td>
+			<td style="width: 223px;">See common responses below - expected that there are behaviour issues with long lists. For OOTB pages, they should be redesigned to include search functionality and prevent issue.</td>
+			<td style="width: 135px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td style="width: 101px;">&nbsp;</td>
+			<td style="width: 224px;">&nbsp;</td>
+			<td style="width: 223px;">&nbsp;</td>
+			<td style="width: 135px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">Please keep information in the table as succinct as possible. If the resolution, problem or notes field are verbose, please use the Additional Information section and add a link.</p>
+
+<h2 dir="ltr" id="ii2">Common Must Gather Information</h2>
+
+<p dir="ltr">None to date.</p>
+
+<h2 dir="ltr" id="ii3">Common Resolutions</h2>
+
+<p dir="ltr">In response to long lists performance complaints, especially when compared to 5.2:</p>
+
+<p dir="ltr" style="margin-left: 40px;">Long list pages in Curam, especially thousands of items, will always have performance problems. This was the case in Curam 5.2 and such pages are not recommended. In Curam 6.0 signification changes have been made to the UI to add new dynamic features, e.g. expandable rows and list row items. These features have added to the loading time for list pages, however in addition pagination support has been provided. Pagination support improves the loading time of list pages by ensuring only the first set of items to be displayed are rendered in the HTML.<br />
+<br />
+However, long lists are not recommended and will encounter performance issues, especially in older versions of Internet Explorer, such as IE7 and IE8.<br />
+<br />
+The recommendations are to redesign such pages to include a search functionality and reduce the number of items returned where they exceed an amount. For example, the readmultimax feature can be used for this.<br />
+<br />
+&lt;INTERNAL&gt; Where the page being complained about is OOTB, the case should be directed at the team owning the page to redesign and handle issue for customer.</p>
+
+<h2 dir="ltr" id="ii4">Additional Information</h2>
+
+<p dir="ltr">None</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

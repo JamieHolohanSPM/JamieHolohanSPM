@@ -1,0 +1,288 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Notes Printing Changes</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Notes Printing Changes";
+    pageId="urn:lsid:ibm.com:td:c9f92ff7-fad7-49d8-9453-214331a5a9a6";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Notes Printing Changes</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr"><span style="font-size:16px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Design Page for 251487 -</strong> <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The Internet Explorer 11 browser may quit unexpectedly when attempting to print a large number of Notes with different styles and formats</strong></span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii3">Stakeholders</h2>
+
+<table border="1" dir="ltr" style="width: 283px;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 0px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Role</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 181px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 0px;">Customer</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 181px;">Ontario - MCSS</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 0px;">Business Owner/Product Owner</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 181px;">Shane McFadden</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 0px;">Architect</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 181px;">Fergal Gavin</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 0px;">Developer(s)</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 181px;">Cian McCann</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 0px;">FVT</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 181px;">Satya Minnekanti</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2 dir="ltr" id="ii4">Background</h2>
+
+<p dir="ltr">When attempting to print a large number of Notes containing different styles and formats from the Client Contact tab on a Person page, it may cause the browser application to quit unexpectedly. This issue only occurs with Internet Explorer 11. This mainly occurs when attempting to print a large number of Notes with different styles and formats.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii5">Requirements</h2>
+
+<p dir="ltr">Note, the issue being reported here only occurs in Internet Explorer. It is our view that we should make the printing process for a Notes page as efficient as possible from our side. If the customer attempts to print Notes which equate to a large number of pages with complex Notes (Maybe 150+) their browser may still quit unexpectedly, this is considered to be a limitation of the Internet Explorer browser rather than something we can really try to solve.</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement 1: On a Notes page with context panel print enabled, clicking the page level print icon shall launch 2 print dialogs.
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Print dialog to print the context panel.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Print dialog to print Notes as the appear in the main content area.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Both shall print successfully on all supported browsers.</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement 2: On a Notes page with context panel print disabled, clicking the page level print icon shall launch 1 print dialog.
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Print dialog to print Notes as the appear in the main content area.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Both shall print successfully on all supported browsers.</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">Design Options</h2>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Option 1</strong></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Specific to Notes pages only.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Upon expanding a Note in the main content area.
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Overwrite the page level print icon to call a new function CEFUtils._overwritePrintButtonToPrintNotesPage().</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Upon clicking the page level print icon on a Notes page which has been overwritten.
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Create a new hidden iFrame off screen which is not visible to the user or accessible to an accessibility user. This iFrame should be a lightweight version of the main content area containing Notes. Rather than having multiple nested iFrames, hidden elements, defining CSS files, defining javascript files etc. this new iFrame should remove that overhead and essentially be made up of tables, divs and some styling.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Populate the iFrame with Note content exactly how they are displayed on the page.
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Any non-expanded Notes should just have their header added to the iFrame.</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Any expanded Notes should have their header and content added to the iFrame.</li>
+		</ul>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Call the inbuilt browser print() function on this new iFrame instead of on the main content area iFrame.</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Alternative: </strong>Originally the idea was to dynamically update and iFrame in the background as Notes are expanded/contracted so the iFrame is ready to print whenever the page level print icon is pressed. This became too complex when dealing with changes in sorting the list of Notes and pagination. Also the overhead of generating the iFrame upon clicking print does not have impact on performance.</li>
+</ul>
+
+<h3 dir="ltr" id="ii6">Requirement Decisions</h3>
+
+<table border="1" dir="ltr" height="156" width="860">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement Decision Title</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Issue or Problem Statement</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Assumptions</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Motivation</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Alternatives</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Decision</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Overwriting the page level Print icon</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">If a user attempts to print a page with Notes without expanding a Note first the page level print icon will not have been overwritten yet.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Printing 45 row headers using the old curam.util.printpage() function will not cause the browser to quit unexpectedly.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">It is better to keep logic for this fix outside of infrastructure. There is NoteHistoryRenderer.java&nbsp; in CEFWidgets which is where this logic should live.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Keeping code out of TI for this would have meant a more hacky solution.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">curam.util.printpage()&nbsp; can print up to 45 Note header rows fine without crashing so only invoking the new print functionality from when the user expands a Note is fine.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Browsers</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Even though Internet Explorer is the only browser which quits unexpectedly should the new print functionality be called across browser.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The new iFrame solution can work across each supported browser.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">It will be developed and tested to work on each supporting browser, or specific checks could be added in javascript to determine if the browser is Internet Explorer or not.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">It was decided the new print functionality should be invoked on each supported broswer. This was decided for 2 reasons, consitency and because the looks of printed Notes in the new iFrame was deemed to be an improvement on how they look when printed from the main content area.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Styling</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Should elements in the new iFrame follow the styling of how they appear on the page.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">It may be better to keep the content in the new iFrame as basic as possible to reduce overhead when printing.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">It was determined elements in the new iFrame should be styled as they appear on the page once copied to the new iFrame. Rather than importing our full style sheets, styling was added for each specific element using the "style" attribute to reduce overhead.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii13">Design Specifics</h2>
+
+<p dir="ltr">All code changes were made on the CEFWidgets stream. They were originally put on CEFWidgets 7.0.7.0iFix2 before being ported to CEFWidgets 7.0.9.0.</p>
+
+<p dir="ltr"><span style="font-size:12px;"><u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">How Notes Looked Previously When Printed</u></span><span style="font-size:16px;"><u sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"> </strong></u></span></p>
+
+<p dir="ltr"><span style="font-size:12px;"><u sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><img lconnwikiparamattachmentname="Screenshot 2019-10-09 at 12.01.03.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Notes%20Printing%20Changes._ATTACHMENTS_/Screenshot%202019-10-09%20at%2012.01.03.png" lconnwikiparamwikipage="Notes Printing Changes" lconnattachedresourcetype="draft"></img></u></span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><span style="font-size:12px;"><u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">How Notes Look When Printed From Hidden iFrame After New Logic Is Invoked</u></span></p>
+
+<p dir="ltr"><span style="font-size:12px;"><u sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><img lconnwikiparamattachmentname="Screenshot 2019-10-09 at 11.57.46.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Notes%20Printing%20Changes._ATTACHMENTS_/Screenshot%202019-10-09%20at%2011.57.46.png" lconnwikiparamwikipage="Notes Printing Changes" lconnattachedresourcetype="draft"></img></u></span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">Design Resilience Measures</h2>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" style="width: 1152px;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">What happens if something expected/unexpected goes wrong?</td>
+			<td style="width: 736px;">If Internet Explorer quits unexpectedly there is no way to to recover it apart from refreshing the page or restating the browser.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">What happens to the system?</p>
+			</td>
+			<td style="width: 736px;">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">Will the user be able to take corrective action in the system without the need to resort to application logs/SQL searching/data manipulation outside of the system?</td>
+			<td style="width: 736px;">Yes</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">Will the data be left in a consistent state within the system after the exception is thrown?</td>
+			<td style="width: 736px;">Yes</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">Will there be messages given to the user? What will these messages be?</td>
+			<td style="width: 736px;">Messages from Windows indicating the IE has quit or become unresponsive.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">Will there something written to the logs? What will this be?</td>
+			<td style="width: 736px;">No</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">Does the feature require some of the exception data to be captured and an admin function provided to allow the situation to be re-mediated?</td>
+			<td style="width: 736px;">No</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii28">Use Cases</h2>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Test Cases should be run on all supporting browsers.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Test Case 1</strong>: Printing page with no context panel.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Login as a caseworker.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Open up the Person Search page.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Click on the page level print icon.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Expected Result: You can print the page as usual on versions such as 7090.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Test Case 2</strong>: Printing normal page and context panel<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Search for a person and open up their person page.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Click on the page level print icon.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Expected Result: You can print the context panel and page as usual on versions such as 7090.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Test Case 3</strong>: Printing Notes page and context panel (Note contracted)<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Search for a person and open up their person page.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Click on the Contacts tab.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Click on Notes.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Click the new button and add one simple note.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+With the Note not expanded click on the page level print icon.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Expected Result: You can print the context panel and Notes page as usual on versions such as 7090.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Test Case 4</strong>: Printing Notes page and context panel (Note expanded)<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Search for a person and open up their person page.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Click on the Contacts tab.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Click on Notes.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Click the new button and add one simple note.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+With the Note expanded click on the page level print icon.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Expected Result: You can print the context panel and Notes page. Here the new Note printing functionality will be invoked.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Test Case 5</strong>: Printing Notes page and context panel (Notes expanded memory test)<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Search for a person and open up their person page.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Click on the Contacts tab.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Click on Notes.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Add 45 notes with a lot of content (See Sample_Note_L2.docx in the Links tab). Also add some formatting to these notes such as changing fonts and colors.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Select 45 from the list pagination.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Expand each of the 45 notes.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Click on the page level print icon.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Expected Result: You can print the context panel and Notes page. Here the new Note printing functionality will be invoked.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Test Case 6</strong>: Printing Notes page and context panel (Notes expanded memory test)<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Search for a person and open up their person page.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Click on the Contacts tab.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Click on Notes.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Add 45 notes with a lot of content (See Sample_Note_L2.docx in the Links tab). Also add some formatting to these notes such as changing fonts and colors.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Select 45 from the list pagination.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Expand each of the 45 notes.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Click on the page level print icon.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Expected Result: You can print the context panel and Notes page. Here the new Note printing functionality will be invoked.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Test Case 7</strong>: Printing Notes page from a different part of the application<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<span style="font-family:Arial,Helvetica,sans-serif;"><span style="font-size:12px;"><span style="background-color: rgb(248, 248, 248); color: rgb(29, 28, 29);">Login as ccsintakeworker<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Create an intake of type Child Prorection Services</span><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<span style="background-color: rgb(248, 248, 248); color: rgb(29, 28, 29);">Add a Child with Role Alleged Victim</span><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<span style="background-color: rgb(248, 248, 248); color: rgb(29, 28, 29);">From Tab Actions menu click on Open Intake</span><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<span style="background-color: rgb(248, 248, 248); color: rgb(29, 28, 29);">Go to Contacts tab and then Notes group filter<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Add a new Note<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Expand the Note</span></span></span><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Click on the page level print icon.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Expected Result: You can print the context panel and Notes page. Here the new Note printing functionality will be invoked.</p>
+
+<p dir="ltr">Note: CEFWidgets does not have the UIToolkit so not automated tests were added.</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

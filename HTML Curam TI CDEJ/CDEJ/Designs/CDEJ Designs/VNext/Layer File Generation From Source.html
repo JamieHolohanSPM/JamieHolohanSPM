@@ -1,0 +1,106 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Layer File Generation From Source</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../wiki.css" />
+<script type="text/javascript" src="../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Layer File Generation From Source";
+    pageId="urn:lsid:ibm.com:td:8bc267f9-50d9-440a-91f5-7809a6efee83";
+    toRoot="../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Layer File Generation From Source</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr"><strong>Design and Implement build scripts that produce layer file from JS Src in Component</strong></p>
+
+<p dir="ltr"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=106933">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=106933</a></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>History</strong></p>
+
+<p dir="ltr">This has been a long standing (particularly for components that are Javascript "heavy" e.g. Outcome Management and Universal Access) requirement &nbsp;to allow components to produce a layered[1] version of their custom Javascript. In components that rely on a large number of handcrafted Javascript files and no way supported way to "layer" those files. This leads to a performance degradation as all of the Javascript files/modules are requested individually</p>
+
+<p dir="ltr"><strong>Implementation</strong></p>
+
+<p dir="ltr">Both UA &amp; Outcome Management have succeeded in writing custom ant scripts to produce layered files. In the case of UA, their implementation&nbsp;leveraged the CDEJ provided&nbsp;build-javascript-layers.xml ant file.</p>
+
+<p dir="ltr">This UA version will be used as the foundation for this work.</p>
+
+<p dir="ltr">UA implemented their own wrapper which inspected the CDEJ version, dojo version and idx version and passed the appropriate versions number to the main&nbsp;<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">build-javascript-layers.xml. These versions are used to locate the appropriate javascript source deliveries on the network.</span></p>
+
+<p dir="ltr"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">This solution is implemented as follows:</span></p>
+
+<p dir="ltr"><em>1. build.xml</em></p>
+
+<p dir="ltr">Addition to the standard&nbsp;-staging-components target of the main build.xml. This target currently&nbsp;loops over each component on the CLIENT_COMPONENT_ORDER. For each&nbsp;component the script checks for the existence of&nbsp;profile.js in the &lt;component&gt;\jscript directory. If the file is found the new&nbsp;build-layer-file.xml<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;The following is the addition at the beginning of the -staging-components target:</span></p>
+
+<p dir="ltr">&nbsp;<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;!-- Generate a layer &nbsp;file for the component if a profile file exists --&gt;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;if&gt;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&lt;available file="@{component}/jscript/profile.js"/&gt;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&lt;then&gt;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&lt;local name="component.name"/&gt;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&lt;basename property="component.name" file="@{component}"/&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;antcall target="build.layer.file"&gt;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&lt;param name="component.name" value="${component.name}"/&gt;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&lt;param name="component.dir" value="@{component}"/&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/antcall&gt; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/then&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;else&gt;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&lt;local name="component.name"/&gt;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&lt;basename property="component.name" file="@{component}"/&gt;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&lt;echo message="No layer configuration found for @{component}"/&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/else&gt;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;/if&gt;&nbsp;&nbsp; &nbsp;<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;!-- End layer file generation --&gt;</span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><em>2.&nbsp;build-layer-file.xml</em></p>
+
+<p dir="ltr">This new build file gets the appropriate versions of CDEJ, dojo and idx and calls the standard&nbsp;<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">build-javascript-layers.xml. This build file is also responsible for copying the generated layer files into the&nbsp;&lt;component&gt;\jscript directory. The new file is attached to this page. It should be added to source control in the same directory as&nbsp;</span><em style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">build-javascript-layers.xml.</em></p>
+
+<p dir="ltr"><em><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">3. build-javascript-layers.xml</span></em></p>
+
+<p dir="ltr"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">There were no changes required to this build file.</span></p>
+
+<p dir="ltr">This implementation means that there are no other changes required to the build process.</p>
+
+<p dir="ltr"><strong>Outstanding issues</strong></p>
+
+<p dir="ltr">- Generating layer files is only sensible for javascript that has been written in AMD format. Currently this is not standard practice across PD.</p>
+
+<p dir="ltr">- This process will result in the individual layer files, e.g. core-layer.js or Appeals-layer.js, being included in the deployed application in &lt;WAR_ROOT&gt;\CDEJ\jscript<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">[2]. This does not mean that these individual layer files are included in any of our screens. Some additional thought will need to go into how the layer files should be included in our screens. This might mean combining/merging the layer files to create a "PD layer" and including it on all screens. An alternative might mean to include each layer file individually. An alternative might mean creating an association between the UIM page and the layer file e.g. if a UIM file is defined in core then include core-layer.js, if the UIM file is defined in Appeals then include Appeals-layer.js etc.</span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>References</strong></p>
+
+<p dir="ltr">[1]&nbsp;Layers are essentially a single JavaScript file that contain several modules and in some cases other resources. A layer is usually the main output of a build that you are looking for, creating this file which then becomes the "distributable" of your application. A layer can be a "boot" layer, which means it includes the bootstrap code of Dojo to allow Dojo to load other modules. What layers you have and their contents is highly dependent upon your application and design. There is not necessarily one "right" way -&nbsp;<a href="https://dojotoolkit.org/documentation/tutorials/1.10/build/">https://dojotoolkit.org/documentation/tutorials/1.10/build/</a></p>
+
+<p dir="ltr">[2] In a dev environment, WAR_ROOT is simply the WebContent folder</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

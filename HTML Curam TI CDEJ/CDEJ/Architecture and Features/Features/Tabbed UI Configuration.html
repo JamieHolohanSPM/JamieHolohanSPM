@@ -1,0 +1,143 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Tabbed UI Configuration</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Tabbed UI Configuration";
+    pageId="urn:lsid:ibm.com:td:e4116d69-b87e-44ef-9839-8c2626823257";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Tabbed UI Configuration</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Overview</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">How it Works</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii3">Server Side: Loader / Verification</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii4">Webtier</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii5">API to Access Tabbed UI Configuration</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii7">JavaScript</a></div>
+
+<h2 dir="ltr" id="ii1">Overview</h2>
+
+<ul dir="ltr">
+	<li>the Tabbed UI has a basic predefined structure and a set of configuration files/options to customize within the constraints of the basic structure</li>
+	<li>The basic structure is described in Cúram WCRM: "Application User Interface Overview" section</li>
+	<li>At the high level the things you can configure are:
+	<ul>
+		<li>new application sections</li>
+		<li>new types of application (aka object) tabs
+		<ul>
+			<li>context panel</li>
+			<li>smart panel</li>
+			<li>action menus</li>
+			<li>navigation tabs and buttons</li>
+			<li>dynamic menu/nav items and their refresh options</li>
+		</ul>
+		</li>
+		<li>shortcuts panel</li>
+	</ul>
+	</li>
+	<li>These configuration options are described in Cúram WCRM here: "Application Configuration -&gt; Configuration Files"</li>
+	<li>Design page: <a href="http://ibmurl.hursley.ibm.com/N24P">http://ibmurl.hursley.ibm.com/N24P</a></li>
+</ul>
+
+<h2 dir="ltr" id="ii2">How it Works</h2>
+
+<ul dir="ltr">
+	<li>app developer puts configuration files in their application component in the EJBServer project</li>
+	<li>then executes the "database" target and the configuration is verified and loaded into database (into resource store)</li>
+	<li>the Cúram webclient accesses the configuration from database using a specific API</li>
+	<li>this way the configuration is then used to create the UI of the application at runtime</li>
+</ul>
+
+<h2 dir="ltr" id="ii3">Server Side: Loader / Verification</h2>
+
+<ul dir="ltr">
+	<li>invoked from "app_tabconfiguration.xml" application build script file in the context of the EJBServer project</li>
+	<li>runs "curam.util.internal.tab.intf.ImportConfiguration.importConfig" as a batch process</li>
+	<li>implemented in the "curam.util.internal.tab.impl.ImportConfiguration" class in the "AppInf" project</li>
+	<li>loads XML files into resource store in DB</li>
+	<li>uses "curam.util.common.tab.TabConfigAccess" API for checking if config is already inserted</li>
+	<li>validates XML with the corresponding schemas</li>
+</ul>
+
+<h2 dir="ltr" id="ii4">Webtier</h2>
+
+<ul dir="ltr">
+	<li>provides a path resolver (renderer framework) to access configuration data from DB
+	<ul>
+		<li>curam.util.client.path.resolver.TabConfigPathResolver</li>
+		<li>used by the UI (renderers, JavaScript) to build the UI</li>
+		<li>uses the client-side API for accessing tab config: "curam.util.client.tab.ClientTabConfigAccess"</li>
+	</ul>
+	</li>
+	<li>renderers (hint: search for references to curam.util.client.path.util.ClientPaths.TAB_LAYOUT_PATH)
+	<ul>
+		<li>ContentPanelRenderer</li>
+		<li>MenuBarRenderer</li>
+		<li>NavigationTabRenderer</li>
+		<li>TabRenderer</li>
+		<li>SmartPanelRenderer</li>
+	</ul>
+	</li>
+</ul>
+
+<h2 dir="ltr" id="ii5">API to Access Tabbed UI Configuration</h2>
+
+<ul dir="ltr">
+	<li>server-side: curam.util.common.tab.TabConfigAccess</li>
+	<li>client-side: curam.util.client.tab.ClientTabConfigAccess</li>
+</ul>
+
+<h2 dir="ltr" id="ii7">JavaScript</h2>
+
+<ul dir="ltr">
+	<li>configuration accessed via paths using curam/ui/ClientDataAccessor JS class via AJAX call</li>
+	<li>curam/util/_ensurePageAssociationInitialized() - /config/tablayout/associated[pageID][USER_APPLICATION_ID]</li>
+	<li>OptimalBrowserMessage class - /config/tablayout/settings[appID]</li>
+	<li>ExternalApplication - /config/tablayout/extapp[appID]</li>
+	<li>curam.util.ui.refresh.TabRefreshController</li>
+</ul>
+
+<h2 dir="ltr">Handling Dynamic Parts of Tabbed UI</h2>
+
+<ul dir="ltr">
+	<li>dynamic menu and navigation items, server side loaders, configured in *.mnu and *.nav config files</li>
+	<li>refresh options in *.tab config file
+	<ul>
+		<li>also possible to control refresh of context panel or main content panel</li>
+	</ul>
+	</li>
+	<li>based on config the Tabbed UI makes AJAX requests to get updated state for menu/nav and updates accordingly
+	<ul>
+		<li>handled by Java class: curam.omega3.ApplicationController.executeDynamicStateCommand()</li>
+	</ul>
+	</li>
+	<li>curam.util.ui.refresh.TabRefreshController JS class orchestrates the whole thing</li>
+	<li>Other related code is in curam/util/Refresh module which calls into other modules for refreshing specific parts (main content, context panel, etc.)</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

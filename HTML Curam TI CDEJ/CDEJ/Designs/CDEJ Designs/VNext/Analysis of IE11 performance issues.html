@@ -1,0 +1,214 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Analysis of IE11 performance issues</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../wiki.css" />
+<script type="text/javascript" src="../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Analysis of IE11 performance issues";
+    pageId="urn:lsid:ibm.com:td:aaf1f5e7-684f-4a14-b6d8-f940a814e196";
+    toRoot="../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Analysis of IE11 performance issues</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><div contenteditable="false" name="intInfo" style="border-radius: 6px; margin: 8px; padding: 4px; display: block; width: auto;background-color: #ffc;">Table of Contents:
+<ul style="list-style-type:none !important;">
+	<li style="list-style-type:none;"><a href="#ii1" style="display: block;">Overview</a></li>
+	<li style="list-style-type:none;"><a href="#ii2" style="display: block;">Why AJAX requests to the PathResolverServlet took significantly longer in IE11 than in Chrome?</a></li>
+	<li style="list-style-type:none;"><a href="#ii3" style="display: block;">How IE11 handles iframes vs Chrome?</a></li>
+	<li style="list-style-type:none;"><a href="#ii4" style="display: block;">Analysis of opening/closing tabs in IE11 and Chrome.</a></li>
+</ul>
+</div>
+
+<h2 dir="ltr" id="ii1">Overview</h2>
+
+<p dir="ltr">The following is documenting the investigation that took place after&nbsp;<a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/L2%20Support#action=com.ibm.team.workitem.viewWorkItem&amp;id=250911">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/L2%20Support#action=com.ibm.team.workitem.viewWorkItem&amp;id=250911</a>&nbsp;was raised in regards to IE11 performance issues.<br />
+<br />
+The 3 main areas of investigations were:</p>
+
+<ul dir="ltr">
+	<li>Why AJAX requests to the PathResolverServlet took significantly longer in IE11 than in Chrome?</li>
+	<li>How IE11 handles iframes vs Chrome?</li>
+	<li>Analysis of opening/closing tabs in IE11 and Chrome.</li>
+</ul>
+
+<h2 dir="ltr" id="ii2"><strong><span style="font-size:16px;">Why AJAX requests to the PathResolverServlet took significantly longer in IE11 than in Chrome?</span></strong></h2>
+
+<p dir="ltr"><br />
+An investigation took place and looked into how IE11 and Chrome handle AJAX POST Requests to the PathResolverServlet in Curam.<br />
+After examining the codebase it was found there are no differences in how Curam creates and initiates the requests sent to the PathResolverServlet in Chrome vs those sent in IE11.<br />
+TI/client/components/client-inf/jscript/src/internal/curam/ui/ClientDataAccessor.js is responsible for constructing the XHR requests to the server.<br />
+The underlying issue is with how IE11 and Chrome handle AJAX POST requests.<br />
+<br />
+When a group of tabs are closed in Curam, an AJAX POST request is sent for each tab.<br />
+The expected behaviour of these requests would be once the request has been initiated, it is almost immediately sent to the server and then the thread can complete any additional tasks on the call stack (e.g Dom manipulation) while waiting on a response.<br />
+And while Chrome behaves this way, IE11 does not. In IE11, when the AJAX POST request is initiated, it is not immediately sent to the server. The request is held onto until the call stack is empty. Once the request is sent, it behaves accordingly.<br />
+In all browsers, UI related tasks take priority over AJAX calls. When closing tabs in Curam, there is a lot of JS functionality happening in order to correctly clean up the tab objects.<br />
+So when an AJAX POST request is initiated, Chrome sends it to the server almost immediately and returns to performing UI related tasks. In IE11, the request is not immediately sent, instead it waits until the UI tasks are complete before sending it to the server.<br />
+<br />
+In the investigation, the Fiddler application was used to inspect the requests which are sent to the PathResolverServlet and it is evident that there is a difference between the two.<br />
+For example, the below screenshots are of a single request (1 of many)&nbsp;that was sent when closing a group of 12 tabs. In&nbsp;Chrome,&nbsp;the overall elapsed time was 4 milliseconds. In IE11 it took 3.522 seconds.<br />
+The overall elapsed time is the time difference it took from when the request was initiated in Javascript(ClientBeginRequest) to when the client was done with the response(ClientDoneResponse).<br />
+The main difference is IE11 has a significant time gap between the ClientBeginRequest and ClientDoneRequest. The ClientDoneRequest is when IE11 actually sent the AJAX request.<br />
+This is signifying that IE11 is holding onto the request for a number of seconds before actually sending it to the server.<br />
+<br />
+IE11 single request to PathResolver:<br />
+<img lconnwikiparamattachmentname="PathResolver single IE11.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Analysis%20of%20IE11%20performance%20issues._ATTACHMENTS_/PathResolver%20single%20IE11.png" style="width: 500px; height: 604px;" lconnwikiparamwikipage="Analysis of IE11 performance issues" lconnattachedresourcetype="draft"></img><br />
+<br />
+Chrome single request to PathResolver:<br />
+<br />
+<img lconnwikiparamattachmentname="PathResolver single Chrome.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Analysis%20of%20IE11%20performance%20issues._ATTACHMENTS_/PathResolver%20single%20Chrome.png" style="width: 500px; height: 540px;" lconnwikiparamwikipage="Analysis of IE11 performance issues" lconnattachedresourcetype="draft"></img><br />
+<br />
+Below are screenshots of the group of PathResolverServlet requests from each browser in a timeline view. These show a stark difference between the amount of time the requests are held onto by the browser before being sent to the server.<br />
+<br />
+Group of AJAX POST requests in IE11 -&nbsp;timeline view.<br />
+<br />
+<img lconnwikiparamattachmentname="IE POST timeline.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Analysis%20of%20IE11%20performance%20issues._ATTACHMENTS_/IE%20POST%20timeline.png" style="width: 500px; height: 555px;" lconnwikiparamwikipage="Analysis of IE11 performance issues" lconnattachedresourcetype="draft"></img><br />
+Group of AJAX POST requests in Chrome -&nbsp;timeline view.<br />
+<br />
+<img lconnwikiparamattachmentname="Chrome POST timeline.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Analysis%20of%20IE11%20performance%20issues._ATTACHMENTS_/Chrome%20POST%20timeline.png" style="width: 500px; height: 537px;" lconnwikiparamwikipage="Analysis of IE11 performance issues" lconnattachedresourcetype="draft"></img><br />
+<br />
+This behaviour is not unique to Curam either. It can be recreated using a simple script as shown in this blog post which talks about the issue:&nbsp;<a href="https://www.codeproject.com/Tips/804933/IE-AJAX-POST-Requests" rel="noopener noreferrer" target="_blank">https://www.codeproject.com/Tips/804933/IE-AJAX-POST-Requests</a><br />
+There is also a StackOverflow post by the same author here:&nbsp;<a href="https://stackoverflow.com/questions/25292570/why-does-ie-wait-till-the-call-stack-is-empty-to-send-post-ajax-requests">https://stackoverflow.com/questions/25292570/why-does-ie-wait-till-the-call-stack-is-empty-to-send-post-ajax-requests</a><br />
+<br />
+This explains why the Network tab in the developers tools for each browser shows a significant difference in the amount of time the PathResolverServlet requests take.<br />
+<br />
+<strong>What about using PUT requests instead of POST?</strong><br />
+<br />
+PUT requests exhibit the same behaviour as POST requests.<br />
+<br />
+<strong>What about using GET requests instead of POST?</strong><br />
+<br />
+A quick experiment was run in TabTest to see what would happen if we switched the type of request to the PathResolverServlet from&nbsp;POST to GET. This was done as none of the requests seemed&nbsp;to be sending much/if any data to the server&nbsp;when closing tabs and the request bodies are mostly empty (any requests that were inspected only seemed to contain e.g dojo.preventCache=123456789, which could potentially inserted into the request URI/query string).<br />
+<br />
+No apparent&nbsp;issues were seen while doing a quick click test around application and closing/opening tabs process seemed more responsive. <u><strong>BUT</strong></u>&nbsp;further investigation would be needed before making a change and each PathResolverServlet request type should be examined to see if a POST request is actually required.<br />
+One thing that was noted after a discussion with Sharunas was GET requests have a character limit on their URL size and as mentioned above, they do not contain a body. So there could be restrictions on how much&nbsp;data can be put in the URL. Whereas, if a large amount of data is required, that can be put in the POST request's body.<br />
+This issue may have been hit before in Curam. The comments in&nbsp;TI/client/components/client-inf/jscript/src/internal/curam/ui/ClientDataAccessor.set() indicate that the request in&nbsp;TI/client/components/client-inf/jscript/src/internal/curam/codetable-hierarchy.js was edited to address the issue.<br />
+Sharunas also indicated that GET requests can be more easily compromised as the information would most likely be contained in the URL vs in an encoded POST request body&nbsp;and that could increase security risks. This would also have to be taken into account.<br />
+<br />
+<br />
+<br />
+Below is a screenshot of how the same PathResolverServlet requests performed when they were switched to GET requests. In the below image, the largest&nbsp;overall elapsed time for a request&nbsp;was 110 milliseconds.&nbsp;That compares to 3.522 seconds when the request was a POST<br />
+<br />
+<img lconnwikiparamattachmentname="IE GET timeline.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Analysis%20of%20IE11%20performance%20issues._ATTACHMENTS_/IE%20GET%20timeline.png" style="width: 500px; height: 510px;" lconnwikiparamwikipage="Analysis of IE11 performance issues" lconnattachedresourcetype="draft"></img></p>
+
+<h2 dir="ltr" id="ii3"><span style="font-size:16px;"><strong>How IE11 handles iframes vs Chrome?</strong></span></h2>
+
+<p dir="ltr">Another part of the investigation looked to&nbsp;identify if there are any other areas of the product that are causing IE to slow down as the user session gets longer.<br />
+Analysis was carried out on the memory consumption throughout the user session after opening and closing tabs. When opening a group of 12 tabs, the heap memory in IE11 grows as expected, and while it does shrink after closing all of the tabs, it does not return to the same levels as before (it grew by approx 0.5mb). The overall IE11 process memory (as seen through Task Manager) also increases after opening and closing tabs (but it grew by approx 20-40mb).<br />
+The difference in growth between the heap memory and the process memory implies IE is holding onto the memory of certain objects that are not visible to the heap memory analysis tool in IE Developer tools, so how IE handles iframes specifically was looked in to.<br />
+To compare how different browsers handle iframes, a script was created that uses vanilla JS to create multiple iframes and adds them to the DOM. When all are loaded, the script automatically removes them from the DOM.<br />
+This script was run multiple times in IE11 and Chrome and the following results were retrieved:<br />
+<br />
+In IE11:<br />
+The Heap size continually grows. Even after the iframes are deleted, it never releases the memory. Even after sitting idle for a few of minutes, the heap size does not reduce.<br />
+The overall process memory grows too - after generating the iframes and deleting them 5 times, the process memory grows by over 100% (15.5-32.7mb). There is also no significant reduction in size after sitting idle for a few minutes.<br />
+<br />
+In Chrome:<br />
+The Heap size grows after the first run to create and delete the iframes, There are spikes for a brief period of time for subsequent runs, but the level stays mostly the same. The heap memory even dropped during the process (indicating that a Garbage collection process has taken place)<br />
+<br />
+Below are&nbsp;screenshots of the analysis:<br />
+<br />
+Chrome heap memory after script was run 5 times:<br />
+<img lconnwikiparamattachmentname="Chrome Heap 2.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Analysis%20of%20IE11%20performance%20issues._ATTACHMENTS_/Chrome%20Heap%202.png" style="width: 600px; height: 362px;" lconnwikiparamwikipage="Analysis of IE11 performance issues" lconnattachedresourcetype="page"></img><img lconnwikiparamattachmentname="Chrome Heap 1.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Analysis%20of%20IE11%20performance%20issues._ATTACHMENTS_/Chrome%20Heap%201.png" style="width: 600px; height: 360px;" lconnwikiparamwikipage="Analysis of IE11 performance issues" lconnattachedresourcetype="page"></img><br />
+<br />
+IE11 heap memory after script was run 5 times:<br />
+<img lconnwikiparamattachmentname="IE11 Heap.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Analysis%20of%20IE11%20performance%20issues._ATTACHMENTS_/IE11%20Heap.png" style="width: 700px; height: 422px;" lconnwikiparamwikipage="Analysis of IE11 performance issues" lconnattachedresourcetype="page"></img><br />
+<br />
+IE11 process memory before script was ran:<br />
+<br />
+<img lconnwikiparamattachmentname="IE11 process before.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Analysis%20of%20IE11%20performance%20issues._ATTACHMENTS_/IE11%20process%20before.png" style="width: 700px; height: 421px;" lconnwikiparamwikipage="Analysis of IE11 performance issues" lconnattachedresourcetype="page"></img><br />
+<br />
+IE11 process memory after script was ran:<br />
+<br />
+<img lconnwikiparamattachmentname="IE11 process after.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Analysis%20of%20IE11%20performance%20issues._ATTACHMENTS_/IE11%20process%20after.png" style="width: 700px; height: 421px;" lconnwikiparamwikipage="Analysis of IE11 performance issues" lconnattachedresourcetype="page"></img><br />
+<br />
+The above is indicating that IE11 itself has issues with handling iframes and does not appear to be releasing the memory for them even after they are deleted.<br />
+<br />
+The script that was used to perform the above analysis has been attached to this wiki <a href="Analysis%20of%20IE11%20performance%20issues._ATTACHMENTS_/load%20and%20delete%20iframes.html" lconnwikiparamwikiattachment="load and delete iframes.html" target="_blank">here</a>.<br />
+&nbsp;</p>
+
+<h2 dir="ltr" id="ii4"><span style="font-size:16px;"><strong>Analysis of opening/closing tabs in IE11 and Chrome.</strong></span></h2>
+
+<p dir="ltr"><br />
+The infrastructure Javascript around opening and closing tabs was also looked into and some areas were identified that were non-performant. <a href="Analysis%20of%20IE11%20performance%20issues._ATTACHMENTS_/Performance%20of%20tabs%20in%20Curam.docx" lconnwikiparamwikiattachment="Performance of tabs in Curam.docx" target="_blank">An MS word document</a> has been attached which details all the analysis of this investigation. A bullet point list to summarise that document is below:</p>
+
+<ul dir="ltr">
+	<li>Opening and closing tabs is laborious.</li>
+	<li>It affects both IE11 and Chrome, although Chrome is faster.</li>
+	<li>No analysis was performed to measure the performance over the course of a day, which would reflect real life usage. This was not the purpose of this analysis.</li>
+	<li>A few areas should be looked at:
+	<ul>
+		<li>Getting rid of dojo.deprecated() calls by updating the functions we call or by overriding&nbsp;dojo.deprecated() function to be blank.
+		<ul>
+			<li>This was one of the most expensive JS calls and it provides us with nothing.</li>
+		</ul>
+		</li>
+		<li>The performance of the anonymous function in TI/client/components/client-inf/jscript/src/internal/curam/widget/_TabButton.js where the tabContext is being updated and the aria-labels and title attributes are being set.
+		<ul>
+			<li>This could be moved into the TabContainer or potentially removed if not required for accessibility purposes.&nbsp;Satya thinks it can potentially be removed altogether but further discussion is needed.&nbsp;https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html</li>
+		</ul>
+		</li>
+		<li>XHRHttpRequest load event handlers should be cleaned up if they are not used.</li>
+		<li>Setting iframe’s source to “about:blank” before it is removed, appeared to be slightly more performant in IE11 from a small sample set. A larger sample would be needed to determine if this is true.
+		<ul>
+			<li>This was recommended in a number of websites/posts on Stackoverflow e.g&nbsp;<a href="https://stackoverflow.com/questions/8407946/is-it-possible-to-use-iframes-in-ie-without-memory-leaks">https://stackoverflow.com/questions/8407946/is-it-possible-to-use-iframes-in-ie-without-memory-leaks</a></li>
+			<li>But others have found it has not worked:&nbsp;<a href="https://stackoverflow.com/questions/34652242/internet-explorer-11-spa-iframe-memory-leak">https://stackoverflow.com/questions/34652242/internet-explorer-11-spa-iframe-memory-leak</a></li>
+		</ul>
+		</li>
+		<li>IE11 appears to spend a lot of time doing nothing (the UIThread is idle).
+		<ul>
+			<li>The way IE11 handles AJAX POST requests could explain this.</li>
+		</ul>
+		</li>
+		<li>Investigate if the amount of requests that are sent to the PathResolverServlet can be reduced.
+		<ul>
+			<li>For example, there is at least 1 request sent for each tab that is closed. Multiple requests are also sent when opening a tab.</li>
+			<li>MCSS report that on a daily basis up to 4 million requests are sent to the PathResolverServlet while there are another 4 million requests sent to the rest of the system.</li>
+		</ul>
+		</li>
+		<li>The TabSessionManager is instantiated multiple times needlessly.
+		<ul>
+			<li>Instead the UIController could create a single instance and hold reference to this. This one instance can then be referenced instead of creating a new instance when saving, selecting or closing a tab.</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li>HTML parsing and Inline script analysis takes a long time in IE11.</li>
+	<li>HTTPRequests measurements are inconsistent:
+	<ul>
+		<li>In the performance tab in IE11, they take an insignificant amount of time.</li>
+		<li>In the Network tab in IE11, requests to PathResolver take a long time. This was later explained by the analysis above</li>
+		<li>In Chrome Network tab, requests to PathResolver are much faster than IE11.</li>
+		<li>When a browser is restarted, the PathResolver requests are no longer taking a significant amount of time. This indicates it is not an issue on the server side</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">The following ticket was created in RTC to investigate non-performant JS in the CDEJ:<br />
+<a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=257053">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=257053</a></p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

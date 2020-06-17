@@ -1,0 +1,146 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>JavaScript Performance Measuring Infrastructure</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../wiki.css" />
+<script type="text/javascript" src="../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="JavaScript Performance Measuring Infrastructure";
+    pageId="urn:lsid:ibm.com:td:1a9bb267-2b67-4f63-a6a7-bc1f7b23aa36";
+    toRoot="../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">JavaScript Performance Measuring Infrastructure</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">This is the work in progress, and a bit ad hoc; will be turned to the proper story as the current task progresses</p>
+
+<h2 dir="ltr">Introduction</h2>
+
+<p dir="ltr">The JavaScript Performance Estimation infrastructure(called inspector) &nbsp; is the application of the aspect-oriented programming framework (inspection infrastructure) integrated with the Curam front-end and allowing for interception and overriding the JavaScript methods used.</p>
+
+<p dir="ltr">The infrastructure consists of the following JavaScript files:</p>
+
+<ul dir="ltr">
+	<li>InspectionManager, which loads a single time on the top level page and is responsible registering the configured inspectors, loading and initializing them and for serving the defined aspects to the requesting modules.</li>
+	<li>Layer JavaScript file, which is the AMD module, refereced by any module to be investigated-aspected. It has a single method, which requests the aspects for that module from the inspection manager.</li>
+	<li>Default reporter JavaScript file which is the fallback reporter where an inspector does not specify any particulat reporter. It dumps the raw data to the console.</li>
+</ul>
+
+<p dir="ltr">&nbsp;&nbsp; Each inspector according to the current design is a set of three or four files:</p>
+
+<ul dir="ltr">
+	<li>Adapter JavaScript which defines a set of aspects for the objects and methods to be intercepted by the framework and converts those interceptions into a set of events which could be further intercepted.</li>
+	<li>Direct aspects JavaScript file where the aspects applied to the base objects defined in the dojo framework itself should go; these aspects cannot be loaded and applied later, when the module loads, therefore their inclusion mechanism is separated from the regular adapter. This file is optional if no dojo framework and top level curam infrastructure objects are to be 'aspected'.</li>
+	<li>Listeners block which intercepts the events defined in the adapter and processes them to convert to the particular states, recognized by the corresponding endpoint.</li>
+	<li>Endpoint block where the inspector gets initialized, adapter, direct aspects and the listeners for the inspector are bundled together, and where the final processing occurs and the reporting chain is invoked. Any inspection logic is also defined here as opposed to the listeners, where the inspection data is just ordered-prepared.</li>
+</ul>
+
+<p dir="ltr">&nbsp;&nbsp; The adapter part is tightly coupled with the application/page JavaScript, it should know the structure of the intercepted objects, the method names and their signatures. The listeners block on the other hand just manages the events (signals) from the adapter.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">'Historical perspective'</h2>
+
+<p dir="ltr">The first cut of the performance infrastructure was released for v6.0.5.8</p>
+
+<p dir="ltr">The initial set of JIRA tickets adressing various tasks/areas the performance measurement infrastructure needed to cover:</p>
+
+<p dir="ltr">The covering story:<br />
+<a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=36597">TEC-16307</a>&nbsp;&nbsp; &nbsp;JS instrumentation needed to help collect SLA data</p>
+
+<p dir="ltr">The tasks related to that story:<br />
+<a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=36706">TEC-16434</a>&nbsp;&nbsp; &nbsp;Add events to help performance estimation of the tab navigation<br />
+<a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=36707">TEC-16435</a>&nbsp;&nbsp; &nbsp;Add events to help performance estimation of object tab loading<br />
+<a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=36708">TEC-16436</a>&nbsp;&nbsp; &nbsp;Add events to help performance estimation of redirecting from modal dialog following form submit<br />
+<a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=36709">TEC-16437</a>&nbsp;&nbsp; &nbsp;Updated: Add events to help performance estimation of paginated list loading<br />
+<a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=36710">TEC-16438</a>&nbsp;&nbsp; &nbsp;Add events to help performance estimation of modal dialog loading</p>
+
+<p dir="ltr">The initial presentation of the performance measurement infrastructure explaining the approach taken: <a href="JavaScript%20Performance%20Measuring%20Infrastructure._ATTACHMENTS_/InspectorLayers%26PerformanceLayer.ppt" target="_blank">presentation&nbsp;link</a>, or see attachments section below.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">The introduction of AMD</h2>
+
+<p dir="ltr">Currently the front end Dojo still uses the old synchronous Dojo loader to load the required JavaScript/Dojo modules. This is seen as an obstacle in improving the application performance and taking on further Dojo upgrades where the legacy loader is not supported any longer. However the performance measurement infrastructure by its nature cannot load asynchronously since it is optional yet, when switched on, needs to be load before anything else (in a synchronous fashion). Therefore the experiments with switching AMD loader resulted in the performance measurement infrastructure being broken.<br />
+Following Barry O'Sullivan effort the AMD loader is now ready to be switched on and the application JavaScript/Dojo modules are converted (or should be finally converted) to work in AMD, asynchronous loading mode (<a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=107483" target="_blank">RTC&nbsp;task&nbsp;107483</a>); therefore the first task would be to adapt the performance measurement infrastructure to load correctly and handle the AMD loading.</p>
+
+<p dir="ltr">Furthermore, the first cut of the inspector infrastructure was meant to be purely internal thing and therefore just built in at the JDE building stage changing the CDEJ buiding mode accordingly. This created the additional trouble for the external infarstructure users, since they did not have access to the JDE build and therefore weren't able to use the infrastructure. The way out of this situation was to drop the required JavaScript files and the configuration artefacts manually into the appropriate runtime locations.<br />
+While we are not looking into making the inspector infrastructure or the performance measurement tool an external deliverable and prefer to have it as a separate set of artefacts to be dropped into the predefined location whenever needed, the configuration, switching on and off needs to be reviewed and made easier, more flexible. This dynamic on/off feature as well as the choice of the particular inspectors to be used is the second task in this area.</p>
+
+<h2 dir="ltr">The bugs/flaws/deficiencies</h2>
+
+<p dir="ltr">Following the performance measurement infrastructure release, there was some feedback from the SVT team, revealing some bugs and further requirements for the performance measurement infrastructure. While this was partly informal and some of the information has been lost, the main tickets raised against the performance measurement indfrastructure were:</p>
+
+<p dir="ltr"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=38244">TEC-18386</a>&nbsp;&nbsp; &nbsp;Ensure the CDEJ Performance Measurement Infrastructure manages subsequent data calls after page load - PODs<br />
+<a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=38243">TEC-18385</a>&nbsp;&nbsp; &nbsp;Created: Add CDEJ Performance Measurement Infrastructure to CitizenPortal application<br />
+<a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=38242">TEC-18384</a>&nbsp;&nbsp; &nbsp;Created: Implement the CDEJ Performance Measurement Infrastructure to be turned on during the traditional build process</p>
+
+<p dir="ltr">As far as I remember, there was also a concern related to the measurement of the modal form submit - the measurement operation was not stable. This falls into the task described by <a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=36708">TEC-16436</a>, but no additional ticked was created since the issue was difficult to re-create in the test application.<br />
+The further deficiencies were related to the unfinished operations (where the frame load failed for some reason), measuring of the expandable list operations (currently not handled); there was also a suggestion to allow for measuring the operations in parallel (currently only the subsequent operations are measured, i.e., if the user clicks a link to open a tab and before this operation finishes, clicks another link on a page, the tab loading operation measurement is aborted without a meaningful outcome. It was assumed that since this infrastructure will just work in the testing environments, handling the 'real' interaction wasn't the primary concern and would add the additional level of complexity; yet this possibility should be considered.</p>
+
+<p dir="ltr">There should be a page with the SVT observations of the performance infrastructure utilization put together by SVT team (the page failed to open for me): <a wiki="Wdf83da735cbe_4fee_bf31_c7e44aede8a9" target="_blank" href="https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/Wdf83da735cbe_4fee_bf31_c7e44aede8a9/page/Recommendations%20%26%20Issues%20for%20Performance%20Measurement%20Infrastructure" id="wikiLink1460999787573" page="Recommendations &amp; Issues for Performance Measurement Infrastructure">link</a></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">Covered (Measured) Operations Summary</h2>
+
+<ol dir="ltr">
+	<li>Duration when opening an object tab - both with one or two panes (including the context panel) loading</li>
+	<li>Duration when flipping between object tabs - including the situation where the tab is loaded or yet to be loaded (restored from the tab session)</li>
+	<li>Duration when closing an object tab and passing to the next tab, whether that tab is already loaded or yet to be loaded.</li>
+	<li>Duration when using the navigation tabs and items within an object tab, where each flip causes a page to be loaded.</li>
+	<li>Modal window opening duration, supporting opening from various places (including other modals).</li>
+	<li>Modal window closing duration.</li>
+	<li>Form submit duration when the form is submit from the content/context panes.</li>
+	<li>Form submit duration when the form is submit from a modal window - both when the landing page loads in the same modal, or the background page following modal discarding.</li>
+</ol>
+
+<h2 dir="ltr">The changes planned</h2>
+
+<ul dir="ltr">
+	<li>Make the infrastructure to work regardless of the AMD loader turned on or off</li>
+	<li>Make the inspectors infrastructure, including the performance infrastructure flexible enough adding the dynamic turn on - turn off capability
+	<ul>
+		<li>this should take into account the fact that we are NOT going to ship the inspectors normally (we might release some of them if these are part of the functionality). Therefore, we need a mechanism to drop the inspectors used for development/debugging purposes and allow for picking up the available inspectors and turning them on or of depending on the task being solved.</li>
+		<li>The inspection manager loading should be fully optional so that it is not present when not needed (there are no inspectors to load, the inspectors have been removed from the system, or present but disabled/turned off).</li>
+	</ul>
+	</li>
+	<li>Make the performance measurement infrastructure to cover the JavaScript operations skipped at this stage; there are still areas where no interception/measurement occurs. The skipped operations list as seen at the time of writing:
+	<ul>
+		<li>expandable lists coverage,</li>
+		<li>in-page navigation tabs loading/switching,</li>
+		<li>CDEJ (infrastructure) popups load</li>
+		<li>evaluation of the resolve pages passed when loading the pages as part of resolving and other more complicated page flows,</li>
+	</ul>
+	</li>
+	<li>If there is some delay or some data is not available, the infrastructure should be made robust enough to continue working - report the failed operations and reset for the next ones.</li>
+	<li>Potentially make the performance measurement infrastructure 'multi-operational'.
+	<ul>
+		<li>When used by SVT and automated tests, the sequential invocations are assumed and would be the rational approach; however, in case of the real usage of the applications, regardless of JavaScript being single-threaded, another operation might be started before the previous one finishes (say, a tab is opened, but before it loads, the previous tab is clicked and some other page requested there). Currently the infrastructure resets every time when it detects an operation starts, therefore the data of the previous operations might be lost. Ideally we want to have the infrastructure which handles multiple operations and separates the data so that all the 'simultaneous' operations are correctly measured and reported.</li>
+	</ul>
+	</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

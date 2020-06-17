@@ -1,0 +1,1866 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Word Integration - Changes and Improvements</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../wiki.css" />
+<script type="text/javascript" src="../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Word Integration - Changes and Improvements";
+    pageId="urn:lsid:ibm.com:td:b8a3231d-88bf-41a9-badd-c72c5bfe2871";
+    toRoot="../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Word Integration - Changes and Improvements</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">Table of Contents:</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii3">Stakeholders</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii4">Background</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii5">Requirements</a>
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii6">Requirement Decisions</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii7">Non Functional Requirements</a></li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii8">Design Options</a>
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii9">Design</a></li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii10">Architecture/Design Decisions</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii11">System Context Diagram</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii12">Architecture/Design Context Diagram</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii13">Design Specifics</a>
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii14">Design User Interface</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii21">Design Validations</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii22">Design Metadata Changes</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii23">Design Logical Data Model Changes</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii24">Design Resilience Measures</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii25">Design Logging</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii26">Design Accessibility</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii27">Third Party Software and Legal Requirements</a></li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii28">Use Cases</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii15">Implementation Notes</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii16">Application Impact</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii17">Configuration Transport Manager</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii18">Testing</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii19">Documentation/How To Use Feature</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii20">Check Lists</a>
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii1">IEG Check List</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii2">Workflow Check List</a></li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h1 dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Word Integration - Changes and Improvements</strong></h1>
+
+<h2 dir="ltr" id="ii3">Stakeholders</h2>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Refer to the following Org Chart to ensure you are engaging the correct people. The table below indicates the current contacts for each area.
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://ibm.biz/BdsuKd">https://ibm.biz/BdsuKd</a></li>
+	</ul>
+	</li>
+</ul>
+
+<table border="1" dir="ltr">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Role</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Sign Off if Applicable</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Customer</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Business Owner/Product Owner</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Shane McFadden/Sonya Purcell</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Architect</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Fergal Gavin/Colm O'Flynn</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Developer(s)</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Colm O'Flynn/Stephen Horgan</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">FVT</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Satya Minnekanti</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">SVT</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">John Redmond/Sean Cleary</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Information Developer</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Annette Sohor</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">UX Design</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Legal</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Deirdre Dolan/Jim Rook</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii4">Background</h2>
+
+<p dir="ltr">(The following is taken from the Word Integration Playback 1 from 2018 <a href="https://ibm.ent.box.com/file/355338927256">https://ibm.ent.box.com/file/355338927256</a>, Castro, Kovanas,McFadden et al)</p>
+
+<p dir="ltr">Cúram SPM&nbsp; currently has separate Microsoft Word integration solutions for the Internet Explorer and Chrome browsers on the client desktops:</p>
+
+<p dir="ltr">The current solution allows a MS Word document to be created automatically from a template where the template details are set in SPM before the document is presented&nbsp;<br />
+to the user for editing.&nbsp;</p>
+
+<p dir="ltr">When the user finishes editing the document and closes MS Word, the document is saved to the IBM Cúram SPM database.</p>
+
+<p dir="ltr">The current solution has two separate implementations, both of which are supported on Windows only.</p>
+
+<ul dir="ltr">
+	<li>One for Internet Explorer&nbsp;
+	<ul>
+		<li>Java applet and the COM bridge combination for the browsers which support applets&nbsp;</li>
+	</ul>
+	</li>
+	<li>One for Chrome
+	<ul>
+		<li>After Google Chrome announcement (Sep, 2015) they were dropping Java applet support,Cúram SPM had to build a “Chrome specific” solution using the Native Messaging Bridge&nbsp;</li>
+		<li>This solution also requires a Java Run-time and is documented <a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" rel="noopener noreferrer" page="Enabling the FILE_EDIT widget for Google Chrome" id="wikiLink1584673444211" href="../../../Architecture%20and%20Features/Features/FILE%20EDIT%20Widget/Enabling%20the%20FILE_EDIT%20widget%20for%20Google%20Chrome.html" target="_blank">here&nbsp;</a></li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">Some significant events &nbsp;have &nbsp;resulted in the current solution having two separate implementations along with the more pressing need for a new future proof solution.&nbsp;</p>
+
+<ul dir="ltr">
+	<li>Following Google's announcement,&nbsp;Microsoft have followed suit and dropped Java plugin support from the Edge browser.</li>
+	<li>As part of&nbsp;JRE 9.0 (Released Sept 2017), Oracle announced the deprecation of the deployment stack, required for Applets and Web Start Applications. These were subsequently&nbsp;removed from JRE 11 (Released Sept 2018)</li>
+	<li>The current applet solution has a high maintenance cost with multiple APARs from customers which prove difficult to reproduce, diagnose and fix due the number of moving parts.</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Project Timeline to date:</strong></p>
+
+<p dir="ltr">The Word Integration Project has been run in phases</p>
+
+<p dir="ltr">&nbsp;In the first phase, the Research And Development team investigated&nbsp;possible alternative solutions&nbsp;<a href="https://ibm.ent.box.com/folder/49079899522">https://ibm.ent.box.com/folder/49079899522</a></p>
+
+<p dir="ltr">These technologies were considered</p>
+
+<ol dir="ltr">
+	<li>For On-premise
+	<ul>
+		<li>a.Microsoft Office Add-Ins;</li>
+		<li>b.Office URI Schemes and WebDav;</li>
+		<li>c.Native Messaging API;</li>
+	</ul>
+	</li>
+	<li>For Cloud
+	<ul>
+		<li>a.Office Online 365 with WOPI;</li>
+		<li>b.Office Online 365 with MsGraphand MsOneDrive</li>
+	</ul>
+	</li>
+</ol>
+
+<p dir="ltr">The recommendation made in July 2018</p>
+
+<table border="1" dir="ltr" style="width: 890px; table-layout: fixed; overflow-wrap: break-word; border-collapse : collapse; border-color : #696969;">
+	<tbody>
+		<tr>
+			<td style="overflow: hidden; width: 883px; border-color: rgb(105, 105, 105); background-color: rgb(255, 255, 204);">
+			<p><strong>For an on-premise solution, R&amp;D recommends WebDAV and Office URI Schemes.</strong></p>
+
+			<ul>
+				<li>This is a direct replacement of existing technology. Please note that R&amp;D did not perform a proof-of-concept using Cúram SPM caseworker application.</li>
+				<li>The spike was purely technical to prove the technology using a sample web application hosted on a simple python HTTP server integrated with WsgiDAV (python-based WebDAV server) and a stub REST API using stubby4j.</li>
+				<li>The research did not perform any non-functional evaluation of the WebDAV service such as:reliability, performance, concurrency, scalability, security, high availability, fault tolerance.</li>
+				<li>These non-functional evaluations must be performed by the project team. R&amp;D also did not assess multiple WebDAV servers –only WsgiDAV. A project team must decide which WebDAV servers Cúram SPM should certify –similar to what was done for CMIS.</li>
+				<li>The non-functional scenarios above should be benchmarked for production.</li>
+			</ul>
+
+			<p><strong>For a hybrid cloud architecture, R&amp;D recommends Office Online 365 with WOPI.</strong></p>
+
+			<ul>
+				<li>R&amp;D did not execute any technical spike on this Cloud alternative due to associated costs, but the research indicates this is a strategic wayto integrate Cúram SPM with Office on the Cloud. A project team might decide through design thinking sessions if the Cloud approach should be implemented.</li>
+			</ul>
+
+			<p><strong>For Appeals.</strong>Due to low adoption of Word integration with Appeals reports by Cúram SPM customers (i.e. only one customer), <strong>R&amp;D recommends the project team to assess Microsoft Office Add-Ins as the way to solve the Appeals Clause problem</strong></p>
+
+			<ul>
+				<li>MsOffice Add-Ins has been used already in the industry to manage Clauses. However, it is up to discussion if Cúram SPM should develop the Add-In or the customer. Design thinking may help to decide.</li>
+			</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">In the second phase, a team was staffed to begin work on this project starting in late&nbsp;2018, to implement a WebDAV solution.In the second quarter of 2019,&nbsp;the project is suspended.</p>
+
+<p dir="ltr" style="margin-top: 14px; text-indent: 0in; text-align: left; margin-left: 40px;"><u>Why was the WebDAV solution initially chosen.</u></p>
+
+<ul dir="ltr" style="margin-left: 40px;">
+	<li style="text-indent: 0in; text-align: justify;"><span style="color:null;"><span style="font-size:12px;"><span style="font-family:Arial,Helvetica,sans-serif;"><span style="line-height:90%"><span style="unicode-bidi:embed">WebDAV would provide&nbsp;a browser agnostic solution to reduce maintenance costs for Cúram.</span></span></span></span></span></li>
+	<li style="text-indent: 0in; text-align: justify;"><span style="color:null;"><span style="font-size:12px;"><span style="font-family:Arial,Helvetica,sans-serif;"><span style="line-height:90%"><span style="unicode-bidi:embed">From a customer perspective,the number of moving parts on the client side would be reduced, and the complexity would be moved to the back-end</span></span></span></span></span></li>
+</ul>
+
+<p dir="ltr" style="margin-top: 14px; text-indent: 0in; text-align: justify; margin-left: 40px;"><u>Characteristics of the WebDAV&nbsp;solution:</u></p>
+
+<ul dir="ltr" style="margin-left: 40px;">
+	<li style="text-indent: 0in; text-align: justify;">The editing experience is delivered by the Word client</li>
+	<li style="text-indent: 0in; text-align: justify;">Microsoft Word acts as WebDAV client and can use a WebDAV URI to access a file on a remote WebDAV server. This ensures that the file does not have to be downloaded to the client machine (AD-004 – Technology ).&nbsp;</li>
+	<li style="text-indent: 0in; text-align: justify;">It has as a&nbsp;prerequisite, a&nbsp;WebDAV Class 2 Server (https://www.webdavsystem.com/server/documentation/ms_office_read_only/)</li>
+	<li style="text-indent: 0in; text-align: justify;">Separate Web DAV Server component that runs as a separate process on the server side.</li>
+	<li style="text-indent: 0in; text-align: justify;">The file is to be persisted to the SPM database (as before)</li>
+	<li style="text-indent: 0in; text-align: justify;">Temporary files are on the WebDAV server. Cúram EAR will create the Word document from a template, on the WebDAV server. Cúram EAR will delete the file as part of closing the editing session</li>
+	<li style="text-indent: 0in; text-align: justify;">WebDAV Server has to be able to act as a Reverse Proxy, to trigger the Cúram EAR to save the file content to the SPM database and update the state of file metadata in the database during the Editing Session.</li>
+	<li style="text-indent: 0in; text-align: justify;">Project identified IBM HTTP Server as being able to act as a web server that provides WebDAV Server Class 2 and reverse proxy support (AD-005 – WebDAV Server Implementation)</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><u>Consequences of choosing WebDAV</u></p>
+
+<ul dir="ltr" style="margin-left: 40px;">
+	<li>Two or more WebDAV servers needed for high availability and fail-over&nbsp;</li>
+	<li>This implies that will need to access to shared file-system for fail-over (AD-006 – WebDAV Server File System )<br />
+	&nbsp;</li>
+</ul>
+
+<p dir="ltr">In 2019, the following factors caused us to re-consider the decision to implement a WebDAV solution</p>
+
+<p dir="ltr"><u>Factor #1</u>: Technical Issue for Hamburg, our largest sponsor customer.</p>
+
+<ul dir="ltr">
+	<li>The choice of IBM HTTP Server (IHS) might be problematic.&nbsp;</li>
+	<li>Hamburg already are using IHS as their web server and it is deployed on z/OS. See <a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=193423" rel="noopener noreferrer" target="_blank">link</a></li>
+	<li>IHS does not support WebDAV enablement on z/OS. See <a href="https://www.ibm.com/support/knowledgecenter/en/SSEQTJ_9.0.5/com.ibm.websphere.ihs.doc/ihs/rihs_apachemods.html" rel="noopener noreferrer" target="_blank">link</a></li>
+	<li>Consequently, they cannot use IHS on z/OS as WebDAV Server</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">Possible Solutions for this.</p>
+
+<ul dir="ltr">
+	<li>A) Hamburg deploy the WebDAV server to a non z/OS machine
+	<ul>
+		<li>For fail-over, there will need two or more non z/OS machines.</li>
+		<li>Additional cost and overhead for the customer.</li>
+	</ul>
+	</li>
+	<li>(B) Raise a ticket against IHS to add WebDAV support for z/OS
+	<ul>
+		<li>Matt Nuttall, WebSphere and IBM HTTP Server on z/OS Support &nbsp;writes:</li>
+		<li>"Our documentation is correct: WebDAV is not ported to Apache on z/OS and there are no plans to include it in the future."</li>
+		<li>We would have to create a deliverable dependency on another product , who currently have no plans to deliver this support.</li>
+	</ul>
+	</li>
+	<li>(C) Implement the missing modules ourselves for z/OS.&nbsp;
+	<ul>
+		<li>This defeats one of the purposes of choosing IHS per "AD-005 – WebDAV Server Implementation"</li>
+		<li>Support from the IHS team? What happens from a support perspective if there is an issue on this IHS server?</li>
+		<li>Additional development effort developing Apache Modules in C. See <a href="https://httpd.apache.org/docs/2.4/developer/modguide.html" rel="noopener noreferrer" target="_blank">link&nbsp;&nbsp;</a>and &nbsp;<a href="https://www-01.ibm.com/support/docview.wss?uid=tss1wp101225&amp;aid=3" rel="noopener noreferrer" target="_blank">link</a>.</li>
+	</ul>
+	</li>
+	<li>(D) Use a Third Party Java Library to deliver WebDAV Class 2 capabilities through the Cúram EAR
+	<ul>
+		<li>The Cúram front-end becomes a WebDAV server by using a set of Java libraries.</li>
+		<li>This means the WAS server running on z/OS is a WebDAV server. There is no need for a separate process. It does not need to behave as a reverse proxy.</li>
+		<li>However, most libraries that provide support Class 2 require commercial licenses.</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr"><u>Factor #2:</u><strong> </strong>SPM Cloud Strategy</p>
+
+<p dir="ltr" style="margin-left: 40px;">Immediate Effects</p>
+
+<ul dir="ltr">
+	<li>This more relates to what the WebDAV solution won't do, and how it affects deploying SPM to the Cloud.</li>
+	<li>There is a question of how our chosen solution will effect how the SPM product can evolve.</li>
+	<li>For Example: See the previously mentioned requirement for shared storage AD-006 – WebDAV Server File System&nbsp;</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">Future Effects</p>
+
+<ul dir="ltr">
+	<li>While there are some Cloud Solutions that leverage WebDAV , the proposed WebDAV approach retains word processing support as part of the core functionality that SPM is seen to provide natively.</li>
+	<li>This contrasts with industry trend for Cloud where the move is toward delegate the responsibility to a Cloud service.</li>
+	<li>We may have to launch another Word Integration project again within two to five years, to address Cloud requirements as part of a Cloud initiative.</li>
+	<li>For example: If we have customers who also have enterprise Office 365 licenses that follow the direction set by Microsoft, we could have a situation where those customer will want to dispense with Word Client on their machines and go with an Online Editor OR they might want support for both, which is the experience they get with <a href="http://office.com/">http://office.com/</a></li>
+</ul>
+
+<p dir="ltr"><u>Factor #3:<strong> </strong></u>Launch of<strong>&nbsp;</strong>Edge Chromium</p>
+
+<p dir="ltr" style="margin-left: 40px;">The following statement written in June 2018, in an R&amp;D document, outlined the difficulty in extending the exiting&nbsp;Chrome solution to Edge</p>
+
+<ul dir="ltr">
+	<li>
+	<table border="1" style="width: 738px; table-layout: fixed; overflow-wrap: break-word; border-collapse : collapse; border-color : #696969;">
+		<tbody>
+			<tr>
+				<td style="overflow: hidden; width: 731px; background-color: rgb(255, 255, 204); ">
+				<p style="text-align: left;"><span style="font-size:12px;"><span style="unicode-bidi:embed"><span style="font-family:Calibri"><span style="color:black"><span style="font-style:italic">The main advantage of using the Native Messaging API, is that it’s the recommended industry standard on the replacement of java applets…</span></span></span></span></span></p>
+
+				<p style="text-align: left;"><span style="font-size:12px;"><span style="unicode-bidi:embed"><span style="font-family:Calibri"><span style="color:black"><span style="font-style:italic">it would seem to be a small task to develop a similar solution to work for the Microsoft Edge browser. </span></span></span></span></span></p>
+
+				<p style="text-align: left;"><span style="font-size:12px;"><span style="unicode-bidi:embed"><u style="text-underline:single"><span style="font-family:Calibri"><span style="color:black"><span style="font-style:italic">&nbsp;Unfortunately, the Edge browser extensions use the Native Messaging technology in a different manner.</span></span></span></u></span></span></p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p>However, this last statement applies to EdgeHTML.&nbsp;</p>
+	</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">Edge Chromium GA'ed on January 15th 2020 and is built on the same foundation (Chromium) as the Chrome browser</p>
+
+<p dir="ltr" style="margin-left: 40px;">The documentation on the Microsoft website indicated that the&nbsp;Native Messaging API implementation&nbsp;is essentially the same as Google Chromes , but there are some minor differences<br />
+<a href="https://docs.microsoft.com/en-us/microsoft-edge/extensions-chromium/developer-guide/native-messaging">https://docs.microsoft.com/en-us/microsoft-edge/extensions-chromium/developer-guide/native-messaging</a></p>
+
+<p dir="ltr" style="margin-left: 40px;">Together with the existing&nbsp;proposal to drop IE 11 support in favor of support for Edge , (for reasons outside of the scope of the Word project)&nbsp;, this announcement makes the Native Messaging API solution more appealing. The thinking was that with minimum development effort the existing solution could be adapted to work on another browser.</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr"><u><strong><em>The question we were left&nbsp;with at the end of 2020 was, if&nbsp;the development and maintenance cost involved for our WebDAV solution, was warranted if it had&nbsp;a short shelf life</em></strong></u>?</p>
+
+<p dir="ltr"><strong>Change of Direction / Phase 3</strong></p>
+
+<p dir="ltr">At a meeting in January 2020 with senior management, the tentative decision arrived at was , that&nbsp;&nbsp;the development and maintenance cost for WebDAV was not warranted at this time.That the&nbsp;longer term solution would involve looking at Cloud based solutions, and that a shorter term strategy for solving the most immediate challenges for the Word Integration Project, which is the Oracle licensing issue.</p>
+
+<p dir="ltr">For the applet based solution to work, an Oracle JRE v7.x&nbsp;or v8.x must be present on the caseworker client machine. See <a href="http:// https://www.ibm.com/software/reports/compatibility/clarity-reports/report/html/prereqsForProduct?deliverableId=5ABDD150BD9B11E88857DCC2171712A1 " rel="noopener noreferrer" target="_blank">link</a>.</p>
+
+<p dir="ltr">If customers are using Oracle JRE v8.0&nbsp;on the client machine, they will have to pay a license.We investigated OpenJDK v8.0 , which does not require a license fee,,but, it&nbsp;&nbsp;does not provide a Java Plugin for IE11 or Edge.</p>
+
+<p dir="ltr">With WebDAV shelved, we have to look again at the alternatives to WebDAV , a&nbsp;list of the alternatives &nbsp;that were investigated&nbsp;are listed in the section&nbsp;<a href="#ii8">Design Options</a>. <span style="color:#ff0000;">TO-DO List the other options considered.</span></p>
+
+<p dir="ltr">Most of them would have comparable development effort save for one,&nbsp;Native Messaging API, the current solution supported for Google Chrome.</p>
+
+<p dir="ltr">The&nbsp;Native Messaging API solution also requires a Java run-time but does not depend on applets and can be an OpenJDK JRE.( which doesn't have a license fee)</p>
+
+<p dir="ltr"><u>Our proposal is that we improve on the Native Messaging API solution&nbsp;by extending the solution developed for Chrome to other supported browsers that support the Native Messaging API (Edge or Firefox)</u>&nbsp;AND to <u>improve the robustness of the Native Messaging solution</u></p>
+
+<p dir="ltr">In February 2020, we developed a patched version of the existing Chrome Solution solution that allows it to work on Edge Chromium. Details of our changes are documented in the section&nbsp;<a href="#ii15">Implementation Notes</a></p>
+
+<p dir="ltr">At the same time, Stephen Horgan fixed an issue in the Chrome solution relating to the handling of an empty details file, and also made improvements to the logging of the Native Messaging Host. See <a href="#ii15">Implementation Notes</a>&nbsp;.</p>
+
+<p dir="ltr">In February 2020, Feargal Conneelly completed internal FVT testing of thow&nbsp;patch, and in March 2020,&nbsp;a TestFix was provided to Hamburg that included the changes needed to enable Edge Chromium support and Stephen's fixes&nbsp;</p>
+
+<p dir="ltr">The test fix Key is: 7.0.5.0_TestFix_110301:910158644186814080</p>
+
+<p dir="ltr">We are currently waiting to hear back from Hamburg with feedback.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii5">Requirements</h2>
+
+<p dir="ltr"><strong>List of Requirements</strong></p>
+
+<ul dir="ltr">
+	<li><strong>These are taken from&nbsp;<a href="https://ibm.ent.box.com/file/290696050948">https://ibm.ent.box.com/file/290696050948</a></strong></li>
+</ul>
+
+<ol dir="ltr" style="margin-left: 40px;">
+	<li><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=152268" rel="noopener noreferrer" target="_blank">152268</a>: As a caseworker, I need the option to select an MS Word Document based on a template that I can edit
+
+	<ul>
+		<li>Marked as invalid, because the functionality exists</li>
+	</ul>
+	</li>
+	<li><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=152269" rel="noopener noreferrer" target="_blank">152269</a>: As a caseworker, I need to be able to open, view and edit MS Word communications from Cúram Communications pages
+	<ul>
+		<li>This is not marked as invalid but going by Marcelo's presentation it should be</li>
+	</ul>
+	</li>
+	<li><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=152276" rel="noopener noreferrer" target="_blank">152276</a>: As an Administrator, I need to be able to create standard paragraph text (clauses) that can be used to insert into an MS Word template
+	<ul>
+		<li>Marked as invalid, because the functionality exists.</li>
+	</ul>
+	</li>
+	<li><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=152275" rel="noopener noreferrer" target="_blank">152275</a>: As an Appeals user, I need to be able to search for pre-configured text that I can insert into a new MS Word template</li>
+</ol>
+
+<ul dir="ltr">
+	<li>MS Word Integration Currently Supports:</li>
+</ul>
+
+<ol dir="ltr" style="margin-left: 80px;">
+	<li>Ability to create a Word document from template</li>
+	<li>Ability to open, view and edit Word documents from Cúram Communications pages</li>
+	<li>Ability to create standard paragraph text in Admin that can be used by Appeals users as clauses to insert into a template</li>
+	<li>Support Appeals functionality of search text for inserting into Word document</li>
+	<li>Support existing customer templates (E.g. California DSS has many templates)</li>
+	<li>Seamless integration with Word processing; (i.e. auto-opens on selecting the action in the application, auto-save the doc to DB and closes the application on completion plus only saves to the DB, not to local disk)</li>
+	<li>Support Word processing from all supported browsers</li>
+	<li>Support our support OSs; Windows, Mac (client) and zOS(server)</li>
+</ol>
+
+<ul dir="ltr">
+	<li><strong>These requirement are taken from&nbsp;<a href="https://ibm.ent.box.com/file/384193885913">https://ibm.ent.box.com/file/384193885913</a></strong>
+
+	<ul>
+		<li>Epics
+		<ul>
+			<li><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=236634" rel="noopener noreferrer" target="_blank">236634&nbsp;</a>As a Caseworker, I need to create a new MS Word Communication from a Cúram Communications page.</li>
+			<li><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=152269" rel="noopener noreferrer" target="_blank">152269&nbsp;</a>As a Caseworker, I need to be able to open, view and edit MS Word communications from Cúram Communications pages.</li>
+		</ul>
+		</li>
+		<li>Stories&nbsp;
+		<ul>
+			<li><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=236913" rel="noopener noreferrer" target="_blank">236913&nbsp;</a>As a Caseworker, I need to edit the information of an existing MS Word Communication from a Cúram Communications page and have the MS</li>
+			<li><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=236640" rel="noopener noreferrer" target="_blank">236640&nbsp;</a>As a Caseworker, I need to delete an existing MS Word Communication from a Cúram Communications page.</li>
+			<li><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=236638" rel="noopener noreferrer" target="_blank">236638</a> As a Caseworker, I need to open an existing MS Word Communication from a Cúram Communications page.</li>
+			<li><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=236637" rel="noopener noreferrer" target="_blank">236637&nbsp;</a>As a Caseworker, I need to only edit the information of an existing MS Word Communication from a Cúram Communications page.</li>
+			<li><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=236636" rel="noopener noreferrer" target="_blank">236636&nbsp;</a>As a Caseworker, when closing the MS Word document,I need to be given the options to either Save or Discard the changes or Cancel to return back to the open document.</li>
+			<li><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=236635" rel="noopener noreferrer" target="_blank">236635&nbsp;</a>As a Caseworker, I need to save my changes at any time while the MS Word document is open.</li>
+			<li><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=152276" rel="noopener noreferrer" target="_blank">152276&nbsp;</a>As an Administrator, I need to be able to create standard paragraph text (clauses) that can be used to insert into an MS Word template.</li>
+			<li><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=152275" rel="noopener noreferrer" target="_blank">152275&nbsp;</a>As an Appeals user, I need to be able to search for pre-configured text that I can insert into a new MS Word template.</li>
+			<li><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=152268" rel="noopener noreferrer" target="_blank">152268&nbsp;</a>As a caseworker, I need the option to select an MS Word Document based on a template that I can edit</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<ul dir="ltr">
+	<li><strong>Additional Improvements to functionality taken from&nbsp;<a href="https://ibm.ent.box.com/file/384193885913">https://ibm.ent.box.com/file/384193885913</a></strong></li>
+</ul>
+
+<ol dir="ltr" style="margin-left: 40px;">
+	<li>Current Implementation is very brittle –remove this technical complexity&nbsp;e.g. Chrome chaining Or provide a more solid/maintainable approach</li>
+	<li>Does it allow for future technology change/direction; cloud / hybrid Note: Non-functional requirements covered as standard as part of the Technical Evaluation Template)</li>
+</ol>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li><strong>Chrome Solution Disadvantages taken from <a href="https://ibm.ent.box.com/file/294236002942">https://ibm.ent.box.com/file/294236002942</a></strong></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">The current Chrome solution has the following weaknesses:</p>
+
+<ol dir="ltr">
+	<li style="margin-left: 40px;">Will always be a high maintenance cost with this implementation due to the many independent moving parts.</li>
+	<li style="margin-left: 40px;">It can be frustrating when a customer chooses to upgrade or resorts to automatic updates.</li>
+	<li style="margin-left: 40px;"><u>It is inconvenient to set up a user’s machine</u> (mostly related to the JRE visibility and proper access rights), &nbsp;installing the "File Edit Native Messaging Bridge" extension and installing the host application. &nbsp;</li>
+	<li style="margin-left: 40px;">Due to the security concerns around the session browser timeout, the JACOB bridge is used to launch MS Word on the desktop, instead of using the Native Messaging Bridge. &nbsp;This is another extra independent moving part</li>
+</ol>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<ul dir="ltr">
+	<li><strong>Feeback from MCSS SAMS</strong></li>
+</ul>
+
+<ol dir="ltr" style="margin-left: 40px;">
+	<li>Need&nbsp;for improved logging and a troubleshooting guide</li>
+</ol>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li><strong>Feedback from Hamburg (<span style="color:#ff0000;">TO-DO Confirm with Shane</span>)</strong></li>
+</ul>
+
+<ol dir="ltr" style="margin-left: 40px;">
+	<li>In addition to the point about the deploy-ability of the Chrome solution, there was also a concern about the file being downloaded to the client machine</li>
+</ol>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii6">Requirement Decisions</h3>
+
+<p dir="ltr">There may be some outstanding questions/decisions made as regards to the requirements. These decisions should be documented here.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="156" width="860">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement Decision Title</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Issue or Problem Statement</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Assumptions</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Motivation</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Alternatives</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Decision</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Justification</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Implications</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Status</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Date</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii7">Non Functional Requirements</h3>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. Do the following non functional requirements apply to the enhancement being created and if so, minor details should be provided here. We can fill in N/A if the specified non functional requirement is not applicable to the feature being delivered.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" style="width: 1161px;" width="671">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">NFR</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+			<td style="width: 489px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Details</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Accessibility</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to be used by people with disabilities. When new technologies are being used for the UI very careful consideration should be given to whether screen readers can be used with the technologies. This applies specifically to usage of JavaScript, Flex and SVG. The use of colors to provide functionality should be considered (and avoided), along with resolutions that will be used by vision impaired users.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Both desktop application and tablet devices should be considered in this effort.</p>
+			</td>
+			<td style="width: 489px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Availability &amp; Resilience</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to be fully or partly operational as and when required and to effectively handle failures that could affect system availability. This should be considered when working outside of the normal infrastructure and deployment. For example, the XML Server is not deployed in an application server and has special handling for fail-over and load balancing. Careful consideration should be taken before adding new components, e.g. EJB Beans, MDBs, to the infrastructure.</td>
+			<td style="width: 489px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Development Resource</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to be designed, built, deployed and operated within known constraints of people, budget, time, etc. In general there is not much information required here, however where special skill sets or people with siloed knowledge are required to work on the change/enhancement, this should be detailed here.</td>
+			<td style="width: 489px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Evolution</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to be flexible in the face of the inevitable change that all systems experience after deployment, balanced against the costs of providing such flexibility. Consideration should be given to future proofing the change, including considering how to upgrade to any changes or enhancements provided in the future. Specifically designs should accommodate elements such as localisation (text, dates, etc.), customization, configurability, and componentization. Providing these features in future releases, when not considered up front, has caused impacts for customers in the past and has prevented us from providing the features in some cases.</td>
+			<td style="width: 489px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Internationalisation</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to be independent from any particular language, country or cultural group. Localisation and internationalisation are a large concern for Cúram. Support should always be provided to view information in multiple locales, based on the user and server locale, along with support for working in multiple time zones.</td>
+			<td style="width: 489px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Location</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to overcome problems brought about by the absolute location of its elements and the distances between them. For the most part this is not a major concern, however we should never design based on the assumption that the customer will use a default configuration</td>
+			<td style="width: 489px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Performance and Scalability</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to predictably execute within its mandated performance profile and to handle increased processing volumes. Performance and scalability are a concern and should always be considered during design. Where necessary, the Performance and Benchmarking teaming should be engaged early to help with determining impact of potential changes.</td>
+			<td style="width: 489px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Regulation</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to conform to locale and international laws, quasi-legal regulations, company policies and other rules and standards. Regulation includes the usages of third party tools and the licensing issues associated with these. New jars should never be introduced without considering the legal implications and licensing of the jars. This includes usage of GPL licensed code. Also, usage of code freely provided on the web and not properly licensed should be avoided.</td>
+			<td style="width: 489px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Security</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to reliably control, monitor and audit who can perform what actions on what resources and to detect and recover from failures in security mechanisms. This is a concern where new features are added that are not contained within the normal Cúram security.</td>
+			<td style="width: 489px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Usability</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ease with which people who interact with the system can work effectively. How the change will affect the user and how they use the application/feature should always be considered. Where necessary the business analysts and our user interface experts should be engaged early to ensure we meet usability requirements. e.g. printing.</td>
+			<td style="width: 489px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii8">Design Options</h2>
+
+<p dir="ltr"><strong>Architectural Alternatives (as described by Marcelo Castro <a href="https://ibm.ent.box.com/file/304427762433">https://ibm.ent.box.com/file/304427762433</a>)</strong></p>
+
+<ol dir="ltr">
+	<li>Integration Method
+	<ul>
+		<li>a.Vertical / Direct Integration Model;</li>
+		<li>b.Horizontal / Indirect Integration Model.</li>
+	</ul>
+	</li>
+	<li>Direct Integration Model
+	<ul>
+		<li>a.OOTB On-premise only, standalone Word;Current architecture.</li>
+		<li>b.OOTB Hybrid only, Word on Cloud;</li>
+		<li>c.Both, On-premise and hybrid;</li>
+		<li>d.OOTB On-premise only, but customizable</li>
+	</ul>
+	</li>
+	<li>Coupling
+	<ul>
+		<li>a.Tightly coupled from the product;Current architecture.</li>
+		<li>b.Loosely coupled from the product;i.e. externalized as REST service, as plug-in/add-in, as asset etc.</li>
+	</ul>
+	</li>
+</ol>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">.</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Option 1&nbsp; &nbsp;</strong><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Web DAV Solution</strong></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Design Option Details&nbsp;<a href="https://ibm.ent.box.com/file/416545878330">https://ibm.ent.box.com/file/416545878330</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Diagram taken from&nbsp;<a href="https://ibm.ent.box.com/file/384193885913">https://ibm.ent.box.com/file/384193885913</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><img lconnwikiparamattachmentname="Picture1.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Word%20Integration%20-%20Changes%20and%20Improvements._ATTACHMENTS_/Picture1.png" style="width: 800px; height: 492px;" lconnwikiparamwikipage="Word Integration - Changes and Improvements" lconnattachedresourcetype="page"></img></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Pros of choosing this option.
+	<ul>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Apache is a widely used open source HTTP server. IHS is commercial alternative. IHS comes free with a WebSphere license.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">No need to edit source code of either, both WebDAV and Reverse Proxy capabilities can be enabled through configurations.&nbsp;</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Docx4j is open source and generates document on server side and allows for non-alpha numeric characters to be used in a property.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Generating documents on the server side is more efficient.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">No need for customer to install anything and no uploading/downloading of documents.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Prevents code bloat as same code implementation for any supported platform, including MacOS.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">WebDAV as an HTTP protocol is a lightweight solution – i.e. it does not require heavy computing resources.<br />
+		&nbsp;</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Cons of choosing this option
+	<ul>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Customers running on Microsoft Word older than Office 2010 SP 2 cannot use the Word integration feature.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Dynamic insertion feature of Appeals Clause picker won’t work.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Disabling of the “Save As” button, which is possible in the current solution is not possible.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Docx4j jar used in Spike needed to be patched due to bug in it’s source code.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Introduces another infrastructure component for customers to manage.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Reliability - Remote calls have higher risk of failure vs local calls</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Latency - Remote calls never perform the same way of local calls</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Option 2&nbsp; <span style="color:#ff0000;"><span style="font-size:18px;">TO-DO</span></span></strong></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Design Option Details</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Simple diagram if it helps to describe the option</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Pros of choosing this option.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Cons of choosing this option</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii9">Design</h3>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. This should outline in detail the design chosen with all of the various areas for the component covered.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii10">Architecture/Design Decisions</h2>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="156" width="860">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Architecture Decision Title</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Issue or Problem Statement</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Assumptions</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Motivation</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Alternatives</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Decision</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Justification</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Implications</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Status</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Date</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Open/In Progress/Closed</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii11">System Context Diagram</h2>
+
+<p dir="ltr">Taken from&nbsp;<a href="https://ibm.ent.box.com/folder/49079899522">https://ibm.ent.box.com/folder/49079899522</a></p>
+
+<p dir="ltr"><img id="1584635414802_0" src="data:image/png;base64,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"></img></p>
+
+<p dir="ltr">The Native Messaging API Solution is documented on the following pages</p>
+
+<p dir="ltr"><a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" rel="noopener noreferrer" page="Enabling the FILE_EDIT widget for Google Chrome" id="wikiLink1584640129923" href="../../../Architecture%20and%20Features/Features/FILE%20EDIT%20Widget/Enabling%20the%20FILE_EDIT%20widget%20for%20Google%20Chrome.html" target="_blank">Enabling&nbsp;the&nbsp;FILE_EDIT&nbsp;widget&nbsp;for&nbsp;Google&nbsp;Chrome</a></p>
+
+<ul dir="ltr">
+	<li><a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" rel="noopener noreferrer" page="New Word Integration Solution Design" id="wikiLink1584640129924" href="../../../Architecture%20and%20Features/Features/FILE%20EDIT%20Widget/New%20Word%20Integration%20Solution%20Design.html" target="_blank">New&nbsp;Word&nbsp;Integration&nbsp;Solution&nbsp;Design</a></li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii12">Architecture/Design Context Diagram</h2>
+
+<p dir="ltr">The diagram below shows the sequence of interactions between browser and front-end and browser extension and the Native Messaging Host, up until the point that editing session begins.It does not show the part of the exchange that happens on Committing/Saving changes made during an editing session.</p>
+
+<p dir="ltr"><img lconnwikiparamattachmentname="FileNativeBridge_NativeMessagingHost_Messages.gif" lconnwikimacro="image" lconnresourcetype="attachment" src="Word%20Integration%20-%20Changes%20and%20Improvements._ATTACHMENTS_/FileNativeBridge_NativeMessagingHost_Messages.gif" style="width: 1000px; height: 489px;" lconnwikiparamwikipage="Word Integration - Changes and Improvements" lconnattachedresourcetype="page"></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The Word Editing UIM/VIM pages of the SPM application , when accessed by a Chromium based browser will hit a JSP file called <span style="font-family:Courier New,Courier,monospace;">file-edit-chrome.jsp.</span></p>
+
+<p dir="ltr">This JSP will output the JS that executes the file download and subsequently calls the browser extension to start the exchange with the Native Messaging House</p>
+
+<p dir="ltr">The JS that executes in the browser issues three HTTP requests in sequence.</p>
+
+<ol dir="ltr">
+	<li>The first HTTP request&nbsp;initializes session data that is used to store the Details File and Content File for a given session
+	<ol>
+		<li>The <em>Content </em>File is a the template for a Word Communication</li>
+		<li>The <em>Details </em>File is the file that has the substitution values that the Native Messaging Host&nbsp;Java application will uses to do a token replace , filter copy to generate a new editable file on the client machine</li>
+	</ol>
+	</li>
+	<li>The second HTTP requests downloads&nbsp;the Details files to a download location beneath the browser file system
+	<ul>
+		<li>The download code uses this Chrome API&nbsp;<a href="https://developer.chrome.com/apps/fileSystem">https://developer.chrome.com/apps/fileSystem</a>&nbsp; to persist the download file to these locations)</li>
+	</ul>
+	</li>
+	<li>The third HTTP request downloads the Contents file&nbsp;</li>
+</ol>
+
+<p dir="ltr">It is after the download of the file that the message exchange with the Native Messaging Host begins.</p>
+
+<p dir="ltr">The protocol of the Native Message API message exchange in general is described here&nbsp;<a aria-describedby="slack-kit-tooltip" delay="150" href="https://developer.chrome.com/apps/nativeMessaging" rel="noopener noreferrer" target="_blank">https://developer.chrome.com/apps/nativeMessaging</a></p>
+
+<table border="1" dir="ltr" style="width: 881px; table-layout: fixed; overflow-wrap: break-word; border-collapse: collapse; border-color: rgb(105, 105, 105);">
+	<tbody>
+		<tr>
+			<td style="overflow: hidden; width: 874px; border-color: rgb(0, 0, 0); background-color: rgb(255, 255, 204); border-style: solid;">
+			<p><i data-stringify-type="italic">Chrome starts each native messaging host in a separate process and communicates with it using standard input (</i><code data-stringify-type="code"><i data-stringify-type="italic">stdin</i></code><i data-stringify-type="italic">) and standard output (</i><code data-stringify-type="code"><i data-stringify-type="italic">stdout</i></code><i data-stringify-type="italic">). </i></p>
+
+			<p><i data-stringify-type="italic">The same format is used to send messages in both directions: each message is serialized using JSON, UTF-8 encoded and is preceded with 32-bit message length in native byte order. </i></p>
+
+			<p><i data-stringify-type="italic">The maximum size of a single message from the native messaging host is 1 MB, mainly to protect Chrome from misbehaving native applications. The maximum size of the message sent to the native messaging host is 4 GB.</i></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">The sequence of messages exchanged between the Cúram SPM File Native Messaging Bridge&nbsp;browser extension and&nbsp;Native Messaging Host (NMH) follows this pattern</p>
+
+<ul dir="ltr">
+	<li>On receipt of a message from the browser extension,&nbsp;the NMH performs an action based on the message, either a set-up check,&nbsp;launch Word , or to quit Word.</li>
+	<li>On receipt of messages from the NMH, the extension w<span style="font-family:Arial,Helvetica,sans-serif;">ill update the pop-up modal that appears when launching a Word editing session and subsequently responds to the NMH with the next message in the protocol sequence</span></li>
+</ul>
+
+<p dir="ltr">The sequence of messages between the SPM&nbsp;Browser Extension and the SPM Native Messaging Host (NMH)&nbsp;is as follows</p>
+
+<ol dir="ltr">
+	<li>The first message is sent by the extension to the NMH,&nbsp;is a JSON Object string with a <span style="color:#0000ff;"><span style="font-family:Courier New,Courier,monospace;">msg </span></span>attribute,&nbsp; whose value is a&nbsp; '|' delimited string.
+
+	<ul>
+		<li>These values will subsequently be used&nbsp;to indicate to the NMH,&nbsp;where the download files are&nbsp;in the Chromium File System</li>
+	</ul>
+	</li>
+	<li>The NMH, on receipt of this message , responds&nbsp;by sending back a JSON Object string with an attribute <span style="font-family:Courier New,Courier,monospace;"><span style="color:#ff0000;">text</span>&nbsp;</span>with a value <span style="color:#ff0000;"><span style="font-family:Courier New,Courier,monospace;">PARAMS_READY</span></span></li>
+	<li>This signals to the Browser Extension to send on the next message. Again, this a JSON Object String with an attribute <span style="color:#0000ff;"><span style="font-family:Courier New,Courier,monospace;">msg </span></span>whose value is a "\@\" separated list of values which the NMH uses when communicating progress back to the Browser.
+	<ul>
+		<li><strong>The main change that we made for the patch provided to Hamburg was to patch the extension so that during the message exchange it included one addition piece of information which is an indicator of which browser is being used, Chrome or Edge Chromium</strong></li>
+		<li><strong>The oval shown on the right hand side is pointing to where in the message exchange this indicator will be included.</strong></li>
+	</ul>
+	</li>
+	<li>On receipt of this message,&nbsp;the NMH responds&nbsp;by sending back a JSON Object string, with an attribute <span style="color:#ff0000;"><span style="font-family:Courier New,Courier,monospace;">text&nbsp;</span></span>with a value <span style="color:#ff0000;"><span style="font-family:Courier New,Courier,monospace;">MESSAGES_READY</span></span></li>
+	<li>This signals to the Browser Extension to send on the next message. Again, this a JSON Object String with an attribute <span style="color:#0000ff;"><span style="font-family:Courier New,Courier,monospace;">msg </span></span>whose value is to <span style="color:#0000ff;"><span style="font-family:Courier New,Courier,monospace;">CHK_JACOB</span></span>
+	<ul>
+		<li>This indicates to the NMH to check if the required JACOB DLLs, needed for Java-COM integration&nbsp; are available.</li>
+	</ul>
+	</li>
+	<li>If this is successful, the NMH responds with a JSON Object string, that has an attribute <span style="color:#ff0000;"><span style="font-family:Courier New,Courier,monospace;">text&nbsp;</span></span>with a value of&nbsp;<span style="color:#ff0000;"><span style="font-family:Courier New,Courier,monospace;">JACOB_READY</span></span></li>
+	<li>This signals to the Browser Extension to send on the next message. Again this a JSON Object String with an attribute <span style="color:#0000ff;"><span style="font-family:Courier New,Courier,monospace;">msg</span> </span>whose value is to <span style="color:#0000ff;"><span style="font-family:Courier New,Courier,monospace;">CHK_WORD</span></span>
+	<ul>
+		<li>The NMH then checks the Word installation on the client machine. On a successful check,&nbsp; It sends back a series of 4 messages (using the message string sent to it earlier in the exchange) to indicate the progress of the check.</li>
+		<li>The last of these four messages is a JSON Object String with a <span style="font-family:Courier New,Courier,monospace;"><span style="color:#ff0000;">text&nbsp;</span></span>attribute of <span style="color:#ff0000;"><span style="font-family:Courier New,Courier,monospace;">WORD_READY</span></span>.</li>
+	</ul>
+	</li>
+	<li>The browser extension will then respond,with&nbsp;JSON Object string, that has an attribute <span style="color:#0000ff;"><span style="font-family:Courier New,Courier,monospace;">msg&nbsp;</span></span>with a value of&nbsp;<span style="color:#0000ff;"><span style="font-family:Courier New,Courier,monospace;">ALL_READY</span></span>
+	<ul>
+		<li><span style="color:null;"><span style="font-family:Arial,Helvetica,sans-serif;">The NMH will perform the filtered copy based on the Content and Details files, to produce a new editable file and t</span></span><span style="color:null;"><span style="font-family:Arial,Helvetica,sans-serif;">hen launches the Word application,to edit this new file</span></span></li>
+		<li><span style="color:null;"><span style="font-family:Arial,Helvetica,sans-serif;">While doing this, the NMH sends four messages reporting the progress to the Browser Extension, and concludes by sending </span></span> with a JSON Object string, that has an attribute <span style="color:#ff0000;"><span style="font-family:Courier New,Courier,monospace;">text&nbsp;</span></span>with a value of&nbsp;<span style="color:#ff0000;"><span style="font-family:Courier New,Courier,monospace;">SESSION_STARTED.</span></span></li>
+	</ul>
+	</li>
+</ol>
+
+<p dir="ltr"><span style="color:#ff0000;"><strong>TO-DO Document how the Save action, like the Download action is performed by JavaScript not by the NMH.</strong></span></p>
+
+<h2 dir="ltr" id="ii13">Design Specifics</h2>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">IEG:</strong></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">IEG Editor</strong></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">IEG Player</strong></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">IEG Engine</strong></li>
+</ul>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Workflow:</strong></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Process Definition Tool</strong></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Workflow Engine</strong></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Workflow Admin</strong></li>
+</ul>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CDEJ:</strong></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">HTML Changes</strong></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Widget Changes</strong></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CSS Changes</strong></li>
+</ul>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">SDEJ:</strong></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Changes?</strong></li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii14">Design User Interface</h3>
+
+<p dir="ltr">If the new enhancement contains any User Interface element, then a UX spec may be required. These include screenshots associated with the new feature, usability concerns, styling and any other UI considerations. Designers and UX team should be involved here. The spec should be associated with this design.</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Note: New UI features should also be tested to ensure they work on a tablet device. From 7.0.1.0 we state we support tablet devices so we need to make sure we are not regressing in this area.</strong></p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Key board short cuts should also be considered if developing features that interact with the user depending on mouse clicks/key board interaction (i.e. back browser button, refresh etc.)</strong></p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Browser differences should be considered for features being developed ensuring that the required browsers are tested and supported.</strong></p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Is the feature specified for the internal caseworker application or for the external Universal Access application (or both)..</strong></p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Accessibility for both the desktop application (JAWS and IE11 is the supported combination) and tablet (VoiceOver on an iPAD using the keyboard and gestures is the supported combination) should be considered for new UI features.</strong></p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Table Support</strong></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">As of v7.0.1 Curam will be certified for use on tablet devices. This introduces a new responsibility on Business Analysts, UX Designers and Developers to ensure that they do not change existing or introduce new features that break the Tablet support statement. For the most part this is limited to the production of custom widgets (non-standard UIM) and how they perform when using touch screen controls. Please note the following:</b></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tablet resolution is typically lower than the minimum recommended resolution of 1366x768. This means that the rules around wrapping of text have been relaxed for tablet, but teams should make a reasonable effort to ensure that any wrapping is not excessive and does not affect the ability to understand and use the application.</b></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Where custom features are introduced, teams must test using a iOS and Android device to ensure that the feature is compatible with touch screen controls.</b></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Where custom features are introduced, they must meet accessibility requirements for mobile devices.</b></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Printing - ensure the UI changes do now affect the printing of the pages</b></li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii21">Design Validations</h3>
+
+<p dir="ltr">Document the validations associated with the new enhancement, what type of validations these are etc.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii22">Design Metadata Changes</h3>
+
+<p dir="ltr">For any metadata based features being developed (e.g. IEG, Workflow etc.). document the new elements/attributes being added/modified and include an XML snippet of this new design. For each new element/attribute, describe how it works functionally.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii23">Design Logical Data Model Changes</h3>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Describe any changes required to the data model, entities, operations, indexes etc. This should be done in a tabular format as follows:</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">This will form of the data dictionary so it needs to be comprehensive.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Also important here that if new tables/indexes are being added, check to ensure that the primary key/index lenght does not exceed the maximum allowed for DB2</strong></li>
+</ul>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">A. Screen shot or diagram of Logical Data Model Changes associated with the enhancement.</strong></p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">B. Each Entity and Attribute Change Described as follows:</strong></p>
+
+<p dir="ltr">Entity: Entity Name</p>
+
+<p dir="ltr">Description of what the entity stores and a real world example etc.</p>
+
+<table border="1" dir="ltr">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Attribute</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Type</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Nullable</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">example</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">systemName</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">String</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">No</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The name of the target Watson system. For example, the System name may be Watson Health Cloud on Softlayer, the front-end cluster system name.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii24">Design Resilience Measures</h3>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. Some thought should be given to how resilient the new feature is.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" style="width: 1152px;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">What happens if something expected/unexpected goes wrong?</td>
+			<td style="width: 736px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">What happens to the system?</p>
+			</td>
+			<td style="width: 736px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">Will the user be able to take corrective action in the system without the need to resort to application logs/SQL searching/data manipulation outside of the system?</td>
+			<td style="width: 736px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">Will the data be left in a consistent state within the system after the exception is thrown?</td>
+			<td style="width: 736px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">Will there be messages given to the user? What will these messages be?</td>
+			<td style="width: 736px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">Will there something written to the logs? What will this be?</td>
+			<td style="width: 736px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">Does the feature require some of the exception data to be captured and an admin function provided to allow the situation to be re-mediated?</td>
+			<td style="width: 736px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii25">Design Logging</h3>
+
+<p dir="ltr">Document any logging requirements for the new feature being added. Does the new feature require some logging output to aid debugging in a black box environment? Think about what the logging could be to avoid revealing PI information but giving enough information to allow effective debugging to occur in the event of an unexpected issue? JMX considerations should also be added here.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii26">Design Accessibility</h3>
+
+<p dir="ltr">The UX design should contain an accessible requirements but this section can capture any further requirements in this area.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii27">Third Party Software and Legal Requirements</h3>
+
+<p dir="ltr">Does the feature require any new or updated open source third party software? If so, describe it's usage, name, version and ensure legal are contacted to discuss the requirements around the third party software being used.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii28">Use Cases</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. The various use cases for the feature must be outlined here. They can be in the following format.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1.1</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Add informational message to cluster with no toggle.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actor</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Citizen</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Where a cluster is defined to not have expand/collapse functionality, if the contents of the cluster are labelled by an informational label, the informational label shall still be displayed.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Preconditions</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Define a &lt;cluster&gt; element.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The contents of this &lt;cluster&gt; element should be labelled by adding an &lt;informational-label&gt; child element.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Flow</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The citizen navigates to the question, relationship or summary page where the &lt;cluster&gt; defined in the preconditions is displayed.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Expected</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The cluster which was labelled with an informational message shall be displayed as normal and have a informational message.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii15">Implementation Notes</h2>
+
+<p dir="ltr">The following is the UML Class Diagram taken from&nbsp;<span style="font-family:Courier New,Courier,monospace;">TI/client/components/word-file-edit </span><span style="font-family:Arial,Helvetica,sans-serif;">with a summary of the changes made by Stephen and Colm in February/March 2020</span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><img lconnwikiparamattachmentname="WordFileEditClassDiagram4.gif" lconnwikimacro="image" lconnresourcetype="attachment" src="Word%20Integration%20-%20Changes%20and%20Improvements._ATTACHMENTS_/WordFileEditClassDiagram4.gif" style="width: 1000px; height: 1954px;" lconnwikiparamwikipage="Word Integration - Changes and Improvements" lconnattachedresourcetype="page"></img></p>
+
+<p dir="ltr"><strong>Sequence Diagram</strong></p>
+
+<p dir="ltr">The following sequence diagram shows the interactions from the NativeMessagingBridge application launched by the Cúram File Native Messaging Bridge solution.</p>
+
+<p dir="ltr">The changes for Edge Chromium are circled below in blue.</p>
+
+<p dir="ltr"><img lconnwikiparamattachmentname="sequencediagram_23_MAR_1.gif" lconnwikimacro="image" lconnresourcetype="attachment" src="Word%20Integration%20-%20Changes%20and%20Improvements._ATTACHMENTS_/sequencediagram_23_MAR_1.gif" style="width: 1000px; height: 2222px;" lconnwikiparamwikipage="Word Integration - Changes and Improvements" lconnattachedresourcetype="page"></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><span style="font-size:18px;"><strong>Proposed Code Changes To Enable Edge Chromium Support.</strong></span></p>
+
+<h3 dir="ltr"><b data-stringify-type="bold">Change #1A : Change to the extToNative.js to send the Browser type. (Temporary Change for Hamburg Test Fix only. Not planned for 7.0.11.0)</b></h3>
+
+<p dir="ltr"><strong>TI Source artifact:</strong> <code data-stringify-type="code">TI/client/BrowserPlugins/chrome-bridge/extToNative.js</code><br />
+<strong>Install Location artifact: </strong><code data-stringify-type="code">%APPUSERDATA%\Local\Microsoft\Edge\User Data\Default\Extensions\legdjfnmdmcapoeifgelafpoeljdlbmc\1.0.5_0\extToNative.js</code></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" style="width: 876px; table-layout: fixed; overflow-wrap: break-word; border-collapse: collapse; border-color: rgb(105, 105, 105);">
+	<tbody>
+		<tr>
+			<td style="overflow: hidden; width: 454px; border-color: rgb(105, 105, 105);"><strong>Before&nbsp;</strong></td>
+			<td style="overflow: hidden; width: 415px; border-color: rgb(105, 105, 105);"><strong>After</strong></td>
+		</tr>
+		<tr>
+			<td style="overflow: hidden; width: 454px; border-color: rgb(105, 105, 105); background-color: rgb(255, 255, 224);">
+			<pre data-stringify-type="pre" dir="ltr">
+function messagesToNative(msgs) {
+  console.warn("Extension received messages from page:", msgs);
+  var flatString = "@";
+  for (var aMessage in msgs) {
+    if (msgs.hasOwnProperty(aMessage)) {
+      flatString += aMessage + "@" + msgs[aMessage] + "@";
+    }
+  }
+  flatString = flatString.substring(0, flatString.length - 1);
+  msgBuffer = flatString;
+}</pre>
+			</td>
+			<td style="overflow: hidden; width: 415px; border-color: rgb(105, 105, 105); background-color: rgb(255, 255, 224);">
+			<pre data-stringify-type="pre" dir="ltr">
+function messagesToNative(msgs) {
+  console.warn("Extension received messages from page:", msgs);
+  var flatString = "@";
+  for (var aMessage in msgs) {
+    if (msgs.hasOwnProperty(aMessage)) {
+      flatString += aMessage + "@" + msgs[aMessage] + "@";
+    }
+  }
+  flatString = flatString.substring(0, flatString.length - 1);
+
+
+  <strong>//BEGIN PATCH</strong>
+ <strong> var userAgentStr=window.navigator.userAgent;
+  var userAgentStrMatchesEdge=userAgentStr.match('Edg/.*?');
+  var browserVar="CHROME";
+  if (userAgentStrMatchesEdge!=null &amp;&amp; userAgentStrMatchesEdge.length&gt;=1) {
+  	  browserVar="EDGE_CHROMIUM";
+  }
+  flatString += "@client.browser@" + browserVar;
+  //END PATCH</strong>
+
+  msgBuffer = flatString;
+}</pre>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr"><b data-stringify-type="bold">Change #1B&nbsp;: Change to the </b><code data-stringify-type="code">file-edit-chrome.jsp</code><b data-stringify-type="bold">&nbsp;to send the Browser type. (Planned Change for 7.0.11.0)</b></h3>
+
+<p dir="ltr"><strong>TI Source artifact:</strong> <code data-stringify-type="code">TI/client/BrowserPlugins/chrome-bridge/extToNative.js</code><br />
+<strong>Install Location artifact: </strong><code data-stringify-type="code">%APPUSERDATA%\Local\Microsoft\Edge\User Data\Default\Extensions\legdjfnmdmcapoeifgelafpoeljdlbmc\1.0.5_0\extToNative.js</code></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>TI Source artifact:</strong><br />
+<code data-stringify-type="code">TI/client/CoreInf/CuramCDEJ/lib/curam/web/jsp/file-edit-chrome.jsp</code></p>
+
+<p dir="ltr"><strong>Install Location artifact:</strong><br />
+<code data-stringify-type="code">HCR/webclient/WebContent/en_US/file-edit-chrome.jsp</code><br />
+<code data-stringify-type="code">HCR/webclient/WebContent/file-edit-chrome.jsp</code></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" style="width: 1144px; table-layout: fixed; overflow-wrap: break-word; border-collapse: collapse; border-color: rgb(105, 105, 105);">
+	<tbody>
+		<tr>
+			<td style="overflow: hidden; width: 602px; border-color: rgb(105, 105, 105);"><strong>Before&nbsp;</strong></td>
+			<td style="overflow: hidden; width: 535px; border-color: rgb(105, 105, 105);"><strong>After</strong></td>
+		</tr>
+		<tr>
+			<td style="overflow: hidden; width: 602px; border-color: rgb(105, 105, 105); background-color: rgb(255, 255, 224);">
+			<pre data-stringify-type="pre">
+	const fContents = 'wia_00001.curamdoc',
+	        fDtls = 'wia_00001.dtls',
+	          commitID = 'commitDocChangesBtnIE';
+	const keys = ['Word.Status.Init.Notification',
+	              'Word.Status.Save.Notification',
+	              'Window.WFE.Doc.Title',
+	              'fileedit.log.on',
+	              'fileedit.taskbar.messages'];
+	const fallbackVals = ['WordInitialized', 'DocumentSaved',
+	                      'DocumentTitle', 'false', '#'];</pre>
+			</td>
+			<td style="overflow: hidden; width: 535px; border-color: rgb(105, 105, 105); background-color: rgb(255, 255, 224);">
+			<pre data-stringify-type="pre">
+  	<strong>const userAgentStr=window.navigator.userAgent;
+  	const userAgentStrMatchesEdge=userAgentStr.match('Edg/.*?');
+  	const browserType=(userAgentStrMatchesEdge!=null &amp;&amp; userAgentStrMatchesEdge.length&gt;=1 ? 'EDGE_CHROMIUM':'CHROME');
+  </strong>	const fContents = 'wia_00001.curamdoc',
+	        fDtls = 'wia_00001.dtls',
+	          commitID = 'commitDocChangesBtnIE';
+	const keys = ['Word.Status.Init.Notification',
+	              'Word.Status.Save.Notification',
+	              'Window.WFE.Doc.Title',
+	              'fileedit.log.on',
+	              'fileedit.taskbar.messages',
+	            <strong>  'client.browser'</strong>];
+	const fallbackVals = ['WordInitialized', 'DocumentSaved',
+	                      'DocumentTitle', 'false', '#',browserType];
+	</pre>
+			</td>
+		</tr>
+		<tr>
+			<td style="overflow: hidden; width: 602px; border-color: rgb(105, 105, 105); background-color: rgb(255, 255, 224);">
+			<pre data-stringify-type="pre">
+  let regularPromise = 
+        new Promise((resolve, reject) =&gt; setTimeout(_=&gt;{
+			    	      keys.forEach(key =&gt; {
+			    	    	let value = doubleGet(key);
+			    	    	value &amp;&amp; (immediateMessages[key] = 
+encodeURIComponent(value));
+			    	      });
+			    	      if (Object.keys(immediateMessages).length == 5) {
+			    	        resolve(immediateMessages);
+			    	      }
+			    	    }, 100));
+});</pre>
+			</td>
+			<td style="overflow: hidden; width: 535px; border-color: rgb(105, 105, 105); background-color: rgb(255, 255, 224);">
+			<pre data-stringify-type="pre">
+let regularPromise = 
+	    new Promise((resolve, reject) =&gt; setTimeout(_=&gt;{        				 	  
+			    	      keys.forEach(key =&gt; {
+			    	      <strong> 	if(key==='client.browser'){
+			    	      		immediateMessages[key] =
+ browserType;
+			    	      	}else{
+			let value = doubleGet(key);
+			value &amp;&amp; (immediateMessages[key] = 
+encodeURIComponent(value));
+			    }		</strong>    	
+			    	      });
+			if (<strong>Object.keys(immediateMessages).length == 6</strong>) {
+			 resolve(immediateMessages);
+			}
+		}, 100));</pre>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><b data-stringify-type="bold">Change #2: Add new Java Constant to point to the root of Edge Chromium default file system, beneath which the Word document is downloaded.</b></p>
+
+<p dir="ltr"><strong>TI Source Artifact: </strong><code data-stringify-type="code">TI/client/components/word-file-edit/src/main/java/curam/util/tools/fileedit/common/FileEditConstants.java</code><br />
+<strong>Install Location Artifact:&nbsp;</strong><code data-stringify-type="code">%APPUSERDATA%\IBM\WordBridge\chrome-native-host.jar</code></p>
+
+<p dir="ltr">Change from</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" style="width: 1127px; table-layout: fixed; overflow-wrap: break-word; border-collapse: collapse; border-color: rgb(105, 105, 105);">
+	<tbody>
+		<tr>
+			<td style="overflow: hidden; width: 542px; border-color: rgb(105, 105, 105);"><strong>Before&nbsp;</strong></td>
+			<td style="overflow: hidden; width: 577px; border-color: rgb(105, 105, 105);"><strong>After</strong></td>
+		</tr>
+		<tr>
+			<td style="overflow: hidden; width: 542px; border-color: rgb(105, 105, 105); background-color: rgb(255, 255, 224);">
+			<pre data-stringify-type="pre" dir="ltr">
+/**
+   * Chrome file system relative path.
+   */
+  public static final String kChromeFS = kSep + "Local" + kSep + "Google"
+    + kSep + "Chrome" + kSep + "User Data" + kSep + "Default" + kSep
+    + "File System";
+  
+</pre>
+			</td>
+			<td style="overflow: hidden; width: 577px; border-color: rgb(105, 105, 105); background-color: rgb(255, 255, 224);">
+			<pre data-stringify-type="pre" dir="ltr">
+  /**
+   * Chrome profile directories, following Chrome naming conventions.
+   */
+  public static final String[] kChromeProfileNames = {"Default", "Profile 1",
+    "Profile 2", "Profile 3" };
+ /**
+   * Chrome file system relative path.
+   */
+  public static final String kChromeUserData = kSep + "Local" + kSep
+    + "Google" + kSep + "Chrome" + kSep + "User Data";
+
+  /**
+   * Chrome file system relative path.
+   */
+  public static final String kChromeFS = kSep + "File System";
+
+/**
+   * Pattern for matching Chrome and Chromium Profiles
+   */
+  public static final String kProfileNamePatternString =
+    "(Default|Profile \\d*)";
+
+  public static final String kEdgeChromiumUserData = kSep + "Local" + kSep
+    + "Microsoft" + kSep + "Edge" + kSep + "User Data";
+
+  public static final String kFileSystem = kSep + "File System";
+
+  /**
+   * Edge file system relative path.
+   */
+  public static final String kEdgeChromiumFS = kSep + "Local" + kSep
+    + "Microsoft" + kSep + "Edge" + kSep + "User Data" + kSep + "Default"
+    + kSep + "File System";
+
+public static final String kChromeLowerCase = "chrome";
+
+ public static final String kEdgeChromiumLowerCase = "edge_chromium";
+
+                        </pre>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><b data-stringify-type="bold">Change #3: Change to Native Messaging Host to read the Browser type and set it on FileConnector.</b></p>
+
+<p dir="ltr"><strong>TI Source Artifact: </strong><code data-stringify-type="code">TI/client/components/word-file-edit/src/main/java/curam/util/tools/fileedit/nativehost/NativeMessagingBridge.java</code><br />
+<strong>Install Location Artifact:</strong> <code data-stringify-type="code">%APPUSERDATA%\IBM\WordBridge\chrome-native-host.jar</code></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Change from</strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" style="width: 1095px; table-layout: fixed; overflow-wrap: break-word; border-collapse: collapse; border-color: rgb(105, 105, 105);">
+	<tbody>
+		<tr>
+			<td style="overflow: hidden; width: 454px; border-color: rgb(105, 105, 105);"><strong>Before&nbsp;</strong></td>
+			<td style="overflow: hidden; width: 630px; border-color: rgb(105, 105, 105);"><strong>After</strong></td>
+		</tr>
+		<tr>
+			<td style="overflow: hidden; width: 454px; border-color: rgb(105, 105, 105); background-color: rgb(255, 255, 224);">
+			<pre data-stringify-type="pre" dir="ltr">
+&nbsp;}  else if (cmdString.equals("ALL_READY")) {
+&nbsp; &nbsp; &nbsp; if (FileEditConnector.intakeData()) {
+&nbsp; &nbsp; &nbsp; &nbsp; feedBack("SESSION_STARTED");
+&nbsp; &nbsp; &nbsp; }
+&nbsp;}&nbsp;           
+  
+</pre>
+			</td>
+			<td style="overflow: hidden; width: 630px; border-color: rgb(105, 105, 105); background-color: rgb(255, 255, 224);">
+			<pre data-stringify-type="pre" dir="ltr">
+&nbsp;} else if (cmdString.equals("ALL_READY")) {
+
+ &nbsp;<strong> &nbsp; // BEGIN, RTC 258119, COF
+&nbsp; &nbsp; &nbsp; String clientBrowser = getMessage("client.browser");
+&nbsp; &nbsp; &nbsp; clientBrowser =
+&nbsp; &nbsp; &nbsp; &nbsp; clientBrowser != null &amp;&amp; !clientBrowser.trim().isEmpty()
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ? clientBrowser.toLowerCase(Locale.ENGLISH) : "chrome";
+&nbsp; &nbsp; &nbsp; FileEditConnector.setBrowser(clientBrowser);
+&nbsp; &nbsp; &nbsp; // END, RTC 258119</strong>
+      if (FileEditConnector.intakeData()) {
+&nbsp; &nbsp; &nbsp; &nbsp; feedBack("SESSION_STARTED");
+&nbsp; &nbsp; &nbsp; }
+&nbsp;}&nbsp;<strong>
+</strong>
+
+</pre>
+			</td>
+		</tr>
+		<tr>
+			<td style="overflow: hidden; width: 454px; border-color: rgb(105, 105, 105); background-color: rgb(255, 255, 224);">&nbsp;</td>
+			<td style="overflow: hidden; width: 630px; border-color: rgb(105, 105, 105); background-color: rgb(255, 255, 224);">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<pre data-stringify-type="pre" dir="ltr">
+  
+
+<span style="font-family:Arial,Helvetica,sans-serif;"><b data-stringify-type="bold">Change #4: Change to the Java file to introduce conditional logic on where to look for root of the file system beneath which the Word file is downloaded. 
+(Look in one location if it is Chrome and a different one if it is Edge Chromium)
+</b><strong>TI Source Artifact:</strong></span> <code data-stringify-type="code">TI/client/components/word-file-edit/src/main/java/curam/util/tools/fileedit/common/FileEditConnector.java</code>
+<strong><span style="font-family:Arial,Helvetica,sans-serif;">Install Location Artifact</span></strong>:<code data-stringify-type="code">%APPUSERDATA%\IBM\WordBridge\chrome-native-host.jar</code><strong><span style="font-family:Arial,Helvetica,sans-serif;">
+</span></strong>
+</pre>
+
+<table border="1" dir="ltr" style="width: 1095px; table-layout: fixed; overflow-wrap: break-word; border-collapse: collapse; border-color: rgb(105, 105, 105);">
+	<tbody>
+		<tr>
+			<td style="overflow: hidden; width: 454px; border-color: rgb(105, 105, 105);"><strong>Before&nbsp;</strong></td>
+			<td style="overflow: hidden; width: 630px; border-color: rgb(105, 105, 105);"><strong>After</strong></td>
+		</tr>
+		<tr>
+			<td style="overflow: hidden; width: 454px; border-color: rgb(105, 105, 105); background-color: rgb(255, 255, 224);">
+			<pre data-stringify-type="pre" dir="ltr">
+<span style="font-size:10px;">&nbsp;<span style="font-family:Courier New,Courier,monospace;">public static boolean intakeData() {</span>
+</span></pre>
+
+			<p><span style="font-size:10px;">&nbsp; &nbsp;<span style="font-family:Courier New,Courier,monospace;"> final String sp = File.separator;<br />
+			&nbsp; &nbsp; final String appDataPath = System.getenv("APPDATA");<br />
+			&nbsp; &nbsp; final String appDataDir =<br />
+			&nbsp; &nbsp; &nbsp; appDataPath.substring(0, appDataPath.lastIndexOf(sp));<br />
+			&nbsp; &nbsp; final String fileSystemRoot = appDataDir + FileEditConstants.kChromeFS;</span></span></p>
+
+			<p><span style="font-size:10px;"><span style="font-family:Courier New,Courier,monospace;">&nbsp; &nbsp; try {<br />
+			&nbsp; &nbsp; &nbsp; Files.walkFileTree(Paths.get(fileSystemRoot), new FileEditConnector());</span></span></p>
+			</td>
+			<td style="overflow: hidden; width: 630px; border-color: rgb(105, 105, 105); background-color: rgb(255, 255, 224);"><span style="font-size:10px;"><span style="font-family:Courier New,Courier,monospace;">public static boolean intakeData() {<br />
+			<br />
+			&nbsp; &nbsp; final String sp = File.separator;<br />
+			&nbsp; &nbsp; final String appDataPath = Environment.getAppData();<br />
+			&nbsp; &nbsp; final String appDataDir =<br />
+			&nbsp; &nbsp; &nbsp; appDataPath.substring(0, appDataPath.lastIndexOf(sp));<br />
+			<br />
+			&nbsp; &nbsp; <strong>// BEGIN, RTC 258119, COF<br />
+			&nbsp; &nbsp; String userData = appDataDir + FileEditConstants.kChromeUserData;<br />
+			&nbsp; &nbsp; if (FileEditConstants.kEdgeChromiumLowerCase.equalsIgnoreCase(browser)) {<br />
+			&nbsp; &nbsp; &nbsp; userData = appDataDir + FileEditConstants.kEdgeChromiumUserData;<br />
+			&nbsp; &nbsp; }<br />
+			&nbsp; &nbsp; final String profileName = getProfileName(userData);<br />
+			&nbsp; &nbsp; if (profileName == null) {<br />
+			&nbsp; &nbsp; &nbsp; frontEnd.logError("Could not locate browser profile on filesystem.");<br />
+			&nbsp; &nbsp; &nbsp; return false;<br />
+			&nbsp; &nbsp; }<br />
+			&nbsp; &nbsp; final String fileSystemRoot =<br />
+			&nbsp; &nbsp; &nbsp; userData + sp + profileName + FileEditConstants.kFileSystem;<br />
+			<br />
+			&nbsp; &nbsp; frontEnd.logMessage("fileSystemRoot: " + fileSystemRoot);<br />
+			<br />
+			&nbsp; &nbsp; // END, RTC 258119</strong><br />
+			&nbsp; &nbsp; try {<br />
+			&nbsp; &nbsp; &nbsp; Files.walkFileTree(Paths.get(fileSystemRoot), new FileEditConnector());</span></span></td>
+		</tr>
+		<tr>
+			<td style="overflow: hidden; width: 454px; border-color: rgb(105, 105, 105); background-color: rgb(255, 255, 224);">&nbsp;</td>
+			<td style="overflow: hidden; width: 630px; border-color: rgb(105, 105, 105); background-color: rgb(255, 255, 224);">
+			<p><strong>//Method added by Stephen Horgan. Minor modifications made by Colm O'Flynn for Chromium support</strong></p>
+
+			<p>&nbsp;<span style="font-size:10px;"><span style="font-family:Courier New,Courier,monospace;">/**<br />
+			&nbsp; &nbsp;* Finds the name of the most recently used Chrome/Chromium profile.<br />
+			&nbsp; &nbsp;*<br />
+			&nbsp; &nbsp;* @param userDataDir the location of the Chrome/Chromium User Data folder<br />
+			&nbsp; &nbsp;* @return the most recently update Chrome/Chromium profile<br />
+			&nbsp; &nbsp;*/<br />
+			&nbsp; private static String getProfileName(final String userDataDir) {</span></span></p>
+
+			<p><span style="font-size:10px;"><span style="font-family:Courier New,Courier,monospace;">&nbsp; &nbsp; final List&lt;Path&gt; profiles = new ArrayList&lt;Path&gt;();<br />
+			&nbsp; &nbsp; final File userDataDirFileObject = new File(userDataDir);<br />
+			&nbsp; &nbsp; final File[] profileFiles =<br />
+			&nbsp; &nbsp; &nbsp; userDataDirFileObject.listFiles(kChromiumBasedBrowserProfileMatcher);</span></span></p>
+
+			<p><span style="font-size:10px;"><span style="font-family:Courier New,Courier,monospace;">&nbsp; &nbsp; if (profileFiles == null || profileFiles.length == 0) {<br />
+			&nbsp; &nbsp; &nbsp; return null;<br />
+			&nbsp; &nbsp; }</span></span></p>
+
+			<p><span style="font-size:10px;"><span style="font-family:Courier New,Courier,monospace;">&nbsp; &nbsp; for (final File profile : profileFiles) {<br />
+			&nbsp; &nbsp; &nbsp; profiles.add(profile.toPath());<br />
+			&nbsp; &nbsp; }<br />
+			&nbsp; &nbsp; // sort in descending order based on last modification time<br />
+			&nbsp; &nbsp; Collections.sort(profiles, new Comparator&lt;Path&gt;() {</span></span></p>
+
+			<p><span style="font-size:10px;"><span style="font-family:Courier New,Courier,monospace;">&nbsp; &nbsp; &nbsp; @Override<br />
+			&nbsp; &nbsp; &nbsp; public int compare(final Path p1, final Path p2) {</span></span></p>
+
+			<p><span style="font-size:10px;"><span style="font-family:Courier New,Courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; try {<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return Files.getLastModifiedTime(p2).compareTo(<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Files.getLastModifiedTime(p1));<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; } catch (final IOException e) {<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return 0;<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; }<br />
+			&nbsp; &nbsp; &nbsp; }<br />
+			&nbsp; &nbsp; });</span></span></p>
+
+			<p><span style="font-size:10px;"><span style="font-family:Courier New,Courier,monospace;">&nbsp; &nbsp; if (profiles.isEmpty()) {<br />
+			&nbsp; &nbsp; &nbsp; return null;<br />
+			&nbsp; &nbsp; }</span></span></p>
+
+			<p><span style="font-size:10px;"><span style="font-family:Courier New,Courier,monospace;">&nbsp; &nbsp; final Path mostRecentProfile = profiles.get(0);<br />
+			&nbsp; &nbsp; return mostRecentProfile.getFileName().toString();<br />
+			&nbsp; }</span></span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="overflow: hidden; width: 454px; border-color: rgb(105, 105, 105); background-color: rgb(255, 255, 224);">&nbsp;</td>
+			<td style="overflow: hidden; width: 630px; border-color: rgb(105, 105, 105); background-color: rgb(255, 255, 224);">
+			<p><span style="font-family:Courier New,Courier,monospace;">private static final FileFilter kChromiumBasedBrowserProfileMatcher =<br />
+			&nbsp; &nbsp; new FileFilter() {</span></p>
+
+			<p><span style="font-family:Courier New,Courier,monospace;">&nbsp; &nbsp; &nbsp; @Override<br />
+			&nbsp; &nbsp; &nbsp; public boolean accept(final File file) {</span></p>
+
+			<p><span style="font-family:Courier New,Courier,monospace;">&nbsp; &nbsp; &nbsp; &nbsp; return file.isDirectory()<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &amp;&amp; file.getName().matches(<br />
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; FileEditConstants.kProfileNamePatternString);<br />
+			&nbsp; &nbsp; &nbsp; }</span></p>
+
+			<p><span style="font-family:Courier New,Courier,monospace;">&nbsp; &nbsp; };</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Change #5: More consistent logging</strong></p>
+
+<p dir="ltr"><span style="font-family:Arial,Helvetica,sans-serif;"><strong>TI Source Artifact:</strong></span> <code data-stringify-type="code">TI/client/components/word-file-edit/src/main/java/curam/util/tools/fileedit/common/FileEditFrontEndAPI.java</code></p>
+
+<p dir="ltr"><strong><span style="font-family:Arial,Helvetica,sans-serif;">Install Location Artifact</span></strong>:<code data-stringify-type="code">%APPUSERDATA%\IBM\WordBridge\chrome-native-host.jar</code></p>
+
+<table border="1" dir="ltr" style="width: 1095px; table-layout: fixed; overflow-wrap: break-word; border-collapse: collapse; border-color: rgb(105, 105, 105);">
+	<tbody>
+		<tr>
+			<td style="overflow: hidden; width: 504px; border-color: rgb(105, 105, 105);"><strong>Before&nbsp;</strong></td>
+			<td style="overflow: hidden; width: 583px; border-color: rgb(105, 105, 105);"><strong>After</strong></td>
+		</tr>
+		<tr>
+			<td style="overflow: hidden; width: 504px; border-color: rgb(105, 105, 105); background-color: rgb(255, 255, 224);"><span style="font-family:Courier New,Courier,monospace;">/**<br />
+			&nbsp;&nbsp; * Displays the generic error to the user and logs the actual error.<br />
+			&nbsp;&nbsp; *<br />
+			&nbsp;&nbsp; * @param logMsg free-form message to be logged.<br />
+			&nbsp;&nbsp; */<br />
+			&nbsp; void logError(final String logMsg);</span><br />
+			&nbsp;<br />
+			&nbsp;</td>
+			<td style="overflow: hidden; width: 583px; border-color: rgb(105, 105, 105); background-color: rgb(255, 255, 224);"><span style="font-family:Courier New,Courier,monospace;">/**<br />
+			&nbsp;&nbsp; * Displays the generic error to the user and logs the actual error.<br />
+			&nbsp;&nbsp; *<br />
+			&nbsp;&nbsp; * @param logMsg free-form message to be logged.<br />
+			&nbsp;&nbsp; */<br />
+			&nbsp; void logError(final String logMsg);<br />
+			&nbsp;<br />
+			&nbsp; /**<br />
+			&nbsp;&nbsp; * Displays the generic error to the user and logs the actual error.<br />
+			&nbsp;&nbsp; *<br />
+			&nbsp;&nbsp; * @param e the exception to be logged.<br />
+			&nbsp;&nbsp; */<br />
+			&nbsp; void logError(final Exception e);</span></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">A new logging API was added: <span style="font-family:Courier New,Courier,monospace;">logError(Exception)</span>. Throughout the native messaging application wherever an exception was being caught, the exception is now being logged using this new method. The default implementation of this method in <span style="font-family:Courier New,Courier,monospace;">NativeMessagingBridge</span> converts the exception stack trace to a string and delegates to the existing method: <span style="font-family:Courier New,Courier,monospace;">logError(String)</span>.</p>
+
+<p dir="ltr">When the <span style="font-family:Courier New,Courier,monospace;"><strong>-debug</strong></span> parameter is passed to the program, all logs are written to a file (<em>NativeMessagingBridge.log</em>) on the client filesystem as well as being passed down through the browser extension to the browser.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii16">Application Impact</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. If there is no impact, then this is as simple as saying so. If there is impact, then this may describe the impact in detail and outline the upgrade path. If the feature is related to a CLE, this section can be a link to that CLE (and hence the documentation associated with the CLE will suffice).</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="74" width="1124">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Components Affected</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actions</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Comments</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2 dir="ltr" id="ii17">Configuration Transport Manager</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">optional</strong>. Consideration should be given to whether this feature adds or changes administration data. If new administration data is being added, are new CTM business objects required to transport this data. If existing administration data is being modified, will this require changes to existing CTM BOM instances?</p>
+
+<h2 dir="ltr" id="ii18">Testing</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. An outline of all of the testing required by the feature should be present here. This may tie in with the use cases outlined above. Describe the framework being used and the kinds of tests being written:</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Unit Tests</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Process Tests</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">End to End Tests</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Functional/Business Flow Tests</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Scenario Tests</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Integration Tests</li>
+</ul>
+
+<p dir="ltr">Is it just functional tests or are further performance tests required:</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">FVT Required?</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">SVT Required?</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii19">Documentation/How To Use Feature</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. This should describe how to use the feature added. Again this may differ from component to component but there are some general headings to consider:</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" style="width: 1153px;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 304px;">Where the feature fits in the overall component?</td>
+			<td style="width: 832px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 304px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">How it may be accessed (i.e. created/authored)?</p>
+			</td>
+			<td style="width: 832px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 304px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">What does it do (may be linked to the use cases above)?</p>
+			</td>
+			<td style="width: 832px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 304px;">Advantages of using the feature?</td>
+			<td style="width: 832px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 304px;">Any limitations associated with the feature?</td>
+			<td style="width: 832px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 304px;">A description of how the feature should be used etc.? This may also include a description of a contract between the various teams using the feature and will incorporate some details of the design.</td>
+			<td style="width: 832px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii20">Check Lists</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. Basically this is a quick check list of items that should be considered when doing a design for that particular component. This varies between components.</p>
+
+<h3 dir="ltr" id="ii1">IEG Check List</h3>
+
+<table border="1" dir="ltr">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Check List Item</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Notes</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Navigation</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Is the feature being introduced going to have an affect on IEG navigation (fast path, disabling sections, page navigation, looping, visited pages, summary pages and links from them). Ensure tests cases in place for all of these.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Different Running Modes</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">IEG can be run in a tab, in a modal and in a page, consider the affect your new feature will have in all these running modes? Also External and Internal Mode.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Localizable Text</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Is there any localizable text in the new feature being added?</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Layout Impact</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The feature you are adding may be used in many different contexts. Ensure you consider all of the places that this new feature can be used (examining the schema could give you a good idea of places where the metadata element/attribute can be used etc.). The actual way the feature is displayed in all of the different contexts should also be considered here.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Data Storage</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Consider the new feature with regards to the data (datastore entities) that it is manipulating (IEG Engine functionality). Ensure that the new feature will have no adverse affect on this.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">RTL Requirements</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Consider the new feature being added with regards to right to left requirements and feed these into the use cases</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Code Line</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Consider the new feature with regards to the code line policy for IEG</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">ERD</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Does the feature require updates to the ERD. If so, then it should be mocked up to see the relationships between the new feature and existing functionality at the ERD level. This may highlight some design features in the new data structures being added.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CPT</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Should this feature be added to the V7 CPT?</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii2">Workflow Check List</h3>
+
+<table border="1" dir="ltr">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Check List Item</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Notes</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">PDT Page-level Validations</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Are there new ones required?</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">PDT Process-level Validations</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Are the process-level validation messages sensible when run on the command line?</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">PDT "Valid" Indicators</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Are there any pages where WDO attributes are displayed and if so do they need valid indicator fields?</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Localizable Text</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Is there any localizable text in the new feature being added (and if so the section of the PDT that allows a process developer to localize text must be updated)?</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Context WDOs</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Does the feature involve the creation of a Context WDO? If so, the following points must be considered.</p>
+
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tests that the WDO is created and used properly</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tests that the WDO gets cleaned-up properly</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tests that the WDO is audited properly</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tests for "rainy day" scenarios (e.g. you just added a WDO that appears when a deadline expires, does it work when the deadline *doesn't* expire?).</li>
+			</ul>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Existing Context WDOs</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Does the feature interact with any existing Context WDOS? (e.g. is it mutually-exclusive to a WDO?)</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Workflow Auditing</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Does the feature introduce a new auditable workflow "event" (WORKFLOWHISTORY record)?</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">PDT Web Tests</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Does the feature need PDT Web Tests?</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Code Line</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Consider the new feature with regards to the code line policy for Workflow</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">ERD</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Does the feature require updates to the ERD. If so, then it should be mocked up to see the relationships between the new feature and existing functionality at the ERD level. This may highlight some design features in the new data structures being added.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

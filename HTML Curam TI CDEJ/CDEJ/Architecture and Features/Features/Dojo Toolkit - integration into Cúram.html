@@ -1,0 +1,249 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Dojo Toolkit - integration into Cúram</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Dojo Toolkit - integration into Cúram";
+    pageId="urn:lsid:ibm.com:td:d7fc61ca-a442-4d24-bf60-26d20f31c785";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Dojo Toolkit - integration into Cúram</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii13">Overview</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii1">What is Dojo and how it's used in Cúram</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii4">CDEJ JS source structure</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii2">Dojo source distributed as a third party tool</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii3">Integration</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii5">Building Layers</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii9">Dojo Versions Used in Cúram</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii6">Dojo Upgrades</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii7">Conversion to AMD</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii10">Unit Testing and Coverage</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii14">Implementation Details</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii12">Building Dojo ZIP</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii15">Dojo Overrides</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii16">Building Layers</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii19">Categories of our usage of Dojo</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii20">CDEJ code</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii21">Theme Customizatoin</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii8">Dojo Localization in Cúram</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii17">Performance Issues</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii18">Unit Testing and Coverage</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii11">Resources</a></div>
+
+<h2 dir="ltr" id="ii13">Overview</h2>
+
+<h3 dir="ltr" id="ii1">What is Dojo and how it's used in Cúram</h3>
+
+<ul dir="ltr">
+	<li>Dojo Toolkit vs. IDT</li>
+	<li>History, why Dojo and not other framework?</li>
+	<li>mention IDX</li>
+</ul>
+
+<h3 dir="ltr" id="ii4">CDEJ JS source structure</h3>
+
+<ul dir="ltr">
+	<li>JDE build vs. application build</li>
+	<li>internal/external APIs</li>
+</ul>
+
+<h3 dir="ltr" id="ii2">Dojo source distributed as a third party tool</h3>
+
+<ul dir="ltr">
+	<li>source --&gt; built Dojo distribution</li>
+</ul>
+
+<h3 dir="ltr" id="ii3">Integration</h3>
+
+<ul dir="ltr">
+	<li>JDE build script level</li>
+	<li>overrides (and legacy dojo-hacks.js)
+	<ul>
+		<li>handling bugs in Dojo</li>
+	</ul>
+	</li>
+	<li>CDEJ: custom classes extending Dojo or copy/paste copying code</li>
+	<li>CDEJ styling: heavily customized theme, a major pain point with any upgrade</li>
+	<li>using Dojo in CDEJ code</li>
+	<li>using Dojo in application code</li>
+</ul>
+
+<h3 dir="ltr" id="ii5">Building Layers</h3>
+
+<ul dir="ltr">
+	<li>uses Dojo builder</li>
+	<li>layer build profile</li>
+	<li>limited support for app devs building layers with a script, more integrated support to come later</li>
+</ul>
+
+<h3 dir="ltr" id="ii9">Dojo Versions Used in Cúram</h3>
+
+<p dir="ltr">(as of 2015-01-15)</p>
+
+<ul dir="ltr">
+	<li>Cúram 5.2 and older: Dojo 1.0</li>
+	<li>Cúram 6.0.5.1 and older: Dojo 1.4.0 + Dojo 1.0</li>
+	<li>Cúram 6.0.5.7 and older: Dojo 1.7.5</li>
+	<li>Cúram 6.0.6: Dojo 1.9.3</li>
+</ul>
+
+<p dir="ltr">Dojo 2.0 major changes, plus we are not yet fully on modern Dojo, so switching would essentially mean full rewrite of our UI code. Need a strategy here!</p>
+
+<h3 dir="ltr" id="ii6">Dojo Upgrades</h3>
+
+<ul dir="ltr">
+	<li>to get security fixes, bugfixes and support for new browsers</li>
+	<li>previously we considered keeping on one Dojo version for a long time, but this proved nonfeasible</li>
+	<li>easier if done frequently</li>
+	<li>someone has to watch the space and drive upgrades - what process to use? I think I proposed one in the past [find the proposal].</li>
+	<li>impact on app teams
+	<ul>
+		<li>Assess extent of impact, communicate with teams, plan the work, test!</li>
+	</ul>
+	</li>
+	<li>Full instructions: <a href="http://ibmurl.hursley.ibm.com/MRBS">http://ibmurl.hursley.ibm.com/MRBS</a></li>
+</ul>
+
+<h3 dir="ltr" id="ii7">Conversion to AMD</h3>
+
+<ul dir="ltr">
+	<li>not having done this holds us back</li>
+	<li>impact on teams
+	<ul>
+		<li>they need to go from plain files to modules to AMD</li>
+		<li>layers</li>
+		<li>unit tests and coverage</li>
+		<li>no proper support for all this in JDE</li>
+	</ul>
+	</li>
+</ul>
+
+<h3 dir="ltr" id="ii10">Unit Testing and Coverage</h3>
+
+<p dir="ltr">Not entirely Dojo-related, but partly yes, because of DoH.</p>
+
+<ul dir="ltr">
+	<li>DoH + JSCoverage</li>
+	<li>Intern</li>
+</ul>
+
+<h2 dir="ltr" id="ii14">Implementation Details</h2>
+
+<h3 dir="ltr" id="ii12">Building Dojo ZIP</h3>
+
+<ul dir="ltr">
+	<li>how it is used at application build time</li>
+	<li>build scripts related to Dojo code are both at JDE level and app build level</li>
+</ul>
+
+<h3 dir="ltr" id="ii15">Dojo Overrides</h3>
+
+<div class="entryContent" dir="ltr">
+<div class="description" id="activityPageNodeContainerd499a6e3-6ad6-44bf-8976-2e95868fc169_description">
+<ul dir="ltr">
+	<li>If you need to make an update to Dojo source, identify the file you are interested in and first check if it is already present in the CDEJ overrides directory: &lt;JDE_ROOT&gt;\client\dojo-overrides</li>
+	<li>The directory structure is the same that is used in Dojo source itself.</li>
+	<li>If you find your file there, you need to make your update in this file directly.</li>
+	<li>If you don't find the file you need to copy if from the Dojo source including any parent directories within the Dojo source.</li>
+	<li>Mark any changes you make with comments in the following format for multi-line updates:
+	<ul>
+		<li>/* CURAM-FIX: description of your change */</li>
+		<li>/* END CURAM-FIX */</li>
+	</ul>
+	</li>
+	<li>and this for single-line updates:
+	<ul>
+		<li>/* CURAM-FIX: adding the following line */</li>
+		<li>/* CURAM-FIX: removing the following line (and comment out the line rater than deleting it) */</li>
+	</ul>
+	</li>
+</ul>
+</div>
+</div>
+
+<h3 dir="ltr" id="ii16">Building Layers</h3>
+
+<ul dir="ltr">
+	<li>build profile</li>
+	<li>Ant script magic</li>
+</ul>
+
+<h3 dir="ltr" id="ii19">Categories of our usage of Dojo</h3>
+
+<p dir="ltr">...with examples</p>
+
+<ul dir="ltr">
+	<li>overrides (clearly messing with internals, hard to maintain across upgrades)</li>
+	<li>calling functions from the public APIs</li>
+	<li>relying on Dojo/Dijit events, public and non-public</li>
+	<li>widgets, extending Dijit classes</li>
+	<li>widgets, copy-pasting code of Dijit classes (now pretty much eradicated from our code)</li>
+	<li>copy-pasted CSS &amp; HTML templates</li>
+	<li>theme customization, CSS (very bad and hard to maintain)</li>
+</ul>
+
+<h3 dir="ltr" id="ii20">CDEJ code</h3>
+
+<ul dir="ltr">
+	<li>app controller vs UIM screens</li>
+	<li>modules now mostly in AMD format</li>
+	<li>still relies on synchronous loader in many places - show example(s)</li>
+	<li>we are cheating with dependencies in a few places, for historical and performance reasons</li>
+	<li>show how we preload modules in the application controller - for historical reasons</li>
+	<li>this is another significant theme for a switch over to modern async loader - get dependencies and module structure/granularity right</li>
+</ul>
+
+<h3 dir="ltr" id="ii21">Theme Customizatoin</h3>
+
+<ul dir="ltr">
+	<li>done mostly by redefining one of the out of the box themes - soria - in our CSS</li>
+	<li>lives in "client\CoreInf\CuramCDEJ\lib\curam\web\themes"</li>
+	<li>very bad if the underlying theme changes, which is almost always does between Dojo versions</li>
+	<li>also, soria has now been removed from Dojo, so we are based on old unmaintained theme which no longer gets fixes</li>
+	<li>on every upgrade we have to review changes and test the style by eye, no way to automate</li>
+</ul>
+
+<h3 dir="ltr" id="ii8">Dojo Localization in Cúram</h3>
+
+<ul dir="ltr">
+	<li>
+	<p><a href="http://ibmurl.hursley.ibm.com/N16A">http://ibmurl.hursley.ibm.com/N16A</a></p>
+	</li>
+</ul>
+
+<h3 dir="ltr" id="ii17">Performance Issues</h3>
+
+<ul dir="ltr">
+	<li>As we moved to later versions of Dojo (especially moving from 1.4 to later) we encountered significant degradation in performance.</li>
+	<li>Causes lie at different levels, from the Cúram app design (iframes) to suboptimal CDEJ code to Dojo getting more resource demanding to actual Dojo performance defects.</li>
+	<li>Lot of work was done on optimizations in Cúram app for 1.7 upgrade, but wee get degradation with every new Dojo version.</li>
+	<li>We worked on Dojo performance defects with them, but we are using legacy loader so didn't get traction on this - one more reason to convert to full AMD/modern loader and get benefit of latest fixes and support!</li>
+	<li>The Perf&amp;Scalability team has <a href="http://gaffer.mul.ie.ibm.com/TSSBuilderReports/uiprofiling.php?db=svt">performance&nbsp;tests</a> they run and can report on any degradation, but there isn't enough emphasis on doing this regularly enough.</li>
+	<li>We have to at least push for it as part of upgrades, ideally on nightly builders.</li>
+	<li>Make sure you get meaningful baseline forst, then upgrade and run tests again to see difference.</li>
+</ul>
+
+<h3 dir="ltr" id="ii18">Unit Testing and Coverage</h3>
+
+<ul dir="ltr">
+	<li>some loader/module magic in Ant scripts to make it work</li>
+</ul>
+
+<h2 dir="ltr" id="ii11">Resources</h2>
+
+<ul dir="ltr">
+	<li><a href="http://curzilla.mul.ie.ibm.com/EJB/TechInf/ClientTeam?action=fullsearch&amp;context=180&amp;value=dojoupgrade&amp;titlesearch=Titles">JDE&nbsp;Wiki&nbsp;Dojo&nbsp;Upgrade&nbsp;related&nbsp;documents</a></li>
+	<li><a href="http://curzilla.mul.ie.ibm.com/EJB/MairtinKeane/DevelopmentNotes/DojoUpgrade">Máirtín&nbsp;Keane's&nbsp;comprehensive&nbsp;notes&nbsp;on&nbsp;Dojo&nbsp;upgrades</a></li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,156 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>New Word Integration Solution Design</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../wiki.css" />
+<script type="text/javascript" src="../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="New Word Integration Solution Design";
+    pageId="urn:lsid:ibm.com:td:35cc8b36-7d8e-4780-8b24-7d35b41440ee";
+    toRoot="../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">New Word Integration Solution Design</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h1 dir="ltr">Overview</h1>
+
+<p dir="ltr">A presentation of the changes made to the Word Integration solution to support Chrome in 6.1 is the following:</p>
+
+<ul dir="ltr">
+	<li><a href="https://ibm.biz/Bd4CEQ">https://ibm.biz/Bd4CEQ</a></li>
+</ul>
+
+<h1 dir="ltr">Word Integration (Word File Edit) Design</h1>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><span style="color:#FF0000;">Please note, this page is the draft not following the structure of the proper design page. It describes the functionality and the technical solutions and decisions but does not detail use cases or any other design page relevant information yet.</span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The Word Integration functionality allows for Curam Web Application interaction with the external environment and communicated with MS Word application which should be installed on the local machine the Curam Web Application is run.</p>
+
+<p dir="ltr"><br />
+The Web application is capable of opening MS Word application and passing the required document and template instantiation data to it, so that the requested document is displayed for editing; the application also listens to Word events and intercepts MS Word Save and Close operations, upon which the user is given the possibility to save the edited document back to the Curam. Once the MS Word is closed, the Web Application normal page flow is resumed.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The functionality has long time been based on the Windows supporting application interaction means - Java applet run in the browser, which was interacting with the Word application via the COM bridge.</p>
+
+<p dir="ltr">The old solution specifics are described in the Word Integration functionality <a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" target="_blank" href=".html" id="wikiLink1463140932339" page="FILE_EDIT widget (Word Integration)">handover document</a>.</p>
+
+<p dir="ltr">The functionality had certain number of difficult to fix flaws and was hard to maintain in its current state; in addition the Google Chrome browser vendors announced the drop of the applet run in their browser context, and therefore the Word Integration functionality on Chrome browsers became problematic.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Following a <a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" target="_blank" href="../C%C3%BAram%20Document%20Generator%20%28replaces%20Word%20Integration%29/Word%20Integration%20Spike.html" id="wikiLink1463140822190" page="Word Integration Spike">spike </a>and development effort, an update Word Integration solution was released with two separate interaction mechanisms for the browsers supporting applets and Chrome browser without such support.</p>
+
+<p dir="ltr">The alternatives discussed at that time are described <a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" target="_blank" href="../C%C3%BAram%20Document%20Generator%20%28replaces%20Word%20Integration%29/Design%20considerations%20and%20options.html" id="wikiLink1463140881956" page="Design considerations and options">here</a>.</p>
+
+<p dir="ltr"><br />
+The solution combines the same elements, however is fully integrated into the Web Application so that the normal page flow is not interrupted. The FILE_EDIT widget (another name for the Word Integration functionality) opens up in a modal dialog as opposed to a separate and separately managed browser window, and displays the status of the file edit session to the end user; the modal dialog does not have any means of closing once the edit session is successfully initialized, and therefore eliminates the previously problematic and unnecessary separate window management point; the proper means of closing the Word Integration session is the MS Word close button; the improper abort can happen just when the user forcibly exists the Web application (closes the browser) in the middle of open session; they are properly warned of the consequences of this action though.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The base of the Word Integration remains the Java Applet (where supported by the browser). The data exchange between the server, application and MS Word has been completely redeveloped though. Previously the Word document to be edited and the template data for it were downloaded on the web page as the contents of the hidden form fields; these contents were subsequently (and repeatedly) passed to the already mentioned separate browser window with the applet, were saved as the local document copy which was subsequently opened by the MS Word application. There were obvious performance issues with this design (multiple transfer of the same data), and the applet window detection problems (since upon launch this window was unknown to the browser with the Web application and needed to be searched and found among any other windows open on the same operating system).</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The re-development separated the data exchange mechanism into a channel of its own, pushing part of the processing to the server side and organizing the initial data exchange as data stream from the web server, saved to the managed local copy of the document without any subsequent local transfers. While the COM bridge is still used under the hood, its main purpose is to listen to that other application and instruct it on the further course of actions.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The older solution was designed in such a way that each user save operation in Word was immediately passed back to Curam using the same data exchange mechanism - reading the local copy and updating the hidden field contents in the Web application, submitting the form with this data which was then processed (saved) by the server.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">This was another performance issue which looked a complete overhead, since the local user save does not mean the final version of the document; operations might be undone or the changes scrapped altogether.<br />
+The new solution still intercepts each of the user save operations, but instead of auto-saving the document data back to the server, the application prompts the end user of such a possibility and provides the means of doing so (the button in the Web application foreseen for this purpose is activated). This is not auto-action or mandatory action, and therefore the data flwo is reduced significantly.</p>
+
+<p dir="ltr">The same way (subject to configuration) MS Word close operation results in the final prompt to the end user, where they are asked if the want to save their latest changes or not. It there was no interim save performed in the middle, the user could choose to scrap all of their changes.</p>
+
+<p dir="ltr">Finally, the local document copy management has been improved as well; the copy is always deleted upon the last save; in addition, if the session is interrupted and the browser closes unexpectedly, an attempt to delete the document copy is also attempted (subject to the operating system timing).</p>
+
+<h2 dir="ltr">The internals of the solution</h2>
+
+<p dir="ltr">Integration with the Web Application and converting a separate window to the modal dialog required to move away from using an arbitrary page with FILE_EDIT widget specified to the unified page, constructed in such a way that it knew about the specifics of the initial UIM where the FILE_EDIT was described. Such a page would describe the server connections to be used to initialize the hidden fields and to accept the data to be saved back to the server. In order for the unified page to work, this data needed to be kept externally and server to the page as required.<br />
+The point of the unified page was to separate the Word Integration related interaction between the pages and describe it in terms of the JavaScript interaction between the two predefined pages; the data connections and the data exchange were the custom parts to be used and delegated to the applet. The assumption here was that the applet would reuse the session data and therefore would not require a separate connection to the server (with the additional authentication). This turned out to be problematic for Google Chrome, and a different approach described below in the corresponding session was used.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The separation of the data connection was solved as the build-time activity where, at the point it is obvious a FILE_EDIT widget is defined on a page, a separate generation branch kicks off and a Java class called accessor is generated instead of the initial page. The Java class contains the means of communicating with the server for both getting and saving the data and is bound to the page id where the file edit has been defined.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Since the Word data communication used the standardized fields from the very beginning, this fact was used when designing the accessors.<br />
+Subsequently the generated accessor classes are compiled and placed into the run-time location. The page id is the only parameter required to identify the right class and use it for the Word Integration. This way the communication channel is separated from the Web application page flow.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The standardized Web Application page flow related to the Word Integration consists of the modal dialog which contains the applet and wraps the Word Integration session, organizing the data exchange, and the background page which is responsible for initializing that modal window, the inter-window interactions and the subsequent page flow. Both modal dialog and the background page are constructed from the manually crafter JSP files which are rendered at run-time in the right sequence and with the right variation of JavaScript depending on the browser context (applet support).</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Therefore, the Word File Integration new solution consists from the handcrafted JSP pages which ensure the standard application flow and mediate/manage the Word Integration session, and the page-specific data accessor classes which ensure the right communication and data exchange between the server and MS Word application.<br />
+The data exchange itself is handled by the trusted applet loaded in the browser context and based on the COM bridge communication between the application; this is also the part which initiates and terminates the data connection with the server and invokes the right accessors.</p>
+
+<h2 dir="ltr"><strong>Chrome solution</strong></h2>
+
+<p dir="ltr">Chrome introduces the alternative to running Java in browsers, which is called Native Messaging API. The applets are not supported in the Chrome browsers starting with v45.</p>
+
+<p dir="ltr">The essence of the approach is Chrome supporting and managing the external applications register on the system in a specific and predefined way, and organizing the message exchange with them using the standard input and standard output to do that communication.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">This way the external app (called host app) is isolated from the browser environment, and exchange using standard communication channels is safe.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">To make it even more safe, Chrome limits the size of the data being passed both ways.<br />
+And, also, the Native Messaging API is being made available just for the Chrome extensions which are properly registered and have the appropriate permissions.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Therefore, while the main parts of the solution - handcrafted JSP pages with base page and modal dialog, the data accessors and the COM bridge - remain the same, there are two implications:<br />
+a) the Java application with the COM bridge cannot run in the context of the Chrome browser. It needs to be launched as a separate local process, interfaced and managed by the Chrome browser.<br />
+This was called Native Messaging Host and represents pretty much the same functionality as the applet, however with a completely different interface and deployment: it cannot be downloaded from the server, but needs to be separately installed on the local user's machine.</p>
+
+<p dir="ltr"><br />
+The other part of the same - the browser and COM bridge interaction channel built on the Chrome native Messaging API requires an additional part - the special Chrome extension. The extension provides the interactions between the browser and the host application and is pretty limited with regards to data exchange, limiting the size of the messages (and, thus, potential data transfer).<br />
+In addition, Chrome mandates that all the extensions were stored on the Google Store and be downloaded from there. Some of the details are given by this <a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" target="_blank" href="Enabling%20the%20FILE_EDIT%20widget%20for%20Google%20Chrome.html" id="wikiLink1463140641810" page="Enabling the FILE_EDIT widget for Google Chrome">related&nbsp;document</a>.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Another issue with the Chrome solution (which otherwise looks and should feel the same as applet solution once all the installations and configuration is done) is the session data propagation. The host application is not aware of the browser session and the browser, while managing that application launch and termination does not share the session data; therefore the data connection channel becomes a separate application which should connect to the web server and authenticate itself independently.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">This undermines the whole Word Integration idea. The solution which was found was to use another proprietary Chrome API called File API. The File API allows the browser to interact with the local file system and keeps the downloaded files in some sort internal sandbox. Therefore, instead of using a separate session and accessors it has been chosen to stream the document and template data to the internal browser 'file system' and direct the MS Word to pick it up from there.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The main problem with this approach was the file name obfuscation used by the Chrome to keep the files internally; however, given the data of the file creation time and file size are known, this turned out to be sufficient to gain the access to the document copy making the Word Integration functionality to work in Chrome same way as in Internet Explorer with the applet.</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

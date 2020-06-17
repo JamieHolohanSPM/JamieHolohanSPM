@@ -1,0 +1,85 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Confirmation Dialog when Leaving a Page</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Confirmation Dialog when Leaving a Page";
+    pageId="urn:lsid:ibm.com:td:129c6abc-1a02-4b4e-bf19-d0f416653fbe";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Confirmation Dialog when Leaving a Page</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Overview</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">How it Works</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii3">JavaScript</a></div>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii1">Overview</h2>
+
+<ul dir="ltr">
+	<li>provides an API that shows confirmation dialog if user is leaving the page</li>
+	<li>globally dynamically configurable with application config</li>
+	<li>developer can provide custom rules for when the dialog should not kick in</li>
+	<li>see release note on <a href="http://pdappsrv.mul.ie.ibm.com:8080/browse/TEC-13001">http://pdappsrv.mul.ie.ibm.com:8080/browse/TEC-13001</a></li>
+</ul>
+
+<h2 dir="ltr" id="ii2">How it Works</h2>
+
+<ul dir="ltr">
+	<li>it is a JS API</li>
+	<li>has an install() function, which enables the function for current page</li>
+	<li>by default it shows confirmation dialog when user navigates away from current page
+	<ul>
+		<li>handles mailto: links automatically</li>
+	</ul>
+	</li>
+	<li>developer can install custom "condition handlers" to avoid the confirmation dialog in specific cases
+	<ul>
+		<li>AppExitConfirmation.registerExitConditionHandler()</li>
+	</ul>
+	</li>
+</ul>
+
+<h2 dir="ltr" id="ii3">JavaScript</h2>
+
+<ul dir="ltr">
+	<li>curam.util.ui.AppExitConfirmation</li>
+	<li>curam.util.ui.AppExitConditionHandler</li>
+</ul>
+
+<h2 dir="ltr">Application Config</h2>
+
+<ul dir="ltr">
+	<li>curam.external.app.guard.against.leaving</li>
+	<li>note this is only provided OOTB in external app container - other app environments, including internal Tabbed UI - have to use that app property and do AppExitConfirmation.install() based on that</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

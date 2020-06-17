@@ -1,0 +1,96 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Generating MSI Installer for Host component</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Generating MSI Installer for Host component";
+    pageId="urn:lsid:ibm.com:td:9ddab950-cfb9-4997-9172-e53f8854803b";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Generating MSI Installer for Host component</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><div dir="ltr" name="intInfo" style="border-radius: 6px; margin: 8px; padding: 4px; display: block; width: auto;background-color: #ffc;">Table of Contents:
+<ul style="list-style-type:none !important;">
+	<li>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii1" style="display: block;">Software requirements</a></li>
+		<li style="list-style-type:none;"><a href="#ii2" style="display: block;">Update steps</a>
+		<ul style="list-style-type:none !important;">
+			<li style="list-style-type:none;"><a href="#ii3" style="display: block;">Build the MSI File Using Jenkins</a></li>
+			<li style="list-style-type:none;"><a href="#ii4" style="display: block;">Build the MSI file Locally</a></li>
+		</ul>
+		</li>
+		<li style="list-style-type:none;"><a href="#ii5" style="display: block;">Notes</a></li>
+	</ul>
+	</li>
+</ul>
+</div>
+
+<p dir="ltr"><span style="background-color:#FFFF00;">NOTE: This process is only necessary, if any files that go into the Host component are updated.</span></p>
+
+<h3 dir="ltr" id="ii1">Software requirements</h3>
+
+<p dir="ltr">The .msi installer for the Chrome Native Messaging Host component of the new FILE_EDIT solution for Google Chrome is generated using InstallShield (Premium or Standalone). A license for the full (Premium/Professional) version of InstallShield can be requested at <a href="http://installation.raleigh.ibm.com/solutions/index">http://installation.raleigh.ibm.com/solutions/index</a></p>
+
+<p dir="ltr" style="text-align: left;">Alternatively, a Standalone Build version can be installed with a Node-locked license (talk to <span class="vcard"><a class="fn url" href="https://w3-connections.ibm.com/profiles/html/profileView.do?userid=42ec2e40-1483-1034-8853-ea2d8929c917"  role="button">@Zhereshchin, Andrey</a><span class="x-lconn-userid" style="display: none">42ec2e40-1483-1034-8853-ea2d8929c917</span></span>).​</p>
+
+<h3 dir="ltr" id="ii2">Update steps</h3>
+
+<h4 dir="ltr" id="ii3">Build the MSI File Using Jenkins</h4>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Ensure that all of your changes are checked in.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">First run the following Jenkins job to create JDE.zip on artifactory for your stream: &nbsp;<a href="https://wh-spmdev-team-jenkins.swg-devops.com/job/JDE_BUILD_FIRST_ZIP/">https://wh-spmdev-team-jenkins.swg-devops.com/job/JDE_BUILD_FIRST_ZIP/</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Then run the installer Jenkins Job: <a href="https://wh-spmdev-team-jenkins.swg-devops.com/view/all/job/BUILD_MSI/">https://wh-spmdev-team-jenkins.swg-devops.com/view/all/job/BUILD_MSI/</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Build with Parameters, specify the stream name and click build.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The created MSI can then be downloaded from the job and checked in to the appropriate location</li>
+</ol>
+
+<h4 dir="ltr" id="ii4">Build the MSI file Locally</h4>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Before generating the MSI installer, you have to have run the 'build client' target (the 'word-file-edit' component must be built for the next step to work).</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Run: build -f non_source\msi_stage\build.xml -Dinstallshield.dir=C:\path\to\InstallShield\2015 -Dinstaller.version=1.0.6
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">installshield.dir</strong> should point to the InstallShield 2013(SAB) directory</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">installer.version</strong> should be incremented to allow customers to easily upgrade their host component</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The output of the above command is placed in JDE_ROOT\non_source\msi_stage\release directory - this should be copied to a source controlled directory.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Check out JDE_ROOT\client\components\word-file-edit\lib\IBMCuramWordIntegrationAssistant.msi</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Run: build -f non_source\msi_stage\build.xml copyToSourceControl</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Check in JDE_ROOT\client\components\word-file-edit\lib\IBMCuramWordIntegrationAssistant.msi</li>
+</ol>
+
+<h3 dir="ltr" id="ii5">Notes</h3>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Standalone Build version of InstallShield cannot edit the .ism file, which defines the tasks involved in building the .msi installer. This version can only override some properties as per <a href="http://helpnet.installshield.com/installshield20helplib/Content/helplibrary/ISCmdBldParam.htm">ISCmdBld&nbsp;documentation</a>. To make any permanent changes to this build definition, you will need InstallShield Premium/Professional.</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

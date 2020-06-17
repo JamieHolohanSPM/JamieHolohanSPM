@@ -1,0 +1,123 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Milestone 1 Scope</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Milestone 1 Scope";
+    pageId="urn:lsid:ibm.com:td:4a367833-0bdb-410e-a463-52bfa97f6086";
+    toRoot="../../../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Milestone 1 Scope</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr"><strong>NOTES (for NPG):</strong></p>
+
+<ul dir="ltr">
+	<li>This only covers the Data Service Layer which was the first request to allow ye to "get data flowing". You have other requirements in <a href="http://jira.curamsoftware.com:8080/browse/TEC-13870">http://jira.curamsoftware.com:8080/browse/TEC-13870</a> that are not in the first drop.</li>
+	<li>What you see\read below is what you get! Don't make any assumptions on it having additional features (functional or non-functional) or behaviour. Please ask questions so we make sure everything is clear. (I know what you are thinking; why we are we saying this to you, we know you will ask questions!)</li>
+	<li>We have to work out a roll-out plan, but I think it's fair to say you will be working with us using preview\beta releases. So, while we'll do our best to keep impact and change to an absolute minimum, it can't be ruled out. As you said in the meeting the other day, we'll work on this together to evolve the API \ features.</li>
+	<li>The scope is pitched at the feature level. Once we're agreed we're going in the right direction, there will be a follow up document with more detailed technical contracts (e.g. data formats etc.) soon after.</li>
+	<li>FYI, we are unsure yet whether the first drop will be based on Dojo 1.9 or not.</li>
+</ul>
+
+<p dir="ltr"><strong>FEATURES:</strong></p>
+
+<ul dir="ltr">
+	<li><strong>Cúram Data Store Implementation (curam.util.dataservice.CRUDStore)</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">An implementation of the Dojo DataStore interface, with Cúram specific features to allow you to hook it up to a Cúram "facade" class.<br />
+NB: The first implementation will accept the facade name directly. This will be replaced by a logical name in future when we make the service configurable in a future drop (i.e. "ObjectivesService" -&gt; curam.facade.impl.ObjectivesFacade"). This configuration will also serve as a white list of operations. I guess all we're saying is, there is still some details to be worked out in this area, you may have to change the parameter(s) that you pass to the "constructor" of the Cúram data store in future drops.<br />
+We will support the following Dojo Store interface methods:</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 80px;">get</li>
+	<li style="margin-left: 80px;">query</li>
+	<li style="margin-left: 80px;">put</li>
+	<li style="margin-left: 80px;">add</li>
+	<li style="margin-left: 80px;">remove</li>
+	<li style="margin-left: 80px;">getIdentity</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">The methods of the store interface will be mapped by convention to methods of the Cúram facade e.g. Store.remove -&gt; ObjectivesFacade.remove i.e. you will have to create your facades in a certain way. (Question: you are prototyping the user interface, has anyone begun building the server code\facades, if so we my have to add additional features here)</p>
+
+<ul dir="ltr">
+	<li><strong>Cúram RPC API (curam.util.dataservice.RPC)</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">Invokes Cúram facades outside the context of a Data Store. (e.g. RPC.call(facade, inputJson).then())<br />
+We need to implement this to use internally in the implementation of "1" above. So, we could make it "public" in the first drop. If you think you'll be happy with just the store, then let us know, we'll leave it out. It'll save us some work as we could take shortcuts in the internal implementation of "1", save some documentation etc.</p>
+
+<ul dir="ltr">
+	<li><strong>JSON Data Structure</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">A definition of the JSON to Cúram "struct" mapping<br />
+Support the following Cúram data types:<br />
+String<br />
+Integer types 8-bit to 64-bit<br />
+Note on 64-bit integer: Since it's not supported natively in JavaScript, this will be serialised as a string. No additional support\helper methods will be provided for 64 bit arithmetic.<br />
+Floating Point (float + double)<br />
+Money<br />
+Code table<br />
+Date + DateTime<br />
+A wrapper API (curam.util.dataservice.Struct) for accessing the JSON structure. Although we will document the JSON data format, you will access values through a wrapper API. (i.e. that may eventually apply "fixups" etc). We feel we should introduce this in the first cut, so that we avoid impacting your code as much as possible as additional drops are taken on.</p>
+
+<ul dir="ltr">
+	<li><strong>Error Handling</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">Errors generated from the facade invocation will be handled through the standard callback methods. It will be up to you to what you do with the exception and it's associated message(s) (e.g. business validations, cross-field validations from the server).<br />
+Error handling for things like "timeouts" will just be "whatever Dojo does by default".</p>
+
+<ul dir="ltr">
+	<li><strong>Documentation + Sample Widget</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">Goes without saying we'll be producing some material to show ye how to use the API, plus there will be a sample widget which uses the features (e.g. A grid (gridX) backed by the Cúram store).</p>
+
+<p dir="ltr"><strong>ADDITIONAL MOBILE PLAYBACK 1 FEATURES</strong></p>
+
+<ul dir="ltr">
+	<li><strong>Worklight Sample Project</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">A one page, read only, mobile application built within Worklight using the CDSL interface</p>
+
+<ul dir="ltr">
+	<li><strong>Prototype of the Worklight/WebSphere Security Integration</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">This is verification of the steps to integrate Worklight and WebSphere and authenticate securely against it.</p>
+
+<ul dir="ltr">
+	<li><strong>Prototype of integration with MCoC Core Framework and Marketplace delivery mechanism</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">Further investigation into Worklight Marketplace and MCoC Core framework and how we will integrate with this. A detailed output from this will be design of how we are going to ship content via Marketplace.</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

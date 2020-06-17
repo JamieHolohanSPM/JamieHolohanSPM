@@ -1,0 +1,148 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Client Infrastructure Error Handling</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Client Infrastructure Error Handling";
+    pageId="urn:lsid:ibm.com:td:14ef5c27-1990-48ba-a3df-6bf1e858c0e6";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Client Infrastructure Error Handling</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h1 dir="ltr"><strong>Overview</strong></h1>
+
+<p dir="ltr">This page documents the mechanisms behind the client infrastructure error handling.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii4" name="intInfo" style="border-radius: 6px;">
+<div id="ii4info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii4" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">High level view</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii3">Details</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Server Side Overview</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii2">AppException</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii3">InformationalException</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii4">Passing Errors to Client</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii8">By Throwing Exception</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii9">Using Informational Channel</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii5">Client Error Handling</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii6">Mechanism to Call the Server: BOPI</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii11">Basic Exception Types</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii7">JDEException: abstract subclass</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii10">ClientException: for client runtime problems</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii12">SvrRemoteException</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii13">Omega3Messages</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii14">Validations</a></div>
+
+<h2 dir="ltr" id="ii1">High level view</h2>
+
+<ul dir="ltr">
+	<li>BPO on the server throws an exception</li>
+	<li>exception is serialized into a String form and transferred to client</li>
+	<li>client catches exception, unpacks error info from string form and displays it to the user</li>
+	<li>there can also be domain validation messages, these would be created in the client itself and again displayed to user</li>
+</ul>
+
+<h2 dir="ltr" id="ii3">Details</h2>
+
+<ul dir="ltr">
+	<li>Informational errors are always bound to a specific BOPI instance (corresponds to server interface in UIM) and specific field within that instance.</li>
+	<li>In CDSL we don't have the complication of multiple SI so we can always assume a single one in error handling.</li>
+	<li>In relation to fields, we will have to consider these as for example data sent over to server can fail validation and such validation does correspond to a specific "field" within the input struct.</li>
+	<li>hence in handling informationals we have to consider fields of all input structs, loop over these and grab any errors there might be for each specific field.</li>
+	<li>Accordingly the error message must include the struct/field name so that API client knows exactly what is wrong</li>
+</ul>
+
+<h2 dir="ltr" id="ii1">Server Side Overview</h2>
+
+<p dir="ltr">All server-side BPO methods throw two types of exceptions:&nbsp;<span style="line-height: 1.5; font-family: 'courier new', courier, monospace;">curam.util.exception.AppException</span><span style="line-height: 1.5;"> and </span><span style="line-height: 1.5; font-family: 'courier new', courier, monospace;">curam.util.exception.InformationalException</span></p>
+
+<h3 dir="ltr" id="ii2">AppException</h3>
+
+<p dir="ltr"><span style="line-height: 1.5;"><span style="font-family:courier new,courier,monospace;">AppException</span> is commonly thrown in Cúram applications to indicate a condition&nbsp;</span><span style="line-height: 1.5;">that the calling code might wish to handle. In general, all <em>checked</em>&nbsp;</span><span style="line-height: 1.5;">Cúram exceptions are instances of <span style="font-family:courier new,courier,monospace;">AppException</span>.</span></p>
+
+<h3 dir="ltr" id="ii3"><span style="line-height: 1.5;">InformationalException</span></h3>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">InformationalException</span> is a&nbsp;class used to describe the exception that is produced by the&nbsp;<span style="font-family:courier new,courier,monospace;">InformationalManager</span> and <span style="font-family:courier new,courier,monospace;">InformationalElement</span>.</p>
+
+<p dir="ltr"><span style="line-height: 1.5; font-family: 'courier new', courier, monospace;">InformationalManager</span><span style="line-height: 1.5;"> class holds &amp; manages all </span><strong style="line-height: 1.5;">validation failures&nbsp;and informational messages</strong><span style="line-height: 1.5;"> for a transaction. This class is responsible for&nbsp;</span><span style="line-height: 1.5;">providing a convenient interface on the hierarchy of elements and their&nbsp;</span><span style="line-height: 1.5;">resultant behavior.</span></p>
+
+<h3 dir="ltr" id="ii4">Passing Errors to Client</h3>
+
+<p dir="ltr">This section will describe how are the above errors passed to Cúram client.</p>
+
+<h4 dir="ltr" id="ii8">By Throwing Exception</h4>
+
+<p dir="ltr">Errors are packed (<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">serialized</span>) into a String (<span style="font-family:courier new,courier,monospace;">InformationalManager</span>, for example in the&nbsp;<span style="font-family:courier new,courier,monospace;">buildAllExceptionsNoTrace()</span> method) and then passed from Cúram server to client, which unpacks and reports them (see <span style="font-family:courier new,courier,monospace;">curam.omega3.taglib.message.Omega3Messages</span>).</p>
+
+<h4 dir="ltr" id="ii9">Using Informational Channel</h4>
+
+<p dir="ltr">[Susan mentioned there was this other way how informationals are communicated to the client - to be fleshed out.]</p>
+
+<h2 dir="ltr" id="ii5">Client Error Handling</h2>
+
+<h3 dir="ltr" id="ii6">Mechanism to Call the Server: BOPI</h3>
+
+<p dir="ltr">The basic way for the Cúram client to call a specific BPO <em>method</em> on the server is via a generated class implementing the <span style="font-family:courier new,courier,monospace;">curam.util.client.bopi.BOPI</span> interface -&nbsp;<span style="line-height: 1.5;">a separate instance is generated for every BPO method.</span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">A <span style="font-family:courier new,courier,monospace;">BOPI </span>(Business Operation Presentation Interface) defines the interface used by the&nbsp;client infrastructure presentation layer to access a business operation&nbsp;implemented in the application server. This interface is implemented by the&nbsp;<span style="font-family:courier new,courier,monospace;">curam.omega3.texthelper.TextHelper</span> abstract class and its generated&nbsp;sub-classes.</p>
+
+<p dir="ltr">A <span style="font-family:courier new,courier,monospace;">BOPI </span>implementation is used to invoke a specific business operation&nbsp;passing data to the operation, retrieving the result, and handling any remote&nbsp;exceptions. A <span style="font-family:courier new,courier,monospace;">BOPI</span> is also responsible for the formatting of data before it&nbsp;is presented to a user and the parsing and validation of data entered by a&nbsp;user. All data used on the presentation layer must be in string form, so the&nbsp;management of data conversion is one of the main functions of a <span style="font-family:courier new,courier,monospace;">BOPI</span>.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">A <span style="font-family:courier new,courier,monospace;">BOPI.callServer()</span> method throws <span style="font-family:courier new,courier,monospace;">curam.util.common.JDEException</span> If the invocation was unsuccessful of there was a&nbsp;failure during property processing.</p>
+
+<h3 dir="ltr" id="ii11">Basic Exception Types</h3>
+
+<h4 dir="ltr" id="ii7">JDEException: abstract subclass</h4>
+
+<p dir="ltr">An abstract exception class that manages message localization. The purpose is&nbsp;to prevent the creation of exceptions other than those with an externalized&nbsp;message identifier.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The <span style="font-family:courier new,courier,monospace;">JDEException</span> chains exceptions using the "cause" property&nbsp;inherited from <span style="font-family:courier new,courier,monospace;">java.lang.Throwable</span>. Chained exceptions will be&nbsp;reported correctly when needed.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><span style="line-height: 1.5; font-family: 'courier new', courier, monospace;">JDEexception</span><span style="line-height: 1.5;">s and their derivatives can be linked together (independently of&nbsp;</span><span style="line-height: 1.5;">their causal exception) to allow several exceptions to be thrown as one if&nbsp;</span><span style="line-height: 1.5;">there are several problems found at one time (for example, the validation of&nbsp;</span><span style="line-height: 1.5;">the values of all of the fields on a page).</span></p>
+
+<p dir="ltr"><img id="1413190138151_0" src="/wikis/form/api/wiki/6900d1bd-a7e2-4fc9-973f-bca6c088b6b1/page/596fcd97-c82f-4c45-89a1-b7228d389ca8/attachment/cc80b31c-08a7-46a5-8036-cd0ce66e7433/media/editor_image_0d11f141-edcd-4f11-8951-561030fea64b.png?preventCache=1462864554448"></img></p>
+
+<h4 dir="ltr" id="ii10"><span style="line-height: 1.5;">ClientException: for client runtime problems</span></h4>
+
+<p dir="ltr">An exception indicating a problem encountered by the run-time client&nbsp;infrastructure. A subclass of <span style="font-family:courier new,courier,monospace;">JDEException</span>.</p>
+
+<h4 dir="ltr" id="ii12">SvrRemoteException</h4>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">curam.util.exception.SvrRemoteException</span>&nbsp;is the exception type thrown from Cúram servers to remote clients. You&nbsp;do not normally construct instances of <span style="font-family:courier new,courier,monospace;">SvrRemoteException</span> yourself. Instead,&nbsp;the Cúram server automatically calls the <span style="font-family:courier new,courier,monospace;">toRemoteException()</span> method of any&nbsp;<span style="font-family:courier new,courier,monospace;">AppException</span> that is thrown (and not handled) by server&nbsp;application code. This returns an exception instance that is returned to the&nbsp;calling client.</p>
+
+<h3 dir="ltr" id="ii13">Omega3Messages</h3>
+
+<p dir="ltr">Stores <span style="font-family:courier new,courier,monospace;">LocalizedMessage</span> and <span style="font-family:courier new,courier,monospace;">LocalizedFieldMessage</span> instances recorded during&nbsp;processing. An instance of this class is stored in the user's session.</p>
+
+<h3 dir="ltr" id="ii14">Validations</h3>
+
+<p dir="ltr">Input validations are done in <span style="font-family:courier new,courier,monospace;">TextHelper.parseAndValidateAll()</span> method. One or more <span style="font-family:courier new,courier,monospace;">JDEException</span>s are used for reporting any issues.</p>
+
+<p dir="ltr">On encountering a first issue the resulting exception is used as a "head" exception and any subsequent validation errors are added using the <span style="font-family:courier new,courier,monospace;">JDEException</span>'s&nbsp;<span style="font-family:courier new,courier,monospace;">addException()</span> method. "Field info" is added to any validation exceptions so that user can be informed about fields which failed validation.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

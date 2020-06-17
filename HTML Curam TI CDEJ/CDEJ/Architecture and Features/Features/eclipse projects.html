@@ -1,0 +1,554 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>eclipse projects</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="eclipse projects";
+    pageId="urn:lsid:ibm.com:td:dd36b8e3-ffe9-4732-b345-1252e8948baa";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">eclipse projects</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h1 dir="ltr">TI eclipse projects</h1>
+
+<h2 dir="ltr">A high level overview</h2>
+
+<p dir="ltr">These GraphViz charts show the eclipse projects within the 7.0.1 TI stream.&nbsp;</p>
+
+<ul dir="ltr">
+	<li>Yellow projects are the ones we typically import if we're working on the CDEJ.</li>
+	<li>Black edges indicate&nbsp;a dependancy defined <u>only in</u> the .project file.</li>
+	<li>Green edges indicate&nbsp;dependancy(ies) defined <u>only in</u> the .classpath file.</li>
+	<li>Blue edges<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;indicate dependancies&nbsp;defined in both.</span></li>
+</ul>
+
+<p dir="ltr">Server side development&nbsp;projects:-</p>
+
+<p dir="ltr"><img style="width: 900px; height: 623px;" lconnwikiparamattachmentname="TI_Projects_Server.png" src="eclipse%20projects._ATTACHMENTS_/TI_Projects_Server.png" lconnwikiparamwikipage="eclipse projects" lconnwikimacro="image" alt=""></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Client side development projects:-</p>
+
+<p dir="ltr"><img style="width: 900px; height: 721px;" lconnwikiparamattachmentname="TI_Projects_Client.png" src="eclipse%20projects._ATTACHMENTS_/TI_Projects_Client.png" lconnwikiparamwikipage="eclipse projects" lconnwikimacro="image" alt=""></img></p>
+
+<p dir="ltr"><br />
+If you're crazy enough to want to see everything on one diagram, here's the one for you. &nbsp;Click to download and use your own image viewer.</p>
+
+<p dir="ltr">Same legend as above PLUS:</p>
+
+<ul dir="ltr" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">
+	<li>Server projects outlined in RED</li>
+	<li>Common&nbsp;<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">projects</span> outlined in BLUE</li>
+	<li>Client&nbsp;<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">projects</span> outlined in GREEN</li>
+</ul>
+
+<p dir="ltr"><a href="eclipse%20projects._ATTACHMENTS_/TI_Projects.png" lconnwikiparamwikiattachment="TI_Projects.png"><img style="width: 200px; height: 199px;" lconnwikiparamattachmentname="TI_Projects.png" src="eclipse%20projects._ATTACHMENTS_/TI_Projects.png" lconnwikiparamwikipage="eclipse projects" lconnwikimacro="image" alt=""></img></a></p>
+
+<p dir="ltr">There are variations of these charts in the attachments on this page. &nbsp;Some without 'Tooling',&nbsp;which really simplifies them a lot.<br />
+If you want to update these charts, the code I used to generate them is attached to this page. &nbsp;It generates dot formatted text and GraphViz does the rest.<br />
+&nbsp;</p>
+
+<p dir="ltr">The following table aims simply to start the process of describing the projects. &nbsp;<span style="color:#FF0000;"><strong><u><span style="background-color:#FFFF00;">Please update the descriptions if you have&nbsp;more accurate or&nbsp;detailed&nbsp;info.</span></u></strong></span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" style="width: 990px;">
+	<tbody>
+		<tr>
+			<td>
+			<h3>Name (location), ordered by location</h3>
+			</td>
+			<td style="width: 37px;">
+			<h3 style="text-align: center;">Server</h3>
+
+			<h3 style="text-align: center;">or</h3>
+
+			<h3 style="text-align: center;">&nbsp;Client</h3>
+			</td>
+			<td style="width: 624px;">
+			<h3>Description</h3>
+			</td>
+		</tr>
+		<tr>
+			<td>TI (.)</td>
+			<td style="width: 37px;">
+			<p>-</p>
+			</td>
+			<td style="width: 624px;">Pointless wrapper</td>
+		</tr>
+		<tr>
+			<td>AppInf (appinf)</td>
+			<td style="width: 37px;">server</td>
+			<td style="width: 624px;">
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Application Infrastructure stuff.</span></p>
+
+			<p>&nbsp;</p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The DB tables / entities modelled within this highlight the breadth of the infrastructure provided within this project.&nbsp;<br />
+			Entities Modelled:-</span><br style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;" />
+			<br />
+			<br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/AppResource.html" target="_blank">AppResource</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/AuditTrail.html" target="_blank">AuditTrail</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/AuthenticationLog.html" target="_blank">AuthenticationLog</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/AuthorisationLog.html" target="_blank">AuthorisationLog</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/BatchErrorCodes.html" target="_blank">BatchErrorCodes</a>,&nbsp;</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/BatchGroupDesc.html" target="_blank">BatchGroupDesc</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/BatchGroupTranslation.html" target="_blank">BatchGroupTranslation</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/BatchGrpGrpAssoc.html" target="_blank">BatchGrpGrpAssoc</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/BatchParamDef.html" target="_blank">BatchParamDef</a>,&nbsp;</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/BatchParamDesc.html" target="_blank">BatchParamDesc</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/BatchParamDescTranslation.html" target="_blank">BatchParamDescTranslation</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/BatchParamValue.html" target="_blank">BatchParamValue</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/BatchProcDef.html" target="_blank">BatchProcDef</a>,&nbsp;</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/BatchProcDesc.html" target="_blank">BatchProcDesc</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/BatchProcDescTranslation.html" target="_blank">BatchProcDescTranslation</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/BatchProcGrpAssoc.html" target="_blank">BatchProcGrpAssoc</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/BatchProcRequest.html" target="_blank">BatchProcRequest</a>,&nbsp;</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/CacheVersion.html" target="_blank">CacheVersion</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/CodeTableData.html" target="_blank">CodeTableData</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/CodeTableHeader.html" target="_blank">CodeTableHeader</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/CodeTableHierarchy.html" target="_blank">CodeTableHierarchy</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/CodeTableItem.html" target="_blank">CodeTableItem</a>,&nbsp;</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/CTDisplayName.html" target="_blank">CTDisplayName</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/DPErrorInformation.html" target="_blank">DPErrorInformation</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/DPErrorInformationOverflow.html" target="_blank">DPErrorInformationOverflow</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/DPProcess.html" target="_blank">DPProcess</a>,&nbsp;</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/DPProcessInstance.html" target="_blank">DPProcessInstance</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/DPTicket.html" target="_blank">DPTicket</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/EventClass.html" target="_blank">EventClass (External),&nbsp;</a><a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/EventType.html" target="_blank">EventType</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/ExtendedUsersInfo.html" target="_blank">ExtendedUsersInfo</a>,&nbsp;</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/FieldLevelSecurity.html" target="_blank">FieldLevelSecurity</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/FunctionIdentifier.html" target="_blank">FunctionIdentifier</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/GroupInformation.html" target="_blank">GroupInformation</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/GroupRange.html" target="_blank">GroupRange</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/GroupRangeValid.html" target="_blank">GroupRangeValid</a>,&nbsp;</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/IEGDefinitionInfo.html" target="_blank">IEGDefinitionInfo</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/IEGExecutionInfo.html" target="_blank">IEGExecutionInfo</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/JMSLiteMessage.html" target="_blank">JMSLiteMessage</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/KeyServer.html" target="_blank">KeyServer</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/KeySetRange.html" target="_blank">KeySetRange</a>,&nbsp;</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/OpAuditTrail.html" target="_blank">OpAuditTrail</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/PropDescription.html" target="_blank">PropDescription</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/Properties.html" target="_blank">Properties</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/RuleSetInformation.html" target="_blank">RuleSetInformation</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/RuleSetLink.html" target="_blank">RuleSetLink</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/ScriptGroupRels.html" target="_blank">ScriptGroupRels</a>,&nbsp;</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/ScriptInformation.html" target="_blank">ScriptInformation</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/SecurityFidSid.html" target="_blank">SecurityFidSid</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/SecurityGroup.html" target="_blank">SecurityGroup</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/SecurityGroupSid.html" target="_blank">SecurityGroupSid</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/SecurityIdentifier.html" target="_blank">SecurityIdentifier</a>,&nbsp;</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/SecurityRole.html" target="_blank">SecurityRole</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/SecurityRoleGroup.html" target="_blank">SecurityRoleGroup</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/TabSession.html" target="_blank">TabSession</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/UserPreferenceInfo.html" target="_blank">UserPreferenceInfo</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/Users.html" target="_blank">Users</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/XMLArchiveDoc.html" target="_blank">XMLArchiveDoc</a>,&nbsp;</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/XSLTemplate.html" target="_blank">XSLTemplate</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/XSLTemplateInst.html" target="_blank">XSLTemplateInst</a></span></p>
+			</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">JDE Build Scripts (build_scripts)</span></td>
+			<td style="width: 37px;">both</td>
+			<td style="width: 624px;">ANT scripts specific to TI targets<br />
+			Intern Configuration file</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">NewDashboard (build_scripts/builders/dashboard)</span></td>
+			<td style="width: 37px;">-</td>
+			<td style="width: 624px;">Some Java for an AntHillPro builder dashboard that we no longer use</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">CuramCDEJ (build_scripts/packConfigFiles/CuramCDEJ)</span></td>
+			<td style="width: 37px;">c<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">lient</span></td>
+			<td style="width: 624px;">An Installation Config file for the CDEJ</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">CuramSDEJ (build_scripts/packConfigFiles/CuramSDEJ)</span></td>
+			<td style="width: 37px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">server</span></td>
+			<td style="width: 624px;">An Installation Config file for the SDEJ</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">BrowserPlugins (client/BrowserPlugins)</span></td>
+			<td style="width: 37px;">c<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">lient</span></td>
+			<td style="width: 624px;">CTI - Computer Telephony Integration<br />
+			Chrome Bridge for Word Integration</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">CuramFlexInfTest (client/BrowserPlugins/flex/CuramFlexInfTest)</span></td>
+			<td style="width: 37px;">c<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">lient</span></td>
+			<td style="width: 624px;">Flex Renderer Bridge Test</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">client-inf (client/components/client-inf)</span></td>
+			<td style="width: 37px;">c<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">lient</span></td>
+			<td style="width: 624px;">Contains the JavaScript, and later Java, files used in the core infrastructure.</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">client-persistence (client/components/client-persistence)</span></td>
+			<td style="width: 37px;">c<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">lient</span></td>
+			<td style="width: 624px;">Contains the accessors used by the persistence stores used&nbsp;by the client classes. &nbsp;<br />
+			E.g. Apache Derby embedded database used to store text property values.</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">dom-html-xim (client/components/dom-html-xim)</span></td>
+			<td style="width: 37px;">c<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">lient</span></td>
+			<td style="width: 624px;">
+			<p>The implementations of the DOM Level 2 HTML API and&nbsp;the extensions for the Cúram DOM XIM API</p>
+
+			<p>Defines the Java binding of the W3C Document Object Model (DOM) Level 2 HTML specification for creating and manipulating HTML documents using an extension of the basic DOM API. This is the Java binding of the same specification that is used in JavaScript programming in modern browsers.</p>
+			</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">general-plug-ins (client/components/general-plug-ins)</span></td>
+			<td style="width: 37px;">c<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">lient</span></td>
+			<td style="width: 624px;">This is all about client Domain Definitions.<br />
+			Contains converters, defaults, comparators, and marshal plug-ins. These types of plug-ins differ from renderer plug-ins in their simpler dependencies when building and testing. Renderer plug-ins are more complex to manage and are maintained in their own component.</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">helptools (client/components/helptools)</span></td>
+			<td style="width: 37px;">c<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">lient</span></td>
+			<td style="width: 624px;">Definitions of various ANT Tasks (mostly for DocBook)</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">mobile-sdk (client/components/mobile-sdk)</span></td>
+			<td style="width: 37px;">c<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">lient</span></td>
+			<td style="width: 624px;">
+			<p>CDSL (Curam data service layer) - basically calls facades on the backend and returns back JSON data which can be cached on the front end.<br />
+			BOPI (Business Operation Presentation Interface) - basically facades are implemented by TextHelpers which implement BOPI. One of BOPIs main functions is data conversion.<br />
+			JSON serialization/deserialization</p>
+
+			<p><img id="1493979406335_0" src="eclipse%20projects._ATTACHMENTS_/editor_image_6d4e3e30-39f6-4f57-83ff-d84e48852627.png"></img></p>
+			</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">plug-in-framework (client/components/plug-in-framework)</span></td>
+			<td style="width: 37px;">c<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">lient</span></td>
+			<td style="width: 624px;">Contains the client-specific domain plug-in framework implementation.&nbsp;<br />
+			There are several types of domain plug-in, each type performs a particular kind of processing.<br />
+			The client infrastructure associates domain plug-ins with domain definitions (defined in the UML model) and then invokes these plug-ins at key points in the processing of the application data. These associations between domain plug-ins and domain definitions can be overridden as required and custom plug-ins can be written to effect the required custom processing.</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">renderer-plug-ins (client/components/renderer-plug-ins)</span></td>
+			<td style="width: 37px;">c<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">lient</span></td>
+			<td style="width: 624px;">Contains the implementations of the OOTB renderer plug-ins. Renderer plug-ins<br />
+			have their own component separate from "general plug-ins", as there are a lot of them and they are likely to have different requirements for building and testing. Separating them out make the build and test dependencies easier to manage.</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">test-framework (client/components/test-framework)</span></td>
+			<td style="width: 37px;">c<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">lient</span></td>
+			<td style="width: 624px;">Contains a library of testing support classes used by the test code of other projects.</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">word-file-edit (client/components/word-file-edit)</span></td>
+			<td style="width: 37px;">c<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">lient</span></td>
+			<td style="width: 624px;">MS Word Integration&nbsp;</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">CoreInf (client/CoreInf)</span></td>
+			<td style="width: 37px;">c<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">lient</span></td>
+			<td style="width: 624px;">The main CDEJ project.<br />
+			Most of the Java behind the client application.</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">dojo-overrides (client/dojo-overrides)</span></td>
+			<td style="width: 37px;">c<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">lient</span></td>
+			<td style="width: 624px;">
+			<p>This project contains Dojo files that we are updating to fix various issues.<br />
+			Issues are either reported to Dojo and being fixed in a future Dojo release or they are not fixed by Dojo and we will keep patches here indefinitely.</p>
+
+			<p>These patched files are automatically copied over the standard Dojo distribution<br />
+			before building so that they are applied in the runtime built version.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Generator (client/Generator)</span></p>
+			</td>
+			<td style="width: 37px;">c<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">lient</span></td>
+			<td style="width: 624px;">
+			<p>The client generator including an aspect oriented profiler of the generator (presumably for finding performance issues within the generator).<br />
+			Recent addition here of the dynamic CSS variable infrastructure.</p>
+
+			<p>From some Javadoc:<br />
+			From the combination of UIM and properties files along with any included VIM files and associated properties files, XML intermediate metadata (XIM) (".xim") is produced as input to XSLT stylesheets that create JSP files and Struts Action classes. The writing of the XIM data to files is optional. During processing, Struts action mappings are calculated and written out to a file that will form the main part of the "struts-config.xml"--a runtime repository of navigation information.</p>
+			</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Sandbox (client/Sandbox)</span></td>
+			<td style="width: 37px;">c<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">lient</span></td>
+			<td style="width: 624px;">This appears to be a handful of POCs, probably no longer relevant.</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">TextHelperGenerator (client/TextHelperGenerator)</span></td>
+			<td style="width: 37px;">c<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">lient</span></td>
+			<td style="width: 624px;">Just 2 java classes that are part of generating the text helpers. &nbsp;By no means all of the TH generation code.</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">commons-testing (commons/commons-testing)</span></td>
+			<td style="width: 37px;">c<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">lient</span></td>
+			<td style="width: 624px;">Contains a library of testing support classes used by the test code of other commons and client projects.</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">duim-generator (commons/duim-generator)</span></td>
+			<td style="width: 37px;">c<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">lient</span></td>
+			<td style="width: 624px;">
+			<p>Contains the implementations for the duim project.</p>
+
+			<p>Dynamic UIM as its name implies, is UIM that is cached in the resource store - rather than static UIM (described in earlier sections) which resides on the file system - so that the server and client do not have to be rebuilt in order for a page to be displayed in an application. All string values in dynamic UIM documents must be externalized in properties files, which must also be cached in the resource store.</p>
+			</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">JDECommons (commons/jde-commons-core)</span></td>
+			<td style="width: 37px;">b<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">oth</span></td>
+			<td style="width: 624px;">Pivotal role in TI.<br />
+			Java code shared between SDEJ and CDEJ.</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">plug-in-core (commons/plug-in-core)</span></td>
+			<td style="width: 37px;">b<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">oth</span></td>
+			<td style="width: 624px;">TODO: Figure out why server needs this.<br />
+			<br />
+			Provides support for domain plug-ins that includes simple life-cycle management and supports a shared, thread-local plug-in context.</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">renderer-model (commons/renderer-model)</span></td>
+			<td style="width: 37px;">c<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">lient</span></td>
+			<td style="width: 624px;">
+			<p>The README States:<br />
+			Contains the API for the renderer-model which includes the component-model, the builders and the PIM Parser.</p>
+
+			<p>I see the component-model used for DUIM but not sure about the rest.</p>
+			</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">resource-manager (commons/resource-manager)</span></td>
+			<td style="width: 37px;">c<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">lient</span></td>
+			<td style="width: 624px;">Contains the implementations for the resource manager project (ApplicationResource etc).</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">ServerCore (coreinf)</span></td>
+			<td style="width: 37px;">s<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">erver</span></td>
+			<td style="width: 624px;">Bootstrap and AppServer properties files.<br />
+			<br />
+			Classes for:-<br />
+			- Audit info<br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-&nbsp;</span>Curam Cache service as well as for a simple least recently used (LRU) cache<br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-&nbsp;</span>supporting incoming web services using Axis2 &amp; Axis 1.4<br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-&nbsp;</span>connecting to other systems using JMS, such as MQ Series<br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-&nbsp;</span>supporting the infrastructure BOMS for Curam Transport Management<br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-&nbsp;</span>accessing and processing data in a data source<br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-&nbsp;</span>various exception types<br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-&nbsp;</span>accessing the CodeTable and KeyServer interfaces<br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-&nbsp;</span>the main session APIs<br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-&nbsp;</span>providing the queueing infrastructure for Workflow and Deferred Processing<br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-&nbsp;</span>providing the JMSLite server for testing Workflow and DP outside of an App Server<br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-&nbsp;</span>providing access to the Curam message catalogs<br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-&nbsp;</span>miscellaneous utilities (tracing, env constants, string and config lookup)&nbsp;<br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-&nbsp;</span>Curam's security framework<br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-&nbsp;</span>testing Curam<br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-&nbsp;</span>the generic Timer Bean functionality<br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-&nbsp;</span>getting information regarding the transaction<br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">-&nbsp;</span>fundamental object types that are used by the Curam. e.g. Date, DateTime and Frequency Pattern<br />
+			(source: package.html files)</td>
+		</tr>
+		<tr>
+			<td>
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">.org.eclipse.jdt.core.external.folders&nbsp;</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">​</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">(devenv/eclipseenv/workspace/.metadata/.plugins/</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">org.eclipse.jdt.core/.org.eclipse.jdt.core.external.folders)</span></p>
+			</td>
+			<td style="width: 37px;">-</td>
+			<td style="width: 624px;">Part of eclipse.<br />
+			Most of JDT is taken up by stored information needed to perform content assist.</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">RemoteSystemsTempFiles (devenv/eclipseenv/workspace/RemoteSystemsTempFiles)</span></td>
+			<td style="width: 37px;">-</td>
+			<td style="width: 624px;">Part of eclipse.<br />
+			Surfaces in eclipse options under: &nbsp;Window -&gt; Preferences -&gt; Remote Systems</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">GenericSearchServer (gssinf)</span></td>
+			<td style="width: 37px;">s<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">erver</span></td>
+			<td style="width: 624px;">
+			<p>Lucene Adapter<br />
+			&nbsp;</p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">The DB tables / entities modelled within this highlight the breadth of the infrastructure provided within this project.&nbsp;<br />
+			Entities modelled:-</p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/GSSBatchChunkKey.html" target="_blank">GSSBatchChunkKey</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/GSSBatchProcess.html" target="_blank">GSSBatchProcess</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/GSSBatchProcessChunk.html" target="_blank">GSSBatchProcessChunk</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/GSSEntity.html" target="_blank">GSSEntity</a>,&nbsp;</p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/GSSMapperType.html" target="_blank">GSSMapperType</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/GSSSyncGap.html" target="_blank">GSSSyncGap</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/GSSSyncTimestamp.html" target="_blank">GSSSyncTimestamp</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/SearchService.html" target="_blank">SearchService</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/SearchServiceField.html" target="_blank">SearchServiceField</a>,&nbsp;</p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/SearchServiceRow.html" target="_blank">SearchServiceRow</a>,&nbsp;<a href="http://dslvm066.mul.ie.ibm.com:8080/view/Analysis%20Documentation/job/DOCGEN_ANALYSIS_DOCUMENTATION_ATLAS/Atlas_Report/entities/SearchSrvcRowExt.html" target="_blank">SearchSrvcRowExt</a></p>
+			</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">WebLogic (non_source/config/Weblogic)</span></td>
+			<td style="width: 37px;">s<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">erver</span></td>
+			<td style="width: 624px;">JAAS login module&nbsp;<br />
+			Uses WebLogic Scripting tool to control server administration functions.<br />
+			Other configuration files for the app server</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Websphere (non_source/config/Websphere)</span></td>
+			<td style="width: 37px;">s<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">erver</span></td>
+			<td style="width: 624px;">Curam Login Module<br />
+			Uses python scripts to configure server administration functions.<br />
+			Other configuration files for the app server</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">ReleaseNotes (non_source/doc/ReleaseNotes)</span></td>
+			<td style="width: 37px;">-</td>
+			<td style="width: 624px;">Presumably no longer relevant.<br />
+			Extracts the known issues list from a spreadsheet stored in some (?) repository and output to a text file in some (?) WIKI format.</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">curam.ide.internal.tooling (plugins/curam.ide.internal.tooling)</span></td>
+			<td style="width: 37px;">b<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">oth</span></td>
+			<td style="width: 624px;">Curam plugin to show/hide source files in a modelling component. &nbsp;Not shipped. &nbsp;Used for development of plugins (i.e. rsm and profile)</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">curam.ide.modeling.profile (plugins/curam.ide.modeling.profile)</span></td>
+			<td style="width: 37px;">b<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">oth</span></td>
+			<td style="width: 624px;">RSM (RSA) Curam Modelling Assistant - this project is a generated plugin for the profile/schema for our business domain</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">curam.ide.modeling.rsm (plugins/curam.ide.modeling.rsm)</span></td>
+			<td style="width: 37px;">b<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">oth</span></td>
+			<td style="width: 624px;">RSM (RSA) Curam Modelling Assistant - this project is our custimisations to the UI within RSA</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">CuramCDEJ (release/CuramCDEJ)</span></td>
+			<td style="width: 37px;">c<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">lient</span></td>
+			<td style="width: 624px;">The end result of everything built into the CDEJ. The contents of this are zipped up into the official release.</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">CuramSDEJ (release/CuramSDEJ)</span></td>
+			<td style="width: 37px;">s<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">erver</span></td>
+			<td style="width: 624px;">The end result of everything built into the SDEJ. The contents of this are zipped up into the official release.</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">adbuildtools (reltools/adbuildtools)</span></td>
+			<td style="width: 37px;">b<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">oth</span></td>
+			<td style="width: 624px;">Scripts generic to most Curam streams for building server, building client, launching eclipse, creating a release, generating a classpath.</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">envvars (reltools/envvars)</span></td>
+			<td style="width: 37px;">s<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">erver</span></td>
+			<td style="width: 624px;">Does some initial conversion of CTX, PRX and Environment.xml files</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">post-processing (reltools/glbntools/post-processing)</span></td>
+			<td style="width: 37px;">b<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">oth</span></td>
+			<td style="width: 624px;">Takes input of the translated content and DNT zip processes these based on an input language and optional country.<br />
+			This results in a Platform and CCS Language Pack zip ready for use to build the application with.</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">pre-processing (reltools/glbntools/pre-processing)</span></td>
+			<td style="width: 37px;">b<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">oth</span></td>
+			<td style="width: 624px;">Takes an input CCS VOB and extracts the relevant content to form 3 deliverables:<br />
+			- A TC.zip which contains the artifacts appropriate for translation<br />
+			- A AC.zip which contains the artifacts appropriate for manual extraction<br />
+			- A DNT.zip which contains all non-translated content in regards LOBs, DMX files, CTX and Messages files. This is used during post-processing to form the complete Language Pack in a Locale.</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">policing (reltools/policing)</span></td>
+			<td style="width: 37px;">b<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">oth</span></td>
+			<td style="width: 624px;">&nbsp;What is the Policing Tool?<br />
+			&nbsp;- A number of tools exist to check the quality of code in Cúram. One such tool is Policing.&nbsp;<br />
+			<br />
+			Policing tool consists of Policing delivered as standard by the JDE (e.g. checksql, validateallrulesets and validateallworkflows)&nbsp;and the Policing Tool which provides internal checking.<br />
+			<br />
+			Other streams can write custom tools.</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">udp (reltools/udp)</span></td>
+			<td style="width: 37px;">b<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">oth</span></td>
+			<td style="width: 624px;">The Upgrade Helper Tool . &nbsp;UDP is the infrastructure. &nbsp;CUP is built on top to create an actually Upgrade Tool.<br />
+			The IBM Cúram Upgrade Helper Pack is your guide to upgrading a custom Cúram application. The pack contains an upgrade guide, which describes the recommended process for upgrading IBM Cúram applications and details any significant migrations that might require upgrade effort. The pack also provides some tools to assist with certain process steps.</td>
+		</tr>
+		<tr>
+			<td>
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">UpgradeHelper (reltools/udp/Sample/UpgradeHelper</span></p>
+
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">/migrations/52SP3_60/components/sample)</span></p>
+			</td>
+			<td style="width: 37px;">-</td>
+			<td style="width: 624px;">A sample upgrade helper release.</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">ClientMockApp (tests/ClientMockApp)</span></td>
+			<td style="width: 37px;">c<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">lient</span></td>
+			<td style="width: 624px;">Predates TabTestApp. &nbsp;<br />
+			Really for 5.2 application. &nbsp;<br />
+			Client side of a test reference application for online testing of the CDEJ infrastructure. &nbsp;<br />
+			Also contains unit tests and web tests (which test the HTML output of custom tags).</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">CuramSampleMobileApp (tests/CuramSampleMobileApp)</span></td>
+			<td style="width: 37px;">c<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">lient</span></td>
+			<td style="width: 624px;">Built by the Systems of Engagement team when they were working on the CDSL (Data Service Layer - a precursor to the REST APIs).</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">GeneratorValidationTests (tests/GeneratorValidationTests)</span></td>
+			<td style="width: 37px;">-</td>
+			<td style="width: 624px;">No longer relevant. &nbsp;Tests have moved elsewhere.<br />
+			TODO:&nbsp;Is this delete-able?</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">EJBServerShoeSize (tests/GSSTests/EJBServerShoeSize)</span></td>
+			<td style="width: 37px;">s<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">erver</span></td>
+			<td style="width: 624px;">GSS server test ( a small version of a CEF application)<br />
+			In-Container tests on deployed application</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">GSSUnitTests (tests/GSSTests/UnitTests)</span></td>
+			<td style="width: 37px;">s<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">erver</span></td>
+			<td style="width: 624px;">GSS unit tests that can be run without anything deployed. &nbsp;</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">ModelTestFramework (tests/ModelTestFramework)</span></td>
+			<td style="width: 37px;">s<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">erver</span></td>
+			<td style="width: 624px;">Consists of various tests to ensure the fundamental assumptions of our modelling and it's generated output work as expected.&nbsp;<br />
+			E.g. there's a test class that executes examples of &nbsp;all readmulti operations that can be modelled</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">TabTestServer (tests/TabTestApp/EJBServer)</span></td>
+			<td style="width: 37px;">client</td>
+			<td style="width: 624px;">Server side of a test reference application for online testing of the CDEJ infrastructure. &nbsp;Has a real backend with DB - this differentiates it from ClientMockApp.</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">TabTestClient (tests/TabTestApp/webclient)</span></td>
+			<td style="width: 37px;">c<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">lient</span></td>
+			<td style="width: 624px;">Client side of a test reference application for online testing of the CDEJ infrastructure.</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">TestModel (tests/TestModel)</span></td>
+			<td style="width: 37px;">s<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">erver</span></td>
+			<td style="width: 624px;">Server side of a test reference application for running in-container tests. &nbsp;E.g. web service tests, batch processing tests</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">TestModelClient (tests/TestModelClient)</span></td>
+			<td style="width: 37px;">s<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">erver</span></td>
+			<td style="width: 624px;">Client side of a test reference application for running in-container tests. &nbsp;E.g. web service tests, batch processing tests</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">UnitTests (tests/UnitTests)</span></td>
+			<td style="width: 37px;">b<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">oth</span></td>
+			<td style="width: 624px;">All Junit tests other than the ones deployed in-container.</td>
+		</tr>
+		<tr>
+			<td><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Tooling (Tooling)</span></td>
+			<td style="width: 37px;">b<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">oth</span></td>
+			<td style="width: 624px;">
+			<p>Previous to the creation of this project, TI had lots of eclipse classpath variables that needed to be set for locating jars. &nbsp;<br />
+			&nbsp;</p>
+
+			<p>Other project build paths can now&nbsp;simply point to Tooling\.....\my.jar</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,463 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Smart Navigator Custom Icons</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../wiki.css" />
+<script type="text/javascript" src="../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Smart Navigator Custom Icons";
+    pageId="urn:lsid:ibm.com:td:a6b987fb-22c2-4bdd-86ad-99a17af07900";
+    toRoot="../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Smart Navigator Custom Icons</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><div contenteditable="false" name="intInfo" style="border-radius: 6px; margin: 8px; padding: 4px; display: block; width: auto;background-color: #ffc;">Table of Contents:
+<ul style="list-style-type:none !important;">
+	<li style="list-style-type:none;"><a href="#ii3" style="display: block;">Stakeholders</a></li>
+	<li style="list-style-type:none;"><a href="#ii4" style="display: block;">Background</a></li>
+	<li style="list-style-type:none;"><a href="#ii5" style="display: block;">Requirements</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii7" style="display: block;">Non Functional Requirements</a>
+		<ul style="list-style-type:none !important;">
+			<li style="list-style-type:none;"><a href="#ii30" style="display: block;">Availability &amp; Resilience</a></li>
+			<li style="list-style-type:none;"><a href="#ii33" style="display: block;">Development Resource</a></li>
+			<li style="list-style-type:none;"><a href="#ii37" style="display: block;">Evolution</a></li>
+			<li style="list-style-type:none;"><a href="#ii38" style="display: block;">Internationalisation</a></li>
+			<li style="list-style-type:none;"><a href="#ii39" style="display: block;">Location</a></li>
+			<li style="list-style-type:none;"><a href="#ii40" style="display: block;">Performance and Scalability</a></li>
+			<li style="list-style-type:none;"><a href="#ii41" style="display: block;">Regulation</a></li>
+			<li style="list-style-type:none;"><a href="#ii42" style="display: block;">Security</a></li>
+			<li style="list-style-type:none;"><a href="#ii51" style="display: block;">Usability</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li style="list-style-type:none;"><a href="#ii8" style="display: block;">Design Options</a></li>
+	<li style="list-style-type:none;"><a href="#ii10" style="display: block;">Architecture/Design Decisions</a></li>
+	<li style="list-style-type:none;"><a href="#ii11" style="display: block;">Architecture/Design Context Diagram</a></li>
+	<li style="list-style-type:none;"><a href="#ii13" style="display: block;">Design Specifics</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii43" style="display: block;">AD-001 - TODO</a></li>
+	</ul>
+	</li>
+	<li style="list-style-type:none;"><a href="#ii47" style="display: block;">General Design Specifics</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii14" style="display: block;">Design User Interface</a></li>
+		<li style="list-style-type:none;"><a href="#ii21" style="display: block;">Design Validations</a></li>
+		<li style="list-style-type:none;"><a href="#ii22" style="display: block;">Design Metadata Changes</a></li>
+		<li style="list-style-type:none;"><a href="#ii23" style="display: block;">Design Logical Data Model Changes</a></li>
+		<li style="list-style-type:none;"><a href="#ii24" style="display: block;">Design Resilience Measures</a></li>
+		<li style="list-style-type:none;"><a href="#ii25" style="display: block;">Design Logging</a></li>
+		<li style="list-style-type:none;"><a href="#ii26" style="display: block;">Design Accessibility</a></li>
+		<li style="list-style-type:none;"><a href="#ii27" style="display: block;">Third Party Software and Legal Requirements</a></li>
+	</ul>
+	</li>
+	<li style="list-style-type:none;"><a href="#ii28" style="display: block;">Use Cases</a></li>
+	<li style="list-style-type:none;"><a href="#ii15" style="display: block;">Implementation Notes</a></li>
+	<li style="list-style-type:none;"><a href="#ii2" style="display: block;">Documentation</a></li>
+	<li style="list-style-type:none;"><a href="#ii16" style="display: block;">Application Impact</a></li>
+	<li style="list-style-type:none;"><a href="#ii17" style="display: block;">Configuration Transport Manager</a></li>
+	<li style="list-style-type:none;"><a href="#ii18" style="display: block;">Testing</a></li>
+	<li style="list-style-type:none;"><a href="#ii6" style="display: block;">Check Lists</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii1" style="display: block;">IEG Check List</a></li>
+		<li style="list-style-type:none;"><a href="#ii54" style="display: block;">Workflow Check List</a></li>
+	</ul>
+	</li>
+</ul>
+</div>
+
+<p dir="ltr">&nbsp;</p>
+
+<h1 dir="ltr"><span style="font-size:20px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Design Page Smart Navigator - Custom Icons</strong></span></h1>
+
+<h2 dir="ltr" id="ii3">Stakeholders</h2>
+
+<table border="1" dir="ltr" style="width: 500px;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Role</span></strong></td>
+			<td style="width: 120px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Name</span></strong></td>
+			<td style="width: 168px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Sign Off if Applicable</span></strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Customer</td>
+			<td style="width: 120px;">MSD</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Business Owner/Product Owner</td>
+			<td style="width: 120px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Angela Brady</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Amy Dunne</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Sonya Purcell</p>
+			</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Architect</td>
+			<td style="width: 120px;">Fergal Gavin</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Developer(s)</td>
+			<td style="width: 120px;">Andrew Thomason</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">FVT</td>
+			<td style="width: 120px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Aoife Lennon</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Satya Minnekanti</p>
+			</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">SVT</td>
+			<td style="width: 120px;">N/A</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Information Developer</td>
+			<td style="width: 120px;">N/A</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">UX Design</td>
+			<td style="width: 120px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Required for icon</strong></td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Legal</td>
+			<td style="width: 120px;">N/A</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2 dir="ltr" id="ii4">Background</h2>
+
+<p dir="ltr">&nbsp;<a href="https://jazz031.hursley.ibm.com:9443/ccm/resource/itemName/com.ibm.team.workitem.WorkItem/254587">Enhancement Request 254587</a>: Smart Navigation: Need Special Caution Clients Icon "<em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Special Cautions are a quick mechanism to convey important points about a client. Incorporating Special Cautions into the smart nav search results provides a quick visual mechanism of presenting additional information that a caseworker may need to be aware of before interacting with the client.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Therefore the request is to incorporate special cautions into the search results of Smart Nav."&nbsp;</em><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">For MSD - Special Caution is extremely important information they need to convey to their caseworkers so incorporating it onto search results is very important and could impact the safety of those users.</strong></p>
+
+<p dir="ltr">MSD want to use Smart Navigator but previously all case navigation was through a customised search where special cautions were highlighted to the case worker and they could request support if the person was in the office. This was considered a critical safety requirement as case workers had previously been attacked. Smart Navigator bypasses this customization.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=239362" id="jazz_ui_ResourceLink_38" widgetid="jazz_ui_ResourceLink_38">RFE 239632</a>&nbsp;provided a hook point between click of a person search and opening the page that would allow MSD to open a modal if there was a special caution against the user and allow code to be executed to provide the same functionality they had in their customised search page. The request to also have the icons update to give an immediate indication there was a special caution against the user was also requested but considered out of scope for the original request though was noted in that design that it was a valid request.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Existing behaviour</strong><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Smart Navigator search displays an icon on each person row result. There are existing issues with this raised internally:<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+1) There are issues with right-to-left (<span style="color:#ff0000;">out of scope?</span>).<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+2) There are accessibility issues as we use the same alt text for different images and the images are conveying additional information not available to a screen reader, such as gender. See&nbsp;<a href="https://jazz031.hursley.ibm.com:9443/ccm/resource/itemName/com.ibm.team.workitem.WorkItem/231841">Defect 231841</a><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;</p>
+
+<hr dir="ltr"></hr>
+<h2 dir="ltr" id="ii5">Requirements</h2>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The icon displayed for result row must be accessible
+	<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Alt text is required that is applicable to the icon being displayed (currently all person rows display the hard coded 'Person Image' alt text.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Icons must be visible in high contrast mode.</li>
+	</ol>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The icon selected for each person record must be customisable so the icon/alt text can be&nbsp;based on custom logic.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">For the OOTB icons
+	<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">A new icon/alt text should be displayed if the person has a special icon. This should retain the existing icon information plus the special caution:&nbsp;
+		<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Prospect Person with Special Caution</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Restricted Person with Special Caution</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Male with Special Caution</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Female with Special Caution</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Gender Not Specified with Special Caution</li>
+		</ol>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The existing icons must be made accessible by providing localisable alt text specific to the icon and reviewing the icons under high contrast mode&nbsp;
+		<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Prospect Person</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Restricted Person</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Male, Female</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Gender Not Specified.</li>
+		</ol>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Prospect Person, Restricted Person and Gender Not Specified all use the same icon, Images/person_grey_adult.png - they should each use a separate icon so that customers can change this without having to customise the search.</li>
+	</ol>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Approach must also verify existing&nbsp;Defect&nbsp;231841 "Smart Navigator:Accessibility: We should not use just Colour to show differences between Male, Female and Prospect Persons in Smart Navigator search results"</li>
+</ol>
+
+<p dir="ltr" style="margin-left: 40px;"><img id="1574775973270_0" src="Smart%20Navigator%20Custom%20Icons._ATTACHMENTS_/editor_image_8bd8363c-0cc0-46cb-8dc4-8c1508095d12.png" style="width: 15%; height: 15%;"></img></p>
+
+<h3 dir="ltr" id="ii7">Non Functional Requirements</h3>
+
+<p dir="ltr"><span style="color:#ff0000;">Question 1: can requirement 3 be achieved without impacting codeline? This was an internal requirement and can maybe be dropped if it is a codeline issue.</span></p>
+
+<p dir="ltr"><span style="color:#ff0000;">Question 2: do we need to address existing Right to Left issues?</span></p>
+
+<h4 dir="ltr" id="ii30">Availability &amp; Resilience</h4>
+
+<p dir="ltr">Decision: Not Applicable.</p>
+
+<h4 dir="ltr" id="ii33">Development Resource</h4>
+
+<p dir="ltr">Decision: <u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Applicable</u></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Basic Javascript skills required for changes to the Smart Navigator Javascript Component</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Curam Server skills to make all other changes.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Documentation: KC updates required.</li>
+</ul>
+
+<h4 dir="ltr" id="ii37">Evolution</h4>
+
+<p dir="ltr">Decision: <u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Applicable</u></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Person search must be customisable to allow display of icons specific to custom logic.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Non-person search icons and alt text must be able to be changed&nbsp;</li>
+</ul>
+
+<h4 dir="ltr" id="ii38">Internationalisation</h4>
+
+<p dir="ltr">Decision: <u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Applicable</u></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Alt text must be localisable.</li>
+</ul>
+
+<h4 dir="ltr" id="ii39">Location&nbsp;&nbsp; &nbsp;</h4>
+
+<p dir="ltr">Decision: Not Applicable</p>
+
+<h4 dir="ltr" id="ii40">Performance and Scalability</h4>
+
+<p dir="ltr">Decision: Not Applicable</p>
+
+<h4 dir="ltr" id="ii41">Regulation</h4>
+
+<p dir="ltr">Decision: Not Applicable</p>
+
+<h4 dir="ltr" id="ii42">Security</h4>
+
+<p dir="ltr">Decision: Not Applicable</p>
+
+<h4 dir="ltr" id="ii51">Usability</h4>
+
+<p dir="ltr">Decision: Not Applicable.</p>
+
+<hr dir="ltr"></hr>
+<h2 dir="ltr" id="ii8">Design Options</h2>
+
+<p dir="ltr">See spike on&nbsp;<a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=254940">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=254940</a></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<hr dir="ltr"></hr>
+<h2 dir="ltr" id="ii10">Architecture/Design Decisions</h2>
+
+<table border="1" dir="ltr" height="156" style="width: 1356px;" width="860">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 135.6px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Architecture Decision Title</strong></span></td>
+			<td style="width: 135.6px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Issue or Problem Statement</strong></span></td>
+			<td style="width: 135.6px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Assumptions</strong></span></td>
+			<td style="width: 135.6px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Motivation</strong></span></td>
+			<td style="width: 135.6px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Alternatives</strong></span></td>
+			<td style="width: 135.6px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Decision</strong></span></td>
+			<td style="width: 135.6px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Justification</strong></span></td>
+			<td style="width: 135.6px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Implications</strong></span></td>
+			<td style="width: 135.6px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Status</strong></span></td>
+			<td style="width: 135.6px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Date</strong></span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 135.6px;">AD-001</td>
+			<td style="width: 135.6px;">TODO</td>
+			<td style="width: 135.6px;">&nbsp;</td>
+			<td style="width: 135.6px;">&nbsp;</td>
+			<td style="width: 135.6px;">&nbsp;</td>
+			<td style="width: 135.6px;">&nbsp;</td>
+			<td style="width: 135.6px;">&nbsp;</td>
+			<td style="width: 135.6px;">&nbsp;</td>
+			<td style="width: 135.6px;">&nbsp;</td>
+			<td style="width: 135.6px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2 dir="ltr" id="ii11">Architecture/Design Context Diagram</h2>
+
+<p dir="ltr"><img id="1574778855062_0" src="Smart%20Navigator%20Custom%20Icons._ATTACHMENTS_/editor_image_892347f9-c41b-45d9-8c4f-80a2f545dc5a.png" style="width: 65%; height: 65%; border-width: 1px; border-style: solid;"></img></p>
+
+<h2 dir="ltr" id="ii13">Design Specifics</h2>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<h3 dir="ltr" id="ii43">AD-001 - TODO</h3>
+	</li>
+</ul>
+
+<hr dir="ltr"></hr>
+<h2 dir="ltr" id="ii47">General Design Specifics</h2>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">IEG/Workflow/CDEJ/SDEJ: Not Applicable</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Smart Navigator JS Module</strong> to be modified:&nbsp;/TI/client/components/client-inf/jscript/src/internal/curam/widget/SearchMultipleTextBox.js</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tests</strong> to be added to&nbsp;/TI/client/components/client-inf/jscript/tests/cdej/widget/SearchMultipleTextBoxTestCase.js</p>
+
+<h3 dir="ltr" id="ii14" style="margin-left: 40px;">Design User Interface</h3>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">N/A</li>
+</ul>
+
+<h3 dir="ltr" id="ii21" style="margin-left: 40px;">Design Validations</h3>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">N/A</li>
+</ul>
+
+<h3 dir="ltr" id="ii22" style="margin-left: 40px;">Design Metadata Changes</h3>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">N/A</li>
+</ul>
+
+<h3 dir="ltr" id="ii23" style="margin-left: 40px;">Design Logical Data Model Changes</h3>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">New struct field on&nbsp;curam.smartnavigator.facade.struct.SearchPersonDtls for alt text</li>
+</ul>
+
+<h3 dir="ltr" id="ii24" style="margin-left: 40px;">Design Resilience Measures</h3>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">N/A</li>
+</ul>
+
+<h3 dir="ltr" id="ii25" style="margin-left: 40px;">Design Logging</h3>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">N/A</li>
+</ul>
+
+<h3 dir="ltr" id="ii26" style="margin-left: 40px;">Design Accessibility</h3>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">Icons must view in high-contrast</li>
+	<li style="margin-left: 40px;">Alt text required that conveys same information as icons</li>
+	<li style="margin-left: 40px;">Alt text to be localisable</li>
+</ul>
+
+<h3 dir="ltr" id="ii27" style="margin-left: 40px;">Third Party Software and Legal Requirements</h3>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">N/A</li>
+</ul>
+
+<hr dir="ltr"></hr>
+<h2 dir="ltr" id="ii28">Use Cases</h2>
+
+<p dir="ltr">TODO</p>
+
+<hr dir="ltr"></hr>
+<h2 dir="ltr" id="ii15">Implementation Notes</h2>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Existing method to return image url: curam.smartnavigator.target.impl.PersonSearchImpl.getConcernRoleImageURL</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Struct holding row of person results: curam.smartnavigator.facade.struct.SearchPersonDtls</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Without changing the existing search api used by PersonSearchImpl this will require an additional API call to read SpecialCaution table (on concernroleid). Given it is a key on the concernrole it should be a lightweight read but we should consider providing special caution with an environment toggle given we've had customer concerns/queries over the impact of smart nav on performance given it can fire requests as the user is typing.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The alt text must be pulled from a Message file to be localizable</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">While it may be useful to refactor some of the existing code to pull image url and alt text in lockstep, care must be taken not to change the contract of any methods unless they are private as the search class can be extended by customers</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Alt text for OOTB must include special caution as well as the existing ootb distinctions (see logic in curam.smartnavigator.target.impl.PersonSearchImpl.getConcernRoleImageURL(long, boolean, boolean)
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Prospect person</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Restricted person</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Male</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Female</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Gender not known/specified</li>
+	</ul>
+	</li>
+</ul>
+
+<hr dir="ltr"></hr>
+<h2 dir="ltr" id="ii2"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Documentation</strong></h2>
+
+<p dir="ltr">Design decisions must be documented and signed-off by&nbsp;<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Fergal</strong>&nbsp;and&nbsp;<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Satya</strong>:&nbsp;<a widgetid="jazz_ui_ResourceLink_37" wiki="W953a3b66c398_4024_a06d_931eafd64b1e" page="CDEJ Designs" id="jazz_ui_ResourceLink_37" href="../../CDEJ%20Designs.html">https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/W953a3b66c398_4024_a06d_931eafd64b1e/page/CDEJ%20Designs</a>.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Wiki page should follow structure of existing ones such as the one done for the MSD Smart Nav Navigation Hook Point -&nbsp;<a widgetid="jazz_ui_ResourceLink_34" wiki="W953a3b66c398_4024_a06d_931eafd64b1e" page="Smart Navigator - Hook Points" id="jazz_ui_ResourceLink_34" href="../7.0.x/7.0.7.0/Smart%20Navigator%20-%20Hook%20Points.html">https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/W953a3b66c398_4024_a06d_931eafd64b1e/page/Smart%20Navigator%20-%20Hook%20Points</a><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+KC documentation to be updated:&nbsp;<a href="https://www.ibm.com/support/knowledgecenter/en/SS8S5A_7.0.8/com.ibm.curam.content.doc/WebClientReference/r_WEBCREF_Conf_search_target.html" id="jazz_ui_ResourceLink_35" widgetid="jazz_ui_ResourceLink_35">https://www.ibm.com/support/knowledgecenter/en/SS8S5A_7.0.8/com.ibm.curam.content.doc/WebClientReference/r_WEBCREF_Conf_search_target.html</a><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Smart Nav Epic to be updated with relevant links to RFE implementation similar to that done for the previous RFE:&nbsp;<a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=242539" id="jazz_ui_ResourceLink_36" widgetid="jazz_ui_ResourceLink_36">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=242539</a></p>
+
+<hr dir="ltr"></hr>
+<h2 dir="ltr" id="ii16">Application Impact</h2>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">N/A</li>
+</ul>
+
+<hr dir="ltr"></hr>
+<h2 dir="ltr" id="ii17">Configuration Transport Manager</h2>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">N/A</li>
+</ul>
+
+<hr dir="ltr"></hr>
+<h2 dir="ltr" id="ii18">Testing</h2>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Add JS unit tests to TI/client/components/client-inf/jscript/tests/cdej/widget/SearchMultipleTextBoxTestCase.js</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Add more java unit tests to cover this to the existing CEF Smart Nav Person Search tests: SmartNavigator/ST/curam/scenario/smartnavigator/core/SmartNavigatorSearchTests.java. Testing should cover all icon types, alt text and prove customisability and localisation.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Accessibility testing - manual testing to be performed in line with standards, by both development and FVT:&nbsp;<a widgetid="jazz_ui_ResourceLink_33" wiki="W473112a05a20_4ea0_a29c_8d07debea102" page="Accessibility Verification Testing (AVT)" id="jazz_ui_ResourceLink_33" href="https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/W473112a05a20_4ea0_a29c_8d07debea102/page/Accessibility%20Verification%20Testing%20(AVT)">https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/W473112a05a20_4ea0_a29c_8d07debea102/page/Accessibility%20Verification%20Testing%20(AVT)</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Testing also to include Defect&nbsp;231841</li>
+</ul>
+
+<hr dir="ltr"></hr>
+<h2 dir="ltr" id="ii6">Check Lists</h2>
+
+<h3 dir="ltr" id="ii1">IEG Check List</h3>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">N/A</li>
+</ul>
+
+<h3 dir="ltr" id="ii54">Workflow Check List&nbsp;</h3>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">N/A</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

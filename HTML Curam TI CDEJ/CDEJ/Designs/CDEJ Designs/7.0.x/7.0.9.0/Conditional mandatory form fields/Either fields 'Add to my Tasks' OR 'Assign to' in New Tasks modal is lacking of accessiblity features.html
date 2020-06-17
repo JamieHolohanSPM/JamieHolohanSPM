@@ -1,0 +1,369 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Either fields 'Add to my Tasks' OR 'Assign to' in New Tasks modal is lacking of accessiblity features</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Either fields 'Add to my Tasks' OR 'Assign to' in New Tasks modal is lacking of accessiblity features";
+    pageId="urn:lsid:ibm.com:td:6df0b354-8f8f-4f77-97e2-7f7f61c2f42b";
+    toRoot="../../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Either fields 'Add to my Tasks' OR 'Assign to' in New Tasks modal is lacking of accessiblity features</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<h1 dir="ltr"><span style="font-size:20px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Design Page for conditional mandatory fields in New Tasks modal within Assignment Details cluster</strong></span></h1>
+
+<h2 dir="ltr" id="ii3">Stakeholders</h2>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Refer to the following Org Chart to ensure you are engaging the correct people. The table below indicates the current contacts for each area.
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://ibm.biz/BdsuKd">https://ibm.biz/BdsuKd</a></li>
+	</ul>
+	</li>
+</ul>
+
+<table border="1" dir="ltr" style="width: 500px;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Role</span></strong></td>
+			<td style="width: 120px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Name</span></strong></td>
+			<td style="width: 168px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Sign Off if Applicable</span></strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Customer</td>
+			<td style="width: 120px;"><span class="LabelValue" title="Scottish Government Technical Strategy Group (7488759)">Scottish Government Technical Strategy Group</span></td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Business Owner/Product Owner</td>
+			<td style="width: 120px;">Sonya Purcell</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Architect</td>
+			<td style="width: 120px;">Fergal Gavin</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Developer(s)</td>
+			<td style="width: 120px;">Fabrice Niclot</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">FVT</td>
+			<td style="width: 120px;">Feargal Conneely</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">SVT</td>
+			<td style="width: 120px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">John Redmond/</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Sean Cleary</p>
+			</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Information Developer</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">UX Design</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Legal</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii4">Background</h2>
+
+<p dir="ltr">The "Add to my Tasks" and "Assign to" fields are presents on many pages of the application at different context levels.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii4">Problem</h2>
+
+<p dir="ltr">The current markup for required fields * (required) used in Curam is not suitable in this situation as either Add to My Tasks or Assign To are required fields. The current state of the application does not provide a mechanism to indicate the user in advance that either fields are mandatory. It is only when the user tries to validate his inputs and that neither of the mandatory either fields are filled in that a warning message is being thrown. The first issue here is that the application is not informative and that causes an accessibility gap. As far as the voice over accessibility feature is concerned, there is no such feature to tell the user that either Add to my Tasks or Assign to fields are mandatory fields. This is the second issue that causes a further accessibility gap.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii5">Requirements</h2>
+
+<p dir="ltr">The application should provide to any users and more importantly to users with disabilities enough information so that the user exactly knows where his inputs will be required before a validation check can be processed by the application.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">List of Requirements</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement 1: Informative text available on the screen.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement 2: Informative text being read by a screen-reader before the either one mandatory input fields.</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Support ticket: <a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=242798">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=242798</a></li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The screenshot below shows either one mandatory fields. There is no explicit mention of it unless hitting the validation mechanism on form submission.</p>
+
+<p dir="ltr" style="margin-left: 120px;"><img lconnwikiparamattachmentname="New Task required fields missing.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Either%20fields%20%27Add%20to%20my%20Tasks%27%20OR%20%27Assign%20to%27%20in%20New%20Tasks%20modal%20is%20lacking%20of%20accessiblity%20features._ATTACHMENTS_/New%20Task%20required%20fields%20missing.png" alt="" width="517" lconnwikiparamwikipage="Mandatory either fields on form New Tasks not marked - Accessiblity" lconnattachedresourcetype="page" height="482"></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">Technical analysis</h2>
+
+<p dir="ltr">Search for .uim, .vim and .properties files containing Cluster.Title.AssignmentDetails.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The locations of these files are as follow:</p>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">no files in TI,</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">33 files in CEF,
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">components/<strong>core</strong>
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Case
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Task (3 .properties files)</li>
+			</ul>
+			</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Integrated Case
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Core
+				<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+					<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Task (2 .properties files)</li>
+				</ul>
+				</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Member
+				<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+					<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Task (2 .properties files)</li>
+				</ul>
+				</li>
+			</ul>
+			</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Participant
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Task (3 .properties files + <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1 .vim file</strong>)</li>
+			</ul>
+			</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Task
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actions (2 .properties files + <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1 .uim file</strong>)</li>
+			</ul>
+			</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Work Allocation
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Inbox
+				<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+					<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tax Maintenance (3 .properties files + <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2 .uim files</strong>)</li>
+				</ul>
+				</li>
+			</ul>
+			</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Workflow
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TaskManagement (4 .properties files + <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1 .uim file</strong>)</li>
+			</ul>
+			</li>
+		</ul>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">components/<strong>SupervisorWorkspace</strong>
+		<ul dir="ltr">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Cases (2 .properties files)</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TaskDetails (2 .properties files)</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Users (5 .properties files)</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">All the files above plus 2 "additionnal" files</strong> in EntMods,
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">components/<strong>MDTWorkspace</strong>
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">copied (copy?? from Workflow/TaskManagement path above)</strong>
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">core
+				<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+					<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Workflow
+					<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+						<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TaskManagement (1. properties file + <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1 .uim file</strong>)</li>
+					</ul>
+					</li>
+				</ul>
+				</li>
+			</ul>
+			</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Same as above - no additional files defined in Solutions,</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Same as above - no additional files defined in CFSS,</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Same as above - 30 additional files in CWC,
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">components/<strong>wco</strong>
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">ClaimSupervisorWorkspace
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Jobs (1. properties file + <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1 .uim file</strong>)</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Positions (1. properties file + <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1 .uim file</strong>)</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TaskDetails (1. properties file + <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1 .uim file</strong>)</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Users (3. properties file + <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3 .uim files</strong>)</li>
+			</ul>
+			</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">ReferenceApp
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">core
+				<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+					<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Case
+					<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+						<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Task (2 .properties files)</li>
+					</ul>
+					</li>
+					<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Integrated Case
+					<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+						<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Core
+						<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+							<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Task (1 .properties file)</li>
+						</ul>
+						</li>
+						<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Member
+						<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+							<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Task (1 .properties file)</li>
+						</ul>
+						</li>
+						<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Participant
+						<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+							<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Task (2 .properties files)</li>
+						</ul>
+						</li>
+						<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Workflow
+						<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+							<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TaskManagement (1. properties file + <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1 .uim file</strong>)</li>
+						</ul>
+						</li>
+					</ul>
+					</li>
+				</ul>
+				</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">SupervisorWorkspace
+				<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+					<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Jobs (1. properties file + <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1 .uim file</strong>)</li>
+					<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Positions (1. properties file + <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1 .uim file</strong>)</li>
+				</ul>
+				</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TaskManagement
+				<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+					<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">case (1. properties file + <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1 .uim file</strong>)</li>
+					<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">supervisor(1. properties file)</li>
+					<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">(2. properties file + <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1 .uim file</strong>)</li>
+				</ul>
+				</li>
+			</ul>
+			</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ol>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii18">Solution</h2>
+
+<p dir="ltr">1 Adding a DESCRIPTION attribute to the Assignement Details cluster populates the desired message on the .vim files.</p>
+
+<p dir="ltr">&lt;CLUSTER<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">DESCRIPTION="Cluster.Title.AssignmentDescription"</strong><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; LABEL_WIDTH="22.5"<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; TITLE="Cluster.Title.AssignmentDetails"<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; &gt;</p>
+
+<p dir="ltr">The DESCRIPTION attribute value being defined in the corresponding .properties files.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The screenshot below displays the position of a descriptive placeholder. Text string below is just for illustrative purpose.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 120px;"><img lconnwikiparamattachmentname="New Task solution.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Either%20fields%20%27Add%20to%20my%20Tasks%27%20OR%20%27Assign%20to%27%20in%20New%20Tasks%20modal%20is%20lacking%20of%20accessiblity%20features._ATTACHMENTS_/New%20Task%20solution.png" alt="" width="530" lconnwikiparamwikipage="Mandatory either fields on form New Tasks not marked - Accessiblity" lconnattachedresourcetype="page" height="420"></img></p>
+
+<p dir="ltr" style="margin-left: 160px;">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">2. Make sure that the text is backed-up with ARIA feature so that it can be read by screen-readers. Updating template in TI for Description atttribute (@DESCRIPTION) in gen-jsp.xsl:</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&lt;xsl:if test="@DESCRIPTION and not (@DESCRIPTION = '' )" &gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsl:attribute name="title"&gt;&lt;xsl:value-of select="@DESCRIPTION"/&gt;&lt;/xsl:attribute&gt;<br />
+<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;xsl:attribute name="tabIndex"&gt;0&lt;/xsl:attribute&gt;</strong><br />
+&lt;/xsl:if&gt;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii18">Testing (TBA)</h2>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. An outline of all of the testing required by the feature should be present here. This may tie in with the use cases outlined above. Describe the framework being used and the kinds of tests being written:</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">Unit Tests</li>
+	<li style="margin-left: 40px;">Process Tests</li>
+	<li style="margin-left: 40px;">End to End Tests</li>
+	<li style="margin-left: 40px;">Functional/Business Flow Tests</li>
+</ul>
+
+<p dir="ltr">Is it just functional tests or are further performance tests required:</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">FVT Required?</li>
+	<li style="margin-left: 40px;">SVT Required?</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

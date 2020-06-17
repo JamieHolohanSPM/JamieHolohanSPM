@@ -1,0 +1,381 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Smart Nav Hook Point Tech Spike</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Smart Nav Hook Point Tech Spike";
+    pageId="urn:lsid:ibm.com:td:7ebacd1c-c007-4b6f-8eed-197af784de41";
+    toRoot="../../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Smart Nav Hook Point Tech Spike</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">This page provides the details of technical spikes used to inform the AD Light for the Smart Navigator Hook documented in the parent page.</p>
+
+<h2 dir="ltr" id="ii35">Appendix I - Spike Option 3 - Javascript Hook Point - Technical Implementation</h2>
+
+<p dir="ltr">Spike was performed in the HCR 7.0.6.0 Stream</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The spike is not intended as an implementation of MSD requirements rather a POC on the functionality required</p>
+
+<p dir="ltr">1) An optional JS hook is provided in the link navigation</p>
+
+<p dir="ltr">2) An implementation is provided that shows how an ajax call can be made before deciding whether to pop open a modal</p>
+
+<p dir="ltr">3) The modal has a display phase that takes the concernroleid and pulls back info about the concern displaying it</p>
+
+<p dir="ltr">4) The modal allows only one button 'continue' and on click the modal closes and navigation completes as normal (saving to history as normal)</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The logic in the ajax call simply reads the history table and if the concern isn't in the history table for the logged in user then the modal displays. The expectation would be that MSD would implement their own facade and entity to record appropriate information about acknowledgement so they could decide whether to display. History could be used if it was configured to never clear so is an option but the intent of the spike is just to show how ajax calls can be incorporated in to the JS hook rather than a design guide.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><img lconnwikiparamattachmentname="Screenshot 2019-02-13 at 10.59.06.png" lconnwikimacro="image" lconnresourcetype="attachment" src="../Smart%20Navigator%20-%20Hook%20Points._ATTACHMENTS_/Screenshot%202019-02-13%20at%2010.59.06.png" alt="" style="width: 75%; height: 75%; border-width: 1px; border-style: solid;" lconnwikiparamwikipage="Smart Navigator - Hook Points" lconnattachedresourcetype="page"></img></p>
+
+<h3 dir="ltr" id="ii32">Technical steps</h3>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">1) Replaced obfuscated&nbsp;cdej-main.js with uncompressed&nbsp;cdej-main.js.uncompressed.js in&nbsp; /HCR/webclient/WebContent/CDEJ/jscript</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">2) Modified&nbsp;widget CuramSearchMultipleTextBox</p>
+
+<p dir="ltr">a) function&nbsp;&nbsp;_openLinkAndSaveHistory - new code in bold</p>
+
+<pre dir="ltr" style="margin-left: 40px;">
+if(isModal ||
+  (pageMapping &amp;&amp; pageMapping.isMapped) ||
+  (mappedToMoreThanOneTab &amp;&amp; item.preferredTabs)){
+    this._hideSearchBox();
+
+    <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">if (util.smartNavigatorPreNavigationHook){
+
+&nbsp;&nbsp; &nbsp; var handle = topic.subscribe('/smartnavigator/prenavigationhook/completed', lang.hitch(this,function(){
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; this._openLinkAndSaveHistoryPostHook(event, item, isHistory, isModal, pageMapping);
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; handle.remove();
+&nbsp;&nbsp; &nbsp; }));
+
+&nbsp;&nbsp; &nbsp; var data = {url: item.url};
+&nbsp;&nbsp; &nbsp; if (item.person) {
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; data.personId = item.person.concernRoleId;
+&nbsp;&nbsp; &nbsp; }
+&nbsp;&nbsp; &nbsp; util.smartNavigatorPreNavigationHook(data);
+&nbsp;    } else{
+&nbsp;&nbsp; &nbsp;     this._openLinkAndSaveHistoryPostHook(event, item, isHistory, isModal, pageMapping);
+&nbsp;    }</strong>
+
+    ...</pre>
+
+<p dir="ltr">b)&nbsp;_openLinkAndSaveHistoryPostHook is just the code that was perviously there to navigate and store history but cut and pasted to another method to avoid duplication for the common code exercised by both branches of the hook condition</p>
+
+<p dir="ltr">3) Provided implementation of hook</p>
+
+<p dir="ltr">a) The Implementation strategy</p>
+
+<p dir="ltr">- if we do not have concernroleid than proceed (this would be case ref or keyword)</p>
+
+<p dir="ltr">- if we have concernroleid check if we have it in the history by doing an ajax call to smartnav</p>
+
+<p dir="ltr">- if in the history then continue (by posting completed message)</p>
+
+<p dir="ltr">- otherwise open modal passing conceroleid and register hook to post completed message on close</p>
+
+<pre dir="ltr">
+ <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;&nbsp; &nbsp;var history = data[0];
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (history.dtls &amp;&amp; history.dtls.length &gt; 0) {
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;for (i = 0; i &lt; history.dtls.length; i++) {
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if(history.dtls[i].searchConcernRoleId == personId) {
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;return true;
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;return false;
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;},
+
+&nbsp; &nbsp; smartNavigatorPreNavigationHook: function(data){
+
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (!data.personId) {
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;topic.publish('/smartnavigator/prenavigationhook/completed');
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;return;
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}
+
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (simpleAccess.connection == null) {
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;simpleAccess.initConnection(new curamConnection(curam.util.retrieveBaseURL() + '/dataservice'));
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}
+
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;var promise = simpleAccess.makeRequest('SmartNavigatorFacade', 'searchUserHistory');
+
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;promise.then(
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;//Success Callback
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;lang.hitch(this, function(historyData){
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if (curam.util.smartNavPreviouslyViewed(historyData, data.personId)) {
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;topic.publish('/smartnavigator/prenavigationhook/completed');
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;} else {
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;var url = "SmartNav_preNavHookPage.do?concernRoleID=" + data.personId;
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;var dialogObject = curam.util.UimDialog.openUrl(url);
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;dialogObject.registerBeforeCloseHandler(lang.hitch(this, function() {
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;topic.publish('/smartnavigator/prenavigationhook/completed');
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}));
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}),
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;//Error Callback
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;function(err){
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;debug.log('Error Checking if Previously Viewed', err);
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;});
+&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;}
+&nbsp; });</strong></pre>
+
+<p dir="ltr">b)&nbsp;added definition of "dojo/_base/lang" to util.js definition required by implementation in step a) above</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">4) Created a new Modal in HCRTest webclient</p>
+
+<p dir="ltr">a) Modal:&nbsp;SmartNav_preNavHook.uim which calls the person context and displays it</p>
+
+<pre dir="ltr">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;!--
+
+  Licensed Materials - Property of IBM
+
+
+  Copyright IBM Corporation 2019. All Rights Reserved.
+
+
+  US Government Users Restricted Rights - Use, duplication or disclosure 
+
+  restricted by GSA ADP Schedule Contract with IBM Corp.
+
+--&gt;
+
+&lt;PAGE
+
+  PAGE_ID="SmartNav_preNavHook"
+
+  WINDOW_OPTIONS="width=400,height=300"
+
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+  xsi:noNamespaceSchemaLocation="file://Curam/UIMSchema.xsd"&gt;
+
+
+  &lt;PAGE_TITLE&gt;
+
+    &lt;CONNECT&gt;
+
+      &lt;SOURCE
+
+        NAME="TEXT"
+
+        PROPERTY="PageTitle.StaticText"
+
+      /&gt;
+
+    &lt;/CONNECT&gt;
+
+  &lt;/PAGE_TITLE&gt;
+
+
+
+  &lt;SERVER_INTERFACE
+
+    CLASS="ParticipantTab"
+
+    NAME="DISPLAY"
+
+    OPERATION="readPerson"
+
+    PHASE="DISPLAY"
+
+  /&gt;
+
+
+
+  &lt;PAGE_PARAMETER NAME="concernRoleID"/&gt;
+
+
+
+  &lt;CONNECT&gt;
+
+    &lt;SOURCE
+
+      NAME="PAGE"
+
+      PROPERTY="concernRoleID"
+
+    /&gt;
+
+    &lt;TARGET
+
+      NAME="DISPLAY"
+
+      PROPERTY="concernRoleID"
+
+    /&gt;
+
+  &lt;/CONNECT&gt;
+
+
+
+  &lt;FIELD&gt;
+
+    &lt;CONNECT&gt;
+
+      &lt;SOURCE
+
+        NAME="DISPLAY"
+
+        PROPERTY="xmlPanelData"
+
+      /&gt;
+
+    &lt;/CONNECT&gt;
+
+  &lt;/FIELD&gt;
+
+  
+
+  &lt;ACTION_SET
+
+    ALIGNMENT="CENTER"
+
+    TOP="false"
+
+  &gt;
+
+    &lt;ACTION_CONTROL
+
+      IMAGE="YesButton"
+
+      LABEL="ActionControl.Label.Yes"
+
+      TYPE="ACTION"
+
+    /&gt;
+
+  &lt;/ACTION_SET&gt;
+
+&lt;/PAGE&gt;</pre>
+
+<p dir="ltr">b) Modal:&nbsp;SmartNav_preNavHook.properties</p>
+
+<pre dir="ltr">
+Help.PageDescription=Smart Navigator Pre-Navigation Hook
+
+PageTitle.StaticText=Pre-Navigation Hook
+
+ActionControl.Label.Yes=Continue</pre>
+
+<p dir="ltr">c) build db and client</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<div style="page-break-after: always"><span style="display: none;">&nbsp;</span></div>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii49"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Appendix II&nbsp;Smart Nav JS Results</strong></h2>
+
+<p dir="ltr"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Numeric search result</b></p>
+
+<p dir="ltr">Example search: 26308</p>
+
+<p dir="ltr">Example result when clicking on ‘Insurance Affordability, 23608’ result:</p>
+
+<p dir="ltr"><img lconnwikiparamattachmentname="NumericSearch.png" lconnwikimacro="image" lconnresourcetype="attachment" src="../Smart%20Navigator%20-%20Hook%20Points._ATTACHMENTS_/NumericSearch.png" alt="" style="width: 40%; height: 40%;" lconnwikiparamwikipage="Smart Navigator - Hook Points" lconnattachedresourcetype="page"></img></p>
+
+<p dir="ltr">Hook requires:</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Indicator that this is a case navigation</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Number</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Indicator as to what number relates to e.g. casetypecode</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Person link</b></p>
+
+<p dir="ltr">Example search: Howard Malone</p>
+
+<p dir="ltr">Example result when clicking on ‘Howard Malone’ result:</p>
+
+<p dir="ltr"><img lconnwikiparamattachmentname="PersonSearch.png" lconnwikimacro="image" lconnresourcetype="attachment" src="../Smart%20Navigator%20-%20Hook%20Points._ATTACHMENTS_/PersonSearch.png" alt="" style="width: 40%; height: 40%;" lconnwikiparamwikipage="Smart Navigator - Hook Points" lconnattachedresourcetype="page"></img></p>
+
+<p dir="ltr">Hook requires:</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Indicator that this is a Person navigation</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">ConcernRoleID</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Person keyword link</b></p>
+
+<p dir="ltr">Example search: Howard Malone Case</p>
+
+<p dir="ltr">Example result: when clicking on ‘Insurance Affordability , 26308’ result</p>
+
+<p dir="ltr"><img lconnwikiparamattachmentname="PersonKeywordSearch.png" lconnwikimacro="image" lconnresourcetype="attachment" src="../Smart%20Navigator%20-%20Hook%20Points._ATTACHMENTS_/PersonKeywordSearch.png" alt="" style="width: 40%; height: 40%;" lconnwikiparamwikipage="Smart Navigator - Hook Points" lconnattachedresourcetype="page"></img></p>
+
+<p dir="ltr">Hook requires:</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Indicator that this is a case navigation</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Number</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Indicator as to what number relates to e.g. casetypecode</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Non-person keyword link</b></p>
+
+<p dir="ltr">Example search: reg</p>
+
+<p dir="ltr">Example result: when clicking on ‘Register Person’ result</p>
+
+<p dir="ltr"><img lconnwikiparamattachmentname="ShortcutSearch.png" lconnwikimacro="image" lconnresourcetype="attachment" src="../Smart%20Navigator%20-%20Hook%20Points._ATTACHMENTS_/ShortcutSearch.png" alt="" style="width: 40%; height: 40%;" lconnwikiparamwikipage="Smart Navigator - Hook Points" lconnattachedresourcetype="page"></img></p>
+
+<p dir="ltr">Hook requires:</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Indicator that this is a shortcut navigation</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Shortcut</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

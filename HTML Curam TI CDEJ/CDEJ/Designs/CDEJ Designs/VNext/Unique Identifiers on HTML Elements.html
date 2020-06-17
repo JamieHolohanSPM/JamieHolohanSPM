@@ -1,0 +1,1046 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Unique Identifiers on HTML Elements</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../wiki.css" />
+<script type="text/javascript" src="../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Unique Identifiers on HTML Elements";
+    pageId="urn:lsid:ibm.com:td:e1f1f2cb-7851-4516-bc48-27310772a118";
+    toRoot="../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Unique Identifiers on HTML Elements</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr"><span style="font-size:20px;"><strong>Unique Identifiers on HTML Elements</strong></span></p>
+
+<p dir="ltr"><a href="#Background">Background</a></p>
+
+<p dir="ltr"><a href="#Requirements">Requirements</a></p>
+
+<p dir="ltr">&nbsp;&nbsp;<a href="#Q&amp;A">Q&amp;A</a></p>
+
+<p dir="ltr">&nbsp;&nbsp;<a href="#HTML Elements and Other Considerations for Requirements Discussion">HTML Elements and Other Considerations for Requirements Discussion</a></p>
+
+<p dir="ltr"><a href="#Non Functional Requirements">Non Functional Requirements</a></p>
+
+<p dir="ltr"><a href="#Design Option Re Attribute to use">Design Option Re Attribute to use</a></p>
+
+<p dir="ltr">&nbsp;&nbsp;<a href="#Option 1 - Use " id="">Option 1 - Use "id" attribute</a></p>
+
+<p dir="ltr">&nbsp;&nbsp;<a href="#Option 2 - Use some new attribute name">Option 2 - Use some new attribute name</a></p>
+
+<p dir="ltr"><a href="#Design Option Re Format of the generated ID">Design Option Re Format of the generated ID</a></p>
+
+<p dir="ltr"><a href="#Design">Design</a></p>
+
+<p dir="ltr"><a href="#CDEJ Component A">CDEJ Component A</a></p>
+
+<p dir="ltr"><a href="#CDEJ Component B">CDEJ Component B</a></p>
+
+<p dir="ltr"><a href="#Validations">Validations</a></p>
+
+<p dir="ltr"><a href="#Data Model Changes and Required Indexes">Data Model Changes and Required Indexes</a></p>
+
+<p dir="ltr"><a href="#Q &amp; A">Q &amp; A</a></p>
+
+<p dir="ltr"><a href="#Use Cases">Use Cases</a></p>
+
+<p dir="ltr"><a href="#Implementation Notes">Implementation Notes</a></p>
+
+<p dir="ltr"><a href="#Application Impact">Application Impact</a></p>
+
+<p dir="ltr"><a href="#CTM">CTM</a></p>
+
+<p dir="ltr"><a href="#Testing">Testing</a></p>
+
+<p dir="ltr"><a href="#Documentation/How To Use Feature">Documentation/How To Use Feature</a></p>
+
+<p dir="ltr"><a href="#Check List">Check List</a></p>
+
+<p dir="ltr"><a href="#Work Estimation">Work Estimation</a></p>
+
+<p dir="ltr"><strong><span style="font-size:18px;"><a id="Background" name="Background">Background</a></span></strong></p>
+
+<p dir="ltr">Selenium is a portable software testing framework for web applications. Selenium provides a record/playback tool for authoring tests without learning a test scripting language (Selenium IDE). It also provides a test domain-specific language Selenese to write tests in a number of popular programming languages, including Java, C#, Groovy, Perl, PHP, Python and Ruby. The tests can then be run against most modern web browsers. Selenium deploys on Windows, Linux, and Macintosh platforms. It is open-source software, released under the Apache 2.0 license, and can be downloaded and used without charge.</p>
+
+<p dir="ltr">The test automation team within Curam have begun to use Selenium as the functional automation tool of choice. To date, a wrapper infrastructure has been created to allow such tests to be written more easily by developers. It is now proposed to release this infrastructure.</p>
+
+<p dir="ltr">However, a stumbling block to the release and the maintenance of such tests is the lack of a unique identifier in many of the core HTML elements generated for the Curam user interface. This has led to issues with regards to identifying elements to click on and populate within the test scripts and more importantly the fact that these scripts need to work from product release to release (something which is currently not guaranteed as there is no HTML contract with a customer and the HTML structure may change from release to release).</p>
+
+<p dir="ltr">A solution to this is to generate a unique identifier for the HTML elements that this testing framework is interested in and which will guarantee to be the same in future releases. This will allow developers to write the automated tests once with the guarantee that the next product release will not break those tests (at least from a unique identifier generation point of view). The fact that these HTML elements will have a unique identifier will also make the writing of these tests easier and more succinct with an added advantage that the framework to support this may be refactored to take this new feature into account.</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;"><a id="Requirements" name="Requirements">Requirements</a></span></strong></p>
+
+<ul dir="ltr">
+	<li>Generate a unique identifier for the following specified HTML elements generated by the CDEJ infrastructure.</li>
+	<li>Guarantee that the unique identifier for a specified HTML element will not change between product releases.</li>
+	<li>etc. etc. Flesh out requirements here............</li>
+	<li>TEC-XXXXX - Title of ticket</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;"><a id="Q&amp;A" name="Q&amp;A">Q&amp;A</a></span></strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">What about IEG?</li>
+	<li style="margin-left: 40px;">What about NPG Page Player?</li>
+	<li style="margin-left: 40px;">What about all of our custom widgets?</li>
+	<li style="margin-left: 40px;">What about any other type of user interface generation we support.in the product?</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;"><a id="HTML Elements and Other Considerations for Requirements Discussion" name="HTML Elements and Other Considerations for Requirements Discussion">HTML Elements and Other Considerations for Requirements Discussion</a></span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">The table below existed before FVT came back to us with two lists of their 1st and 2nd priority items to be identified. &nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">I've attempted to translate the FVT lists onto the table below, but for full traceability, here are&nbsp;the original lists (exactly as they were&nbsp;given):-</p>
+
+<p dir="ltr" style="margin-left: 40px;">1.&nbsp;checkbox, text field, table, multi-select list (select/option tags), iframe, radiobutton<br />
+2.&nbsp;anchor (a), image (img), list (li, ul), textarea, table row (tr) and table cell (td)<br />
+&nbsp;</p>
+
+<table border="1" dir="ltr" style="width: 1629px;">
+	<tbody>
+		<tr>
+			<td style="width: 220px;"><strong>Name</strong></td>
+			<td style="width: 76px;">
+			<p><strong>Unique Identifier Required in the long run</strong></p>
+			</td>
+			<td style="width: 40px;"><strong>FVT priority</strong></td>
+			<td style="width: 117px;"><strong>CDEJ have control over this?</strong></td>
+			<td style="width: 181px;">
+			<p style="text-align: center;"><strong style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Best identifier right now<br />
+			OR<br />
+			a raw HTML example</strong></p>
+			</td>
+			<td style="width: 1002px;"><b>Comments</b></td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">iFrame</td>
+			<td style="width: 76px;">Maybe</td>
+			<td style="width: 40px;">1</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">iframe&nbsp;@src</td>
+			<td style="width: 1002px;">Used in tests to identify further elements to navigate to.</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Table</td>
+			<td style="width: 76px;">Yes</td>
+			<td style="width: 40px;">1</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&lt;div class="list"&gt;&lt;div style="zoom:1;"&gt;<br />
+			&lt;table cellspacing="0" class="list-id-CommonIntake_listApplicationCaseByOwner-N20A72 paginated-list-id-N20A72" id="sortable_N20A72" summary="Table for formatting purposes only"&gt;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">TR</td>
+			<td style="width: 76px;">Yes</td>
+			<td style="width: 40px;">2</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">TD</td>
+			<td style="width: 76px;">Yes</td>
+			<td style="width: 40px;">2</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">&nbsp;</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;"><strong><span style="font-size:14px;">Field Types</span></strong></td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Text Box</td>
+			<td style="width: 76px;">Yes</td>
+			<td style="width: 40px;">1</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">Identify text fields to input data into</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Drop Down&nbsp;Select</span></td>
+			<td style="width: 76px;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Yes</span></td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Drop Down&nbsp;<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Option</span></td>
+			<td style="width: 76px;">Yes</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Date Selector</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">Icon to launch the date picker or text field to type into</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Check Box (input)</td>
+			<td style="width: 76px;">Yes</td>
+			<td style="width: 40px;">1</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Radio Button</td>
+			<td style="width: 76px;">Yes</td>
+			<td style="width: 40px;">1</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Frequency Pattern Selector</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Search</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">Icon to launch a search page and icon to clear the data from that field</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">
+			<p>CheckBoxed List</p>
+			</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&lt;div class="checkboxed-list" style="height: 119px;width: 100%;"&gt;<br />
+			&lt;fieldset&gt;<br />
+			&lt;div style="overflow-x:hidden;padding-bottom:2px;"&gt;<br />
+			&lt;input aria-labelledby="__o3uid940-label" checked="checked" id="__o3uid940" name="__o3id0" title="Benefit Overpayment" type="checkbox" value="CT4|PN4"&gt;<br />
+			&lt;span id="__o3uid940-label" style="padding-left:3px;" title="Benefit Overpayment"&gt;Benefit Overpayment&lt;/span&gt;...</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">&nbsp;</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">&nbsp;</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;"><strong><span style="font-size:14px;">Other</span></strong></td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Log in/Log Out/Log In Unsuccessful Pages</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">Anything special about these?</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Application Section Tabs/Buttons</td>
+			<td style="width: 76px;">Yes</td>
+			<td style="width: 40px;">2</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">e.d. Home, Inbox etc.</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Home Page Customise Panel</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">Hide or show different Pods</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Home Page Pods</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">Expand/Contract Toggle Button, Filter Button, Close Button, Multi-select check boxes. Search and Reset Buttons, List Pod links, graph Pods</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Page Level Application Tabs</td>
+			<td style="width: 76px;">Yes</td>
+			<td style="width: 40px;">2</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">Tab Name and Close Button</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Calendar Month/Week/Day View</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Tab Action Menu</td>
+			<td style="width: 76px;">Yes</td>
+			<td style="width: 40px;">2</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Page Buttons</td>
+			<td style="width: 76px;">Yes</td>
+			<td style="width: 40px;">2</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">Buttons found at the bottom of the page (Save, Cancel etc.)</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Context Panel Dropdown Toggle</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Context Panel</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">links on the context panel, context panel photo/image links and other types of links</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Navigation Bar Tabs</td>
+			<td style="width: 76px;">Yes</td>
+			<td style="width: 40px;">2</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">the tabs under the main application tabs</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Page Group Navigation Bar</td>
+			<td style="width: 76px;">Yes</td>
+			<td style="width: 40px;">2</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">sections panel on a page as links</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Page Action Buttons</td>
+			<td style="width: 76px;">Yes</td>
+			<td style="width: 40px;">2</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">On the Page Title Bar, buttons if less than two, turns into a page action menu if more.</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Page Title Bar</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">Also contains refresh, print and help</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">In Page Navigation Tabs</td>
+			<td style="width: 76px;">Yes</td>
+			<td style="width: 40px;">2</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Cluster Expand and Collapse Arrow</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">Clicking on the arrow opens or closes the cluster. The icon toggles from open to closed state Icons displayed: open state arrow, closed state arrow.</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Linked Text</td>
+			<td style="width: 76px;">Yes</td>
+			<td style="width: 40px;">2</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">All linked text is displayed in blue. On mouse rollover, the text underlines</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">List Action Menu</td>
+			<td style="width: 76px;">Yes</td>
+			<td style="width: 40px;">2</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">Allows users to edit the object in the list (see specs for drop down actions menu) Icons displayed: Normal, Rollover and Selected State</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">List Expand Collapse Arrows</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">Each list item can expand to display a details panel. The icons toggles from an open to closed state<br />
+			Icons displayed: open state arrow, closed state arrow.</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">List Item Panel Tabs/In Pane Navigation</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">Displays what was previously In Page Navigation. There are two states: selected and not selected.</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">List Pagination</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Shortcuts Panel Links</td>
+			<td style="width: 76px;">Yes</td>
+			<td style="width: 40px;">2</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Accordian Control (Shortcuts)</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">When the arrow is clicked the accordian expands over the interface (see Accordian Expanded). When the user rolls off the accordian, the accordian contracts (with a delay). When the user clicks on the interface, the accordian contracts.</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Pin Control</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">Once the accordian is expanded, the user can click on the pin icon to lock the accordian in the expanded position. When the accordian is pinned, the icon changes to an arrow. Clicking on this arrow collapses the accordian.</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Smart Panel</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">The user can expand and contract the panel using the arrow on the top left of the panel. Advisor links and quick notes editor are also clickable.</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">&nbsp;</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;"><strong><span style="font-size:14px;">Specialized Widgets</span></strong></td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Transfer List Widget</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">User Preferences Widget</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Tree Widget</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Upload Widget</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Download Widget</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Single Select Widget</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Multi Select Widget&nbsp;<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">(table of inputs of type checkbox)</span></td>
+			<td style="width: 76px;">Yes</td>
+			<td style="width: 40px;">1</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">
+			<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Individual checkboxes via&nbsp;<a aria-labelledby="mentionsAria_1">@</a>name and @value:-</p>
+
+			<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&lt;input ... name="__o3msw.ACTION.details$attendeeList$selectedClients" value="26303"&gt;<br />
+			&nbsp;</p>
+
+			<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Select-all checkbox via&nbsp;<a aria-labelledby="mentionsAria_1">@</a>onclick:-</p>
+
+			<p style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><span class="webkit-html-attribute-name" style="min-width: 0px; min-height: 0px; box-sizing: border-box; unicode-bidi: -webkit-isolate; font-family: Consolas, 'Lucida Console', monospace; line-height: normal; white-space: pre-wrap;">onclick</span><span style="font-family: Consolas, 'Lucida Console', monospace; line-height: normal; white-space: pre-wrap;">="</span><span class="webkit-html-attribute-value" style="min-width: 0px; min-height: 0px; box-sizing: border-box; unicode-bidi: -webkit-isolate; font-family: Consolas, 'Lucida Console', monospace; line-height: normal; white-space: pre-wrap;">ToggleSelectAll(this, '__o3msw.ACTION.details$attendeeList$selectedClients')</span><span style="font-family: Consolas, 'Lucida Console', monospace; line-height: normal; white-space: pre-wrap;">"</span></p>
+			</td>
+			<td style="width: 1002px;">
+			<p>&nbsp;</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Agenda Player</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Decision Assist Evidence Comparison</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Decision Assist Evidence View Mode</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Evidence Broker Comparison</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Schedule View</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Meeting View</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Rates Table</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Evidence Display</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Typical Picture Editor</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Heatmap</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">File Name</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">Workflow Graphical View Widget</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 220px;">&nbsp;</td>
+			<td style="width: 76px;">&nbsp;</td>
+			<td style="width: 40px;">&nbsp;</td>
+			<td style="width: 117px;">&nbsp;</td>
+			<td style="width: 181px;">&nbsp;</td>
+			<td style="width: 1002px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;"><a id="Non Functional Requirements" name="Non Functional Requirements">Non Functional Requirements</a></span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. We can fill in N/A if the specified non functional requirement is not applicable to the feature being delivered, otherwise some notes must be entered here covering the particular area.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" width="671">
+	<tbody>
+		<tr>
+			<td style="width: 118px;"><strong>NFR</strong></td>
+			<td style="width: 537px;"><strong>Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Accessibility</td>
+			<td style="width: 537px;">The ability of the system to be used by people with disabilities. When new technologies are being used for the UI very careful consideration should be given to whether screen readers can be used with the technologies. This applies specifically to usage of JavaScript, Flex and SVG. The use of colors to provide functionality should be considered (and avoided), along with resolutions that will be used by vision impaired users.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Availability &amp; Resilience</td>
+			<td style="width: 537px;">The ability of the system to be fully or partly operational as and when required and to effectively handle failures that could affect system availability. This should be considered when working outside of the normal infrastructure and deployment. For example, the XML Server is not deployed in an application server and has special handling for fail-over and load balancing. Careful consideration should be taken before adding new components, e.g. EJB Beans, MDBs, to the infrastructure.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Development Resource</td>
+			<td style="width: 537px;">The ability of the system to be designed, built, deployed and operated within known constraints of people, budget, time, etc. In general there is not much information required here, however where special skill sets or people with siloed knowledge are required to work on the change/enhancement, this should be detailed here.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Evolution</td>
+			<td style="width: 537px;">The ability of the system to be flexible in the face of the inevitable change that all systems experience after deployment, balanced against the costs of providing such flexibility. Consideration should be given to future proofing the change, including considering how to upgrade to any changes or enhancements provided in the future. Specifically designs should accommodate elements such as localisation (text, dates, etc.), customization, configurability, and componentization. Providing these features in future releases, when not considered up front, has caused impacts for customers in the past and has prevented us from providing the features in some cases.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Internationalisation</td>
+			<td style="width: 537px;">The ability of the system to be independent from any particular language, country or cultural group. Localisation and internationalisation are a large concern for Cúram. Support should always be provided to view information in multiple locales, based on the user and server locale, along with support for working in multiple time zones.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Location</td>
+			<td style="width: 537px;">The ability of the system to overcome problems brought about by the absolute location of its elements and the distances between them. For the most part this is not a major concern, however we should never design based on the assumption that the customer will use a default configuration</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Performance and Scalability</td>
+			<td style="width: 537px;">The ability of the system to predictably execute within its mandated performance profile and to handle increased processing volumes. Performance and scalability are a concern and should always be considered during design. Where necessary, the Performance and Benchmarking teaming should be engaged early to help with determining impact of potential changes.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Regulation</td>
+			<td style="width: 537px;">The ability of the system to conform to locale and international laws, quasi-legal regulations, company policies and other rules and standards. Regulation includes the usages of third party tools and the licensing issues associated with these. New jars should never be introduced without considering the legal implications and licensing of the jars. This includes usage of GPL licensed code. Also, usage of code freely provided on the web and not properly licensed should be avoided.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Security</td>
+			<td style="width: 537px;">The ability of the system to reliably control, monitor and audit who can perform what actions on what resources and to detect and recover from failures in security mechanisms. This is a concern where new features are added that are not contained within the normal Cúram security.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Usability</td>
+			<td style="width: 537px;">The ease with which people who interact with the system can work effectively. How the change will affect the user and how they use the application/feature should always be considered. Where necessary the business analysts and our user interface experts should be engaged early to ensure we meet usability requirements. e.g. printing.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;"><a id="Design Option Re Attribute to use" name="Design Option Re Attribute to use">Design Option Re Attribute to use</a></span></strong></p>
+
+<p dir="ltr">Technically, web driver tests do not require the CDEJ to use the "id" attribute.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;"><a id="">Option 1 - Use "id" attribute</a></span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><br />
+<strong>Pros:-</strong></p>
+
+<ol dir="ltr">
+	<li style="margin-left: 40px;">Semantically&nbsp;this makes the most sense.</li>
+	<li style="margin-left: 40px;">Dedicated functions in Selenium to getById.</li>
+</ol>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>Cons / Complications:-</strong></p>
+
+<ol dir="ltr">
+	<li style="margin-left: 40px;">Impact<br />
+	Curam already generates a number of values into various IDs and we would need to figure out the impact of changing these values. From an FVT perspective they think that they would not be impacted by removing the old IDs.<br />
+	Would customers be impacted? If so, do we officially support them on these IDs? Either way, impacting customers would be best&nbsp;avoided.<br />
+	&nbsp;</li>
+	<li style="margin-left: 40px;">Usage restrictions<br />
+	<br />
+	From w3c:-
+	<table border="1" dir="ltr" style="width: 500px;">
+		<tbody>
+			<tr>
+				<td style="width: 500px;">
+				<p dir="ltr" style="margin-left: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">HTML defines these naming rules:</p>
+
+				<ul dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+					<li style="margin-left: 40px;">Must contain at least one character</li>
+					<li style="margin-left: 40px;">Must not contain any space characters</li>
+					<li style="margin-left: 40px;">In HTML, all values are case-insensitive</li>
+				</ul>
+
+				<p style="margin-left: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">In HTML5, the id attribute can be used on any HTML element.</p>
+
+				<p style="margin-left: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">In HTML 4.01, the id attribute cannot be used with: &lt;base&gt;, &lt;head&gt;, &lt;html&gt;, &lt;meta&gt;, &lt;param&gt;, &lt;script&gt;, &lt;style&gt;, and &lt;title&gt;. This shouldn't be a problem for us as these don't concern the testing team.</p>
+
+				<p style="margin-left: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Note: HTML 4.01 has greater restrictions on the content of id values (for example; in HTML 4.01 id values cannot start with a number).</p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<br />
+	Additionally, a comment in our own HTMLUtils.getUniqueID() states that&nbsp;a "-"&nbsp;is not valid in a HTML ID value. [citation needed]<br />
+	<br />
+	From stackoverflow:-
+	<table border="1" style="width: 500px;">
+		<tbody>
+			<tr>
+				<td style="width: 500px;">
+				<p>For HTML 4, the answer is technically:</p>
+
+				<p>ID and NAME tokens must begin with a letter ([A-Za-z]) and may be followed by any number of letters, digits ([0-9]), hyphens ("-"), underscores ("_"), colons (":"), and periods (".").<br />
+				<br />
+				HTML 5 is even more permissive, saying only that an id must contain at least one character and may not contain any space characters.</p>
+
+				<p>The id attribute is case sensitive in XHTML [citation needed].</p>
+
+				<p>As a purely practical matter, you may want to avoid certain characters. Periods, colons and '#' have special meaning in CSS selectors, so you will have to escape those characters using a backslash in CSS or a double backslash in a selector string passed to jQuery.</p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p>In summary it would be best to begin with a letter and the rest should contain only letters, digits and underscores.&nbsp;<br />
+	TODO: decide on a format.</p>
+	</li>
+</ol>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;"><a id="Option 2 - Use some new attribute name" name="Option 2 - Use some new attribute name">Option 2 - Use some new attribute name</a></span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>Pros:-</strong></p>
+
+<ol dir="ltr">
+	<li style="margin-left: 40px;">FVT can easily find an element by an xpath expression that uses the new attribute name. &nbsp;This is effectively as easy as getting an element by id once a central function is added.</li>
+</ol>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>Cons:-</strong></p>
+
+<ol dir="ltr">
+	<li style="margin-left: 40px;">Semantically this is potentially not as clear and not what developers would expect.</li>
+</ol>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><strong><span style="font-size:18px;"><a id="Design Option Re Format of the generated ID" name="Design Option Re Format of the generated ID">Design Option Re Format of the generated ID</a></span></strong></p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><span style="font-size:16px;">Potential building blocks for the unique identifier of any element:-</span></p>
+
+<p dir="ltr" style="margin-top: 0px;"><br />
+&lt;Page ID&gt;</p>
+
+<p dir="ltr" style="margin-top: 0px;">&lt;Cluster / List Div ID&gt;</p>
+
+<p dir="ltr" style="margin-top: 0px;">&lt;ListRowBeginTag&gt;&lt;index R-1&gt;&lt;ListRowSeparatorTag&gt;&lt;index R&gt;&lt;ListRowBeginTag&gt;</p>
+
+<p dir="ltr" style="margin-top: 0px;">&lt;ListColBeginTag&gt;&lt;index C&gt;&lt;ListColEndTag&gt;</p>
+
+<p dir="ltr" style="margin-top: 0px;">&lt;Field ID&gt;<br />
+&nbsp;</p>
+
+<p dir="ltr" style="margin-top: 0px;">1. page id</p>
+
+<p dir="ltr" style="margin-top: 0px;">- need to figure out what to provide for this in IEG, PagePlayer and anything else I haven't thought of where page id may not be known</p>
+
+<p dir="ltr" style="margin-top: 0px;">2. cluster / list div id</p>
+
+<p dir="ltr" style="margin-top: 0px;">3. list row index</p>
+
+<p dir="ltr" style="margin-top: 0px;">- This is already available and it's unclear whether anything we can provide around this will be helpful as list rows are dynamic based on the data and sort orders and filters.</p>
+
+<p dir="ltr" style="margin-top: 0px;">- Would it be possible to create a row id by combining all the links from an entire row? Usually links from a row item will typically include parameters which uniquely identify the object represented by the row.</p>
+
+<p dir="ltr" style="margin-top: 0px;">4. list col id</p>
+
+<p dir="ltr" style="margin-top: 0px;">- note, this is not the index but rather based on the underlying CONNECT</p>
+
+<p dir="ltr" style="margin-top: 0px;">5. field id</p>
+
+<p dir="ltr" style="margin-top: 0px;">- For UIM pages this might be produced from the underlying CONNECT element. This might get distilled down into the most&nbsp;immutable parts.</p>
+
+<p dir="ltr" style="margin-top: 0px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-top: 0px;">If we want to minify the new unique ids, all of the above might be put through a hashing algorithm to produce a short unique ID.</p>
+
+<p dir="ltr" style="margin-top: 0px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-top: 0px;">While FVT could simply use the shortened end result of this, changes in pages and page flows make this a bad idea, i.e. deprecated pages being replaced by new very similar pages. It would be better, therefore, to give FVT the formula to create the long form of these ids and then to hash it before locating the element in question. Updating a test to run with a&nbsp;new page superseding an old one could then be a simple process of updating the page id portion in all the test references rather than inspecting everything on the page again at runtime and grabbing the new hashes.</p>
+
+<p dir="ltr" style="margin-top: 0px;">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;"><a id="Design" name="Design">Design</a></span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. This should outline in detail the design chosen with all of the various areas for the component covered. This will differ from component to component so the sub headings here will reflect that.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;"><a id="CDEJ Component A" name="CDEJ Component A">CDEJ Component A</a></span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;"><a id="CDEJ Component B" name="CDEJ Component B">CDEJ Component B</a></span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;"><a id="Validations" name="Validations">Validations</a></span></strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">Validations Required</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;"><a id="Data Model Changes and Required Indexes" name="Data Model Changes and Required Indexes">Data Model Changes and Required Indexes</a></span></strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">Describe any changes required to the data model, entities, operations, indexes etc.</li>
+	<li style="margin-left: 40px;"><strong>Also important here that if new tables/indexes are being added, check to ensure that the primary key/index lenght does not exceed the maximum allowed for DB2</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;"><a id="Q &amp; A" name="Q &amp; A">Q &amp; A</a></span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">This is <strong>optional</strong>. There may be some outstanding questions as regards to the design. These questions and the answers when they become available may be recorded here.</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;"><a id="Use Cases" name="Use Cases">Use Cases</a></span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. The various use cases for the feature must be outlined here. They can be in whatever format deemed appropriate (i.e. verbose description or in a tabular format with actors and actions etc.). Below is an example of how use cases may be documented in a tabular format.</p>
+
+<table border="1" dir="ltr" style="width: 638px;">
+	<tbody>
+		<tr>
+			<td><strong>Role/Actor</strong></td>
+			<td><strong>Description</strong></td>
+			<td><strong>Expected Behavior</strong></td>
+			<td style="width: 256px;"><strong>Tested</strong></td>
+		</tr>
+		<tr>
+			<td>User</td>
+			<td>Does Something</td>
+			<td>What happens when this action is taken?</td>
+			<td style="width: 256px;">How is this tested, manual or automatically?</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;"><a id="Implementation Notes" name="Implementation Notes">Implementation Notes</a></span></strong></p>
+
+<p dir="ltr">This is <strong>optional</strong>. Any notes related to the actual implementation can be described here. These can be related to some questions related to the implementation, the way some part of the implementation was completed etc.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;"><a id="Application Impact" name="Application Impact">Application Impact</a></span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. If there is no impact, then this is as simple as saying so. If there is impact, then this may describe the impact in detail and outline the upgrade path. If the feature is related to a CLE, this section can be a link to that CLE (and hence the documentation associated with the CLE will suffice).</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;"><a id="CTM" name="CTM">CTM</a></span></strong></p>
+
+<p dir="ltr">This is <strong>optional</strong>. Consideration should be given to whether this feature adds or changes administration data. If new administration data is being added, are new CTM business objects required to transport this data. If existing administration data is being modified, will this require changes to existing CTM BOM instances?</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;"><a id="Testing" name="Testing">Testing</a></span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. An outline of all of the testing required by the feature should be present here. This may tie in with the use cases outlined above. This may differ from component to component so the sub headings here will reflect that.</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Unit tests</p>
+	</li>
+	<li>
+	<p>Manual Test Plans</p>
+	</li>
+	<li>
+	<p>Automated tests</p>
+	</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;"><a id="Documentation/How To Use Feature" name="Documentation/How To Use Feature">Documentation/How To Use Feature</a></span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. This should describe how to use the feature added. Again this may differ from component to component but there are some general headings to consider:</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Where the feature fits in the overall component?</p>
+	</li>
+	<li>
+	<p>How it may be accessed (i.e. created/authored)?</p>
+	</li>
+	<li>
+	<p>What does it do (may be linked to the use cases above)?</p>
+	</li>
+	<li>
+	<p>Advantages of using the feature?</p>
+	</li>
+	<li>
+	<p>Any limitations associated with the feature?</p>
+	</li>
+	<li>
+	<p>A description of how the feature should be used etc.? This may also include a description of a contract between the various teams using the feature and will incorporate some details of the design.</p>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;"><a id="Check List" name="Check List">Check List</a></span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Basically this is a quick check list of items that should be considered when doing a design for that particular component.</p>
+
+<table border="1" dir="ltr" style="width: 658px;">
+	<tbody>
+		<tr>
+			<td style="width: 166px;"><strong>Check List Item</strong></td>
+			<td style="width: 314px;"><strong>Notes</strong></td>
+			<td style="width: 157px;"><strong>Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">????</td>
+			<td style="width: 314px;">?????.</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;"><a id="Work Estimation" name="Work Estimation">Work Estimation</a></span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Again, the actual items listed in the estimate breakdown may vary from task to task and component to component.</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Work Estimates</p>
+
+	<ul>
+		<li>
+		<p>Design: ? Days</p>
+		</li>
+		<li>
+		<p>Prototype: ? Days</p>
+		</li>
+		<li>
+		<p>Implementation: ? Days</p>
+		</li>
+		<li>
+		<p>Testing: ? Days</p>
+		</li>
+		<li>
+		<p>Documentation: ? Days</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Total: ? Days</p>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><br />
+&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

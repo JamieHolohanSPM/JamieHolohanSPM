@@ -1,0 +1,115 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Enabling the FILE_EDIT widget for Google Chrome</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../wiki.css" />
+<script type="text/javascript" src="../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Enabling the FILE_EDIT widget for Google Chrome";
+    pageId="urn:lsid:ibm.com:td:b3c14046-a20e-4a1c-9489-fcac0ace2237";
+    toRoot="../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Enabling the FILE_EDIT widget for Google Chrome</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">*** WORK IN PROGRESS ***</p>
+
+<h1 dir="ltr">1. Introduction</h1>
+
+<p dir="ltr">The Cúram IBM (Cúram) FILE_EDIT widget allows a user to launch Microsoft Word, edit the document and save the document directly to the Cúramdatabase. This functionality relies on instantiating a Java applet [1] to communicate with the launched Microsoft Word document. This use of a Java applet relies on the Java plugin being installed in the end user's browser. The Java plugin relies on the Netscape Plug-in (NP-API) [2] to function.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Google Chrome (Chrome) have made the decision to end support for NP-API in 2015 [3].&nbsp; This effectively means that the Java plugin will stop working with Chrome 45, in September 2015 [4]. As a consequence the Cúram FILE_EDIT widget will cease to work when an end user upgrades to this version of Chrome.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Many Cúram customers have come to depend on this FILE_EDIT widget feature as part of their daily business process. With this in mind an alternative, applet-less, solution has been developed for Google Chrome. This alternative solution makes use of Google's recommend best practices [5].</p>
+
+<h1 dir="ltr">2. Cúram applet-less solution for Google Chrome</h1>
+
+<p dir="ltr"><img alt="" id="1430482558070_0" src="Enabling%20the%20FILE_EDIT%20widget%20for%20Google%20Chrome._ATTACHMENTS_/editor_image_ecd0fedd-6754-4145-82f1-d3d6604ec07b.png"></img></p>
+
+<p dir="ltr">Cúram have developed a solution based on a Chrome Extension &amp; Native Messaging bridge to allow the Cúram application to interact with Microsoft Word.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Customers wishing to enable this feature for their end users must install two separate software components onto the computers of their end users:</p>
+
+<p dir="ltr">1. Chrome Extension</p>
+
+<p dir="ltr">2. Chrome Native Messaging Bridge</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Please note that the feature cannot be used until both components are installed.</p>
+
+<h1 dir="ltr">3. Installing required software</h1>
+
+<h2 dir="ltr">3.1 Installing the Chrome Extension</h2>
+
+<p dir="ltr">Cúram provide the Chome Extension as a .crx file. Since Chrome 33,&nbsp; 2013, Google have placed a restriction on the location that users can install extensions from [6]. Since this release, only extensions published to the Chrome Webstore [7] can be installed by users. Licensing restrictions prevent Cúram from publishing software in this way so an alternative installation method must be used. The recommended approach is to install the provided Chrome Extension is via the Chrome supported enterprise policy [8].</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">// TODO - add steps here</p>
+
+<h2 dir="ltr">3.2 Installing the Chrome Native Messaging Bridge</h2>
+
+<p dir="ltr">The Chrome Native Messaging Bridge is provided as a standard Windows Installer (.msi file). It is recommended that customer avail of the group policy software installation feature provided by Mircrosoft [9][10].</p>
+
+<p dir="ltr"><a lconnwikimacro="wikilink" href="Enabling%20the%20FILE_EDIT%20widget%20for%20Google%20Chrome/Generating%20MSI%20Installer%20for%20Host%20component.html" lconnwikiparamwikipage="Generating MSI Installer for Host component">Generating MSI Installer for Host component</a></p>
+
+<p dir="ltr">// TODO - don't think that we need to offer steps here, it's very standard stuff.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">3.2 Installing the Chrome group policy templates (XML files)</h2>
+
+<p dir="ltr">// TODO</p>
+
+<h1 dir="ltr">References</h1>
+
+<p dir="ltr">[1] <a href="http://en.wikipedia.org/wiki/Applet">http://en.wikipedia.org/wiki/Applet</a></p>
+
+<p dir="ltr">[2] <a href="https://java.com/en/download/faq/chrome.xml">https://java.com/en/download/faq/chrome.xml</a></p>
+
+<p dir="ltr"><a href="http://blog.chromium.org/2013/09/saying-goodbye-to-our-old-friend-npapi.html">[3] http://blog.chromium.org/2013/09/saying-goodbye-to-our-old-friend-npapi.html</a></p>
+
+<p dir="ltr"><a href="https://sites.google.com/a/chromium.org/dev/developers/npapi-deprecation">[4] https://sites.google.com/a/chromium.org/dev/developers/npapi-deprecation</a></p>
+
+<p dir="ltr">[5] <a href="https://developer.chrome.com/extensions/api_index">https://developer.chrome.com/extensions/api_index</a></p>
+
+<p dir="ltr">[6] <a href="http://blog.chromium.org/2013/11/protecting-windows-users-from-malicious.html">http://blog.chromium.org/2013/11/protecting-windows-users-from-malicious.html</a></p>
+
+<p dir="ltr">[7] <a href="https://chrome.google.com/webstore">https://chrome.google.com/webstore</a></p>
+
+<p dir="ltr">[8] <a href="https://support.google.com/chrome/a/answer/188453">https://support.google.com/chrome/a/answer/188453</a></p>
+
+<p dir="ltr">[9] <a href="https://support.microsoft.com/en-us/kb/816102">https://support.microsoft.com/en-us/kb/816102</a></p>
+
+<p dir="ltr"><a href="https://technet.microsoft.com/en-us/library/cc782727%28v=ws.10%29.aspx">[10] https://technet.microsoft.com/en-us/library/cc782727%28v=ws.10%29.aspx</a></p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

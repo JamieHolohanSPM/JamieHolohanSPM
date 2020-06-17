@@ -1,0 +1,128 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>CDEJ Infrastructure - improvement path</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="CDEJ Infrastructure - improvement path";
+    pageId="urn:lsid:ibm.com:td:5dbb9c22-1a47-4cbe-bd3d-610c240fbad5";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">CDEJ Infrastructure - improvement path</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">OK, so let the discussion start. The following is loosely structured and rather first impression thoughts, yet they represent my - perhaps too conservative - view on the direction the infrastructure might be moving.<br />
+First of all, some comments on the proposed next generation solution. It is an interesting view, and definitely not everything is caught by the quick first reading, so some of the following might be limited relevance.</p>
+
+<h2 dir="ltr">The “wizard-type” choice of the technology</h2>
+
+<p dir="ltr">Before looking at the suggested page - I agree it might be an interesting read - I do not think that the command line or even graphical wizard to make the choices for the technologies a developer wants to engage with is something for us to consider. A “development for everyone” (“code which writes the code”)&nbsp; concept might be played by an end customers to show that the development workforce is not needed at all; it might serve for the proof of concept for the technological choices, for the assessments to be done before choosing the right combination, but the “not developing” experience is nothing valuable for a developer, and also there is a doubt if changing the technologies should really be the everyday necessity.<br />
+The real concern is the quality of the solution and how the side technologies might help ensuring it, and, hence, which side technologies to provide for it.<br />
+The solution developer should not think about the infrastructure rather concentrating on the business logic and the choice of representing the data flow in the way meaningful to the end user. This is their concern; to generate the infrastructure isn’t their concern and shouldn’t be.<br />
+There are always parts of the application where dynamics are beneficial or which can change frequently. Theme changes, flexibility in the layout or describing the layout, customization and adjustment capabilities at various levels. Finally, the internally frameworks used should be subject to easy change. These are all the capabilities though, which require the right architecture, the right management and maintaining - the right centralization.<br />
+Moving towards loose solutions is the right way to create a huge maintenance problems and resource shortages because of the de-centralization and mixing the non-mixable concerns. We are in this situation now, and just switching to the new technologies and following the same path - with even more de-centralization does not seem the right long-term direction.</p>
+
+<h2 dir="ltr">The page description format</h2>
+
+<p dir="ltr">I would disagree that HTML is by any means less verbose than UIM or more self-explanatory. HTML is a technical language which does not translate to any meaningful concepts for the developer, therefore HTML based templates from the readability perspective aren’t a real option, and should not be. With regards to the other descriptive measures, they surely might be considered to see how and where they are simpler, quicker, less verbose and more beneficial than UIM. This should also take into account the existing experience - are those new means so obvious and easy for the current UIM developer, who is used to this type of page description?</p>
+
+<p dir="ltr">Is there a real driver to throw away this concept, or rather build on it, look at where the weakneses are rather than creating something from scratch?</p>
+
+<p dir="ltr">With regards to the verbosity of the UIM page. The guiding principle of such a page would be the intuitive simplicity of putting it together.<br />
+Being easy to learn - externally - is one of the main advantages of such a page.<br />
+Another main advantage is that the UIM-to-JSP transformation system (if not taking into account outputs which might require updating) is that you have a ready to go (or ready to improve) system as opposed to the side solutions where the experience is yet to be learned and where the initial optimism might run into certain obstacles hidden at the early stages.</p>
+
+<p dir="ltr">Another argument would be the general principle of the development: change the internals, do not change the front-end. Do not force your customers into something which is beneficial to you but not obviously beneficial to them.<br />
+UIM-based development is known to a lot of people; there are already thousands of page developed in that language, so even for the rapid development purpose it would not be quite good to throw it away and to suggest our customers something which they should learn for the non-obvious benefits.</p>
+
+<p dir="ltr">Yes, cloud based solution (Watson Care Management) is allegedly moving from UIMs (I am not familiar with the latest development, the usual silo thing!). However, the “closed-circuit-application”, SaaS is not only a completely different distribution channel - it is a completely different development/deployment/integration process meant. All (and not only OOTB) development is kept in house - so it does not really matter which is the development language as long as the customer sees the same front-end.<br />
+On the other hand, SaaS does not provide any finer-grained adjustment or customization - or at least these aspects would not be easy to implement and support.<br />
+The in-premises application being customizable is the right addition to the solution portfolio. This is our differentiation from the cloud based application, and thus it is important to maintain and extend that, rather then follow the footsteps of the “one-for-all” solution which is beneficial when coupled with being free from the installation/integration/maintenance etc. concerns, which will still be there for the in-premises applications.<br />
+So to follow the path of the application based on another development paradigm is questionable.</p>
+
+<h2 dir="ltr">The JavaScript framework of choice</h2>
+
+<p dir="ltr">There is no such thing as the best ever JavaScript framework.<br />
+While some of them might indeed be better than the others in the mean time, there is no guarantee that in two years time when the new delivery will stabilize a better one won’t emerge, or, equally the hidden constraints of the current best won’t overweight its benefits.<br />
+React.js might be an option, however, the real question when considering it is - do we or the end users have a real need for the extreme run time (JS) performance? Is there a lot of page redraws or application resizing happening during its usage, is there any evidence backing this “KPI” of the framework as a driver?</p>
+
+<p dir="ltr">React.js was developed for Facebook, a social networking site where the content is updated and changes every second. This type of updates would also benefit the news site, or maybe some online newspaper, or maybe an environment where the dynamic advertisement content is appropriate. However the enterprise application isn’t base on any such frequent updates, or at least that needs to be proven (we could equally argue that we should have utilized the Google map technology since it provides (or provided) the unsurpassed ajax based draw capabilities).<br />
+The point is that unless there is a business need for the stream-like DOM changes in our application (say, converting or merging them with the social networking), the choice of a framework should not be driven by its excellence in handling the speed of updating the DOM.<br />
+The main performance complaints for our pages/application were related with the huge footprint and big number of requests, the slow load of complicated pages - but would this be addressed by the React.js?<br />
+What is expected from a framework though, would be the right variety and easy development/customization/tailoring of the components, minimal footprint, maximum usability, accessibility, easy re-styling (picking up the governing theme) and suitability for the interaction with the other frameworks/solutions to provide for future development/shift in paradigm. A page does not only consist of the widgets and data components, so the proper interaction should be there.<br />
+Ideally, we should not stick to the third party Javascript solutions at all, but rather to the reusable approaches implemented there; in the reality however, this is not achievable, at least where rapid solutions are required; however the guiding principle in my opinion should be minimum dependency on the third party tooling and frameworks, just taking the right approach where possible and appropriate.</p>
+
+<h2 dir="ltr">Responsive design</h2>
+
+<p dir="ltr">The current development fashion called “responsive design” advocates the approach that the same application should be run in a different viewing environments without having to re-develop the view (which should be self-adjusting). The underlying concept, though, is - everything should be based on the mobile environment and the limited screen size.<br />
+To an extent, this represents a reversed approach, where the minimalistic and constrained view is then repeated on the less constrained viewing surface with the necessary stretches/resizes and minimum of re-positioning.</p>
+
+<p dir="ltr">This in particular means, that the rich front-end experience is sacrificed for the universality of the solution. However, the real question is, who benefits from that minimalism and universality? Is this the end-user of the enterprise application, a case worker or the administrator, 90% of the cases - a person who is sitting by the PC and looking at the normal screen. IBM advocates and supports the “customer-first” approach, but in this case it seems that the target market segment proposed is the mobile case workers. This does not look right though. While the application should provide for the minimalistic interface and be runnable and usable in the constrained environment, or main target segment remains the office/in-premise workers whom the richer user interface would benefit.<br />
+This does not mean we need to go for several different applications; what we need to do though, is to consider what would be the right architecture which would not only be responsive but responsible as well.<br />
+In short, simplifying and minimizing the UI is benefit for us and not the end user; the end user would expect the desktop application and won’t care about the tablet or mobile version; there will be a different segment, or situations when they switch to the mobile environment, and we need to support it the best we can. Again, we should really keep in mind context we are in and make our decisions based on that context and not the general modern web app design.</p>
+
+<h2 dir="ltr">Current infrastructure</h2>
+
+<p dir="ltr">The path for the infrastructure in my opinion must be driven by combating its weaknesses along with the preparation and employing of the new opportunities.<br />
+The main weakness of the infrastructure is it being too static and not configurable.<br />
+It is over-dependent on the current technologies and solutions, which restrict its wider application and the end users from being able to fully suit it to the particular solution needs.</p>
+
+<p dir="ltr">In this concept if we develop it the infrastructure should really become a platform which combines the strong parts with the fall-back configurational solution but the wide abilities of overriding and configuring it as required.</p>
+
+<p dir="ltr">The strong parts of the infrastructure as it is seen would be UIM support and the related generation process which allows for generation of the enterprise web application which is consistent, has solid and reliable request dispatch mechanism and is scalable.<br />
+It implements and follows MVC architecture and regardless of the modern technologies that architecture is still a base of most web solutions these days.</p>
+
+<p dir="ltr">On the other hand, infrastructure is week since currently it represents incremental and add-on style development which made it</p>
+
+<ol dir="ltr">
+	<li>too bulky;</li>
+	<li>too inconsistent internally;</li>
+	<li>too dependent on the particular technologies;</li>
+	<li>allows wide configuration options which are under-used but at the same time slow down the rendering;</li>
+	<li>do not have the configurable options for the processes which are vital to ensure the flexibility.</li>
+</ol>
+
+<p dir="ltr">Architecture wise the most problematic, constraining part is the JSP generator.<br />
+While it has been transformed to allow for view flexibility, it contains lots of the direct output (HTML/JS even CSS) code which clearly limits the output without adding either to the performance or indeed any other or KPIs of the produced web application; in addition the maintenance of the bulky gen-jsp stylesheet has been long time referenced as one of the main problems and obstacles.</p>
+
+<p dir="ltr">Therefore, if we are going to move the infrastructure further, we need to start with reviewing the ways we produce JSP output, the ways we include various parts and the alternatives in this domain.<br />
+Ideally the purpose there is to utilize the accumulated page content, domain, property and navigational information but apply properly customized subsequent processing so that the resultant web-application artifacts are still consistent navigation or styling or accessibility wise.<br />
+Instead of having roughly speaking one page template we should end up having the template of invoking other, configurable templates; at the same time our task is to fill-in the potential gaps so that we still have the fall-back solution where not all the parts are chosen to customize; the customization mechanism and requirements are to be fully and carefully documented, since the flexibility in the output also means variety of the renderers and page components mandated to be implemented for the application to be fully functional.<br />
+Along with the JSP generator modernization, a synchronized attempt is to be made to<br />
+a) identify and produce the upgrade paths for some of our either outdated or ineffective mechanisms (popups, modal, form handling, resolve pages),<br />
+b) properly develop the two-window application concept to fully utilize its capabilities and to reduce the multi-iframe approach currently in use.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Therefore my take of it would be the improvement of the existing infrastructure rather than surrender the original solution in favor to the ever-changing and externally dictated development fashion.</p>
+
+<p dir="ltr">This is questionable even from the security perspective, since it creates excellent opportunities for the reverse engineering on the customer site or elsewhere - basing the whole solution carrying the customer data solely on the third-party open source technologies along with the modernization implies openness to easy understanding of the logic outside.</p>
+
+<p dir="ltr">And if there are any vulnerabilities or problems associated with those frameworks, you will need to stick to their development cycles or to come out with the way to introduce the security or the feature fixes in some way - again, not that this is not doable, but it might require additional resources and not easy maintenance.<br />
+We should in no way deny the good things happening outside, but on the other hand, creating a total dependency on the side technologies and moving to the per-solution infrastructure does not appeal to me as along-term and viable perspective. Borrowing the outside technologies is good when there is a huge rush in delivering quick solution coupled with limited resources and capacities, a situation common to the pilot projects but not something usual to the strategic direction.<br />
+If it is not so much solution driven, on the other hand, then we are talking about simply rewriting the infrastructure on a different basis. This is a big effort, the one which cannot happen without the proper planning and the phased approach. And first of all in that process we need to sit back and look at our current infrastructure - if only to learn from the mistakes or weaknesses there.</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

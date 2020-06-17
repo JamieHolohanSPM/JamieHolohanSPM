@@ -1,0 +1,96 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>JavaScript Localization</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="JavaScript Localization";
+    pageId="urn:lsid:ibm.com:td:d270c9a2-fe2f-4598-bdf6-79eed4832033";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">JavaScript Localization</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Overview</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">client.xml -create-javascript-layers</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii3">build.xml -createCdejJavascript</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii4">build-javascript-layers.xml create-javascript-layers</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii5">client-inf/build.xml -process-js-properties</a></div>
+
+<h2 dir="ltr" id="ii1">Overview</h2>
+
+<ul dir="ltr">
+	<li>legacy way
+	<ul>
+		<li>CDEJProperties -&gt; JSPUtils -&gt; JS vars in JSP</li>
+	</ul>
+	</li>
+	<li>new way
+	<ul>
+		<li>*.propertites -&gt; Dojo NLS format -&gt; load as module -&gt; access via ResourceBundle</li>
+		<li>a rollup NLS file built for each layer+locale combination</li>
+		<li>for performance reasons we don't preload rollups for locales Cúram client is not built for</li>
+		<li>fallback mechanism causes 404s - not appreciated by customers, we work around this by creating empty files</li>
+		<li>More details: <a href="http://ibmurl.hursley.ibm.com/N16A">http://ibmurl.hursley.ibm.com/N16A</a></li>
+	</ul>
+	</li>
+</ul>
+
+<h2 dir="ltr" id="ii2">client.xml -create-javascript-layers</h2>
+
+<ul dir="ltr">
+	<li>copies built NLS files for our layers</li>
+</ul>
+
+<h2 dir="ltr" id="ii3">build.xml -createCdejJavascript</h2>
+
+<p dir="ltr">Modifies cdej.js to avoid preloading unnecessary locales.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li>check if layers are compressed</li>
+	<li>load locale list the layers were built for</li>
+	<li>filter this by locales C/ram client was built for</li>
+	<li>then in all layer files: update the preload module with full locale list to only contain the locales we build for</li>
+</ul>
+
+<h2 dir="ltr" id="ii4">build-javascript-layers.xml create-javascript-layers</h2>
+
+<ul dir="ltr">
+	<li>copies built NLS files for our layers</li>
+</ul>
+
+<h2 dir="ltr" id="ii5">client-inf/build.xml -process-js-properties</h2>
+
+<ul dir="ltr">
+	<li>processeses JavaScript property files in this project so that they can be used to externalize JavaScript messages from the infrastructure</li>
+	<li>will also create empty locale files to prevent 404 errors when doing lookups</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

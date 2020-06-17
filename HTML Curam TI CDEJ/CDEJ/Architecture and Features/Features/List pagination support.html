@@ -1,0 +1,111 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>List pagination support</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="List pagination support";
+    pageId="urn:lsid:ibm.com:td:3c5e47ba-9c25-48d5-8cfd-3fcf053a7bb8";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">List pagination support</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Overview</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii5">How it Works</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">Generator</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii3">Runtime</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii4">JavaScript</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii6">Testing</a></div>
+
+<h2 dir="ltr" id="ii1">Overview</h2>
+
+<ul dir="ltr">
+	<li>View-level pagination, little performance gain for large data sets.</li>
+	<li>There was a discussion whether we should add a serious pagination, but it would have to span all layers of the system and there was no apetite to invest there. So we chose a "cosmetic" and relatively quick way.</li>
+	<li>configured globally (curam-config.xml) and per list in UIM</li>
+	<li>currently not supported in DUIM</li>
+	<li>design page: <a href="http://ibmurl.hursley.ibm.com/N24N">http://ibmurl.hursley.ibm.com/N24N</a></li>
+	<li>also see Cúram WCRM
+	<ul>
+		<li>UIM Reference -&gt; UIM Reference for Pages and Views -&gt; LIST -&gt; Attributes</li>
+		<li>Development -&gt; Customization -&gt; General Configuration -&gt; PAGINATION</li>
+	</ul>
+	</li>
+</ul>
+
+<h2 dir="ltr" id="ii5">How it Works</h2>
+
+<ul dir="ltr">
+	<li>full list is read by webtier</li>
+	<li>the list representation in HTML is packed into &lt;script&gt; tags to prevent rendering of rows that are currently not visible
+	<ul>
+		<li>is a performance gain, but still downloads the full list data so no good for huge lists</li>
+	</ul>
+	</li>
+	<li>JavaScript code then manipulates the packed list data to show/hide rows according to page selected in UI</li>
+</ul>
+
+<h2 dir="ltr" id="ii2">Generator</h2>
+
+<ul dir="ltr">
+	<li>gen-jsp.xsl generates JS calls appropriate for the list type and configuration</li>
+	<li>it also generates the appropriate code into JSPs which then at runtime pack the list content into &lt;script&gt; tags</li>
+	<li>it's all done in XSLT, so not easy to understand and maintain</li>
+	<li>one important concern is that it needs to properly</li>
+</ul>
+
+<h2 dir="ltr" id="ii3">Runtime</h2>
+
+<ul dir="ltr">
+	<li>JSP for the UIM screen generates HTML including a packed list content</li>
+	<li>curam/pagination.addPagination() is called after page loads and it initializes the list with pagination</li>
+	<li>unpacking the first page</li>
+	<li>the user can then page through the list via controls</li>
+	<li>there is a hookpoint for list sorting - when sorted the pagination is reset!</li>
+</ul>
+
+<h2 dir="ltr" id="ii4">JavaScript</h2>
+
+<ul dir="ltr">
+	<li>The classes live in curam/pagination.</li>
+	<li>MVC design pattern.
+	<ul>
+		<li>model(s): DefaultListModel.js, ExpandableListModel.js</li>
+		<li>view: ControlPanel.js</li>
+		<li>controller: StateController.js</li>
+	</ul>
+	</li>
+	<li>curam/pagination.js then has the init and general functions for pagination</li>
+	<li>localization done in a nonstandard way, it was early days... see curam/pagination.localizedStrings</li>
+</ul>
+
+<h2 dir="ltr" id="ii6">Testing</h2>
+
+<ul dir="ltr">
+	<li>Manual testing in TabTest app: Tab Home page -&gt; Click here to open ClientMockApp test tab -&gt; UIM Elements Tests -&gt; LIST -&gt; List Pagination Test</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+zip.name=UIToolkit
+zip.version=_6_1_0_0_s002_001
+zip.network.location=ProductDevelopment/DevReleases/UIToolkit_release
+zip.unpack.location=${sysenv.DEVENV}/UIToolkit
+
+# UITOOLKIT_HOME

@@ -1,0 +1,348 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Editable List - MultiSelect</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Editable List - MultiSelect";
+    pageId="urn:lsid:ibm.com:td:39065a6a-9efa-4a4c-9c43-3c24acaaa6b2";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Editable List - MultiSelect</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h2 dir="ltr"><span style="font-size:20px;"><strong>Design Page for MultiSelect Widget - Back flow</strong></span></h2>
+
+<h3 dir="ltr"><strong><span style="font-size:18px;">Background</span></strong></h3>
+
+<p dir="ltr">The multiselect widget allows a subset of list entries to be submitted to an ACTION SI, based on those checked. The selection should persist if the user returns to a previous page in a wizard.</p>
+
+<h3 dir="ltr"><strong><span style="font-size:18px;">Requirements</span></strong></h3>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Each requirement for the feature should be defined here in as clear and concise fashion as possible. A screen shot(s) may also be provided here for clarification. A link to the case in CEMs should also be provided here:</p>
+
+<ul dir="ltr">
+	<li><a href="http://pdappsrv.mul.ie.ibm.com:8080/browse/TEC-18361" target="_blank">TEC-18361</a> - Prepopulation of the previously selected check box is not happening in the list which contains MultiSelect widget along with Editable Field.<img alt="" height="281" id="1426675512288_0" src="Editable%20List%20-%20MultiSelect._ATTACHMENTS_/editor_image_2eee5e6a-b14e-4742-80ed-5e8084c4e075.png" width="411"></img>
+	<ul>
+		<li>The selection should persist if the user returns to this phase, without committing the selection to the database.</li>
+	</ul>
+	</li>
+</ul>
+
+<h3 dir="ltr"><strong><span style="font-size:18px;">Non Functional Requirements</span></strong></h3>
+
+<table border="1" dir="ltr" height="263" width="671">
+	<tbody>
+		<tr>
+			<td style="width: 118px;"><strong>NFR</strong></td>
+			<td style="width: 537px;"><strong>Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Accessibility</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Availability &amp; Resilience</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Development Resource</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Evolution</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Internationalisation</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Location</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Performance and Scalability</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Regulation</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Security</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Usability</td>
+			<td style="width: 537px;">UIM Developers must use a predetermined page parameter prefix to transfer keys between wizard screens</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr"><strong><span style="font-size:18px;">Design Options</span></strong></h3>
+
+<p dir="ltr">Cúram has only two persistence methods - database and page parameters. Multiselect back flow functions as expected, when the database is used as a means of persisting data across UIM screens. The following two options were identified for using page parameters to maintain selection during back flow of a wizard.</p>
+
+<ul dir="ltr">
+	<li>
+	<h4 dir="ltr"><strong><span style="font-size:18px;">Option 1</span></strong></h4>
+
+	<ul>
+		<li>Enable PAGE as a valid end-point for the MultiSelect Widget. This is likely to have a major impact on the infrastructure, as PAGE_PARAMETER elements were not intended to be directly addressed by widgets or their parameters.</li>
+	</ul>
+	</li>
+	<li>
+	<h4 dir="ltr"><strong><span style="font-size:18px;">Option 2</span></strong> (preferred)</h4>
+
+	<ul>
+		<li>Alter the readAll() method (or create a new one with the same output struct) on relevant Facade to match the signature of the readAllSelected() method (or similar). The implementation of the method remains the same, except the input struct is aggregated by the output struct.</li>
+	</ul>
+	</li>
+</ul>
+
+<h3 dir="ltr"><strong><span style="font-size:18px;">Design</span></strong></h3>
+
+<ul dir="ltr">
+	<li>
+	<h4><strong><span style="font-size:18px;">CDEJ - CoreInf</span></strong></h4>
+
+	<ul>
+		<li>When checking for the predetermined parameter prefix, if it is not present in the Request, provide a default (empty) value to preserve the forward flow of the application.</li>
+	</ul>
+	</li>
+	<li>
+	<h4><strong><span style="font-size:18px;">Application - Selection UIM</span></strong></h4>
+
+	<ul>
+		<li>The first UIM screen should have a PAGE_PARAMETER with a predetermined prefix connected to the DISPLAY server interface.</li>
+		<li>MULTI_SELECT_INITIAL widget parameter should connect to the relevant OUT-property containing the keys</li>
+	</ul>
+	</li>
+	<li>
+	<h4><span style="font-size:18px;">Application - Review UIM</span></h4>
+
+	<ul>
+		<li>The ACTION_CONTROL linking back to the previous screen should pass on the keys, which the page had received.</li>
+	</ul>
+	</li>
+	<li>
+	<h4><strong><span style="font-size:18px;">Data Model Changes</span></strong></h4>
+
+	<ul>
+		<li>Facade operation used by the DISPLAY interface should be able to receive an argument containing the keys.</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<h3 dir="ltr"><strong><span style="font-size:18px;">Use Cases</span></strong></h3>
+
+<p dir="ltr">This is <strong>mandatory</strong>. The various use cases for the feature must be outlined here. They can be in whatever format deemed appropriate (i.e. verbose description or in a tabular format with actors and actions etc.). Below is an example of how use cases may be documented in a tabular format.</p>
+
+<table border="1" dir="ltr" height="112" width="859">
+	<tbody>
+		<tr>
+			<td style="width: 105px;"><strong>Role/Actor</strong></td>
+			<td style="width: 240px;"><strong>Description</strong></td>
+			<td style="width: 200px;"><strong>Expected Behavior</strong></td>
+			<td style="width: 286px;"><strong>Tested</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 105px;">Caseworker</td>
+			<td style="width: 240px;">Select a subset of items in a list, and advance to next screen. Return to previous screen.</td>
+			<td style="width: 200px;">The user's initial selection should be preselected for review.</td>
+			<td style="width: 286px;">Manual test cases.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr"><strong><span style="font-size:18px;">Implementation Notes</span></strong></h3>
+
+<p dir="ltr">The page parameter prefix for handling pre-selected keys is <strong>psk_ </strong><strong>.</strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr"><strong><span style="font-size:18px;">Application Impact</span></strong></h3>
+
+<p dir="ltr">This is <strong>mandatory</strong>. If there is no impact, then this is as simple as saying so. If there is impact, then this may describe the impact in detail and outline the upgrade path. If the feature is related to a CLE, this section can be a link to that CLE (and hence the documentation associated with the CLE will suffice).</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr"><strong><span style="font-size:18px;">Testing</span></strong></h3>
+
+<h4 dir="ltr">Manual testing</h4>
+
+<p dir="ltr">Scenario 1: Short list</p>
+
+<ol dir="ltr">
+	<li>Launch TabTest application.</li>
+	<li>Click "Click here to open a tab with editable lists."</li>
+	<li>Add at least 2 new items by pressing the ACTION menu, and selecting New Item.</li>
+	<li>Select "Editable Lists with MultiSelect" from the ACTION menu.</li>
+	<li>Select a subset of items.</li>
+	<li>Click Submit.</li>
+	<li>Click Back to return to the previous Wizard screen.</li>
+</ol>
+
+<p dir="ltr">Expected Outcome:</p>
+
+<p dir="ltr">- The items, which were previously selected should be checked.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Scenario 2: Long list (100 keys / 2kb)</p>
+
+<ol dir="ltr">
+	<li>Launch TabTest application.</li>
+	<li>Click "Click here to open a tab with editable lists."</li>
+	<li>Select "Long Editable Lists with MultiSelect Widget" from the ACTION menu.</li>
+	<li>Click on the "Select All" check-box.</li>
+	<li>Click Submit.</li>
+	<li>Click Back to return to the previous Wizard screen.</li>
+</ol>
+
+<p dir="ltr">Expected Outcome:</p>
+
+<p dir="ltr">- The items, which were previously selected should be checked.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr"><strong><span style="font-size:18px;">Documentation/How To Use Feature</span></strong></h3>
+
+<p dir="ltr">The key objective of this enhancement is to capture the user's selection and persist it during back flow within a wizard that has a multiselect widget, without committing any changes to any database tables.</p>
+
+<p dir="ltr"><strong>Step 1:</strong> Update the Model</p>
+
+<ol dir="ltr">
+	<li>Open the Facade used by the DISPLAY server interface in RSA.</li>
+	<li>Find the operation used by the SI to populate the display bean on the first Wizard page.
+	<ul>
+		<li>e.g. readAll()</li>
+	</ul>
+	</li>
+	<li>Update operation's signature to accept a single argument, similar to operation used on the second Wizard page.
+	<ul>
+		<li>e.g. readAllSelected(<em>SelectedCaseKeys keys</em>)</li>
+	</ul>
+	</li>
+	<li>Check if the return struct already aggregates the argument struct. If not, create this relationship.</li>
+	<li>Update the implementation of the Facade to match the updated operation signature.
+	<ul>
+		<li>The argument should be assigned to the relevant field within the return struct.</li>
+	</ul>
+	</li>
+</ol>
+
+<p dir="ltr"><strong>Step 2: </strong>Update Selection UIM</p>
+
+<ol dir="ltr">
+	<li>Add a PAGE_PARAMETER with the <strong>psk_ </strong>prefix.
+
+	<ul>
+		<li>This flags it for special processing during forward flow of the application</li>
+	</ul>
+	</li>
+	<li>Add a page-level CONNECT element to link the above parameter with the IN-parameter of the DISPLAY server interface.</li>
+	<li>Update the MULTI_SELECT_INITIAL widget parameter to get its values from the relevant OUT-parameter of the DISPLAY server interface (from Step 1.5)</li>
+</ol>
+
+<p dir="ltr"><strong>Step 3: </strong>Update Review UIM</p>
+
+<ol dir="ltr">
+	<li>Add/update the Back ACTION_CONTROL LINK pointing to the PAGE_ID of the Selection UIM.
+	<ul>
+		<li>This LINK element should have the following additional attributes:
+		<ul>
+			<li>DISMISS_MODAL="false"</li>
+			<li>SAVE_LINK="false"</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li>Add a CONNECT child to the above LINK element, connecting the existing keys property to the PAGE property with the <strong>psk_</strong> prefix, created in the Selection UIM.</li>
+</ol>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr"><strong><span style="font-size:18px;">Check List</span></strong></h3>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Basically this is a quick check list of items that should be considered when doing a design for that particular component.</p>
+
+<table border="1" dir="ltr" style="width: 658px;">
+	<tbody>
+		<tr>
+			<td style="width: 166px;"><strong>Check List Item</strong></td>
+			<td style="width: 314px;"><strong>Notes</strong></td>
+			<td style="width: 157px;"><strong>Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">????</td>
+			<td style="width: 314px;">?????.</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr"><strong><span style="font-size:18px;">Work Estimation</span></strong></h3>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Again, the actual items listed in the estimate breakdown may vary from task to task and component to component.</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Work Estimates</p>
+
+	<ul>
+		<li>
+		<p>Design: 2 Days</p>
+		</li>
+		<li>
+		<p>Prototype: 2 Days</p>
+		</li>
+		<li>
+		<p>Implementation: 0.5 Days</p>
+		</li>
+		<li>
+		<p>Testing: 1 Day</p>
+		</li>
+		<li>
+		<p>Documentation: 0.5 Days</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Total: 6 Days</p>
+	</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Next phase - Font Replacement</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Next phase - Font Replacement";
+    pageId="urn:lsid:ibm.com:td:17bb2a54-f100-4602-a25f-4fc7d6bffc5e";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Next phase - Font Replacement</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">Minimum</h2>
+
+<p dir="ltr">TI - update font files and main-ibm-font.css<br />
+SPMEntMods - update CCV font files and main-ibm-font.css (noting that this css is not really css) and build the SWF<br />
+OneUI - prettify CSS (and check whether it gets minified in the build - if not, make prettification bare minimum number of additional chars by removing indentation etc), deliver, run automated scripts, delive</p>
+
+<h2 dir="ltr">Optional</h2>
+
+<p dir="ltr">BizInf &amp; HCR - introduce &amp; document ieg-config.properties entries for the font-family to enable the removal of the literal font-families through IEG CSS</p>
+
+<h2 dir="ltr">Bonus</h2>
+
+<p dir="ltr">Tech Debt - Replace overloaded font-faces with just 1 and put font-weight everywhere it is needed. This is better in many ways, one being we'd have no more faux-fonts and therefore a predictable look.</p>
+
+<h2 dir="ltr">Out of scope of this wiki</h2>
+
+<p dir="ltr">Anything about fixing the infrastructure for handling wrapping/truncation gracefully.</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

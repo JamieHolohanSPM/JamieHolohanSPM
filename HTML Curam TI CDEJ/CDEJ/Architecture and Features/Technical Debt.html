@@ -1,0 +1,2543 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Technical Debt</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../wiki.css" />
+<script type="text/javascript" src="../../wiki.js" ></script>
+<script type="text/javascript" src="../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Technical Debt";
+    pageId="urn:lsid:ibm.com:td:7ed4903f-7388-4eef-a1f6-515bcd58349f";
+    toRoot="../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Technical Debt</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h1 dir="ltr">Overview</h1>
+
+<p dir="ltr">The following details are a result of the technical debt analysis completed for the CDEJ repository. This includes all of the source code present in that repository including the test logic present.</p>
+
+<h1 dir="ltr">Feature/Technology Upgrade</h1>
+
+<table border="1" dir="ltr" height="216" width="903">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 252px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Feature/Item Name</span></strong></p>
+			</td>
+			<td style="width: 388px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Description</span></strong></td>
+			<td style="width: 216px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Comments</span></strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 252px;">Responsive Design</td>
+			<td style="width: 388px;">JS framework utilised, need a framework upgrade (Dojo 2 or maybe what Abu Dhabi used)..</td>
+			<td style="width: 216px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 252px;">Web UI Components</td>
+			<td style="width: 388px;">new frameworks like Dojo 2 might have this, custom HTML, performance improvements, spike required</td>
+			<td style="width: 216px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 252px;">Struts</td>
+			<td style="width: 388px;">New version of Struts if we are keeping this technology</td>
+			<td style="width: 216px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h1 dir="ltr">Items to Remove</h1>
+
+<table border="1" dir="ltr" style="width: 907px;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 250px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Feature/Item Name</span></strong></td>
+			<td style="width: 434px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Description</span></strong></td>
+			<td style="width: 221px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Comments</span></strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 250px;">Word Integration</td>
+			<td style="width: 434px;">Look at alternatives, replace with Import/Export and associated support.</td>
+			<td style="width: 221px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 250px;">Portlets</td>
+			<td style="width: 434px;">There is very limited knowledge of our support for portlets within the CDEJ team . The original requirement seemed to have been to alow the exposure of Curam PODs in a portlet and say we supported that. There is a document which outlines how to do this (Cúram Portlet Deployment Guide For WebSphere Portal Server). There is an entry in our supported Pre-reqs for Websphere Portal Server but this is also out of date (newer versions are available). There is some infrastructure present but it is not well known how to use this infrastructure of what it provided</td>
+			<td style="width: 221px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 250px;">Legacy Widgets</td>
+			<td style="width: 434px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">During the technical debt analysis if the CDEJ functionality, a number of so called legacy widgets were identified. These are related and documented as "Domain Specific Controls" but we feel that some have been superseded and others are just not used anymore. Customer usage is not as well known though.</p>
+
+			<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Decision Assist - could remove straight away.</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Flex Charts - analysis but probably remove (renderers).</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Generic Flex Widget -</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Frameset Widget (Tree Control)</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Heat Map</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Meeting View</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Schedule</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Decision Matrix</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Gantt Chart</li>
+			</ol>
+			</td>
+			<td style="width: 221px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 250px;">Tag Infrastructure</td>
+			<td style="width: 434px;">Move everything to the renderer framework, remove the request handling infrastructure.. currently maintaining two infrastructures for this.. (AbuDhabi not usng either, using the underlying JS framework for rendering). If we get rid of the legacy widgets - Renderer (60%)&nbsp;&nbsp; Tag(40%) - no external impact to making this change, just maintenance.....</td>
+			<td style="width: 221px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 250px;">CDEJ - Screen Previews</td>
+			<td style="width: 434px;">There is infrastructure present for generating screen previews which outputs HTML files which can be viewed offline. We think this functionality may have been resurrected for the Atlas project but it is poorly tested and maintained (with most of the knowledge of the logic having left the building). Although there is a standalone function present (build time parameter to generate these), it may not be extensively used and could be a candidate for removal.</td>
+			<td style="width: 221px;">CADT (Curam Analysis Documentation Tool) uses this and is itself extensively used.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h1 dir="ltr">Testing Technical Debt</h1>
+
+<table border="1" dir="ltr" height="113" width="903">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 252px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Feature/Item Name</span></strong></p>
+			</td>
+			<td style="width: 388px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Description</span></strong></td>
+			<td style="width: 216px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Comments</span></strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 252px;">Tab Test Application</td>
+			<td style="width: 388px;">Automate the CPT for this application, would save a huge amount of manual testing for releases and certification processes.</td>
+			<td style="width: 216px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<h1 dir="ltr">Items for Review/Removal</h1>
+
+<p dir="ltr">The following is a detailed examination of the CDEJ source code. It has been a while since this code was examined in great details and there seems to be quite a large</p>
+
+<p dir="ltr">amount of technical debt present from old widgets to testing items that have existed in the codebase but are no longer used/shipped.</p>
+
+<p dir="ltr"><span style="color:#FF0000;">Items marked in red can be removed from the code base and have been analysed etc.</span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">client-inf\jscript\src\javascript\external\curam/widget</p>
+
+<table border="1" dir="ltr" style="width: 910px;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Package Name</span></strong></td>
+			<td style="width: 221px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Feature/Item Name</span></strong></td>
+			<td style="width: 371px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Description</span></strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">1. components\client-inf</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">.settings</td>
+			<td style="width: 371px;"><span style="color:#FF0000;">Remove</span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">intern-config</td>
+			<td style="width: 371px;">Review - Check with Barry</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">non-source\inspectors</td>
+			<td style="width: 371px;"><span style="color:#FF0000;">Remove</span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">non-source/templates/jsdoc</td>
+			<td style="width: 371px;"><span style="color:#00FF00;">Required - Check with Barry</span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">jscript</td>
+			<td style="width: 371px;"><span style="color:#00FF00;">Required</span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">src</td>
+			<td style="width: 371px;">Possibly remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client-inf\jscript\src\javascript\external\curam/util</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">DataServiceAPI</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">Application.js</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">Dialog.js</td>
+			<td style="width: 371px;">Review</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">UIMDialog.js</td>
+			<td style="width: 371px;">Review</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">DialogObject.js</td>
+			<td style="width: 371px;">Review</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">Request.js</td>
+			<td style="width: 371px;">Review</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">ResourceBundle.js</td>
+			<td style="width: 371px;">Review - for all of these why a version in both external and internal.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client-inf\jscript\src\javascript\external\curam/util/ui</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">Application.js</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">AppExitConfirmation.js</td>
+			<td style="width: 371px;">Required - do we have two copies</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">AppExitConditionalHandler.js</td>
+			<td style="width: 371px;">Review - do we have two copies</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">ProgressSpinner.js</td>
+			<td style="width: 371px;">Review - why two copies</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client-inf\jscript\src\javascript\external\</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">dcl.js</td>
+			<td style="width: 371px;">Review - why two copies</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client-inf\jscript\src\javascript\internal</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">internal\cm</td>
+			<td style="width: 371px;">Can only be removed but there are still instances in the code - High Tech Debt</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">curam</td>
+			<td style="width: 371px;">Review - JS - definitely some of it not required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;client\components\client-inf\src\main\javascript\internal</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">dTree</td>
+			<td style="width: 371px;"><span style="color:#FF0000;">Remove - replaced by lazy loading tree</span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">idx</td>
+			<td style="width: 371px;">Review - by Sharunas - 4 versions of idx - take 1.5.8 version, remove the rest and rewrite if required.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;client\components\client-inf\jscript/tests</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">Review</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;client\components\client-inf\jscript\javascript-properties</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">default</td>
+			<td style="width: 371px;">Review - reworked - messages used by different components</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;client\components\client-inf\jscript/tests\webapp</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">Review, check?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\components\client-inf\src\test\javascript</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review All the content in here needs to be reviewed.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\components\client-inf\jscript\test\cdej</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">Review - Check to see if the content in here is still being used.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\components\client-inf</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">Review - Check if this still being used.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">2. client\components\client-persistence</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">src\main\java\curam\util\client\persistence</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">Derby Database</td>
+			<td style="width: 371px;">Review better way of doing this - build process</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">src\main\java\curam\util\client\components</td>
+			<td style="width: 221px;">help tools</td>
+			<td style="width: 371px;"><span style="color:#FF0000;">Remove</span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">mobile-sdk</td>
+			<td style="width: 371px;">Review - Fergal to follow up with Conor Cullen and Susan</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">profiling-tools</td>
+			<td style="width: 371px;"><span style="color:#FF0000;">Remove</span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">sample</td>
+			<td style="width: 371px;"><span style="color:#FF0000;">Remove</span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\doc\RAD</td>
+			<td style="width: 221px;">Zip file</td>
+			<td style="width: 371px;"><span style="color:#FF0000;">Remove</span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\components\dom-html-xim</td>
+			<td style="width: 221px;">src\main\java\curam\util\dom\html2\impl</td>
+			<td style="width: 371px;">Review - Sharunas to check if this is still being used</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">src\main\java\org\w3c\dom\html2</td>
+			<td style="width: 371px;">Review why separate - do we still need it?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">src\test</td>
+			<td style="width: 371px;">Review - Check what is in here and if it still being used</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">4. client\components\general-plug-ins</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">src\main\java\curam\util\client\domain\marshal</td>
+			<td style="width: 371px;"><span style="color:#00FF00;">Required</span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">5. client\components\helptools</td>
+			<td style="width: 221px;">src\main\java\curam\help\tools\anttasks</td>
+			<td style="width: 371px;"><span style="color:#FF0000;">Remove</span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">6. client\components\mobile-sdk</td>
+			<td style="width: 221px;">All content</td>
+			<td style="width: 371px;">Review - Check with Susan if this is still being used</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">7. client\components\plug-in-framework</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">8. client\components\renderer-plug-ins</p>
+			</td>
+			<td style="width: 221px;">renderer-plug-ins\src\main\java\curam\util\client\domain\render\legacy\edit</td>
+			<td style="width: 371px;">Review - Renderers or Tags - what do we want to use?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">9. client\components\profiling-tools</td>
+			<td style="width: 221px;">All content</td>
+			<td style="width: 371px;"><span style="color:#FF0000;">Remove</span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">10. client\components\sample</td>
+			<td style="width: 221px;">All content</td>
+			<td style="width: 371px;"><span style="color:#FF0000;">Remove</span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">11. client\components\test-framework</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review - unit tests built around that, still used. - all used, deeper insight</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">12. client\components\word-file-edit</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Remove - Word Integration - old structure - remove content associated with old solution.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">13. client\components\xim-stylesheets</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review if still all required. Was this an attempt to replace the gen.jsp?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\BrowserPlugins</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">client\BrowserPlugins\cert</td>
+			<td style="width: 371px;"><span style="color:#FF0000;">Remove</span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">client\BrowserPlugins\chrome-bridge</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">client\BrowserPlugins\flex</td>
+			<td style="width: 371px;"><span style="color:#FF0000;">Remove</span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">client\BrowserPlugins\lib\chrome-bridge-ext</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">client\BrowserPlugins\lib\cti</td>
+			<td style="width: 371px;"><span style="color:#FF0000;">Remove</span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">client\BrowserPlugins\src\curam\util\tools\cti</td>
+			<td style="width: 371px;"><span style="color:#FF0000;">Remove</span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">CoreInf</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">client\CoreInf\CuramCDEJ\bin\components</td>
+			<td style="width: 371px;">Review - All Required?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\bin</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">build-portlet-war.xml</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">cti-simulator.xml</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">generate-topics.xml</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\doc\RAD</td>
+			<td style="width: 221px;">RAD.zip</td>
+			<td style="width: 371px;">Remove - what is this used for? - Paulius</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\ear</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review - review complete folder to see if all still applicable</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\jar</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">docmaker.jar</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">dummyDDL.properties</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">page-hierarchy.jar</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\web\about\default</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">Review - Check if still required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\web\active-x</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">Remove - old version of active x, not required - remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\web\flex</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">hchart.swf</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">linechart.swf</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">piechart.swf</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">vchart.swf</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">curam-flex-inf.swc</td>
+			<td style="width: 371px;">Review</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">editorslib.swc</td>
+			<td style="width: 371px;">Review</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\web\flex\ResourceModules</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">Review - used by the CDEJ Flex infrastructure - check - might remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\web\html</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">index.html</td>
+			<td style="width: 371px;">Review - client mock app as the home page</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">theme.html</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">empty.html</td>
+			<td style="width: 371px;">Review - blank page - some requests could use it, may be used.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\web\jscript</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\web\jsp\extapp</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">Review - is it used as a target folder, otherwise remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\web\jsp\tab</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">ApplicationBanner.jspx</td>
+			<td style="width: 371px;">Review - Is this still being used|?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\web\jsp</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">about.jsp</td>
+			<td style="width: 371px;">Review - Is this still being used?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">contextError.jspx</td>
+			<td style="width: 371px;">Review - Agenda Player</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">css-file-links.jsp</td>
+			<td style="width: 371px;">Review - imported by generated JSP - check</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">css-file-links_rtl.jsp</td>
+			<td style="width: 371px;">Review</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">cti-applet.jsp</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">cti-user.jsp</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">CuramPodToPortletAdaptor.jspx</td>
+			<td style="width: 371px;">Remove - portlets - remove, PODS?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">DataServiceError.jspx</td>
+			<td style="width: 371px;">Review CDSL - still required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">empty-error-page.jspx</td>
+			<td style="width: 371px;">Review - if still used, needs a redesign</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">end-user-stats.jsp</td>
+			<td style="width: 371px;">Review - JMX?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">end-user-stats-json.jsp</td>
+			<td style="width: 371px;">Review - JMX?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">external-session-timeout-dialog.jspx</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">external-session-timeout-warning-dialog.jspx</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">FEBase-body.jsp</td>
+			<td style="width: 371px;">Required - New Word Integration</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">gcf-error.jspx</td>
+			<td style="width: 371px;">Remove, related to Chrome Frame</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">generic-modal-error.jspx</td>
+			<td style="width: 371px;">Review - could be redesigned</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">help.jsp</td>
+			<td style="width: 371px;">Review - examine if on line help redesigned/removed</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">http-404-error.jsp</td>
+			<td style="width: 371px;">Review - could be redesigned if we have one page for errors</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">loading.jspx</td>
+			<td style="width: 371px;">Remove - related to old Tree Control Widget - remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">no-dialog.jsp</td>
+			<td style="width: 371px;">Review - Check if still used</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">optimal-browser-msg-fragment.jspx</td>
+			<td style="width: 371px;">Review - dialog - browser not optimal, upgrade - check?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">treecontrol.xml</td>
+			<td style="width: 371px;">Remove - along with the Tree Control</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">user-locale-selector.jspx</td>
+			<td style="width: 371px;">Review - is it still needed, do we allow a user select a locale?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">wizard.xml</td>
+			<td style="width: 371px;">Review - agenda player - outdated design</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">wizard-header.jspx</td>
+			<td style="width: 371px;">Review - Agenda Player - still required?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">wizardnav.jspx</td>
+			<td style="width: 371px;">Review - agenda player - still required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\web\popups\decision-assist</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">add-messages.jsp</td>
+			<td style="width: 371px;">Remove - along with the folder</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\web\popups</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">date-selector.jsp</td>
+			<td style="width: 371px;">Required - Date popup Widget</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">frequency-editor.jsp</td>
+			<td style="width: 371px;">Review - issues, very old, still required or redesigned?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\web\svg</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">tree.svg</td>
+			<td style="width: 371px;">Review - rules tree - is this still used?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">tree1.svg</td>
+			<td style="width: 371px;">Review - Is this still used?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">tree2.svg</td>
+			<td style="width: 371px;">Review - Is this still used?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">workflow.svg</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\web\themes</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">classic - css and images</td>
+			<td style="width: 371px;">Review - can it be removed - New UI team should considered this.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">classic_rtl</td>
+			<td style="width: 371px;">As Above</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">mobile</td>
+			<td style="width: 371px;">As Above</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">new</td>
+			<td style="width: 371px;">As Above</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">new_trl</td>
+			<td style="width: 371px;">As Above</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">previews</td>
+			<td style="width: 371px;">As Above</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">soria</td>
+			<td style="width: 371px;">As Above</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">soria_rtl</td>
+			<td style="width: 371px;">As Above</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">v6</td>
+			<td style="width: 371px;">As Above</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">v6_rtl</td>
+			<td style="width: 371px;">As Above</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\web\vbscript</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">svgcheck.vbs</td>
+			<td style="width: 371px;">Remove and remove folder</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\web\WEB-INF</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">ibm-web-bnd.xml</td>
+			<td style="width: 371px;">Review - check if still required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">ibm-web-bnd.xmi</td>
+			<td style="width: 371px;">Review - check if still required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">ibm-web-ext.xmi</td>
+			<td style="width: 371px;">Review - check if still required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">web.xml</td>
+			<td style="width: 371px;">Review - check if still required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\xml\build</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">struts-top-2.txt</td>
+			<td style="width: 371px;">Required but review other files</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\xml\config</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">domain-table.xml</td>
+			<td style="width: 371px;">Review - this one but most can be removed</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\xml\schema</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">agenda.xsd</td>
+			<td style="width: 371px;">Review - Agenda Player- required?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">agenda-config.xsd</td>
+			<td style="width: 371px;">Review - Agenda Player- required?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">barchart.xsd</td>
+			<td style="width: 371px;">Required?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">barchart-config.xsd</td>
+			<td style="width: 371px;">Required?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">decision-matrix.xsd</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">decision-matrix-config.xsd</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">display-evidence.xsd</td>
+			<td style="width: 371px;">Remove - as well as tags</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">dynamic-menu-config.xsd</td>
+			<td style="width: 371px;">Review - probably remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">dynamic-menu-data.xsd</td>
+			<td style="width: 371px;">Review - probably remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">evidence.xsd</td>
+			<td style="width: 371px;">Review - check could be removed not supporting the evidence tags</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">evidence-comparison.xsd</td>
+			<td style="width: 371px;">As above</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">evidence-comparison-config.xsd</td>
+			<td style="width: 371px;">As above</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">evidence-review.xsd</td>
+			<td style="width: 371px;">As above</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">evidence-tab-container.xsd</td>
+			<td style="width: 371px;">As above</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">evidence-tab-container-config.xsd</td>
+			<td style="width: 371px;">As above</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">file-edit-data.xsd</td>
+			<td style="width: 371px;">Review -&nbsp; Check, possibly remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">gantt.xsd</td>
+			<td style="width: 371px;">Review - Check for application usage</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">gantt-config.xsd</td>
+			<td style="width: 371px;">Review - do application still use it? Are they still dependent on it</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">generated-legacy-page-hierarchy.xsd</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">heatmap.xsd</td>
+			<td style="width: 371px;">Review - Still used?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">heatmap-config.xsd</td>
+			<td style="width: 371px;">Review - Still used?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">ieg-answers.xsd</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">ieg-player-config.xsd</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">ieg-questions.xsd</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">ieg-summary.xsd</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">image-map-config.xsd</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">line-chart.xsd</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">line-chart-config.xsd</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">meeting-view-config.xsd</td>
+			<td style="width: 371px;">Review - outdated - still used?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">meeting-view-data.xsd</td>
+			<td style="width: 371px;">Review - outdated, still used, removed?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">pie-chart.xsd</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">pie-chart-config.xsd</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">rules-config.xsd</td>
+			<td style="width: 371px;">Review - rules tree - still used?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">rules-decision.xsd</td>
+			<td style="width: 371px;">Review - Still required?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">ruleset.xsd</td>
+			<td style="width: 371px;">Review - Still required?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">svg11.dtd</td>
+			<td style="width: 371px;">Review - Still required?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">tree-control.xsd</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">tree-control-config.xsd</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">type-info.xsd</td>
+			<td style="width: 371px;">Review</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;typical-picture-editor.xsd</td>
+			<td style="width: 371px;">Remove - No longer used, remove.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\xml\xsl</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">barchart</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">bean-doc</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\xml\xsl\build</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">log.xsl</td>
+			<td style="width: 371px;">Review - ANT Logger?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">merge-agenda-player-config.xsl</td>
+			<td style="width: 371px;">Review - Agenda Player?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">merge-bar-chart-config.xsl</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">merge-decision-matrix-config.xsl</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">merge-gantt-config.xsl</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">merge-heatmap-config.xsl</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">merge-iim.xsl</td>
+			<td style="width: 371px;">Review - Still required?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">merge-image-map.xsl</td>
+			<td style="width: 371px;">Review - Are these still being used?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">merge-line-chart-config.xsl</td>
+			<td style="width: 371px;">Review - Remove?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">merge-meeting-view-config.xsl</td>
+			<td style="width: 371px;">Review - meeting view widget? Still used?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">merge-pie-chart-config.xsl</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">merge-rules-decision-config.xsl</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">merge-rules-editor-config.xsl</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">merge-tree-control-config.xsl</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">calendar</td>
+			<td style="width: 371px;">Review -&nbsp;Calendar Widget, still required?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\xml\xsl\chart</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">horizontal.xsl</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">vertical.xsl</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\xml\xsl\common\rules</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review - dependencies on other xsls, would have to check these one by one</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">static-rules.xsl</td>
+			<td style="width: 371px;">Remove</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\xml\xsl\decision-assist</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Remove along with the related widget</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\xml\xsl\dynamic-menu</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">All Conent</td>
+			<td style="width: 371px;">Remove as related to old style</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\xml\xsl\flex</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">flex charts</td>
+			<td style="width: 371px;">Remove along with the charts</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\xml\xsl\heatmap</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">heatmap</td>
+			<td style="width: 371px;">Remove along with widget</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\xml\xsl\ieg</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Remove, Classic IEG</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\xml\xsl\jsp</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">gen-page-help.xsl</td>
+			<td style="width: 371px;">Review</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">gen-previews.xsl</td>
+			<td style="width: 371px;">Review</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">gen-previews-content-area-template.xsl</td>
+			<td style="width: 371px;">Review</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">gen-previews-modal-template.xsl</td>
+			<td style="width: 371px;">Review</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">gen-previews-navigation-group-template.xsl</td>
+			<td style="width: 371px;">Review</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\xml\xsl\meeting-view</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Remove if associated widget is being removed</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\xml\xsl\rules</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review -&nbsp; Remove - most of this should go away along with the old SVG Rules Tree</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\xml\xsl\rules-sim</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review if still used.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\xml\xsl\svg</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">workflow</td>
+			<td style="width: 371px;">Review - Check to see if still used</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\curam\xml\xsl\wizard</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">agenda player</td>
+			<td style="width: 371px;">Review - Still used?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\ext\dll</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\ext\jar</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review to see if still used and if common ones can be refactored</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\ext\js</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">CFInstall.js</td>
+			<td style="width: 371px;">Remove, outdated</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\lib\imageGen</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Remove, not generating images any more?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\CuramCDEJ\portlet\WAS</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">Review, is this still supported, can it go?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\Default Properties\curam\omega3\defaultproperties</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\Default Properties\curam\omega3\i18n\defaultproperties</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Remove the associated property files from here if widgets are removed.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\src\curam\omega3\codetable</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\src\curam\omega3\config</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\src\curam\omega3\ejb\messaging</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\src\curam\omega3\imagegen</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review and remove if no longer required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\src\curam\omega3\mbean</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review - JMX so possibly OK</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\src\curam\omega3\message</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Remove empty folder</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\src\curam\omega3\mockobjects</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review - Related to Client Mock Application</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\src\curam\omega3\onlinehelp</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review - Check existing functionality</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\src\curam\omega3\request</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required - old tag requests - handling - still used</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\src\curam\omega3\security</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\src\curam\omega3\server</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\src\curam\omega3\taglib</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review - Complete review required by Sharunas</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\src\curam\omega3\texthelper</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\src\curam\omega3\user</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">ThemeSwitcher.java</td>
+			<td style="width: 371px;">Review -&nbsp; if still used and needed</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\src\curam\omega3\util</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\src\curam\omega3\xml</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review - Complete review required by Sharunas</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\src\curam\util\client\bopi</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\src\curam\util\client\domain</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\src\curam\util\client\jsp</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\src\curam\util\client\message</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">OnlineHelpInterimMetadata.java</td>
+			<td style="width: 371px;">Review if required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\src\curam\util\client\page</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\src\curam\util\client\path\util</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\src\curam\util\client\persistence</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\src\curam\util\client\plugin</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\src\curam\util\configuration\internal</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review if required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\CoreInf\src\curam\util\portlet</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">CuramPortletContainer.java</td>
+			<td style="width: 371px;">Review if required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\dojo-overrides</td>
+			<td style="width: 221px;">src\main\javascript\dijit\layout\templates</td>
+			<td style="width: 371px;">Review all overrides after upgrade.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">src\main\javascript\dijit\layout</td>
+			<td style="width: 371px;">Review all after upgrade</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">src\main\javascript\dijit\themes</td>
+			<td style="width: 371px;">Review all after upgrade</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">src\main\javascript\dojo\_base</td>
+			<td style="width: 371px;">Review after upgrade</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\dojo-overrides\src\main\javascript\dojo</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">dom-geometry.js</td>
+			<td style="width: 371px;">Review if still required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">ready.js</td>
+			<td style="width: 371px;">Review if still required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\dojo-overrides\src\main\javascript\dojox\encoding\digests</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review if still required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">\client\Generator</td>
+			<td style="width: 221px;">src</td>
+			<td style="width: 371px;">Review if aspect profiling of the Client Generator - not used anymore?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\Generator\src\curam\omega3\anttasks</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">DojoLocalizationWorkaroundTask.java</td>
+			<td style="width: 371px;">Review if required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">UpdateBuildSettingsWithModulePaths.java</td>
+			<td style="width: 371px;">Review if required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\Generator\src\curam\omega3\config</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review if required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\Generator\src\curam\omega3\xml\analyser\analysis</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review if required.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\Generator\src\curam\omega3\xml</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review if required - Sharunas</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\Sandbox</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review if this still used as part of testing - if this is part of testing, then move to other location. Otherwise remove or remove parts into the testing. - Barry</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">client\TextHelperGenerator</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">commons\commons-testing</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">commons\duim-generator</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">src\main\java\curam\util\common\resource\store</td>
+			<td style="width: 371px;">Review - store class should be in commons testing</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">commons\duim-generator\src\main\java\curam\util\common\uim\loader</td>
+			<td style="width: 221px;">MockResourceStoreUIMResourceReader.java</td>
+			<td style="width: 371px;">Review for usage - Resource Store mock</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">jde-commons-core\doc</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required, move to "messages" perhaps</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">jde-commons-core\lib\message</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required, stylesheets</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">jde-commons-core\lib\schema</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">menubar.xsd and menubar_withRefID.xsd</td>
+			<td style="width: 371px;">Review - compare to determine differences between these two files</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">jde-commons-core\src\</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">JMXStats.xsl</td>
+			<td style="width: 371px;">Review - if required move to correct location</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">jde-commons-core\src\curam\util\cdsl</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review if still required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">jde-commons-core\src\curam\util\codesecurity</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review if still required - JMX</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">commons\jde-commons-core\src\curam\util\common\ant</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review if still required - ant tasks</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">commons\jde-commons-core\src\curam\util\common\message</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">commons\jde-commons-core\src\curam\util\common\profile</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review, possibly remove - infrastructure created by Damian G, never used?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">commons\jde-commons-core\src\curam\util\common\tab</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">commons\jde-commons-core\src\curam\util\common\util\deprecation</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">commons\jde-commons-core\src\curam\util\common\util\xml</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">commons\jde-commons-core\src\curam\util\common\util</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review all content (i.e. Iterator2, are they still required)?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">commons\jde-commons-core\src\curam\util\configuration\internal</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review if still required - current usage</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">commons\jde-commons-core\src\curam\util\internal\perfinf</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">commons\jde-commons-core\src\curam\util\jmx</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">commons\jde-commons-core\src\curam\util\reflection</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">commons\jde-commons-core\src\curam\util\resources</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">commons\jde-commons-core\src\curam\util\runtime</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">commons\jde-commons-core\src\curam\util\trace</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review for Usage</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">commons\jde-commons-core\src\curam\util\webservices</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review for Usage</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">commons\plug-in-core\src\main\java\curam\util</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">commons\renderer-model\src\main\java</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">commons\resource-manager\src\main\java\curam</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review - project with two classes, can this be wrapped into an existing project? And Remove this one?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">General Review Comment</td>
+			<td style="width: 371px;">Within the commons projects, the classes from the projects are placed in the jde-commons JAR file as well as their individual JARs for each project. Both are in the Web-Inf, ideally, only one copy of these class files should end up in there - REVIEW</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">CuramCDEJ\doc</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review of what is generated into and what is contained within this folder.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">TIVOB\tests\ClientDepApp</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review - Where is this used? Is it used on the server side? If not, can it be removed? - Sharunas to check?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">tests\ClientMockApp</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review - what is contained within this, is it all used?</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">tests\CuramSampleMobileApp</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review - check if this is still required</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">TIVOB\tests\TabTestApp</td>
+			<td style="width: 221px;">All Content</td>
+			<td style="width: 371px;">Review - contains actual pages in the test application, visual testing.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;- check if all functionality covered.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">- remove the legacy widgets</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">- sample links, leading to old applications, need to be updated.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">- steps and explanations on pages, outdated, need to be reviewed and changes.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">- Tab Test CPT - examine what is in it...</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 311px;">&nbsp;</td>
+			<td style="width: 221px;">&nbsp;</td>
+			<td style="width: 371px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h1 dir="ltr">General Notes</h1>
+
+<p dir="ltr">The following are the detailed notes that were taken as this exercise was being carried out. These formed the basis of the items extracted and documented above and should be used to gather further details on the big list items above.</p>
+
+<p dir="ltr">----------------------------------------------------------------<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CDEJ Technical Debt:</strong></p>
+
+<p dir="ltr">1. Custom Tags/Legacy Widgets</p>
+
+<p dir="ltr">&nbsp; - two infrastructures to produce HTML - custom tags and renderer framework - will we port all of our custom tags over to renderers?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - renderer framework - the future of that. Should we use widget development from the framework we chose rather than our own framework? Dojo or whatever other framework we choose?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; testing issues here...<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - tags that we no longer use, remove these? Chart tags, Evidence charts, Bar charts,<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - Sharunas to provide a full list of these? &nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+2. Java Script</p>
+
+<p dir="ltr">&nbsp; - removing the legacy JS that could be replaced by Dojo, layer that had naviagtion functions. (client components, client if, curam.cm<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - Review all our JS and see what can be removed. pop ups, utility functions,<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+3. Client side validations - don't work anymore - should we support it again? HTML 5 validations could be used. Product Management.... decide if we need this anymore.</p>
+
+<p dir="ltr">4. List of Widgets on Barry's spredsheet</p>
+
+<p dir="ltr">5. Flex Charts for Business Intelligence Charts</p>
+
+<p dir="ltr">6. Gantt Charts - CEF Widgets using it, images/icons provided from the CDEJ, should have the icons themselves</p>
+
+<p dir="ltr">6. Source Code:</p>
+
+<p dir="ltr">1. components\client-inf</p>
+
+<p dir="ltr">&nbsp;- . settings - OK - review - checked in by mistake<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- intern-config - Barry<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- non-source\inspectors - dynamic inclusions - no longer needed<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- templates - JavaDoc - review<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- src<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; - client-inf\src\main\javascript\external\curam\util<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp; - DataServiceAPI - check<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp; - rest ecternal and still required<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp; - Application.js - possible remove - mechanism to deprecate them..<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- client-inf\src\main\javascript\internal\cm - remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- curam - review JS - definitely some of it not required<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;client\components\client-inf\src\main\javascript\internal\dTree - removed altogether - replaced by lazy loading tree<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;client\components\client-inf\src\main\javascript\internal\tests - what does this do? Unless they are used by internal tests, remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;client\components\client-inf\src\main\javascript\internal - review by Sharunas - 4 versions of idx<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;client\components\client-inf\src\main\javascript-properties\default - reworked - messages used by different components<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;client\components\client-inf\src\main\webapp - remove folder<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;client\components\client-inf\src\test\javascript - check this<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;client\components\client-inf\src\test\javascript\cdej - check this to still in use<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;client\components\client-inf - check if still used<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+2. client\components\client-persistence</p>
+
+<p dir="ltr">client\components\client-persistence\src\main\java\curam\util\client\persistence - Derby Database - better way of doing this - build process<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\components\client-persistence\src\main\resources\curam\util\client\persistence</p>
+
+<p dir="ltr">- client-persistence<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - help tools<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - mobile-sdk - Fergal to follow up with Conor Cullen and Susan<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - profiling-tools<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - sample - check to see if it there<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; -<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; client\CoreInf\CuramCDEJ\doc\RAD - remove</p>
+
+<p dir="ltr">client\components\client-persistence\src\test\java\curam\util\client\persistence\properties - Maven - tests for above</p>
+
+<p dir="ltr">3. client\components\dom-html-xim\src\main\java\curam\util\dom\html2\impl -</p>
+
+<p dir="ltr">client\components\dom-html-xim\src\main\java\curam\util\dom\html2\impl - check if still used Sharunas</p>
+
+<p dir="ltr">client\components\dom-html-xim\src\main\java\org\w3c\dom\html2 - why separate - do we still need it?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+C:\CC\fgavin_TI_MAIN\TIVOB\client\components\dom-html-xim\src\test - check</p>
+
+<p dir="ltr">4. C:\CC\fgavin_TI_MAIN\TIVOB\client\components\general-plug-ins</p>
+
+<p dir="ltr">client\components\general-plug-ins\src\main\java\curam\util\client\domain\marshal - check</p>
+
+<p dir="ltr">5. client\components\helptools</p>
+
+<p dir="ltr">client\components\helptools\src\main\java\curam\help\tools\anttasks - check? - Docmaker stuff</p>
+
+<p dir="ltr">6. client\components\mobile-sdk - still applicable - check with team</p>
+
+<p dir="ltr">7. client\components\plug-in-framework<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; client\components\renderer-plug-ins<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\components\renderer-plug-ins\src\main\java\curam\util\client\domain\render\legacy\edit</p>
+
+<p dir="ltr">Renderers or Tags - what do we want to use?</p>
+
+<p dir="ltr">8. client\components\profiling-tools - review as may no longer be used. - Check with SVT</p>
+
+<p dir="ltr">9. client\components\sample - remove not required - check with documentation to see if we still need it</p>
+
+<p dir="ltr">10. client\components\test-framework - unit tests buuilt around that, still used. - all used, deeper insight</p>
+
+<p dir="ltr">11. client\components\word-file-edit - Word Integration - old structure - can be removed. Clean up required</p>
+
+<p dir="ltr">12. client\components\xim-stylesheets - review to see what is in it.</p>
+
+<p dir="ltr"><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+===============<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\BrowserPlugins</p>
+
+<p dir="ltr">some stuff in there that needs to be removed</p>
+
+<p dir="ltr">client\BrowserPlugins\cert - remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\BrowserPlugins\chrome-bridge - required</p>
+
+<p dir="ltr">client\BrowserPlugins\flex - source code for Flex charts - remove.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\BrowserPlugins\lib\chrome-bridge-ext - required<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\BrowserPlugins\lib\cti - remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\BrowserPlugins\src\curam\util\tools\cti - remove</p>
+
+<p dir="ltr">==========================<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+CoreInf</p>
+
+<p dir="ltr">client\CoreInf\CuramCDEJ\bin\components - all required<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\CuramCDEJ\bin -<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - build-portlet-war.xml - still needed?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - cti-simulator.xml - go<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - generate-topics.xml - go</p>
+
+<p dir="ltr">client\CoreInf\CuramCDEJ\doc\RAD - RAD.zip - what is this used for? - Paulius</p>
+
+<p dir="ltr">client\CoreInf\CuramCDEJ\ear - review complete folder to see if all still applicable</p>
+
+<p dir="ltr">client\CoreInf\CuramCDEJ\lib\curam\jar</p>
+
+<p dir="ltr">&nbsp;- docmaker.jar - remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- dummyDDL.properties - remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- page-hierarchy.jar<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\CuramCDEJ\lib\curam\web\about\default - check if still needed?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\CuramCDEJ\lib\curam\web\active-x - old version of active x, not required - remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\CuramCDEJ\lib\curam\web\flex</p>
+
+<p dir="ltr">&nbsp; - hchart.swf<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - linechart.swf<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - piechart.swf<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - vchart.swf - all go, related to Flex Charts<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - curam-flex-inf.swc - check<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - editorslib.swc - check<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; client\CoreInf\CuramCDEJ\lib\curam\web\flex\ResourceModules - used by the CDEJ Flex infrastructure - check - might remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\CuramCDEJ\lib\curam\web\html -</p>
+
+<p dir="ltr">&nbsp;- index.html - client mock app as the home page<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- theme.html - remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- empty.html - blank page - some requests could use it, may be used.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\CuramCDEJ\lib\curam\web\jscript - remove</p>
+
+<p dir="ltr">client\CoreInf\CuramCDEJ\lib\curam\web\jsp\extapp - is it used as a target folder, otherwise remove</p>
+
+<p dir="ltr">client\CoreInf\CuramCDEJ\lib\curam\web\jsp\tab -</p>
+
+<p dir="ltr">&nbsp;- ApplicationBanner.jspx - is this still used?</p>
+
+<p dir="ltr">client\CoreInf\CuramCDEJ\lib\curam\web\jsp</p>
+
+<p dir="ltr">&nbsp;- about.jsp - still used?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- contextError.jspx - agenda player<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- css-file-links.jsp - imported by generated JSP - check<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- css-file-links_rtl.jsp - same<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- cti-applet.jsp - remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- cti-user.jsp - remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- CuramPodToPortletAdaptor.jspx - portlets - remove, PODS?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- DataServiceError.jspx - CDSL - still required<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- empty-error-page.jspx - if used, needs a redesign<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- end-user-stats.jsp - JMX<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- end-user-stats-json.jsp - JMX - still used<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- external-session-timeout-dialog.jspx - still used<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;external-session-timeout-warning-dialog.jspx - still used<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- FEBase-body.jsp - nw Word Integartion<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- gcf-error.jspx - removed, related to Chrome Frame<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- generic-modal-error.jspx - could be redesigned<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- help.jsp - examine if on line help redesigned/removed<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- http-404-error.jsp - could be redesigned if we have one page for errors<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- loading.jspx - related to old Tree Control Widget - removed<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- no-dialog.jsp - check<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- optimal-browser-msg-fragment.jspx - dialog - browser not optimal, upgrade - check?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- treecontrol.xml - remove along with the Tree Control<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- user-locale-selector.jspx - still needed, do we allow a user select a locale?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- wizard.xml - agenda player - outdated design<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- wizard-header.jspx - agenda player - still required<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- wizardnav.jspx - agenda player - still required<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\CuramCDEJ\lib\curam\web\popups\decision-assist</p>
+
+<p dir="ltr">&nbsp;- add-messages.jsp - remove along with the folder<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\CuramCDEJ\lib\curam\web\popups - still used</p>
+
+<p dir="ltr">&nbsp;- date-selector.jsp - date popup widget<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- frequency-editor.jsp - issues, very old, still required or redesigned?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\CuramCDEJ\lib\curam\web\svg</p>
+
+<p dir="ltr">&nbsp;- tree.svg - rules tree - is this still used?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- tree1.svg - still used?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- tree2.svg - is it still used<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- workflow.svg - still used</p>
+
+<p dir="ltr">client\CoreInf\CuramCDEJ\lib\curam\web\themes</p>
+
+<p dir="ltr">client\CoreInf\CuramCDEJ\lib\curam\web\themes\classic - css and images - can it be removed - New UI team should considered this.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\CuramCDEJ\lib\curam\web\themes\classic_rtl<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\CuramCDEJ\lib\curam\web\themes\mobile<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\CuramCDEJ\lib\curam\web\themes\new<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\CuramCDEJ\lib\curam\web\themes\new_rtl<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\CuramCDEJ\lib\curam\web\themes\previews<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\CuramCDEJ\lib\curam\web\themes\soria<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\CuramCDEJ\lib\curam\web\themes\soria_rtl<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\CuramCDEJ\lib\curam\web\themes\v6<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\CuramCDEJ\lib\curam\web\themes\v6_rtl</p>
+
+<p dir="ltr">client\CoreInf\CuramCDEJ\lib\curam\web\vbscript</p>
+
+<p dir="ltr">&nbsp;- svgcheck.vbs - removed and folder<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\CuramCDEJ\lib\curam\web\WEB-INF<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- ibm-web-bnd.xml - check if still required<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- ibm-web-bnd.xmi<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- ibm-web-ext.xmi<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- web.xml - another copy?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\CuramCDEJ\lib\curam\xml</p>
+
+<p dir="ltr">client\CoreInf\CuramCDEJ\lib\curam\xml\build - all required static -</p>
+
+<p dir="ltr">&nbsp;- struts-top-2.txt - needed, review other files<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\CuramCDEJ\lib\curam\xml\config</p>
+
+<p dir="ltr">&nbsp;- domain-table.xml - review and most of could be removed<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\CuramCDEJ\lib\curam\xml\schema</p>
+
+<p dir="ltr">&nbsp;- agenda.xsd<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- agenda-config.xsd<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- barchart.xsd<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;barchart-config.xsd<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- decision-matrix.xsd - remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- decision-matrix-config.xsd - remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- display-evidence.xsd - remove as well as tags<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- dynamic-menu-config.xsd - check but remove?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- dynamic-menu-data.xsd - check but remove?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- evidence.xsd - check could be removed not supporting the evidenvce tags<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- evidence-comparison.xsd<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- evidence-comparison-config.xsd<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- evidence-review.xsd<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- evidence-tab-container.xsd<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- evidence-tab-container-config.xsd<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- file-edit-data.xsd - might still be used - check<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- gantt.xsd - do not use it<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- gantt-config.xsd - do application still use it? Are they still dependent on it<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- generated-legacy-page-hierarchy.xsd - remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- heatmap.xsd - still used?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- heatmap-config.xsd - still used?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- ieg-answers.xsd - remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- ieg-player-config.xsd - remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- ieg-questions.xsd<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- ieg-summary.xsd<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- image-map-config.xsd - remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- line-chart.xsd - go<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- line-chart-config.xsd - remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- meeting-view-config.xsd - outdated - still used?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- meeting-view-data.xsd - outdated, still used, removed?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- pie-chart.xsd - remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- pie-chart-config.xsd - remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- rules-config.xsd - rules tree - still used?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- rules-decision.xsd - same<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- ruleset.xsd - classic Rules or rules tree?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- svg11.dtd - still required?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;tree-control.xsd - remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;tree-control-config.xsd - remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;type-info.xsd - review?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;typical-picture-editor.xsd - no longer used<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;</p>
+
+<p dir="ltr">client\CoreInf\CuramCDEJ\lib\curam\xml\xsl</p>
+
+<p dir="ltr">&nbsp;- barchart - remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- bean-doc - OK<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- build<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; - log.xsl - ANT Logger?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; - merge-agenda-player-config.xsl - agenda - remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; - merge-bar-chart-config.xsl - remove?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; - merge-decision-matrix-config.xsl - remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; - merge-gantt-config.xsl - remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; - merge-heatmap-config.xsl - heatmap widget - remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; - merge-iim.xsl - go?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; - merge-image-map.xsl - go? Are they still be used?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; - merge-line-chart-config.xsl - go?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; - merge-meeting-view-config.xsl - meeting view widget?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; - merge-pie-chart-config.xsl - go<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; - merge-rules-decision-config.xsl - SVG rules tree - keeping these<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; - merge-rules-editor-config.xsl - go?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; - merge-tree-control-config.xsl - remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - calendar - calendar widget<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - chart<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; - horizontal.xsl<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; - vertical.xsl - both go<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - common\rules<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; - dependencies on other xsls, would have to check these one by one<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - static-rules.xsl - go?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - decision-assist<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; - all go along with the related widget<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - dynamic-menu - old style - go?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - flex<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; - flex charts - remove flex charts, go as well<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - heatmap - widget goes, remove this<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - ieg - old ieg - remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - jsp<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; - gen-page-help.xsl - review<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; - gen-previews.xsl - preview<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; - gen-previews-content-area-template.xsl<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; - gen-previews-modal-template.xsl<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; - gen-previews-navigation-group-template.xsl<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - meeting-view - check if getting rid of widget - go?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - rules<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; - most of this shuld go away along with the old SVG Rules Tree<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - rules-sim<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp;&nbsp; - check if still used<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - svg - workflow - check<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - wizard - agenda playrer - still used?</p>
+
+<p dir="ltr">client\CoreInf\CuramCDEJ\lib\ext\dll</p>
+
+<p dir="ltr">&nbsp;- dll - OK<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- client\CoreInf\CuramCDEJ\lib\ext\jar - check all JARs<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\CuramCDEJ\lib\ext\js</p>
+
+<p dir="ltr">&nbsp;- CFInstall.js - out dated go?</p>
+
+<p dir="ltr">client\CoreInf\CuramCDEJ\lib\imageGen - not generating images any more - all should go?</p>
+
+<p dir="ltr">client\CoreInf\CuramCDEJ\portlet\WAS - is this still supported, can it go?</p>
+
+<p dir="ltr">client\CoreInf\Default Properties\curam\omega3\defaultproperties - OK</p>
+
+<p dir="ltr">client\CoreInf\Default Properties\curam\omega3\i18n\defaultproperties</p>
+
+<p dir="ltr">&nbsp;- get rid of the widgets, get rid of the property files<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\src\curam\omega3\codetable - OK<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\src\curam\omega3\config - OK<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\src\curam\omega3\ejb\messaging - OK<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\src\curam\omega3\imagegen - GO?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\src\curam\omega3\mbean -<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\src\curam\omega3\message - empty - go?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\src\curam\omega3\mockobjects - client mock app<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\src\curam\omega3\onlinehelp - check?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\src\curam\omega3\request - old tag requests - handling - still used<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\src\curam\omega3\security - OK<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\src\curam\omega3\server - OK<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\src\curam\omega3\taglib - complete tag lib - Sharunas<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\src\curam\omega3\texthelper - OK<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\src\curam\omega3\user - OK<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - ThemeSwitcher.java - check<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\src\curam\omega3\util - OK<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\src\curam\omega3\xml - review by Sharunas</p>
+
+<p dir="ltr">client\CoreInf\src\curam\util\client\bopi - OK<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\src\curam\util\client\domain - ok<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\src\curam\util\client\jsp - ok<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\src\curam\util\client\message - ok<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - OnlineHelpInterimMetadata.java<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\src\curam\util\client\page - OK<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\src\curam\util\client\path\util - OK<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\src\curam\util\client\persistence&nbsp; -<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\CoreInf\src\curam\util\client\plugin - OK</p>
+
+<p dir="ltr">client\CoreInf\src\curam\util\configuration\internal - check that file</p>
+
+<p dir="ltr">client\CoreInf\src\curam\util\portlet<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - CuramPortletContainer.java - check<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+===============================<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\dojo-overrides</p>
+
+<p dir="ltr">&nbsp;- client\dojo-overrides\src\main\javascript\dijit\layout\templates - check after upgrade<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- client\dojo-overrides\src\main\javascript\dijit\layout - check after upgrade</p>
+
+<p dir="ltr">client\dojo-overrides\src\main\javascript\dijit\themes - check</p>
+
+<p dir="ltr">client\dojo-overrides\src\main\javascript\dojo\_base - check</p>
+
+<p dir="ltr">client\dojo-overrides\src\main\javascript\dojo -</p>
+
+<p dir="ltr">&nbsp;- dom-geometry.js - check<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- ready.js - check<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\dojo-overrides\src\main\javascript\dojox\encoding\digests - check</p>
+
+<p dir="ltr">==============================<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+\client\Generator</p>
+
+<p dir="ltr">&nbsp;- src-aspect profiling of the Client Generator - not used anymore?</p>
+
+<p dir="ltr">client\Generator\src\curam\omega3\anttasks - reviewed - some them</p>
+
+<p dir="ltr">&nbsp;- DojoLocalizationWorkaroundTask.java - review<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- UpdateBuildSettingsWithModulePaths.java - review<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\Generator\src\curam\omega3\config - reviewing</p>
+
+<p dir="ltr">client\Generator\src\curam\omega3\xml\analyser\analysis - needs to be checked?</p>
+
+<p dir="ltr">client\Generator\src\curam\omega3\xml - review - Sharunas</p>
+
+<p dir="ltr">==========================<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+client\Sandbox - if this is part of testing, then move. Otherwise remove or remove parts into the testing. - Barry</p>
+
+<p dir="ltr">&nbsp;- client\Sandbox\CSSDemos -<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;=======================================<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;client\TextHelperGenerator - OK<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;======================================================================================<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;commons\commons-testing - ok<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;commons\duim-generator -<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- commons\duim-generator\src\main\java\curam\util\common\resource\store class should be in commons testing<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+- commons\duim-generator\src\main\java\curam\util\common\uim\loader\MockResourceStoreUIMResourceReader.java</p>
+
+<p dir="ltr">commons\jde-commons-core</p>
+
+<p dir="ltr">&nbsp;- jde-commons-core\doc - OK - move to "messages" perhaps?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- jde-commons-core\lib\message - stylesheets - ok<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- jde-commons-core\lib\schema - compare menubar.xsd and menubar_withRefID.xsd to determine differences?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- jde-commons-core\src\JMXStats.xsl - if required, move to correct location?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;-<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- jde-commons-core\src\curam\util\cdsl - check?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- jde-commons-core\src\curam\util\codesecurity - check if still used. - JMX -<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- commons\jde-commons-core\src\curam\util\common\ant - check tasks are still used?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- commons\jde-commons-core\src\curam\util\common\message - OK<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- commons\jde-commons-core\src\curam\util\common\profile - infrastructure created by Damian G, never used?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- commons\jde-commons-core\src\curam\util\common\tab - OK<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- commons\jde-commons-core\src\curam\util\common\util\deprecation - OK - check deprecation messages<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- commons\jde-commons-core\src\curam\util\common\util\xml - OK<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- commons\jde-commons-core\src\curam\util\common\util - check (Iterator2 for example)<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- commons\jde-commons-core\src\curam\util\configuration\internal - check for usage?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- commons\jde-commons-core\src\curam\util\internal\perfinf - OK<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- commons\jde-commons-core\src\curam\util\jmx - OK<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- commons\jde-commons-core\src\curam\util\reflection - OK - PerInf<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- commons\jde-commons-core\src\curam\util\resources - OK<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- commons\jde-commons-core\src\curam\util\runtime - OK<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- commons\jde-commons-core\src\curam\util\trace - check<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- commons\jde-commons-core\src\curam\util\webservices - check<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+commons\plug-in-core\src\main\java\curam\util - all OK</p>
+
+<p dir="ltr">commons\renderer-model\src\main\java - OK</p>
+
+<p dir="ltr">commons\resource-manager\src\main\java\curam - project with two classes, can this be wrapped into an existing project? And Remove this one?</p>
+
+<p dir="ltr">Within the commons projects, the classes from the projects are placed in the jde-commons JAR file as well as their individual JARs for each project. Both are in the Web-Inf, ideally, only one copy of these class files should end up in there - REVIEW</p>
+
+<p dir="ltr">========================================<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+CuramCDEJ\doc - review of what is generated into and what is contained within this folder.</p>
+
+<p dir="ltr">===============================<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+TIVOB\tests\ClientDepApp - where is this used? Is it used on the server side? If not, can it be removed? - Sharunas to check?</p>
+
+<p dir="ltr">tests\ClientMockApp - review what is in this.</p>
+
+<p dir="ltr">&nbsp;- automated unit tests currently, can these be abstracted up and included in the one place?</p>
+
+<p dir="ltr">tests\CuramSampleMobileApp - check this still required</p>
+
+<p dir="ltr">TIVOB\tests\TabTestApp - contains actual pages in the test application, visual testing.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - check if all functionality covered.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - remove the legacy widgets<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - sample links, leading to old applications, need to be updated.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - steps and explanations on pages, outdated, need to be reviewed and changes.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; - Tab Test CPT - examine what is in it...<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+===============================================================<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Technical Debt</p>
+
+<p dir="ltr">Feature/Technology Upgrade<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+1. Responsive Design - JS framework utilised, need a framework upgrade (Dojo 2 or maybe what Abu Dhabi used)..<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+2. Web UI Components - new frameworks like Dojo 2 might have this, custom HTML, performance improvements, spike required<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+3. New version of Struts</p>
+
+<p dir="ltr"><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Items to remove<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+1. Word Integration - replace with Import/Export and associated support.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+2. Portlets<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+3. Legacy Widgets (Decision Assist Widgets, Flex based widgets (Flex charts, generic Flex Widget), Frameset widgets (Agenda Player and Tree Control), Rules Tree (SVG), Heat Map, Meeting View, Schedule, Decision Matrix.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+4. Tag Infrastructure - move everything to the renderer framework, remove the request handling infrastructure.. currently maintaining two infrastructures for this.. (AbuDhabi not usng either, using the underlying JS framework for rendering). If we get rid of the legacy widgets - Renderer (60%)&nbsp;&nbsp; Tag(40%) - no external impact to making this change, just maintenace .....</p>
+
+<p dir="ltr"><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Review<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+1. Online Help<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+2. Screen Previews<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+3. Client Mock Test App and Tab Test App.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+4. Client side validations</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,193 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>SmartNav Hook Point Discussion Archive</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="SmartNav Hook Point Discussion Archive";
+    pageId="urn:lsid:ibm.com:td:1f6e9f1d-bb0c-4a07-9f60-f4c85952b4bd";
+    toRoot="../../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">SmartNav Hook Point Discussion Archive</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">This page holds information that at some point belonged on the parent analysis document but was superseded and no longer represents the requirement.</p>
+
+<h1 dir="ltr">Requirements</h1>
+
+<p dir="ltr">The original requirements provided are below but these were re-defined during analysis and those on the parent page represent the target the solution is aimed at.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement 1: Display specific icons for a person in the Smart Navigator Person Search Results Dialog which convey various extra pieces of information about that person in the Smart Navigator. These may include:
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Prospect Person</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Special Caution ((when hovered over, displays a brief summary about the caution (sex, staff-security, public risk).</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Duplicate</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Secured</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Must View Alert (displays a brief about list of notes, etc. (ex. IRD Change, Agent Update))</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement 2:Present a confirmation dialog or other mechanism to allow a caseworker acknowledge some key information before they proceed to use the rest of the application (normally from the person search results).
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actions must be allowed to be invoked from this dialog.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Once the dialog is dismissed, the rest of the application becomes active again.</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement 2 Expanded:
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1. Determine if extra information needs to be displayed before navigating to the target page</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2. Display extra information tailored to the client's situation (e.g. through a custom modal dialog)</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3. Get a forced acknowledgement that the user has read / understood the information.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">4. Invoke extra system processing if required</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">5. Additionally, do not display this extra information when the same user is accessing the same person's record several times in the same session</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h1 dir="ltr">Design Options</h1>
+
+<p dir="ltr">The following represent the design options as originally provided but have been moved here to avoid confusion. Design options given detailed consideration are on the parent page</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii33"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Option 1 - Include the Icons which are displayed in the standard person home pages in the Smart Navigator Person Search Results</strong></h3>
+
+<ul dir="ltr">
+	<li>This would just take what we have with regards to the displaying of icons in the person home page and determine if we can display it in the Smart Navigator results based on the collateral we have there now.</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><img id="1548433450926_0" src="../Smart%20Navigator%20-%20Hook%20Points._ATTACHMENTS_/editor_image_8e728c0e-b134-4b6f-8bf4-e785c51f9215.png"></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Pros:</p>
+
+<ul dir="ltr">
+	<li>Would indicate to the user that there are special cautions for that person.</li>
+	<li>Make it more consistent with the standard person page.</li>
+</ul>
+
+<p dir="ltr">Cons:</p>
+
+<ul dir="ltr">
+	<li>Would the real estate available for the Smart Navigator search results be sufficient to show these extra icons?</li>
+	<li>Would there be a possibility to hover over and see extra information for these icons (see requirements)?</li>
+</ul>
+
+<h3 dir="ltr" id="ii39">Option 1 Analysis</h3>
+
+<ul dir="ltr">
+	<li>Person search provided by default implementation&nbsp;<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">curam.smartnavigator.target.impl.PersonSearchImpl</strong></li>
+	<li>Implementation has a call to protected method getConcernRoleImageURL with signature</li>
+</ul>
+
+<pre dir="ltr">
+protected String getConcernRoleImageURL(final long concernRoleID,
+    final boolean isProspectPerson, final boolean isRestrictedPerson)
+      throws AppException, InformationalException
+</pre>
+
+<ul dir="ltr">
+	<li>Providing a hook point here would allow complex custom logic in determining the icon.</li>
+	<li>! Custom implementations must consider performance given this is&nbsp;called for every person result which could in theory be very large</li>
+</ul>
+
+<p dir="ltr">The interface for the hook would have to include both image and alternate text for accessibility.</p>
+
+<p dir="ltr">This additional field (alternate text) would also have to be modelled in struct for the results and the JS updated to use it.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Further analysis required around codeline</p>
+
+<ul dir="ltr">
+	<li>PersonSearch Interface and Default Implementation<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</strong>are both EXTERNAL but interface is not marked implementable so not sure if intention here is to allow custom binding?</li>
+	<li>Also the getConcernRoleImageURL is protected - not sure if that was intended as a way to allow extension but would recommend hook over extension for standard approach.</li>
+</ul>
+
+<p dir="ltr">Requirements questions</p>
+
+<p dir="ltr">1) Would we have to allow for multiple icons per result - if so the design of smart nav does not cater for that and would have to be revisited</p>
+
+<p dir="ltr">2) Would we have to allow custom icons for each type of result? This should be possible in a similar way as described above for the Person search.</p>
+
+<p dir="ltr">3) Would we have to allow for conveying additional information (beyond alttext). For example, if special caution&nbsp;would we have to have a way of displaying the caution detail&nbsp;(e.g. hover over) or would it be sufficient to have the icon with alttext 'Special Caution'. May need design input if the former.</p>
+
+<h3 dir="ltr" id="ii40"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Option 2 - Quick View With Actions From the Smart Navigator</strong></h3>
+
+<ul dir="ltr">
+	<li>
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Open a page/modal with additional information</p>
+	</li>
+	<li>
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Contents of this page/modal would be completely customizable For example – MSD could show on this page/modal that a client has a special caution</p>
+	</li>
+	<li>
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Can investigate if it is possible include actions on this Quick View – i.e. to ‘force acknowledge’ from here</p>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><img id="1548433705217_0" src="../Smart%20Navigator%20-%20Hook%20Points._ATTACHMENTS_/editor_image_d3f2ddae-881e-40fd-8ba1-164cc6dde5ea.png"></img></p>
+
+<ul dir="ltr">
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Pros:</p>
+
+<ul dir="ltr">
+	<li>
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Users would have to focus/hover on each item in the list for the quick view to display, so this wouldn’t always appear perhaps?</p>
+	</li>
+	<li>
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Depends on how this was implemented?</p>
+	</li>
+	<li>
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Current use case is where the rest of the application is not available until the information is acknowledged, this would have to be catered for?</p>
+	</li>
+</ul>
+
+<p dir="ltr">Cons:</p>
+
+<ul dir="ltr">
+	<li>
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Aligns with the Smart Nav concept is&nbsp; not the definite endpoint</p>
+	</li>
+	<li>
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actions should (such as “force acknowledge”) be on the definite endpoint ?</p>
+	</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

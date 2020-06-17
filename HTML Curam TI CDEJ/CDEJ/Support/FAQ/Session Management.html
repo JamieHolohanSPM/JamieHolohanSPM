@@ -1,0 +1,158 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Session Management</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Session Management";
+    pageId="urn:lsid:ibm.com:td:4ab817a2-84f3-4439-9eac-83d62edde3be";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Session Management</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Support Case List</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">Common Must Gather Information</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii3">Common Resolutions</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii4">Additional Information</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii5">Pressing F5 returns user to Home Section</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii6">Resolution</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii7">Notes</a></div>
+
+<p dir="ltr">&nbsp;</p>
+
+<h1 dir="ltr">Session Management</h1>
+
+<p dir="ltr">Support cases relating to the restoration of Tabs in the browser and how different browsers handle web sessions.</p>
+
+<h2 dir="ltr" id="ii1">Support Case List</h2>
+
+<table border="1" dir="ltr" style="width: 90%;">
+	<tbody>
+		<tr>
+			<td><strong>PMR</strong></td>
+			<td style="width: 101px;"><strong>Customer</strong></td>
+			<td style="width: 224px;"><strong>Problem</strong></td>
+			<td style="width: 223px;"><strong>Resolution</strong></td>
+			<td style="width: 135px;"><strong>Notes</strong></td>
+		</tr>
+		<tr>
+			<td>38687,999,616</td>
+			<td style="width: 101px;">WorkCover South Australia</td>
+			<td style="width: 224px;">Pressing F5 returns user to Home section</td>
+			<td style="width: 223px;">When the HTTPOnly setting is enabled for the JSESSIONID, the tab restoration code can't access the cookies and has to assume a new session. This results in defaulting to the home tab and not the previously selected tab. <a href="#1">Further&nbsp;Information</a></td>
+			<td style="width: 135px;">TEC-9557 &amp; TEC-11925</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td style="width: 101px;">&nbsp;</td>
+			<td style="width: 224px;">&nbsp;</td>
+			<td style="width: 223px;">&nbsp;</td>
+			<td style="width: 135px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">Please keep information in the table as succinct as possible. If the resolution, problem or notes field are verbose, please use the Additional Information section and add a link.</p>
+
+<h2 dir="ltr" id="ii2">Common Must Gather Information</h2>
+
+<p dir="ltr">TO BE EXPANDED UPON</p>
+
+<h2 dir="ltr" id="ii3">Common Resolutions</h2>
+
+<p dir="ltr">The most common resolution to these issues is education for the customer on how IE handles sessions. Consult the <a href="http://pic.dhe.ibm.com/infocenter/curam/6.0.5/topic/com.ibm.curam.content.doc/Developers/components/core/CuramWebClientReferenceManual/r_WEBCREF_Management1SessionManagement1.html">Session&nbsp;Management</a> section of the Information centre for more details.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii4">Additional Information</h2>
+
+<p dir="ltr"><a id="1" name="1"></a></p>
+
+<h3 dir="ltr" id="ii5">Pressing F5 returns user to Home Section</h3>
+
+<h4 dir="ltr" id="ii6">Resolution</h4>
+
+<p dir="ltr">The issue with browser refresh (f5) not restoring the currently selected tab is caused when the HTTPOnly option is set on the JSESSIONID cookie.</p>
+
+<p dir="ltr">When HTTP only is set on a cookie, browsers that support attribute do not enable cookies to be accessed by client-side scripts. The feature that restores the currently selected tab on refresh requires access to the JSESSIONID to work correctly and where it does not have this access, it selects the home tab by default.</p>
+
+<p dir="ltr">The HttpOnly configuration can be modified in Websphere using the administration console.</p>
+
+<p dir="ltr">In the console click Servers &gt; Server types &gt; WebSphere application servers &gt; server_name &gt; Session management &gt; Enable cookies.</p>
+
+<p dir="ltr">Untick the "Set cookies as HTTP only to help prevent cross-site scripting attacks" property to disable the HttpOnly flag on the cookie.</p>
+
+<p dir="ltr">Select Applications &gt; Application Types &gt;WebSphere enterprise applications &gt; &lt;application_name&gt; -&gt; Session management -&gt; Enable cookies</p>
+
+<p dir="ltr">Untick the "Set cookies as HTTP only to help prevent cross-site scripting attacks" property to disable the HttpOnly flag on the cookie.</p>
+
+<p dir="ltr">Save the changes and restart the server.</p>
+
+<p dir="ltr">This change will allow the tab selection feature on session restoration to work as expected.</p>
+
+<p dir="ltr">It is important to note that there is a trade-off here between the security provided by this setting and the ability to restore the currently selected tab on refresh.</p>
+
+<p dir="ltr">For more information on the HttpOnly please consult the WebSphere Information Centre.</p>
+
+<h4 dir="ltr" id="ii7">Notes</h4>
+
+<p dir="ltr">There are a number of options in relation to HTTPOnly setting in WAS. To access in the administration console:</p>
+
+<p dir="ltr"><strong>A) LTPA HTTPOnly setting</strong><br />
+Click Security &gt; Global security.<br />
+Under Authentication, click Web and SIP security &gt; Single sign-on (SSO)</p>
+
+<p dir="ltr">Confirm what the "Set security cookies to HTTPOnly to help prevent cross-site scripting attacks" option is set to.</p>
+
+<p dir="ltr">The attribute specifies that LTPA and WASReqURL cookies include the HTTPOnly field.</p>
+
+<p dir="ltr"><strong>B) JSESSIONID HTTPOnly setting</strong><br />
+Click Servers &gt; Server types &gt; WebSphere application servers &gt; server_name &gt; Session management &gt; Enable cookies .</p>
+
+<p dir="ltr">Verify what the "Set cookies as HTTP only to help prevent cross-site scripting attacks" property is set to.</p>
+
+<p dir="ltr">Specifies that session cookies include the HTTP only field. When checked, browsers that support the HTTP only attribute do not enable cookies to be accessed by client-side scripts.</p>
+
+<p dir="ltr"><strong>C) Custom HTTPOnly setting</strong><br />
+Click Security &gt; Global security<br />
+Select Custom Properties</p>
+
+<p dir="ltr">Verify what the com.ibm.ws.security.addHttpOnlyAttributeToCookies property is set to.</p>
+
+<p dir="ltr">When you set this custom property value to true, the application server sets the HTTPOnly attribute for SSO cookies whose values are set by the server. The HTTPOnly attribute enables the protection of sensitive values in cookies.</p>
+
+<p dir="ltr">Also, a true value enables the application server to properly recognize, accept, and process inbound cookies with HTTPOnly attributes and inhibit any cross-site scripting from accessing sensitive cookie information.</p>
+
+<p dir="ltr">When you use this custom property, HTTPOnly attribute is not added to every cookie that passes through the application server. Also, the attribute is not added to other non-secure cookies that are created by the application server. A list of non-HTTPOnly cookies includes:</p>
+
+<p dir="ltr">&nbsp; JSESSIONID cookies<br />
+&nbsp; SSO cookies that are created by authenticators or providers from another software vendor<br />
+&nbsp; Client or browser cookies that do not already contain the HTTPOnly attribute</p>
+
+<p dir="ltr">THIS PROPERTY APPEARS TO BE THE SAME AS A) LTPA HTTPOnly setting. Setting one sets the other.</p>
+
+<p dir="ltr">Note: The descriptions have been taken from the WAS information centre.</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,127 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Automated Tests</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Automated Tests";
+    pageId="urn:lsid:ibm.com:td:40042df7-6e7a-40f3-8120-cdb4c480caa3";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Automated Tests</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h1 dir="ltr">Automated Tests from TI stream&nbsp;</h1>
+
+<p dir="ltr">- Run all the automated Tests on TestModel</p>
+
+<p dir="ltr">- These tests are localized in the folder TI/tests/AutomatedTests/</p>
+
+<p dir="ltr">- The target to run this tests is "appbuild&nbsp;testmodelautomatedtest". The ant&nbsp;file name is automatedtests.xml</p>
+
+<div dir="ltr">- All the test login and the application&nbsp;before start the test</div>
+
+<div dir="ltr">&nbsp;</div>
+
+<div dir="ltr">&nbsp;</div>
+
+<div dir="ltr">&nbsp;</div>
+
+<table border="1" dir="ltr" style="width: 500px;">
+	<tbody>
+		<tr>
+			<td style="width: 166px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">caseinsensitivelogintest</span></td>
+			<td style="width: 166px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">This tests case-insensitive login and resets the case-insensitive property back</span></td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">customvalidationtest</span></td>
+			<td style="width: 166px;">Verifies&nbsp;if field<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;contains&nbsp;secure field value is ${SECURE_FIELD_VALUE}. Login&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span> in <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;the application, access the field "Person Address" with two different users and secure field value</span></td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">domaindefaultstest</span></td>
+			<td style="width: 166px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Verifies the domain ID</span></td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">exceptionhandlingtest</span></td>
+			<td style="width: 166px;">Check display phase application error pages</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">enablepublicaccesssecurity</span></td>
+			<td style="width: 166px;">Setup and Enable Public Access Security Test</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">fieldlevelsecuritytest</span></td>
+			<td style="width: 166px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">the title and click on the data field, //commented the verification</span></td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">fieldlevelerrorindicatorstest</span></td>
+			<td style="width: 166px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">verifies the container error display the correct error message in different&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">phases</span></td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">fileuploadtest</span></td>
+			<td style="width: 166px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Check comments field exists.</span></td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">informationalmanagertest</span></td>
+			<td style="width: 166px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">check for warning text in&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span> a input <span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;field</span></td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">setjmxoff</span></td>
+			<td style="width: 166px;">
+			<div>Dislabing the properties curam.jmx.in_flight_statistics_enabled, curam.jmx.transaction_tracing_enabled, curam.jmx.sql_statement_statistics_enabled and&nbsp; check title going to the login page</div>
+			</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">setcaseinsensitivesecurity</span></td>
+			<td style="width: 166px;">Setup Case Insensitive Security Property</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">setjmxon</span></td>
+			<td style="width: 166px;">Execute test to add property, check title, insert property value and then go to the login page and logout page</td>
+			<td style="width: 168px;">Turning on JMX and rerunning tests</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">userhomelinktest</span></td>
+			<td style="width: 166px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">Click and the button and check browser&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">title</span></td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

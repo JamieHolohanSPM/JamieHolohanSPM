@@ -1,0 +1,271 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>IEG Modal Popup Freeze in IE11</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="IEG Modal Popup Freeze in IE11";
+    pageId="urn:lsid:ibm.com:td:2e3c2377-cb56-4b97-8ca5-77285c0202de";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">IEG Modal Popup Freeze in IE11</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<h1 dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Design Page for 251740 - </strong>IEG Modal Popup Freeze in IE11</h1>
+
+<h2 dir="ltr" id="ii3">Stakeholders</h2>
+
+<table border="1" dir="ltr">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Role</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Sign Off if Applicable</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Customer</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">UK - DWP</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Business Owner/Product Owner</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Sonya Purcell</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Architect</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Fergal Gavin</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Developer(s)</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Clara Mannion</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">FVT</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Satya Minnekanti</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">SVT</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">John Redmond/Sean Cleary</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii4">Background</h2>
+
+<p dir="ltr">In IE11/Edge the modal is not closing properly as expected. The scenario where this issue has appeared is on the submitting or saving an Intake application case. This issue has been introduced because of the work from defect 234604, which was the initial code to solve the back button functionality and memory loss issue.&nbsp;<br />
+<br />
+The javascript code from defect 234604, changed the registering of an <span style="color:#ff0000;">dojo.addOnUnload</span>&nbsp;event to an window&nbsp;<span style="color:#ff0000;">onunload</span> event when the page loads. This is unfortunately treated differently by different browsers, and therefore throughs an exception when using the IE11/Edge web browser, and doesn't allow the modal to close successfully.&nbsp;</p>
+
+<h2 dir="ltr" id="ii5">Requirements</h2>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The modal shall close as expected when submitting an Intake application using the IE11 browser.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The modal shall close as expected when saving an Intake application to resume at a later stage when using the&nbsp;IE11 browser.</li>
+</ul>
+
+<p dir="ltr">RTC Ticket</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=251740">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=251740</a><br />
+	&nbsp;</li>
+</ul>
+
+<h3 dir="ltr">Requirement Decisions</h3>
+
+<ul dir="ltr">
+	<li>There are two javascript classes in the technical infrastructure that registers&nbsp;the window&nbsp;<span style="color:#ff0000;">onunload</span> event when the page loads (<strong>dialog.js</strong> and <strong>Dialog.js</strong>). From chatting to Sharunas and Cian, the only way to tackle this issue is to insert a check in the code and register the <span style="color:#ff0000;">dojo.addOnUnload</span> event for this particular page.&nbsp;</li>
+	<li>&nbsp;</li>
+</ul>
+
+<h3 dir="ltr" id="ii6">Design</h3>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li><s>The <strong>dialog.js</strong> method <strong>initModal</strong> is called from the the<strong> JspUtil.java </strong>class at the technical infrastructure level, and a check for the uim page at this level wouldn't be correct. Therefore, I've gone with the decision to include a javascript call in the <strong>Intake_confirmSaveApplicationScriptExecution.uim</strong>&nbsp;file to call a function in <strong>dialog.js</strong> to set a parameter&nbsp;to true. </s></li>
+	<li>After further investigation back to the support ticket, we see that they have possibly a customised uim page and as this is high severity and going into a v7080 iFix, the approach we decided on would not be ideal. Therefore, from working with James Darcy, we decided to go for a global javascript variable that will be used as a check, and deleted in curam.dialog.js</li>
+	<li>Therefore, we can have a check in function for this parameter, and if it's true register the <span style="color:#ff0000;">dojo.addOnUnload</span> event else register the window&nbsp;<span style="color:#ff0000;">onunload</span> event.</li>
+	<li>The <strong>Dialog.js </strong>method init is called from <strong>ieg-modal.js</strong> (BizInf stream) and within this method, I've decided to call a new function in Dialog.js to set a parameter to true and similarly to the previous bullet point above, have a check in the init function to check for this parameter and if it's true register the <span style="color:#ff0000;">dojo.addOnUnload</span> event else register the window&nbsp;<span style="color:#ff0000;">onunload</span> event.</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii10">Use Cases</h2>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1.1</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Save an application and resume at later point</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actor</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Caseworker</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">When a caseworker chooses to save an application to resume at a later stage, the modal will close as expected.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Preconditions</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Flow</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">** Test on IE11/Edge/Firefox and Chrome **<br />
+			<br />
+			Login as caseworker<br />
+			Register Person<br />
+			New Application<br />
+			Fill half of the application<br />
+			Select “Close” button<br />
+			Select to Save the Application<br />
+			Select "Save the application and come back to work on it later."<br />
+			Next</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Expected</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p>The modal will close.</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1.2</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Submit an application</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actor</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Caseworker</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">When a caseworker chooses to submit an application,&nbsp;the modal will close as expected.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Preconditions</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Flow</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">** Test on IE11/Edge/Firefox and Chrome **<br />
+			<br />
+			Login as caseworker<br />
+			Register Person<br />
+			New Application<br />
+			Complete the application and submit</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Expected</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p>The modal will close.</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii15">Implementation Notes</h2>
+
+<p dir="ltr">TI stream</p>
+
+<ul dir="ltr">
+	<li>Dialog.js</li>
+	<li>dialog.js</li>
+</ul>
+
+<p dir="ltr">BizInf stream</p>
+
+<ul dir="ltr">
+	<li>ieg-modal.js</li>
+</ul>
+
+<p dir="ltr">SPMEntMods</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Intake_confirmSaveApplicationScriptExecution.uim</p>
+	</li>
+	<li>
+	<p>IntakeModalExitingIEGScript.js</p>
+	</li>
+</ul>
+
+<h2 dir="ltr" id="ii16">Testing</h2>
+
+<p dir="ltr">Unit Tests: none at the moment, as a variable is set up from a uim page and javascript just tests for this variable.<br />
+&nbsp;</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">FVT Required
+	<ul>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">scenarios should be performed on IE11 and Chrome web browsers</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">back button functionality needs to be tested aswell.</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii19">&nbsp;</h2>
+
+<h2 dir="ltr" id="ii20">&nbsp;</h2>
+
+<h3 dir="ltr" id="ii2">&nbsp;</h3></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

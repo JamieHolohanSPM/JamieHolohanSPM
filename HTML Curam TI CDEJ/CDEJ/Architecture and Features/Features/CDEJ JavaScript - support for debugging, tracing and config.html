@@ -1,0 +1,106 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>CDEJ JavaScript - support for debugging, tracing and config</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="CDEJ JavaScript - support for debugging, tracing and config";
+    pageId="urn:lsid:ibm.com:td:08a0ce5a-8cf5-4fcf-8a00-fc48417893ba";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">CDEJ JavaScript - support for debugging, tracing and config</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Tracing</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">Debugging</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii3">Configuration - Old Approach(es)</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii4">Configuration - New Apporach</a></div>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii1">Tracing</h2>
+
+<ul dir="ltr">
+	<li>before 6.0.5.2 we only used console.log() for tracing</li>
+	<li>in 6.0.5.2 and later we introduced curam/debug module for unified tracing that can be disabled for production (at build time!)
+	<ul>
+		<li>debug.log()</li>
+		<li>controlled by "JavaScriptTraceOn" key in CDEJResources.properties</li>
+	</ul>
+	</li>
+	<li>on TI_MAIN (vNEXT) we then made this dynamically configurable without rebuilding
+	<ul>
+		<li>the "curam.trace.javascript" application property</li>
+	</ul>
+	</li>
+</ul>
+
+<h2 dir="ltr" id="ii2">Debugging</h2>
+
+<ul dir="ltr">
+	<li>typically we use TabTest app to reproduce issues and Chrome/Firefox Dev Tools (F12) for debugging</li>
+	<li>can disable minification of layers with "-Ddisable.jscompress=true" switch at app build time to aid readability when stepping through code</li>
+	<li>in complex app and with event driven code setting breakpoints in DevTools directly is often not an option</li>
+	<li>use the JavaScript's "debugger;" statement to stop at particular place in code and go from there</li>
+	<li>Can turn on debug statements for this session by entering&nbsp;<span style="color: rgb(34, 34, 34); font-family: Consolas, 'Lucida Console', monospace; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none; background-color: rgb(255, 255, 255);">curam_util_LocalConfig_overrides.jsTraceLog = "true";</span> in the browser console</li>
+</ul>
+
+<h2 dir="ltr" id="ii3">Configuration - Old Approach(es)</h2>
+
+<ul dir="ltr">
+	<li>previously we would typically use CDEJResources.properties or CDEJBuildSettings.properties for build time setup</li>
+	<li>and application properties for any dynamic setup, coding against those values via corresponding standard CDEJ APIs</li>
+	<li>in both cases we read values in webtier and output to HTML as JS variables, then use them in JS code</li>
+	<li>the problem is fragmentation - different people use slightly different approaches and also duplication of code - the same thing needs to be implemented again and again in many places</li>
+	<li>it is not clear why one would choose CDEJResources.properties over CDEJBuildSettings.properties or the other way around</li>
+	<li>example on TI_MAIN using CDEJResources: curam.util.client.jsp.JspUtil class, outputInspectorLayerData() method, accessing the "inspector.layers.disabled" property</li>
+	<li>example on TI_MAIN using CDEJBuildSettings: curam.util.client.jsp.JspUtil class, outputJSModulePaths() method, accessing the "curam.custom.module.paths" property</li>
+	<li>example on TI_MAIN using application property: curam.util.client.tabApplicationConfigUtils class, isGuardAgainstLeavingSet() method, accessing the "curam.external.app.guard.against.leaving" property</li>
+</ul>
+
+<h2 dir="ltr" id="ii4">Configuration - New Apporach</h2>
+
+<ul dir="ltr">
+	<li>you can set options dynamically and globally via app properties</li>
+	<li>accessed in a unified way in webtier via JspUtil, using CuramConfigurationUtil.getConfiguration() to access values.
+	<ul>
+		<li>When adding new value you sill have to update JspUtil to output it to HTML</li>
+	</ul>
+	</li>
+	<li>then use curam/util/LocalConfig API to access from JavaScript</li>
+	<li>ability to override options via browser local storage in order to allow per user setup - useful in production to debug on single machine
+	<ul>
+		<li>need to be careful about security, not allow the user to enable/disable something they shouldn't be able to control</li>
+		<li>we should build in sanitization/escaping to avoid injection attacks</li>
+		<li>need means for admin to override/ignore and/or wipe user provided values</li>
+	</ul>
+	</li>
+	<li>example usage in curam/debug module and JspUtil</li>
+	<li>also need better interface to setting the local storage values (special page only available for debugging)</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

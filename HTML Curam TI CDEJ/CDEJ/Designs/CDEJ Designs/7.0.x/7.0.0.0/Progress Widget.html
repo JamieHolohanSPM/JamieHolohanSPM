@@ -1,0 +1,510 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Progress Widget</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Progress Widget";
+    pageId="urn:lsid:ibm.com:td:ab8c6728-e525-46c5-8bfa-59f99c553fe1";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Progress Widget</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;"><u><strong><span style="font-size: 18px;">Background</span></strong></u></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">The goal of the Progress Widget is to inform the user that an action that is happening in the server causing the screen that is current being displayed to be blocked, preventing any kind of user interaction.</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;"><u><strong><span style="font-size: 18px;">Problem Description</span></strong></u></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">User receives no visual feedback they have completed a UI action successfully and are awaiting its completion. In most cases a blank screen is displayed as the request is being processed. The user is left unsure if they somehow clicked the wrong link, caused an error or if they need to refresh/close the page.</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;"><u><strong><span style="font-size: 18px;">Requirements</span></strong></u></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;"><strong>Design Requirements</strong></p>
+
+<ul dir="ltr">
+	<li style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif; line-height: normal;">Requirement 1 -&gt; Discuss and define the default background color to be used for the overlay when the application is loading content / busy.
+	<ul>
+		<li style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif; line-height: normal;">White was selected as the default color.</li>
+	</ul>
+	</li>
+	<li style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif; line-height: normal;">Requirement 2 -&gt; Discuss and define a default spinner image (gif) to be used.
+	<ul>
+		<li style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif; line-height: normal;">The IBM Northstar Loading Spinner was selected.</li>
+		<li style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif; line-height: normal;"><a href="https://www.ibm.com/standards/web/design/loading-spinner/">https://www.ibm.com/standards/web/design/loading-spinner/</a></li>
+	</ul>
+	</li>
+	<li style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif; line-height: normal;">Requirement 3 -&gt; Discuss and define a default threshold value for when the component will start to be displayed.
+	<ul>
+		<li style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif; line-height: normal;">2000 milliseconds (2 seconds) was selected.</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;"><strong>Functional Requirements</strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">Decided on as part of the investigation and implementation of this Progress Widget.</p>
+
+<ul dir="ltr">
+	<li style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif; line-height: normal;">Spinner shall have a turn on/off mechanism which shall enable or disable the Progress Widget across the application. The Progress Widget shall not be configurable on a page-by-page basis.
+	<ul>
+		<li style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif; line-height: normal;">Configurable under the property "curam.progress.widget.enabled" define in ApplicationConfiguration.properties.</li>
+	</ul>
+	</li>
+	<li style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif; line-height: normal;">The Progress Widget panel shall block the whole application once displayed, avoiding to the possibility of multiple spinners appearing.
+	<ul>
+		<li style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif; line-height: normal;">The overlay provided by the Dojo Standby widget will be used.</li>
+	</ul>
+	</li>
+	<li style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif; line-height: normal;">Progress Widget spinner shall be displayed within the element/frame which triggered the application to load.</li>
+	<li style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif; line-height: normal;">The Progress Widget shall have a timeout triggered when the process which caused the Progress Widget to display fails. This ensures the Progress Widget will be removed and stop blocking the application.</li>
+</ul>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;"><span style="font-size:12px;"><strong>Non Functional Requirements</strong></span></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" style="margin: 4px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; border-collapse: collapse !important;" width="671">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 118px;"><strong>NFR</strong></td>
+			<td style="padding: 4px; width: 537px;"><strong>Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Accessibility</td>
+			<td style="padding: 4px; width: 537px;">An Alt Text will be provided for accessibility purposes.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Availability &amp; Resilience</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Development Resource</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Evolution</td>
+			<td style="padding: 4px; width: 537px;">This functionality will be customizable according to what the application team want to use, if they do not specify anything in particular default values will be used.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Internationalisation</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Location</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Performance and Scalability</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Regulation</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Security</td>
+			<td style="padding: 4px; width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 118px;">Usability</td>
+			<td style="padding: 4px; width: 537px;">The Progress Widget will be developed together with the design team so we can make it more visible and intuitive to the final user.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;"><u><strong><span style="font-size: 18px;">Design (Implementation)</span></strong></u></p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; padding-top: 2px; padding-bottom: 2px; line-height: normal;">Create a new module in TI that will act as a wrapper for the actual Standby component, this module would have few overloaded methods depending on which kind of customization the application team want to do, but at the lower layer we will have default values defined for when no values come&nbsp;from the application team.</p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; padding-top: 2px; padding-bottom: 2px; line-height: normal;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; padding-top: 2px; padding-bottom: 2px; line-height: normal;">The dojo Standby widget allows the following customization's that are used in ProgressSpinner.js:&nbsp;</p>
+
+<div class="section" dir="ltr" id="constructor-params-attributes" style="box-sizing: border-box; padding: 0px; font-family: Merriweather, serif; font-size: 15px; line-height: 22.5px;">
+<table border="1" class="docutils" height="316" style="box-sizing: border-box; border: 0px none; border-collapse: collapse; margin: 20px 0px;" width="1045">
+	<tbody style="box-sizing: border-box;" valign="top">
+		<tr class="row-odd" style="box-sizing: border-box;">
+			<td style="box-sizing: border-box; padding: 0.5em 1em; border: 1px solid rgb(208, 208, 208); font-size: 14px; vertical-align: top; white-space: nowrap;">
+			<p style="margin-left: 40px;"><strong style="box-sizing: border-box;">Parameter/Variable</strong></p>
+			</td>
+			<td style="box-sizing: border-box; padding: 0.5em 1em; border: 1px solid rgb(208, 208, 208); font-size: 14px; vertical-align: top;">
+			<p style="margin-left: 40px;"><strong style="box-sizing: border-box;">Description</strong></p>
+			</td>
+		</tr>
+		<tr class="row-even" style="box-sizing: border-box;">
+			<td style="box-sizing: border-box; padding: 0.5em 1em; border: 1px solid rgb(208, 208, 208); font-size: 14px; vertical-align: top; white-space: nowrap;">
+			<p style="margin-left: 40px;">target</p>
+			</td>
+			<td style="box-sizing: border-box; padding: 0.5em 1em; border: 1px solid rgb(208, 208, 208); font-size: 14px; vertical-align: top;">
+			<p style="margin-left: 40px;">&nbsp; The target DOMNode id, DOMNode reference, or Widget ID to overlay when show() is called.</p>
+			</td>
+		</tr>
+		<tr class="row-odd" style="box-sizing: border-box;">
+			<td style="box-sizing: border-box; padding: 0.5em 1em; border: 1px solid rgb(208, 208, 208); font-size: 14px; vertical-align: top; white-space: nowrap;">
+			<p style="margin-left: 40px;">image</p>
+			</td>
+			<td style="box-sizing: border-box; padding: 0.5em 1em; border: 1px solid rgb(208, 208, 208); font-size: 14px; vertical-align: top;">
+			<p style="margin-left: 40px;">&nbsp; The URL of the image to center in the blocking div overlay</p>
+			</td>
+		</tr>
+		<tr class="row-even" style="box-sizing: border-box;">
+			<td style="box-sizing: border-box; padding: 0.5em 1em; border: 1px solid rgb(208, 208, 208); font-size: 14px; vertical-align: top; white-space: nowrap;">
+			<p style="margin-left: 40px;">imageText</p>
+			</td>
+			<td style="box-sizing: border-box; padding: 0.5em 1em; border: 1px solid rgb(208, 208, 208); font-size: 14px; vertical-align: top;">
+			<p style="margin-left: 40px;">&nbsp; The ALT tag text for the centered image.</p>
+			</td>
+		</tr>
+		<tr class="row-odd" style="box-sizing: border-box;">
+			<td style="box-sizing: border-box; padding: 0.5em 1em; border: 1px solid rgb(208, 208, 208); font-size: 14px; vertical-align: top; white-space: nowrap;">
+			<p style="margin-left: 40px;">color</p>
+			</td>
+			<td style="box-sizing: border-box; padding: 0.5em 1em; border: 1px solid rgb(208, 208, 208); font-size: 14px; vertical-align: top;">
+			<p style="margin-left: 40px;">The background color of the translucent DIV overlay&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="box-sizing: border-box; padding: 0.5em 1em; border: 1px solid rgb(208, 208, 208); font-size: 14px; vertical-align: top; white-space: nowrap; text-align: center;">text&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td style="box-sizing: border-box; padding: 0.5em 1em; border: 1px solid rgb(208, 208, 208); font-size: 14px; vertical-align: top; text-align: center;"><span style="font-family: Merriweather, serif; font-size: 13.5px; line-height: 22.5px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Text/HTML to display in the center of the overlay This is used if image center is disabled.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></td>
+		</tr>
+		<tr>
+			<td style="box-sizing: border-box; padding: 0.5em 1em; border: 1px solid rgb(208, 208, 208); font-size: 14px; vertical-align: top; white-space: nowrap; text-align: center;">SHOW_SPINNER&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td style="box-sizing: border-box; padding: 0.5em 1em; border: 1px solid rgb(208, 208, 208); font-size: 14px; vertical-align: top; text-align: center;">
+			<p>The SHOW_SPINNER variable was added to the ProgressSpinner.js to &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+
+			<p>dismiss the progress spinner on the Frequency Editor when incorrect/invalid values are entered&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<p class="section" dir="ltr" style="margin-left: 40px; box-sizing: border-box; padding: 0px; font-family: Merriweather, serif; font-size: 15px; line-height: 22.5px;">Methods which were created (ProgressSpinner.js):</p>
+
+<ul dir="ltr">
+	<li class="section" style="margin-left: 40px; box-sizing: border-box; padding: 0px; font-family: Merriweather,serif; font-size: 15px; line-height: 22.5px;">init()
+	<ul>
+		<li class="section" style="margin-left: 40px; box-sizing: border-box; padding: 0px; font-family: Merriweather,serif; font-size: 15px; line-height: 22.5px;">Initialize progress topics.</li>
+	</ul>
+	</li>
+	<li class="section" style="margin-left: 40px; box-sizing: border-box; padding: 0px; font-family: Merriweather,serif; font-size: 15px; line-height: 22.5px;">addClassAppendChild (pageSpinner)<span style="font-family: Merriweather, serif; font-size: 15px; line-height: 22.5px;">;</span>
+	<ul>
+		<li class="section" style="margin-left: 40px; box-sizing: border-box; padding: 0px; font-family: Merriweather,serif; font-size: 15px; line-height: 22.5px;">Adds the domNode that will hold the image and will have the background color to the body of the document.</li>
+	</ul>
+	</li>
+	<li class="section" style="margin-left: 40px; box-sizing: border-box; padding: 0px; font-family: Merriweather,serif; font-size: 15px; line-height: 22.5px;">_getSpinner<span style="font-family: Merriweather, serif; font-size: 15px; line-height: 22.5px;"> (</span>target<span style="font-family: Merriweather, serif; font-size: 15px; line-height: 22.5px;">);</span>
+	<ul>
+		<li class="section" style="margin-left: 40px; box-sizing: border-box; padding: 0px; font-family: Merriweather,serif; font-size: 15px; line-height: 22.5px;">&nbsp;Instantiates the Standby dojox component and populate the attributes that we need. It will also call the startup() method of the pageSpinner reference that is needed by the Standby component.</li>
+	</ul>
+	</li>
+	<li class="section" style="margin-left: 40px; box-sizing: border-box; padding: 0px; font-family: Merriweather,serif; font-size: 15px; line-height: 22.5px;">show (pageSpinner, threshold)
+	<ul>
+		<li class="section" style="margin-left: 40px; box-sizing: border-box; padding: 0px; font-family: Merriweather,serif; font-size: 15px; line-height: 22.5px;">Displays the spinner (Standby component) to the user after the Threshold amount.</li>
+	</ul>
+	</li>
+	<li class="section" style="margin-left: 40px; box-sizing: border-box; padding: 0px; font-family: Merriweather,serif; font-size: 15px; line-height: 22.5px;">dismissSpinner: function(context)
+	<ul>
+		<li class="section" style="margin-left: 40px; box-sizing: border-box; padding: 0px; font-family: Merriweather,serif; font-size: 15px; line-height: 22.5px;">Removes the spinner from the DOM hierarchy.</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;"><strong><span style="font-size: 18px;">Resilience</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;"><br />
+When using the feature with a custom Image and ImageText, a path must be informed so the application can find the image. If that path is incorrect an error icon will be displayed but the application will continue working as expected.&nbsp;A fallback mechanism for when an image path is incorrect was considered but still need to have a better understanding of the requirements so it will be developed and implemented in a different task<strong>.</strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; margin-left: 40px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;"><u><strong><span style="font-size: 18px;">Use Cases</span></strong></u></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<table border="1" dir="ltr" style="margin: 4px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; width: 638px; border-collapse: collapse !important;">
+	<tbody>
+		<tr>
+			<td style="padding: 4px;"><strong>Role/Actor</strong></td>
+			<td style="padding: 4px; width: 85px;"><strong>Description</strong></td>
+			<td style="padding: 4px; width: 181px;"><strong>Expected Behavior</strong></td>
+			<td style="padding: 4px; width: 256px;"><strong>Tested</strong></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px;">User</td>
+			<td style="padding: 4px; width: 85px;">Click a submit button (Action Control) from within the main content area</td>
+			<td style="padding: 4px; width: 181px;">The Progress Widget (spinner) should be displayed in the main content screen.</td>
+			<td style="padding: 4px; width: 256px;">See the testing scenarios below.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px;">User</td>
+			<td style="padding: 4px; width: 85px;">Click a submit button (Action Control) from within a modal</td>
+			<td style="padding: 4px; width: 181px;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">The Progress Widget (spinner) should be displayed in the modal.</span></td>
+			<td style="padding: 4px; width: 256px;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">See the testing scenarios below.</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">User</span></td>
+			<td style="padding: 4px; width: 85px;">Click a submit button (Action Control) from within a Page Action menu</td>
+			<td style="padding: 4px; width: 181px;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">The Progress Widget (spinner) should be displayed in the page.</span></td>
+			<td style="padding: 4px; width: 256px;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">See the testing scenarios below.</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">User</span></td>
+			<td style="padding: 4px; width: 85px;">Press Search button or press Enter key from within a Search page / field&nbsp;</td>
+			<td style="padding: 4px; width: 181px;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">The Progress Widget (spinner) should be displayed in the page.</span></td>
+			<td style="padding: 4px; width: 256px;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">See the testing scenarios below.</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">User</span></td>
+			<td style="padding: 4px; width: 85px;"><span class="left" style="font-size: 10pt; font-family: Arial; color: rgb(0, 0, 0);">Click Next / Finish from within a Wizard that has some kind of submit logic</span>
+			<table>
+			</table>
+			</td>
+			<td style="padding: 4px; width: 181px;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">The Progress Widget (spinner) should be displayed in the wizard.</span></td>
+			<td style="padding: 4px; width: 256px;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">See the testing scenarios below.</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px;">User</td>
+			<td style="padding: 4px; width: 85px;">Click submit and close button from an Agenda Legacy Widget</td>
+			<td style="padding: 4px; width: 181px;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">The Progress Widget (spinner) should be displayed in the Agenda Legacy Widget.</span></td>
+			<td style="padding: 4px; width: 256px;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">See the testing scenarios below.</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px;">User</td>
+			<td style="padding: 4px; width: 85px;">Click Save button from a Frequency Editor Widget</td>
+			<td style="padding: 4px; width: 181px;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">The Progress Widget (spinner) should be displayed in the modal.</span></td>
+			<td style="padding: 4px; width: 256px;"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">See the testing scenarios below.</span></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px;">User</td>
+			<td style="padding: 4px; width: 85px;">Submit / Search inside an Expandable List Row</td>
+			<td style="padding: 4px; width: 181px;">The Progress Widget (spinner) should be displayed within the row of the Expandable List.</td>
+			<td style="padding: 4px; width: 256px;">See the testing scenarios below.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px;">User</td>
+			<td style="padding: 4px; width: 85px;">Click Save / Reset button on User Preferences page</td>
+			<td style="padding: 4px; width: 181px;">The Progress Widget (spinner) should be displayed in the modal.</td>
+			<td style="padding: 4px; width: 256px;">See the testing scenarios below.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px;">User</td>
+			<td style="padding: 4px; width: 85px;">Click Save on Frequency Editor</td>
+			<td style="padding: 4px; width: 181px;">When user enters a valid values the progress spinner should be displayed in the modal and the parent page should be updated</td>
+			<td style="padding: 4px; width: 256px;">See the testing scenarios below.</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px;">User</td>
+			<td style="padding: 4px; width: 85px;">Click Save on Frequency Editor</td>
+			<td style="padding: 4px; width: 181px;">When user enters incorrect/invalid values the progress spinner should not be displayed.</td>
+			<td style="padding: 4px; width: 256px;">See the testing scenarios below</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">The Org Tree&nbsp;Legacy Widget was tested and does not enter as a Use Case as it does not contain any kind of submit logic.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;"><strong><span style="font-size: 18px;">Application Impact</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">There should be no impact to the application as the new feature won't change any kind of business logic in the application, only the look and feel.</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;"><strong><span style="font-size: 18px;">Testing</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; margin-left: 40px;"><strong>Test Scenarios</strong></li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; margin-left: 40px;">&nbsp;</p>
+
+<ul dir="ltr">
+	<li style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; margin-left: 80px;"><strong>Create New Location Structure Scenario</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; margin-left: 160px;">Log in as Admin<br />
+Click Administration Workspace -&gt; Click Organization -&gt; My Organisation<br />
+Click the Structures tab on the Nav Bar<br />
+Click Location Structures<br />
+Click New<br />
+Enter Name as Company and Save<br />
+Progress Widget should be displayed</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; margin-left: 80px;">&nbsp;</p>
+
+<ul dir="ltr">
+	<li style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; margin-left: 80px;"><strong>Create New Root Location Scenario</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; margin-left: 160px;">Log in as Admin<br />
+Click Administration Workspace -&gt; Click Organization -&gt; My Organisation<br />
+Click the Structures tab on the Nav Bar<br />
+Click Location Structures<br />
+Select one Location Structure<br />
+On the Home Page Click New Root Location<br />
+Enter Name as Curam<br />
+Enter Address<br />
+Click Save<br />
+Progress Widget should be displayed</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; margin-left: 160px;">&nbsp;</p>
+
+<ul dir="ltr">
+	<li style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; margin-left: 80px;"><strong>User Search Scenario</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; margin-left: 160px;">Log in as Admin<br />
+Click Administration Workspace -&gt; Click Users -&gt; User Search<br />
+Populate the First Name field with "A"<br />
+Press enter key<br />
+Progress Widget should be displayed<br />
+Click Search button<br />
+Progress Widget should be displayed</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; margin-left: 40px;">&nbsp;</p>
+
+<ul dir="ltr" style="margin-left: 40px;">
+	<li style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; margin-left: 40px;"><strong>New User Scenario</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; margin-left: 160px;">Log in as Admin<br />
+Click Administration Workspace -&gt; Click Users -&gt; New User<br />
+Populate Mandatory Fields<br />
+Click Save<br />
+Progress Widget should be displayed</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; margin-left: 40px;">&nbsp;</p>
+
+<ul dir="ltr" style="margin-left: 40px;">
+	<li style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; margin-left: 40px;"><strong>Add a Deduction to the Code Table Scenario</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; margin-left: 160px;">Log in as sysadmin<br />
+Select Application Data from the Shortcuts menu<br />
+Select codetables from the shortcuts menu<br />
+Search For "Deductionname", and Click View<br />
+Click New Item from the actions menu<br />
+Enter the Following Data<br />
+Click Save<br />
+Progress Widget should be displayed<br />
+Enter the Following Data<br />
+Click Save<br />
+Progress Widget should be displayed<br />
+Click Code Tables Tab<br />
+Click Publish&nbsp;<br />
+Progress Widget should be displayed</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<ul dir="ltr" style="margin-left: 40px;">
+	<li style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; margin-left: 40px;"><strong>Frequency Editor Scenario</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; margin-left: 40px;"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Launch the TabTest Application and Login as superuser</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; margin-left: 40px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Navigate to ClientMockApp -&gt;Flow Control Tests -&gt; Modals -&gt; Modal Tests</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Click on "Test opening and using the Frequency Editor from another modal" link</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; On the frequencies in the page that pops up, Enter incorrect values e.g. 'aa' as value for label Daily-&gt; Every aa days OR</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Leave the input fields empty for the selected pattern( Daily, Weekly, Monthly, Bi-monthly and Yearly).</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Click Save -&gt; Click 'OK' on the web dialog that pops up</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Progress Spinner should not be appear and the frequency editor model should not be closed</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Note: Whenever user enters an invalid values, the validation error should be displayed after clicking 'OK' the Progress Spinner should not be displayed</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; When user enters a valid values and click on the 'Save' button, the Progress Spinner should be displayed as normal</p>
+
+<p dir="ltr">&nbsp;
+<p>&nbsp;
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;"><strong><span style="font-size: 18px;">Documentation/How To Use Feature</span></strong></p>
+</p>
+</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">This enhancement will be used every time a submit button is clicked, the feature has 2 working modes, first one will display a spinner image with some background-color overlaying the application screen and the second one&nbsp;displays a defined&nbsp;text with the overlay layer so that the user can understand that some processing is happening in background of the application and that they need to wait it to complete. The advantages of using this feature is that the user will no longer think that the application is just hanging there and instead they will realize that something&nbsp;is really happening and that they need to wait until that processing is done. The feature is highly customizable, that means that the application team can define the background-color, image, text to be used.</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;"><strong><span style="font-size: 18px;">Check List</span></strong></p>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">&nbsp;</p>
+
+<table border="1" dir="ltr" style="margin: 4px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; width: 658px; border-collapse: collapse !important;">
+	<tbody>
+		<tr>
+			<td style="padding: 4px; width: 166px;"><strong>Check List Item</strong></td>
+			<td style="padding: 4px; width: 314px;"><strong>Notes</strong></td>
+			<td style="padding: 4px; width: 157px;"><strong>Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 166px;">Customization</td>
+			<td style="padding: 4px; width: 314px;">The module needs to be customizable for the Application Team</td>
+			<td style="padding: 4px; width: 157px;">Yes</td>
+		</tr>
+		<tr>
+			<td style="padding: 4px; width: 166px;">Standard Behaviour</td>
+			<td style="padding: 4px; width: 314px;">The module must have default values defined for each of its fields that are customizable.</td>
+			<td style="padding: 4px; width: 157px;">Yes</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

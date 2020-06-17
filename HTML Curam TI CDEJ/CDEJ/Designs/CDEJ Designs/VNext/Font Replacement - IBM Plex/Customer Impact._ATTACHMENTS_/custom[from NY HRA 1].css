@@ -1,0 +1,1377 @@
+/**/
+body#ANYCProviderPortalJSP {
+	font-family: Arial;
+}
+
+body#ANYCProviderPortalJSP #ProviderPortalLandingPage img.HRALogoCss {
+	width: 110px;
+	height: 110px;
+}
+
+body#ANYCProviderPortalJSP #ProviderPortalLandingPage #col1 {
+	text-align: center;
+}
+
+body#ANYCProviderPortalJSP #ProviderPortalLandingPage #col2 {
+	padding-right: 5%;
+}
+
+body#ANYCProviderPortalJSP #ProviderPortalLandingPage #LoginImage {
+	background-image: url(../../Images/LogIn.png);
+	height: 65px;
+	background-size: 100% auto;
+	background-repeat: no-repeat;
+}
+
+body#ANYCProviderPortalJSP #ProviderPortalLandingPage td#col3 {
+	vertical-align: top;
+	padding-top: 10px;
+}
+
+body#ANYCProviderPortalJSP #ProviderPortalLandingPage td#col3 table div.loginDiv
+	{
+	background-image: url(../../Images/LogIn.png);
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+	height: 70px;
+	text-align: left;
+	color: white;
+	font-weight: bold;
+	width: 350px;
+}
+
+body#ANYCProviderPortalJSP #ProviderPortalLandingPage td#col3 table div.loginDiv:hover
+	{
+	background-image: url(../../Images/LogInHover.png);
+}
+
+body#ANYCProviderPortalJSP #ProviderPortalLandingPage td#col3 table .innerTextCss
+	{
+	padding-top: 7%;
+	padding-left: 7%;
+}
+
+body#ANYCProviderPortalJSP #ProviderPortalLandingPage td#col3 table div.createAccountDiv
+	{
+	background-image: url(../../Images/CreateAccount.png);
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+	height: 70px;
+	text-align: left;
+	color: #FFFFFF;
+	font-weight: bold;
+	width: 350px;
+}
+
+body#ANYCProviderPortalJSP #ProviderPortalLandingPage td#col3 table div.createAccountDiv:hover
+	{
+	background-image: url(../../Images/CreateAccountHover.png);
+}
+
+body#ANYCProviderPortalJSP #ProviderPortalLandingPage td#col3 table {
+	width: 100%;
+}
+
+body#ANYCProviderPortalJSP #ProviderPortalLandingPage td#col3 td.createAccountTDCss
+	{
+	padding-top: 10px;
+}
+
+body#ANYCProviderPortalJSP #ProviderPortalLandingPage td#col3 a {
+	text-decoration: none;
+}
+
+body#ANYCProviderPortalJSP #ProviderPortalLandingPage p#applicationName
+	{
+	font-size: 50px;
+	font-weight: bold;
+	margin: 0px;
+}
+
+body#ANYCProviderPortalJSP #ProviderPortalLandingPage p#subTitle {
+	font-size: 25px;
+	font-weight: bold;
+	margin: 0px;
+	margin-top: -5px;
+}
+
+body#ANYCProviderPortalJSP #ProviderPortalLandingPage div#LoginImage p span
+	{
+	font-size: 20px;
+	padding: 20px;
+	font-weight: bold;
+	color: white;
+}
+
+body#ANYCProviderPortalJSP #ProviderPortalLandingPage div#CreateAccountImage p span
+	{
+	padding: 20px;
+	font-size: 20px;
+	font-weight: bold;
+	color: black;
+}
+
+body#ANYCProviderPortalJSP #ProviderPortalLandingPage #textContentBlue {
+	font-weight: normal;
+	font-size: 24px;
+	color: #AED6F1;
+	margin: -12px 0 0;
+}
+
+body#ANYCProviderPortalJSP #ProviderPortalLandingPage p#description {
+	color: black; //
+	padding-right: 12%;
+}
+
+body#ANYCProviderPortalJSP #ProviderPortalLandingPage #textContentBold4
+	{
+	font-size: 50px;
+	font-weight: bold;
+	margin: 0;
+}
+
+body#ANYCProviderPortalJSP #ProviderPortalLandingPage {
+	padding-top: 50px;
+}
+
+body#ANYCProviderPortalJSP #idxHeaderPrimary {
+	background-color: #333440 !important;
+	filter: none !important;
+	height: 48px;
+	color: #ffffff;
+	text-align: center;
+}
+
+body#ANYCProviderPortalJSP #idxHeaderPrimary p
+	{
+	margin-top: -10px;
+    padding-top: 15px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+body#ANYCProvider_createAccount #idxHeaderPrimary p
+	{
+    padding-top: 15px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+
+/*body#ANYCProviderPortalJSP #idxHeaderOrangeLip {
+	background-color: #FDB721;
+	display: block;
+	height: 9px;
+}*/
+body#ANYCProviderPortalJSP div.HRACards table.Cardtable1 td.iconAlignment img.imageCss,div.HRACards table.Cardtable3 td.iconAlignment img.imageCss
+	{
+	width: 50px;
+    height: 50px;
+	min-width: 39px;
+}
+
+body#ANYCProviderPortalJSP div.HRACards {
+	padding-top: 2%;
+}
+
+body#ANYCProviderPortalJSP div.HRACards table.Cardtable1 tr:first-child h1,div.HRACards table.Cardtable3  tr:first-child h1
+	{
+	margin: 4px;
+}
+
+body#ANYCProviderPortalJSP div.HRACards table.Cardtable1,div.HRACards table.Cardtable2,div.HRACards table.Cardtable3
+	{
+	border: 1px solid #b7b7b7;
+	border-radius: 10px;
+	border-collapse: initial;
+	padding: 1%;
+	margin: 2%;
+	height: 230px;
+	overflow-y: hidden;
+}
+
+body#ANYCProviderPortalJSP div.HRACards table.Cardtable1 td.linkCss,div.HRACards table.Cardtable3 td.linkCss
+	{
+	text-align: center;
+	font-weight: bold;
+}
+
+body#ANYCProviderPortalJSP div.HRACards table.Cardtable2 a {
+	font-weight: bold;
+}
+
+body#ANYCProviderPortalJSP div.HRACards table.Cardtable2 img.iPhoneimageCss
+	{
+	width: 60%; 
+	padding: 1px;
+	padding-bottom: 5%;
+	height: 70%;
+}
+
+body#ANYCProviderPortalJSP div.HRACards table.Cardtable2 img.playImageCss,div.HRACards table.Cardtable2 img.appleImageCss
+	{
+	width: auto;
+	height: 45px;
+	padding-top: 3%;
+}
+
+body#ANYCProviderPortalJSP div.HRACards table.Cardtable2 td.cardImageAlignment
+	{
+	text-align: center;
+	vertical-align: top;
+}
+/* Commented out for defect #7847	Provider Portal - Landing Page cosmetic issues
+body#ANYCProviderPortalJSP div.HRACards table.Cardtable2 td.cardTable2TextAlignment{
+	vertical-align: top;
+}*/
+body#ANYCProviderPortalJSP div.HRACards table.Cardtable2 div a {
+	font-weight: bold;
+}
+
+body#ANYCProviderPortalJSP div.HRACards table.Cardtable1 td.iconAlignment,div.HRACards table.Cardtable3 td.iconAlignment
+	{
+	vertical-align: center;
+}
+
+body#ANYCProvider_createAccount table {
+	border-collapse: collapse;
+}
+
+body#ANYCProvider_createAccount td {
+	text-align: left;
+	font-family: Arial;
+	vertical-align: middle;
+	font-size: 14px;
+}
+
+body#ANYCProvider_createAccount #tableThreeRoot tr {
+	border-bottom-style: dashed;
+	border-bottom-width: 2px;
+	border-color: silver;
+}
+
+body#ANYCProvider_createAccount #LoginImage {
+	background-image: url(./Login.png);
+	height: 56px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	padding: 1px;
+}
+
+body#ANYCProvider_createAccount #CreateAccountImage {
+	background-image: url(../../Images/CreateAccount_blue.png);
+	height: 65px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	padding: 1px;
+	width: 295px;
+}
+
+body#ANYCProvider_createAccount p#applicationName {
+	font-size: 60px;
+	font-weight: bold;
+	margin: 0px;
+}
+
+body#ANYCProvider_createAccount p#subTitle {
+	font-size: 35px;
+	font-weight: bold;
+	margin: 0px;
+	margin-top: -15px;
+}
+
+body#ANYCProvider_createAccount div#LoginImage p span {
+	font-size: 20px;
+	padding: 20px;
+	font-weight: bold;
+	color: white;
+}
+
+body#ANYCProvider_createAccount #CreateAccountImage:hover {
+	background-image: url(../../Images/CreateAccountHover_blue.png);
+	background-repeat: no-repeat;
+}
+
+body#ANYCProvider_createAccount div#CreateAccountImage p span {
+	padding-left: 30px;
+	font-size: 18px;
+	font-weight: bold;
+	color: white;
+}
+
+body#ANYCProvider_createAccount #textContentBlue {
+	font-weight: bold;
+	font-size: 20px;
+	color: #AED6F1;
+	font-family: monospace;
+	margin: -15px 0 0;
+}
+
+body#ANYCProvider_createAccount p#description {
+	color: #5D6D7E;
+}
+
+body#ANYCProvider_createAccount div#tableThreeRoot table td.col2 {
+	padding-right: 10px;
+}
+
+body#ANYCProvider_createAccount .textDecorationNone {
+	text-decoration: none;
+}
+
+body#ANYCProvider_createAccount .col3 span+span {
+	color: red;
+	font-weight: bold;
+}
+
+body#ANYCProvider_createAccount .textBold {
+	font-weight: bold;
+	font-size: 16px;
+}
+
+body#ANYCProvider_createAccount p {
+	margin: 0;
+}
+
+body#ANYCProvider_createAccount {
+	margin: 0;
+}
+
+body#ANYCProvider_createAccount #textContentBold2 {
+	font-size: 18px;
+	margin: 0;
+	padding-bottom: 5px;
+	font-family: sans-serif;
+	text-align: left;
+	border-bottom-style: solid;
+	border-bottom-width: 2px;
+	border-color: silver;
+}
+
+body#ANYCProvider_createAccount #textContentBold3 {
+	font-size: 20px;
+	margin: 0;
+	padding-left: 10px;
+	padding-top: 5px;
+	font-family: sans-serif;
+	text-align: left;
+}
+
+body#ANYCProvider_createAccount #tabletwoRoot {
+	padding-top: 10px;
+	padding-left: 10px;
+}
+
+.col3 {
+	margin: 0;
+}
+
+body#ANYCProvider_createAccount #idxHeaderPrimary {
+	background-color: #333440 !important;
+	filter: none !important;
+	height: 48px;
+	color: #ffffff;
+	text-align: center
+}
+
+/*body#ANYCProvider_createAccount #idxHeaderOrangeLip {
+	background-color: #FDB721;
+	display: block;
+	height: 9px;
+}*/
+body#ANYCProvider_createAccount tr#noBottomBorder {
+	border-bottom-style: none;
+}
+
+body#ANYCProvider_createAccount #tableThreeRoot tr {
+	height: 80px;
+}
+
+body#ANYCProvider_createAccount .footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	color: white;
+}
+
+body#ANYCProvider_createAccount .footer a {
+	color: white !important
+}
+
+body#ANYCProvider_createAccount .footer p {
+	margin: 0;
+}
+
+/*body#ANYCProvider_createAccount div#idxHeaderPrimary img.logo1 {
+	height: 26px;
+	width: 98px;
+	padding: 15px 45px;
+}*/
+body#ANYCProvider_createAccount div#tableOneRoot table div img.personImgCss
+	{
+	width: 52px;
+	height: 46px;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+body#ANYCProvider_createAccount div#idxHeaderOrangeLip {
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+body#ANYCProvider_createAccount td#textContentBold4 {
+	font-size: 30px;
+	font-weight: bold;
+	margin: 0;
+	padding-left: 10px;
+	font-family: 'HelvNeueBoldforIBM';
+}
+
+body#ANYCProvider_createAccount div#tabletwoRoot table.tabletwoRootCss {
+	width: 95%;
+}
+
+body#ANYCProvider_createAccount div#tableThreeRoot table td.col2 div#CreateAccountImage p.textAlignment
+	{
+	margin-top: 20px;
+}
+
+body#ANYCProvider_createAccount div.footer div.app-footer-left {
+	float: left;
+	width: 65%;
+	margin-top: 15px;
+}
+
+body#ANYCProvider_createAccount div.footer div.app-footer-right {
+	float: right;
+	width: 35%;
+	margin-top: 12px;
+}
+
+/* ANYCProvider_unlinkUserHome.uim */
+body#Curam_ANYCProvider_unlinkUserHome div.ImageTitle table td span.container
+	{
+	font-family: 'Arial Bold', 'Arial';
+	font-weight: 700;
+	font-style: normal;
+	font-size: 24px;
+}
+
+body#Curam_ANYCProvider_unlinkUserHome div.ImageTitle img {
+	width: 52px;
+	height: 46px;
+}
+
+body#Curam_ANYCProvider_unlinkUserHome td.redText {
+	font-family: 'Arial Bold', 'Arial';
+	font-weight: 700;
+	color: #FF0000 !important;
+}
+
+body#Curam_ANYCProvider_unlinkUserHome div.clusterAlignmentCss table tr:nth-child(1) td.top:nth-child(n+2)
+	{
+	border-bottom: 2px dashed #dadada;
+}
+
+body#Curam_ANYCProvider_unlinkUserHome div.clusterAlignmentCss table tr:nth-child(2) td.top:nth-child(n+2)
+	{
+	border-bottom: 2px dashed #dadada;
+	padding-top: 10px;
+	padding-bottom: 14px;
+}
+
+body#Curam_ANYCProvider_unlinkUserHome div.clusterAlignmentCss table tr:nth-child(3) td.top:nth-child(n+2)
+	{
+	padding-top: 15px;
+}
+
+body#Curam_ANYCProvider_unlinkUserHome div.clusterAlignmentCss tr td {
+	vertical-align: middle;
+	padding: 0px;
+	margin: 0px;
+	font-family: 'Arial';
+	font-style: normal;
+}
+
+body#Curam_ANYCProvider_unlinkUserHome div.clusterAlignmentCss {
+	margin-left: -70px;
+	margin-top: -40px;
+}
+/*
+body#Curam_ANYCProvider_unlinkUserHome div.clusterAlignmentCss tr {
+	height: 30px;	
+}
+*/
+body#Curam_ANYCProvider_unlinkUserHome div.cluster.cluster-with-no-header td.top.first-col div.cluster
+	{
+	padding: 0px !important;
+	margin: 0px !important;
+}
+/**
+body#Curam_ANYCProvider_unlinkUserHome div.cluster.cluster-with-no-header td.field.last-cell{
+	line-height: 5;
+}
+*/
+body#Curam_ANYCProvider_unlinkUserHome div.clusterAlignmentCss table colgroup col:first-child
+	{
+	width: 5%;
+}
+
+body#Curam_ANYCProvider_unlinkUserHome div.clusterAlignmentCss table colgroup col:nth-child(2)
+	{
+	width: 5%;
+}
+
+body#Curam_ANYCProvider_unlinkUserHome div.clusterAlignmentCss table colgroup col:nth-child(3)
+	{
+	width: 10%;
+}
+
+body#Curam_ANYCProvider_unlinkUserHome div.clusterAlignmentCss tr td.boldText
+	{
+	font-weight: bold;
+}
+body#Curam_ANYCProvider_unlinkUserHome div.clusterAlignmentCss tr:first-child+tr td.redText
+	{
+	color: #FF0000 !important;
+}
+
+body#Curam_ANYCProvider_unlinkUserHome td.greenTickCss img {
+	width: 91px;
+	height: 81px;
+}
+
+body#Curam_ANYCProvider_unlinkUserHome .underLineText td {
+	font-family: 'Arial Bold', 'Arial';
+	font-weight: 700;
+	font-style: normal;
+	font-size: 16px;
+}
+
+body#Curam_ANYCProvider_unlinkUserHome .underLineTextCompleted td {
+	font-family: 'Arial Bold', 'Arial';
+	font-weight: 700;
+	font-style: normal;
+	font-size: 16px;
+	color: gray;
+}
+
+body#Curam_ANYCProvider_unlinkUserHome div.SectionTitle div h3 span.collapse-title
+	{
+	font-family: 'Arial Bold', 'Arial';
+	font-weight: 700;
+	font-style: normal;
+	font-size: 18px;
+	color: #000000;
+}
+
+body#Curam_ANYCProvider_unlinkUserHome div.SectionTitle div h3 {
+	padding: 0px;
+	margin: 0px;
+}
+
+body#Curam_ANYCProvider_unlinkUserHome div.SectionTitle div p.description
+	{
+	padding: 0px;
+	margin: 0px;
+	font-family: 'Arial';
+	font-weight: 400;
+	font-style: normal;
+	font-size: 14px;
+}
+
+body#Curam_ANYCProvider_unlinkUserHome .tdTitle td {
+	font-family: 'Arial Bold', 'Arial';
+	font-weight: 700;
+	font-style: normal;
+	font-size: 16px;
+}
+
+body#Curam_ANYCProvider_unlinkUserHome .tdTitleCompleted td {
+	font-family: 'Arial Bold', 'Arial';
+	font-weight: 700;
+	font-style: normal;
+	font-size: 16px;
+	color: gray;
+}
+
+body#Curam_ANYCProvider_unlinkUserHome div.clusterAlignmentCss table td.top div.action-set
+	{
+	padding-left: 0px;
+	margin-left: 0px;
+}
+
+body#Curam_ANYCProvider_unlinkUserHome div#content .action-set a.ac {
+	background-color: #1B8BD1;
+	border-radius: 5px;
+}
+
+body#Curam_ANYCProvider_unlinkUserHome div#content .action-set.blue-action-set .middle
+	{
+	color: white !important;
+	/*	 font-size: 28px;  */
+}
+
+
+
+body.CPMEXPROV.curam.soria #app-banner .program-name-div .program-logo-div
+	{
+	width: 57px;
+}
+
+body.CPMEXPROV.curam.soria #app-banner .program-name-div .program-logo-div img
+	{
+	width: 57px;
+}
+
+div#PTANYC01_body span.list-info {
+	top: 0 !important;
+}
+
+div#PTANYC01_body div.list-info-header {
+	height: auto !important;
+}
+
+table#PTANYC01_table_table tbody {
+	color: #464646;
+}
+
+div#PTANYC02_body span.list-info {
+	top: 0 !important;
+}
+
+div#PTANYC02_body div.list-info-header {
+	height: auto !important;
+}
+
+table#PTANYC02_table_table tbody {
+	color: #464646;
+}
+
+div#PTANYC05_body span.list-info {
+	top: 0 !important;
+}
+
+div#PTANYC05_body div.list-info-header {
+	height: auto !important;
+}
+
+table#PTANYC05_table_table tbody {
+	color: #464646;
+}
+
+div#PTANYC08_body span.list-info {
+	top: 0 !important;
+}
+
+div#PTANYC08_body div.list-info-header {
+	height: auto !important;
+}
+
+table#PTANYC08_table_table tbody {
+	color: #464646;
+}
+
+#Curam_ANYCProviderWizard_selectOrganizationPage2 div.Phone-Number-Provider div table colgroup col
+	{
+	width: 30% !important;
+}
+
+#Curam_ANYCProviderWizard_selectOrganizationPage2 div.Phone-Number-Provider div table colgroup col+col
+	{
+	width: 80% !important;
+}
+
+#Curam_ANYCProviderWizard_selectOrganizationPage2 div.Phone-Number-Provider_Text
+	{
+	background-image: url('../../Images/required3.png');
+	background-position: right top;
+	background-repeat: no-repeat;
+	padding-left: 6%;
+}
+
+#Curam_ANYCProviderWizard_selectOrganizationPage2 div.Phone-Number-Provider_Text div table tr td
+	{
+	font-family: HelvNeueMediumforIBM, Helvetica, Arial;
+	font-size: 14px;
+	color: #464646;
+}
+
+#Curam_ANYCProviderWizard_selectOrganizationPage2 div.Phone-Number-Provider_Edit div table colgroup col
+	{
+	width: 10% !important;
+}
+
+#Curam_ANYCProviderWizard_selectOrganizationPage2 div.Phone-Number-Provider_Edit div table colgroup col+col
+	{
+	width: 28% !important;
+}
+
+#Curam_ANYCProviderWizard_selectOrganizationPage2 div.Phone-Number-Provider_Edit div table colgroup col+col+col
+	{
+	width: 20% !important;
+}
+
+#Curam_ANYCProviderWizard_selectOrganizationPage2 div.Phone-Number-Provider_Edit div table colgroup col:nth-child(4)
+	{
+	width: 10% !important;
+}
+
+#Curam_ANYCProviderWizard_selectOrganizationPage2 div.Phone-Number-Provider_Edit div table colgroup col:nth-child(5)
+	{
+	width: 20% !important;
+}
+
+#Curam_ANYCProviderWizard_selectOrganizationPage2 div.Phone-Number-Provider_Edit div table colgroup col:nth-child(6)
+	{
+	width: 25% !important;
+}
+
+#Curam_ANYCProviderWizard_selectOrganizationPage2 div.Phone-Number-Provider_Edit div.edit-phone table colgroup col
+	{
+	width: 19% !important;
+}
+
+#Curam_ANYCProviderWizard_selectOrganizationPage2 div.Phone-Number-Provider_Edit div.edit-phone table colgroup col+col
+	{
+	width: 65% !important;
+}
+
+#Curam_ANYCProviderWizard_selectOrganizationPage2 div.Phone-Number-Provider_Edit div.edit-phoneExt table colgroup col
+	{
+	width: 41% !important;
+}
+
+#Curam_ANYCProviderWizard_selectOrganizationPage2 div.Phone-Number-Provider_Edit div.edit-phoneExt table colgroup col+col
+	{
+	width: 70% !important;
+}
+
+#Curam_ANYCProviderWizard_selectOrganizationPage2 div.Phone-Number-Provider_Edit div.edit-phoneType table colgroup col
+	{
+	width: 39% !important;
+}
+
+#Curam_ANYCProviderWizard_selectOrganizationPage2 div.Phone-Number-Provider_Edit div.edit-phoneType table colgroup col+col
+	{
+	width: 80% !important;
+}
+
+#Curam_ANYCProviderWizard_selectOrganizationPage2 div.Disclaimer-Provider
+	{
+	width: 73% !important;
+	padding-left: 13%;
+}
+
+#Curam_ANYCProviderWizard_selectOrganizationPage2 div.Disclaimer-Provider table colgroup col
+	{
+	width: 7% !important;
+}
+
+#Curam_ANYCProviderWizard_selectOrganizationPage2 div.Disclaimer-Provider table colgroup col+col
+	{
+	width: 93% !important;
+}
+
+#Curam_ANYCProviderWizard_selectOrganizationPage2 div.Disclaimer-Provider table td:first-child+td
+	{
+	background-image: url('../../Images/required3.png');
+	background-position: right top;
+	background-repeat: no-repeat;
+	float: left;
+}
+
+#Curam_ANYCProviderAdmin_viewUserHomeTabDetails div.content-panel-detail.person-details-panel-no-links
+	{
+	left: 130px;
+	width: calc(100% -               121px);
+	background: none;
+	top: 20px;
+	bottom: 0px !important;
+}
+
+#Curam_ANYCProviderAdmin_viewUserHomeTabDetails div.content-contacts {
+	padding: 0;
+	position: relative;
+	top: 5px;
+	display: block;
+}
+
+#Curam_ANYCProviderAdmin_viewUserHomeTabDetails div.content-contacts div
+	{
+	height: 21px;
+	float: none;
+	padding-top: 5px;
+}
+
+#Curam_ANYCProviderAdmin_viewUserHomeTabDetails div.content-address {
+	float: none;
+}
+
+#Curam_ANYCProviderAdmin_viewUserHomeTabDetails div.content-contacts .incidents a
+	{
+	background: url("../../Images/icon_incidents.png") left center no-repeat;
+	padding-left: 30px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+#Curam_ANYCProviderAdmin_viewUserHomeTabDetails div.content-contacts .IncidentsNotFound
+	{
+	background: url("../../Images/icon_incidents.png") left center no-repeat;
+	font-family: HelvNeueRomanforIBM, Helvetica, Arial;
+	font-size: 14px;
+	line-height: 20px;
+	color: #464646;
+	padding-left: 30px;
+}
+
+#Curam_ANYCProviderAdmin_viewUserHomeTabDetails div.content-contacts .emailNotFound
+	{
+	background: url("../../Images/icon_email.png") left center no-repeat;
+	font-family: HelvNeueRomanforIBM, Helvetica, Arial;
+	font-size: 14px;
+	line-height: 20px;
+	color: #464646;
+	padding-left: 30px;
+}
+
+#Curam_ANYCProviderAdmin_viewUserHomeTabDetails div.image-panel-content
+	{
+	width: 100px !important;
+	margin-top: 2% !important;
+	border-radius: 50% !important;;
+}
+
+#Curam_ANYCProviderAdmin_viewUserHomeTabDetails div.participant-image img
+	{
+	padding-top: 20% !important;
+	padding-left: 13% !important;
+	height: 60% !important;
+	width: 60% !important;
+	border-radius: 0 !important;
+}
+
+div#PTANYC06_body div.list-info-header {
+	height: auto !important;
+}
+
+div#PTANYC06_body span.list-info {
+	top: 0 !important;
+}
+
+table#PTANYC06_table_table tbody {
+	color: #464646;
+}
+
+#Curam_ANYCProvider_listAllClientsForMyOrganization .page-header .page-title-bar .title h2,#Curam_ANYCProvider_listRecertificationDue .page-header .page-title-bar .title h2,#Curam_ANYCProvider_listSNAPPeriodicReportsDue .page-header .page-title-bar .title h2,#Curam_ANYCProvider_listRecentSubmissionForOrganizationClients .page-header .page-title-bar .title h2,#Curam_ANYCProvider_listRecentNotificationsForOrganizationClients .page-header .page-title-bar .title h2,#Curam_ANYCProvider_listBudgetLettersAvailableForOrganizationClients .page-header .page-title-bar .title h2,#Curam_ANYCProvider_listDocumentReturnRequiredForOrganizationClients .page-header .page-title-bar .title h2,#Curam_ANYCProvider_listENoticesAvailableForOrganizationClients .page-header .page-title-bar .title h2
+	{
+	font-size: 21px;
+	line-height: 30px !important;
+	font-family: HelvNeueLightforIBM, Helvetica, Arial;
+	color: #454646;
+	display: inline;
+	font-weight: normal;
+}
+
+#Curam_ANYCProviderWizard_selectOrganizationPage1 div.SearchDescription table tbody tr td
+	{
+	background-color: rgb(243, 250, 255);
+}
+
+div.pagination-gui-container {
+	padding-top: 50px;
+}
+
+.star-client img {
+	cursor: pointer !important;
+	padding-left: 8px;
+}
+
+body#Curam_PME_applicationViewError .page-title-bar {
+	display: none;
+}
+
+#Curam_ANYCProvider_clientsCalendar table#monthView tr td a span {
+	white-space: inherit;
+}
+#Curam_ANYCProvider_clientsCalendar div.calendar-menu li.date a {
+	min-width: 125px;
+}
+
+#Curam_ExternalProviderCustomHome div.pod-container-actions a.refresh {
+	transform: rotate3d(-1, -1, 0, 180deg);
+}
+
+#Curam_ANYC_listMyCasesForProviderClient table tr td div.cluster.cluster-with-no-header.label-field
+	{
+	margin-right: 0px !important;
+}
+
+#Curam_ANYC_listMyCasesForProviderClient div.TitleCluster table  td img
+	{
+	float: left !important;
+}
+
+#Curam_ANYC_viewCaseDetailsForProviderClient div.MyCases-Header table tr td.top div.cluster.cluster-with-no-header.label-field.Title-cluster
+	{
+	margin-left: 15px !important;
+}
+
+#Curam_ANYC_listAllENoticesForProviderClient div.mandatory-icon-help {
+	display: none;
+}
+
+/*fix for  defect 8226 Start*/
+#Curam_ANYC_listMyCasesForProviderClient div#actionDetail div table.action-title tr td:first-child
+	{
+	vertical-align: middle !important;
+}
+
+#Curam_ANYC_viewCaseDetailsForProviderClient div.more-info-cluster span,#Curam_ANYC_listMyCasesForProviderClient div.more-info-cluster span,#Curam_ANYC_listMyDocumentsForProviderClient div.more-info-cluster span,#Curam_ANYC_listAllENoticesForProviderClient div.more-info-cluster span,#Curam_ANYC_listAllRecentDocumentsForProviderClient div.more-info-cluster span,#Curam_ANYC_viewCaseDetailsForProviderClient div.more-info-cluster span,#Curam_ANYC_editContactInfoForProviderClient div.more-info-cluster span,#Curam_ANYC_viewMyPaymentsForProviderClient div.more-info-cluster span
+	{
+	vertical-align: top !important;
+	line-height: 28px !important;
+}
+
+#Curam_ANYC_viewCaseDetailsForProviderClient table.myprogram-title td:first-child
+	{
+	vertical-align: middle !important;
+}
+
+#Curam_ANYC_viewCaseDetailsForProviderClient table#caseHeader-infoContainer tr td:first-child+td table
+	{
+	margin: 3px !important;
+}
+
+div.page-description {
+	display: none !important;
+}
+
+#Curam_ANYC_viewMyPaymentsForProviderClient div#content {
+	margin: 10px !important;
+	height: 336px !important;
+}
+
+#Curam_ANYC_viewUpcomingAppointmentsForProviderClient table.app-document-titleCluster,#Curam_ANYC_viewRequiredDocumentsForProviderClient table.app-document-titleCluster
+	{
+	margin-top: 0px !important;
+}
+
+
+#Curam_ANYC_viewUpcomingAppointmentsForProviderClient div#modal-actions-panel,#Curam_ANYC_viewRequiredDocumentsForProviderClient div#modal-actions-panel
+	{
+	border: none !important;
+	height: 58px !important;
+}
+
+#Curam_ANYC_viewMyPaymentsForProviderClient div#actionDetail table.action-title colgroup col:first-child
+	{
+	width: 85% !important;
+}
+
+#Curam_ANYC_viewMyPaymentsForProviderClient div.more-info-cluster p span
+	{
+	padding-right: 5px !important;
+}
+
+/*fix for  defect 8226 End*/
+div.anyccpm-mandatory-field th span {
+	background-image: url('../../Images/required3.png');
+	background-position: right top;
+	background-repeat: no-repeat;
+	padding-right: 17px;
+}
+
+#Curam_ExternalProviderCustomHome div.selection-table {
+	margin: 0px 0px 0px 30px;
+	background-color: #f4f4f4;
+	border: none;
+}
+
+/*fix for defect 8625-removing of OOTB elements form AccessHRA provider portal Account*/
+#Curam_ANYCProvider_unlinkUserHome div.page-header,#Curam_ANYCProvider_unlinkUserHome div.header-wrapper span
+	{
+	display: none;
+}
+
+#Curam_ANYCProvider_unlinkUserHome div.title-exists {
+	margin-top: -69px;
+}
+
+.removeTabElement {
+	display: none;
+}
+
+#Curam_ANYCProvider_unlinkUserHome div.ImageTitle table colgroup col:first-child
+	{
+	width: 4% !important;
+}
+
+#Curam_ANYCProvider_unlinkUserHome div#content div.ImageTitle table colgroup col:first-child+col
+	{
+	width: 96% !important;
+}
+
+#Curam_ANYCProvider_unlinkUserHome div.ImageTitle table tr td:first-child+td
+	{
+	vertical-align: middle;
+	font-size: 27px;
+	font-weight: bold;
+}
+/*fix for defect 8625*/
+.ANYCPROVUN #app-root-container-dc{
+	background:none !important;
+}
+@media (max-width: 700px){
+	body.curam.soria #app-banner .right-box{
+	min-width: 0;
+	width:auto;
+	}
+}
+body.CPMEXPROV.curam.soria #app-banner .program-name-div .program-logo-div
+	{
+	display:none !important;
+}
+body.EXUSRADMN.curam.soria #app-banner .program-name-div .program-logo-div
+	{
+	display:none !important;
+}
+body.CPMEXPROV.curam.soria #app-banner .program-name-div{
+	text-align: left !important;
+	padding-left: 40% !important;
+	position:absolute !important;
+}
+body.EXUSRADMN.curam.soria #app-banner .program-name-div{
+	text-align: left !important;
+	padding-left: 40% !important;
+	position:absolute !important;
+}
+
+
+/* Defect #8626 - Provider Portal: Master defect for header and footer. */
+body#ANYCProviderPortalJSP {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+/*Defect Defect #8626 */
+body#ANYCProvider_createAccount #idxHeaderPrimary p{
+	font-family: arial !important;
+}	
+
+#Curam_ProviderManagement_listAddress div.list td.last-field.list-row-menu,#Curam_ProviderManagement_listEmailAddress div.list td.last-field.list-row-menu {
+    text-align: right;
+}
+
+body#ANYCProvider_appProvisionError #idxHeaderPrimary p
+	{
+    padding-top: 15px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+body#ANYCProvider_appProvisionError table {
+	border-collapse: collapse;
+}
+
+body#ANYCProvider_appProvisionError td {
+	text-align: left;
+	font-family: Arial;
+	vertical-align: middle;
+	font-size: 14px;
+	padding-bottom: 20px;
+}
+
+body#ANYCProvider_appProvisionError #tableThreeRoot tr {
+	border-bottom-style: dashed;
+	border-bottom-width: 2px;
+	border-color: silver;
+}
+body#ANYCProvider_appProvisionError #LoginImage {
+	background-image: url(./Login.png);
+	height: 56px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	padding: 1px;
+}
+
+body#ANYCProvider_appProvisionError #CreateAccountImage {
+	background-image: url(../../Images/CreateAccount_blue.png);
+	height: 65px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	padding: 1px;
+	width: 320px;
+	margin-left: 35%;
+	margin-top: 2%;
+}
+
+body#ANYCProvider_appProvisionError p#applicationName {
+	font-size: 60px;
+	font-weight: bold;
+	margin: 0px;
+}
+
+body#ANYCProvider_appProvisionError p#subTitle {
+	font-size: 35px;
+	font-weight: bold;
+	margin: 0px;
+	margin-top: -15px;
+}
+
+body#ANYCProvider_appProvisionError div#LoginImage p span {
+	font-size: 20px;
+	padding: 20px;
+	font-weight: bold;
+	color: white;
+}
+
+body#ANYCProvider_appProvisionError #CreateAccountImage:hover {
+	background-image: url(../../Images/CreateAccountHover_blue.png);
+	background-repeat: no-repeat;
+}
+
+body#ANYCProvider_appProvisionError div#CreateAccountImage p span {
+	padding-left: 25px;
+	font-size: 16px;
+	font-weight: bold;
+	color: white;
+}
+
+body#ANYCProvider_appProvisionError #textContentBlue {
+	font-weight: bold;
+	font-size: 20px;
+	color: #AED6F1;
+	font-family: monospace;
+	margin: -15px 0 0;
+}
+
+body#ANYCProvider_appProvisionError p#description {
+	color: #5D6D7E;
+}
+
+body#ANYCProvider_appProvisionError div#tableThreeRoot table td.col2 {
+	padding-right: 10px;
+	font-weight: bold !important;
+}
+
+body#ANYCProvider_appProvisionError .textDecorationNone {
+	text-decoration: none;
+}
+
+body#ANYCProvider_appProvisionError .col3 span+span {
+	color: red;
+	font-weight: bold;
+}
+
+body#ANYCProvider_appProvisionError .textBold {
+	font-weight: bold;
+	font-size: 16px;
+}
+
+body#ANYCProvider_appProvisionError p {
+	margin: 0;
+}
+
+body#ANYCProvider_appProvisionError {
+	margin: 0;
+}
+
+body#ANYCProvider_appProvisionError #textContentBold2 {
+	font-size: 18px;
+	margin: 0;
+	padding-bottom: 5px;
+	font-family: sans-serif;
+	text-align: left;
+	border-bottom-style: solid;
+	border-bottom-width: 2px;
+	border-color: silver;
+}
+
+body#ANYCProvider_appProvisionError #textContentBold3 {
+	font-size: 20px;
+	margin: 0;
+	padding-left: 10px;
+	padding-top: 5px;
+	font-family: sans-serif;
+	text-align: left;
+}
+
+body#ANYCProvider_appProvisionError #tabletwoRoot {
+	padding-top: 25px;
+	padding-left: 10px;
+}
+
+.col3 {
+	margin: 0;
+}
+
+body#ANYCProvider_appProvisionError #idxHeaderPrimary {
+	background-color: #333440 !important;
+	filter: none !important;
+	height: 48px;
+	color: #ffffff;
+	text-align: center;
+	font-family: 'HelvNeueBoldforIBM';
+}
+
+/*body#ANYCProvider_appProvisionError #idxHeaderOrangeLip {
+	background-color: #FDB721;
+	display: block;
+	height: 9px;
+}*/
+body#ANYCProvider_appProvisionError tr#noBottomBorder {
+	border-bottom-style: none;
+}
+
+body#ANYCProvider_appProvisionError #tableThreeRoot tr {
+	height: 80px;
+}
+
+body#ANYCProvider_appProvisionError .footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	color: white;
+}
+
+body#ANYCProvider_appProvisionError .footer a {
+	color: white !important
+}
+
+body#ANYCProvider_appProvisionError .footer p {
+	margin: 0;
+}
+
+/*body#ANYCProvider_appProvisionError div#idxHeaderPrimary img.logo1 {
+	height: 26px;
+	width: 98px;
+	padding: 15px 45px;
+}*/
+body#ANYCProvider_appProvisionError div#tableOneRoot table div img.personImgCss
+	{
+	width: 52px;
+	height: 46px;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+body#ANYCProvider_appProvisionError div#idxHeaderOrangeLip {
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+body#ANYCProvider_appProvisionError td#textContentBold4 {
+	font-size: 30px;
+	font-weight: bold;
+	margin: 0;
+	padding-left: 10px;
+	font-family: 'HelvNeueBoldforIBM';
+}
+
+body#ANYCProvider_appProvisionError div#tabletwoRoot table.tabletwoRootCss {
+	width: 95%;
+}
+
+body#ANYCProvider_appProvisionError div#tableThreeRoot table td.col2 div#CreateAccountImage p.textAlignment
+	{
+	padding-top: 20px;
+}
+
+body#ANYCProvider_appProvisionError div.footer div.app-footer-left {
+	float: left;
+	width: 65%;
+	margin-top: 15px;
+}
+
+body#ANYCProvider_appProvisionError div.footer div.app-footer-right {
+	float: right;
+	width: 35%;
+	margin-top: 12px;
+}
+body#ANYCProvider_appProvisionError a.textDecorationNone p {
+	padding-top:20px;
+}
+body.curam.soria div.pod-container div.pod-styling div#PTANYC04_body table.findclientpod-background td input,
+	body.curam.soria div.cluster table tbody td.field input.text, body.curam.soria div.cluster table tbody td.address input.text,
+	body.curam .dijitTextBox.dijitComboBox.codetable {
+	background-color: #e0e3ee !important;
+	border: 1px solid #000000 !important;
+}
+body.curam.soria .pod-container .selection-table .checkbox-container .checkbox-label {
+    margin-left: 5px !important;
+}
+/* Fix for tablets. Less space for the checkbox labels. */ 
+@media (max-width: 1250px) {
+	body.curam.soria .pod-container .selection-table .checkbox-container .checkbox-label { 
+		width: 20%;
+	}
+
+#Curam_ANYCProviderWizard_selectOrganizationPage2 div.Phone-Number-Provider_Edit div.edit-phone table tr th {
+	padding-right: 0px !important;
+}
+
+#Curam_ANYCProviderWizard_selectOrganizationPage2 div.Phone-Number-Provider_Edit div.edit-phoneExt table tr th {
+	padding-right: 0px !important;
+}
+}
+
+#Curam_ANYC_editContactInfoForProviderClient span.SubtitleImage img{
+	    width: 55px;
+}
+
+#Curam_ANYC_editContactInfoForProviderClient .SubTitleCluster td{
+	   font-size: 24px;
+}
+
+#Curam_ANYC_editContactInfoForProviderClient .TitleCluster div.cluster.cluster-with-no-header.label-field{
+	       width: 85%;
+}
+
+#Curam_ANYC_editContactInfoForProviderClient .TitleCluster td.last-col.top{
+	      vertical-align: middle;
+	      padding-left: 10px;
+}
+
+#Curam_ANYC_editContactInfoForProviderClient div.TitleBorder table{
+	      margin:0;
+}
+
+#Curam_ANYC_editContactInfo table.action-title,#Curam_ANYC_editContactInfoForProviderClient table.action-title {
+	border-bottom: 1px solid;
+	margin-bottom: 12px !important;
+	margin: 0 !important;
+}
+#Curam_ANYC_editContactInfo div.anyc-ieg-page-text {
+	font-family: Arial;
+    font-size: 14px;
+    font-weight: bold;
+    color: #666666;
+    border-top: 1px dashed black !important;
+    border-bottom: 1px dashed black !important;
+    padding-left: 30px;
+    padding-bottom: 5px;
+    background-image: url(../../Images/info_icon.png);
+    background-repeat: no-repeat;
+    background-position: 8px 18px;
+    background-color: #cccccc !important;
+}
+
+#Curam_ANYC_viewProfileForProviderClient .titleCluster td *,#Curam_ANYC_viewProfileForProviderClient .titleCluster td
+	{
+	vertical-align: middle;
+	padding-left: 0px;
+	font-weight: bold;
+	font-size: 23px;
+	/* vertical-align: text-top; */
+} 
+
+#Curam_ANYC_viewProfileForProviderClient .red_alert{
+	background-color: #ffb5b5;
+}
+
+#Curam_ANYC_viewProfileForProviderClient div.boldTextCluster th, #Curam_ANYC_viewProfileForProviderClient div.Primary-PhoneNum >div > table > tbody > tr> td:first-child,#Curam_ANYC_viewProfileForProviderClient div.Alternate-PhoneNum >div > table > tbody > tr> td:first-child{
+	font-weight: bold !important;
+}

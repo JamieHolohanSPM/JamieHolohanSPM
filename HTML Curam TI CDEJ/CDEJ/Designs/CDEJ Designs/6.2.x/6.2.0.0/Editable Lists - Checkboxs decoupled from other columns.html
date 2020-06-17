@@ -1,0 +1,372 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Editable Lists - Checkboxs decoupled from other columns</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Editable Lists - Checkboxs decoupled from other columns";
+    pageId="urn:lsid:ibm.com:td:b74bb32b-1c72-42fd-85a5-8645f4913898";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Editable Lists - Checkboxs decoupled from other columns</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h2 dir="ltr"><span style="font-size:20px;"><strong>Design Page for </strong></span>Editable Lists - Checkboxs decoupled from other columns</h2>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Background</span></strong></p>
+
+<p dir="ltr"><strong>This feature has been developed under the hood since 2011 - used in Appeals</strong></p>
+
+<p dir="ltr"><span style="font-size:12px;">Essentially what they currently are&nbsp; is a checkbox controlled editable list - where the enabling of a checkbox on a list row enabled editable fields within other columns on that row to be editable.</span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">In other word the editable values cannot be updated without the checkbox value being set to true.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Requirements</span></strong></p>
+
+<p dir="ltr"><span style="font-family:helvetica;"><span style="font-size:12.0pt;">T</span></span>he requirement is that these should <strong>NOT </strong>be a checkbox controlled editable list. In other words the checkbox field should be decoupled from the other editable columns.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">So what they want essentially is a 'normal' editable list where a boolean (base domani SVR_BOOLEAN) field does not carry any significance.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li>143633 -<a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=143633">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=143633</a></li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">This means that we would effectively have two types of editable list:</p>
+
+<p dir="ltr"><strong>(1) Checkbox Controlled Editable Lists</strong></p>
+
+<p dir="ltr"><strong>(2) Normal Editable Lists</strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Any other hidden requirements?</strong></p>
+
+<p dir="ltr">Is there a requirement to support editable Lists where<strong> </strong>FIELD elements<strong> with only </strong>a target connection are allowed <strong>( 'Creatable list' support)</strong>?</p>
+
+<p dir="ltr">Barry check with CGISS &amp; HCR and there is no such requirement so this is beyond the scope of 6.2. In fact in my opinion this is a different feature, this would be a 'creatable list'.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<div dir="ltr">Currently a developer would have a create page with&nbsp; a CLUSTER that had FIELD(s) with only a target connection, and that would be rendered as an input cluster that would allow the user to input the data (creation of business objects within the application).</div>
+
+<div dir="ltr">&nbsp;</div>
+
+<div dir="ltr">Post 6.2, if we were to implement an enhancement to allow FIELDS have only target connections within a LIST - this would enable users to create lists of business objects within a create page in the application.</div>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">One for business to consider I think!</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Non Functional Requirements</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. We can fill in N/A if the specified non functional requirement is not applicable to the feature being delivered, otherwise some notes must be entered here covering the particular area.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" width="671">
+	<tbody>
+		<tr>
+			<td style="width: 118px;"><strong>NFR</strong></td>
+			<td style="width: 537px;"><strong>Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Accessibility</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Availability &amp; Resilience</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Development Resource</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Evolution</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Internationalisation</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Location</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Performance and Scalability</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Regulation</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Security</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Usability</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Design Consideration</span></strong></p>
+
+<p dir="ltr"><strong>Current Definition of Editable List</strong>?</p>
+
+<p dir="ltr">The current definition of an editable list is that the LIST must:</p>
+
+<p dir="ltr"><strong>(1)</strong> Have a source connection on each FIELD element within the LIST. In other words a FIELD <strong>cannot have only</strong> a TARGET connection within a LIST.</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp; <strong>NOTE:</strong> Since the feature was introduced there has been validations that check that there must be a source connection when a target connection is found.</p>
+
+<p dir="ltr"><strong>(2)</strong> <span style="font-size:12px;">The first FIELD in editable list should have a <strong>base domain</strong> of 'SVR_BOOLEAN'.</span><br />
+&nbsp;&nbsp;<strong>&nbsp; NOTE</strong>: There was never a validation put in place to check that the base domain of editable field within a list had this domain.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Solutions to the problem of decoupling checkbox column from the other editable columns?&nbsp; </strong></p>
+
+<p dir="ltr"><strong>(1)</strong>&nbsp; Force a new validation that the first editable FIELD within a LIST must have domain based on SVR_BOOLEAN.</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>OOTB Impact of doing this?</strong> Does not seem to be an issue as the first field within editable lists do seem to have domain of SVR_BOOLEAN.</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong> Customer Impact of doing thi</strong>s? More than likely they do have the editable lists constructed the same way as OOTB pages but if this were not the case it would break their builds so really this is a non runner as implications are too severe!</p>
+
+<p dir="ltr"><strong>(2)</strong> Identify a check box controlled editable list from a normal editable list.</p>
+
+<p dir="ltr"><strong>(i)</strong> <strong>UIM attribute to indicate editable list</strong></p>
+
+<p dir="ltr">Currently there is no UIM attribute to distinguish editable lists which makes the task pretty difficult. It is not possible to add a UIM attribute at this stage because that would mean customized editable pages would not behave correctly without impact.<strong> Perhaps V7, this should be considered - BOS?</strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>(ii) Update JSPX Generator and renderer to differentiate between the types of editable list based on the Boolean Fields position within the LIST.</strong></p>
+
+<p dir="ltr">What this means is that within the generator at build time when we encounter a FIELD based on SVR_BOOLEAN we would check it's position.</p>
+
+<p dir="ltr">If it was at the first position, we would set a special flag/parameter that would tell the associated Checkbox renderer to implement it as a checkbox controllable editable list. Otherwise we treat it as normal checkbox field which won't be associated with other columns within the list.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OOTB Impact of doing this?</strong> Does not seem to be an issue as the first field within editable lists do seem to have domain of SVR_BOOLEAN.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Customer Impact of doing this?</strong></p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; More than likely they do have the editable lists constructed the same way as OOTB pages but if they didn't it would mean that they should be aware that they may have to put some logic into the associated facade to check that&nbsp; the value of the checkbox field is true! (because it had to be set to true before)</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Considerations for impact</strong></p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; See Application Impact below for more details</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Implementation Considerations</span></strong></p>
+
+<h3 dir="ltr"><strong>Option 2 : differentiate between the types of editable list based on the Boolean Fields position within the LIST.</strong></h3>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">CDEJ </span></strong></p>
+
+<h3 dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Validations</span></strong></h3>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-size:12px;">Since this feature released a number of years ago under the hood there is no validations that we can do as we could potentially break something customer has done..</span></p>
+
+<h3 dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Generator Changes</h3>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (1) Update gen-jsp.xsl and gen-ng-field.xsl to set a parameter if the FIELD with base domain of SVR_BOOLEAN is first field within LIST.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>Renderer Changes</strong></h3>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In CheckboxEditRenderer, only add the JavaScript that makes if a CheckBox Controlled Editable List if the parameter is set</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Use Cases</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. The various use cases for the feature must be outlined here. They can be in whatever format deemed appropriate (i.e. verbose description or in a tabular format with actors and actions etc.). Below is an example of how use cases may be documented in a tabular format.</p>
+
+<table border="1" dir="ltr" style="width: 763px;">
+	<tbody>
+		<tr>
+			<td><strong>Role/Actor</strong></td>
+			<td><strong>Description</strong></td>
+			<td style="width: 243px;"><strong>Expected Behavior</strong></td>
+			<td style="width: 256px;"><strong>Tested</strong></td>
+		</tr>
+		<tr>
+			<td>developer</td>
+			<td>The boolean field within editable list is in first position</td>
+			<td style="width: 243px;">CheckBox Controlled Editable List</td>
+			<td style="width: 256px;">Tabtestapp page will be created to test new feature manually .</td>
+		</tr>
+	</tbody>
+</table>
+
+<table border="1" dir="ltr">
+	<tbody>
+		<tr>
+			<td>developer</td>
+			<td style="width: 181px;">The boolean field within editable list is<strong> not</strong> in first position</td>
+			<td style="width: 244px;">Normal Editable List</td>
+			<td style="width: 256px;">Tabtestapp page will be created to test new feature manually .</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Implementation Notes</span></strong></p>
+
+<p dir="ltr">This is <strong>optional</strong>. Any notes related to the actual implementation can be described here. These can be related to some questions related to the implementation, the way some part of the implementation was completed etc.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Application Impact</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. If there is no impact, then this is as simple as saying so.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">If there is impact, then this may describe the impact in detail and outline the upgrade path. If the feature is related to a CLE, this section can be a link to that CLE (and hence the documentation associated with the CLE will suffice).</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Choices to deal with potential impact</strong></p>
+
+<ul dir="ltr">
+	<li>We don't care if they have pages with editable lists and it has a boolean field that is not the first field, as this is not really a supported feature!</li>
+	<li>Communicate the impact that if they have pages with editable lists and it has a boolean field that is not the first field then they may need some logic in the facade (as stated above)</li>
+	<li>Give customer a way to list pages have editable lists and it has a boolean field that is not the first field so that they can still be treated as before i.e checbox controlled editable list. There are two ways to that this could potentially be done. Offically with some new setting curam-config.xml that can be used to list these pages or as part of 'dark Curam' where we have a new ApplicationConfiguration property they can use to list these pages.</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">CTM</span></strong></p>
+
+<p dir="ltr">This is <strong>optional</strong>. Consideration should be given to whether this feature adds or changes administration data. If new administration data is being added, are new CTM business objects required to transport this data. If existing administration data is being modified, will this require changes to existing CTM BOM instances?</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Testing</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. An outline of all of the testing required by the feature should be present here. This may tie in with the use cases outlined above. This may differ from component to component so the sub headings here will reflect that.</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Unit tests written for the renderers:</p>
+	</li>
+	<li>
+	<p>Manual Test Plans</p>
+	</li>
+	<li>
+	<p>Automated tests</p>
+	</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Documentation/How To Use Feature</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. This should describe how to use the feature added. Again this may differ from component to component but there are some general headings to consider:</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Editable Lists (the two types) will need to be documented for 6.2 as it is a front and center feature.<br />
+	&nbsp;</p>
+	</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Check List</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Basically this is a quick check list of items that should be considered when doing a design for that particular component.</p>
+
+<table border="1" dir="ltr" style="width: 658px;">
+	<tbody>
+		<tr>
+			<td style="width: 166px;"><strong>Check List Item</strong></td>
+			<td style="width: 314px;"><strong>Notes</strong></td>
+			<td style="width: 157px;"><strong>Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">????</td>
+			<td style="width: 314px;">?????.</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Work Estimation</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Again, the actual items listed in the estimate breakdown may vary from task to task and component to component.</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Work Estimates</p>
+
+	<ul>
+		<li>
+		<p>Design: 1d</p>
+		</li>
+		<li>
+		<p>Implementation:. .5d</p>
+		</li>
+		<li>
+		<p>Tes:. .5d</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Total: 2 Days</p>
+	</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

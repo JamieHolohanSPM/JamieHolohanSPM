@@ -1,0 +1,807 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Optional clusters (design draft)</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Optional clusters (design draft)";
+    pageId="urn:lsid:ibm.com:td:e281b83c-f5de-4162-a291-11384ae14102";
+    toRoot="../../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Optional clusters (design draft)</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h1 dir="ltr">Optionally displayed clusters</h1>
+
+<p dir="ltr">NOTE: This is a design draft. The chosen design approach could be found <a href="https://ibm.biz/BdHc6X" target="_blank">here</a>.</p>
+
+<h2 dir="ltr">Requirements</h2>
+
+<p dir="ltr">The main requirement is to add the dynamic display capability to a cluster (also 'controlled element' further in the text) allowing for it being initially hidden and displayed based on a selection of the other element on a page (also 'control element' further in the text). The control elements required are check box, a radio selection button, or a drop down item on the list.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The requirement in general resolves to adding the relationship between the rendered page elements and that relationship is enacted by the user interaction. This type of interconnection now just exists in the JavaScript domain when the front-end widgets are rendered; the optional cluster requirement however is drawn not against the abstract widget but rather of the main UIM elements, therefore the description of that interconnection should be added to the UIM.</p>
+
+<p dir="ltr">The options and technical particulars of the possible UIM Markup changes are summarized later in this document.</p>
+
+<p dir="ltr">Full requirements described in the JIRA <em>TEC-18864</em></p>
+
+<h2 dir="ltr">The current situation</h2>
+
+<p dir="ltr">Currently the UIM allows for minimal describing of the operations/interactions once the page contents are rendered. The conditional clusters (elements) feature allows for hiding or showing a cluster at the page rendering time and is based on the server interface property setting. The conditional clusters are driven by the <span style="font-family:courier new,courier,monospace;">CONDITION/IS_TRUE/IS_FALSE</span> UIM tags. There is no further interaction foreseen, and any user choices related changes could be just seen upon navigating to another page or reloading the same page. Same way the conditional links functionality (<span style="font-family:courier new,courier,monospace;">HIDE_CONDITIONAL_LINKS</span> attribute on the <span style="font-family:courier new,courier,monospace;">PAGE </span>UIM tag) is another render-time feature to hide the conditional links or style them as disabled.</p>
+
+<p dir="ltr"><br />
+There is also the <span style="font-family:courier new,courier,monospace;">ACTION_CONTROL</span> of the type <span style="font-family:courier new,courier,monospace;">CLIPBOARD</span>, which inserts the JavaScript instruction on a page, the instruction being copying the specified content and placing that onto the Windows clipboard. The functionality is nearly deprecated at this stage as from all the browsers only Internet Explorer still exposed Windows Clipboard to the JavaScript, and it is not used in any case, however the approach is still there.</p>
+
+<h2 dir="ltr">Evolution</h2>
+
+<p dir="ltr">TEC-18864 describes the particular application of showing or hiding one type of element by changing the state of the other element, but this is easily generalized to allowing the wider rendered element interaction on a page, and therefore means of describing the two - or more - element relationship. This needs to be kept in mind when designing, and some of the possible additional scenarios are described below:</p>
+
+<h3 dir="ltr"><strong>A) extending to different controlled elements</strong></h3>
+
+<p dir="ltr">Apart from the CLUSTER the page layout elements are <span style="font-family:courier new,courier,monospace;">CONTAINER </span>and <span style="font-family:courier new,courier,monospace;">LIST</span>, <span style="font-family:courier new,courier,monospace;">WIDGET </span>to certain extent. It is nothing but logical to assume a further requirement might be to extend the controlled element set from just cluster to involve some or all of the mentioned elements. This does not contradict the main control logic, however might turned out to be problematic or require the additional validations to avoid the overlapping control (the situations where say the <span style="font-family:courier new,courier,monospace;">LIST </span>within the <span style="font-family:courier new,courier,monospace;">CLUSTER </span>are both optional and have a separate elements defined at the same (page) level so both visible and potentially representing the opposite selection state; such case should either be explicitly forbidden by our validations, or the rules of controlling the nested and nesting elements should be clearly defined).</p>
+
+<h3 dir="ltr"><strong>B) controlling a group of elements</strong></h3>
+
+<p dir="ltr">The initial requirement talks about a <span style="font-family:courier new,courier,monospace;">CLUSTER </span>controlled by a control element which implies 1:1 relationship. It is, however, easily extended to a 1:n situation where is a number of layout elements (<span style="font-family:courier new,courier,monospace;">CLUSTER</span>s) on a page, controlled by the SAME control element and displayed/hidden at once. This might seem a valid extension and is technically achievable (depending on the binding option from the ones listed later) and should be considered initially.<br />
+&nbsp;</p>
+
+<h3 dir="ltr"><strong>C) controlling the same element by several control elements on a page.</strong></h3>
+
+<p dir="ltr">This is the scenario where the same elements are controlled by different control elements. The option D discussed below would also imply this type of extension.<br />
+However, this 'n:1' type interaction means a potential overlap with different control elements setting the different state of the same, which cannot be allowed and there should be a validation to exclude this type of scenario. On the other hand, if option D is considered to be the acceptable scenario, this means</p>
+
+<ol dir="ltr">
+	<li>the validation for not having multiple control elements with the same operation type acting on the same set of the controlled elements.</li>
+	<li>the synchronization of the control elements might be required with the possibility to disable/hide some of them which are inapplicable or might break the control logic.</li>
+</ol>
+
+<h3 dir="ltr">D) different interaction type</h3>
+
+<p dir="ltr">Optional display is one but not only type of interaction between the elements. It could be easily extended to say set the different style of the controlled element or group of the controlled elements (say to mark all the areas of interest, etc.). Therefore the initial design should take into consideration that evolution direction and perhaps provide for it, making the optional display just the default/fallback control/operation type. The appropriate markup is discussed later in the text.</p>
+
+<h3 dir="ltr">E) Dynamic aspect and expressions</h3>
+
+<p dir="ltr">The initial discussion revealed another potential development (does not seem to be the initial requirement though), in the control type which would allow the operation (displaying or hiding a cluster) based not on a binary or non binary selection, but rather the <em>expression </em>which takes into account number of field values on the page; the cluster is displayed or hidden based on that expression evaluation result.</p>
+
+<p dir="ltr">This is implemented in IEG and works the following way (Mael's information):<br />
+A cluster to be controlled is wrapped into a condition which has the expression.</p>
+
+<p dir="ltr">The expression uses the fully qualified field names, and values from those fields.</p>
+
+<p dir="ltr">Once the page is rendered, the JavaScript watches for the <em>onchange </em>event on any of the fields (or anywhere in a page) and re-evaluates the expression, displaying or hiding the controlled the cluster. Therefore the option definition is kept in one place, and all the markup required would be the extension of the <span style="font-family:courier new,courier,monospace;">CONDITION</span>&nbsp; element (there is already UIM element like this, used for conditional display but used as a child element of <span style="font-family:courier new,courier,monospace;">CLUSTER, LIST, ACTION_SET, ACTION_CONTROL, LINK</span> or <span style="font-family:courier new,courier,monospace;">DETAILS_ROW</span> elements).</p>
+
+<p dir="ltr"><br />
+This might be called a "distributed control" and the choice here is far from the simple selection.</p>
+
+<p dir="ltr">While this could be considered, there are certain obstacles/limitations in implementing the same approach in UIM.</p>
+
+<ol dir="ltr">
+	<li><strong>Field identification</strong>. In order to participate in an expression, a field should be referenced, therefore our option would be to add an explicit identifier, or to use any implicit but guaranteed one. The <strong>explicit </strong>identifier, while possible, seems a bit excessive in UIM, meaning adding its support to most UIM tags.<br />
+	The <strong>implicit </strong>identifier might be a field-to-bean binding; all the form fields are targeting certain server interface properties, and therefore they should carry the binding information. This is true, however not problem free:
+
+	<ul style="list-style-type: disc;">
+		<li>there is in general a mixture of the old style tags which carry the binding information in their names and the renderers where the binding information is carried by the additional hidden field on the form. This requires taking into account both options.</li>
+		<li>furthermore, the partial fields, parts of more complicated input widgets carry out just pieces of the data, which are collected into the final bit on the server side using the appropriate, domain specific algorithm; using the composite value in the expression would mean the necessity to recreate the same mechanism - but without the knowledge of the domain specifics, or the expressions would be limited to the single values (which would be counter-intuitive).</li>
+		<li>another limitation of that approach would be the the read-only fields, which do not carry any binding information when on page (they are usually output as spans or divs with the value as innerHTML).</li>
+	</ul>
+	</li>
+</ol>
+
+<p dir="ltr">All those limitations need to be clearly documented and even then would seem to cause lots of misunderstanding, since at the developer level it is not intuitively obvious what might be allowed and what not<strong>.</strong></p>
+
+<ol dir="ltr" start="2">
+	<li><strong>The expression language extent</strong>. We should either limit ourselves to the certain number of the operations we support = additional tags (<span style="font-family:courier new,courier,monospace;">IS_EQUAL/IS_NOT_EQUAL/IS_LESS/IS_BIGGER </span>under the <span style="font-family:courier new,courier,monospace;">CONDITION </span>element as suggested), or will end up with having to process complicated expressions. Adding the ability to combine the values (<span style="font-family:courier new,courier,monospace;">AND/OR</span>), the ranges of acceptable/non-acceptable values, value pattern match (so regular expressions) would require certain amount of additional processing, badly impact the readability of the UIM and, finally would have the aditional security impact, since the expression at the end of the day will need to be evaluated by the JavaScript, so using <em>eval</em>.</li>
+</ol>
+
+<p dir="ltr">This is a bit of overlap with the conditional cluster functionality as described above; and since the <span style="font-family:courier new,courier,monospace;">CONDITION </span>element is also applicable to many other elements, we have an undesired dependency.</p>
+
+<p dir="ltr">Overall, while it seems to be an useful feature, there is also an impression that the "distributed control" aims at implementing some sort of runtime validations on the fields, which is perhaps a separate task.</p>
+
+<h2 dir="ltr">Initial state</h2>
+
+<p dir="ltr">The requirement concentrates on the ability to display a cluster when the user's choice is made; however, this scenario easily becomes the opposite - the initially displayed cluster should be hidden when the user de-selects the control element. This is part of the interaction on the page, however, it also implies the additional initial state when a page loads, the cluster might be initially hidden, or it might be initially displayed. This is similar to what we currently have for the other cluster related feature - collapsibility, and we do have the <span style="font-family:courier new,courier,monospace;">BEHAVIOR </span>attribute on the cluster which could be defined as either <span style="font-family:courier new,courier,monospace;">EXPANDED </span>or <span style="font-family:courier new,courier,monospace;">COLLAPSED</span>, however in this case the cluster state is controlled by the control element selection state. Therefore, if the control element bound to the server interface property and is initailly selected, the controlled cluster should be displayed; however it might be considered to have the initial state described in UIM as opposed to the server model, which is less obvious option for the UIM developer.</p>
+
+<p dir="ltr">If the latter option is chosen, a third (second if&nbsp; <span style="font-family:courier new,courier,monospace;">OPERATION_TYPE/CONTROL_TYPE </span>is omitted) attribute on the control element is needed, something like <span style="font-family:courier new,courier,monospace;">SELECTED="true/false"</span>.<br />
+On the other hand, this might be just applicable to the check box control element, and with regards the radio group or the selection list the initial selection is defined via the server interface and should be regarded anyway; therefore for consistency the check box control element should have the initial state defined via the server interface property.</p>
+
+<h2 dir="ltr">Layout considerations</h2>
+
+<h3 dir="ltr"><strong>1. Sequential layout</strong></h3>
+
+<p dir="ltr">As said already, the sequential layout where the controlled element is defined next to the control element in the page layout is technically easiest, since number of assumptions could be made regarding the element relationship, including the reduced markup (there is no need to define). Also in the sequential layout case the later described binding by title option is viable.</p>
+
+<p dir="ltr"><br />
+However, the sequential layout seems too much restrictive, the page design and the business logic might require the control elements to be defined anywhere on the page, be part of the 'control panels', etc. The sequential layout also excludes grouping of the controlled elements (without the additional markup), even if they are following each other in UIM. And, the last, it is badly suited for the initial version even if this type of layout is considered currently sufficient - in order to decouple elements, the additional markup will need to be introduced anyway and the effort of the further evolution should that be required would be comparable or even bigger that the initial effort of introducing this functionality (with both generator and JavaScript changes).</p>
+
+<p dir="ltr"><br />
+The sequential layout option might be extended a bit by adding the markup to denote the control placement with regards to the controlled content (we have similar approach with regards the ACTION_CONTROL placement), however there are a very few options, the business suitability would be questionable and the implementation effort might turn out to be big.</p>
+
+<h3 dir="ltr"><strong>2. Loose layout</strong></h3>
+
+<p dir="ltr">The loose layout where the controlled and control element position on a page are unpredictable requires both ends of the controlled chain marked to create the awareness of each other. There are some binding options discussed below, however in any case the additional UIM markup needs to be introduced and transferred down to HTML level (either JavaScript level). This is much more flexible option both with regards to the current requirements and taking into account the potential evolution (grouping, extending the controlled element set, etc.). And since the sequential layout does not give much savings as regards the markup either, the loose layout option is the one to go with.</p>
+
+<h2 dir="ltr">UIM markup considerations</h2>
+
+<h3 dir="ltr"><strong>Alternative 1. Re-using existing markup (extending supported types)</strong></h3>
+
+<p dir="ltr">As we are talking about the interconnections between the page elements, the natural consideration would be to look at the existing <span style="font-family:courier new,courier,monospace;">CONNECT </span>elements which are used to describe different types of page/field connections mainly with the server interfaces, however might also be used for a bit different purpose. In fact, the connections are driven by the endpoint (<span style="font-family:courier new,courier,monospace;">SOURCE/TARGET</span>) type and used to describe the look-up for the localized page resources as well.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">So, while the <span style="font-family:courier new,courier,monospace;">SOURCE </span>connection would remain the same for the control element, the <span style="font-family:courier new,courier,monospace;">TARGET </span>connection should allow for a different <span style="font-family:courier new,courier,monospace;">NAME </span>to describe the on-page interaction rather than the connection with the server, and the <span style="font-family:courier new,courier,monospace;">PROPERTY </span>should match some UIM on the controlled element (elements).</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The <strong>advantages </strong>of this approach:</p>
+
+<ul dir="ltr">
+	<li>to an extent be the consistency with the existing UIM, just extending it where necessary.</li>
+	<li>if coupled with the title attribute approach discussed in option 2, it would mean minimal UIM changes. If not, then this approach is also compatible with the 1:n control relationship to accommodate the potential evolution aspect B discussed earlier.</li>
+	<li>easily extendable control element set, since most of the UIM data elements support <span style="font-family:courier new,courier,monospace;">CONNECT</span>.</li>
+</ul>
+
+<p dir="ltr">An example of this type of markup:<br />
+<span style="font-family:courier new,courier,monospace;">&lt;FIELD LABEL="Control.Checkbox.Label"&gt;<br />
+&nbsp; &lt;CONNECT&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;SOURCE NAME="DISPLAY" PROPERTY="initialSelectionState"/&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;TARGET NAME="CONTROL" PROPERTY="controlAttribute"/&gt;<br />
+&nbsp; &lt;/CONNECT&gt;<br />
+&lt;/FIELD&gt;<br />
+..<br />
+&lt;CLUSTER.. CONTROL_ID="controlAttribute"&gt;<br />
+..<br />
+&lt;/CLUSTER&gt;</span><br />
+The <strong>drawbacks</strong>:</p>
+
+<ul dir="ltr">
+	<li>reserving the target connection to bind the control to another page element(s) excludes binding the same control to the server interface, therefore, the state cannot be preserved.</li>
+	<li>extending to accommodate different operation types as discussed in the evolution option D would be difficult and not efficient (would require adding new target <span style="font-family:courier new,courier,monospace;">NAME </span>values, creating a potential mess with one of the heaviest used UIM construct). On the other hand, for the small number of potential operation types might prove this as an acceptable option. In any case, it needs further consideration.</li>
+	<li>non-binary choice coming from the HTML select or radio group as the control element cannot be described directly and without prior knowledge of the option values driving the cluster display and hiding. This is the generic limitation in UIM and regardless of the chosen alternative it will need to be work-arounded by either the convention on the controlled clusters declaration order or putting the control code in the UIM in one or the other way.</li>
+</ul>
+
+<h3 dir="ltr"><strong>Alternative 2. Additional attributes</strong></h3>
+
+<p dir="ltr">The most obvious option, where the additional attributes are added to both the control element and the controlled element, something like:<br />
+<span style="font-family:courier new,courier,monospace;">&lt;FIELD LABEL="Control.Checkbox.Label" CONTROLS="controlGroup1"&gt;<br />
+...<br />
+&lt;CLUSTER .. CONTROL_ID="controlGroup1"&gt;<br />
+...</span></p>
+
+<p dir="ltr">Control and controlled elements therefore are defined separately in the UIM, and the awareness of each other is built at the JSP generation level and enacted once the page is rendered (in Java Script).</p>
+
+<p dir="ltr"><strong>Advantages</strong></p>
+
+<ul dir="ltr">
+	<li>allows for loose layout</li>
+	<li>allows for group control and other types of relationship.</li>
+	<li>depending on the markup, allows for the different control types, therefore is compatible with the listed evolution directions.</li>
+	<li>The actual JavaScript methods used might be driven by the domain of the control field (since some options are available here), so this concern might be taken away from UIM developer (however, it isn't, see the disadvantages below).</li>
+</ul>
+
+<p dir="ltr"><strong>Disadvantages</strong></p>
+
+<ul dir="ltr">
+	<li>Additional markup needed on both control and controlled elements.</li>
+	<li>Build-time validation problems, since there is nothing to prevent the invalid relationships from being introduced.</li>
+	<li>Same as alternative 1, while well suited for the check box control element, the description of the selection from the several values is more problematic.</li>
+	<li>Does not solve the non-binary choice drawback mentioned for the alternative 1</li>
+</ul>
+
+<p dir="ltr">The variation of the same is to use the <span style="font-family:courier new,courier,monospace;">TITLE </span>attribute of the cluster being controlled, binding the control element to the title key of a cluster. This would mean just the additional attributes for the control element need to be introduced.<br />
+The <strong>advantage </strong>of that option:</p>
+
+<ul dir="ltr">
+	<li>less changes in the UIM markup</li>
+</ul>
+
+<p dir="ltr">The <strong>drawbacks </strong>of that option:</p>
+
+<ul dir="ltr">
+	<li>&nbsp; not normally compatible with the evolution option C (controlling group of elements), since the title is defined per cluster (not taking into account the listing all the title keys in the attribute value, does not seem to be a valid option).</li>
+	<li><span style="font-family:courier new,courier,monospace;">TITLE </span>attribute is optional on the <span style="font-family:courier new,courier,monospace;">CLUSTER </span>and might not be present. Therefore, the <span style="font-family:courier new,courier,monospace;">TITLE </span>will need to be mandated on the controlled clusters.</li>
+</ul>
+
+<p dir="ltr">If taking into account evolution option D though, another optional attribute, something like CONTROL_TYPE is needed to foresee for the FIELD used as the control element. This would allow to specify the additional type of control operations should these be needed. If not specified, this would default to the optional cluster display and hide operation according to the initial requirement .</p>
+
+<h3 dir="ltr"><strong>Alternative 3. Additional elements and renderer</strong></h3>
+
+<p dir="ltr">The option to introduce the additional elements to describe the control chain between the two elements. Basically, we do have the lately bound widget concept, where the WIDGET element has the CONTENT type in addition for the pre-defined types supported, the example UIM construct is:<br />
+<span style="font-family:courier new,courier,monospace;">&nbsp; &lt;WIDGET TYPE="CONTENT" COMPONENT_STYLE="curam-util-client::sample-widget-renderer" CONFIG="ConfigurationRef"/&gt;</span><br />
+This construct delegates the actual content rendering to the rendering plug-in as specified under the <span style="font-family:courier new,courier,monospace;">COMPONENT_STYLE</span>. The optional cluster could potentially be described as a widget of some sort, meaning the UIM construct like:<br />
+<span style="font-family:courier new,courier,monospace;">&nbsp; &lt;WIDGET TYPE="CONTENT" STYLE="curam-util-client::checkbox-controlled-cluster" CONFIG="OptionalClusterConfig1"&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;WIDGET_PARAMETER ..../&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;CLUSTER&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;!-- the regular CLUSTER contents --&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;/CLUSTER&gt;<br />
+&nbsp; &lt;/WIDGET&gt;</span><br />
+The <strong>advantages</strong>:</p>
+
+<ul dir="ltr">
+	<li>&nbsp;The UIM markup remains the same (see the drawback below though!).</li>
+	<li>There is no need to describe the operation type, or, indeed, the control element - this would be added by the renderer and bound with the cluster under control by the JavaScript means.</li>
+	<li>The logic of the control in this case is represented perhaps better as it is one piece of dedicated UIM which describes the control relationship.</li>
+	<li>The actual details might be hidden in the configuration.</li>
+	<li>The selection list type control might be described easier by placing the controlled cluster alternatives in a row without any additional markup, the order of the definition implying the order of the control.</li>
+	<li>WIDGET has the already defined <span style="font-family:courier new,courier,monospace;">CONFIG</span> attribute which would allow to move part of the description from the UIM to the XML configuration. We have the similar approach for the multiple domain popups, where the code table relations with the actual pop-up chosen is described in <span style="font-family:courier new,courier,monospace;">curam-config.xml</span>.</li>
+</ul>
+
+<p dir="ltr">The <strong>drawbacks</strong>:</p>
+
+<ul dir="ltr">
+	<li>&nbsp;The<span style="font-family:courier new,courier,monospace;"> WIDGET</span> is the UIM element on its own,it has the <span style="font-family:courier new,courier,monospace;">WIDGET_PARAMETER</span> but no other child elements. Adding a cluster as the child content would require a significant change in the generators.<br />
+	This could be partially work-arounded, moving the rendered contents description in the referenced configuration. This, however, would just be suitable for the small number of clusters which could be treated as the cluster types. This disadvantage applies to the configuration approach in general, bigger number of the optional clusters in the application might mean huge the configuration file, and the actual relationships might have to be resolved at runtime.</li>
+	<li>This corresponds to the sequential layout (layout option 1 above) which does not seem to be a runner for the moment - however, it is a matter of further discussion.</li>
+	<li>Does not solve the non-binary choice drawback mentioned for the alternative 1</li>
+</ul>
+
+<h3 dir="ltr"><strong>Alternative 4. Cluster renderer attribute</strong></h3>
+
+<p dir="ltr">Another option of the same sort would be to ammend the CLUSTER with the attribute which points at the renderer to be used for it, and therefore draws the required control element.</p>
+
+<p dir="ltr">&lt;CLUSTER RENDERER="curam-util-client::checkbox-controlled-cluster"&gt;</p>
+
+<p dir="ltr">This approach combines approaches 2 and 3 but</p>
+
+<ol dir="ltr" start="1" style="list-style-type: lower-alpha;">
+	<li>&nbsp;saves on the control element since this will be decided by the renderer used</li>
+	<li>&nbsp;does not require any child contents re-definition as with the option 3</li>
+	<li>&nbsp;might be suited for the wider variety of the tasks related to the cluster content rendering/displaying.</li>
+</ol>
+
+<p dir="ltr">The <strong>drawbacks </strong>with the approach:</p>
+
+<ul dir="ltr">
+	<li>sequential layout as already discussed</li>
+	<li>since just the <span style="font-family:courier new,courier,monospace;">CLUSTER </span>is extended with the new attribute, adding to the controlled element subset would require the same work for any other layout element.</li>
+	<li>Just 1:1 relationship</li>
+	<li>Does not solve the non-binary choice drawback mentioned for the alternative 1</li>
+</ul>
+
+<h3 dir="ltr"><strong>Alternative 5. Additional cluster child element</strong></h3>
+
+<p dir="ltr">&nbsp;As it was already discussed, we support the conditional clusters where the cluster rendering on the page depends on the condition - server interface property. The condition is described by means of the additional child element (<span style="font-family:courier new,courier,monospace;">CONDITION </span>tag) within the CLUSTER, which in turn defines the condition further and binds it to the server interface property.</p>
+
+<p dir="ltr"><br />
+<span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp; &lt;SERVER_INTERFACE NAME="DISPLAY"..../&gt;<br />
+&nbsp;&nbsp;&nbsp; ...<br />
+&nbsp; &nbsp; &lt;FIELD&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;SOURCE NAME="DISPLAY" PROPERTY="clusterControl1"/&gt;<br />
+&nbsp; &nbsp; &lt;/FIELD&gt;<br />
+&nbsp; &nbsp; ...<br />
+&nbsp; &nbsp; &lt;CLUSTER ...&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;CONTROL_OPTION&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;DISPLAY_ON NAME="DISPLAY" PROPERTY="clusterControl1"/&gt;<br />
+&nbsp; &nbsp; &nbsp; &lt;/CONTROL_OPTION&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ...<br />
+&nbsp; &nbsp;&nbsp; &lt;/CLUSTER&gt;</span></p>
+
+<p dir="ltr"><br />
+&nbsp;Re-using the approach would lead us to the variation of the option 4 but with the additional <strong>advantages</strong>:</p>
+
+<ul dir="ltr">
+	<li>&nbsp;the option (<span style="font-family:courier new,courier,monospace;">CONTROL_OPTION</span> might actually be the name of the UIM tag) is defined in the controlled element as opposed to the control element. The consequence of that is that we can bind the display option with the server interface property carrying the initial selection state of the associated selection control, and therefore bind the cluster to its controlling element indirectly, without the additional markup on the control element (via the shared server interface property).<br />
+	There will still be JavaScript needed to capture the control relationship via the shared interface property and for the subsequent display/hide operations.</li>
+	<li>While it requires the additional UIM markup, all the markup is concentrated in one place.</li>
+	<li>The markup does not limit the 1:n relationship discussed early (however the description might turn to be a bit excessive since every cluster being controlled will need to have the new child elements.</li>
+	<li>No sequential layout imposed either, the control and controlled elements might be defined anywhere on the page.</li>
+	<li>With regards to the additional tasks, these could be introduced as the new tags same way IS_TRUE/IS_FALSE were added for the conditional display.</li>
+</ul>
+
+<p dir="ltr"><strong>&nbsp;Drawbacks</strong></p>
+
+<ul dir="ltr">
+	<li>Inversion of paradigm for the UIM developer where they need to relate the controlled element to the controlling element indirectly, the control relationship won't be reflected in UIM. It is less evident and might lead to a confusion.</li>
+	<li>The control relationship still needs to be captured and reflected in the JavaScript. Therefore, a bit more processing in the generator will be required to establish the direct relationship from the indirect data (the development time concern).</li>
+	<li>Does not solve the non-binary choice drawback mentioned for the alternative 1</li>
+</ul>
+
+<h3 dir="ltr">Alternative 6. Extending the conditional clusters feature</h3>
+
+<p dir="ltr">The variation of the approach 5, but instead of introducing another set of UIM elements, the existing <span style="font-family:courier new,courier,monospace;">CONDITION </span>elements re-used with the addition to the to the conditions set.</p>
+
+<p dir="ltr"><br />
+In general, all the same as 5 with the advantage of re-using the existing <span style="font-family:courier new,courier,monospace;">CONDITION </span>tag but the drawback of intervening the the already existing functionality with the possibility to break it and create the additional confusion as part of the functionality bound to the same tags will mean different type of interaction.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Further combinations of the above or any new options might be added by anyone who comes out with an interesting and effective solution, if so, please feel free to edit this page to add more options while there is no final one decided on.</p>
+
+<h3 dir="ltr">Alternative 7. Combined approach (alternatives 2,5,6)</h3>
+
+<p dir="ltr">The alternative 7 emerged as a result of the discussions around the initial design.</p>
+
+<p dir="ltr">The proposed UIM construct in this case would be</p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">&nbsp;&nbsp;&nbsp; &lt;SERVER_INTERFACE NAME="DISPLAY"..../&gt;<br />
+&nbsp;&nbsp;&nbsp; ...<br />
+&nbsp;&nbsp;&nbsp; &lt;FIELD&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;SOURCE NAME="DISPLAY" PROPERTY="binaryProperty" CONTROL_REF="checkbox1"/&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;/FIELD&gt;<br />
+&nbsp;&nbsp;&nbsp; ...<br />
+&nbsp;&nbsp;&nbsp; &lt;CLUSTER ...&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;CONDITION TYPE="DYNAMIC"&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;IS_TRUE CONTROL_REF="checkbox1"/&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/CONDITION&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ...<br />
+&nbsp;&nbsp;&nbsp;&nbsp; &lt;/CLUSTER&gt;</span><br />
+In the above construct, a new attribute called <span style="font-family:courier new,courier,monospace;">CONTROL_REF</span> (proposed name, a matter of further agreement) is added to the UIM <span style="font-family:courier new,courier,monospace;">FIELD</span> element and serves as an identifier of the field within the expression.<br />
+Currently the fields with the <span style="font-family:courier new,courier,monospace;">CONTROL_REF</span> are expected to translate into the HTML check-boxes and the HTML select/radio group elements; in future though this might be extended to include wider variety of the fields which have the content suitable for participating in the control expression.</p>
+
+<p dir="ltr"><br />
+The control expression in the construct is placed within the revised <span style="font-family:courier new,courier,monospace;">CONDITION </span>element, which gets the additional attribute <span style="font-family:courier new,courier,monospace;">TYPE </span>to mark it being used for different purpose than the conditional clusters. A new build time validation is needed to prevent the dynamic condition (condition with the <span style="font-family:courier new,courier,monospace;">TYPE</span>) been used in the UIM elements other that <span style="font-family:courier new,courier,monospace;">CLUSTER</span>.<br />
+The allowed expression would currently consist of one UIM tag (no combination allowed),<span style="font-family:courier new,courier,monospace;"> IS_TRUE/IS_FALSE/IS_EQUAL </span>with the different attributes - the <span style="font-family:courier new,courier,monospace;">CONTROL_REF</span> which would match the same of the control field, and the optional <span style="font-family:courier new,courier,monospace;">VALUE </span>attribute where the code table value is used to make a display decision. From that set, only <span style="font-family:courier new,courier,monospace;">IS_EQUAL </span>(the proposed format would be <span style="font-family:courier new,courier,monospace;">&lt;IS_EQUAL CONTROL_REF="ctfield" VALUE="CODE1"/&gt;</span>) is the new tag, <span style="font-family:courier new,courier,monospace;">IS_TRUE/IS_FALSE</span> already exist and need to be revisited to add the new attribute support.</p>
+
+<p dir="ltr">Again, more build time validation would be needed to separate the conditional cluster functionality from the optional cluster functionality, which will use different sets of attributes in those tags.<br />
+&nbsp;&nbsp; &nbsp;<br />
+The point of the construct like this is to both re-use the existing UIM, take on board the approach of the similar functionality in IEG and leave space for the further expansion.</p>
+
+<p dir="ltr">The <strong>advantages</strong>:</p>
+
+<ul dir="ltr">
+	<li>this type of runtime binding is suitable for both 1:1 and 1:n relationship, as every cluster independently defines their control expression.</li>
+</ul>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <strong>&nbsp;Comment 1 -&nbsp;(BOS): </strong>Could an example be provided of 1:n relationship, for example 1 Drop down field controlling 2 Clusters?</p>
+
+<ul dir="ltr">
+	<li>the approach has a better evolution capability (the expression language development introducing the new tags) and currently allows for just the minimum change (IS_EUQAL tag is needed, the other related tags need to be revisited and the CONTROL_REF type attribute would be needed for nearly all other alternatives).</li>
+</ul>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<strong> <span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Comment 2&nbsp;-</span><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;(BOS):&nbsp;</span></strong>The proposed UIM syntax/format&nbsp;looks pretty good. In order to agree on the this new format for this new functionality in 6.2, we need to think about possible scenarios regarding the evolution in order to ensure that future scenarios won't impact this UIM format - it can just extend it. I guess it is important to think about considerations with respect to accomodating an expression language as discussed. So with this in mind could we think of possible complex scenarions that might be required in the future. I guess we need to look at the possibilities in IEG in order to do this. Mael might be able to help us come up with scenarios here!!</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Comment 3&nbsp;-</span><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;(BOS):&nbsp;</span></strong> The UIM format looks pretty good on first run through but we need more revisions and discussion obviously before it can be finalized. Sceanrios and Test Cases (even beyond the scope of 6.2 will feed into this).</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">After Ciaran's analysis it does look like we need to cater for mulipitle&nbsp;conditions. Although it does looks like the scenarios that we have seen that one of the conditions is DYNAMIC&nbsp;and one of the conditions is STATIC (from a previous step/page on the wizard). Having multiple DYNAMIC conditions could be very hard to support at the moment given our limited UIM format thus far.<strong> TODO:</strong> I think we need to clarify with Niambh that multiple&nbsp;<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">DYNAMIC conditions is not required for 6.2.</span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Here is an example of the required as outlined by Ciaran:</p>
+
+<p dir="ltr">Scenario:&nbsp;Is 'Parent/Child relationship' AND '&lt; 18 or under 21 and full time student'</p>
+
+<p dir="ltr">So&nbsp;<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">'Parent/Child relationship'&nbsp;</span>&nbsp;is dropdown on the page and dynamically controls 1 Cluster.</p>
+
+<p dir="ltr"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">'&lt; 18 or under 21 and full time student' is on a previous page and this whole condition will evaluate to either true or false from a facade on a previous page. This is a STATIC condition.</span></p>
+
+<p dir="ltr"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">The UIM may look something like this:</span></p>
+
+<p dir="ltr"><span style="font-family: 'courier new', courier, monospace;">&lt;SERVER_INTERFACE NAME="DISPLAY"..../&gt;</span><br style="font-family: 'courier new', courier, monospace;" />
+<br />
+<br />
+<br />
+<span style="font-family: 'courier new', courier, monospace;">&nbsp;&nbsp;&nbsp; ...</span><br />
+<span style="font-family: 'courier new', courier, monospace;">&nbsp;&nbsp;&nbsp; &lt;FIELD&gt;</span><br />
+<span style="font-family: 'courier new', courier, monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;SOURCE NAME="DISPLAY" PROPERTY="codetableProperty" CONTROL_REF="ctRelField"/&gt;</span><br />
+<span style="font-family: 'courier new', courier, monospace;">&nbsp;&nbsp;&nbsp; &lt;/FIELD&gt;</span><br style="font-family: 'courier new', courier, monospace;" />
+<br />
+<br />
+<br />
+<span style="font-family: 'courier new', courier, monospace;">&nbsp;&nbsp;&nbsp; ...</span><br style="font-family: 'courier new', courier, monospace;" />
+<br />
+<br />
+<br />
+<br />
+<span style="font-family: 'courier new', courier, monospace;">&nbsp;&nbsp;&nbsp; &lt;CLUSTER ...&gt;</span></p>
+
+<p dir="ltr"><span style="font-family: 'courier new', courier, monospace;">&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;</span><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&lt;CONDITION&gt;</span><br style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;" />
+<br />
+<br />
+<br />
+<br />
+<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;IS_TRUE NAME="PersonRelationships</span><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">" PROPERTY="isApplicableStudent</span><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">"/&gt;</span></p>
+
+<p dir="ltr"><br />
+<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/CONDITION&gt;</span><br style="font-family: 'courier new', courier, monospace;" />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<span style="font-family: 'courier new', courier, monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;CONDITION TYPE="DYNAMIC"&gt;</span><br style="font-family: 'courier new', courier, monospace;" />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<span style="font-family: 'courier new', courier, monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;IS_EQUAL CONTROL_REF="ctRelF</span><span style="font-family: 'courier new', courier, monospace;">ield" VALUE="CODE1"/&gt;</span><br style="font-family: 'courier new', courier, monospace;" />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<span style="font-family: 'courier new', courier, monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/CONDITION&gt;</span></p>
+
+<p dir="ltr"><span style="font-family: 'courier new', courier, monospace;">&nbsp; &nbsp; &nbsp;</span><br style="font-family: 'courier new', courier, monospace;" />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<span style="font-family: 'courier new', courier, monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ...</span><br style="font-family: 'courier new', courier, monospace;" />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<span style="font-family: 'courier new', courier, monospace;">&nbsp;&nbsp;&nbsp;&nbsp; &lt;/CLUSTER&gt;</span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><span style="font-family: 'courier new', courier, monospace;">The key points here are:</span></p>
+
+<p dir="ltr"><span style="font-family: 'courier new', courier, monospace;">(1) Multiple conditions ('AND') are inferred here by having the 2 CONDITION elements sequentially within the CLUSTER element.</span></p>
+
+<p dir="ltr"><span style="font-family: 'courier new', courier, monospace;">(2) The first part of the expression&nbsp;</span><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">'&lt; 18 or under 21 and full time student'&nbsp;</span>&nbsp;which is static is known upfront and can be used an input when&nbsp;<span style="font-family: 'courier new', courier, monospace;">evaluating wether the selected codetable matches the one controls the cluster.</span></p>
+
+<h3 dir="ltr">Alternative 7a. Developer-designed condition</h3>
+
+<p dir="ltr">Before opening the Pandora's box of the potential expression/UIM complications, here's just another suggestion which builds on the top of the alternative 7, hence 7a.<br />
+When certain runtime behavior is needed on a field or action control, UIM has the capability of the custom scripting in the format</p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">&lt;SCRIPT EVENT="CLICK" ACTION="clickHandler"/&gt;</span><br />
+This instructs the tag/renderer to include the additional JavaScript function call when certain event is triggered on certain element which includes the that <span style="font-family:courier new,courier,monospace;">SCRIPT</span> element.<br />
+The <span style="font-family:courier new,courier,monospace;">ACTION</span>, JavaScript function is completely up to the developer and might be used to perform various tasks.<br />
+This, however, is applicable to just the fields which emit DOM events. In our case since we decided that the best place to describe the control relationship and control expression would be the <span style="font-family:courier new,courier,monospace;">CLUSTER</span> and <span style="font-family:courier new,courier,monospace;">CONDITION </span>within that cluster, which translate into the 'passive' HTML -&nbsp; the suggestion is to add the additional attribute to the <span style="font-family:courier new,courier,monospace;">CONDITION</span> element in the form of:<br />
+<span style="font-family:courier new,courier,monospace;">&lt;CLUSTER&gt;<br />
+&nbsp; &lt;CONDITION TYPE="DYNAMIC" VALIDATION="customExpression"/&gt;<br />
+&nbsp; ...<br />
+&lt;/CLUSTER&gt;</span><br />
+where the <em><span style="font-family:courier new,courier,monospace;">customExpression </span></em>is the JavaScript function fully described in the script file attached at either the page using the existing UIM syntax, or by extending the <span style="font-family:courier new,courier,monospace;">CONDITION </span>attributes even further to support <span style="font-family:courier new,courier,monospace;">SCRIPT_FILE</span> attribute as the regular <span style="font-family:courier new,courier,monospace;">SCRIPT </span>element does.<br />
+The variation to that syntax would be to use the child element to describe the validation, potentially, reusing the <span style="font-family:courier new,courier,monospace;">SCRIPT </span>element adjusting it to the <span style="font-family:courier new,courier,monospace;">CONDITION</span> as a context.<br />
+<span style="font-family:courier new,courier,monospace;">&lt;CLUSTER&gt;<br />
+&nbsp; &lt;CONDITION TYPE="DYNAMIC"/&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;SCRIPT EVENT="DISPLAY_VALIDATION" ACTION="customExpression"/&gt;<br />
+&nbsp; &lt;/CONDITION&gt;</span></p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">&nbsp;&nbsp; ...<br />
+&lt;/CLUSTER&gt;</span><br />
+This variation certainly requires extending the set of possible <span style="font-family:courier new,courier,monospace;">SCRIPT </span>event types which might be undesirable as the element can be used in various other contexts (so at least one more validation is required). It has the <strong>advantage </strong>though in that the <span style="font-family:courier new,courier,monospace;">SCRIPT_FILE</span> is already supported on <span style="font-family:courier new,courier,monospace;">SCRIPT </span>element as mentioned earlier.</p>
+
+<p dir="ltr">It also feels more consistent (child element within the <span style="font-family:courier new,courier,monospace;">CONDITION </span>as opposed to the attribute on it) if we decide to combine both singular expression approach (<span style="font-family:courier new,courier,monospace;">IS_TRUE/IS_FALSE/IS_EQUAL</span>) with the custom scripting to aid the developers who just need simple control relationship on a page.</p>
+
+<p dir="ltr">This way the developer is given the same means as they would be given with the additional UIM elements/syntax but in a different domain, directly writing whatever behavior they want using the already existing JavaScript interpreter means and certain rules/agreements.</p>
+
+<p dir="ltr">In any case, there is certain number of things which should be taken care of at the infrastructure level for this approach to work:</p>
+
+<ol dir="ltr">
+	<li>for every active control field (which has the <span style="font-family:courier new,courier,monospace;"><em>onchange</em></span> event associated) participating in the expression (<span style="font-family:courier new,courier,monospace;">CONTROL_REF</span> defined) add the code emitting an agreed event, say "<span style="font-family:courier new,courier,monospace;">curam/check/clusters</span>" on change.</li>
+	<li>for every field marked with <span style="font-family:courier new,courier,monospace;">CONTROL_REF</span> also output output the JavaScript variable in the agreed format; the variable name should match the <span style="font-family:courier new,courier,monospace;">CONTROL_REF</span>, it is desirable to have the variable properly scoped (<span style="font-family:courier new,courier,monospace;">curam.optional.clusters.field1 = dojo.byId('_the real dom object id, need to figure out properly_')</span>). The validation function must has the access to all the fields via the Dojo/DOM API in the agreed and documented format.</li>
+	<li>The read only fields carrying the <span style="font-family:courier new,courier,monospace;">CONTROL_REF</span> should also be translated into the JavaScript variables same way as the input fields would, so their values can be accessed and interpreted by the JavaScript expression.</li>
+	<li>The custom JavaScript expression/validation function should return "true" or "false" and make use of any fields of interest. It is up to developer to write the validation, it is up to us to document this writing rules and the variable agreements in place.</li>
+	<li>the infrastructure then should take care of handling the validation return, therefore it should add the page level (or top level if proves necessary) subscription to "<span style="font-family:courier new,courier,monospace;">curam/check/clusters</span>" event, which invokes the developer designed custom validation method and uses it's result to show or hide the associated cluster.</li>
+</ol>
+
+<p dir="ltr">Certainly, this just sketches the approach and needs the additional thinking. There are further details to be discussed and agreed on, as to how to best translate UIM identifiers into JavaScript, how to handle the composite fields (dates, addresses), is the <span style="font-family:courier new,courier,monospace;">CONTROL_REF</span> the best option to be used in every case, should it be combined with the bean/field based identifier, is there a way to avoid evaluating all the expressions on the page with every '<span style="font-family:courier new,courier,monospace;">onchange</span>' and so on.</p>
+
+<h3 dir="ltr">Example of 7a for the particular scenario</h3>
+
+<p dir="ltr">So just a bit of speculation on that scenario, I do not have it by hand, however, regardless on the actual fields, this is what option 7a would mean (arbitrary names/namespaces/values below):</p>
+
+<p dir="ltr">Defined on the page are the following fields:</p>
+
+<ul dir="ltr">
+	<li>parent/child relationship dropdown with the <span style="font-family:courier new,courier,monospace;">CONTROL_REF="relationshipSelect"</span></li>
+	<li>tax filling status dropdown with the<span style="font-family:courier new,courier,monospace;"> CONTROL_REF="taxDependentSelect"</span></li>
+	<li>checkbox for the parent dependent child with the <span style="font-family:courier new,courier,monospace;">CONTROL_REF="dependentChildCheckbox"</span></li>
+	<li>checkbox for a "Claimed as a Tax Dependent" with the<span style="font-family:courier new,courier,monospace;"> CONTROL_REF="taxDependentChildCheckbox"</span></li>
+</ul>
+
+<p dir="ltr">The <span style="font-family:courier new,courier,monospace;">CLUSTER </span>which display condition is dependent upon these fields is defined like this:</p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">&nbsp; &lt;CLUSTER LABEL="Additional.Information.Label"....&gt;</span></p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">&nbsp;&nbsp;&nbsp;&nbsp; &lt;CONDITION TYPE="DYNAMIC"&gt;</span></p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;SCRIPT EVENT="CLUSTER_CONTROL" VALIDATION="checkDependentChild"/&gt;</span></p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">&nbsp;&nbsp;&nbsp;&nbsp; &lt;/CONDITION&gt;</span></p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">&nbsp;&nbsp;&nbsp; ...</span></p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">&nbsp; &lt;/CLUSTER&gt;</span></p>
+
+<p dir="ltr">The control field DOM references are reflected in the JavaScript as the following variables (translating the CONTROL_REf's but also using the actual identifiers to find the DOM references):</p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">curam.clusterControl.taxDependentSelect</span></p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">curam.clusterControl.relationshipSelect</span></p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">curam.clusterControl.dependentChildCheckbox</span></p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">curam.clusterControl.taxDependentChildCheckbox</span></p>
+
+<p dir="ltr">The validation function within the custom JavaScript file (say attached as PAGE level SCRIPT_FILE for simplicity) would be:</p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">function checkDependentChild() {</span></p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">&nbsp; if (!curam.clusterControl.dependentChildCheckbox.checked</span></p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; || !curam.clusterControl.taxDependentChildCheckbox.checked) {</span></p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">&nbsp;&nbsp;&nbsp;&nbsp; return false;</span></p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">&nbsp; }</span></p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">&nbsp; if (curam.clusterControl.taxDependentSelect.selectedValue=="TXD1"</span></p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &amp;&amp; curam.clusterControl.relationshipSelect.selectedValue=="REL2") {</span></p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">&nbsp;&nbsp;&nbsp; return true;</span></p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">&nbsp; }</span></p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">&nbsp; return false;</span></p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">}</span></p>
+
+<p dir="ltr">Once any of the four fields (or indeed any other input field with the <span style="font-family:courier new,courier,monospace;">CONTROL_REF</span> defined on the page) changes, the specific event as described in 7a is emitted and the <span style="font-family:courier new,courier,monospace;">checkDependentChild </span>function is invoked.</p>
+
+<p dir="ltr">If it returns <span style="font-family:courier new,courier,monospace;">true</span>, the cluster is/remains displayed, if the result is <span style="font-family:courier new,courier,monospace;">false</span>, the cluster is/remains hidden.</p>
+
+<p dir="ltr">The cluster (table) identifier which is also needed for the manipulation is implied, but should be possible to emulate when processing the UIM/XIM.</p>
+
+<h3 dir="ltr">Work-arounding non-binary choice</h3>
+
+<p dir="ltr">As it was already noticed, when the same control element contains more than one cluster display option (HTML select, radio group), the relationship between the control and the actual cluster of choice becomes problematic. The problem is the representation of the control element in UIM. Be it a check box, a select, or a radio group, it is populated at runtime when resolving the actual domain for the control; in UIM all the variety is represented by the single <span style="font-family:courier new,courier,monospace;">FIELD</span> tag and the option names/values are unknown.</p>
+
+<p dir="ltr">Therefore, UIM developer needs either to look-up that information and either make use of the explicit values or rely on certain assumptions:</p>
+
+<ul dir="ltr">
+	<li>a naming convention might be used for the <span style="font-family:courier new,courier,monospace;">CONTROL_ID</span> so that say <span style="font-family:courier new,courier,monospace;">CONTROL_ID="controlGroup1_2"</span> would mean the cluster displayed when selecting the second option in the HTML select or radio-group.</li>
+	<li>a variation of that would be binding the <span style="font-family:courier new,courier,monospace;">CONTROL_ID</span> to the codetable code, i.e., <span style="font-family:courier new,courier,monospace;">CONTROL_ID="controlGroup1_SW2"</span>. This makes it easy to process and bind.</li>
+	<li>a wrapper CLUSTER around the optional cluster pool, or the cluster pool wrapped by another element (the already discussed WIDGET alternative), where the definition order matches the option number. In this case the wrapper carries the control id directly or indirectly, and the rest of the relationship is implied.</li>
+	<li>the additional attribute directly bound to the option value, like:</li>
+</ul>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;DISPLAY_ON NAME="DISPLAY" PROPERTY="clusterControl1" VALUE="CODE1"/&gt;</span></p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In any case the UIM developer needs to know the domain of the control element and the control values.</p>
+
+<h2 dir="ltr">Rendering/implementation alternatives</h2>
+
+<h3 dir="ltr"><strong>1. Lazy loading as opposed to displaying</strong></h3>
+
+<p dir="ltr">The control element could easily be suited to load contents lazily via the ajax requests and display them on the page upon selection; another piece of the JavaScript functionality would ensure hiding them.<br />
+<strong>Advantages</strong></p>
+
+<ul dir="ltr">
+	<li>The requested page with the optional clusters potentially loads and renders quicker as part of the contents is supposed to load upon separate requests and might not be needed at all.</li>
+</ul>
+
+<p dir="ltr"><strong>Drawbacks</strong></p>
+
+<ul dir="ltr">
+	<li>potential lag especially when the connection is slower, bad usability therefore; we had problems with the modal page loading, this is not different.</li>
+	<li>just suitable for the display/hiding functionality (since directly related to loading).</li>
+	<li>if the initial state needs to be preserved, it means two different situations, one when the cluster is loaded initially, the other when it is loaded lazily, therefore would look a subset of the pure JavaScript solution with minor initial load savings.</li>
+	<li>Bigger server load as every controlled element contents need to be loaded via the separate request.</li>
+	<li>Big change with regards to the rendering and content initialization. While it is possible to generate piece of jsp using the initial UIM description of the cluster, this would mean a different storage and serving model where just the fragment is served back upon the request; the server communication for that fragment, however will still be defined on the main page (unless some variation of UI VIEW is used where the full definition might be contained within the fragment).<br />
+	When rendering the requested cluster, the application server components will need to be invoked and potentially re-invoked to serve the data to the pieces of page being rendered.</li>
+	<li>No real advantages over the pure JavaScript solution since the JavaScript (just a bit different) is required.</li>
+</ul>
+
+<p dir="ltr">The conclusion: some technical complications with no real advantages.</p>
+
+<h3 dir="ltr"><strong>2. JavaScript style changing</strong></h3>
+
+<p dir="ltr">In this case all the page contents is loaded but just the clusters which are either non-optional or initially set to display are displayed; the optional clusters are shown by changing the HTML display style from <span style="font-family:courier new,courier,monospace;">display:none</span> to <span style="font-family:courier new,courier,monospace;">display:''</span>.<br />
+This is the trivial solution with regards to the implementation, the only difficulty being bindings between the control and controlled elements, however the bindings are easily defined when processing the UIM and converted to the required instructions (jsp, scriptlet, javascript) at the required stage.<br />
+<strong>Advantages</strong></p>
+
+<ul dir="ltr">
+	<li>simplicity</li>
+	<li>easily adaptable and extendable</li>
+</ul>
+
+<p dir="ltr"><strong>Disadvantage</strong></p>
+
+<ul dir="ltr">
+	<li>potentially bigger load times as opposed to the option 1, as even the contents which might not be needed loads and is rendered in the browser.</li>
+</ul>
+
+<p dir="ltr">&nbsp;On the other hand, the performance issues or some subsequent requirements might see lazily loaded UIM elements being introduced at some stage with the required fragment generation and serving tasks solved in the optimal way. This solution might then be reconsidered to utilize the combination of instant and lazy load, perhaps with yet another attribute required to mark the type of loading.</p>
+
+<h2 dir="ltr">Build time validations</h2>
+
+<ul dir="ltr">
+	<li>The validation to check the unbound control; maybe the singularity of the controlled element if there is the design limitation we want to impose from the very beginning by just allowing 1:1 control between the elements.</li>
+	<li>The cluster participating in the optional display should be explicitly forbidden to be a conditional cluster, displayed or not by the bean property. This should be a build time validation. Otherwise, if we want to allow that, we should impose a requirement the control and the associated cluster to be part of the same conditional group, so rendered or not rendered together. The problem with allowing this is that the IS_TRUE/IS_FALSE is not applicable to the loose control elements, therefore the only imaginable construct here would be a conditional cluster containing the control and the nested control cluster.</li>
+	<li>The build time validation to make sure that there is no many-to-one relationship between the control and controlled elements for the same operation.</li>
+</ul>
+
+<h2 dir="ltr">Renderer/tag changes</h2>
+
+<p dir="ltr">Whatever the chosen alternative is, the main difference is the UIM/XIM/JSP processing, however there is another area which needs to be taken care of - actual renderers or custom tags.<br />
+This is where the actual HTML output is generated, and these objects should be aware of the new content.</p>
+
+<p dir="ltr"><br />
+While there are mechanisms to communicate the new attributes or children the HTML rendering classes, it is perhaps a bit too complicated and requires the additional effort (tld changes, field parameter description changes, changes in every tag/renderer class).</p>
+
+<p dir="ltr">At the same time the needed functionality is all JavaScript domain; therefore it is much easier to process the new bindings at the JSP generator level, by converting them to the proper JavaScript instructions at this stage.</p>
+
+<p dir="ltr">This might be viewed as a deflection from the usual mechanism, where the attributes are processed by the rendering classes; on the other hand, this processing ends up as JavaScript instruction in any case.</p>
+
+<h2 dir="ltr">The JavaScript</h2>
+
+<p dir="ltr">The JavaScript responsible for displaying/hiding controlled elements could be simple enough to implement; part of it would be output to the page by the JSP generator so that the bindings, binding types (defaulting to the optional display binding) (and potentially the initial state information) is being made known to the controlling JavaScript.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The controlling JavaScript module request needs to be placed upon encountering the optional (controlled) clusters on the page. The proper namespace is to be used for the bindings, and same way the proper AMD module should be created for the optional cluster control.</p>
+
+<p dir="ltr"><br />
+It should be mentioned, that once the target format of the clusters and the control elements (the attributes/additional content) is decided on, the JavaScript development could start in parallel, acting on the mock page (the mocking might be done in Fiddler by replacing on regular page with the one with the additional attributes) as if the optionality information was already propagated.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">One more thing JavaScript needs to take care of would be blanking all the fields in the controlled cluster, once that is hidden after being display - to avoid any irrelevant user input to be passed back to the server. Couple of options to consider when implementing this would be either outputting the additional JavaScript for the controlled cluster field when this is rendered, or JavaScript scan of the cluster contents once it is displayed. The preferable way would look the one when rendering, since this would allow for the selective binding of just the relevant content, however the former suggestion might prove to be simpler when implementing, and not too much overhead from the performance point of view either.</p>
+
+<h2 dir="ltr">Testing</h2>
+
+<h3 dir="ltr">Automated testing</h3>
+
+<p dir="ltr">The generation result could be tested same way as the other UIM-to-JSP chain testing, however currently there is not much for that testing, since the webtests are more of a leftover from the previous application than a really useful testing means; same way the validation violations aren't tested automatically at this stage apart from the development/review testing where they are introduced.</p>
+
+<p dir="ltr"><br />
+JavaScript functionality could probably be tested on it's own without getting visual, hence subject to the automated testing. Need to check with Barry regarding the testing possibilities with the newly introduced UI Tooling. It is also suitable for Selenium-like tests, since the controlled elements should disappear from/appear in the HTML markup when controlled correspondingly.</p>
+
+<h3 dir="ltr">Manual testing</h3>
+
+<p dir="ltr">The manual testing would be the visual test to check the different control combinations, including different initial display, one optional cluster on a page, number of the optional clusters on a page. The test pages need to be introduced to the TabTest application, and the TabTest application tests are 100% sufficient for the manual testing.</p>
+
+<h2 dir="ltr">Documentation</h2>
+
+<p dir="ltr">Adding new UIM markup even as the attributes has bigger impact on the documentation, since both our UIM schema needs to be changed, the UIm validations need to be adjusted accordingly (not part of the documentation) , but also the description of the existing elements need to be modified. Most certainly it requires new sub-chapter regarding the new features of the CLUSTER but also new attributes for the chosen control elements; their behavior in the request needs to be considered, since they are not the regular form items any longer; however it could be chosen to pass the selection information back to the server to have the element state preserved when re-rendering the page.</p>
+
+<p dir="ltr"><br />
+At this stage there does not seem to be any new runtime validation messages required; at the same time there definitely should be and need to be introduced new generator-build time messages to warn the user about the invalid combinations on the UIM page with regards to the new control bindings (duplicate controls, non-existent controlled elements, etc).</p>
+
+<h2 dir="ltr">Accessibility</h2>
+
+<p dir="ltr">The design should provide for hiding the hidden clusters and their contents from the visibility to the screen reader; yet, once such a cluster is shown, it should be properly announced and tabbed to; this might be already the way with the browser/screen reading correctly handling the non-displayed elements. However, from the user perspective the newly displayed cluster or the possibility to show the additional cluster should be correctly announced either before the user's choice/selection (so on the control element) or upon the display and hiding a cluster. Not really sure which is the acceptable way of achieving this and what the standards/best practices are in this area.</p>
+
+<p dir="ltr"><br />
+<strong>TO DO</strong>: need to run this by our accessibility experts before detailing any further.</p>
+
+<h2 dir="ltr">Localization</h2>
+
+<p dir="ltr">There are no separate localization requirements since the element visual labeling should follow the same rules and guidelines as for the other elements. The only difference is the accessibility related texts (tool tips) - these might need be made separate and therefore separately localized. Otherwise the element binding is completely hidden from the end user and does not introduce any localization issues/requirements.</p>
+
+<h2 dir="ltr">Use cases (in progress)</h2>
+
+<ul dir="ltr">
+	<li>The user clicks the check box control associated with the hidden cluster. The cluster shows up (and is announced if Screen Reader is turned on).</li>
+	<li>The user clicks the check box control associated with the displayed cluster. The cluster is hidden. The disabled user should be informed of this consequence by the Screen Reader.
+	<ul>
+		<li>The tool tip should include the cluster label for the screen reader to announce.</li>
+	</ul>
+	</li>
+	<li>The user clicks on the control (check box) supposed to be associated with some cluster on the page, which is not on the page.<br />
+	This should not happen by any means, it should be eliminated by the build time validations and the restrictions already discussed.</li>
+	<li>The user clicks on the control (check box) which is bound to the same cluster which is already controlled by another check box (other control element) and already has a state (displayed/hidden)
+	<ul>
+		<li>Another validation task, the control elements acting on the same cluster should be excluded at the build time, the build should fail with the appropriate messages.</li>
+	</ul>
+	</li>
+	<li>The user selects some check boxes to display number of optional clusters, leaving the other optional clusters hidden and submits the results.&nbsp;</li>
+</ul>
+
+<ol dir="ltr" style="margin-left: 40px;">
+	<li>The submit (form validation) fails. The currently shown clusters as well as the state of the control elements should be re-displayed.</li>
+	<li>The submit succeeds on the form which is possible to re-display (return to the same wizard page). Whatever the control element values were, they should be retained, so the optional clusters previously displayed are to be re-displayed.<br />
+	NOTE: this scenario is the desired one, however it is up to the app developers to actually implement it, since it requires storage of the control element values on the server-side.</li>
+</ol>
+
+<ul dir="ltr">
+	<li>The user selects an option from the select<br />
+	The cluster corresponding to the user's choice gets displayed; the clusters representing other choices are/remain hidden. The nwely displayed cluster is correctly announced by the Screen Reader if it is in use.</li>
+</ul>
+
+<p dir="ltr">The following scenarios do not apply to the current solution required, but should be considered if the solution is extended to allow for group action:</p>
+
+<ul dir="ltr">
+	<li>The user clicks the control which contains the controlled element from another control group.<br />
+	This should be excluded by maintaining the naming convention and validations. If the control groups are allowed, they should not intersect and one group should be controlled by a single control element.</li>
+</ul>
+
+<h2 dir="ltr">Work Estimation</h2>
+
+<h3 dir="ltr">Task summary and breakdown</h3>
+
+<table border="1" dir="ltr" style="width: 1021px;">
+	<tbody>
+		<tr>
+			<td style="width: 25px;"><strong>&nbsp;#</strong></td>
+			<td style="width: 315px;"><strong>Task</strong></td>
+			<td style="width: 84px;"><strong>Estimate (days)</strong></td>
+			<td style="width: 571px;"><strong>Notes</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 25px;">1</td>
+			<td style="width: 315px;">Design page</td>
+			<td style="width: 84px;">3-4</td>
+			<td style="width: 571px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 25px;">2</td>
+			<td style="width: 315px;">Discussions/narrowing down final options</td>
+			<td style="width: 84px;">3</td>
+			<td style="width: 571px;">Finalising the design since multiple options are available, input is needed</td>
+		</tr>
+		<tr>
+			<td style="width: 25px;">3</td>
+			<td style="width: 315px;">Generator changes</td>
+			<td style="width: 84px;">5-8</td>
+			<td style="width: 571px;">UIM to JSP changes. Does not include any renderer related work should that be needed</td>
+		</tr>
+		<tr>
+			<td style="width: 25px;">4</td>
+			<td style="width: 315px;">Build time validations/additional messages</td>
+			<td style="width: 84px;">2-3</td>
+			<td style="width: 571px;">Requires extensive testing, however partly overlaps with task #6 as test pages need to be created for this.</td>
+		</tr>
+		<tr>
+			<td style="width: 25px;">5</td>
+			<td style="width: 315px;">JavaScript</td>
+			<td style="width: 84px;">5</td>
+			<td style="width: 571px;">Could be run in parallel with #3</td>
+		</tr>
+		<tr>
+			<td style="width: 25px;">6</td>
+			<td style="width: 315px;">Test pages and initial testing</td>
+			<td style="width: 84px;">2-3</td>
+			<td style="width: 571px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 25px;">&nbsp;</td>
+			<td style="width: 315px;"><strong>Summary</strong></td>
+			<td style="width: 84px;"><strong>18-24</strong></td>
+			<td style="width: 571px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

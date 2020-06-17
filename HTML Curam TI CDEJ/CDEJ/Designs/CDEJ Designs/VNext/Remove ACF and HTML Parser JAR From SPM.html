@@ -1,0 +1,1557 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Remove ACF and HTML Parser JAR From SPM</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../wiki.css" />
+<script type="text/javascript" src="../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Remove ACF and HTML Parser JAR From SPM";
+    pageId="urn:lsid:ibm.com:td:b71a3a07-7d4a-438a-9acc-713b702250b3";
+    toRoot="../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Remove ACF and HTML Parser JAR From SPM</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><div contenteditable="false" name="intInfo" style="border-radius: 6px; margin: 8px; padding: 4px; display: block; width: auto;background-color: #ffc;">Table of Contents:
+<ul style="list-style-type:none !important;">
+	<li style="list-style-type:none;"><a href="#ii3" style="display: block;">Stakeholders</a></li>
+	<li style="list-style-type:none;"><a href="#ii4" style="display: block;">Background</a></li>
+	<li style="list-style-type:none;"><a href="#ii5" style="display: block;">Requirements</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii6" style="display: block;">Requirement Decisions</a></li>
+		<li style="list-style-type:none;"><a href="#ii29" style="display: block;">Current ACF and Html Parser References Within the Product</a></li>
+		<li style="list-style-type:none;"><a href="#ii30" style="display: block;">Discussion on Usage and Possible Replacement</a></li>
+		<li style="list-style-type:none;"><a href="#ii7" style="display: block;">Non Functional Requirements</a></li>
+	</ul>
+	</li>
+	<li style="list-style-type:none;"><a href="#ii8" style="display: block;">Replacement Options</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii31" style="display: block;">Watson Care Manager Replacement Option</a></li>
+		<li style="list-style-type:none;"><a href="#ii9" style="display: block;">Design</a></li>
+	</ul>
+	</li>
+	<li style="list-style-type:none;"><a href="#ii10" style="display: block;">Architecture/Design Decisions</a></li>
+	<li style="list-style-type:none;"><a href="#ii11" style="display: block;">System Context Diagram</a></li>
+	<li style="list-style-type:none;"><a href="#ii12" style="display: block;">Architecture/Design Context Diagram</a></li>
+	<li style="list-style-type:none;"><a href="#ii13" style="display: block;">Design Specifics</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii14" style="display: block;">Design User Interface</a></li>
+		<li style="list-style-type:none;"><a href="#ii21" style="display: block;">Design Validations</a></li>
+		<li style="list-style-type:none;"><a href="#ii22" style="display: block;">Design Metadata Changes</a></li>
+		<li style="list-style-type:none;"><a href="#ii23" style="display: block;">Design Logical Data Model Changes</a></li>
+		<li style="list-style-type:none;"><a href="#ii24" style="display: block;">Design Resilience Measures</a></li>
+		<li style="list-style-type:none;"><a href="#ii25" style="display: block;">Design Logging</a></li>
+		<li style="list-style-type:none;"><a href="#ii26" style="display: block;">Design Accessibility</a></li>
+		<li style="list-style-type:none;"><a href="#ii27" style="display: block;">Third Party Software and Legal Requirements</a></li>
+	</ul>
+	</li>
+	<li style="list-style-type:none;"><a href="#ii28" style="display: block;">Use Cases</a></li>
+	<li style="list-style-type:none;"><a href="#ii15" style="display: block;">Implementation Notes</a></li>
+	<li style="list-style-type:none;"><a href="#ii16" style="display: block;">Application Impact</a></li>
+	<li style="list-style-type:none;"><a href="#ii17" style="display: block;">Configuration Transport Manager</a></li>
+	<li style="list-style-type:none;"><a href="#ii18" style="display: block;">Testing</a></li>
+	<li style="list-style-type:none;"><a href="#ii19" style="display: block;">Documentation/How To Use Feature</a></li>
+	<li style="list-style-type:none;"><a href="#ii20" style="display: block;">Check Lists</a>
+	<ul style="list-style-type:none !important;">
+		<li style="list-style-type:none;"><a href="#ii1" style="display: block;">IEG Check List</a></li>
+		<li style="list-style-type:none;"><a href="#ii2" style="display: block;">Workflow Check List</a></li>
+	</ul>
+	</li>
+</ul>
+</div>
+
+<p dir="ltr">&nbsp;</p>
+
+<h1 dir="ltr"><span style="font-size:20px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Remove ACF and HTML Parser JARs from SPM</strong></span></h1>
+
+<h2 dir="ltr" id="ii3">Stakeholders</h2>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Refer to the following Org Chart to ensure you are engaging the correct people. The table below indicates the current contacts for each area.
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://ibm.biz/BdsuKd">https://ibm.biz/BdsuKd</a></li>
+	</ul>
+	</li>
+</ul>
+
+<table border="1" dir="ltr" style="width: 500px;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Role</span></strong></td>
+			<td style="width: 120px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Name</span></strong></td>
+			<td style="width: 168px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Sign Off if Applicable</span></strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Customer</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Business Owner/Product Owner</td>
+			<td style="width: 120px;">Shane McFadden/Sonya Purcell</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Architect</td>
+			<td style="width: 120px;">Fergal Gavin</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Developer(s)</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">FVT</td>
+			<td style="width: 120px;">Satya Minnekanti</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">SVT</td>
+			<td style="width: 120px;">John Redmond/Sean Cleary</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Information Developer</td>
+			<td style="width: 120px;">Annette Sohor</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">UX Design</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Legal</td>
+			<td style="width: 120px;">Deirdre Dolan/Jim Rook</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii4">Background</h2>
+
+<p dir="ltr">Connections and various other IBM products have been divested to HCL. As part of this process, two libraries used in SPM (acf and htmlparser) were also included in that bundling. This means that for SPM to continue using these libraries in the product, some fee would have to be paid to HCL.</p>
+
+<p dir="ltr">Therefore, a decision has been made to remove these libraries from the product and look for alternatives to perform the same functionality as the libraries provided.</p>
+
+<p dir="ltr">The most recent communication on this was via email on 29-01-2020 where a bundling dependency on ACF triggered an email conversation with <strong>Duinseach Carey/Ireland/IBM</strong>. The below text is the result of that communication:</p>
+
+<p dir="ltr"><em>I've confirmed there is no new owning team for ACF at IBM. Looking at the list of dependencies in CH, most are HCL now (Connections, Docs, Sametime, Portal). That leaves Curam and Rational Requirements Composer, which looks to have gone EOL in September of 2017, so essentially Curam is the only active consumer of the code.</em></p>
+
+<p dir="ltr"><em>HCL will be independently maintaining the version they own and use (they have the source and rights to continue with it) so that leaves your team with two choices - either maintain your copy or move off to an alternative. My understanding is that other teams such as Watson Health are planning to move to OWASP so that may be something you want to consider? I can accept this last dependency request based on your agreement that continued use of the code will be at your own risk: it is unsupported, there will be no further development and no bug fixes. Beyond this request, unless your team wishes to take ownership of the record, I will be following up with the CH team re getting it moved to EOL.</em></p>
+
+<p dir="ltr">It should also ne noted that that ACF has been marked as EOL within Clearing House and hence no future bundling dependencies can be raised against it:</p>
+
+<ul dir="ltr">
+	<li><a href="https://w3-connections.ibm.com/forums/html/topic?id=aad686b4-04c5-4e9c-a413-c667f7be2737">https://w3-connections.ibm.com/forums/html/topic?id=aad686b4-04c5-4e9c-a413-c667f7be2737</a></li>
+</ul>
+
+<h2 dir="ltr" id="ii5">Requirements</h2>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement 1: Remove the acf and html parser JARs from the SPM deliverable.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement 2: Replace the functionality that these JARs provided and usage within the product with an alternative technology so as that there is no impact to SPM and the result of any processing performed by these libraries is the same.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement 3: This removal exercise must be performed across all of the live versions of the SPM product.</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=?????" target="_blank">RTC&nbsp;Story&nbsp;###</a> - Title of the story in RTC.</li>
+</ul>
+
+<h3 dir="ltr" id="ii6">Requirement Decisions</h3>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">There may be some outstanding questions/decisions made as regards to the requirements. These decisions should be documented here.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="156" width="860">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement Decision Title</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Issue or Problem Statement</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Assumptions</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Motivation</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Alternatives</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Decision</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Justification</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Implications</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Status</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Date</strong></span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<h3 dir="ltr" id="ii29">Current ACF and Html Parser References Within the Product</h3>
+
+<p dir="ltr">1. Libraries used (these are downloaded as a pair):</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;acf.jar</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;html-parser.jar</li>
+</ul>
+
+<p dir="ltr">2. Current Version - 2.5.0.29</p>
+
+<p dir="ltr">3. Download Location:<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- <a wiki="W565cebd7cf70_4439_85c3_715f217e5f07" page="Welcome &amp; Download" id="wikiLink1561115209918" href="https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/W565cebd7cf70_4439_85c3_715f217e5f07/page/Welcome%20%26%20Download">https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/W565cebd7cf70_4439_85c3_715f217e5f07/page/Welcome%20%26%20Download</a></p>
+
+<p dir="ltr">4. Source Controlled in:<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- TI/client/CoreInf/CuramCDEJ/lib/ext/jar</p>
+
+<p dir="ltr">5. Released in:<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;- CuramCDEJ/lib/ext/jar</p>
+
+<p dir="ltr">6. Usage:<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+The following table outlines where these libraries are used throughout the product. All usage is completed through a generic wrapper class called SecurityUtils of which there are numerous copies of in various components.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The table below shows the usage and should be consulted when performing the gap analysis and definition of the use cases which must be tested during this process.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="4001" style="table-layout: fixed; overflow-wrap: break-word; border-collapse: collapse; border-color: rgb(105, 105, 105);" width="984">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;"><span style="font-size:16px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Component</strong></span></td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Usage</span></strong></td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Comments</span></strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Technical Infrastructure (TI)</strong></td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">TI\BuilderScripts\packConfigFiles\CuramCDEJ\.classpath</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">References to both acf and html parser in here.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">TI\client\CoreInf\CuramCDEJ\bin\build-properties.xml</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">References to both acf and html parser in here.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">TI\client\CoreInf\CuramCDEJ\lib\ext\jar</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">Both JARs are located here.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">TI\reltools\resttoolkit\.classpath</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">References to the JARs in here</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">TI\reltools\resttoolkit\buildscripts\server\rest_buildWar.xml</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">References to the JARs in here</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">TI\reltools\resttoolkit\buildscripts\server\rest_properties.xml</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">References to the JARs in here</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">TI\reltools\resttoolkit\source\curam\rest\server\RequestUtils.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">This seems to be using ACF filtering directly. It looks as if the full JSON body (which is an input stream) and can sanitize and remove malicious code, and then continue processing. This is for POST and PUT requests only. The malicious code removal is the same as the regular HTML sanitizing - it removes all javascript/script tags, and then any HTML tags that it thinks are malicious based on the OOTB confguration rules.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Business Infrastructure (30 hits in 4 files)</strong></td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Package: BIZINF\webclient\components\IntelligentEvidenceGathering\javasource\curam\ieg\player</strong></em></td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">IEGJSONUtility.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">23 calls in here. Used to filter all aspects of the data for IEG JSON data for display.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">RichTextComponent.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">final String filteredDesc = SecurityUtils.filterACF(desc);</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Used for filtering the description for this component.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">SecurityUtils.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">The Security Utils class itself. This contains the actual references to the acf library.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Package: BIZINF\webclient\components\IntelligentEvidenceGathering\tests\java\curam\ieg\test\player</strong></em></td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">SecurityUtilsTest.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">The test class for the SecurityUtils class.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CEF Widgets (24 hits in 8 files)</strong></td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Component: CEFWidgets</strong></em></p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Package: CEFWidgets\webclient\components\CEFWidgets\javasource\curam\widget\render\CEF</strong></em></p>
+			</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">BIReportInPodRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">String sanitisedReportURL = SecurityUtils.escapeURL(reportURL);</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">GoogleMapsAddressViewRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">String sanitisedURL = SecurityUtils.escapeURL(googleMapURL);</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">NoteHistoryRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">filteredNoteContents = SecurityUtils.filterACF(noteContents);</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">RichTextEditRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">value = SecurityUtils.sanitize(value);</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">RichTextViewRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">filteredContent = SecurityUtils.filterACF(desc);</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Package: CEFWidgets\webclient\components\CEFWidgets\javasource\curam\widget\render\infrastructure</strong></em></td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">ListBodyRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">filteredContent = SecurityUtils.filterACF(listInfoText);</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Package: CEFWidgets\webclient\components\CEFWidgets\javasource\curam\widget\render\utils\</strong></em></td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">SecurityUtils.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">The Security Utils class itself. This contains the actual references to the acf library.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Package: CEFWidgets\webclient\components\CEFWidgets\tests\curam\tests\render\infrastructure\</strong></em></td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">RichTextRenderFilteringTest.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">Multiple tests to test the filtering of rich text content.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">SPM Ent Mods (52 hits in 21 files)</strong></td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CitizenWorkspace: </strong></em></p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Package: SPM-EntMods\webclient\components\CitizenWorkspace\javasource\citizenaccount\renderer</strong></em></p>
+			</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">CitizenHomeBannerRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">final String filteredContent = SecurityUtils.filterACF(bannerText);</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">CitizenHomeCampaignPanelRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">final String filteredContent = SecurityUtils.filterACF(itemText);</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">CitizenHomeMessagesRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">final String filteredMessageTitle = SecurityUtils.filterACF(messageTitle);</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">RendererUtil.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">final String filteredContent = SecurityUtils.filterACF(text);</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">LayoutUtils.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">final String filteredTitle = SecurityUtils.filterACF(title);<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			final String filteredContent = SecurityUtils.filterACF(text);</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">BannerRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">final String filteredBannerText = SecurityUtils.filterACF(bannerText);<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			final String filteredContent = SecurityUtils.filterACF(bannerTitle);</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">CheckboxEditRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">final String filteredContent = SecurityUtils.filterACF(description);</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">CWViewRichTextRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">final String filteredContent = SecurityUtils.filterACF(desc);</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">GovernmentServicesInformationRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">final String filteredContent = SecurityUtils.filterACF(description);</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">\HeaderRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">SecurityUtils.filterACF(containerDescription);</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">HomePageLinkRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">final String filteredTitleContent = SecurityUtils.filterACF(title);<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			SecurityUtils.filterACF(description);</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">LandingPageRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">final String filteredTitlePart1 = SecurityUtils.filterACF(titlePart1);</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">final String filteredTitlePart2 = SecurityUtils.filterACF(titlePart2);<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			final String filteredTitlePart3 = SecurityUtils.filterACF(titlePart3);<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			final String filteredDescription = SecurityUtils.filterACF(description);</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">PostSubmitRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">SecurityUtils.filterACF(componentTitle);<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			final String filteredTitle = SecurityUtils.filterACF(title);</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">RadioEditRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">final String title = SecurityUtils.filterACF(field.getTitle());</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">SecurityUtils.filterACF(field.getDescription());<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			final String filteredText = SecurityUtils.filterACF(title);<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			final String filteredText = SecurityUtils.filterACF(description);</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">RichTextEditRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">final String filteredContent = SecurityUtils.filterACF(value);</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">RichTextViewRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">final String filteredContent = SecurityUtils.filterACF(desc);</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">TextContentRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">final String filteredContent = SecurityUtils.filterACF(body);</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Package: SPM-EntMods\webclient\components\CitizenWorkspace\javasource\citizenworkspace\util</strong></em></td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">SecurityUtils.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">The Security Utils class itself. This contains the actual references to the acf library.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">WorkspaceServices:</em></strong></p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Package: SPM-EntMods\webclient\components\CitizenWorkspace\javasource\workspaceservices\renderer\richtext</em></strong></p>
+			</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">RichTextFlexViewRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">SecurityUtils.filterACF(wellFormedFieldData);</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">RichTextViewRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">final String filteredContent = SecurityUtils.filterACF(desc);</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CPM</em></strong></p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Package: SPM-EntMods\webclient\components\CPM\javasource\cpm\widget\renderer</em></strong></p>
+			</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">ServiceViewRichTextRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">filteredDesc = curam.widget.render.utils.SecurityUtils.filterACF(desc);</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">References to RendererUtil.richTextRenderer()</strong></em></td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Package: SPM-EntMods\webclient\components\CitizenWorkspace\javasource\citizenaccount\renderer</strong></em></td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">CitizenHomeBannerRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">Line 152:&nbsp;&nbsp;&nbsp;&nbsp; RendererUtil.richTextRenderer(filteredContent, fragment, context,</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">CitizenHomeCampaignPanelRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">Line 403:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RendererUtil.richTextRenderer(filteredContent,</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">CitizenHomeMessagesRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">Line 359:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RendererUtil.richTextRenderer(fieldBuilder.getComponent(),</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">LifeEventListRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">Line 146:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RendererUtil.richTextRenderer(field, doc, rendererContext, contract,<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			Line 227:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RendererUtil.richTextRenderer(field, doc, rendererContext, contract,</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">ViewLifeEventLaunchRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Line 150:&nbsp;&nbsp;&nbsp;&nbsp; RendererUtil.richTextRenderer(field, doc, rendererContext, contract,</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Line 358:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RendererUtil.richTextRenderer(field, doc, rendererContext, contract,<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			Line 363:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RendererUtil.richTextRenderer(field, doc, rendererContext, contract,</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">ViewLifeEventRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">Line 211:&nbsp;&nbsp;&nbsp;&nbsp; RendererUtil.richTextRenderer(builder.getComponent(), moreInfoDiv,</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">ApplyForBenefitsRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">Line 92:&nbsp;&nbsp;&nbsp;&nbsp; RendererUtil.richTextRenderer(field, doc, context, contract,<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			Line 105:&nbsp;&nbsp;&nbsp;&nbsp; RendererUtil.richTextRenderer(field, doc, context, contract, descDiv,<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			Line 145:&nbsp;&nbsp;&nbsp;&nbsp; RendererUtil.richTextRenderer(field, doc, context, contract,<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			Line 160:&nbsp;&nbsp;&nbsp;&nbsp; RendererUtil.richTextRenderer(field, doc, context, contract, pdfDescDiv,</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">BannerRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">Line 238:&nbsp;&nbsp;&nbsp;&nbsp; RendererUtil.richTextRenderer(filteredBannerText, anchor, context,</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">ContentPanelHelper.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">RendererUtil.richTextRenderer(informationalList.item(i)</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">HomePageRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">Line 57:&nbsp;&nbsp;&nbsp;&nbsp; RendererUtil.richTextRenderer(component.getTitle(), title, context,<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			Line 60:&nbsp;&nbsp;&nbsp;&nbsp; RendererUtil.richTextRenderer(component.getDescription(), description,</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">HyperlinksViewRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">Line 305:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RendererUtil.richTextRenderer(label, anchor, context, contract);</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">ListAllLocalOfficesRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">Line 85:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RendererUtil.richTextRenderer(address, listEntry, context, contract);</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">LaunchOnlineAppealRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">Line 64:&nbsp;&nbsp;&nbsp;&nbsp; RendererUtil.richTextRenderer(field, doc, context, contract,<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			Line 73:&nbsp;&nbsp;&nbsp;&nbsp; RendererUtil.richTextRenderer(field, doc, context, contract,<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			Line 114:&nbsp;&nbsp;&nbsp;&nbsp; RendererUtil.richTextRenderer(field, doc, context, contract,<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			Line 122:&nbsp;&nbsp;&nbsp;&nbsp; RendererUtil.richTextRenderer(field, doc, context, contract,</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">ScreeningResultsRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">Line 580:&nbsp;&nbsp;&nbsp;&nbsp; RendererUtil.richTextRenderer(program.explanation,</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">TextContentRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">Line 66:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RendererUtil.richTextRenderer(body, content, context, contract);</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">TitleAndDescriptionPluggableRenderer.java</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">Line 244:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RendererUtil.richTextRenderer(body, contentSpan, context, contract);</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">References to LayoutUtils.addSelectInput()</em></strong></p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">This private function is called by these two functions within the same class:</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1. addRadio(() - RadioButtonGroupLayout.java</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2. addCheckbox() - SelectClientAndRolesWidgetRenderer.java and CheckboxGroupLayout.java</p>
+			</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">Utility Function</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">References to LayoutUtils.createElement()</strong></em></p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">This is a public static function which makes a call to the SecurityUtils function. Need to check as it only applies to rich text and not all calls to the function are rich text related and pass in text.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1. CheckboxGroupLayout.java - some references in here.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2. LinkLayout.java - couple of references in there</p>
+			</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">Utility Function</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 166px; border-color : #696969;">&nbsp;</td>
+			<td style="overflow: hidden; width: 357px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+			<td style="overflow: hidden; width: 305px; border-color: rgb(105, 105, 105);">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii30">Discussion on Usage and Possible Replacement</h3>
+
+<p dir="ltr">I have reviewed our use of this within `curam.widget.render.utils.SecurityUtils.java`, which is where I worked on that defect previously.</p>
+
+<p dir="ltr">I think what we are doing with the call to ACF is to set up a blacklist of specifically prohibited characters, and apply it to a document that has already had a whitelist applied. So the flow within that filterACF() method is as follows:</p>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Set up the processor factory and instance for manipulating the document.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Check if whitelist is enabled (system configuration)</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;&nbsp; a. If it is, read whitelist from properties file and apply the whitelist using jsoup.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;&nbsp; b. If not break out of that check.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Apply the blacklist using ACF.</li>
+</ol>
+
+<p dir="ltr">I think we should be fine to take the same process and replicate in jsoup, so it becomes</p>
+
+<p dir="ltr">1. Check if whitelist is enabled (system configuration)<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; a.&nbsp; If it is, read whitelist from properties file and apply the whitelist using jsoup.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; b. If not break out of that check - and apply blacklist, applying it to the document once it has already been manipulated by the whitelist is redundant, _and_ raises an issue where a customer enables a tag for whatever reason in their propertiesfile, but we have magic code in ACF that removes it, with no visibility.</p>
+
+<p dir="ltr">Jsoup doesn’t really deal with the idea of a `blacklist`, only whitelists. I would question the use case of applying a blacklist at all actually, I remember Fergus wanted all uses of it removed over time. We would be best off filtering all content through a whitelist and a only through a whitelist, the blacklist is redundant with modern injection/obfuscation techniques.</p>
+
+<p dir="ltr">But what we could do is create a “Whitelist” that allows all tags, and then remove the ones that are currently on the blacklist in that ACF code, and if whitelist is not enabled by that system config, apply that more lenient whitelist. It would have the same effect.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<blockquote dir="ltr">
+<p dir="ltr">&nbsp;/**<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; * This method takes untrusted html, and filters through a white-list of<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; * permitted tags and attributes (designed to match rich text editor<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; * white-list) before returning the safe HTML.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; *<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; * @param richText The html string to be filtered.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; *<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; * @return the sanitized html string.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp; */</p>
+</blockquote>
+
+<p dir="ltr">This is the sanitize method, which used Jsoup to clean the passed in html based on a very restrictive whitelist. Basically, we start off with Whitelist.none(), which is an empty whitelist, no tags will be allowed at all. We then read the whiteListMap, and apply the tags and attributes from that to our whitelist, and then apply the whitelist to the html.</p>
+
+<p dir="ltr">We only call this method if the `kWhiteListFilterDisabledConfig` system property is not set.</p>
+
+<p dir="ltr">Regardless of whether or not that property is set, we currently use ACF to apply a blacklist. You can see the flow of this in my next message.</p>
+
+<p dir="ltr">The ideal solution here would be to enforce whitelist usage by removing that system property, and remove any use of and reference of a blacklist, as they are a antiquated,&nbsp; allowing all tags by default except those defined by the blacklist.</p>
+
+<p dir="ltr">An attacker could use _any_ of the methods here `https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet` to still inject malicious code past this blacklist.</p>
+
+<p dir="ltr">The whitelist approach, used within the sanitize method, lets nothing through, except that outlined in the properties file,</p>
+
+<p dir="ltr"><img height="426" id="1561122370290_0" src="Remove%20ACF%20and%20HTML%20Parser%20JAR%20From%20SPM._ATTACHMENTS_/editor_image_95697feb-a6ed-4693-8b1c-6392ebe975e1.png" width="897"></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Check for system configuration before applying whitelist. Always apply blacklist.</p>
+
+<p dir="ltr"><img height="414" id="1561122429724_0" src="Remove%20ACF%20and%20HTML%20Parser%20JAR%20From%20SPM._ATTACHMENTS_/editor_image_6bab1ced-d99e-4d7f-868e-8bc84c3f6cef.png" width="886"></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Differences between ACF, JSoup and OWASP Java Sanitizer</span></strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><img id="1562169151985_0" src="Remove%20ACF%20and%20HTML%20Parser%20JAR%20From%20SPM._ATTACHMENTS_/editor_image_93dec8b1-c3a3-4ef8-8ac9-240f8373c654.png"></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The above table shows the tests written around the ACF implementation. It shows the input string and the various outputs for each of the possible replacement libraries. There is also a sample rich text test shown below that ACF does not modify in any way.</p>
+
+<p dir="ltr">JSoup also does not modify this when using the "whitelist = Whitelist.relaxed();" that the library provides however it does format the html with spaces and new lines so that complicates writing junit tests.</p>
+
+<p dir="ltr">OWASP only modifies it slightly by changing the &lt;br&gt; tag to &lt;br /&gt; when configured to allow the following elements "final PolicyFactory policy = Sanitizers.FORMATTING.and(Sanitizers.LINKS).and(Sanitizers.BLOCKS).and(Sanitizers.IMAGES).and(Sanitizers.TABLES).and(Sanitizers.STYLES);"</p>
+
+<p dir="ltr">Further refinement may need to be done on the whitelists. The above ones were used for simplicity to test the basic functionalities.</p>
+
+<p dir="ltr">&lt;div&gt;This Div will contain all content<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&lt;a href=“https://ibm.com”&gt;Link to IBM website&lt;/a&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&lt;b&gt;Bold Text&lt;/b&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&lt;br/&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&lt;p&gt;This is &lt;span style="color:blue"&gt;blue&lt;/span&gt;.&lt;/p&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&lt;i&gt;Italic Text&lt;/i&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&lt;ol&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;li&gt;Ordered List Item 1&lt;/li&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;li&gt;Ordered List Item 2&lt;/li&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&lt;/ol&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&lt;ul&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;li&gt;Ordered List Item 1&lt;/li&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;li&gt;Ordered List Item 2&lt;/li&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&lt;/ul&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&lt;u&gt;Underlined Text&lt;/u&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&lt;strong&gt;Strong Text&lt;/strong&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&lt;h1&gt;Heading 1&lt;/h1&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&lt;h2&gt;Heading 2&lt;/h2&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&lt;h3&gt;Heading 3&lt;/h3&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&lt;h4&gt;Heading 4&lt;/h4&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&lt;table style="width:100%"&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;tr&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;th&gt;Firstname&lt;/th&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;th&gt;Lastname&lt;/th&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;th&gt;Age&lt;/th&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;/tr&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;tr&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;td&gt;Jill&lt;/td&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;td&gt;Smith&lt;/td&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;td&gt;50&lt;/td&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;/tr&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;tr&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;td&gt;Eve&lt;/td&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;td&gt;Jackson&lt;/td&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;td&gt;94&lt;/td&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;/tr&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;&nbsp; &nbsp;&lt;/table&gt;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&lt;/div&gt;</p>
+
+<h3 dir="ltr" id="ii7">Non Functional Requirements</h3>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. Do the following non functional requirements apply to the enhancement being created and if so, minor details should be provided here. We can fill in N/A if the specified non functional requirement is not applicable to the feature being delivered.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" width="671">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">NFR</strong></td>
+			<td style="width: 537px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Accessibility</td>
+			<td style="width: 537px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to be used by people with disabilities. When new technologies are being used for the UI very careful consideration should be given to whether screen readers can be used with the technologies. This applies specifically to usage of JavaScript, Flex and SVG. The use of colors to provide functionality should be considered (and avoided), along with resolutions that will be used by vision impaired users.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Both desktop application and tablet devices should be considered in this effort.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Availability &amp; Resilience</td>
+			<td style="width: 537px;">The ability of the system to be fully or partly operational as and when required and to effectively handle failures that could affect system availability. This should be considered when working outside of the normal infrastructure and deployment. For example, the XML Server is not deployed in an application server and has special handling for fail-over and load balancing. Careful consideration should be taken before adding new components, e.g. EJB Beans, MDBs, to the infrastructure.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Development Resource</td>
+			<td style="width: 537px;">The ability of the system to be designed, built, deployed and operated within known constraints of people, budget, time, etc. In general there is not much information required here, however where special skill sets or people with siloed knowledge are required to work on the change/enhancement, this should be detailed here.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Evolution</td>
+			<td style="width: 537px;">The ability of the system to be flexible in the face of the inevitable change that all systems experience after deployment, balanced against the costs of providing such flexibility. Consideration should be given to future proofing the change, including considering how to upgrade to any changes or enhancements provided in the future. Specifically designs should accommodate elements such as localisation (text, dates, etc.), customization, configurability, and componentization. Providing these features in future releases, when not considered up front, has caused impacts for customers in the past and has prevented us from providing the features in some cases.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Internationalisation</td>
+			<td style="width: 537px;">The ability of the system to be independent from any particular language, country or cultural group. Localisation and internationalisation are a large concern for Cúram. Support should always be provided to view information in multiple locales, based on the user and server locale, along with support for working in multiple time zones.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Location</td>
+			<td style="width: 537px;">The ability of the system to overcome problems brought about by the absolute location of its elements and the distances between them. For the most part this is not a major concern, however we should never design based on the assumption that the customer will use a default configuration</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Performance and Scalability</td>
+			<td style="width: 537px;">The ability of the system to predictably execute within its mandated performance profile and to handle increased processing volumes. Performance and scalability are a concern and should always be considered during design. Where necessary, the Performance and Benchmarking teaming should be engaged early to help with determining impact of potential changes.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Regulation</td>
+			<td style="width: 537px;">The ability of the system to conform to locale and international laws, quasi-legal regulations, company policies and other rules and standards. Regulation includes the usages of third party tools and the licensing issues associated with these. New jars should never be introduced without considering the legal implications and licensing of the jars. This includes usage of GPL licensed code. Also, usage of code freely provided on the web and not properly licensed should be avoided.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Security</td>
+			<td style="width: 537px;">The ability of the system to reliably control, monitor and audit who can perform what actions on what resources and to detect and recover from failures in security mechanisms. This is a concern where new features are added that are not contained within the normal Cúram security.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Usability</td>
+			<td style="width: 537px;">The ease with which people who interact with the system can work effectively. How the change will affect the user and how they use the application/feature should always be considered. Where necessary the business analysts and our user interface experts should be engaged early to ensure we meet usability requirements. e.g. printing.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii8">Replacement Options</h2>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:18px;">Option 1 - Java HTML Sanitizer</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">A replacement for the ACF tool that HCL are looking for licensing fees for may be the following. Turns out we probably should be using this one (https://github.com/owasp/java-html-sanitizer ) anyway as the ACF one had fallen behind. It appears to do all that we require, so there should be no issue migrating to this tool, but as always these things take time and because of turn over in staff there is unlikely to be anyone overly familiar with the these tools and current implementations in the product.</p>
+
+<p dir="ltr" style="margin-left: 40px;">Pros:</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">Seems to be current.</li>
+	<li style="margin-left: 40px;">Seems to do what we want.</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">Cons:</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">New OSS to introduce and maintain.</li>
+	<li style="margin-left: 40px;">Fit gap analysis required to determine if it satsifies our current requirements.</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:18px;">Option 2 - JSoup</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><span style="font-size:12px;">We have used this library before in other places for this purpose.</span></p>
+
+<p dir="ltr" style="margin-left: 40px;"><span style="font-size:12px;">Pros:</span></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;"><span style="font-size:12px;">Already in use so we know how it functions.</span></li>
+	<li style="margin-left: 40px;"><span style="font-size:12px;">No requirement to add in new OSS into the product.</span></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><span style="font-size:12px;">Cons:</span></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;"><span style="font-size:12px;">Need to determine if it will satisfy our current requirements.</span></li>
+</ul>
+
+<h3 dir="ltr" id="ii31">Watson Care Manager Replacement Option</h3>
+
+<p dir="ltr">WCM have decided to the use the OWASP HTML Sanitizer.</p>
+
+<p dir="ltr">The source for their solution is attached <a wiki="W47749e13a6b3_43a7_9ecc_30ea756f969b" rel="noopener noreferrer" page="7.0.4.1 Streaming" id="wikiLink1562661023192" href="https://w3-connections.ibm.com/wikis/home?lang=en#!/wiki/W47749e13a6b3_43a7_9ecc_30ea756f969b/page/7.0.4.1%20Streaming" target="_blank">here.</a>.</p>
+
+<div class="socmaildefaultfont" dir="ltr" style="font-family: Arial, Helvetica, sans-serif; font-size: 10pt;">
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:12px;">You can check the class <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">curam.cirrus.client.util.SanitizerSuite</strong>&nbsp;for some usage examples.</span></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:12px;">As for sanitizing the data, I would recommend to use either:</span>
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:12px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">curam.util.sanitization.SanitizationUtils</strong>: case the input type is unkown</span></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:12px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">curam.util.sanitization.constants.ContentType#getSanitizer()</strong>: if you know the input type</span></li>
+	</ul>
+	</li>
+</ul>
+</div>
+
+<h3 dir="ltr" id="ii9">Design</h3>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. This should outline in detail the design chosen with all of the various areas for the component covered.</p>
+
+<h2 dir="ltr" id="ii10">Architecture/Design Decisions</h2>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<table border="1" dir="ltr" height="156" width="860">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Architecture Decision Title</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Issue or Problem Statement</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Assumptions</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Motivation</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Alternatives</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Decision</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Justification</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Implications</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Status</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Date</strong></span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">Open/In Progress/Closed</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii11">System Context Diagram</h2>
+
+<p dir="ltr">A diagram which shows the system context of the new feature, if applicable. This should be a simple schematic which highlights where the new feature as an enhancement fits into an existing feature or if a competely new feature, where it fits into the overall system context.</p>
+
+<h2 dir="ltr" id="ii12">Architecture/Design Context Diagram</h2>
+
+<p dir="ltr">A diagram should be constructed to display to the reader at a glance the architecture of the new enhancement or at the very least the relationship between the various classes that make up the new enhancement. This will help the designer to think about the relationships that exist within the architecture of the feature and the internal relationships of the internal classes within the new feature.</p>
+
+<h2 dir="ltr" id="ii13">Design Specifics</h2>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">IEG:</strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">IEG Editor</strong></li>
+	<li style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">IEG Player</strong></li>
+	<li style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">IEG Engine</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Workflow:</strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Process Definition Tool</strong></li>
+	<li style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Workflow Engine</strong></li>
+	<li style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Workflow Admin</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CDEJ:</strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">HTML Changes</strong></li>
+	<li style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Widget Changes</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">SDEJ:</strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Changes?</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<h3 dir="ltr" id="ii14">Design User Interface</h3>
+
+<p dir="ltr" style="margin-left: 40px;">If the new enhancement contains any User Interface element, then a UX spec may be required. These include screenshots associated with the new feature, usability concerns, styling and any other UI considerations. Designers and UX team should be involved here. The spec should be associated with this design.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Note: New UI features should also be tested to ensure they work on a tablet device. From 7.0.1.0 we state we support tablet devices so we need to make sure we are not regressing in this area.</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Key board short cuts should also be considered if developing features that interact with the user depending on mouse clicks/key board interaction (i.e. back browser button, refresh etc.)</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Browser differences should be considered for features being developed ensuring that the required browsers are tested and supported.</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Is the feature specified for the internal caseworker application or for the external Universal Access application (or both)..</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Accessibility for both the desktop application (JAWS and IE11 is the supported combination) and tablet (VoiceOver on an iPAD using the keyboard and gestures is the supported combination) should be considered for new UI features.</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Table Support</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;"><span style="OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; OUTLINE-COLOR: invert"><b style="OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; OUTLINE-COLOR: invert">As of v7.0.1 Curam will be certified for use on tablet devices. This introduces a new responsibility on Business Analysts, UX Designers and Developers to ensure that they do not change existing or introduce new features that break the Tablet support statement. For the most part this is limited to the production of custom widgets (non-standard UIM) and how they perform when using touch screen controls. Please note the following:</b></span></li>
+	<li style="margin-left: 40px;"><span style="OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; OUTLINE-COLOR: invert"><b style="OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; OUTLINE-COLOR: invert">Tablet resolution is typically lower than the minimum recommended resolution of 1366x768. This means that the rules around wrapping of text have been relaxed for tablet, but teams should make a reasonable effort to ensure that any wrapping is not excessive and does not affect the ability to understand and use the application.</b></span></li>
+	<li style="margin-left: 40px;"><span style="OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; OUTLINE-COLOR: invert"><b style="OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; OUTLINE-COLOR: invert">Where custom features are introduced, teams must test using a iOS and Android device to ensure that the feature is compatible with touch screen controls.</b></span></li>
+	<li style="margin-left: 40px;"><span style="OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; OUTLINE-COLOR: invert"><b style="OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; OUTLINE-COLOR: invert">Where custom features are introduced, they must meet accessibility requirements for mobile devices.</b></span></li>
+	<li style="margin-left: 40px;"><span style="OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; OUTLINE-COLOR: invert"><b style="OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; OUTLINE-COLOR: invert">Printing - ensure the UI changes do now affect the printing of the pages</b></span></li>
+</ul>
+
+<h3 dir="ltr" id="ii21" style="margin-left: 40px;">Design Validations</h3>
+
+<p dir="ltr" style="margin-left: 40px;">Document the validations associated with the new enhancement, what type of validations these are etc.</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<h3 dir="ltr" id="ii22" style="margin-left: 40px;">Design Metadata Changes</h3>
+
+<p dir="ltr" style="margin-left: 40px;">For any metadata based features being developed (e.g. IEG, Workflow etc.). document the new elements/attributes being added/modified and include an XML snippet of this new design. For each new element/attribute, describe how it works functionally.</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<h3 dir="ltr" id="ii23" style="margin-left: 40px;">Design Logical Data Model Changes</h3>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">Describe any changes required to the data model, entities, operations, indexes etc. This should be done in a tabular format as follows:</li>
+	<li style="margin-left: 40px;">This will form of the data dictionary so it needs to be comprehensive.</li>
+	<li style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Also important here that if new tables/indexes are being added, check to ensure that the primary key/index lenght does not exceed the maximum allowed for DB2</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">A. Screen shot or diagram of Logical Data Model Changes associated with the enhancement.</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">B. Each Entity and Attribute Change Described as follows:</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">Entity: Entity Name</p>
+
+<p dir="ltr" style="margin-left: 40px;">Description of what the entity stores and a real world example etc.</p>
+
+<table border="1" dir="ltr" style="width: 841px;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 125px;"><span style="font-size:16px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Attribute</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:16px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Type</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:16px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Nullable</strong></span></td>
+			<td style="width: 459px;"><span style="font-size:16px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</strong></span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 125px;">example</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 459px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 125px;">systemName</td>
+			<td style="width: 125px;">String</td>
+			<td style="width: 125px;">No</td>
+			<td style="width: 459px;">The name of the target Watson system. For example, the System name may be Watson Health Cloud on Softlayer, the front-end cluster system name.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<h3 dir="ltr" id="ii24" style="margin-left: 40px;">Design Resilience Measures</h3>
+
+<p dir="ltr" style="margin-left: 40px;">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. Some thought should be given to how resilient the new feature is.</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">What happens if something expected/unexpected goes wrong?</li>
+	<li style="margin-left: 40px;">What happens to the system?</li>
+	<li style="margin-left: 40px;">Will the user be able to take corrective action in the system without the need to resort to application logs/SQL searching/data manipulation outside of the system.</li>
+	<li style="margin-left: 40px;">Will the data be left in a consistent state within the system after the exception is thrown?</li>
+	<li style="margin-left: 40px;">Will there be messages given to the user? What will these messages be?</li>
+	<li style="margin-left: 40px;">Will there something written to the logs? What will this be?</li>
+	<li style="margin-left: 40px;">Does the feature require some of the exception data to be captured and an admin function provided to allow the situation to be re-mediated?</li>
+</ul>
+
+<h3 dir="ltr" id="ii25" style="margin-left: 40px;">Design Logging</h3>
+
+<p dir="ltr" style="margin-left: 40px;">Document any logging requirements for the new feature being added. Does the new feature require some logging output to aid debugging in a black box environment? Think about what the logging could be to avoid revealing PI information but giving enough information to allow effective debugging to occur in the event of an unexpected issue? JMX considerations should also be added here.</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<h3 dir="ltr" id="ii26" style="margin-left: 40px;">Design Accessibility</h3>
+
+<p dir="ltr" style="margin-left: 40px;">The UX design should contain an accessible requirements but this section can capture any further requirements in this area.</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<h3 dir="ltr" id="ii27" style="margin-left: 40px;">Third Party Software and Legal Requirements</h3>
+
+<p dir="ltr" style="margin-left: 40px;">Does the feature require any new or updated open source third party software? If so, describe it's usage, name, version and ensure legal are contacted to discuss the requirements around the third party software being used.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii28">Use Cases</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. The various use cases for the feature must be outlined here. They can be in the following format.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Use Case ID</td>
+			<td style="width: 336px;">1.1</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Name</td>
+			<td style="width: 336px;">Add informational message to cluster with no toggle.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Actor</td>
+			<td style="width: 336px;">Citizen</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Description</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Where a cluster is defined to not have expand/collapse functionality, if the contents of the cluster are labelled by an informational label, the informational label shall still be displayed.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Preconditions</td>
+			<td style="width: 336px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Define a &lt;cluster&gt; element.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The contents of this &lt;cluster&gt; element should be labelled by adding an &lt;informational-label&gt; child element.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Flow</td>
+			<td style="width: 336px;">The citizen navigates to the question, relationship or summary page where the &lt;cluster&gt; defined in the preconditions is displayed.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 188px;">Expected</td>
+			<td style="width: 336px;">The cluster which was labelled with an informational message shall be displayed as normal and have a informational message.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii15">Implementation Notes</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">optional</strong>. Any notes related to the actual implementation can be described here. These can be related to some questions related to the implementation, the way some part of the implementation was completed etc.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii16">Application Impact</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. If there is no impact, then this is as simple as saying so. If there is impact, then this may describe the impact in detail and outline the upgrade path. If the feature is related to a CLE, this section can be a link to that CLE (and hence the documentation associated with the CLE will suffice).</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="74" width="1124">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 125px;"><span style="font-size:16px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:16px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Components Affected</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:16px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actions</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:16px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Comments</strong></span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2 dir="ltr" id="ii17">Configuration Transport Manager</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">optional</strong>. Consideration should be given to whether this feature adds or changes administration data. If new administration data is being added, are new CTM business objects required to transport this data. If existing administration data is being modified, will this require changes to existing CTM BOM instances?</p>
+
+<h2 dir="ltr" id="ii18">Testing</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. An outline of all of the testing required by the feature should be present here. This may tie in with the use cases outlined above. Describe the framework being used and the kinds of tests being written:</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">Unit Tests</li>
+	<li style="margin-left: 40px;">Process Tests</li>
+	<li style="margin-left: 40px;">End to End Tests</li>
+	<li style="margin-left: 40px;">Functional/Business Flow Tests</li>
+	<li style="margin-left: 40px;">Scenario Tests</li>
+	<li style="margin-left: 40px;">Integration Tests</li>
+</ul>
+
+<p dir="ltr">Is it just functional tests or are further performance tests required:</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">FVT Required?</li>
+	<li style="margin-left: 40px;">SVT Required?</li>
+</ul>
+
+<h2 dir="ltr" id="ii19">Documentation/How To Use Feature</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. This should describe how to use the feature added. Again this may differ from component to component but there are some general headings to consider:</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Where the feature fits in the overall component?</p>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">How it may be accessed (i.e. created/authored)?</p>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">What does it do (may be linked to the use cases above)?</p>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Advantages of using the feature?</p>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Any limitations associated with the feature?</p>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">A description of how the feature should be used etc.? This may also include a description of a contract between the various teams using the feature and will incorporate some details of the design.</p>
+	</li>
+</ul>
+
+<h2 dir="ltr" id="ii20">Check Lists</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. Basically this is a quick check list of items that should be considered when doing a design for that particular component. This varies between components.</p>
+
+<h3 dir="ltr" id="ii1">IEG Check List</h3>
+
+<table border="1" dir="ltr" style="width: 658px;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Check List Item</strong></td>
+			<td style="width: 314px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Notes</strong></td>
+			<td style="width: 157px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">Navigation</td>
+			<td style="width: 314px;">Is the feature being introduced going to have an affect on IEG navigation (fast path, disabling sections, page navigation, looping, visited pages, summary pages and links from them). Ensure tests cases in place for all of these.</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">Different Running Modes</td>
+			<td style="width: 314px;">IEG can be run in a tab, in a modal and in a page, consider the affect your new feature will have in all these running modes? Also External and Internal Mode.</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">Localizable Text</td>
+			<td style="width: 314px;">Is there any localizable text in the new feature being added?</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">Layout Impact</td>
+			<td style="width: 314px;">The feature you are adding may be used in many different contexts. Ensure you consider all of the places that this new feature can be used (examining the schema could give you a good idea of places where the metadata element/attribute can be used etc.). The actual way the feature is displayed in all of the different contexts should also be considered here.</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">Data Storage</td>
+			<td style="width: 314px;">Consider the new feature with regards to the data (datastore entities) that it is manipulating (IEG Engine functionality). Ensure that the new feature will have no adverse affect on this.</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">RTL Requirements</td>
+			<td style="width: 314px;">Consider the new feature being added with regards to right to left requirements and feed these into the use cases</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">Code Line</td>
+			<td style="width: 314px;">Consider the new feature with regards to the code line policy for IEG</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">ERD</td>
+			<td style="width: 314px;">Does the feature require updates to the ERD. If so, then it should be mocked up to see the relationships between the new feature and existing functionality at the ERD level. This may highlight some design features in the new data structures being added.</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">CPT</td>
+			<td style="width: 314px;">Should this feature be added to the V7 CPT?</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii2">Workflow Check List</h3>
+
+<table border="1" dir="ltr">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Check List Item</strong></td>
+			<td style="width: 314px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Notes</strong></td>
+			<td style="width: 157px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">PDT Page-level Validations</td>
+			<td style="width: 314px;">Are there new ones required?</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">PDT Process-level Validations</td>
+			<td style="width: 314px;">Are the process-level validation messages sensible when run on the command line?</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">PDT "Valid" Indicators</td>
+			<td style="width: 314px;">Are there any pages where WDO attributes are displayed and if so do they need valid indicator fields?</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">Localizable Text</td>
+			<td style="width: 314px;">Is there any localizable text in the new feature being added (and if so the section of the PDT that allows a process developer to localize text must be updated)?</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">Context WDOs</td>
+			<td style="width: 314px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Does the feature involve the creation of a Context WDO? If so, the following points must be considered.</p>
+
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tests that the WDO is created and used properly</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tests that the WDO gets cleaned-up properly</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tests that the WDO is audited properly</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tests for "rainy day" scenarios (e.g. you just added a WDO that appears when a deadline expires, does it work when the deadline *doesn't* expire?).</li>
+			</ul>
+			</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">Existing Context WDOs</td>
+			<td style="width: 314px;">Does the feature interact with any existing Context WDOS? (e.g. is it mutually-exclusive to a WDO?)</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">Workflow Auditing</td>
+			<td style="width: 314px;">Does the feature introduce a new auditable workflow "event" (WORKFLOWHISTORY record)?</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">PDT Web Tests</td>
+			<td style="width: 314px;">Does the feature need PDT Web Tests?</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">Code Line</td>
+			<td style="width: 314px;">Consider the new feature with regards to the code line policy for Workflow</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 166px;">ERD</td>
+			<td style="width: 314px;">Does the feature require updates to the ERD. If so, then it should be mocked up to see the relationships between the new feature and existing functionality at the ERD level. This may highlight some design features in the new data structures being added.</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

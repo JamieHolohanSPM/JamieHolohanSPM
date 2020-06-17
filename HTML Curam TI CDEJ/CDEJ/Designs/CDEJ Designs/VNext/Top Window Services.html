@@ -1,0 +1,343 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Top Window Services</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../wiki.css" />
+<script type="text/javascript" src="../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Top Window Services";
+    pageId="urn:lsid:ibm.com:td:8d20470d-e4df-45c6-8e10-1c9c79fca313";
+    toRoot="../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Top Window Services</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">The page is in progress and represents work in progress. It is not the official design page but rather describes the possible approach</p>
+
+<h1 dir="ltr"><strong><span style="font-size:14px;">Top level window services</span></strong></h1>
+
+<p dir="ltr">Our tabbed application has been built up on the single page application by changing the context these single pages load.</p>
+
+<p dir="ltr">For a single page application every loaded page is a separate entity and must contain certain JavaScript code and certain data in order to work properly. Therefore, we have lots of code loaded every time a page is navigated to.</p>
+
+<p dir="ltr">Loading a page is also associated with number of network requests to get back to HTML/CSS/JavaScript and images used on it.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Since the tabbed application might contain a number of the pages loaded at the same time (separate tabs/tab parts/tab furniture) , each of them in effect loads into a separate browser window (iframe). These frames co-exists, each adding to the footprint of the application.</p>
+
+<p dir="ltr">Even though there are means to limit the potential number of simultaneously opened iframes (by controlling the number of open tabs), they are partial, since the further iframes, not related to tabs but embedded on a page as the expandable list row contents aren't limited.</p>
+
+<p dir="ltr">Therefore, if we cannot, at least for now, avoid the iframes for the single pages, we might try to minimize the content loaded in each of these frames.</p>
+
+<p dir="ltr">The network load is attempted to minimize by the browser itself by caching the required files; from our side we pull together the related JavaScript code and load the always needed Dojo/JavaScript as a single layer - therefore just issuing one request instead of multiple ones, and due to the browser caching getting the copy of that file from cache.</p>
+
+<p dir="ltr">However, this is where our savings end. Each time the JS file is requested, it needs to be parsed and a separate copy of dojo registry filled in.</p>
+
+<p dir="ltr">Once a page unloads, the already parsed and initialized code is lost and needs to be loaded, re-parsed and re-initialized for the next page.</p>
+
+<p dir="ltr">This is clearly a waste, causing lower performance and the already mentioned bigger footprint.</p>
+
+<p dir="ltr">One other thing to be mentioned is the JavaScript directly output on a page as part of inline scripting elements. There is no caching at all happening for the inline scripts, they are loaded as part of each page, yet their copies are used across the application; while these scripts might be considered small, they have their effect on performance (need to be parsed), network load and footprint and the side effect of reducing the readability of the generated HTML.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">It might be inevitable in some cases, however looking at the contents of a single page one can notice the data and methods which do really belong to the application rather that a single page.</p>
+
+<p dir="ltr">This data is the candidate to be converted to the shared code which would be</p>
+
+<p dir="ltr">a) loaded once</p>
+
+<p dir="ltr">b) loaded on the first demand.</p>
+
+<p dir="ltr">The tabbed application has a clear advantage over a single page application in that it has the separate, context page which stays in place for the duration of the application usage. The page is called AppController.jspx (application.jspx), and currently contains certain code related to the tab loading and management (UIController).</p>
+
+<p dir="ltr">It does also have a separate layer file which contains a different subset of JavaScript modules, just meaningful in this background window context (but hugely overlapping with the main client page scripts).</p>
+
+<p dir="ltr">This entry or top level page (or pages taking into account application.jspx as well) is to an extent under-utilized taking into account its 'persistence'.</p>
+
+<h2 dir="ltr"><span style="font-size:14px;"><strong>Top Services API</strong></span></h2>
+
+<p dir="ltr">Therefore, the task emerges to review the code currently residing on a single page and come out with the approach of moving that code to the top level window, making it available to every page via a well defined and extensible mechanism. At the moment lets call that mechanism TopServices API (TWS).</p>
+
+<p dir="ltr">The idea in the technical sense is to have the top level window initialization changed in such a way that it creates some sort of own JavaScript registry, where the shared code is contained under a distinct namespaces - <em>services</em>.</p>
+
+<p dir="ltr">These services can be either preloaded in advance if they are immediately and inevitably needed, or upon the first request from a dependent page via the already mentioned API. Also, depending on the application mode and user preferences, the additional, optional services (like performance measuring or logging) might be loaded by changing the browser settings and persisting these settings in the browser local storage (which should cause the application to reload, adding the requested services to the top registry).</p>
+
+<p dir="ltr">Furthermore, every (dependent) page loaded in the top window context notifies its loading fact to the top level window, and in response receives the access to the top level window reference and the services currently available in it. This allows the page to request the additional services or use the existing ones (or obey the application mode, say requesting the aspects requiring for performance measurement).</p>
+
+<p dir="ltr">Additionally, there are lots of requests for the top level window from a single page JavaScript code, which usually traverse the DOM to find it repeatedly, and which would not longer be needed if the top window reference is available to a page from the very beginning.</p>
+
+<h2 dir="ltr"><strong>The areas which might be converted to the top window services</strong></h2>
+
+<ol dir="ltr">
+	<li>performance measurement<br />
+	Performance measurement infrastructure is the part of the wider inspection infrastructure, an optional addition which should be possible to add to the application runtime by dropping into the agreed location and turning on from the browser (and turning off once not needed).</li>
+	<li>Logging/debugging<br />
+	Currently the debugging logging statements clutter the code and sometimes slow it down even when the logging is not required/switched off. The idea is to convert the logger to another inspector in the inspection infrastructure so that it becomes<br />
+	a) dynamically turned on/off;<br />
+	b) fully additional to the main functionality, no longer integrated, a layer loaded on demand<br />
+	c) potentially adaptive so that only the invocations of interest are logged.</li>
+	<li>User monitoring service<br />
+	In order to adaptively plan the development effort and further enhancement areas, user statistics are useful; these statistics might be collected at various levels, however, mostly when the exchange between the server and browser happens. There is gray area when it comes to the user interface usage, and this information might be useful - for both the application development and the customer staff training (by identifying the areas problematic to navigate or understand or use). The inspection infrastructure and top window service which in fact would be a dedicated and operations bound logger with the specific reporting would be another useful addition to the system.</li>
+	<li>Runtime / hot patch testing<br />
+	There is the JavaScipt testing framework already in place, this is not seen as a substitution, but rather a supplement, optionally available as a layer on top of the main functionality and depending on the structure useful to test the particular method input and output. Depending on the purpose it might also be used to selectively hot replace certain methods/invocations to preliminary test the fixes/changes without actually changing the main functionality.</li>
+	<li>Testing enhancements (proof of concept)<br />
+	The extension of the previous idea, might again be a separate inspector.</li>
+	<li>In-place domain validation<br />
+	This functionality is currently commented out, however it an attempt to reduce the network traffic it might be re-introduced, made optional and allow for early reporting of the input mistakes; coupled with HTML 5 validation features it might prove an useful addition in the new version.</li>
+	<li>Popup management<br />
+	Each page, with or without popups associated loads up the known popup configurations and the associated handling code including the 'popup registry' for the value exchange. This could be reworked first of all, and second the handling should be moved to the top level window services.</li>
+	<li>Modal dialog management<br />
+	This would be one of the most important application in top level services. The modal dialogs are managed by the top level window anyway, however the balance of the functionality is not even, scattered and also has some functional limitations (the well known double submit problem or the fact that the old modal dialog needs to be left in memory until another one loads). The management of the flow upon the modal closing is tricky and not evident. Converting the modal dialog functionality into the top level window service would allow for code concentration in one area, decouple the data and methods which are not relevant to the modal window contents or the background page contents.</li>
+	<li>Error messages and informationals.<br />
+	The error messages and informationals are handled per page, either upon form submission or upon page load. There are situations, however, when these messages are cleared, or, to avoid them being cleared they are pushed to the local storage and then attempted to re-display; because of the page flow specifics this mechanism is tricky and prone to bugs. Having the top level service which would help managing these messages would help reducing the mess and allow for additional flexibility.</li>
+	<li>Date/other formatting<br />
+	Each page, with or without date fields contain the data which allows the proper date formatting and handling. This is, however, clearly excessive at the page level and should be converted into the top window service.</li>
+	<li>Localized messages<br />
+	There are locale-dependent text messages which are loaded and stored in every page context, some of them never used. These text blocks might be loaded on demand and once, and stored in the top level window, being served from this central location. The user locale does not usually change per app usage, and even if it changes, this change requires the application to be reloaded, hence localized messages as a service would not cause ant locale mismatch across the pages.</li>
+	<li>Screen context. Each page has a separate screen context object, which allows for loading that context related code. This data is coming from the request, then converted to the JavaScript object and used when handling the links. The JavaScript object might be moved from a page to the top level window and converted to be a service, thus allowing for the centralized management and also additional logic which is difficult to implement in a separate page context.</li>
+	<li>Tab configuration and refresh data.<br />
+	The advantage of having the controller page is that the code and functionality might be reused. One of the types of the information which is not reused is the tab configuration and tab refresh related data. There are tabs in the application which logically share the same configuration and might be loaded much faster if that fact was utilized, and the configurations were appropriately cached and reused just focusing on the possible dynamics specific to a tab instance (like enabled/disabled/hidden navigation tabs) . The overhead associated with that is that the tab configuration is read from the database and parsed every time that type of tab is requested, while if it was cached and managed by the top level window, this information would be ready to use at the load time.<br />
+	Same applies to the tab refresh configurations.</li>
+	<li>Accessibility related data<br />
+	Accessibility related data is part of HTML. While it is not automatically considered to be optional, it is the additional data added to the DOM and as such might be subject to optional, layered loading and serving from one centralized location instead of being initially added to the HTML. This is just an idea at this stage and might be dropped if turns out to be not feasible, however it is seen falling under the same approach.</li>
+	<li>Unique ID maintenance<br />
+	There is currently a work aimed at introducing the unique identifiers for the DOM objects on a page, mainly for the testing purposes. This potentially could be done as a top level window service, making it optional and tailored for different purposes/different levels of identification.</li>
+	<li>Data related to the collapsible clusters/paginated lists/expandable lists and some other page-level registries which are loaded by design but optional by usage.<br />
+	This is the preliminary area to review and investigate. Some of the code might already be optional and some of it isn't necessarily convertible to the top level service (or such a conversion would be too expensive for the effect achieved).</li>
+</ol>
+
+<h2 dir="ltr">The requirements to the TWS API</h2>
+
+<ul dir="ltr">
+	<li>Initial minimalism to allow for quickest possible initialization.
+	<ul>
+		<li>The initial services code should load in the synchronous mode as soon as dojo framework becomes available. To achieve maximum efficiency, the loading mechanism should combine the inline scripting (output static elements from Java), the basic functionality as one module and the optional functionality as a separate module, loaded asynchronously; any parts which might be bound to some later activity should be required by that activity as an additional services.</li>
+		<li>User configuration support should be loaded as an optional service, on demand, as a prerequisite for the configurator (modal window or background screen).</li>
+		<li>Overloading might be also considered if proves more efficient: the synchronous first load engages shorter, minimalistic version of the API implementation overridden by the full versions of the same methods later where more conditions and variations become relevant; this way the API is not only amended to asynchronously, but built and finalized the same way.</li>
+		<li>It should be possible to unload or cancel the unnecessary services, not only explicit but also implicit, based on the last access so that the rarely used services are not kept in memory.</li>
+	</ul>
+	</li>
+	<li>Maximum flexibility and extensibility to allow for easy addition of the new services, easy and clear their configuration; the potential to be used in a single page application (to be future proof) so that the same concept could be ported easily and would not prevent loading the pages outside the tabbed context for the testing purposes.</li>
+	<li>Maximum dynamics by allowing for choosing the right number and content of the optional services and the mode most suitable to both the user and the system supervisor needs: the optional services should be switched on and on dynamically and configured both by the global settings (per application) and locally, by the settings stored in the browser - with local settings overriding the global ones.</li>
+	<li>It is crucial to distribute the functionality and foresee the right interaction, exchange and dependency determination points and stages.
+	<ul>
+		<li>Say, some service related code might be bound to the single visible window load event thus plugging into the existing 'onload' infrastructure to ensure the right loading time when these services become relevant.</li>
+		<li>Maximum controlled inter-dependency, where both the client window might request the additional services, specific to the page/pages/application and the top window, depending on the current configuration might change the prerequisite modules of the pages being load, thus ensuring the true load on demand.</li>
+	</ul>
+	</li>
+</ul>
+
+<h2 dir="ltr">Services 'contract'</h2>
+
+<p dir="ltr">1. Top page loads</p>
+
+<ol dir="ltr">
+	<li>&nbsp;&nbsp; TWS statics are output as the inline JavaScript (Java output), topvars (application-wide variables) are initialized.</li>
+	<li>&nbsp;&nbsp;&nbsp; Services (manager) and the basic loading infrastructure is synchronously loaded.</li>
+	<li>&nbsp;&nbsp;&nbsp; Mandatory services are loaded (synchronous and asynchronous load combinations and service order should be considered),</li>
+	<li>&nbsp;&nbsp;&nbsp; Optional TWS module load is initiated.</li>
+	<li>&nbsp;&nbsp;&nbsp; Pre-configured optional services load is initiated.</li>
+</ol>
+
+<p dir="ltr">2. A client page loads</p>
+
+<ol dir="ltr">
+	<li>&nbsp;&nbsp; the client page notifies top level page initiating exchange channel.</li>
+	<li>&nbsp;&nbsp; top level page injects the application wide variable references into the client page.</li>
+	<li>&nbsp;&nbsp;&nbsp; top level window notifies the client page about the prerequisite modules required for the loaded services</li>
+	<li>&nbsp;&nbsp;&nbsp; client page loads the required prerequisite modules</li>
+</ol>
+
+<p dir="ltr">3. User interaction/other events on the page happen</p>
+
+<ol dir="ltr">
+	<li>&nbsp;&nbsp;&nbsp; client page requests a service (data) from the top level window</li>
+	<li>&nbsp;&nbsp;&nbsp; top level window looks up the services registry and:
+	<ul>
+		<li>either returns back the data (after processing whatever needed) to the client page</li>
+		<li>or loads the requested service if its isn't yet loaded and then returns the data to the client page</li>
+	</ul>
+	</li>
+	<li>if necessary for the requested service, top window also initiates the additional module load in the requester page.</li>
+</ol>
+
+<p dir="ltr">4. User (admin) pops up the services configuration pane</p>
+
+<ol dir="ltr">
+	<li>The configuration panel JSP checks the available optional services and their load status</li>
+	<li>The configuration pane loads a widget for every available service and presents it to the user along with the current service state (activated or not) and the current configuration data.</li>
+	<li>The user selects or unselects the required services and manages the local configuration settings as required</li>
+	<li>Once the user confirms their choices, the settings are stored, the services pane closes and the application reloads with the new services/settings enacted</li>
+	<li>If the user cancels the configuration pane at any stage, the settings remain as they were before</li>
+	<li>User is presented with a long for each service to reset the local configuration settings for that service - if this is used, the service upon reload uses the app wide settings.</li>
+</ol>
+
+<h2 dir="ltr">Graphical</h2>
+
+<p dir="ltr"><img style="width: 750px; height: 361px;" lconnwikiparamattachmentname="TWS_Structural.png" src="Top%20Window%20Services._ATTACHMENTS_/TWS_Structural.png" lconnwikiparamwikipage="Top Window Services" lconnwikimacro="image" alt=""></img></p>
+
+<h3 dir="ltr">The dual configuration</h3>
+
+<p dir="ltr"><img style="width: 650px; height: 634px;" lconnwikiparamattachmentname="TWSConfig.png" src="Top%20Window%20Services._ATTACHMENTS_/TWSConfig.png" lconnwikiparamwikipage="Top Window Services" lconnwikimacro="image" alt=""></img></p>
+
+<h3 dir="ltr">Exchange</h3>
+
+<p dir="ltr"><img style="width: 650px; height: 427px;" lconnwikiparamattachmentname="TWSExchange.png" src="Top%20Window%20Services._ATTACHMENTS_/TWSExchange.png" lconnwikiparamwikipage="Top Window Services" lconnwikimacro="image" alt=""></img></p>
+
+<h2 dir="ltr">Story and tasks</h2>
+
+<p dir="ltr"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=155543">Story</a></p>
+
+<h3 dir="ltr">Tasks</h3>
+
+<table border="1" dir="ltr" style="width: 750px;">
+	<tbody>
+		<tr>
+			<td style="width: 315px;">Task</td>
+			<td style="width: 51px;">Ticket</td>
+			<td style="width: 99px;">Status</td>
+			<td style="width: 77px;">Priority</td>
+			<td style="width: 178px;">Dependencies</td>
+		</tr>
+		<tr>
+			<td style="width: 315px;"><span class="LabelValue" title=""><a class="jazz-ui-ResourceLink" href="https://jazz031.hursley.ibm.com:9443/ccm/resource/itemOid/com.ibm.team.workitem.WorkItem/_OeLSVRD_EeasqZz5N_rUWg" id="jazz_ui_ResourceLink_90">Remove the cdej-cm code from the application JavaScript and replace the methods used with the Dojo equivalents</a></span></td>
+			<td style="width: 51px;">155544</td>
+			<td style="width: 99px;">In progress</td>
+			<td style="width: 77px;">1</td>
+			<td style="width: 178px;">reworking form mechanism</td>
+		</tr>
+		<tr>
+			<td style="width: 315px;"><span class="LabelValue" title=""><a class="jazz-ui-ResourceLink" href="https://jazz031.hursley.ibm.com:9443/ccm/resource/itemOid/com.ibm.team.workitem.WorkItem/_T-56gBEAEeasqZz5N_rUWg" id="jazz_ui_ResourceLink_91">Introduce Top Level Services API in the top level window</a></span></td>
+			<td style="width: 51px;">155545</td>
+			<td style="width: 99px;">In progress</td>
+			<td style="width: 77px;">2</td>
+			<td style="width: 178px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 315px;"><span class="LabelValue" title=""><a class="jazz-ui-ResourceLink" href="https://jazz031.hursley.ibm.com:9443/ccm/resource/itemOid/com.ibm.team.workitem.WorkItem/_4NKcdBEAEeasqZz5N_rUWg" id="jazz_ui_ResourceLink_92">Introduce inspection infrastructure as top level window service</a></span></td>
+			<td style="width: 51px;">155546</td>
+			<td style="width: 99px;">In progress</td>
+			<td style="width: 77px;">3</td>
+			<td style="width: 178px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 315px;"><span class="LabelValue" title=""><a class="jazz-ui-ResourceLink" href="https://jazz031.hursley.ibm.com:9443/ccm/resource/itemOid/com.ibm.team.workitem.WorkItem/_JZRPMBEZEeasqZz5N_rUWg" id="jazz_ui_ResourceLink_93">Introduce form validation as top level window service</a></span></td>
+			<td style="width: 51px;">155617</td>
+			<td style="width: 99px;">pilot ready, further dev.needed</td>
+			<td style="width: 77px;">7</td>
+			<td style="width: 178px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 315px;"><span class="LabelValue" title=""><a class="jazz-ui-ResourceLink" href="https://jazz031.hursley.ibm.com:9443/ccm/resource/itemOid/com.ibm.team.workitem.WorkItem/_sQeh0BEdEeasqZz5N_rUWg" id="jazz_ui_ResourceLink_94">Introduce popup dialog interaction and data exchange as top level window service</a></span></td>
+			<td style="width: 51px;">155632</td>
+			<td style="width: 99px;">pilot ready, full version dev. needed</td>
+			<td style="width: 77px;">8</td>
+			<td style="width: 178px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 315px;"><span class="LabelValue" title=""><a class="jazz-ui-ResourceLink" href="https://jazz031.hursley.ibm.com:9443/ccm/resource/itemOid/com.ibm.team.workitem.WorkItem/_ma2gUBEfEeasqZz5N_rUWg" id="jazz_ui_ResourceLink_95">Introduce top level window optional services configuration mechanism</a></span></td>
+			<td style="width: 51px;">155633</td>
+			<td style="width: 99px;">in progress</td>
+			<td style="width: 77px;">4</td>
+			<td style="width: 178px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 315px;"><span class="LabelValue" title=""><a class="jazz-ui-ResourceLink" href="https://jazz031.hursley.ibm.com:9443/ccm/resource/itemOid/com.ibm.team.workitem.WorkItem/_1BB0oBEhEeasqZz5N_rUWg" id="jazz_ui_ResourceLink_96">Investigate and convert modal dialog infrastructure into top level window service</a></span></td>
+			<td style="width: 51px;">155638</td>
+			<td style="width: 99px;">not started</td>
+			<td style="width: 77px;">9</td>
+			<td style="width: 178px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 315px;"><span class="LabelValue" title=""><a class="jazz-ui-ResourceLink" href="https://jazz031.hursley.ibm.com:9443/ccm/resource/itemOid/com.ibm.team.workitem.WorkItem/_d4q8gBEiEeasqZz5N_rUWg" id="jazz_ui_ResourceLink_97">Investigate and convert screen context into top level window service</a></span></td>
+			<td style="width: 51px;">155641</td>
+			<td style="width: 99px;">not started</td>
+			<td style="width: 77px;">10</td>
+			<td style="width: 178px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 315px;"><span class="LabelValue" title=""><a class="jazz-ui-ResourceLink" href="https://jazz031.hursley.ibm.com:9443/ccm/resource/itemOid/com.ibm.team.workitem.WorkItem/_3FQgwBEiEeasqZz5N_rUWg" id="jazz_ui_ResourceLink_98">Investigate and convert localized messages into the top level window service</a></span></td>
+			<td style="width: 51px;">155643</td>
+			<td style="width: 99px;">not started</td>
+			<td style="width: 77px;">5</td>
+			<td style="width: 178px;">other services depend on this one, a priority once the framework is ready</td>
+		</tr>
+		<tr>
+			<td style="width: 315px;"><span class="LabelValue" title=""><a class="jazz-ui-ResourceLink" href="https://jazz031.hursley.ibm.com:9443/ccm/resource/itemOid/com.ibm.team.workitem.WorkItem/_1oAqMBEjEeasqZz5N_rUWg" id="jazz_ui_ResourceLink_99">Investigate and convert error and informational message access into the top level window service</a></span></td>
+			<td style="width: 51px;">155644</td>
+			<td style="width: 99px;">not started</td>
+			<td style="width: 77px;">11</td>
+			<td style="width: 178px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 315px;"><span class="LabelValue" title=""><a class="jazz-ui-ResourceLink" href="https://jazz031.hursley.ibm.com:9443/ccm/resource/itemOid/com.ibm.team.workitem.WorkItem/_MHtqFBEnEeasqZz5N_rUWg" id="jazz_ui_ResourceLink_100">Investigate and convert locale dependent page data and formatting data into top level window service</a></span></td>
+			<td style="width: 51px;">155654</td>
+			<td style="width: 99px;">not started</td>
+			<td style="width: 77px;">6</td>
+			<td style="width: 178px;">related to the localized messages services and would be good to get it done in one go</td>
+		</tr>
+		<tr>
+			<td style="width: 315px;"><span class="LabelValue" title=""><a class="jazz-ui-ResourceLink" href="https://jazz031.hursley.ibm.com:9443/ccm/resource/itemOid/com.ibm.team.workitem.WorkItem/_RrA2YBEuEeasqZz5N_rUWg" id="jazz_ui_ResourceLink_101">Investigate and convert tab configuration data into top level window cache and service</a></span></td>
+			<td style="width: 51px;">155678</td>
+			<td style="width: 99px;">not started</td>
+			<td style="width: 77px;">14</td>
+			<td style="width: 178px;">investigation needed</td>
+		</tr>
+		<tr>
+			<td style="width: 315px;"><span class="LabelValue" title=""><a class="jazz-ui-ResourceLink" href="https://jazz031.hursley.ibm.com:9443/ccm/resource/itemOid/com.ibm.team.workitem.WorkItem/_ZYdYUBEwEeasqZz5N_rUWg" id="jazz_ui_ResourceLink_102">Investigate and convert tab refresh configuration into top level window cache and service</a></span></td>
+			<td style="width: 51px;">155680</td>
+			<td style="width: 99px;">&nbsp;</td>
+			<td style="width: 77px;">13</td>
+			<td style="width: 178px;">investigation needed</td>
+		</tr>
+		<tr>
+			<td style="width: 315px;"><span class="LabelValue" title=""><a class="jazz-ui-ResourceLink" href="https://jazz031.hursley.ibm.com:9443/ccm/resource/itemOid/com.ibm.team.workitem.WorkItem/_HpMEwBExEeasqZz5N_rUWg" id="jazz_ui_ResourceLink_103">Investigate re-usable page data serving from top level window and convert this data to be served from the top level window</a></span></td>
+			<td style="width: 51px;">155681</td>
+			<td style="width: 99px;">&nbsp;</td>
+			<td style="width: 77px;">12</td>
+			<td style="width: 178px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<div class="ValueDiv" dir="ltr">
+<div class="com-ibm-team-foundation-web-ui-views-LabelView CompactMode ValueElement" id="com_ibm_team_rtc_foundation_web_ui_views_LabelView_38">
+<div class="StatusIconContainer">&nbsp;</div>
+</div>
+</div>
+
+<div class="ValueDiv" dir="ltr">
+<div class="com-ibm-team-foundation-web-ui-views-LabelView CompactMode ValueElement" id="com_ibm_team_rtc_foundation_web_ui_views_LabelView_39">
+<div class="com-ibm-team-rtc-foundation-web-ui-views-aligned-text com-ibm-team-rtc-foundation-web-ui-label">&nbsp;</div>
+</div>
+</div>
+
+<div class="com-ibm-team-foundation-web-ui-views-LabelView CompactMode ValueElement" dir="ltr" id="com_ibm_team_rtc_foundation_web_ui_views_LabelView_43">
+<div class="com-ibm-team-rtc-foundation-web-ui-views-aligned-text com-ibm-team-rtc-foundation-web-ui-label">&nbsp;</div>
+</div></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

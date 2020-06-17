@@ -1,0 +1,87 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Running within CDEJ</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../wiki.css" />
+<script type="text/javascript" src="../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Running within CDEJ";
+    pageId="urn:lsid:ibm.com:td:6437ee22-7ca7-41f7-a5b9-a2d5709c0962";
+    toRoot="../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Running within CDEJ</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h1 dir="ltr">SPM 6.1</h1>
+
+<p dir="ltr"><span style="font-family:arial,helvetica,sans-serif;">For 6.1 we are using Intern, Selenium and Node JS to run units and report code coverage. On previous versions of the the Curam JDE (pre 6.1), Doh and JSCoverage were used.</span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">Development environment</h2>
+
+<p dir="ltr">To run client-inf/mobile-sdk project tests do the following:</p>
+
+<ol dir="ltr">
+	<li>In eclipse go to the External Tool menu/External Tools Configuration.</li>
+</ol>
+
+<p dir="ltr"><img alt="" id="1426781428224_0" src="../JavaScript%20Unit%20Testing%20and%20Coverage._ATTACHMENTS_/editor_image_82976eae-f0bd-4275-8e76-3d54d1f1bf1e.png"></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp;&nbsp; <strong>2.</strong>&nbsp; To debug or run tests, select the applicable configuration and click on the 'Run' button. It should be noted that if an external tools configuration has been executed once, then it will be available in the Menu.</p>
+
+<p dir="ltr"><strong>NOTE 1</strong>: Before you run tests you must start the <strong>selenium-server</strong>. You can start the selenium server by running 'build -f build_scripts\client.xml selenium-start' from the command line. DEVENV_HOME should be set before doing so</p>
+
+<p dir="ltr"><strong>NOT</strong>E 2: &nbsp;To debug tests you must have chrome installed. To run tests you must have a supported version of Internet Explorer installed.</p>
+
+<p dir="ltr"><strong>NOTE 3:</strong> To run selenium on IE, you must configure IE to have Protected Mode on all zones. See <a href="https://code.google.com/p/selenium/issues/detail?id=1795">https://code.google.com/p/selenium/issues/detail?id=1795. </a></p>
+
+<p dir="ltr"><strong>NOTE 4: </strong>To run selenium on IE9, you must open developer tools&nbsp;(F12) and set the properties&nbsp;Browser Mode to IE9 and Document Mode to IE 9 Standards. Also make sure that the compatibility mode is disabled (Tools -&gt; Compatibility View Settings -&gt; Uncheck all the three checks&nbsp;and remove all the addresses added to the list.)</p>
+
+<p dir="ltr">Also more important see: <a href="https://code.google.com/p/selenium/wiki/DesiredCapabilities">https://code.google.com/p/selenium/wiki/DesiredCapabilities</a></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><img alt="" id="1426781894450_0" src="../JavaScript%20Unit%20Testing%20and%20Coverage._ATTACHMENTS_/editor_image_760eeb0e-28db-45c6-88a8-ac5d4333d0ae.png"></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;</p>
+
+<p dir="ltr"><img alt="" id="1426782065733_0" src="../JavaScript%20Unit%20Testing%20and%20Coverage._ATTACHMENTS_/editor_image_99c15412-3a99-46dc-84dd-52e58af7e1e4.png"></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">Command Line</h2>
+
+<ol dir="ltr">
+	<li>To run unit tests and coverage, run build -f client/components/build.xml test-javascript</li>
+</ol>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

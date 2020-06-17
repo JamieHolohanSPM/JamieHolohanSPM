@@ -1,0 +1,140 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>External Portals</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../wiki.css" />
+<script type="text/javascript" src="../../wiki.js" ></script>
+<script type="text/javascript" src="../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="External Portals";
+    pageId="urn:lsid:ibm.com:td:fb55454a-b73a-4306-a573-79d4742a290c";
+    toRoot="../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">External Portals</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">If we are providing properties to control the behavior of certain features and these will be factored towards internal (caseworker) and external (citizen facing) applications, then we need to know which "infrastructure" is rendering these "external portals". There is no issue if they all use the Universal Access external container (as the external properties will all pertain to that) but if we have a mixture of CDEJ and UA infrastructures rendering "external" portals, then we do have an issue!</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Information about customer usage found <a href="https://w3-connections.ibm.com/forums/html/topic?id=2f13c2eb-41ab-4f87-b832-12f81c69c7a0" rel="noopener noreferrer" target="_blank">here</a></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CitizenPortal</strong></p>
+
+<p dir="ltr">- This is the citizen-facing portal for Universal Access</p>
+
+<p dir="ltr"><a href="http://localhost:9080/CitizenPortal/application.do">http://localhost:9080/CitizenPortal/application.do</a></p>
+
+<p dir="ltr">Customer Usage:</p>
+
+<p dir="ltr">In NC we have Provider Portal (CPM external Portal &nbsp;)&nbsp; and Citizen Portal</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Navigator Portal</strong><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+- HCR built this feature to support the concept of a third party (i.e. a community based representative) assisting clients with their insurance affordability applications.</p>
+
+<p dir="ltr">- Seems to be rendered using the UA external container and indeed Universal Access is listed on one of the pages? So a true external application hosted in the external container.</p>
+
+<p dir="ltr">- They were designed as external apps but you should be able to verify using the URLs below:</p>
+
+<p dir="ltr"><a href="https://falcon.mul.ie.ibm.com:9044/NavigatorNS/">https://falcon.mul.ie.ibm.com:9044/NavigatorNS/</a></p>
+
+<p dir="ltr"><a href="https://falcon.mul.ie.ibm.com:9044/NavigatorS/application.do">https://falcon.mul.ie.ibm.com:9044/NavigatorS/application.do</a>&nbsp;&nbsp;&nbsp; (securenavigator/password)</p>
+
+<p dir="ltr">Customer Usage</p>
+
+<p dir="ltr">MNSure (&nbsp;state of Minnesota) uses Navigator Portal</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CPMExternal Portals</strong><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+- External portals for providers to maintain their offerings etc as part of the Curam Provider Management module</p>
+
+<p dir="ltr">- Sheryl may be able to help from a business perspective if you need more info.</p>
+
+<p dir="ltr">- Not sure about this one, looks like the internal UIM/CDEJ infrastructure just styled a little differently?</p>
+
+<p dir="ltr">- URLs are here if you want to check usage:</p>
+
+<p dir="ltr"><a href="https://dslvm1026.mul.ie.ibm.com:9044/CPMExternalNS/">https://dslvm1026.mul.ie.ibm.com:9044/CPMExternalNS/</a></p>
+
+<p dir="ltr"><a href="https://dslvm1026.mul.ie.ibm.com:9044/CPMExternalS/logon.jsp">https://dslvm1026.mul.ie.ibm.com:9044/CPMExternalS/logon.jsp</a>&nbsp;&nbsp; (cpmexternalprovider/password)</p>
+
+<p dir="ltr"><a href="https://dubxpcvm3545.mul.ie.ibm.com:9044/CPMExternalNS/">https://dubxpcvm3545.mul.ie.ibm.com:9044/CPMExternalNS/</a></p>
+
+<p dir="ltr"><a href="https://dubxpcvm3545.mul.ie.ibm.com:9044/CPMExternalNS/">https://dubxpcvm3545.mul.ie.ibm.com:9044/CPMExternalS/logon.jsp</a></p>
+
+<p dir="ltr">Customer Usage:</p>
+
+<p dir="ltr">MDT Portal and&nbsp;CPM External Portal (Secure) are used in DSCIS, Ontario (Canada).</p>
+
+<p dir="ltr">In NC we have Provider Portal (CPM external Portal &nbsp;)&nbsp; and Citizen Portal</p>
+
+<p dir="ltr">My memory is NYC did not use any for DHS CARES.&nbsp;&nbsp; Surfaced functionality that was partially in CPM External Portal through exposing internal app to providers.</p>
+
+<p dir="ltr">ACES Clark County and JUSIT(Hamburg)&nbsp;uses CPM.</p>
+
+<p dir="ltr">MNSure (&nbsp;state of Minnesota) uses&nbsp;CPM.</p>
+
+<p dir="ltr">MSD use CPM External Portal (Secure).&nbsp;</p>
+
+<p dir="ltr">The SIREC project for the Generalitat de Catalunya / CTTI in Barcelona uses the Provider Portal</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">MDTWorkspace Portal</strong></p>
+
+<p dir="ltr">- This is part of the social enterprise colloboration platform.</p>
+
+<p dir="ltr">- This portal is a way for caseworkers and others outside the agency to collaborate to achieve better outcomes for the client.</p>
+
+<p dir="ltr">- Again, looks like UIM/CDEJ and just styled slightly differently</p>
+
+<p dir="ltr">- URL is here if you want to check usage:</p>
+
+<p dir="ltr"><a href="https://dslvm1026.mul.ie.ibm.com:9044/MDTWorkspace/logon.jsp">https://dslvm1026.mul.ie.ibm.com:9044/MDTWorkspace/logon.jsp</a> (john/password)</p>
+
+<p dir="ltr">Customer Usage:</p>
+
+<p dir="ltr">MDT Portal and&nbsp;CPM External Portal (Secure) are used in DSCIS, Ontario (Canada).</p>
+
+<p dir="ltr">MSD have asked about MDT as few times recently. (2018)</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">SamplePublicAccess Portal</strong></p>
+
+<p dir="ltr">- This is a demonstration of how you would provide a public portal for an entity to register and then login and see some of their details.</p>
+
+<p dir="ltr">- CPM use a very similar (if not exact copy) model for the Providers. They can use the external portal to register, it's less secure and allows you to receive a registration email and then log in the the 'non-external' portal. My understanding is that these are provided primarily for third party's, e.g. an Employer or Service Provider, as opposed to 'the public' which is what UA is providing.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+- As it is sample it is not something we would expect customers to use out of the box. We expect customers to take responsibility for building out their own version based on this example. For example they may want to customise the authentication part to be more sophisticated, and then customise the services that are provided, including authorization to resources.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

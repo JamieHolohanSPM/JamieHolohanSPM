@@ -1,0 +1,994 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Duplicate Domains in Curam</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../wiki.css" />
+<script type="text/javascript" src="../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Duplicate Domains in Curam";
+    pageId="urn:lsid:ibm.com:td:af16b63b-934c-4cbf-a495-e9d193470779";
+    toRoot="../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Duplicate Domains in Curam</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h1 dir="ltr"><span style="font-size:20px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Duplicate&nbsp;Domains in Curam - Detecting and updating duplicate domains that have been configured in a datastore schema and the application model.</strong></span></h1>
+
+<h2 dir="ltr">Stakeholders</h2>
+
+<table border="1" dir="ltr" style="width: 858px;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Role</span></strong></td>
+			<td style="width: 371px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Name</span></strong></td>
+			<td style="width: 278px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:16px;">Sign Off if Applicable</span></strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Customer</td>
+			<td style="width: 371px;">North Caroline - Dept of Health and Human Services</td>
+			<td style="width: 278px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Business Owner/Product Owner</td>
+			<td style="width: 371px;">Sonya Purcell</td>
+			<td style="width: 278px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Architect</td>
+			<td style="width: 371px;">Fergal Gavin</td>
+			<td style="width: 278px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Developer(s)</td>
+			<td style="width: 371px;">Bruna Dantas, Clara Mannion, James Darcy</td>
+			<td style="width: 278px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">FVT</td>
+			<td style="width: 371px;">Satya Minnekanti</td>
+			<td style="width: 278px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">SVT</td>
+			<td style="width: 371px;">&nbsp;</td>
+			<td style="width: 278px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Information Developer</td>
+			<td style="width: 371px;">&nbsp;</td>
+			<td style="width: 278px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">UX Design</td>
+			<td style="width: 371px;">&nbsp;</td>
+			<td style="width: 278px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 197px;">Legal</td>
+			<td style="width: 371px;">&nbsp;</td>
+			<td style="width: 278px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii4">Background</h2>
+
+<p dir="ltr">There are duplicate static and "dynamic" domain names within the product. This has been highlighted recently through investigation of <a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=237326">Defect&nbsp;237326</a>&nbsp;raised by North Carolina. This defect raises the problem that in some of the Income Support evidence modals, the frequency dropdown was being rendered differently and when the "--Please Select--" option was selected, the text "--Please Select--" is rendered incorrectly below the dropdown.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+The issue here is because duplicate static and IEG/Datastore domain names being stored in the same staticDomainNames list. Eg. frequencyCode, addressState etc. IEG Domains are dynamic-like, but presently are treated like static domains and are stored in the same cache as the application static domains. They are not linked to the actual dynamic domains, for example Dynamic Evidence domain types, which are stored in a separate dynamic domains cache.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+In the past, static domain definition INCOME_TYPE_NO_IEG_OVERRIDE was created as an attempt to solve&nbsp;this issue.&nbsp;The domain definition description is:<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+"<em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">This came after INCOME_TYPE. That older domain was then accidentally overridden on HCR by HealthCareDomains.xsd which re-defined it as pointing to the codetable named HealthCareIncomeType. In order to overcome this issue, this newer domain can be used to model UIM fields with the intended values from the IncomeType codetable."</em></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The following table is a list of all duplicate domains and indicates which ones will be deprecated, whether they have a counterpart with the NO_IEG_OVERRIDE suffix and whether they will be deprecated also&nbsp;as part of this exercise:</p>
+
+<table border="1" dir="ltr" style="width: 766px; border-collapse: collapse; border-color: rgb(105, 105, 105);">
+	<tbody>
+		<tr>
+			<td style="width: 271px; border-color : #696969;"><strong>Domain name</strong></td>
+			<td style="width: 265px; border-color: rgb(105, 105, 105);"><strong>Has version with&nbsp;<font color="#000000">NO_IEG_OVERRIDE suffix?</font></strong></td>
+			<td style="width: 117px; border-color: rgb(105, 105, 105);"><strong>Will be deprecated?</strong></td>
+			<td style="width: 92px; border-color: rgb(105, 105, 105);"><strong>Date</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 271px; border-color : #696969;">CITIZENSHIP_STATUS</td>
+			<td style="width: 265px; border-color: rgb(105, 105, 105);">Yes</td>
+			<td style="width: 117px; border-color: rgb(105, 105, 105);">Yes</td>
+			<td style="width: 92px; border-color: rgb(105, 105, 105);">03/06/2020</td>
+		</tr>
+		<tr>
+			<td style="width: 271px; border-color : #696969;"><font color="#000000">FREQUENCY_CODE</font></td>
+			<td style="width: 265px; border-color: rgb(105, 105, 105);">Yes</td>
+			<td style="width: 117px; border-color: rgb(105, 105, 105);">Yes</td>
+			<td style="width: 92px; border-color: rgb(105, 105, 105);">03/06/2020</td>
+		</tr>
+		<tr>
+			<td style="width: 271px; border-color : #696969;">INCOME_TYPE</td>
+			<td style="width: 265px; border-color: rgb(105, 105, 105);">Yes</td>
+			<td style="width: 117px; border-color: rgb(105, 105, 105);">Yes</td>
+			<td style="width: 92px; border-color: rgb(105, 105, 105);">03/06/2020</td>
+		</tr>
+		<tr>
+			<td style="width: 271px; border-color : #696969;">ADDRESS_STATE</td>
+			<td style="width: 265px; border-color: rgb(105, 105, 105);">Yes</td>
+			<td style="width: 117px; border-color: rgb(105, 105, 105);">Yes</td>
+			<td style="width: 92px; border-color: rgb(105, 105, 105);">03/06/2020</td>
+		</tr>
+		<tr>
+			<td style="width: 271px; border-color : #696969;">CODETABLE_CODE</td>
+			<td style="width: 265px; border-color: rgb(105, 105, 105);">No</td>
+			<td style="width: 117px; border-color: rgb(105, 105, 105);">No</td>
+			<td style="width: 92px; border-color: rgb(105, 105, 105);">03/06/2020</td>
+		</tr>
+		<tr>
+			<td style="width: 271px; border-color : #696969;">SHORT_CODETABLE_CODE</td>
+			<td style="width: 265px; border-color: rgb(105, 105, 105);">No</td>
+			<td style="width: 117px; border-color: rgb(105, 105, 105);">No</td>
+			<td style="width: 92px; border-color: rgb(105, 105, 105);">03/06/2020</td>
+		</tr>
+		<tr>
+			<td style="width: 271px; border-color : #696969;">INCOME_SOURCE</td>
+			<td style="width: 265px; border-color: rgb(105, 105, 105);">No</td>
+			<td style="width: 117px; border-color: rgb(105, 105, 105);">Yes</td>
+			<td style="width: 92px; border-color: rgb(105, 105, 105);">09/06/2020</td>
+		</tr>
+		<tr>
+			<td style="width: 271px; border-color : #696969;">COC_TYPE</td>
+			<td style="width: 265px; border-color: rgb(105, 105, 105);">No</td>
+			<td style="width: 117px; border-color: rgb(105, 105, 105);">Yes</td>
+			<td style="width: 92px; border-color: rgb(105, 105, 105);">09/06/2020</td>
+		</tr>
+		<tr>
+			<td style="width: 271px; border-color : #696969;">COVERAGE_CODE</td>
+			<td style="width: 265px; border-color: rgb(105, 105, 105);">No</td>
+			<td style="width: 117px; border-color: rgb(105, 105, 105);">Yes</td>
+			<td style="width: 92px; border-color: rgb(105, 105, 105);">09/06/2020</td>
+		</tr>
+		<tr>
+			<td style="width: 271px; border-color : #696969;">BENEFIT_TYPE</td>
+			<td style="width: 265px; border-color: rgb(105, 105, 105);">No</td>
+			<td style="width: 117px; border-color: rgb(105, 105, 105);">Yes</td>
+			<td style="width: 92px; border-color: rgb(105, 105, 105);">09/06/2020</td>
+		</tr>
+		<tr>
+			<td style="width: 271px; border-color : #696969;">PLAN_LEVEL</td>
+			<td style="width: 265px; border-color: rgb(105, 105, 105);">No</td>
+			<td style="width: 117px; border-color: rgb(105, 105, 105);">Yes</td>
+			<td style="width: 92px; border-color: rgb(105, 105, 105);">09/06/2020</td>
+		</tr>
+		<tr>
+			<td style="width: 271px; border-color : #696969;">RECORD_STATUS</td>
+			<td style="width: 265px; border-color: rgb(105, 105, 105);">No</td>
+			<td style="width: 117px; border-color: rgb(105, 105, 105);">Yes</td>
+			<td style="width: 92px; border-color: rgb(105, 105, 105);">09/06/2020</td>
+		</tr>
+		<tr>
+			<td style="width: 271px; border-color : #696969;">CW_MOTIVATION_RESULTS_MEMBER_STATUS</td>
+			<td style="width: 265px; border-color: rgb(105, 105, 105);">No</td>
+			<td style="width: 117px; border-color: rgb(105, 105, 105);">Yes</td>
+			<td style="width: 92px; border-color: rgb(105, 105, 105);">09/06/2020</td>
+		</tr>
+		<tr>
+			<td style="width: 271px; border-color : #696969;">IEG_MONEY</td>
+			<td style="width: 265px; border-color: rgb(105, 105, 105);">No</td>
+			<td style="width: 117px; border-color: rgb(105, 105, 105);">Yes</td>
+			<td style="width: 92px; border-color: rgb(105, 105, 105);">09/06/2020</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii5">Requirements</h2>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement 1: IEG/Datastore domain types should not be used when rendering fields in the internal application.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement 2: A developer needs to be able to create a unique domain name and be informed if domain name is taken.</li>
+</ul>
+
+<p dir="ltr">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=237326" rel="noopener noreferrer" target="_blank">RTC&nbsp;Story&nbsp;237326</a>- The text "--Please Select--" displays incorrectly below the dropdown in some Income Support evidence modals when dropdown with default value of "--Please Select--" is clicked</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii6">Requirement Decisions</h3>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">There may be some outstanding questions/decisions made as regards to the requirements. These decisions should be documented here.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="156" style="width: 1279px;" width="860">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement Decision Title</strong></span></td>
+			<td style="width: 218px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Issue or Problem Statement</strong></span></td>
+			<td style="width: 157px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Assumptions</strong></span></td>
+			<td style="width: 150px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Motivation</strong></span></td>
+			<td style="width: 177px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Alternatives</strong></span></td>
+			<td style="width: 217px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Decision</strong></span></td>
+			<td style="width: 297px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Justification</strong></span></td>
+			<td style="width: 120px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Implications</strong></span></td>
+			<td style="width: 78px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Status</strong></span></td>
+			<td style="width: 91px;"><span style="font-size:14px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Date</strong></span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;">Tool location.</td>
+			<td style="width: 218px;">Where should the tool live?</td>
+			<td style="width: 157px;">The tool should be able to access all domain types to determine if there are any duplicates. So should it live in ADBuildTools or IEG component</td>
+			<td style="width: 150px;">Duplicate domains can cause unexpected behaviour in the application. It's important to catch any duplicate domains throughout as many stacks as possible.</td>
+			<td style="width: 177px;">N/A</td>
+			<td style="width: 217px;">The tool will live in the BizInf stream, in the IEG component. A new "tools" directory will be created at the root of the component.</td>
+			<td style="width: 297px;"><span style="color:null;">To detect duplicate domains in the static cache, the IEG/DS domains should be loaded. The tool uses an existing method in the DS to load all DS schemas (which define the domain definitions) on the filesystem.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			The tool will not be added to the IEG source directory however. A new "tools" directory will be added. This will allow for the tool to be excluded from being added to the shipped Curam product, but will allow for it to be included in the BizInf delivery zip.</span></td>
+			<td style="width: 120px;"><span style="color:null;">An ANT target will need to be defined that can run on the command line from any stream that takes on IEG.</span></td>
+			<td style="width: 78px;">Complete</td>
+			<td style="width: 91px;">20/03/20</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;">What to do if a duplicate is found?</td>
+			<td style="width: 218px;">Should the tool fail the build if duplicates are detected or throw a warning?</td>
+			<td style="width: 157px;">N/A</td>
+			<td style="width: 150px;">If the tool is being run to prevent duplicate domains, should the tool/build fail if a duplicate is found?</td>
+			<td style="width: 177px;">Tool could just throw a warning and write duplicate domain info to a log/console</td>
+			<td style="width: 217px;">If a new duplicate is found, fail the build. If an existing duplicate is found, throw a warning! The warnings can be turned off and errors be thrown for all duplicates</td>
+			<td style="width: 297px;">There are a handful of duplicate domains in the application already. Those raised by customers will be fixed. The others will be noted and added to a whitelist in the tool. These duplicate domains will throw a warning if present. If a new one not included on the whitelist is found, an error will be thrown.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			An argument can be provided to the tool to treat warnings as errors, so anytime a duplicate is found, an error is thrown.</td>
+			<td style="width: 120px;">Builds will fail if a developer adds a duplicate domain</td>
+			<td style="width: 78px;">Complete</td>
+			<td style="width: 91px;">13/03/20</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;">Should the IEG Domains be renamed or the Application domain be renamed?</td>
+			<td style="width: 218px;">What to do with pre-existing duplicate domains?</td>
+			<td style="width: 157px;">We need to address the duplicate domain issues already raised by customers.</td>
+			<td style="width: 150px;">There are known issues in the application related to duplicate domains</td>
+			<td style="width: 177px;">N/A</td>
+			<td style="width: 217px;">Application domains should be renamed</td>
+			<td style="width: 297px;">Customers could have custom scripts with the IEG domains referenced. Renaming the IEG domain could have impact on customers</td>
+			<td style="width: 120px;">N/A</td>
+			<td style="width: 78px;">Complete</td>
+			<td style="width: 91px;">13/03/20</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;">Should the tool include Dynamic Domains when checking for duplicates?</td>
+			<td style="width: 218px;">Can duplicates domains be present in the Dynamic Domains cache or between the Dynamic Domains and Static Domains caches?</td>
+			<td style="width: 157px;">N/A</td>
+			<td style="width: 150px;">We want to avoid all duplicates</td>
+			<td style="width: 177px;">Don't include Dynamic Domains cache when looking for duplicates</td>
+			<td style="width: 217px;">Don't include Dynamic Domains cache</td>
+			<td style="width: 297px;">There is a very low risk of having a duplicate Dynamic Domain. The Dynamic domains naming convention is made up of &lt;EVIDENCETYPE_NAME&gt;_&lt;EFFECTIVEDATE_AS_LONG&gt;_&lt;ATTRIBUTE_NAME&gt;. Static or Datastore domains do not follow this naming convention.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			Also Dynamic evidence domains are generated from the ETV, so there is less chance of a developer handcrafting the domain to have a duplicate name.</td>
+			<td style="width: 120px;">If a duplicate domain is found between the dynamic and static cache, the domain will be loaded from the dynamic cache (if the dynamic domain cache has been populated)</td>
+			<td style="width: 78px;">Complete</td>
+			<td style="width: 91px;">13/03/20</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;">How should duplicate domains be fed into the tool?</td>
+			<td style="width: 218px;">The tool should have access to a whitelist of known duplicate domains. The list of domains need to be easily accessible and consumable. Should they be in the form of:<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			&nbsp;- Text file<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			&nbsp;- Properties file<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			&nbsp;- Enum within the tool<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			&nbsp;</td>
+			<td style="width: 157px;">N/A</td>
+			<td style="width: 150px;">An error should not be thrown for an already known duplicate domain, so a list of ones to ignore is not required.</td>
+			<td style="width: 177px;">N/A</td>
+			<td style="width: 217px;">Use an Enum for now. Possible properties file/text file going forward if we decide to ship the tool to customers</td>
+			<td style="width: 297px;">An Enum may keep the list more black boxed. We don't want developers to be able to easily edit a text or properties file in order to force a build to pass.</td>
+			<td style="width: 120px;">If any more known duplicates are found, the Enum in the code will have to be updated.</td>
+			<td style="width: 78px;">Complete</td>
+			<td style="width: 91px;">20/03/20</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;">When should the tool be run?</td>
+			<td style="width: 218px;">Developers should know if they've added a duplicate domain. The new tool should be run as part of the usual development process. Should it be run as part of the server/database/Smoketest build?</td>
+			<td style="width: 157px;">N/A</td>
+			<td style="width: 150px;">Developers should know if they've added a duplicate domain.</td>
+			<td style="width: 177px;">The onus is on the developer to run the tool.</td>
+			<td style="width: 217px;">An ANT target a developer can run as a standalone and this target should then be included in the Smoketest.</td>
+			<td style="width: 297px;">There's no need for this to be run all of the time, so no need to include it in a server or database build. It's more suitable to have a standalone target a developer can run when needed and then include in the target in the smoketest so it's run when code is submitted.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			All streams that take on the IEG component will need to have their smoketest updated, except for SPMEntMods.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			Currently the SPMEntMods smoketest does not run the regular database build target. This tool requires the database to be built. The decision was made to not run the tool in SPMEntMods as we would need to re-introduce this database build which will increase the length of the smoketest. This was decided because the likelyhood of adding a new duplicate domain in this stream is very low.</td>
+			<td style="width: 120px;">Smoketest related file(s) will need to be updated on all applicable streams.</td>
+			<td style="width: 78px;">Complete</td>
+			<td style="width: 91px;">20/03/20</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 50px;">Should the tool be shipped to customers?</td>
+			<td style="width: 218px;">Is this something we want customers to have the ability to run?</td>
+			<td style="width: 157px;">N/A</td>
+			<td style="width: 150px;">If we don't want customers to run it, we should prevent this from being shipped.</td>
+			<td style="width: 177px;">N/A</td>
+			<td style="width: 217px;">It shouldn't be shipped to customers at this stage.</td>
+			<td style="width: 297px;">We don't want to ship it to customers for the moment when we have multiple duplicate domains existing in the product.</td>
+			<td style="width: 120px;">Customers won't have access to the tool that can detect duplicate domains.</td>
+			<td style="width: 78px;"><span style="color:null;">Complete</span></td>
+			<td style="width: 91px;">20/03/20</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<h3 dir="ltr" id="ii7">Non Functional Requirements</h3>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" width="671">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">NFR</strong></td>
+			<td style="width: 537px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Accessibility</td>
+			<td style="width: 537px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">N/A</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Availability &amp; Resilience</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Development Resource</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Evolution</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Internationalisation</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Location</td>
+			<td style="width: 537px;"><span style="color:#000000;">The tool to detect the duplicate domains should live in a new "tools" directory in IEG component and should be taken on up through the stack, but it should not be shipped to customers</span></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Performance and Scalability</td>
+			<td style="width: 537px;">The tool only takes a few seconds to run (tested on Mac). For example, when run locally against a HCR stream, it takes approx less than 30 seconds to complete.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Regulation</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Security</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 118px;">Usability</td>
+			<td style="width: 537px;">The user should be able to view the correct rendered fields in the internal application.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii8">Design Options</h2>
+
+<h3 dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:18px;">&nbsp; &nbsp; &nbsp; &nbsp; Option 1&nbsp;(chosen)</span></strong></h3>
+
+<p dir="ltr" style="margin-left: 40px;">On investigation into the defect, the structs called from the UIM pages all contain aggregated attributes from the Common Evidence component (moved to SPM Ent-Mods) entities.&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Looking into the <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">frequencyCode</strong>&nbsp;domain, there are 35 static evidences that would need to be updated. These effect 293 UIM pages. Please view the file (Please Select Frequency domain issue.xlsx) attached to this page.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+There has been done before in the UnearnedRentalIncomeExpense evidence, as the entity as a frequency code calling <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">EVD_FREQUENCY_CODE&nbsp;</strong>domain. This domain could be used&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+to update all the other 35 static evidences effected.&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Other duplicate domain codes also need to be investigated (eg, IncomeType, CitizenshipStatus, AddressState etc) to ensure that there are no more duplicate domain names in the product.&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+To get this, a tool should be corrected to catch any duplicate domain names created.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="color:#0000cd;">Pros of choosing this option:</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">- Ensures there are no duplicate domain names in the code OOTB and prevents any being created by the customer.</p>
+
+<p dir="ltr" style="margin-left: 40px;">- Fixes the defect raised by North Caroline.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="color:#ff0000;">Cons of choosing this option:</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">- Investigation needs to be done on whether this breaks codeline (updating attribute in entities to a different domain name).<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+- A lot of uim pages to be tested.&nbsp;</p>
+
+<h3 dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:18px;">Option 2 (not chosen)</span></strong></h3>
+
+<p dir="ltr" style="margin-left: 40px;">The other option we discussed is further investigation into ClientDomains.java class to see if this could be solved. However, as we don't provide a context to a page as to when the IEG or&nbsp;static domains need to be called, we considered this as pointless.</p>
+
+<p dir="ltr" style="margin-left: 40px;">One place where a context string could be provided is in the ClientDomains.getDomain(String domainName) method. In here, a distinction could be made between IEG2 and non-IEG2 domains so the correct one is retrieved, but&nbsp;providing&nbsp;a context parameter here would require a large number of changes across multiple stacks as this method is directly and in-directly called from numerous places. This type of change is less than ideal.</p>
+
+<h3 dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:18px;">Option 3&nbsp;(not chosen)</span></strong></h3>
+
+<p dir="ltr" style="margin-left: 40px;">An option that works, is updating the IEG domain name in the schema and updating the relevant IEG scripts referencing this domain.&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="color:#0000cd;">Pros of choosing this option:</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">- Fixes the defect raised by North Caroline.</p>
+
+<p dir="ltr" style="margin-left: 40px;">- Not editing the modal domains.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="color:#ff0000;">Cons of choosing this option:</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">- Investigation needs to be done on whether this breaks codeline.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+- Customers would have to update all their IEG scripts to include the name of the new IEG domains. And therefore this is not a real option for us.</p>
+
+<h3 dir="ltr" style="margin-left: 40px;"><span style="font-size:18px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Decision : Option 1</strong></span></h3>
+
+<p dir="ltr" style="margin-left: 40px;">This option was chosen as the other two options would require a massive effort or may have big impact on customers who have custom IEG scripts.</p>
+
+<h4 dir="ltr" style="margin-left: 40px;"><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<span style="color:#000000;">Strategy for renaming existing duplicate&nbsp;domains:</span></h4>
+
+<p dir="ltr" style="margin-left: 40px;"><font color="#000000">A customer has raised a ticket in relation to the duplicate domain&nbsp;FREQUENCY_CODE. Any instance of the FREQUENCY_CODE domain will need to be renamed in the application model.</font><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<font color="#000000">The original plan was for the&nbsp;domain to be renamed to the&nbsp;FREQUENCY_CODE_NO_IEG_OVERRIDE domain name. This was previously created for a similar defect.</font><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+The "<font color="#000000">NO_IEG_OVERRIDE"&nbsp;</font>suffix was to be re-used for the <font color="#000000">FREQUENCY_CODE domain for 2 reasons:<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+1. The&nbsp;FREQUENCY_CODE_NO_IEG_OVERRIDE already exists and there is no point in creating a new domain. There are already 3 existing domains linked to the same codetable:&nbsp;</font><a href="http://cadg-demo.rtp.raleigh.ibm.com:9080/curamanalysisdocumentation/codetables/ct-FrequencyCode.html">http://cadg-demo.rtp.raleigh.ibm.com:9080/curamanalysisdocumentation/codetables/ct-FrequencyCode.html</a><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<font color="#000000">2. The suffix has also been used for renaming other domain definitions in the past. Although a more appropriate&nbsp;name could have been chosen, the suffix will continued to be used as it has already been used and released to customers. It is more important to be consistent vs choosing a more appropriate name.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+But a further issue exists as the FREQUENCY_CODE domain is defined&nbsp;in the model in BIZINF and CEF (not sure why the EJBServer/components/core/model/Packages/Domain Definitions/Common_cat.efx&nbsp;is checked into both)&nbsp;but the&nbsp;FREQUENCY_CODE_NO_IEG_OVERRIDE domain lives in HCR. Therefore any artefact that uses the FREQUENCY_CODE domain below HCR cannot use the current&nbsp;FREQUENCY_CODE_NO_IEG_OVERRIDE domain.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Therefore a new domain related to FREQUENCY_CODE will be created with a unique&nbsp;name (</font><span style="color:#ff0000;">where?</span><font color="#000000">)&nbsp;to notify&nbsp;developers that this should not be&nbsp;defined in an datastore schema.&nbsp;FREQUENCY_CODE_STATIC is the proposed name to replace the older domains.&nbsp;The FREQUENCY_CODE and&nbsp;FREQUENCY_CODE_NO_IEG_OVERRIDE domains will then be deprecated.</font><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<font color="#000000">When the domains are deprecated and the new one is in place, customers will have to analyse their custom code to see if they have overwritten the old domains (using the * notation)&nbsp;and if they have, they will need to apply the same domain definition customisations&nbsp;to their custom implementation of the new version.</font></p>
+
+<p dir="ltr" style="margin-left: 40px;">The documentation tab in RSA&nbsp;for the&nbsp;<font color="#000000">FREQUENCY_CODE and FREQUENCY_CODE_NO_IEG_OVERRIDE domain definitions will need to be updated to indicate they've been deprecated.&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+The documentation of the following domains should also be updated as the documentation is not sufficient.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+ADDRESS_STATE_NO_IEG_OVERRIDE<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+CITIZENSHIP_STATUS_NO_IEG_OVERRIDE<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+INCOME_TYPE_NO_IEG_OVERRIDE</font></p>
+
+<h4 dir="ltr" style="margin-left: 40px;"><span style="color:null;">Strategy for detecting&nbsp;existing duplicate&nbsp;domains:</span></h4>
+
+<p dir="ltr" style="margin-left: 40px;">As part of this option, a tool will be created to detect any duplicate domains at build time. There are already a number of existing duplicate domains in the product, so these have been whitelisted and a warning will be thrown when these are discovered. If any base domains (e.g SVR_STRING, INT_64, CODETABLE_CODE etc) are defined in Datastore schemas, these will be ignored. The tool will determine a domain to be a base domain if it has no parent domain, or if it is a CODETABLE_CODE or SHORT_CODETABLE_CODE.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+If a new duplicate domain is discovered, the tool will throw an error and will fail the build.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+The tool will live in the IEG component of the BizInf stream. This is because we are interested in seeing if there are any duplicated domains that were defined in an IEG or Datastore schema.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+To detect duplicate domains in the static cache, the IEG/DS domains should be loaded. The tool uses an existing method in the DS to load all DS schemas (which define the domain definitions) on the filesystem.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+It calls&nbsp;curam.datastore.facade.intf.ClientDomainHierarchy.get(), which returns all the IEG/DS domains in xml form. The domains are returned in xml text form. This is done by the&nbsp;curam.datastore.validator.impl.AllDomainsSchemaCreator.getAllDomainsSchema() method calling&nbsp;the curam.datastore.entity.base.DatastoreSchema.readAll() method it called to retrieve all the schemas on the filesystem. That information is then transformed into XML text form and returned.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+A whitelist of existing domains will be fed into the tool, so it knows not to throw an error for those listed - <span style="color:null;">the whitelist will exist in the form of an Enum within the tool's source code.</span><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+The tool will need to be run via command line as a standalone target that developers can run and as part of the smoketest (except for SPMEntMods - see requirements decision for details), so no new duplicate domains are added to the source code.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+A build target will be introduced in BIZINF/EJBServer/components/IntelligentEvidenceGathering/tools/scripts/detect_duplicate_domains.xml.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+A&nbsp;flag can be set when running the tool to treat warnings as errors. If this is switched on, an error will be thrown even if the duplicate domain that was found was already known. The default is for this to be switched off.</p>
+
+<p dir="ltr" style="margin-left: 40px;">It was decided that the dynamic domains cache would not be included in the search for duplicate domains. This is because the chances of a having a duplicate domain in the dynamic cache itself and between the dynamic domain and the static domains is very low. This is because dynamic evidence domains naming convention is made up of &lt;EVIDENCETYPE_NAME&gt;_&lt;EFFECTIVEDATE_AS_LONG&gt;_&lt;ATTRIBUTE_NAME&gt;.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+The dynamic domains are stored in the&nbsp;DynEvdDomains.xml (which is sourced at CEF/CEFBase/EJBServer/components/DynamicEvidence/data/initial/blob/DynEvdDomains.xml), which is loaded onto the APPRESOURCE table at build time. This is initially blank, but is populated at runtime with dynamic domains by the&nbsp;curam.dynamicevidence.ui.domaindefs.impl.DynamicDomainDefinitionGenerator, which lives in the DynamicEvidence component in CEF.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Static or Datastore domains do not follow the same&nbsp;naming convention as dynamic domains.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Also Dynamic evidence domains are generated from the ETV, so there is less chance of a developer handcrafting the domain to have a duplicate name.</p>
+
+<h2 dir="ltr">Implementation details:</h2>
+
+<h3 dir="ltr" style="margin-left: 40px;"><span style="font-size:18px;">Tool:</span></h3>
+
+<p dir="ltr" style="margin-left: 40px;"><span style="color:null;"><u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">BizInf:</u><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+The tool's class name is&nbsp;DetectDuplicateDomains.java<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+The tool lives in the newly created BIZINF/EJBServer/components/IntelligentEvidenceGathering/tools/src/curam/ieg/domains/ directory.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+It can be run using the appbuild ieg.detectduplicatedomains target. A flag can be provided in order to treat warnings as errors if necessary. This can be done by running the tool the following way:<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+appbuild ieg.detectduplicatedomains&nbsp;-Dtreat.warnings.as.errors=true<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+A new ANT script has been added where the above targets are defined. The ANT file is&nbsp;detect_duplicate_domains.xml and lives in the newly created&nbsp;BIZINF/EJBServer/components/IntelligentEvidenceGathering/tools/scripts/ directory.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+A test class to test the took lives in the&nbsp;BIZINF/EJBServer/components/IntelligentEvidenceGathering/tools/tests/curam/ieg/test/domains directory.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+The test class is&nbsp;DetectDuplicateDomainsTest.java and can be run using the appbuild ieg.test.detectduplicatedomains.tool target.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Both the tool class and the test class can be run in eclipse also.</span></p>
+
+<p dir="ltr" style="margin-left: 40px;">The tool and test classes are compiled when the respective targets are run. The tool's compiled artefacts live in the newly created BIZINF/EJBServer/components/IntelligentEvidenceGathering/tools/target/main directory.&nbsp;The test class&nbsp;compiled artefacts live in the newly created BIZINF/EJBServer/components/IntelligentEvidenceGathering/tools/target/tests directory.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+The tool works by loading the domain hierarchy for the application infrastructure and&nbsp;application domain hierarchies. It does this by loading the domain information from the curam/util/bopi-model.xml (app inf domains) and curam/bopi-model.xml (app domains) files. This mirrors what is done in a running Curam application, although there are some differences. For example, a domain factory and domain options factory are used when loading the domain hierarchy. In a running application, a ClientDomainFactory and ClientDomainOptionsFactory would be used whereas the tool uses&nbsp;DefaultDomainFactory and&nbsp;DefaultDomainOptionsFactory. This was done as the tool lives in the EJBServer project and these factory classes are client based, so I wanted to avoid a dependency on client based classes. Another difference is that the domains are configured in a running application (where marshalling classes, converter classes etc are configured per domain). This is not done in the tool as it is not needed.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+The tool also loads the datastore domain hierarchy.&nbsp;The tool uses an existing method in the DS to load all DS schemas (which define the domain definitions) on the filesystem. It calls&nbsp;curam.datastore.facade.intf.ClientDomainHierarchy.get(), which returns all the IEG/DS domains in xml form. To do this a transaction is required to be started within the tool. Therefore when the tool is first ran a transaction begins. After the tool has finished, regardless of whether an error was thrown or not, the transaction will be rolled back. This is because we are not actually making any changes on the DB. Only an SQL read operation is performed.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+The domains are returned in xml text form. This is done by the&nbsp;curam.datastore.validator.impl.AllDomainsSchemaCreator.getAllDomainsSchema() method calling&nbsp;the curam.datastore.entity.base.DatastoreSchema.readAll() method it called to retrieve all the schemas on the filesystem. That information is then transformed into XML text form and returned.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+When all domain hierarchies are loaded, the tool will then iterate through the datastore domains and check if any domains with the same name exist in the applications and&nbsp;application infrastructure domains. If a duplicate domain is found but it has&nbsp;no parent domain, it is classed as a root domain and is skipped over. If it is listed&nbsp;in&nbsp;the BaseDomains enum that is defined in the tool, it will also be skipped. This enum is configured in the tool and the following domains are defined:&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+CODETABLE_CODE<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+SHORT_CODETABLE_CODE.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+If it listed in the KnownDuplicate enum that is defined in the tool, a warning will be thrown (if the&nbsp;<span style="color:null;">-Dtreat.warnings.as.errors flag is set to false, which is the default behaviour). The following domains are defined in that enum:</span><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+INCOME_SOURCE<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+COC_TYPE<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+COVERAGE_CODE<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+CITIZENSHIP_STATUS<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+BENEFIT_TYPE<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+PLAN_LEVEL<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+INCOME_TYPE<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+RECORD_STATUS<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+ADDRESS_STATE<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+CW_MOTIVATION_RESULTS_MEMBER_STATUS<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+IEG_MONEY<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+If a duplicate domain is found and has not been classified as a root domain, base domain or a known domain, an error will be printed to the console and a build exception will be thrown, causing&nbsp;the build to fail.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+The method used to detect duplicate domains,&nbsp;curam.ieg.domains.DetectDuplicateDomains.detectDuplicateDomains(MutableDomains, List&lt;MutableDomains&gt;) has been made public in order for it to be unit tested. This is tested in the&nbsp;<span style="color:null;">DetectDuplicateDomainsTest class. This class passes in dummy application infrastructure, application and datastore domains (one version with duplicates and one without duplicates) and tests are run to detect if duplicates are found.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+The EJBServer/.classpath file has been updated to allow for the tool and tool test class to be run in eclipse. A .jazzignore has also been added to hide the changes within the BIZINF/EJBServer/components/IntelligentEvidenceGathering/tools/target directory.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+The&nbsp;BIZINF/EJBServer/components/IntelligentEvidenceGathering/config/InstallationConfiguration.xml file has been updated to exclude the tools directory from the delivered Curam product. This will prevent the tool from being shipped to customers.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+The tools directory is automatically picked up by the createDeliveryZip target, which allows for the tools directory to be delivered up through the layers.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Although javadoc has been written in various places within the&nbsp;tool's class, the javadoc for this class will not be included in the overall IEG javadoc that would be available to customers.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TI:</u><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+There are two changes required in the TI stream for this tool.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+The&nbsp;curam.util.common.domain.DefaultMutableDomains.getDomains() method has changed from protected to public. This is to allow the tool to retrieve a map of the domains within the domain hierarchy, and allows the&nbsp;datastore domain information to be iterated through and compared to the domain information contained within the application and application infrastructure domain hierarchies.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+The TI/reltools/adbuildtools/EJBServer/build.xml file has been updated to import the&nbsp;BIZINF/EJBServer/components/IntelligentEvidenceGathering/tools/scripts/detect_duplicate_domains.xml ANT script. This import is set to optional, so if the script does not exist on the stream, no errors will occur. This mirrors what has been done for the </span>IntelligentEvidenceGathering/script/app_ieg.xml<span style="color:null;"> and other scripts in workflow, REST and CREOLE components. This allows the script to be available on every stream in the application.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<u sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Various Streams:</u></span></p>
+
+<p dir="ltr" style="margin-left: 40px;">The Smoketest file on each stream&nbsp;that takes on the IntelligentEvidenceGathering component (except for SPMEntMods - see requirements decision for details) will need to be updated to run the ieg.detectduplicatedomains target in order for the tool to be ran with every code submission.</p>
+
+<h3 dir="ltr" style="margin-left: 40px;"><span style="font-size:18px;">Renaming the&nbsp;FREQUENCY_CODE domain:</span></h3>
+
+<p dir="ltr" style="margin-left: 40px;">- <span style="color:#ff0000;">In progress:</span><br />
+<br />
+<span style="color:null;">Using the Customer Impact Analysis tool I am able to identify where the domain is referenced on each stream. It provides me with a report which tells me the line in each file where a reference to that domain is. Using that info, I can easily update references to the old domain with the new one:<br />
+- Update any model references through RSA<br />
+&nbsp; - Create a copy of existing domain and give it a new name e.g FREQUENCY_CODE_STATIC.<br />
+&nbsp; - Deprecate existing domain by updating documentation tab.<br />
+&nbsp; - Update any references to old domain with new one.<br />
+- Update any textual references, domain plug-in references (e.g where the domain may be linked to a specific renderer)&nbsp;through text editor<br />
+<br />
+For more info on the Customer Impact Analysis tool, see:&nbsp;</span><a wiki="W0c6659bf1ea2_4ec4_a931_2222e7accb81" page="Customer Impact Analysis Tool?section=ii23" id="wikiLink1591693622008" href="https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/W0c6659bf1ea2_4ec4_a931_2222e7accb81/page/Customer%20Impact%20Analysis%20Tool?section=ii23">https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/W0c6659bf1ea2_4ec4_a931_2222e7accb81/page/Customer%20Impact%20Analysis%20Tool?section=ii23</a></p>
+
+<h2 dir="ltr">Use cases:</h2>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">1.1</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Name</td>
+			<td style="padding: 4px; width: 336px;">A developer adds a new unique datastore domain</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Actor</td>
+			<td style="padding: 4px; width: 336px;">Developer</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Description</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">A developer creates a new unique domain in a datastore schema that is used as part of an IEG script.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Flow</td>
+			<td style="padding: 4px; width: 336px;">A developer creates a new unique domain in a datastore schema that is used as part of an IEG script. The developer then submits the code and the smoketest is run.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Expected</td>
+			<td style="padding: 4px; width: 336px;">The smoketest will pass successfully as the domain is unique.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">1.2</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Name</td>
+			<td style="padding: 4px; width: 336px;">A developer adds a new unique application domain</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Actor</td>
+			<td style="padding: 4px; width: 336px;">Developer</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Description</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">A developer creates a new unique domain in the model.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Flow</td>
+			<td style="padding: 4px; width: 336px;">A developer creates a new unique domain in the model. The developer then submits the code and the smoketest is run.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Expected</td>
+			<td style="padding: 4px; width: 336px;">The smoketest will pass successfully as the domain is unique.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">1.3</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Name</td>
+			<td style="padding: 4px; width: 336px;">A developer adds a new duplicate datastore domain</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Actor</td>
+			<td style="padding: 4px; width: 336px;">Developer</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Description</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">A developer creates a new duplicate domain in a datastore schema that is used as part of an IEG script.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Flow</td>
+			<td style="padding: 4px; width: 336px;">A developer creates a new duplicate domain in a datastore schema that is used as part of an IEG script. The developer then submits the code and the smoketest is run.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Expected</td>
+			<td style="padding: 4px; width: 336px;">The smoketest will fail as the domain is not unique. The duplicate domain info will be printed to the console.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">1.4</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Name</td>
+			<td style="padding: 4px; width: 336px;">A developer adds a new duplicate application domain</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Actor</td>
+			<td style="padding: 4px; width: 336px;">Developer</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Description</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">A developer creates a new duplicate domain in the model.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Flow</td>
+			<td style="padding: 4px; width: 336px;">A developer creates a new duplicate domain in the model but this domain is already defined in a datastore schema. The developer then submits the code and the smoketest is run.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Expected</td>
+			<td style="padding: 4px; width: 336px;">The smoketest will fail as the domain is not unique. The duplicate domain info will be printed to the console.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">1.5</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Name</td>
+			<td style="padding: 4px; width: 336px;">A developer adds a new duplicate datastore domain</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Actor</td>
+			<td style="padding: 4px; width: 336px;">Developer</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Description</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">A developer creates a new duplicate domain in a datastore schema that is used as part of an IEG script. The developer wants to run a tool to detect a duplicate domain before submitting the code changes to smoketest.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Preconditions</td>
+			<td style="padding: 4px; width: 336px;">The server and database should be built.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Flow</td>
+			<td style="padding: 4px; width: 336px;">A developer creates a new duplicate domain in a datastore schema that is used as part of an IEG script. The developer then runs the ./appbuild ieg.detectduplicatedomains target from the EJBServer directory.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Expected</td>
+			<td style="padding: 4px; width: 336px;">The target will fail as the domain is not unique. The duplicate domain info will be printed to the console.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">1.6</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Name</td>
+			<td style="padding: 4px; width: 336px;">A developer adds a new duplicate application domain</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Actor</td>
+			<td style="padding: 4px; width: 336px;">Developer</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Description</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">A developer creates a new duplicate domain in the model. The developer wants to run a tool to detect a duplicate domain before submitting the code changes to smoketest.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Preconditions</td>
+			<td style="padding: 4px; width: 336px;">The server and database should be built.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Flow</td>
+			<td style="padding: 4px; width: 336px;">A developer creates a new duplicate domain in the model but this domain is already defined in a datastore schema. The developer then runs the ./appbuild ieg.detectduplicatedomains target from the EJBServer directory.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Expected</td>
+			<td style="padding: 4px; width: 336px;">The target will fail as the domain is not unique. The duplicate domain info will be printed to the console.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">1.7</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Name</td>
+			<td style="padding: 4px; width: 336px;">A developer adds a new duplicate datastore domain and wants an error thrown for all duplicate domains in the product</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Actor</td>
+			<td style="padding: 4px; width: 336px;">Developer</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Description</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">A developer creates a new duplicate domain in a datastore schema that is used as part of an IEG script. The developer wants to run a tool to detect a duplicate domain before submitting the code changes to smoketest. The developer wants all</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Preconditions</td>
+			<td style="padding: 4px; width: 336px;">The server and database should be built.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Flow</td>
+			<td style="padding: 4px; width: 336px;">A developer creates a new duplicate domain in a datastore schema that is used as part of an IEG script. The developer then runs the ./appbuild ieg.detectduplicatedomains&nbsp;<span style="color:null;">-Dtreat.warnings.as.errors=true</span> target from the EJBServer directory.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Expected</td>
+			<td style="padding: 4px; width: 336px;">The target will fail as the domain is not unique. The duplicate domain info will be printed to the console.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">1.8</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Name</td>
+			<td style="padding: 4px; width: 336px;">A developer adds a new duplicate application domain&nbsp;and wants an error thrown for all duplicate domains in the product</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Actor</td>
+			<td style="padding: 4px; width: 336px;">Developer</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Description</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">A developer creates a new duplicate domain in the model. The developer wants to run a tool to detect a duplicate domain before submitting the code changes to smoketest.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Preconditions</td>
+			<td style="padding: 4px; width: 336px;">The server and database should be built.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Flow</td>
+			<td style="padding: 4px; width: 336px;">A developer creates a new duplicate domain in the model but this domain is already defined in a datastore schema. The developer then runs the ./appbuild ieg.detectduplicatedomains&nbsp;<span style="color:null;">-Dtreat.warnings.as.errors=true</span> target from the EJBServer directory.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Expected</td>
+			<td style="padding: 4px; width: 336px;">The target will fail as the domain is not unique. The duplicate domain info will be printed to the console.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">1.9</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Name</td>
+			<td style="padding: 4px; width: 336px;">A developer wants to run the tests that test the tool which detects duplicate domains</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Actor</td>
+			<td style="padding: 4px; width: 336px;">Developer</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Description</td>
+			<td style="padding: 4px; width: 336px;">A developer wants to run the tests that test the tool which detects duplicate domains</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Flow</td>
+			<td style="padding: 4px; width: 336px;">A developer runs the <span style="color:null;">appbuild ieg.test.detectduplicatedomains.tool target</span> from the EJBServer directory.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Expected</td>
+			<td style="padding: 4px; width: 336px;">The tests will run on the command line.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">1.10</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Name</td>
+			<td style="padding: 4px; width: 336px;">A developer wants to run the tool in eclipse</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Actor</td>
+			<td style="padding: 4px; width: 336px;">Developer</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Description</td>
+			<td style="padding: 4px; width: 336px;">
+			<p style="margin-bottom: 5px; padding-top: 2px; padding-bottom: 2px;">A developer wants to run the tool to detect duplicate domains in their eclipse development environment</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Preconditions</td>
+			<td style="padding: 4px; width: 336px;">The typical development build targets should be run and eclipse configured accordingly.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Flow</td>
+			<td style="padding: 4px; width: 336px;">A developer searches for the DetectDuplicateDomains.java class and runs it as a Java application.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Expected</td>
+			<td style="padding: 4px; width: 336px;">The tool will run in eclipse.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">1.11</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Name</td>
+			<td style="padding: 4px; width: 336px;">A developer wants to run the tests which test the tool in eclipse</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Actor</td>
+			<td style="padding: 4px; width: 336px;">Developer</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Description</td>
+			<td style="padding: 4px; width: 336px;">A developer wants to run the tests which test the tool in eclipse</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Preconditions</td>
+			<td style="padding: 4px; width: 336px;">The typical development build targets should be run and eclipse configured accordingly.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Flow</td>
+			<td style="padding: 4px; width: 336px;">A developer searches for the <span style="color:null;">DetectDuplicateDomainsTest</span>.java class and runs it as a Junit application.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Expected</td>
+			<td style="padding: 4px; width: 336px;">The tests will run in eclipse.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; margin: 4px; border-collapse: collapse !important;" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Use Case ID</td>
+			<td style="padding: 4px; width: 336px;">2.1</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Name</td>
+			<td style="padding: 4px; width: 336px;">The correct HTML should be rendered for the frequency code dropdown menu in the Income Support Evidence modal.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Actor</td>
+			<td style="padding: 4px; width: 336px;">Caseworker</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Description</td>
+			<td style="padding: 4px; width: 336px;">The correct renderer should output the HTML for the frequency code dropdown menu in the Income Support Evidence modal.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Preconditions</td>
+			<td style="padding: 4px; width: 336px;">A caseworker should be logged into a Curam application where Income support module is available.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Flow</td>
+			<td style="padding: 4px; width: 336px;">
+			<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Login as eligibilityworker.</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Create an CGISS application.</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Navigate to the Income Support evidence dashboard and create a new General Insurance or&nbsp;Alimony evidence.</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Check the Frequency dropdown. It will have "Please Select" by default.</li>
+			</ol>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="padding: 4px; width: 188px;">Expected</td>
+			<td style="padding: 4px; width: 336px;">When you click the dropdown arrow, a "Please Select" should not be added below the drop down, even after selecting a dropdown value.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

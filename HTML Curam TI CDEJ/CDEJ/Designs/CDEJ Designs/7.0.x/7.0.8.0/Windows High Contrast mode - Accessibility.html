@@ -1,0 +1,193 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Windows High Contrast mode - Accessibility</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Windows High Contrast mode - Accessibility";
+    pageId="urn:lsid:ibm.com:td:3a68b830-d64a-4dca-bb28-ff94b899a80e";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Windows High Contrast mode - Accessibility</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<h1 dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Design Page for Windows High Contrast mode missing icons</strong></h1>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii3">Background</h2>
+
+<p dir="ltr">The background to this wiki page is Support Ticket <a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/L2%20Support#action=com.ibm.team.workitem.viewWorkItem&amp;id=239933">239933</a>&nbsp;which outlines the issue that currently OOTB with the high contrast mode turned on in Windows OS, there are multiple non-decorative icons and images missing. Currently, we are waiting on feedback from the customer on the scope of this ticket as general issues are mentioned but the screenshots only contain some defects.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The first defect around this issue (High Contrast mode) resulted in a meeting held on 4th March 2019 (with Fergal Gavin, Barry O'Sullivan, Francesco Marini, Shane McFadden and Clara Mannion) to discuss where we stand on the accessibility issues arising from Windows high contrast mode turned on.&nbsp;The conclusion from this meeting is that IBM requires any teams to include Windows HC mode in their testing steps and we should fix any defects in this area.&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;</p>
+
+<h2 dir="ltr" id="ii5">Requirements</h2>
+
+<p dir="ltr">List of Requirements</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement 1: We shall fix defects arising with Windows High Contrast mode turned on.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement 2: We shall include Windows High Contrast mode in our testing steps.</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=?????" target="_blank">RTC&nbsp;Story&nbsp;</a><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/L2%20Support#action=com.ibm.team.workitem.viewWorkItem&amp;id=239933">239933 </a>- Accessibility - Windows High Contrast Mode Removes Icons</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii6"><span style="font-size:18px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Technical Analysis</strong></span></h3>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:12px;">Windows HC mode: ON</span></strong></p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:12px;">Missing icons highlighted on Person Home page</span></strong></p>
+
+<p dir="ltr"><img lconnwikiparamattachmentname="Win High Contrast Person Home missing icons.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Windows%20High%20Contrast%20mode%20-%20Accessibility._ATTACHMENTS_/Win%20High%20Contrast%20Person%20Home%20missing%20icons.png" alt="" style="width: 700px;" lconnwikiparamwikipage="Windows High Contrast mode - Accessibility" lconnattachedresourcetype="page"></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">1. Missing arrow icon on top right of Person image (Citizen Context Viewer icon)</p>
+
+<p dir="ltr">This contains a link &lt;a&gt; tag with a background url to display the image and css changes to update the background image on hover and focus states.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+The link &lt;a&gt; tag already has an existing image tag, that is currently hiding through css styling (display: none).</p>
+
+<p dir="ltr">Solution:<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+-&nbsp;update PersonDetailsPanel.css to remove background images and view the &lt;img&gt; tag.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+- update LinkBuilder.java to include an attribute on the link, so when in focus the image will be updated.</p>
+
+<p dir="ltr">- update Image.properties to add hover icon image.</p>
+
+<p dir="ltr">- update ImagePanelBuilder.java</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">2. Missing phone, map and email icons</p>
+
+<p dir="ltr">This are also background images and an image tag needs to be added.</p>
+
+<p dir="ltr">- update PersonDetailsPanel.css<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;</p>
+
+<p dir="ltr">3. Missing toggle buttons on Home tab page.</p>
+
+<p dir="ltr">This icon is a background image on a button tag.</p>
+
+<p dir="ltr">Update the toggle button to have &lt;img&gt; tag.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;</p>
+
+<p dir="ltr">4. Missing menu icon on top right of Person home page.</p>
+
+<p dir="ltr">This icon is in a span, with the background image on the <em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">dijitButtonNode&nbsp;</em>class which is updated through css on a hover event.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;</p>
+
+<p dir="ltr">5. Shortcuts icon&nbsp;</p>
+
+<p dir="ltr">This missing icon is of a right and left double chevron images, depending on whether the Shortcuts panel is expanded or not. The images are background urls to the &lt;div&gt; tag.</p>
+
+<p dir="ltr">Solution:</p>
+
+<p dir="ltr">- Update ExpandoPane.html to have &lt;img&gt; tag</p>
+
+<p dir="ltr">- Update ExpandoPane.js<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Note</strong>:<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+1. Also update the css files corresponding to right to left variations and test from right to left.</p>
+
+<p dir="ltr">2. Test with JAWS screenreader on what's in focus, and what's read.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Windows HC mode: ON</p>
+
+<p dir="ltr">Missing icons highlighted on the Shortcuts panel</p>
+
+<p dir="ltr"><img lconnwikiparamattachmentname="Win High Contrast Shortcuts missing icons.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Windows%20High%20Contrast%20mode%20-%20Accessibility._ATTACHMENTS_/Win%20High%20Contrast%20Shortcuts%20missing%20icons.png" alt="" style="width: 700px; height: 429px;" lconnwikiparamwikipage="Windows High Contrast mode - Accessibility" lconnattachedresourcetype="page"></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">1. Missing Shortcuts Icon (to expand or close)</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">2. Missing Shortcuts menu item toggle icons</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><span style="font-size:18px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Common issues</strong></span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Resulting from the technical analysis and investigation into this support ticket, there are some common issues and solutions. The reason theses icons are missing are because Windows HC mode removes all background images. Instead, they need to be updated to have an image tag.&nbsp;</p>
+
+<p dir="ltr">Example:<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<span style="font-size:14px;">&lt;img&nbsp;src="smiley.gif"&nbsp;alt="" &gt;</span></p>
+
+<p dir="ltr">The image tag <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">must</strong>&nbsp;have the&nbsp;<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">alt</strong> attribute, as it is a HTML standard. However, depending on whether they are decorative images or not, it will depend whether the alt attribute should be null (alt="") or have appropriate alternative text. Refer to here:&nbsp;<a href="https://webaim.org/techniques/alttext/">https://webaim.org/techniques/alttext/</a></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Another issue is that generally the background images have been used for icons, as it's very easy to update the images through css when the state of the element changes, such as a hover or focus.&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+For an image tag there are two ways to implement this behaviour.&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+1. Add javascript function to the link, so that when it's on hover or focus (this can be a large range of mouseover, mouseout, keyboard actions etc) to update the image src.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+2. Or add two &lt;img&gt; tags in the link, and hide one. And using css display the correct image for that state.&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii18">Testing</h2>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">This is&nbsp;<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. An outline of all of the testing required by the feature should be present here. This may tie in with the use cases outlined above. Describe the framework being used and the kinds of tests being written:</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Unit Tests</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Process Tests</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">End to End Tests</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Functional/Business Flow Tests</li>
+</ul>
+
+<p dir="ltr">Is it just functional tests or are further performance tests required:</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">FVT Required?</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">SVT Required?</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

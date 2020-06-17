@@ -1,0 +1,325 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Dojo Upgrade to 1.10.5</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Dojo Upgrade to 1.10.5";
+    pageId="urn:lsid:ibm.com:td:f14be65d-eea3-4bf7-9245-e903e8b13275";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Dojo Upgrade to 1.10.5</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr"><span style="font-size:20px;"><strong>Design Page for Dojo Upgrade to 1.10.5</strong></span></p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Background</span></strong></p>
+
+<p dir="ltr">As part of the drive to support Microsoft Edge, a new version of the IBM Dojo toolkit has been released. This page will highlight the changes required to move from version 1.10.4 to 1.10.5 and also outline some of the files removed as a result.</p>
+
+<p dir="ltr">Note that this was also completed for the 6.2.0.2 release as well as the Volga release.</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Requirements</span></strong></p>
+
+<p dir="ltr"><a href="https://jazz031.hursley.ibm.com:9443/ccm/resource/itemName/com.ibm.team.workitem.WorkItem/159769" target="_blank">Story</a> in RTC.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Non Functional Requirements</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. We can fill in N/A if the specified non functional requirement is not applicable to the feature being delivered, otherwise some notes must be entered here covering the particular area.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" width="671">
+	<tbody>
+		<tr>
+			<td style="width: 118px;"><strong>NFR</strong></td>
+			<td style="width: 537px;"><strong>Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Accessibility</td>
+			<td style="width: 537px;">The ability of the system to be used by people with disabilities. When new technologies are being used for the UI very careful consideration should be given to whether screen readers can be used with the technologies. This applies specifically to usage of JavaScript, Flex and SVG. The use of colors to provide functionality should be considered (and avoided), along with resolutions that will be used by vision impaired users.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Availability &amp; Resilience</td>
+			<td style="width: 537px;">The ability of the system to be fully or partly operational as and when required and to effectively handle failures that could affect system availability. This should be considered when working outside of the normal infrastructure and deployment. For example, the XML Server is not deployed in an application server and has special handling for fail-over and load balancing. Careful consideration should be taken before adding new components, e.g. EJB Beans, MDBs, to the infrastructure.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Development Resource</td>
+			<td style="width: 537px;">The ability of the system to be designed, built, deployed and operated within known constraints of people, budget, time, etc. In general there is not much information required here, however where special skill sets or people with siloed knowledge are required to work on the change/enhancement, this should be detailed here.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Evolution</td>
+			<td style="width: 537px;">The ability of the system to be flexible in the face of the inevitable change that all systems experience after deployment, balanced against the costs of providing such flexibility. Consideration should be given to future proofing the change, including considering how to upgrade to any changes or enhancements provided in the future. Specifically designs should accommodate elements such as localisation (text, dates, etc.), customization, configurability, and componentization. Providing these features in future releases, when not considered up front, has caused impacts for customers in the past and has prevented us from providing the features in some cases.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Internationalisation</td>
+			<td style="width: 537px;">The ability of the system to be independent from any particular language, country or cultural group. Localisation and internationalisation are a large concern for Cúram. Support should always be provided to view information in multiple locales, based on the user and server locale, along with support for working in multiple time zones.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Location</td>
+			<td style="width: 537px;">The ability of the system to overcome problems brought about by the absolute location of its elements and the distances between them. For the most part this is not a major concern, however we should never design based on the assumption that the customer will use a default configuration</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Performance and Scalability</td>
+			<td style="width: 537px;">The ability of the system to predictably execute within its mandated performance profile and to handle increased processing volumes. Performance and scalability are a concern and should always be considered during design. Where necessary, the Performance and Benchmarking teaming should be engaged early to help with determining impact of potential changes.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Regulation</td>
+			<td style="width: 537px;">The ability of the system to conform to locale and international laws, quasi-legal regulations, company policies and other rules and standards. Regulation includes the usages of third party tools and the licensing issues associated with these. New jars should never be introduced without considering the legal implications and licensing of the jars. This includes usage of GPL licensed code. Also, usage of code freely provided on the web and not properly licensed should be avoided.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Security</td>
+			<td style="width: 537px;">The ability of the system to reliably control, monitor and audit who can perform what actions on what resources and to detect and recover from failures in security mechanisms. This is a concern where new features are added that are not contained within the normal Cúram security.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Usability</td>
+			<td style="width: 537px;">The ease with which people who interact with the system can work effectively. How the change will affect the user and how they use the application/feature should always be considered. Where necessary the business analysts and our user interface experts should be engaged early to ensure we meet usability requirements. e.g. printing.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Design</span></strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">The Dojo upgrade procedure is described in the <a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" target="_blank" href="../../../../Development%20And%20Test/Upgrades/Dojo%20Upgrade%20Instructions.html" id="wikiLink1468252582013" page="Dojo Upgrade Instructions">following&nbsp;source.</a></p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Resilience</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">Unsuccessful upgrade will show up as the visual and functional discrepancies. There might be styling issues or the user interaction issues. Since the upgrade is the minor one and devoted to the defect fixes, however, the number of affected areas is expected to be fairly limited and since the change lists given below show that the fixed issues were themselves rather limiting the functionality, the expected outcome should be the better, more consistent behavior rather than any not foreseen, negative impact.</p>
+
+<p dir="ltr" style="margin-left: 40px;">In case if there are changes, though, which affect the developer/end user, these should be rectified by narrowing down the affected area and reviewing the code which should have been changed following the upgrade. As mentioned already, the number of affected areas is minimal, and the nature of changes does not look to be threatening.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Implementation Notes</span></strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><a href="https://bugs.dojotoolkit.org/query?group=status&amp;milestone=1.10.5">Dojo&nbsp;1.10.5&nbsp;official&nbsp;changes&nbsp;list</a> could be found by following the link. One should check all the changes which might seem applicable to our code base. Basically, where the ticket mentions the JS classes which are in our dojo-overrides, these need to be checked first of all, and either merged, if they contain Curam specific fixes not yet resolved, or deleted, if the updated version contains the fix or its equivalent for which the native class was overridden.</p>
+
+<p dir="ltr"><a href="https://w3-03.ibm.com/tools/cm/iram/artifact/DBF96565-E96F-6B69-C027-E0C68EA58EDF/1.10.X/Builds/CHANGELOG.txt" target="_blank">IBM&nbsp;Dojo&nbsp;Toolkit&nbsp;change&nbsp;log</a> (if you have access to it) contains the more extensive changes list related to Dojo 1.10.5 (and other recent releases as well). Same way, this list might be check to see if any of the changes might affect widgets in use. Again, since the changes are mostly defect fixes, the main focus would be to check for own fixes of the same which might be not necessary any longer and would allow to remove the overriding artifacts. Additionally, if any of the customizations/overrides are deep enough and Dojo native methods are being overriden, a check is needed to see if the signatures are left unchanged (while the user level APIs would generally be changed, the internal APIs might contain such changes).</p>
+
+<h3 dir="ltr">Deleted files list</h3>
+
+<p dir="ltr">The following files were deleted removed from our code base:</p>
+
+<p dir="ltr">1. The Decision Matrix support</p>
+
+<ul dir="ltr">
+	<li>&nbsp;&nbsp;&nbsp; Container.js (curam/Container)</li>
+	<li>&nbsp;&nbsp;&nbsp; decisionmatrixbase.js (used to preload the matrix related modules)</li>
+	<li>&nbsp;&nbsp;&nbsp; Matrix.js (curam/Matrix)</li>
+	<li>&nbsp;&nbsp;&nbsp; Answer.js (curam/matrix/Answer)</li>
+	<li>&nbsp;&nbsp;&nbsp; AnswerGroup.js (curam/matrix/AnswerGroup)</li>
+	<li>&nbsp;&nbsp;&nbsp; BottomLeft.js (curam/matrix/BottomLeft)</li>
+	<li>&nbsp;&nbsp;&nbsp; BottomLeftFiller.js (curam/matrix/BottomLeftFiller)</li>
+	<li>&nbsp;&nbsp;&nbsp; BottomLeftMain.js (curam/matrix/BottomLeftMain)</li>
+	<li>&nbsp;&nbsp;&nbsp; BottomRight.js (curam/matrix/BottomRight)</li>
+	<li>&nbsp;&nbsp;&nbsp; Constants.js (curam/matrix/Constants)</li>
+	<li>&nbsp;&nbsp;&nbsp; Contradiction.js (curam/matrix/Contradiction)</li>
+	<li>&nbsp;&nbsp;&nbsp; ContradictionCell.js (curam/matrix/ContradictionCell)</li>
+	<li>&nbsp;&nbsp;&nbsp; ContradictionColumn.js (curam/matrix/ContradictionColumn)</li>
+	<li>&nbsp;&nbsp;&nbsp; ContradictionRow.js (curam/matrix/ContradictionRow)</li>
+	<li>&nbsp;&nbsp;&nbsp; Number.js (curam/matrix/Number)</li>
+	<li>&nbsp;&nbsp;&nbsp; Outcome.js (curam/matrix/Outcome)</li>
+	<li>&nbsp;&nbsp;&nbsp; OutcomeCell.js (curam/matrix/OutcomeCell)</li>
+	<li>&nbsp;&nbsp;&nbsp; OutcomeColumn.js (curam/matrix/OutcomeColumn)</li>
+	<li>&nbsp;&nbsp;&nbsp; OutcomeRow.js (curam/matrix/OutcomeRow)</li>
+	<li>&nbsp;&nbsp;&nbsp; Priority.js (curam/matrix/Priority)</li>
+	<li>&nbsp;&nbsp;&nbsp; PriorityGroup.js (curam/matrix/PriorityGroup)</li>
+	<li>&nbsp;&nbsp;&nbsp; QuestionLeft.js (curam/matrix/QuestionLeft)</li>
+	<li>&nbsp;&nbsp;&nbsp; QuestionRight.js (curam/matrix/QuestionRight)</li>
+	<li>&nbsp;&nbsp;&nbsp; QuestionText.js (curam/matrix/QuestionText)</li>
+	<li>&nbsp;&nbsp;&nbsp; ScoreGroup.js (curam/matrix/ScoreGroup)</li>
+	<li>&nbsp;&nbsp;&nbsp; TopLeft.js (curam/matrix/TopLeft)</li>
+	<li>&nbsp;&nbsp;&nbsp; TopRight.js (curam/matrix/TopRight)</li>
+	<li>&nbsp;&nbsp;&nbsp; TopRightBottom.js (curam/matrix/TopRightBottom)</li>
+	<li>&nbsp;&nbsp;&nbsp; TopRightFiller.js (curam/matrix/TopRightFiller)</li>
+	<li>&nbsp;&nbsp;&nbsp; TopRightTop.js (curam/matrix/TopRightTop)</li>
+	<li>&nbsp;&nbsp;&nbsp; TempDivs.js (curam/matrix/TempDivs)</li>
+	<li>&nbsp;&nbsp;&nbsp; util.js (curam/matrix/util)</li>
+	<li>&nbsp;&nbsp;&nbsp; AnswerValidator (curam/matrix/validation/AnswerValidator)</li>
+	<li>&nbsp;&nbsp;&nbsp; ContradictionValidator (curam/matrix/validation/ContradictionValidator)</li>
+	<li>&nbsp;&nbsp;&nbsp; DefaultCombinationValidator (curam/matrix/validation/DefaultCombinationValidator)</li>
+	<li>&nbsp;&nbsp;&nbsp; DefaultValidator (curam/matrix/validation/DefaultValidator)</li>
+	<li>&nbsp;&nbsp;&nbsp; OutcomeValidator (curam/matrix/validation/OutcomeValidator)</li>
+	<li>&nbsp;&nbsp;&nbsp; PriorityValidator (curam/matrix/validation/PriorityValidator)</li>
+	<li>&nbsp;&nbsp;&nbsp; MatrixMenuItem (curam/widget/MatrixMenuItem)</li>
+	<li>&nbsp;&nbsp;&nbsp; MatrixPopupMenu (curam/widget/MatrixPopupMenu)</li>
+	<li>&nbsp;&nbsp;&nbsp; DivButton (curam/widget/DivButton)</li>
+</ul>
+
+<p dir="ltr">2. PopupPage/Widget support - these are base on the outdated Dojo version (0.4.2) which is not longer used, the base classes are long removed from the dojo shipped source, hence these files look clear left-overs:</p>
+
+<ul dir="ltr">
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PopupPage (curam/widget/PopupPage)</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PopupWidget (curam/widget/PopupWidget)</li>
+</ul>
+
+<p dir="ltr">3. Outdated internal tests support. The following files seem to be another set of left-overs using the outdated APIs ant not available dojo locations/signatures.</p>
+
+<ul dir="ltr">
+	<li>&nbsp;&nbsp;&nbsp;&nbsp; client/inf/src/main/javascript/internal/tests/date-selector.gif</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp; client/inf/src/main/javascript/internal/tests/linkPanePopupTester.html</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp; client/inf/src/main/javascript/internal/tests/linkPanePopupTesterDojo.html</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp; client/inf/src/main/javascript/internal/tests/test_datePicker.html</li>
+	<li>&nbsp;&nbsp;&nbsp;&nbsp; client/inf/src/main/javascript/internal/tests/test-tree.html</li>
+</ul>
+
+<p dir="ltr">4. Dojo-overrides which were not necessary any longer. These are the files which introduced the changes now available in the official version. The comparison shows the overriden and the native files are identical or functionally identical, hence the overriding versions are removed:</p>
+
+<ul dir="ltr">
+	<li>&nbsp;sniff.js (dojo/base/_sniff) - the browser detection utility, the customizations related to IE11 (trident) recognition no longer necessary + the _base version is no longer in use, and the Edge support is added in the dojo/sniff.</li>
+	<li>&nbsp;&nbsp; place.js (dijit/place) - the overriding and the native version have no differences.</li>
+	<li>&nbsp;&nbsp; _base.js (dojox/encoding/digests) - identical overriding and native versions.</li>
+	<li>&nbsp;&nbsp; SHA1.js (SHA1 algorithm implementation used by digests) - again, identical overriding and native versions.</li>
+	<li>_TabContainerBase.js (dijit/layout/_TabContainerBase) - the upgraded version was identical to the overriden version after the fix has been introduced.</li>
+</ul>
+
+<h3 dir="ltr">Merged/changed files list</h3>
+
+<p dir="ltr">These are the files where Curam specific customizations were present, or which contained the bug fixes not yet in the native versions.</p>
+
+<ul dir="ltr">
+	<li>&nbsp; _TabButton.js - customized _StackButton used by the scrolling tab controller to display tabs and containing the Curam specific functionality to allow for disabling and changing the visibility of the tabs. No merging required, removed the duplicated listener and the code aimed at IE6 support.</li>
+	<li>&nbsp; DeferredDropdownButton.js (curam/widget/DeferredDropDownButton) - removed the unnecessary code</li>
+	<li>&nbsp; OptimalBrowserMessage.js (curam/widget/OptimalBrowserMessage) - added Edge support.</li>
+	<li>&nbsp; ScrollingTabController.js (dijit/layout/ScrollingTabController) - added the fix for the problem reported&nbsp;<a href="https://bugs.dojotoolkit.org/ticket/18535">here</a> leaving the Curam specific customization for the performance.</li>
+	<li>&nbsp; TabController.js (dijit/layout/TabController) - merged the customized and the native versions to preserve the Curam specific modifications.</li>
+	<li>&nbsp; cdej.profile.js - changed to exclude the removed matrix and other files from the layer build.</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Application Impact</span></strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">No application impact is expected apart unless any of the Customers still use the old, JavaScript based and buggy Decision Matrix Editor. There is no evidence of anybody doing so - the old Matrix was left incomplete and had huge styling and accessibility issues which would have already been reported multiple times, yet there is no support cases or questions coming this direction for a number of years.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Testing</span></strong></p>
+
+<ul dir="ltr">
+	<li>
+	<p>Unit tests - JavaScript unit tests (intern tests) should be run</p>
+	</li>
+	<li>
+	<p>Manual Testing - regression testing should be done, especially focusing on the ScrollingTabController tests (the slider with the tab strip) - to see that the scrolling and the menu still work, tabs look as previously, are selectable by clicking on them or their names in the menu). The date selector popups should also be tested to check if they work as expected.</p>
+	</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Documentation</span></strong></p>
+
+<p dir="ltr">No documentation other than this page is associated with this upgrade which should be completely transparent to the layers above TI and the end users if they are upgrading from Dojo 1.10.4. The changes list already mentioned shows that apart from Edge support the release has fixed some of the reported bugs/defects. Unless the layers above us have their customizations&nbsp; which workaround or utilize these bugs somehow, there should not be any take-on required.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Check List</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Basically this is a quick check list of items that should be considered when doing a design for that particular component.</p>
+
+<table border="1" dir="ltr" style="width: 658px;">
+	<tbody>
+		<tr>
+			<td style="width: 224px;"><strong>Check List Item</strong></td>
+			<td style="width: 256px;"><strong>Notes</strong></td>
+			<td style="width: 157px;"><strong>Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 224px;">The new version release notes/changelog</td>
+			<td style="width: 256px;">What has changed/what areas have been changed? Are these areas overriden by our OOTB code?</td>
+			<td style="width: 157px;">Yes</td>
+		</tr>
+		<tr>
+			<td style="width: 224px;">The nature of the changes</td>
+			<td style="width: 256px;">Did the changes remove the work-arounded problems (and therefore the workarounds could be removed)</td>
+			<td style="width: 157px;">Yes</td>
+		</tr>
+		<tr>
+			<td style="width: 224px;">The visual changes</td>
+			<td style="width: 256px;">Visual and functional tests around the widgets and functional areas related to the changes to see that everything looks and functions the same</td>
+			<td style="width: 157px;">
+			<p>Yes</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 224px;">Existing JS tests</td>
+			<td style="width: 256px;">Do all the JavaScrip tests pass? If there are failures, are these related to the upgrade (do these same failures occur in the pre-upgrade version)?</td>
+			<td style="width: 157px;">Yes</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Work Estimation</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Again, the actual items listed in the estimate breakdown may vary from task to task and component to component.</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Work Estimates</p>
+
+	<ul>
+		<li>
+		<p>Design: ? Days</p>
+		</li>
+		<li>
+		<p>Prototype: ? Days</p>
+		</li>
+		<li>
+		<p>Implementation: ? Days</p>
+		</li>
+		<li>
+		<p>Testing: ? Days</p>
+		</li>
+		<li>
+		<p>Documentation: ? Days</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Total: ? Days</p>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><br />
+&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

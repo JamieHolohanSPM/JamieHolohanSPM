@@ -1,0 +1,352 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>CDSL JavaScript API</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="CDSL JavaScript API";
+    pageId="urn:lsid:ibm.com:td:0a56c2d1-bb14-4939-b84e-ec03cefd1639";
+    toRoot="../../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">CDSL JavaScript API</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Description of Change</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">Prerequisites</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii3">Rationale</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii4">Requirements</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii5">Non-Functional Requirements</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii6">Outstanding Issues</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii7">High-Level Design</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii28">CuramService API</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii8">CuramStore API</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii9">Impact</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii10">Code Line Exemption</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii11">Dependencies</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii12">Use Cases</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii13">Implementation Details</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii14">Integration Points</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii15">Test</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii16">Dependencies</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii17">Manual Application Test</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii18">Automated Tests</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii19">Comprehensive Manual Tests</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii20">Documentation</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii21">Release Notes Preview</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii22">Task List</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii23">Review Comments</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii24">Simple Comments</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii25">Extended Comments</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii26">Summary Title</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii27">Historical Information</a></div>
+
+<h2 dir="ltr" id="ii1">Description of Change</h2>
+
+<p dir="ltr">Design and implement a JavaScript API for accessing Cúram as part of the Data Service Layer component of the Cúram Mobile SDK project.</p>
+
+<ul dir="ltr">
+	<li><strong>Targeted Release(s):</strong> 6.1</li>
+	<li><strong>CEMS Case:</strong> <a href="http://cems.curamsoftware.com:8080/browse/TEC-14828" target="_blank">TEC-14828</a></li>
+	<li><strong>Support Case:</strong> N/A</li>
+</ul>
+
+<h2 dir="ltr" id="ii2">Prerequisites</h2>
+
+<ul dir="ltr">
+	<li>N/A</li>
+</ul>
+
+<h2 dir="ltr" id="ii3">Rationale</h2>
+
+<ul dir="ltr">
+	<li>N/A</li>
+</ul>
+
+<h2 dir="ltr" id="ii4">Requirements</h2>
+
+<p dir="ltr">See the <a wiki="We1458f1078dd_463a_9e7c_c54ac9e1e5a7" href="/wikis/home#!/wiki/We1458f1078dd_463a_9e7c_c54ac9e1e5a7/page/Requirements" id="wikiLink1526291457221" page="Requirements">Requirements</a> page.</p>
+
+<h2 dir="ltr" id="ii5">Non-Functional Requirements</h2>
+
+<table border="1" dir="ltr" style="width: 80%;">
+	<tbody>
+		<tr>
+			<td style="width: 166px;"><strong>NFR</strong></td>
+			<td style="width: 99px;"><strong>Applicable</strong></td>
+			<td style="width: 445px;"><strong>Comment</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Accessibility</td>
+			<td style="width: 99px;">&nbsp;</td>
+			<td style="width: 445px;">No planned changes in this area</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Availability and Resilience</td>
+			<td style="width: 99px;">&nbsp;</td>
+			<td style="width: 445px;">No planned changes in this area</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Dynamic UIM Impact</td>
+			<td style="width: 99px;">&nbsp;</td>
+			<td style="width: 445px;">No planned changes in this area</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Development Resource</td>
+			<td style="width: 99px;">&nbsp;</td>
+			<td style="width: 445px;">No planned changes in this area</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Evolution</td>
+			<td style="width: 99px;">&nbsp;</td>
+			<td style="width: 445px;">No planned changes in this area</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Internationalisation</td>
+			<td style="width: 99px;">&nbsp;</td>
+			<td style="width: 445px;">
+			<p>UTF support at data protocol level so that we can pass through strings in any language without losing information.</p>
+
+			<p>Any messages produced by API itself will be externalized and translatable.</p>
+
+			<p>The user locale will be used when selecting the language for messages.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Location</td>
+			<td style="width: 99px;">&nbsp;</td>
+			<td style="width: 445px;">No planned changes in this area</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Performance and Scalability</td>
+			<td style="width: 99px;">&nbsp;</td>
+			<td style="width: 445px;">No planned changes in this area</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Regulation</td>
+			<td style="width: 99px;">&nbsp;</td>
+			<td style="width: 445px;">No planned changes in this area</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Security</td>
+			<td style="width: 99px;">&nbsp;</td>
+			<td style="width: 445px;">No planned changes in this area</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Usability</td>
+			<td style="width: 99px;">&nbsp;</td>
+			<td style="width: 445px;">No planned changes in this area</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2 dir="ltr" id="ii6">Outstanding Issues</h2>
+
+<ul dir="ltr">
+	<li>Just thinking, can we use the standard Cúram approach to externalizing messages for the API? The API is developed as part of JDE, but it is expected to have as little dependency on JDE as possible. By using JDE approach to translation we would be tying API to JDE too much.<br />
+	At the very least we can't expect translations to be delivered in a "localization pack" type application component. So we would have to have them all in JDE itself.<br />
+	I am not sure how to solve this one... we'll have to come up with a specific translation process for this kind of delivery.<br />
+	I think for now I'll use the Dojo native way of externalizing strings and take from there once we figure this out.</li>
+</ul>
+
+<h2 dir="ltr" id="ii7">High-Level Design</h2>
+
+<p dir="ltr">The JavaScript&nbsp; API component of the Cúram Data Service Layer provides access to Cúram server functionality through Cúram facade layer.</p>
+
+<p dir="ltr">One level will provide access to calling Cúram Facades</p>
+
+<p dir="ltr"><img alt="" src="/wikis/form/api/wiki/12b91591-921d-435f-a01e-ba0367d5471d/page/247d58dd-20dc-44b5-bb45-f0afe4d5b9af/attachment/8f4de2b4-e02d-427c-adac-1bbfd3b3bc18/media/JS_API_overview.png?preventCache=1526291457244" title=""></img></p>
+
+<h3 dir="ltr" id="ii28">CuramService API</h3>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii8">CuramStore API</h3>
+
+<p dir="ltr">Implements the <a href="http://dojotoolkit.org/reference-guide/1.9/dojo/store.html#returned-objects">dojo/store&nbsp;API</a> on top of the CuramService API.</p>
+
+<p dir="ltr">We provide a facility for configuring the mapping from dojo/store methods onto the Cúram facades. [TODO] have to decide whether this is configurable in JS or webtier</p>
+
+<p dir="ltr">Following are the dojo/store methods we implement and associated design details.</p>
+
+<table border="1" dir="ltr" style="width: 99%;">
+	<thead>
+		<tr>
+			<th scope="col">dojo/store method</th>
+			<th scope="col">associated Cúram facade</th>
+			<th scope="col">Notes</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+			<p>query(query, options)</p>
+			</td>
+			<td>listItems</td>
+			<td>
+			<p>The "query" parameter is an arbitrary object, which is converted into a Struct and passed to the server side for processing. This provides flexibility in handling queries in simple or complex ways, depending on the needs of the specific application.</p>
+
+			<p>The contents and semantics of the "options" parameter is <a href="http://dojotoolkit.org/reference-guide/1.9/dojo/store.html#methods">specified</a> by the dojo/store API and the suported options are "start", "count" and "sort". All of these options will be passed along to the server to enable server-side handling if required, however the "pagination" options (star and count) will be (by default) handled in the webtier so that we can provide pagination "for free" to app developers.</p>
+
+			<p>A typical scenario for a query in Cúram is the Person search. It is implemented as a server method, which takes a relatively small number of parameters which are interpreted by server side code as specific search terms. This type of scenario is easily implemented with the provided mechanism, the search term values are sent over to server as properties of the query object.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>get(identity)</td>
+			<td>read</td>
+			<td>
+			<p>Reads one specific object by it's identity.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>put(object, options)</td>
+			<td>modify</td>
+			<td>
+			<p>Updates the stored data with values from the specified object.</p>
+
+			<p>The method returns the identity of the updated or created object.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>add(object, options)</td>
+			<td>insert</td>
+			<td>
+			<p>Creates a new object based on specified values.</p>
+
+			<p>The method returns the identity of the newly created object.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>remove(identity)</td>
+			<td>remove</td>
+			<td>
+			<p>Deletes one specific object by it's identity.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>getIdentity</td>
+			<td>N/A</td>
+			<td>
+			<p>We will provide a way to configure CuramStore instances for different algorithms to determine object identity. By default the implementation will expect that structs returned from facade have a property called "id" and the value of this property will be used as identity.</p>
+
+			<p>In case of objects with compound identity (consisting of values from multiple if it's properties) the identity object returned from this method will need to hold the corresponding values so that it can be used by the store to match against objects and construct search keys to send back to server.</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<h3 dir="ltr" id="ii9">Impact</h3>
+
+<ul dir="ltr">
+	<li>N/A</li>
+</ul>
+
+<h4 dir="ltr" id="ii10">Code Line Exemption</h4>
+
+<ul dir="ltr">
+	<li>N/A</li>
+</ul>
+
+<h4 dir="ltr" id="ii11">Dependencies</h4>
+
+<ul dir="ltr">
+	<li>N/A</li>
+</ul>
+
+<h2 dir="ltr" id="ii12">Use Cases</h2>
+
+<ul dir="ltr">
+	<li>An app developer creates an instance of CuramStore for their widget. They are creating a new Cúram facade for use with their new CuramStore instance.</li>
+</ul>
+
+<h2 dir="ltr" id="ii13">Implementation Details</h2>
+
+<ul dir="ltr">
+	<li>N/A</li>
+</ul>
+
+<h3 dir="ltr" id="ii14">Integration Points</h3>
+
+<ul dir="ltr">
+	<li>N/A</li>
+</ul>
+
+<h2 dir="ltr" id="ii15">Test</h2>
+
+<p dir="ltr">Details of how the design will be tested.</p>
+
+<h3 dir="ltr" id="ii16">Dependencies</h3>
+
+<ul dir="ltr">
+	<li>N/A</li>
+</ul>
+
+<h3 dir="ltr" id="ii17">Manual Application Test</h3>
+
+<ul dir="ltr">
+	<li>N/A</li>
+</ul>
+
+<h3 dir="ltr" id="ii18">Automated Tests</h3>
+
+<ul dir="ltr">
+	<li>N/A</li>
+</ul>
+
+<h3 dir="ltr" id="ii19">Comprehensive Manual Tests</h3>
+
+<ul dir="ltr">
+	<li>N/A</li>
+</ul>
+
+<h2 dir="ltr" id="ii20">Documentation</h2>
+
+<ul dir="ltr">
+	<li>N/A</li>
+</ul>
+
+<h3 dir="ltr" id="ii21">Release Notes Preview</h3>
+
+<ul dir="ltr">
+	<li>N/A</li>
+</ul>
+
+<h2 dir="ltr" id="ii22">Task List</h2>
+
+<ul dir="ltr">
+	<li>N/A</li>
+</ul>
+
+<h2 dir="ltr" id="ii23">Review Comments</h2>
+
+<h3 dir="ltr" id="ii24">Simple Comments</h3>
+
+<table border="1" dir="ltr" style="width: 755px;">
+	<tbody>
+		<tr>
+			<td><strong>Reviewer</strong></td>
+			<td style="width: 345px;"><strong>Comment</strong></td>
+			<td style="width: 199px;"><strong>Action/Follow-up</strong></td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td style="width: 345px;">&nbsp;</td>
+			<td style="width: 199px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<h3 dir="ltr" id="ii25">Extended Comments</h3>
+
+<h4 dir="ltr" id="ii26">Summary Title</h4>
+
+<p dir="ltr"><strong>Reviewer:</strong> &lt;Name&gt;<br />
+<br />
+<strong>Comment:</strong> &lt;Comment&gt;<br />
+<br />
+<strong>Action/Follow-up:</strong> &lt;Details of the follow-up/action taken on the comment&gt;</p>
+
+<h2 dir="ltr" id="ii27">Historical Information</h2>
+
+<ul dir="ltr">
+	<li>N/A</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

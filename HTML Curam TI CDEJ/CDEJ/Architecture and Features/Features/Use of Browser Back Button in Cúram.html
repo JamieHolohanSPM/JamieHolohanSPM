@@ -1,0 +1,109 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Use of Browser Back Button in Cúram</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Use of Browser Back Button in Cúram";
+    pageId="urn:lsid:ibm.com:td:bc73e512-edf0-467a-b504-c26cb052bd14";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Use of Browser Back Button in Cúram</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Problem we are trying to address</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">Behaviour for various UI elements</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii3">Ideal Behaviour</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii4">Practical Solution</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii6">Spike</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii5">HTML 5 history API Investigation notes</a></div>
+
+<h2 dir="ltr" id="ii1">Problem we are trying to address</h2>
+
+<ol dir="ltr">
+	<li>The browser back experience is not consistent within the Curam application.<br />
+	Different parts of the UI behave differently when the browser back button is clicked, i.e. in IEG, the page from which IEG was launched is navigated back to, modal dialogs - should the modal not close?, what happens when it is clicked when a UIM wizard is present etc. etc.</li>
+	<li>In certain parts of the application (e.g. IEG), data may be lost when the browser back button is clicked or errors happen as in navigating across form submission boundary</li>
+</ol>
+
+<h2 dir="ltr" id="ii2">Behaviour for various UI elements</h2>
+
+<p dir="ltr">We discussed the various UI elements and how they behave when the browser back button is clicked when they are displayed:</p>
+
+<ul dir="ltr">
+	<li>Modal</li>
+	<li>Expandable List</li>
+	<li>UA</li>
+	<li>IEG</li>
+	<li>Internal Curam application pages</li>
+	<li>Wizards</li>
+	<li>Other navigation, sections panel, tabs, smart panel, in page navigation links etc.</li>
+</ul>
+
+<h2 dir="ltr" id="ii3">Ideal Behaviour</h2>
+
+<p dir="ltr">Discussed the usage of the History API which is part of HTML5. This is present in modern browsers (IE10 and later). This API could be used to manage the history of a Curam application, insert entries into the application history when required and determine which page to navigate to when either the Back or Forward browser button is clicked.</p>
+
+<p dir="ltr">After discussing this, some issues were highlighted with regards to this i.e. identifying the right places to record a history event, managing these history entries, disallow the usage of the Back button in some scenarios (i.e. submission of a form). It was felt that this could get quite complicated quickly and that it may not cover all of the various required scenarios.</p>
+
+<p dir="ltr">Decision:<br />
+We will not at this stage solve this issue by supporting the managing of the Curam application history. We may investigate this in the future if required.</p>
+
+<h2 dir="ltr" id="ii4">Practical Solution</h2>
+
+<p dir="ltr">We will spike the intercepting of the Browser Back (and Forward?) button click and display a message to the user informing them that this is not supported. It may be that this functionality is required in two places (External and Internal application controller) but the spike should determine that. It should also determine what technology we will use to provide this functionality (HTML5 history API or other).</p>
+
+<h3 dir="ltr" id="ii6">Spike</h3>
+
+<p dir="ltr">I have done a spike using the HTML5 History API.</p>
+
+<p dir="ltr">The most important conclusion so far is that the "popstate" event on window we hoped to use for detecting the usage of browser navigation buttons only works for "synthetic" history states - the ones you manage programmatically from your code. This means that if for example I click a link that adds a new state in the history, but returning to that state does NOT fire the onpopstate event. DOH. Also I found the state changes from within iframes are not propagated to top level onpopstate listener.</p>
+
+<p dir="ltr">I recommend the following next steps:</p>
+
+<ul dir="ltr">
+	<li>get someone to take my test files (<a href="Use%20of%20Browser%20Back%20Button%20in%20C%C3%BAram._ATTACHMENTS_/histest.zip" lconnwikiparamwikiattachment="histest.zip">histest.zip</a>) and take deeper look at the History API in case I have missed something obvious - I find it strange this would not be supported by the standard API</li>
+	<li>if it really doesn't work then we will ahve to come up with a way to register an onbeforeunload listener in every iframe and have it report these events to a top level API, which would then provide the message to user. This is certainly awkward, but doable and probably not too difficult.</li>
+</ul>
+
+<h2 dir="ltr" id="ii5">HTML 5 history API Investigation notes</h2>
+
+<p dir="ltr">provided by Martin before meeting</p>
+
+<p dir="ltr"><a href="https://html.spec.whatwg.org/multipage/browsers.html#history">https://html.spec.whatwg.org/multipage/browsers.html#history</a></p>
+
+<ul dir="ltr">
+	<li>- concept of "joint session history"
+	<ul>
+		<li>includes top level document and all child contexts, such as iframes</li>
+		<li>Since each Document in a browsing context might have a different event loop, the actual state of the joint session history can be somewhat nebulous. For example, two sibling iframe elements could both traverse from one unique origin to another at the same time, so their precise order might not be well-defined; similarly, since they might only find out about each other later, they might disagree about the length of the joint session history.</li>
+	</ul>
+	</li>
+	<li>Pages can add state objects to the session history. These are then returned to the script when the user (or script) goes back in the history, thus enabling authors to use the "navigation" metaphor even in one-page applications.</li>
+	<li>from the above I take it that our problem is that our navigation metaphor is not sound with respect to the approach taken by the HTML5 history API</li>
+	<li>in other words our application has certain states which are not recorded in the history or they are, but the notion of going back doesn't make sense for them.</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

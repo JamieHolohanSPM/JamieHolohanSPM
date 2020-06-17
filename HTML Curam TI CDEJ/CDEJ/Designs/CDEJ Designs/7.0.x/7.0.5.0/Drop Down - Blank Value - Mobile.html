@@ -1,0 +1,663 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Drop Down - Blank Value - Mobile</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Drop Down - Blank Value - Mobile";
+    pageId="urn:lsid:ibm.com:td:656126f4-d11d-453c-908c-cdd5b8949478";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Drop Down - Blank Value - Mobile</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr"><span style="font-size:20px;"><strong>Design Page for Drop Down - Blank Value - Mobile</strong></span></p>
+
+<p dir="ltr"><span style="font-size:20px;"><strong>Stakeholders</strong></span></p>
+
+<ul dir="ltr">
+	<li>Refer to the following Org Chart to ensure you are engaging the correct people. The table below indicates the current contacts for each area.
+	<ul>
+		<li><a href="https://ibm.biz/BdsuKd">https://ibm.biz/BdsuKd</a></li>
+	</ul>
+	</li>
+</ul>
+
+<table border="1" dir="ltr" style="width: 500px;">
+	<tbody>
+		<tr>
+			<td style="width: 197px;"><strong><span style="font-size:16px;">Role</span></strong></td>
+			<td style="width: 120px;"><strong><span style="font-size:16px;">Name</span></strong></td>
+			<td style="width: 168px;"><strong><span style="font-size:16px;">Sign Off if Applicable</span></strong></td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">Customer</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">Business Owner/Product Owner</td>
+			<td style="width: 120px;">Shane McFadden/Niambh Scullion</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">Architect</td>
+			<td style="width: 120px;">Fergal Gavin</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">Developer(s)</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">FVT</td>
+			<td style="width: 120px;">Feargal Conneely/Ronan Smyth</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">SVT</td>
+			<td style="width: 120px;">John Redmond</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">Information Developer</td>
+			<td style="width: 120px;">Annette Sohor</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">UX Design</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">Legal</td>
+			<td style="width: 120px;">Deirdre Dolan/Jim Rook</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Background</span></strong></p>
+
+<p dir="ltr">The HTML select boxes used in Curam have been wrapped by the Dijit <span style="font-family:courier new,courier,monospace;">FilteringSelect</span> widget to allow for the enhanced usability where the values can not only be selected by scrolling and clicking the drop-down, but also by typed into the input part of the select box, thus narrowing down the visible choices by only the partially/fully matchin entries.<br />
+With the increased focus on accessibility and the added mobile environments support, however two effects were observed:</p>
+
+<ol dir="ltr">
+	<li>In the desktop environment with the screen reader on the Filtering Select was just usable as the regular select since the filtered list was not read by the screen reader nor such a reading would make much sense (as it would require the additional selection means). Nevertheless this lack of reading did not affect the&nbsp; usability of the widget - apart from the blank value reading. The blank value reading was left for the browser to interpret - no specific text was provided for it. The option could not be left fully blank because of the HTML parsing limitations on the web-tier, therefore an HTML comment was added in place of the regular label content.</li>
+	<li>The mobile environment added another issue - the suggestions bar popping up once the typing in the text field started. This resulted in the additional readings of the suggestions completely not related to the displayed data (rather matches from the internal dictionaries of the browser/mobile device) and broke the original keyboard navigation order and layout. As a workaround the environment-dependent branching has been implemented where on the mobile devices the regular HTML select would be used instead. This worked with one exception - the blank option could not be manually selected/re-selected (<a lconnwikimacro="wikilink" href=".html" lconnwikiparamwikipage="Defect 193191" target="_blank">Defect&nbsp;193191</a>). Therefore, another solution was needed.</li>
+</ol>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Requirements</span></strong></p>
+
+<ul dir="ltr">
+	<li>Requirement 1: This is the requirement for the blank option in the selection list. It shall be keyboard selectable/re-selectable; the existing native HTML based option would allow for the initial selection of it, however there was no option to re-select it without adding a prompt value; the prompt value, while being an option did not have any appearance control and hence would either look right but be annouced in the wrong way, or read OK but look the same as any other option.</li>
+	<li>Requirement 2: This is the requirement for the blank option in the selection list. It shall be read by the screen reader. This was not controllable in the native version if the description was left blank</li>
+	<li>Requirement 3: This is the requirement for the blank option in the selection list. The description for the blank option in the selection list shall be customizable/localizable.</li>
+	<li>Requirement 4. The updated select control/widget should be styled to match the existing application theme and the existing FilteringSelect appearance.</li>
+	<li><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=193191" target="_blank">RTC&nbsp;Story&nbsp;193191</a> - Tablet Support : Accessibility : Unable to re-select blank item from drop down list (defect).</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Requirement Decisions</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">There may be some outstanding questions/decisions made as regards to the requirements. These decisions should be documented here.</p>
+
+<table border="1" dir="ltr" height="156" width="860">
+	<tbody>
+		<tr>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Requirement Decision Title</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:14px;"><strong>Issue or Problem Statement</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Assumptions</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Motivation</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Alternatives</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Decision</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Justification</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Implications</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Status</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Date</strong></span></td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Non Functional Requirements</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Do the following non functional requirements apply to the enhancement being created and if so, minor details should be provided here. We can fill in N/A if the specified non functional requirement is not applicable to the feature being delivered.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" width="671">
+	<tbody>
+		<tr>
+			<td style="width: 118px;"><strong>NFR</strong></td>
+			<td style="width: 537px;"><strong>Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Accessibility</td>
+			<td style="width: 537px;">
+			<p>The primary driver for this change. The widget used in the mobile environment should be keyboard accessible the same way as the desktop version.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Availability &amp; Resilience</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Development Resource</td>
+			<td style="width: 537px;">The implementation and maintenance should be carried on by a person familar with the client side technologies and having good understanding of the Dojo/Dijit widget structure and life cycle.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Evolution</td>
+			<td style="width: 537px;">The selection box functionality in Curam is trivial, well defined and matured enough. There is no evolution path within the current framework and technology, all the requirements are final.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Internationalisation</td>
+			<td style="width: 537px;">Crucial to have support for it. This falls under the standard mechanisms though and should be ensured using the already existing means.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Location</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Performance and Scalability</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Regulation</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Security</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Usability</td>
+			<td style="width: 537px;">Since this is the customization of the pre-existing widget and a wrapper to the native browser HTML control, the main care should be taken to not introduce usability issues rather than to implement any new features. Using the keyboard on a tablet is restricts usability naturally however.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Design Options</span></strong></p>
+
+<p dir="ltr">This is <strong>optional</strong>. If there are is more than one design option available and being discussed, then these should be outlined here.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Option 1. Mofification of the FilteringSelect widget</span></strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 80px;">This option would mean a deep modification of the <span style="font-family:courier new,courier,monospace;">FilteringSelect</span> widget to suit both environments and correctly position on the blank option with the appropriate reading.</li>
+	<li style="margin-left: 80px;">The advantages of this choice would be a single solution for all the environments and potentially easier maintenance.</li>
+	<li style="margin-left: 80px;">The disadvantages
+	<ul>
+		<li style="margin-left: 80px;">Complexity. Deep modification required on the composite widget with the functionality spread through number of JavaScript modules with lots of the irrelevant clauses because of participating in various inheritance/composition chains..The deep modification exercise was first attempted and failed, closing to writing a new Dijit widget which given the complexity of the filtering select and the scope was not viable</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Option 2. Visible value for the blank option</span></strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 80px;">The visible agreed value for the blank option, which would explicitly state the absence of any selection.</li>
+	<li style="margin-left: 80px;">The advantage - simplicity, quick implementation and maintenance.</li>
+	<li style="margin-left: 80px;">disadvantage - the need for localization, degrading usability - the blank option was not an existing choice, hence the potential mix-up; furthermore, demoting the visual value as a special type of option would make the screen reading of this value misleading with all the special marks read out as well.</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Option 3. Another widget for the mobile environment</span></strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 80px;">The existing approach re-used where the code output is branched depending on the user environment, however instead of the native HTML select another widget for the same purpose is output without the problems of the <span style="font-family:courier new,courier,monospace;">FilteringSelect</span> and limitations of the native control.</li>
+	<li style="margin-left: 80px;">Advantages
+	<ul>
+		<li style="margin-left: 80px;">the ability to separate visual and screen-readable format</li>
+		<li style="margin-left: 80px;">the focusable drop-down sharing the usability of the regular drop-down.</li>
+	</ul>
+	</li>
+	<li style="margin-left: 80px;">Disadvantages
+	<ul>
+		<li style="margin-left: 80px;">the environment dependency remains in place; the maintenance effort potentially doubles, as two widgets are to be checked/fixed instead of one.</li>
+		<li style="margin-left: 80px;">tabular design of the wrapper widget which makes it evolution more difficult; tables are generally considered to be bad layout practice in HTML5; however given the limited life cycle of the JavaScript framework currently in use this is not a separate issue but rather part of the same modernization problem faced by the infrastructure in general</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Design</span></strong></p>
+
+<p dir="ltr">The initial take of it was to achieve the required level of accessibility on both desktop and mobile environments by utilizing deeply modified variety of the <span style="font-family:courier new,courier,monospace;">FilteringSelect</span> since that <span style="font-family:courier new,courier,monospace;">Dijit</span> widget was already overridden for the Curam purposes and had number of hook points (custom <span style="font-family:courier new,courier,monospace;">ComboBox</span> for example).</p>
+
+<p dir="ltr">However, the functional base of the <span style="font-family:courier new,courier,monospace;">FilteringSelect</span> was rather complicated with the autocomplete features and the internal store sourced current drop-down list (to visually indicate the potential alternatives to the user).</p>
+
+<p dir="ltr">It turned out that the drop-down part of this type of widget was intentionally based on the non-focusable sub-widget (since it's purpose was to display the current (remaining) subset of the choices but not to allow for direct selection).</p>
+
+<p dir="ltr">Furthermore, as mentioned already, the user typing support into the associated text box resulted in the automatically popped suggestion bar on the tablet; there was no way to retain the typable text box required for filtering at the same time suppressing the suggestions bar.</p>
+
+<p dir="ltr">The read-only variety for the mobile environment, which would just turn-off the typing in that context did not serve the initial idea to consolidate the solution so that it was suitable for both environments,&nbsp; and would break the consistency of the user experience, or, more exactly would retain that difference already there with the native HTML mobile solution.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">dijit/form/Select</span> widget already utilized by the infrastructure albeit for the other purposes (page level menu) still posed the promising choice; being HTML table based it did not have any filtering capabilities which would pop-up the suggestion bar on the tablet thus breaking the natural page (and screen reader) flow; however it did not have the required blank option support either.</p>
+
+<p dir="ltr">Also because of the purpose it was used it was styled accordingly, to look like menu and not the drop-down for the user input.</p>
+
+<p dir="ltr">So, the<strong> actual choice</strong> final choice was to retain he modal branching (Option 3 above) but to re-base it on the existing select wrapping <span style="font-family:courier new,courier,monospace;">dijit/form/Select </span>by customizing it as appropriate, making the <span style="font-family:courier new,courier,monospace;">curam/widget/Select</span> with the overridden/additional construction-time configuration options as described below.</p>
+
+<p dir="ltr">Option 2 requirement to optionally have the blank option text visible was also taking into account, making it a combination of both options, configurable when constructing the widget instance -- but defaulting to to the invisible (just readable) blank option since this would be consistent to what we have on the desktop version.&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The widget had the main functionality implemented, however it’s plain form was already used by Curam for page action menus which implied there is a specific styling applied. In order to have the separate styling instructions, the HTML output construct needed to be adjusted, hence the original Select template needed to be customized first of all.</p>
+
+<p dir="ltr"><br />
+Another template customization needed to be applied for the drow-down menu for those same reasons - to separate the styling, but also to override the original functionality by adding the bits necessary for the blank option proper support.</p>
+
+<p dir="ltr"><br />
+From the functional perspective most of the original methods were retained, however, since the widget was supposed to be used solely as a drop-down list, the multiple selection option and related conditionals were taken-out from the Dijit version (this simplifies the functional flow without any actual losses). The rest of the methods allowed for converting the original HTML structure from the server shared between the Curam version of <span style="font-family:courier new,courier,monospace;">FilteringSelect</span> and this widget, creating the blank option and maintaining it as the user selection.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Due to the text visibility requirement for the design option 2 and for the re-using purposes an additional option has been added which allowed for visually hiding the blank option text&nbsp; (the default value) or showing it if needed.<br />
+The additional <span style="font-family:courier new,courier,monospace;">CDEJResources.properties</span> based property "<span style="font-family:courier new,courier,monospace;">text.select.blankoption.description</span>” has been created and channeled through to be used as the visible or just the readable text for the blank option.<br />
+The web-tier rendering chain has been modified. In order to have an easy roll-back the most popupar <span style="font-family:courier new,courier,monospace;">CTListEditRenderer</span> was extended by <span style="font-family:courier new,courier,monospace;">CTListEditWithBlankRenderer</span> and plug-ins-config.xml was reconfigured acordingly rather than modifying the original renderer; The less popular <span style="font-family:courier new,courier,monospace;">ListSelectRenderer</span> proved to be less suitable for inheriting from because of the internal design and hence was modified directly.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The configurable properties for the <span style="font-family:courier new,courier,monospace;">curam/widget/Select</span> widget:</p>
+
+<ul dir="ltr">
+	<li><strong>templateString</strong>: allows for overriding the current template used to display the textbox part and containing the helper objects (container for the drop-down and the arrow object). While it can be done, such a customization should adhere to the main attach points as defined by the original template, and normally would require deeper customization, so it is really not for configuring.</li>
+	<li><strong>blankComment</strong>: the meta-content initially expected as a child of the blank option. This needs to be there because of the server-side rendering specifics, however it should not be displayed or rendered in the final wrapped view as otherwise it would be readable by some screen readers and break the intended reading.</li>
+	<li><strong>blankDescription</strong>: this is the text to be heard (and optionally visible) when the blank option is selected. It has the default of 'No Selection' if not specified when constructing, however is naturally custiomizable/localizable and in fact comes from the renderer where it is sourced from the new entry <span style="font-family:courier new,courier,monospace;">text.select.blankoption.description</span> in <span style="font-family:courier new,courier,monospace;">CDEJResources.properties</span> as described above.</li>
+	<li><strong>isBlankVisible</strong>: specifies if the blank option description text is rendered visible or stays transparent to make the option appear fully blank (but readable by the screen reader). This defaults to 'false' but could be changed by either chooseing another renderer or adding the separate renderer property support (this support hasn't been implemented as of now, since there wasn't any necessity for it).</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Architecture/Design Decisions</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<table border="1" dir="ltr" height="156" width="860">
+	<tbody>
+		<tr>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Architecture Decision Title</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:14px;"><strong>Issue or Problem Statement</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Assumptions</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Motivation</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Alternatives</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Decision</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Justification</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Implications</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Status</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Date</strong></span></td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">Open/In Progress/Closed</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Design Specifics</span></strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>CDEJ:</strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">The page HTML changes output for the mobile environment once the wrapping occurs. The original HTML &lt;select&gt; tag and any existing options are replaced by the contents of the instantiated templates from the Dojo framework. In case of the <span style="font-family:courier new,courier,monospace;">FilteringSelect</span> the final wrapping is HTML div based; the customized Select widget used table to layout the dropdown. Nevertheless, this is pretty much equivalent and does not break the page structure or functionality.</li>
+	<li style="margin-left: 40px;">Widget Changes. There are no changes to any of the existing widgets; the <span style="font-family:courier new,courier,monospace;">curam/widget/Select</span> is a separate customization with the properties on its own. These properties, however, should be served by the web-tier rendering infrastructure, therefore the new renderer has been introduced and configured for this type of output. To keep things under control and allow for easy roll-back should that be needed, the new renderer has been designed to inherit from the existing one, sharing all the common functionality thus. The roll-back in this case is as simple as the TI or Customer site plug-in re-configuration. Note that the <span style="font-family:courier new,courier,monospace;">ListSelectRenderer</span> was rather modified, therefore the rollback in this case isn't that trivial; however this was the choice given the time constraints and the implementation structure differences in two renderers which needed the change - using the inheritance for the <span style="font-family:courier new,courier,monospace;">ListSelectRenderer</span> would require actual rewriting of the original renderer in order to extend that properly; while this might be considered as a follow-up task if needed, it wasn't viewed as an immediate concern.</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Design User Interface</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">The new widget does not provide any new User Interface features neither change any existing ones, pretty much matching what the existing non-mobile environment alternative provides, therefore the User Interface considerations, while important, are a bit secondary in this particular case.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Design Resilience Measures</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">Since this is a View layer component, it's resilience is pretty-much defined by the ability to withstand edge cases where it needs to be rendered from insufficient/absent data. Most of such cases cannot be viewed apart from the overall page rendering failures. The use cases above and the manual testing plans describe some of the expected edge case scenarios.</p>
+
+<p dir="ltr" style="margin-left: 40px;">In case the page rendering fails, the user will be presented with the standard application error message; the network connectivity issues&nbsp; again would be reported same way as they would for the pages without this type of widget, ther is no separate mechanism implemented neither needed. The widget JavaScript failures would be traditionally captured in the browser Console. These are not addressable by the User and therefore this type of hidden reporting is considered to be sufficient.</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Design Accessibility</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">There are no separate accessibility requirements apart from the ones already defined for the HTML select control and the already used <span style="font-family:courier new,courier,monospace;">curam/widget/FilteringSelect</span> widget.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Third Party Software and Legal Requirements</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">This widget is based on the third-party JavaScript framework, Dojo 1.10.4. The framework does not have much evolution and is superseeded by the reworked version - Dojo 2/3 released recently. There are no immediate plans to upgrade the framework; in case such plans are in place, this widget will be subject to rewriting or adopting using the Dojo 2 interoperability mechanism.</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Use Cases</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. The various use cases for the feature must be outlined here. They can be in the following format.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody>
+		<tr>
+			<td style="width: 188px;">Use Case ID</td>
+			<td style="width: 336px;">1.1</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Name</td>
+			<td style="width: 336px;">Navigate to the select drop-down</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Actor</td>
+			<td style="width: 336px;">Mobile Caseworker</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Description</td>
+			<td style="width: 336px;">
+			<p>Using supported keyboard clicks (arrow keys) navigate to the dropdown field on the form.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Preconditions</td>
+			<td style="width: 336px;">iPad displays a form with a drop-down field; no blank value is defined for the drop-down. Screen reader is turned on, keyboard is used for navigation.</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Flow</td>
+			<td style="width: 336px;">Arbitrary flow but using keyboard finally ending up with the select drop-down.</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Expected</td>
+			<td style="width: 336px;">Once the drop-down is focused on by the keyboard, the currently selected value is read.</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Use Case ID</td>
+			<td style="width: 336px;">1.2</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Name</td>
+			<td style="width: 336px;">Open the drop-down and select value</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Actor</td>
+			<td style="width: 336px;">Mobile Caseworker</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Description</td>
+			<td style="width: 336px;">User should be able to open the drop-down with the available choices, navigate through the dropdown list and select the value of their choice</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Preconditions</td>
+			<td style="width: 336px;">iPad displays a form with a drop-down field; no blank value is defined for the drop-down. Screen reader is turned on, keyboard is used for navigation.</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Flow</td>
+			<td style="width: 336px;">Arbitrary flow but using keyboard finally ending up with the select drop-down. Once focused on the currently selected text, user presses the combination to open the associated drop-down (normally up and down arrows simultaneously). This should open the drop-down and the focus should go to the option matching the current selection. User is then capable of navigating within the list of options using left and right arrows and make their selection with the same combination (up-and-down arrows simultaneously). Once this is done, the new selection should be focused on in the drop-down field and read out by the screen reader.</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Expected</td>
+			<td style="width: 336px;">User is able to open the drop-down list, navigate it and select the required value, their new choice is immediately displayed and read out.</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Use Case ID</td>
+			<td style="width: 336px;">1.3</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Name</td>
+			<td style="width: 336px;">Open the dropdown and select the blank value</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Actor</td>
+			<td style="width: 336px;">Mobile Caseworker</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Description</td>
+			<td style="width: 336px;">Navigate to the drop-down field, open the drop-down and select the blank value from the list of options</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Preconditions</td>
+			<td style="width: 336px;">iPad displays a form with a drop-down field; blank value is defined for the drop-down but not initially selected. Screen reader is turned on, keyboard is used for navigation.</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Flow</td>
+			<td style="width: 336px;">The same as in 1.2 case above, however once the user is presented with the list of choices, the blank option should be displayed as the first option in the list. The focus goes to the currently selected item, the user is able to navigate to any of the options including the blank option using keyboard.</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Expected</td>
+			<td style="width: 336px;">Once the blank option is focused on, the blank option localized text is read out. Navigate to the blank option and select it using the same mechanism as in the case above (1.2). The blank option should be displayed in the drop-down field as the new selection and the blank option text should be read out by the screen reader (the text itself remains invisible to the user).</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Use Case ID</td>
+			<td style="width: 336px;">1.4</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Name</td>
+			<td style="width: 336px;">Navigate and open the dropdown with the blank value initially selected.</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Actor</td>
+			<td style="width: 336px;">Mobile Caseworker</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Description</td>
+			<td style="width: 336px;">Navigate the drop-down with the blank option initially selected; once the drop-down list is open the blank option at the top of the list should get focus and be read out same as any other selection in the list; it should be possible to navigate and select any other option from the list as well as return back and re-select the blank option</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Preconditions</td>
+			<td style="width: 336px;">iPad displays a form with a drop-down field; blank value is defined for the drop-down and initially selected (the drop-down list looks blank). Screen reader is turned on, keyboard is used for navigation.</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Flow</td>
+			<td style="width: 336px;">Using keyboard navigate to the dropdown field on the form, open the drop-down with the blank-option pre-selected, navigate to select any other value and return back to the blank value to re-select it.</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Expected</td>
+			<td style="width: 336px;">The field should be normally focusable and once focused the blank description should be read out by the screen reader; the drop-down should open using the supported key combination, and the focus should go to the blank option (first in the list) as it would for any other pre-selected option. The further selection/navigation and the selected value display should be similar to what is described by the above cases.</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Use Case ID</td>
+			<td style="width: 336px;">1.5</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Name</td>
+			<td style="width: 336px;">Use the drop-down with the blank option text visible</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Actor</td>
+			<td style="width: 336px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Description</td>
+			<td style="width: 336px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Preconditions</td>
+			<td style="width: 336px;">iPad displays a form with a drop-down field; blank value is defined for the drop-down but not initially selected. Screen reader is turned on, keyboard is used for navigation. The field is rendered using the custom configuration to have the blank option text visible.</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Flow</td>
+			<td style="width: 336px;">Same as in 1.2 case above but once the list is open the blank option text should be visible same as any other option lables in the dropdown list. Once blank option is selected it becomes a new choice and the blank option text is both displayed to the user and read out by the screen reader.</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Expected</td>
+			<td style="width: 336px;">The expectation is the same as in 1.2</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Use Case ID</td>
+			<td style="width: 336px;">1.6</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Name</td>
+			<td style="width: 336px;">Use the drop-down with the blank option text visible and blank option being the initial choice (pre-selection value)</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Actor</td>
+			<td style="width: 336px;">Mobile Caseworker</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Description</td>
+			<td style="width: 336px;">Navigate the drop-down with the blank option initially selected; once the drop-down list is open the blank option at the top of the list should get focus and be read out same as any other selection in the list; it should be possible to navigate and select any other option from the list as well as return back and re-select the blank option</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Preconditions</td>
+			<td style="width: 336px;">Same as in 1.4 case above but the initially selected value text is visible to the user and read out as well.</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Flow</td>
+			<td style="width: 336px;">Same as in the case 1.4 above</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Expectations</td>
+			<td style="width: 336px;">Same as in the case 1.4 above, but the blank option text remains visible and read when focused and when selected as the user choice.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Application Impact</span></strong></p>
+
+<p dir="ltr">There is no application impact expected resulting from this change; the data exchange under the hood remains the same; the new renderers are configured OOTB and should ensure the transparent transition.</p>
+
+<p dir="ltr">The <span style="font-family:courier new,courier,monospace;">text.select.blankoption.description</span><span style="font-family:arial,helvetica,sans-serif;"> entry in </span><span style="font-family:courier new,courier,monospace;">CDEJResources.properties </span><span style="font-family:arial,helvetica,sans-serif;">has the reasonable default, and once it is properly translated and the translations added to the applications there is a complete application transparency in the way the control is rendered and interacts.</span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Testing</span></strong></p>
+
+<p dir="ltr">Dual type of testing is required. The automated unit tests, added as part of the general JavaScript testing suite ensures the output matches expected given certain type of inputs, including edge cases and the normal cases. However, these type of tests are not suitable for identifying any styling issues, any user interaction issues or the accessibility problems, which would require manual testing and FVT to verify everything is working.&nbsp; SVT would not be required, since as mentioned the data exchange hasn't changed.</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">Unit Tests: <span style="font-family:courier new,courier,monospace;">cdej/widget/SelectTestCase.js</span> has been added to the general JavaScript Unit tests (intern based).</li>
+	<li style="margin-left: 40px;">Manual tests: The 'happy path' testing plan for the TabTest application should be described on the <a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=235825">activity </a><span class="floatingTable"><span class="titleTextArea"><span class="TitleText" tabindex="0"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=235825">235825</a>. As for the edge cases, these are pre-existing and could be found using the following paths:</span></span></span>
+	<ul>
+		<li style="margin-left: 40px;"><span style="font-family:courier new,courier,monospace;">Home Tab &gt; ClientMockApp</span> Tab &gt; <span style="font-family:courier new,courier,monospace;">Selection Boxes</span> navigation tab &gt; <span style="font-family:courier new,courier,monospace;">“Empty Codetable Overview”</span> Navigation item — all the links on the “<span style="font-family:courier new,courier,monospace;">Empty Codetable Overview</span>” page</li>
+		<li style="margin-left: 40px;"><span style="font-family:courier new,courier,monospace;">Home Tab &gt; ClientMockApp </span>Tab &gt; <span style="font-family:courier new,courier,monospace;">Selection Boxes</span> navigation tab &gt; “<span style="font-family:courier new,courier,monospace;">Codetable Invalid Input Handling Overview Page</span>” Navigation item&nbsp; — all the links on the “<span style="font-family:courier new,courier,monospace;">Codetable Invalid Input Handling Overview Page</span>” page.<br />
+		The edge case checks need to be done on iPad in comparison with the desktop version for any regression issues.</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Documentation/How To Use Feature</span></strong></p>
+
+<p dir="ltr">There is no documentation needed for this feature itself, since it is pre-existing. An internal release note shall be added to the <a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=235825">activity </a><span class="floatingTable"><span class="titleTextArea"><span class="TitleText" tabindex="0"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=235825">235825</a></span></span></span> for the accessibility issue now solved.</p>
+
+<p dir="ltr">However, since it there is a <span style="font-family:courier new,courier,monospace;">CDEJResources</span> entry <span style="font-family:courier new,courier,monospace;">text.select.blankoption.description </span>added, this means the globalization impact and the translations of this property needed for the supported locales.</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

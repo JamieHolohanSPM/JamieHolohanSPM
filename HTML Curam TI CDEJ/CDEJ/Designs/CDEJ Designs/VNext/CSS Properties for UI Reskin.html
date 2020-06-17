@@ -1,0 +1,795 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>CSS Properties for UI Reskin</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../wiki.css" />
+<script type="text/javascript" src="../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="CSS Properties for UI Reskin";
+    pageId="urn:lsid:ibm.com:td:6aacecfc-0673-4e3e-9032-f576303a5453";
+    toRoot="../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">CSS Properties for UI Reskin</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr"><span style="font-size:20px;"><strong>CSS Properties for UI Reskin</strong></span></p>
+
+<p dir="ltr"><span style="font-size:20px;"><strong>Stakeholders</strong></span></p>
+
+<ul dir="ltr">
+	<li>Refer to the following Org Chart to ensure you are engaging the correct people. The table below indicates the current contacts for each area.
+	<ul>
+		<li><a href="https://ibm.biz/BdsuKd">https://ibm.biz/BdsuKd</a></li>
+	</ul>
+	</li>
+</ul>
+
+<table border="1" dir="ltr" style="width: 500px;">
+	<tbody>
+		<tr>
+			<td style="width: 197px;"><strong><span style="font-size:16px;">Role</span></strong></td>
+			<td style="width: 120px;"><strong><span style="font-size:16px;">Name</span></strong></td>
+			<td style="width: 168px;"><strong><span style="font-size:16px;">Sign Off if Applicable</span></strong></td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">Customer</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">Business Owner/Product Owner</td>
+			<td style="width: 120px;">Shane McFadden/Niambh Scullion</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">Architect</td>
+			<td style="width: 120px;">Fergal Gavin</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">Developer(s)</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">FVT</td>
+			<td style="width: 120px;">Feargal Conneely/Ronan Smyth</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">SVT</td>
+			<td style="width: 120px;">John Redmond</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">Information Developer</td>
+			<td style="width: 120px;">Annette Sohor</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">UX Design</td>
+			<td style="width: 120px;">&nbsp;</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 197px;">Legal</td>
+			<td style="width: 120px;">Deirdre Dolan/Jim Rook</td>
+			<td style="width: 168px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Background</span></strong></p>
+
+<p dir="ltr">For the modern UI project during V7 we did a lot of work under the hood to allow enable this enhancement. However we did not expose it out to the customer for the following reasons:</p>
+
+<ul dir="ltr">
+	<li>We did not have time to lock down the naming conventions for the variables and which ones to expose out to the customers. When we expose this in the future we need sign off (from Business and Technical architect) as it will be part of the UI customization contract between us and the customer going forward and we need to get it right!</li>
+	<li>The CSS variables for V7 declared within TI are referenced throughout the application, however at a guess I would say that maybe 5-10% of the CSS properties that should be variables were missed e.g. maybe some fonts and text colors. We need to go through all the streams to ensure that <b>ALL</b> CSS properties that should have been referenced with variables were as that is what the customer will expect!</li>
+	<li>The re-skining of PODs did not use any CSS variables because PODS does not conform to usual styling process. The customer would expect that CSS variables they they change also changes PODs styling too!</li>
+	<li>Even when we are totally satisfied that we are ready to expose the CSS variables out to the customers to reskin the application, it does not allow them to change the color of icons! I don't know if this is a requirement but in my opinion the customer would probably expect when they customize the color of the titles in the application they can do the same with icons especially given modern icon rendering techniques (like icon fonts and inline SVG). This is ultimately a business decision about whether this is requirement or not! I have attached an image showing that a customer could change the color of dropdowns but the image of the person menu would remain blue, they might expect that this would change too!</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Requirements</span></strong></p>
+
+<p dir="ltr">List of Requirements</p>
+
+<ul dir="ltr">
+	<li>Requirement 1: Description</li>
+	<li>Requirement 2: Description</li>
+	<li>Requirement 3: Description</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Associated RTC Tickets</span></strong></p>
+
+<ul dir="ltr">
+	<li><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=159607" target="_blank">159607&nbsp;-&nbsp;</a> - As a SPM developer I want to re-skin the SPM product without writing code</li>
+	<li><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=227453" target="_blank">227453&nbsp;-&nbsp;</a> - V7 Readability - Alternating Row Colours for lists'</li>
+	<li><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=227455" target="_blank">227455&nbsp;-&nbsp;</a> - V7 Readability - Heading Fonts'</li>
+	<li><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=227829" target="_blank">227829&nbsp;-&nbsp;</a> - &nbsp;'Header background color in V7'</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Requirement Decisions</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">There may be some outstanding questions/decisions made as regards to the requirements. These decisions should be documented here.</p>
+
+<table border="1" dir="ltr" height="156" width="860">
+	<tbody>
+		<tr>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Requirement Decision Title</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:14px;"><strong>Issue or Problem Statement</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Assumptions</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Motivation</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Alternatives</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Decision</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Justification</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Implications</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Status</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Date</strong></span></td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Non Functional Requirements</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Do the following non functional requirements apply to the enhancement being created and if so, minor details should be provided here. We can fill in N/A if the specified non functional requirement is not applicable to the feature being delivered.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" width="671">
+	<tbody>
+		<tr>
+			<td style="width: 118px;"><strong>NFR</strong></td>
+			<td style="width: 537px;"><strong>Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Accessibility</td>
+			<td style="width: 537px;">
+			<p>The ability of the system to be used by people with disabilities. When new technologies are being used for the UI very careful consideration should be given to whether screen readers can be used with the technologies. This applies specifically to usage of JavaScript, Flex and SVG. The use of colors to provide functionality should be considered (and avoided), along with resolutions that will be used by vision impaired users.</p>
+
+			<p>Both desktop application and tablet devices should be considered in this effort.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Availability &amp; Resilience</td>
+			<td style="width: 537px;">The ability of the system to be fully or partly operational as and when required and to effectively handle failures that could affect system availability. This should be considered when working outside of the normal infrastructure and deployment. For example, the XML Server is not deployed in an application server and has special handling for fail-over and load balancing. Careful consideration should be taken before adding new components, e.g. EJB Beans, MDBs, to the infrastructure.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Development Resource</td>
+			<td style="width: 537px;">The ability of the system to be designed, built, deployed and operated within known constraints of people, budget, time, etc. In general there is not much information required here, however where special skill sets or people with siloed knowledge are required to work on the change/enhancement, this should be detailed here.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Evolution</td>
+			<td style="width: 537px;">The ability of the system to be flexible in the face of the inevitable change that all systems experience after deployment, balanced against the costs of providing such flexibility. Consideration should be given to future proofing the change, including considering how to upgrade to any changes or enhancements provided in the future. Specifically designs should accommodate elements such as localisation (text, dates, etc.), customization, configurability, and componentization. Providing these features in future releases, when not considered up front, has caused impacts for customers in the past and has prevented us from providing the features in some cases.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Internationalisation</td>
+			<td style="width: 537px;">The ability of the system to be independent from any particular language, country or cultural group. Localisation and internationalisation are a large concern for Cúram. Support should always be provided to view information in multiple locales, based on the user and server locale, along with support for working in multiple time zones.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Location</td>
+			<td style="width: 537px;">The ability of the system to overcome problems brought about by the absolute location of its elements and the distances between them. For the most part this is not a major concern, however we should never design based on the assumption that the customer will use a default configuration</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Performance and Scalability</td>
+			<td style="width: 537px;">The ability of the system to predictably execute within its mandated performance profile and to handle increased processing volumes. Performance and scalability are a concern and should always be considered during design. Where necessary, the Performance and Benchmarking teaming should be engaged early to help with determining impact of potential changes.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Regulation</td>
+			<td style="width: 537px;">The ability of the system to conform to locale and international laws, quasi-legal regulations, company policies and other rules and standards. Regulation includes the usages of third party tools and the licensing issues associated with these. New jars should never be introduced without considering the legal implications and licensing of the jars. This includes usage of GPL licensed code. Also, usage of code freely provided on the web and not properly licensed should be avoided.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Security</td>
+			<td style="width: 537px;">The ability of the system to reliably control, monitor and audit who can perform what actions on what resources and to detect and recover from failures in security mechanisms. This is a concern where new features are added that are not contained within the normal Cúram security.</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Usability</td>
+			<td style="width: 537px;">The ease with which people who interact with the system can work effectively. How the change will affect the user and how they use the application/feature should always be considered. Where necessary the business analysts and our user interface experts should be engaged early to ensure we meet usability requirements. e.g. printing.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Design Options</span></strong></p>
+
+<p dir="ltr">This is <strong>optional</strong>. If there are is more than one design option available and being discussed, then these should be outlined here.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Option 1</span></strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 80px;">Design Option Details</li>
+	<li style="margin-left: 80px;">Simple diagram if it helps to describe the option</li>
+	<li style="margin-left: 80px;">Pros of choosing this option.</li>
+	<li style="margin-left: 80px;">Cons of choosing this option</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Option 2</span></strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 80px;">Design Option Details</li>
+	<li style="margin-left: 80px;">Simple diagram if it helps to describe the option</li>
+	<li style="margin-left: 80px;">Pros of choosing this option.</li>
+	<li style="margin-left: 80px;">Cons of choosing this option</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Design</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. This should outline in detail the design chosen with all of the various areas for the component covered.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Architecture/Design Decisions</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<table border="1" dir="ltr" height="156" width="860">
+	<tbody>
+		<tr>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Architecture Decision Title</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:14px;"><strong>Issue or Problem Statement</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Assumptions</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Motivation</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Alternatives</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Decision</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Justification</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Implications</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Status</strong></span></td>
+			<td style="width: 50px;"><span style="font-size:14px;"><strong>Date</strong></span></td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">Open/In Progress/Closed</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+			<td style="width: 50px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">System Context Diagram</span></strong></p>
+
+<p dir="ltr">A diagram which shows the system context of the new feature, if applicable. This should be a simple schematic which highlights where the new feature as an enhancement fits into an existing feature or if a competely new feature, where it fits into the overall system context.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Architecture/Design Context Diagram</span></strong></p>
+
+<p dir="ltr">A diagram should be constructed to display to the reader at a glance the architecture of the new enhancement or at the very least the relationship between the various classes that make up the new enhancement. This will help the designer to think about the relationships that exist within the architecture of the feature and the internal relationships of the internal classes within the new feature.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Design Specifics</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>IEG:</strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;"><strong>IEG Editor</strong></li>
+	<li style="margin-left: 40px;"><strong>IEG Player</strong></li>
+	<li style="margin-left: 40px;"><strong>IEG Engine</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>Workflow:</strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;"><strong>Process Definition Tool</strong></li>
+	<li style="margin-left: 40px;"><strong>Workflow Engine</strong></li>
+	<li style="margin-left: 40px;"><strong>Workflow Admin</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>CDEJ:</strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;"><strong>HTML Changes</strong></li>
+	<li style="margin-left: 40px;"><strong>Widget Changes</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>SDEJ:</strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;"><strong>Changes?</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Design User Interface</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">If the new enhancement contains any User Interface element, then a UX spec may be required. These include screenshots associated with the new feature, usability concerns, styling and any other UI considerations. Designers and UX team should be involved here. The spec should be associated with this design.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>Note: New UI features should also be tested to ensure they work on a tablet device. From 7.0.1.0 we state we support tablet devices so we need to make sure we are not regressing in this area.</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>Key board short cuts should also be considered if developing features that interact with the user depending on mouse clicks/key board interaction (i.e. back browser button, refresh etc.)</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>Browser differences should be considered for features being developed ensuring that the required browsers are tested and supported.</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>Is the feature specified for the internal caseworker application or for the external Universal Access application (or both)..</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>Accessibility for both the desktop application (JAWS and IE11 is the supported combination) and tablet (VoiceOver on an iPAD using the keyboard and gestures is the supported combination) should be considered for new UI features.</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>Table Support</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;"><span style="OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; OUTLINE-COLOR: invert"><b style="OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; OUTLINE-COLOR: invert">As of v7.0.1 Curam will be certified for use on tablet devices. This introduces a new responsibility on Business Analysts, UX Designers and Developers to ensure that they do not change existing or introduce new features that break the Tablet support statement. For the most part this is limited to the production of custom widgets (non-standard UIM) and how they perform when using touch screen controls. Please note the following:</b></span></li>
+	<li style="margin-left: 40px;"><span style="OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; OUTLINE-COLOR: invert"><b style="OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; OUTLINE-COLOR: invert">Tablet resolution is typically lower than the minimum recommended resolution of 1366x768. This means that the rules around wrapping of text have been relaxed for tablet, but teams should make a reasonable effort to ensure that any wrapping is not excessive and does not affect the ability to understand and use the application.</b></span></li>
+	<li style="margin-left: 40px;"><span style="OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; OUTLINE-COLOR: invert"><b style="OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; OUTLINE-COLOR: invert">Where custom features are introduced, teams must test using a iOS and Android device to ensure that the feature is compatible with touch screen controls.</b></span></li>
+	<li style="margin-left: 40px;"><span style="OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; OUTLINE-COLOR: invert"><b style="OUTLINE-WIDTH: medium; OUTLINE-STYLE: none; OUTLINE-COLOR: invert">Where custom features are introduced, they must meet accessibility requirements for mobile devices.</b></span></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Design Validations</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">Document the validations associated with the new enhancement, what type of validations these are etc.</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Design Metadata Changes</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">For any metadata based features being developed (e.g. IEG, Workflow etc.). document the new elements/attributes being added/modified and include an XML snippet of this new design. For each new element/attribute, describe how it works functionally.</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Design Logical Data Model Changes</span></strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">Describe any changes required to the data model, entities, operations, indexes etc. This should be done in a tabular format as follows:</li>
+	<li style="margin-left: 40px;">This will form of the data dictionary so it needs to be comprehensive.</li>
+	<li style="margin-left: 40px;"><strong>Also important here that if new tables/indexes are being added, check to ensure that the primary key/index lenght does not exceed the maximum allowed for DB2</strong></li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>A. Screen shot or diagram of Logical Data Model Changes associated with the enhancement.</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>B. Each Entity and Attribute Change Described as follows:</strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">Entity: Entity Name</p>
+
+<p dir="ltr" style="margin-left: 40px;">Description of what the entity stores and a real world example etc.</p>
+
+<table border="1" dir="ltr" style="width: 841px;">
+	<tbody>
+		<tr>
+			<td style="width: 125px;"><span style="font-size:16px;"><strong>Attribute</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:16px;"><strong>Type</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:16px;"><strong>Nullable</strong></span></td>
+			<td style="width: 459px;"><span style="font-size:16px;"><strong>Description</strong></span></td>
+		</tr>
+		<tr>
+			<td style="width: 125px;">example</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 459px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 125px;">systemName</td>
+			<td style="width: 125px;">String</td>
+			<td style="width: 125px;">No</td>
+			<td style="width: 459px;">The name of the target Watson system. For example, the System name may be Watson Health Cloud on Softlayer, the front-end cluster system name.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Design Resilience Measures</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">This is <strong>mandatory</strong>. Some thought should be given to how resilient the new feature is.</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">What happens if something expected/unexpected goes wrong?</li>
+	<li style="margin-left: 40px;">What happens to the system?</li>
+	<li style="margin-left: 40px;">Will the user be able to take corrective action in the system without the need to resort to application logs/SQL searching/data manipulation outside of the system.</li>
+	<li style="margin-left: 40px;">Will the data be left in a consistent state within the system after the exception is thrown?</li>
+	<li style="margin-left: 40px;">Will there be messages given to the user? What will these messages be?</li>
+	<li style="margin-left: 40px;">Will there something written to the logs? What will this be?</li>
+	<li style="margin-left: 40px;">Does the feature require some of the exception data to be captured and an admin function provided to allow the situation to be re-mediated?</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Design Logging</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">Document any logging requirements for the new feature being added. Does the new feature require some logging output to aid debugging in a black box environment? Think about what the logging could be to avoid revealing PI information but giving enough information to allow effective debugging to occur in the event of an unexpected issue? JMX considerations should also be added here.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Design Accessibility</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">The UX design should contain an accessible requirements but this section can capture any further requirements in this area.</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">Third Party Software and Legal Requirements</span></strong></p>
+
+<p dir="ltr" style="margin-left: 40px;">Does the feature require any new or updated open source third party software? If so, describe it's usage, name, version and ensure legal are contacted to discuss the requirements around the third party software being used.</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Use Cases</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. The various use cases for the feature must be outlined here. They can be in the following format.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody>
+		<tr>
+			<td style="width: 188px;">Use Case ID</td>
+			<td style="width: 336px;">1.1</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Name</td>
+			<td style="width: 336px;">Add informational message to cluster with no toggle.</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Actor</td>
+			<td style="width: 336px;">Citizen</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Description</td>
+			<td style="width: 336px;">
+			<p>Where a cluster is defined to not have expand/collapse functionality, if the contents of the cluster are labelled by an informational label, the informational label shall still be displayed.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Preconditions</td>
+			<td style="width: 336px;">
+			<p>Define a &lt;cluster&gt; element.</p>
+
+			<p>&nbsp;</p>
+
+			<p>The contents of this &lt;cluster&gt; element should be labelled by adding an &lt;informational-label&gt; child element.</p>
+
+			<p>&nbsp;</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Flow</td>
+			<td style="width: 336px;">The citizen navigates to the question, relationship or summary page where the &lt;cluster&gt; defined in the preconditions is displayed.</td>
+		</tr>
+		<tr>
+			<td style="width: 188px;">Expected</td>
+			<td style="width: 336px;">The cluster which was labelled with an informational message shall be displayed as normal and have a informational message.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Implementation Notes</span></strong></p>
+
+<p dir="ltr">This is <strong>optional</strong>. Any notes related to the actual implementation can be described here. These can be related to some questions related to the implementation, the way some part of the implementation was completed etc.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Application Impact</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. If there is no impact, then this is as simple as saying so. If there is impact, then this may describe the impact in detail and outline the upgrade path. If the feature is related to a CLE, this section can be a link to that CLE (and hence the documentation associated with the CLE will suffice).</p>
+
+<table border="1" dir="ltr" height="74" width="1124">
+	<tbody>
+		<tr>
+			<td style="width: 125px;"><span style="font-size:16px;"><strong>Description</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:16px;"><strong>Components Affected</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:16px;"><strong>Actions</strong></span></td>
+			<td style="width: 125px;"><span style="font-size:16px;"><strong>Comments</strong></span></td>
+		</tr>
+		<tr>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+			<td style="width: 125px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Configuration Transport Manager</span></strong></p>
+
+<p dir="ltr">This is <strong>optional</strong>. Consideration should be given to whether this feature adds or changes administration data. If new administration data is being added, are new CTM business objects required to transport this data. If existing administration data is being modified, will this require changes to existing CTM BOM instances?</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Testing</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. An outline of all of the testing required by the feature should be present here. This may tie in with the use cases outlined above. Describe the framework being used and the kinds of tests being written:</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">Unit Tests</li>
+	<li style="margin-left: 40px;">Process Tests</li>
+	<li style="margin-left: 40px;">End to End Tests</li>
+	<li style="margin-left: 40px;">Functional/Business Flow Tests</li>
+</ul>
+
+<p dir="ltr">Is it just functional tests or are further performance tests required:</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">FVT Required?</li>
+	<li style="margin-left: 40px;">SVT Required?</li>
+</ul>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Documentation/How To Use Feature</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. This should describe how to use the feature added. Again this may differ from component to component but there are some general headings to consider:</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Where the feature fits in the overall component?</p>
+	</li>
+	<li>
+	<p>How it may be accessed (i.e. created/authored)?</p>
+	</li>
+	<li>
+	<p>What does it do (may be linked to the use cases above)?</p>
+	</li>
+	<li>
+	<p>Advantages of using the feature?</p>
+	</li>
+	<li>
+	<p>Any limitations associated with the feature?</p>
+	</li>
+	<li>
+	<p>A description of how the feature should be used etc.? This may also include a description of a contract between the various teams using the feature and will incorporate some details of the design.</p>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong><span style="font-size:18px;">Check List</span></strong></p>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Basically this is a quick check list of items that should be considered when doing a design for that particular component. This varies between components.</p>
+
+<h3 dir="ltr">IEG Check List</h3>
+
+<table border="1" dir="ltr" style="width: 658px;">
+	<tbody>
+		<tr>
+			<td style="width: 166px;"><strong>Check List Item</strong></td>
+			<td style="width: 314px;"><strong>Notes</strong></td>
+			<td style="width: 157px;"><strong>Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Navigation</td>
+			<td style="width: 314px;">Is the feature being introduced going to have an affect on IEG navigation (fast path, disabling sections, page navigation, looping, visited pages, summary pages and links from them). Ensure tests cases in place for all of these.</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Different Running Modes</td>
+			<td style="width: 314px;">IEG can be run in a tab, in a modal and in a page, consider the affect your new feature will have in all these running modes? Also External and Internal Mode.</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Localizable Text</td>
+			<td style="width: 314px;">Is there any localizable text in the new feature being added?</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Layout Impact</td>
+			<td style="width: 314px;">The feature you are adding may be used in many different contexts. Ensure you consider all of the places that this new feature can be used (examining the schema could give you a good idea of places where the metadata element/attribute can be used etc.). The actual way the feature is displayed in all of the different contexts should also be considered here.</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Data Storage</td>
+			<td style="width: 314px;">Consider the new feature with regards to the data (datastore entities) that it is manipulating (IEG Engine functionality). Ensure that the new feature will have no adverse affect on this.</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">RTL Requirements</td>
+			<td style="width: 314px;">Consider the new feature being added with regards to right to left requirements and feed these into the use cases</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Code Line</td>
+			<td style="width: 314px;">Consider the new feature with regards to the code line policy for IEG</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">ERD</td>
+			<td style="width: 314px;">Does the feature require updates to the ERD. If so, then it should be mocked up to see the relationships between the new feature and existing functionality at the ERD level. This may highlight some design features in the new data structures being added.</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">CPT</td>
+			<td style="width: 314px;">Should this feature be added to the V7 CPT?</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr">Workflow Check List</h3>
+
+<table border="1" dir="ltr">
+	<tbody>
+		<tr>
+			<td style="width: 166px;"><strong>Check List Item</strong></td>
+			<td style="width: 314px;"><strong>Notes</strong></td>
+			<td style="width: 157px;"><strong>Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">PDT Page-level Validations</td>
+			<td style="width: 314px;">Are there new ones required?</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">PDT Process-level Validations</td>
+			<td style="width: 314px;">Are the process-level validation messages sensible when run on the command line?</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">PDT "Valid" Indicators</td>
+			<td style="width: 314px;">Are there any pages where WDO attributes are displayed and if so do they need valid indicator fields?</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Localizable Text</td>
+			<td style="width: 314px;">Is there any localizable text in the new feature being added (and if so the section of the PDT that allows a process developer to localize text must be updated)?</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Context WDOs</td>
+			<td style="width: 314px;">
+			<p>Does the feature involve the creation of a Context WDO? If so, the following points must be considered.</p>
+
+			<ul>
+				<li>Tests that the WDO is created and used properly</li>
+				<li>Tests that the WDO gets cleaned-up properly</li>
+				<li>Tests that the WDO is audited properly</li>
+				<li>Tests for "rainy day" scenarios (e.g. you just added a WDO that appears when a deadline expires, does it work when the deadline *doesn't* expire?).</li>
+			</ul>
+			</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Existing Context WDOs</td>
+			<td style="width: 314px;">Does the feature interact with any existing Context WDOS? (e.g. is it mutually-exclusive to a WDO?)</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Workflow Auditing</td>
+			<td style="width: 314px;">Does the feature introduce a new auditable workflow "event" (WORKFLOWHISTORY record)?</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">PDT Web Tests</td>
+			<td style="width: 314px;">Does the feature need PDT Web Tests?</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">Code Line</td>
+			<td style="width: 314px;">Consider the new feature with regards to the code line policy for Workflow</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">ERD</td>
+			<td style="width: 314px;">Does the feature require updates to the ERD. If so, then it should be mocked up to see the relationships between the new feature and existing functionality at the ERD level. This may highlight some design features in the new data structures being added.</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

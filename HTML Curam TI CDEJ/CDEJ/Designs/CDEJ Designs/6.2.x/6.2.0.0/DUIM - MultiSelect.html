@@ -1,0 +1,257 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>DUIM - MultiSelect</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="DUIM - MultiSelect";
+    pageId="urn:lsid:ibm.com:td:332bccdd-949b-413c-bd8c-9c5384d4f584";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">DUIM - MultiSelect</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h1 dir="ltr"><span style="font-size:20px;">Design Page for DUIM - MultiSelect</span></h1>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Background</span></strong></h2>
+
+<p dir="ltr"><span style="font-size:12px;">Dynamic Evidence has to generate DUIM pages containing multiselect widgets in support of the functionality as specified in <a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=122758" target="_blank" title="Enhancement to apply an evidence to multiple participants">SPMP-14055&nbsp;/&nbsp;RTC&nbsp;122758</a>. The MULTISELECT widget is not supported in Dynamic UIM prior to Curam 6.2.</span> <span style="font-size:12px;"><span style="font-family: helvetica;">The enhanced new evidence screen will have a UI where we list all the case participants in a tabular form in the participant cluster. The case worker can select multiple participants to whom the evidence must be added and capture the evidence information. This will create an evidence record for each of the selected participants with the same evidence information</span>.</span></p>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Requirements</span></strong></h2>
+
+<p dir="ltr"><span style="font-size:12px;">To implement support for the MULTISELECT widget on Dynamic UIM pages.</span></p>
+
+<ul dir="ltr">
+	<li><span style="font-size:12px;"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=106996" target="_blank">TEC-17787&nbsp;/&nbsp;RTC&nbsp;106996</a> - DUIM Support for multiselect widget</span></li>
+</ul>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Non Functional Requirements</span></strong></h2>
+
+<table border="1" dir="ltr" height="263" width="671">
+	<tbody>
+		<tr>
+			<td style="width: 118px;"><strong>NFR</strong></td>
+			<td style="width: 537px;"><strong>Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Accessibility</td>
+			<td style="width: 537px;">The widget in DUIM should possess the same accessibility attributes as in its static alternative, i.e. tabIndex and WAI-ARIA attributes/roles</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Availability &amp; Resilience</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Development Resource</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Evolution</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Internationalisation</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Location</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Performance and Scalability</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Regulation</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Security</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 118px;">Usability</td>
+			<td style="width: 537px;">N/A</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Design</span></strong></h2>
+
+<h3 dir="ltr" style="margin-left: 40px;"><strong><span style="font-size:18px;">CDEJ</span></strong></h3>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">New Renderers for handling the multiselect widget in DUIM</li>
+	<li style="margin-left: 40px;">uim-to-component-model needs to match the multiselect widget and apply the proper styles.</li>
+</ul>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Use Cases</span></strong></h2>
+
+<table border="1" dir="ltr" style="width: 638px;">
+	<tbody>
+		<tr>
+			<td><strong>Role/Actor</strong></td>
+			<td><strong>Description</strong></td>
+			<td><strong>Expected Behavior</strong></td>
+			<td style="width: 256px;"><strong>Tested</strong></td>
+		</tr>
+		<tr>
+			<td>caseworker</td>
+			<td>When updating evidence</td>
+			<td>Needs to be able to add new evidence for a group of participants, e.g. while creating new evidence of type 'address', the caseworker should be able to update it for a whole family.</td>
+			<td style="width: 256px;">
+			<p>New TabTestApp pages added to test new feature manually.</p>
+
+			<p>Also covered by Dynamic Evidence tests @ CEF level</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Application Impact</span></strong></h2>
+
+<p dir="ltr">No impact.</p>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Testing</span></strong></h2>
+
+<ul dir="ltr">
+	<li>
+	<p>Unit tests written for the renderers.</p>
+	</li>
+	<li>
+	<p>Unit tests for uim-to-component-model.xsl</p>
+	</li>
+	<li>
+	<p>Manual Test Plans</p>
+
+	<ul>
+		<li>
+		<p>New test pages added under DYNAMIC UIM Elements Tab &gt; LIST</p>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Documentation/How To Use Feature</span></strong></h2>
+
+<ul dir="ltr">
+	<li>
+	<p>Where the feature fits in the overall component?</p>
+
+	<ul>
+		<li>
+		<p>Feature will enable support for the MULTISELECT widget in Dynamic UIM.</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>How it may be accessed (i.e. created/authored)?</p>
+
+	<ul>
+		<li>
+		<p>The MULTISELECT widget in Dynamic UIM is constructed the same way as in static UIM pages.</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>What does it do (may be linked to the use cases above)?</p>
+
+	<ul>
+		<li>
+		<p>It provide a multiselect option for a caseworker .</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Advantages of using the feature?</p>
+
+	<ul>
+		<li>
+		<p>Reducing the input for a caseworker. At the moment when for example new address needs to be added to participant it needs to be done for each participant living at the same address.</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Any limitations associated with the feature?</p>
+	</li>
+	<li>
+	<p>A description of how the feature should be used etc.? This may also include a description of a contract between the various teams using the feature and will incorporate some details of the design.</p>
+	</li>
+</ul>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Check List</span></strong></h2>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Basically this is a quick check list of items that should be considered when doing a design for that particular component.</p>
+
+<table border="1" dir="ltr" style="width: 658px;">
+	<tbody>
+		<tr>
+			<td style="width: 166px;"><strong>Check List Item</strong></td>
+			<td style="width: 314px;"><strong>Notes</strong></td>
+			<td style="width: 157px;"><strong>Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 166px;">????</td>
+			<td style="width: 314px;">?????.</td>
+			<td style="width: 157px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2 dir="ltr"><strong><span style="font-size:18px;">Work Estimation</span></strong></h2>
+
+<p dir="ltr">This is <strong>mandatory</strong>. Again, the actual items listed in the estimate breakdown may vary from task to task and component to component.</p>
+
+<ul dir="ltr">
+	<li>
+	<p>Work Estimates</p>
+
+	<ul>
+		<li>
+		<p>Design: 1 day</p>
+		</li>
+		<li>
+		<p>Prototype: 2 days</p>
+		</li>
+		<li>
+		<p>Implementation: 3 days</p>
+		</li>
+		<li>
+		<p>Testing: 2 days</p>
+		</li>
+		<li>
+		<p>Documentation: 1 day</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Total: 9 Days</p>
+	</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,175 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>CDEJ JavaScript Layering</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="CDEJ JavaScript Layering";
+    pageId="urn:lsid:ibm.com:td:f544deef-0ce7-4630-b12f-772db533eb0d";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">CDEJ JavaScript Layering</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">JavaScript layer file is a JavaScript file containing more than one Dojo (at the time of writing the only supported framework) style modules, therefore a JavaScript chunk serving the essential part of the required rich web application functionality .</p>
+
+<p dir="ltr">The layer files are loaded by the browser and the contained modules are interpreted in one go, therefore saving from the additional requests at the expense of bigger single loading time.</p>
+
+<p dir="ltr">Same way the layer files are then cached and served to the rest of the domain without having to reach the web container at all (provided the expiration headers are not messed with).</p>
+
+<p dir="ltr">Apart from the layer files the loose Dojo style (AMD or older) modules might be loaded and the duplicates of the single module files stil exist under the runtime location.</p>
+
+<p dir="ltr"><br />
+Currently the infrastructure is based on cdej.js layer file (or cdej-main.js for the main window) dojo.layer.js file. cdej-cm.js, cdej.js. cdsl.js,<br />
+Any JS files which are not included into the layer files are still available for a load by the dojo loader system, and even the copies of the layered module JS files are still available at runtime (even though not used if acquired via the Dojo loader mechanism).</p>
+
+<h2 dir="ltr">The layering mechanism</h2>
+
+<p dir="ltr">The layering is based on the standard Dojo functionality, even though the actual tooling used (Java compiler) is provided by Mozilla and some other vendors (shrinksafe compression tool (based on Rhino) and the Closure Compiler from Google for removing the “dead code” and minification).</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Our JDE build script does the layering every time the clean client is built; the care is taken to do the build for just the locales defined for that build.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Below is the diagram showing CDEJ layering mechanism and current outputs:</p>
+
+<p dir="ltr"><img style="width: 800px; height: 425px;" lconnwikiparamattachmentname="JSLayers.png" src="CDEJ%20JavaScript%20Layering._ATTACHMENTS_/JSLayers.png" lconnwikiparamwikipage="CDEJ JavaScript Layering" lconnwikimacro="image" alt=""></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Alternatively, JDE release an external layering target which could be used to build the custom profiles as required; the target is external to JDE, since it is still relying on access to the CDEJ sources availability, so not something really "external" and available for the customers.</p>
+
+<p dir="ltr"><br />
+An (older) example of the external target usage by IEG (with the relevant placeholders) to build their specific layer (check with Mael if this is still valid):</p>
+
+<p dir="ltr"><br />
+<span style="font-family:courier new,courier,monospace;">ant -f &lt;_stream_dir_&gt;\CuramCDEJ\bin\build-javascript-layers.xml create-javascript-layers -Dlayer-name=ieg-base-layer -Dlayer-build-configuration=.\ieg.base.layer.json -Dtarget-directory=.\target -Dsources-directory=.\temp -Dapp-component-dependencies=“__CDEJ_source_zip_, _dojo_source_zip_, _idx_source_zip" -Dbasedir=.\</span></p>
+
+<h2 dir="ltr">Layer build profiles</h2>
+
+<p dir="ltr">The following is the excerpt from the Dojo documentation providing some details on the build profile used when layering.</p>
+
+<p dir="ltr"><br />
+Build profiles are small JavaScript files that provide information to the builder on how to handle the code.<br />
+The build profile is the main configuration file for the build system.<br />
+It is a JavaScript file that places all of the directives that are necessary to create a fully functional build on a profile object.</p>
+
+<p dir="ltr">Some key options which create the structure for a full build profile are:</p>
+
+<table border="1" dir="ltr" style="width: 851px;">
+	<tbody>
+		<tr>
+			<td style="width: 112px;"><strong>Option</strong></td>
+			<td style="width: 83px;"><strong>Type</strong></td>
+			<td style="width: 635px;"><strong>Description</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 112px;"><span style="font-family:courier new,courier,monospace;">basePath</span></td>
+			<td style="width: 83px;">Path</td>
+			<td style="width: 635px;">This is the "root" of the build, from where the rest of the build will be calculated from. This is relative to where the build profile is located.</td>
+		</tr>
+		<tr>
+			<td style="width: 112px;"><span style="font-family:courier new,courier,monospace;">releaseDir</span></td>
+			<td style="width: 83px;">Path</td>
+			<td style="width: 635px;">This is the root directory where the build should go. The builder will attempt to create this directly and will overwrite anything it finds there. It is relative to the basePath</td>
+		</tr>
+		<tr>
+			<td style="width: 112px;"><span style="font-family:courier new,courier,monospace;">releaseName</span></td>
+			<td style="width: 83px;">String</td>
+			<td style="width: 635px;">This provides a name to a particular release when outputting it. This is appended to the releaseDir. For example if you are going to release your code in release/prd you could set your releaseDir to release and your releaseName to prd.</td>
+		</tr>
+		<tr>
+			<td style="width: 112px;"><span style="font-family:courier new,courier,monospace;">action</span></td>
+			<td style="width: 83px;">String</td>
+			<td style="width: 635px;">This should be set to release.</td>
+		</tr>
+		<tr>
+			<td style="width: 112px;"><span style="font-family:courier new,courier,monospace;">packages</span></td>
+			<td style="width: 83px;">Array</td>
+			<td style="width: 635px;">This is an array of hashes of package information which the builder uses when mapping modules. This provides flexibility in locating in different places and the pulling it together when you build.</td>
+		</tr>
+		<tr>
+			<td style="width: 112px;"><span style="font-family:courier new,courier,monospace;">layers</span></td>
+			<td style="width: 83px;">Object</td>
+			<td style="width: 635px;">This allows you to create different "layer" modules as part of a build that contain discreet functionality all built into single file.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+<h2 dir="ltr">The dependencies and take-on</h2>
+
+<p dir="ltr">This is the copy of the note in cdej.profile.js:<br />
+<span style="font-family:courier new,courier,monospace;">“The following layer exists only for use by the Universal Access and IEG teams. It is not imported in the internal curam user interface. It is imported in their applications.<br />
+They currently have a temporary solution for building their own layer files. However, those layers include CDEJ JS files.<br />
+This means we have to ship CDEJ source to them and also introduces a hard dependency between CDEJ, IEG and UA releases.<br />
+&nbsp;We can no longer make releases simultaneously into a stack. For example, UA have to wait until we release a JDE for a stack, then re-build their layer, re-test and then make a release. They have estimated this as a two day turn around.<br />
+This layer consist of the files they were previously referencing.</span></p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">They will simply include this file in their UI and so no longer need to wait to build a layer.<br />
+&nbsp;Any changes to this layer should only be at the request of the UA or IEG teams.</span></p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">There should be no need for a CDEJ developer to change this layer as it is not included in our user interface.<br />
+This is an interim solution until the "JS Tooling project" provides a layering solution that will scale to all projects.”</span></p>
+
+<p dir="ltr"><br />
+As we can see, IEG and UA are dependent on part of the same modules/scripts included in cdej.js layer.</p>
+
+<p dir="ltr">As it is explained in <a wiki="W9d016d857fe0_48ee_ade0_72ff94c822e9" target="_blank" href="https://w3-connections.ibm.com/wikis/home?lang=en#!/wiki/W9d016d857fe0_48ee_ade0_72ff94c822e9/page/Javascript%20Layering" id="wikiLink1492097316579" page="Javascript Layering">this&nbsp;document</a>, IEG scripts are difficult to modularize and therefore cannot be referenced in the same way Dojo modules are referenced in the profile for the layer build.</p>
+
+<p dir="ltr">As for the UA, they apparently follow the same approach even though they have their <a wiki="We149a83e69c4_4f6a_af6a_f91b262ca3f2" target="_blank" href="https://w3-connections.ibm.com/wikis/home?lang=en#!/wiki/We149a83e69c4_4f6a_af6a_f91b262ca3f2/page/Layer%20File" id="wikiLink1492084853503" page="Layer File">own&nbsp;build&nbsp;scripts</a> used to produce their layer, called <span style="font-family:courier new,courier,monospace;">cwtk-layer.js</span> which again is built using CDEJ modules and therefore is dependent on JDE release.</p>
+
+<h2 dir="ltr">The external build</h2>
+
+<p dir="ltr">While the layers are part of JDE build and, as mentioned before, they are also added to the IEG and UA project source control, additional layer files might also be build. There is a separate target for this purpose shipped with JDE in the build-javascript-layers.xml build script.</p>
+
+<p dir="ltr"><br />
+The target invocation syntax is :<br />
+<span style="font-family:courier new,courier,monospace;">ant -f &lt;_stream_dir_&gt;\CuramCDEJ\bin\build-javascript-layers.xml create-javascript-layers -Dlayer-name=_custom_layer_name_ -Dlayer-build-configuration=_custom.profile_</span></p>
+
+<p dir="ltr">where the <span style="font-family:courier new,courier,monospace;">_custom.profile_</span> describes the layer contents according to the above discussed markup.<br />
+It should be noted that the invocation requires certain jars/classes (for shrinksafe and closure compiler as well as the layering tool itself) to be available on the classpath; these are shipped as part of JDE.</p>
+
+<h2 dir="ltr">Potential evolution</h2>
+
+<p dir="ltr">The layering mechanism allows for load time savings and somewhat simplifies the script file management (at the expense of AMD, however since the multi-threading to speed the interpretation might not be available because of the single chunk load (this depends on the browser internal logic though)).</p>
+
+<p dir="ltr">However, there are significant drawbacks associated with the way the layer files are currently made-up.<br />
+1. There is no content management apart from the layer-build time management; while the dynamic inclusion might complicate things or be not a viable option, the proper design there might result in additional savings and avoiding the unnecessary content.<br />
+2. There is no flexibility in the way layer composition is managed. This is the reason why the dependency exists in the solution layers above the infrastructure.</p>
+
+<p dir="ltr">Therefore when looking at the potential evolution of the mechanism, the directions might be the dynamic (runtime) composition of the layer content, and configured layering, where the pre-configured rather than hardcoded set of layer files is included.</p>
+
+<p dir="ltr"><br />
+In these scenarios the final layer content is decided before the actual page is rendered and served so that the choice could be made between the full layer and just part of it. Same way, since different solution have different needs in JS content, the right configuration would allow serving the suitable set of the JS layer files decoupling the solution and infrastructure layers from each other.<br />
+The top level window services should they be implemented at some stage aim at reducing the necessary JS load and therefore might lead to more lightweight layer files.</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

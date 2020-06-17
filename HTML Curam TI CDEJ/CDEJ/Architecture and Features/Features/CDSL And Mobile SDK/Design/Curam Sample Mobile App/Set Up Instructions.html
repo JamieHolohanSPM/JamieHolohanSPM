@@ -1,0 +1,72 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Set Up Instructions</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Set Up Instructions";
+    pageId="urn:lsid:ibm.com:td:f4abb089-e925-412b-97a8-952c34a15fbe";
+    toRoot="../../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Set Up Instructions</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p align="center" dir="ltr" style="text-align:center;">&nbsp;</p>
+
+<p dir="ltr"><strong>Install Worklight Studio</strong></p>
+
+<ol dir="ltr">
+	<li>In eclipse, go to Help -&gt; Install New Software -&gt; Add…</li>
+	<li>In the Add Repository Dialog, click Archive…</li>
+	<li>Select iws_eclipse_6.1.0.1.zip from the following location on tiny: <a href="">\\tiny\ProductDevelopment\TechInf\Client_Infrastructure\Mobile</a></li>
+	<li>Give it a name, Worklight Studio 6.1.0.1 (This is the version currently supported by the Curam Sample App.) Then click OK.</li>
+	<li>Select “IBM Worklight Studio Development Tools” from Install New Software window. Click Next and Next. Accept the license agreements and Click Finish.</li>
+	<li>Installing is now kicked off. Wait until the installation is finished successfully and restart the eclipse. Now the installation of Worklight Studio is complete.</li>
+</ol>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Set up Curam Sample App Project</strong></p>
+
+<ol dir="ltr">
+	<li>Go to File -&gt; Import… -&gt; Existing Projects into Workspace -&gt; Browse… Select the CuramSampleMobileApp project from \TIVOB\test location. Click Finish to Complete</li>
+	<li>Switch Eclipse to Design Perspective. Navigate to CuramSampleMobileApp project -&gt; apps -&gt; CuramSampleMobileApp folder</li>
+	<li>Right click on the CuramSampleMobileApp folder -&gt; New -&gt; Worklight Environment -&gt; Select iPhone -&gt; Click Finish to add an iPhone environment.</li>
+	<li>Right click on the CuramSampleMobileApp folder again -&gt; Run As -&gt; Build All Environments, to start building all environment.</li>
+	<li>Once again, right click on the CuramSampleMobileApp folder -&gt; Run As -&gt; Run on Worklight Development Server to start the Curam Sample Mobile App on the Worklight.</li>
+</ol>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Run Sample App in Mobile Simulator</strong></p>
+
+<ol dir="ltr">
+	<li>Right click on the CuramSampleMobileApp project -&gt; Open Worklight Console. If the Worklight Console opens in the Eclipse internal browser, go to Windows -&gt; Pereference -&gt; General -&gt; Web Browser -&gt; Use external web browser.</li>
+	<li>Click iPhone icon on the console to open the simulator</li>
+	<li>Now you can see the Curam Sample Mobile App running in a iPhone simulator.</li>
+</ol></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,202 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Design considerations and options</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../wiki.css" />
+<script type="text/javascript" src="../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Design considerations and options";
+    pageId="urn:lsid:ibm.com:td:2f7d5ee3-68fc-4a4d-a1a3-704a36d3d75f";
+    toRoot="../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Design considerations and options</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h2 dir="ltr"><span style="font-size:14px;"><strong>Current situation</strong></span></h2>
+
+<p dir="ltr"><br />
+Described in <a href="http://ibmurl.hursley.ibm.com/N0L3">FILE_EDIT&nbsp;widget handover document</a></p>
+
+<h2 dir="ltr"><span style="font-size:14px;">The Parties</span></h2>
+
+<p dir="ltr"><br />
+&nbsp; The functionality being discussed aims at serving two parties who use it for the same purpose but in a different way:</p>
+
+<ul dir="ltr">
+	<li>&nbsp; the <strong>administrator</strong> (admin further in the text) who is providing the documentation templates</li>
+	<li>&nbsp; the <strong>user </strong>(caseworker or user further in the text) who creates the correspondence documents based on the templates or edits the documents already created.</li>
+</ul>
+
+<h2 dir="ltr"><strong><span style="font-size:14px;">Background</span></strong></h2>
+
+<p dir="ltr">The word integration solution allows Customers to work with their correspondence documents using an external editing application (Microsoft Word) bridged with the Curam application on the caseworker (user) side, but separated from the main application on the admin side. Admin manually creates the required templates in Microsoft Word and uploads those templates into the application database using the standard local file upload mechanism.<br />
+There is no bridging required on the admin side.<br />
+The user on the other hand is presented with the Word application as the "inline" editor which allows them freeform editting of the template based and to certain extent pre-filled document, which is then saved back to the database and is available for further editing the same way by request.<br />
+&nbsp;<br />
+The advantages of this approach is its convenience to the user, the popular and intuitive editing format, using the application which is wide spread and popular as an editor.<br />
+&nbsp;<br />
+The disadvantage is the editing environment being completely external to the main application, therefore poor and unreliable control over it; high maintenance costs and issues not related with the internal bugs, but rather user configuration/preferences and third-party decisions (like dropping the API used for the bridging).<br />
+&nbsp;<br />
+In this light the integration solution needs to be reviewed and replaced with the compromise solution which would allow more reliable and robust functionality, quicker and lower cost maintenance, at the same time remaining as user-friendly as is achievable given the timeframe and effort required.</p>
+
+<h2 dir="ltr"><span style="font-size:14px;"><strong>Requirements and Approach</strong></span></h2>
+
+<p dir="ltr">The main requirement is to support both mentioned parties with the adequate means of creating DOC or PDF documents to for the required correspondence.<br />
+The suggestion is to replace the immediate editing of the document in the third-party external editor with the generation of that document from some intermediate data.<br />
+This implies two major considerations and choices:</p>
+
+<ul dir="ltr">
+	<li>&nbsp; the document generation tool being used</li>
+	<li>&nbsp; the mechanism/interface for the admin and user parties to work with the intermediate data.</li>
+</ul>
+
+<h2 dir="ltr"><span style="font-size:14px;">Document generation tool</span></h2>
+
+<p dir="ltr">&nbsp; The main characteristic of the generation tool, apart from being capable to support the required output format (doc or rtf) is the input format.<br />
+&nbsp; The input should allow for templates; it should be flexible enough and also it should be usable taking into account the users the tool is aimed at.<br />
+&nbsp; The output format required would be DOC/RTF &amp; pdf (or basic DOC/RTF and more advanced PDF slightly pushing towards PDF finally).</p>
+
+<p dir="ltr">&nbsp; The existing options are described in <a href="http://ibmurl.hursley.ibm.com/MYZO" target="_blank">the&nbsp;parent&nbsp;document</a>.</p>
+
+<h2 dir="ltr"><span style="font-size:14px;">User interface options</span></h2>
+
+<p dir="ltr"><br />
+Here the options could differ in the level of presentation, capabilities and flexibility, and could also be different for both admin and caseworker (user) parties.</p>
+
+<p dir="ltr">There are the essential parts: template; pre-defined data (document pre-population) and user data (entered manually).</p>
+
+<p dir="ltr">The question here is how advanced we want it. At this stage there are use cases and practices. The Word Integration feature is used to make the standard correspondence letters related to the cases. As such they follow certain rules and their layout is to certain extent predictable and limited.<br />
+A full-feature editing framework or using Word as it is used now provides superior flexibility which is completely excessive. One of the main advantages cited on Windward Document generator site is its small footprint as opposed to the other solutions. Therefore, the resource consumption is an issue when using the document editing or even generation solution; and in a situation where the final documents fall into a small category, it is right to say that more minimalistic approach would not mean any actual loss in flexibility and the really used functionality.<br />
+Keep in mind that even the current functionality was reported non performant when it comes to pre-filling in the document with multiple fields.<br />
+In essence the document template is nothing but the layout of the formatted text blocks and possibly graphics. The correspondence standards follow certain set of rules and no advanced/fancy formatting is expected here. MS Word provides no more then the usual text editor when it comes to the plain text entering, it's power and convenience is in the layouting and formatting the text.</p>
+
+<h2 dir="ltr"><span style="font-size:14px;"><strong>Option 1. WYSWYG template creation, HTML form for the user</strong></span></h2>
+
+<p dir="ltr">In this scenario we choose the third part generator solution from the ones listed which comes along with the WYSWYG editor. The intercomputer solution allows for using Word for template creation the same way it was, so nothing changes for the admin user; same way the Windward product suite ('DocGen') allows for using Word as the template editor, however introduces certain custom markup (autotags) for the data bindings.<br />
+The IBM Rational Publishing Engine uses Document Studio application for the template creation, so again comes with WYSWYG capabilities.<br />
+All of these tools allow for preserving the admin side editing at the same level it used to be with one difference: they should allow for data extraction to generate whatever the user (caseworker) interface, be it HTML form or more sophisticated presentation. This could pose certain technical problem or impose limitations; the major drawback, however is the necessity for the Customer to purchace the third party solution. As the solution tends to serve for just any document generation purposes, it would be powerful and flexible just to accomplish any of the document generation tasks, so it could be way too powerful for our situation, and, therefore costly for the Customer.<br />
+Another thing is that while the templace creation is facilitated, the generation tool itself is a standalone application which again needs one or the other type of bridging form the Curam application - thus we are getting away from the bridging on the user side just to get another bridge on the server side. Certainly this isn't COM bridge, and the server machine configuration means no variation which was one of the main problem when using Word and COM bridge on multiple user machines, however something which needs to be considered.<br />
+The last drawback to consider: while the admin gets the same visual editing interface, the user is presented with much poorer front-end which just allows for inputing the data - even though the combination with the ability to preview the document (sample generation) could be suggested to improve the situation.<br />
+On the other hand, provded the side tool costs are acceptable for the Customer and the tool integration is smooth, this could be the quickest replacement solution.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr"><span style="font-size:14px;">Option 2. Mediated template creation with layout info for admin or both sides</span></h2>
+
+<p dir="ltr">As it was already mentioned, since the task is limited to creating the correspondence documents (letters) the variety of the possible templates isn't big, which implies quite simple layout options. Such a layout could be reflected and edited in some sort of intermediate editor or even widget which is presented to the admin user but could also be reproduced in the "read only layout mode" for the user entering the data.<br />
+Curam has the existing document generation solution, XML Server, which accepts XML data and the templates defined in XSL-FOP. The advantage of this solution - it is already integrated into the application, it does not incur any additional costs to the Customer neither Company. The major drawback, however is no front-end - the templates are edited using the text or XML editor, which would not be acceptable for the Customer admin user.<br />
+The scenario in this case would be to develop the simple WYSWYG front-end for either the admin or admin and user; such a solution (Template Editor) could allow placement, sizing and formatting of the text blocks, graphics and potentially tables and their binding to the data.<br />
+The advantage - fully controlled solution, fully integrated solution. The disadvantage - front-end editor development takes more time and effort than the configuration/integration of the third party tool with HTML form generation for the user. This could pose certain risk given the limited time available for the development.</p>
+
+<p dir="ltr">Since option 2 needs more consideration and detalisation, it is discussed below in more details.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr">Phased approach</h3>
+
+<p dir="ltr">Writing and testing an editor and the conversion/parsing utilities takes time regardless of the base technology chosen and in order to ensure deadlines met a phased approach could be considered.<br />
+The <em><strong>Phase 1</strong></em> of such an approach would be providing the administrator with the set of predefined templates in the right format without any graphical editing but with some advice as regards the XML/textual editing. Also, previewing of the templates (filling them with the sample data) should be included in Phase 1.<br />
+Another thing is the user side. If the user is presented with HTML form to input the data, this should be presented as well. In any case, an extractor utility should be implemented/adopted (if there's one in place) allowing for extraction of the required user input from the XSL-FOP template and converting that into the basic user input form.<br />
+As to the user, it would be preferable for them to have the same ability to preview the template they are choosing with the sample data even though the input would still be plain HTML form.<br />
+Internally the Phase 1 should aim at the introduction of the inline editor, developed to some stage so that the further road-map is clear and could be communicated to the Customers taking the solution.</p>
+
+<p dir="ltr">The thing to keep in mind is that the Customers who use IE might prefer to keep with the current solution until the full replacement is made, since Microsoft did not have any announcement regarding Java support in their browser and it would be hard to convince such Customers to switch to the initially more limiting solution.</p>
+
+<p dir="ltr"><em><strong>Phase 2 </strong></em>would be releasing admin side Template Editor at least, or Template Editor and Document Player for the user if the decision is to equip both sides with the visual viewer/editor. It could be further divided into stages if turns out necesasary, however the aim is to provide the solution close to the final one.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr">The technology for the editor</h3>
+
+<p dir="ltr"><br />
+At this stage there are two technologies which could be used for the editor front-end: Dojo/HTML and Adobe Flash/Flex.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Flex/Flash</strong><br />
+&nbsp;&nbsp; While industry is moving away from this technology, Curam application actively uses it, there is number of editors supported, the required development licenses and the<br />
+&nbsp;&nbsp; expertise which allows for developing the new editor.<br />
+&nbsp;&nbsp; The advantages of using Flex is the visual part of the interface, readily available components to do parts of it and good implementation of drag-and drop for the layout.<br />
+&nbsp;&nbsp; The disadvantage could be the life cycle of the editor if the flash player is not supported by the browsers and replaced by pure HTML 5 solution. However, this should be<br />
+&nbsp;&nbsp; weighted against the frequency of Dojo upgrades if the Dojo widget alternative is chosen.<br />
+&nbsp;&nbsp; Another potential disadvantage is the maintenance time frame. The Dojo/JavaScript solution could be debugged quicker and the fix could be made by the bigger number of people.<br />
+&nbsp;&nbsp; However, it could be easier for the hot-fixes/test fixes, since there is no need to rebuild the code to pick up an updated version, while Dojo/JavaScript solution could<br />
+&nbsp;&nbsp; require layer to be rebuilt.<br />
+&nbsp;&nbsp; <em>Advantages:</em><br />
+&nbsp;&nbsp; * Quick execution, good styling, fluent drag-and-drop<br />
+&nbsp;&nbsp; * if Template Editor and Doc Player option is chosen, the later is the slight variation of the former<br />
+<em>&nbsp;&nbsp; Disadvantages</em><br />
+&nbsp;&nbsp; * (arguably) more difficult maintenance (licenses the source code could be just changed by a person holding license).</p>
+
+<p dir="ltr"><br />
+<em><strong>Dojo widget</strong></em><br />
+&nbsp;&nbsp; Again, there is internal expertise in developing and styling various widgets, the Dojo is the technology being actively developed, the editor would be inline with the rest<br />
+&nbsp;&nbsp; of the development in Curam, so it is a good alternative to the Flash/Flex alternative.<br />
+&nbsp;&nbsp; However, the drag-and-drop in HTML is an issue to some extent, especially when there is bigger number of moving objects. Another thing is the heavy usage of the JavaScript<br />
+&nbsp;&nbsp; and potentially bigger size of the editor. JavaScript is an interpreted language with bigger rendering times anfd potential visual lags. At the same time the swf is less in<br />
+&nbsp;&nbsp; the size and, since it is compiled, it is quicker to run and the user experience with it might be better.<br />
+&nbsp;&nbsp; To summarize, the advantages of this technology:<br />
+&nbsp;&nbsp; * popularity/wider development knowledge<br />
+&nbsp;&nbsp; * easier debugging and maintenance (the runtime code is the source code)<br />
+&nbsp;&nbsp; The disadvantages:<br />
+&nbsp;&nbsp; * slower to render and to respond to the user interaction; drag-and-drop under question<br />
+&nbsp;&nbsp; * (might be) less user friendly and worse user experience.<br />
+&nbsp;&nbsp; * if Template Editor and Doc Player option is chosen, two widgets would be required.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Third-party visual editors for XSL-FOP</strong></p>
+
+<p dir="ltr"><br />
+There are side products available for creating XSL-FO templates which could be used by the admin party. Some of them are listed below:</p>
+
+<ul dir="ltr">
+	<li>Stylus studio</li>
+</ul>
+
+<p dir="ltr">&nbsp;&nbsp; <a href="http://www.stylusstudio.com/xsl_fo_processing.html">http://www.stylusstudio.com/xsl_fo_processing.html</a><br />
+&nbsp;&nbsp; This is 3rd party tool, not freeware;</p>
+
+<ul dir="ltr">
+	<li>XSL-FO Wysiwyg MiniScribus</li>
+</ul>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp; <a href="http://sourceforge.net/projects/wysiwyg-edit/">http://sourceforge.net/projects/wysiwyg-edit/</a><br />
+&nbsp;&nbsp;&nbsp; This is the Open Source alternative. Might be suitable or suitable for the Phase 1 solution, depends on the licensing terms</p>
+
+<ul dir="ltr">
+	<li>Oxygen editor has XSLT-FOP support</li>
+</ul>
+
+<p dir="ltr"><a href="http://www.oxygenxml.com/xml_editor/fo_editor.html">http://www.oxygenxml.com/xml_editor/fo_editor.html</a><br />
+While this is not the visual FOP editor, it has the built-in FOP support, therefore facilitates template creation. It is available as part of the DITA documentation creation/editting package so could be used to create/edit templates for Phase 1 delivery if phased approach is taken as described above.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">The related graphs could be found in the attached presentation.</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

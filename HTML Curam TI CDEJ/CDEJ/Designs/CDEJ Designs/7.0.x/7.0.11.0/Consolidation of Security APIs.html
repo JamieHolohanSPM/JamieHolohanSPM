@@ -1,0 +1,672 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Consolidation of Security APIs</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Consolidation of Security APIs";
+    pageId="urn:lsid:ibm.com:td:edac8518-56a3-41dd-b525-965ab7fb59fe";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Consolidation of Security APIs</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">Table of Contents:</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii3">Stakeholders</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii4">Background</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii5">Requirements</a>
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii6">Requirement Decisions</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii7">Non Functional Requirements</a></li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii8">Design Options</a>
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii9">Design</a></li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii10">Architecture/Design Decisions</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii11">System Context Diagram</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii12">Architecture/Design Context Diagram</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii13">Design Specifics</a>
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii14">Design User Interface</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii21">Design Validations</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii22">Design Metadata Changes</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii23">Design Logical Data Model Changes</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii24">Design Resilience Measures</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii25">Design Logging</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii26">Design Accessibility</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii27">Third Party Software and Legal Requirements</a></li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii28">Use Cases</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii15">Implementation Notes</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii16">Application Impact</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii17">Configuration Transport Manager</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii18">Testing</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii19">Documentation/How To Use Feature</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii20">Check Lists</a>
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii1">IEG Check List</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii2">Workflow Check List</a></li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h1 dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Design Page for Consolidation of Security APIs</strong></h1>
+
+<h2 dir="ltr" id="ii3">Stakeholders</h2>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Refer to the following Org Chart to ensure you are engaging the correct people. The table below indicates the current contacts for each area.
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://ibm.biz/BdsuKd">https://ibm.biz/BdsuKd</a></li>
+	</ul>
+	</li>
+</ul>
+
+<table border="1" dir="ltr">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Role</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 366px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 29px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Sign Off if Applicable</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Customer</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 366px;">SPM-security/internal</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 29px;">Yes</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Business Owner/Product Owner</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 366px;">Ian Pillion</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 29px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Architect</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 366px;">Fergal Gavin/Sai Inala/Michael Searles</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 29px;">Yes</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Developer(s)</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 366px;">Michael Searles/Ian Kirby/Paula Dooley/Greg Byrne/Yaroslav</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 29px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">FVT</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 366px;">Vardhini/Steven Condon</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 29px;">Yes</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">SVT</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 366px;">John Redmond/Sean Cleary</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 29px;">Yes</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Information Developer</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 366px;">Annette Sohor</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 29px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">UX Design</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 366px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 29px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Legal</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 366px;">Jim Rook</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 29px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii4">Background</h2>
+
+<p dir="ltr">Contrast is a tool that the security team uses to perform scanning of the SPM code base to search for security vulnerabilities. Currently (March 2020) Contrast is not mandated by IBM but this is likely to change in the future.</p>
+
+<p dir="ltr">Since we have started using Contrast, a number of security issues have been flagged by the tool. A team has been set-up within PD to investigate each issue, to validate, and to apply the recommended security fix as required.</p>
+
+<p dir="ltr">From a cursory review of the code, it appears several threat mitigation mechanisms, and in some cases duplicate mitigation mechanism, are already in different locations in the code base which are being used to sanitise/mitigate un-trusted input and output data. Furthermore, some of these mitigation mechanisms, such as Active Content Filtering, have been sunset and will be removed at some stage.</p>
+
+<p dir="ltr">The team's objective here is to:</p>
+
+<ul dir="ltr">
+	<li>Modernise our security mechanisms in order to align with current best practice</li>
+	<li>Consolidate these mechanisms in a central location within the product in an easy to use API.</li>
+	<li>Going forward, developers should familiarise themselves and use these API's to mitigate existing security vulnerabilities. In the future,&nbsp; the API's should be incorporated into new secure coding practices to prevent new vulnerabilities developing.</li>
+</ul>
+
+<h2 dir="ltr" id="ii5">Requirements</h2>
+
+<p dir="ltr">List of Requirements</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">A new Security component will be added to the Technical infrastructure that shall contain new security API's. These API's shall be available to all higher stacks and used explicitly for security fixes.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The API shall be available to both the web and server tiers and should also include the REST infrastructure.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The design of this new infrastructure should follow existing TI patterns that apply.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The Security API must provide mitigation mechanisms that align with current security industry standards and address the common security issues flagged by Contrast.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The API and any dependencies, such as third party libraries, will have approval from legal and located in this new central security component.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The API should be extensible to the customer.&nbsp;</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The API should be well documented for internal and external stakeholders.</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">RTC Ticket</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=258698">RTC&nbsp;Ticket:&nbsp;258698</a></li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii6">Requirement Decisions</h3>
+
+<p dir="ltr">There may be some outstanding questions/decisions made as regards to the requirements. These decisions should be documented here.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="294" style="width: 1036px;" width="963">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement Decision Title</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Issue or Problem Statement</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Assumptions</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Motivation</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 49px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Alternatives</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 143px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Decision</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 146px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Justification</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 39px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Implications</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Status</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 95px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Date</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Include REST &amp; other web API's</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Ideally, our new security API should be available to all Web API's</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Data input can come from a number of sources including REST and SOAP API's. We need to provide protection to these points also. REST is deployed in a seperate EAR.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 49px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 143px;">We do not need to consider REST and SOAP as seperate cases.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 146px;">Following discussion with Architects, as per existing TI Infrastructure, the API should be available to REST and no need to consider as a special case.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 39px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Closed</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 95px;">23-Mar-20</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 49px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 143px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 146px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 39px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 95px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii7">Non Functional Requirements</h3>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. Do the following non functional requirements apply to the enhancement being created and if so, minor details should be provided here. We can fill in N/A if the specified non functional requirement is not applicable to the feature being delivered.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" style="width: 1161px;" width="671">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">NFR</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+			<td style="width: 489px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Details</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Accessibility</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to be used by people with disabilities. When new technologies are being used for the UI very careful consideration should be given to whether screen readers can be used with the technologies. This applies specifically to usage of JavaScript, Flex and SVG. The use of colors to provide functionality should be considered (and avoided), along with resolutions that will be used by vision impaired users.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Both desktop application and tablet devices should be considered in this effort.</p>
+			</td>
+			<td style="width: 489px;">N/a</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Availability &amp; Resilience</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to be fully or partly operational as and when required and to effectively handle failures that could affect system availability. This should be considered when working outside of the normal infrastructure and deployment. For example, the XML Server is not deployed in an application server and has special handling for fail-over and load balancing. Careful consideration should be taken before adding new components, e.g. EJB Beans, MDBs, to the infrastructure.</td>
+			<td style="width: 489px;">Minimal consideration</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Development Resource</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to be designed, built, deployed and operated within known constraints of people, budget, time, etc. In general there is not much information required here, however where special skill sets or people with siloed knowledge are required to work on the change/enhancement, this should be detailed here.</td>
+			<td style="width: 489px;">Development team with guidance from security.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Evolution</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to be flexible in the face of the inevitable change that all systems experience after deployment, balanced against the costs of providing such flexibility. Consideration should be given to future proofing the change, including considering how to upgrade to any changes or enhancements provided in the future. Specifically designs should accommodate elements such as localisation (text, dates, etc.), customization, configurability, and componentization. Providing these features in future releases, when not considered up front, has caused impacts for customers in the past and has prevented us from providing the features in some cases.</td>
+			<td style="width: 489px;">It is desirable to support customisation of this API by customers. This will be supported in a phased approach. Phase 1 will not support customisation but it will be designed and implemented in a way that will facilitate customisation in future phases.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Internationalisation</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to be independent from any particular language, country or cultural group. Localisation and internationalisation are a large concern for Cúram. Support should always be provided to view information in multiple locales, based on the user and server locale, along with support for working in multiple time zones.</td>
+			<td style="width: 489px;">So far as we can see, current data sanitisation mechanisms do not specifically take account of different languages. This is something we should considered in the future. Perhaps we should use configurable properties, such as black &amp; white lists were possible in the API's to provide flexibility. We should also consider incorporating different languages into our automated tests.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Location</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to overcome problems brought about by the absolute location of its elements and the distances between them. For the most part this is not a major concern, however we should never design based on the assumption that the customer will use a default configuration</td>
+			<td style="width: 489px;">N/A</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Performance and Scalability</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to predictably execute within its mandated performance profile and to handle increased processing volumes. Performance and scalability are a concern and should always be considered during design. Where necessary, the Performance and Benchmarking teaming should be engaged early to help with determining impact of potential changes.</td>
+			<td style="width: 489px;">Adding additional layers of data processing may impact performance and scalability. A performance Impact should be considered.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Regulation</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to conform to locale and international laws, quasi-legal regulations, company policies and other rules and standards. Regulation includes the usages of third party tools and the licensing issues associated with these. New jars should never be introduced without considering the legal implications and licensing of the jars. This includes usage of GPL licensed code. Also, usage of code freely provided on the web and not properly licensed should be avoided.</td>
+			<td style="width: 489px;">At this point, this is not an issue. We should keep under review as we develop the security API's. More third party tools may be considered.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Security</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to reliably control, monitor and audit who can perform what actions on what resources and to detect and recover from failures in security mechanisms. This is a concern where new features are added that are not contained within the normal Cúram security.</td>
+			<td style="width: 489px;">Covered already.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Usability</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ease with which people who interact with the system can work effectively. How the change will affect the user and how they use the application/feature should always be considered. Where necessary the business analysts and our user interface experts should be engaged early to ensure we meet usability requirements. e.g. printing.</td>
+			<td style="width: 489px;">
+			<p>We need to determine the correct level of documentation:</p>
+
+			<p>1. Guide Internal Development</p>
+
+			<p>2. Guidance on customisation points for external audience</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii8">Design</h2>
+
+<p dir="ltr"><img lconnwikiparamattachmentname="Screenshot 2020-03-26 at 14.43.20.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Consolidation%20of%20Security%20APIs._ATTACHMENTS_/Screenshot%202020-03-26%20at%2014.43.20.png" lconnwikiparamwikipage="Consolidation of Security APIs" lconnattachedresourcetype="page"></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">We will follow a phased approach to the implementation.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Phase 1. We provide a basic factory pattern. Client uses the factory to get an instance of the SecurityUtility API. This is limited to the default SecurityUtilsImpl. We are not supporting customisation of the default implementation.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Phase 2. The customer can provide their own API implementation by using GUICE to inject their custom SecurityUtilImpl class into the factory. This is done using an approved SPM pattern. It reuires the customer to provide the custom component and update the appropriate bindings in the GUICE module class.&nbsp;</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">GUICE is new to the TI layer and we need to spike the effort in supporting customisation using GUICE.</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><span style="font-size:16px;"><strong>Proposed Location and structure of new security Component</strong></span></p>
+
+<p dir="ltr"><img lconnwikiparamattachmentname="Screenshot 2020-03-15 at 12.04.59.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Consolidation%20of%20Security%20APIs._ATTACHMENTS_/Screenshot%202020-03-15%20at%2012.04.59.png" width="1289" lconnwikiparamwikipage="Consolidation of Security APIs" lconnattachedresourcetype="page" height="202"></img></p>
+
+<h2 dir="ltr" id="ii10">Architecture/Design Decisions</h2>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="525" width="1122">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Architecture Decision Title</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 125px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Issue or Problem Statement</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 93px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Assumptions</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 100px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Motivation</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 120px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Alternatives</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 133px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Decision</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Justification</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Implications</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Status</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Date</strong></td>
+		</tr>
+		<tr>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">new TI security component</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 125px;">Create a new centralised location for all security utilities</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 93px;">
+			<p>Available to all stacks.</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 100px;">Single consolidated location for security</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 120px;">none</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 133px;">create a new security component in TI</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 23px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p>- Update to build scripts and class-paths</p>
+
+			<p>-dev documentation</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">closed</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 95px;">24-Mar-20</td>
+		</tr>
+		<tr>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Decide Name and structure of new component</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Need to decide on name and structure of the new security component in TI</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 93px;">GUICE infrastructure in place to support API customisation</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 100px;">Maintain Architectural consistency</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 120px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 133px;">
+			<p>Name of new component will be security-inf.</p>
+
+			<p>It will be located in TI/commons</p>
+
+			<p>Inner structure will be:</p>
+
+			<p>security-inf/src/main/java security-inf/src/main/jscript &nbsp; &nbsp; &nbsp;&nbsp; security-inf/src/test/java</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 23px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">New component will be located in its own Jar file and copied to the CDEJ and SDEJ.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">closed</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 95px;">24-Mar-20</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p>Support customisation</p>
+
+			<p>(Phase 2)</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 125px;">Should we allow the customer to customise the API &amp; how do we do this.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 93px;">TI provides a mechanism to support customisation of Security API.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 100px;">The customer may have unique security requirements and need to develop a bespoke security solution</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 120px;">
+			<p>Are first preference is to leverage Guice injection to enable customisation.</p>
+
+			<p>Reflection could achieve our aims but is seen as an outdated mechanism</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 133px;">
+			<p>If possible we want to provide API customisation using Guice injection mechanism.</p>
+
+			<p>&nbsp;</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">We need to investigate if supports Guice and if not the effort required. (Currently being spiked)</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Open</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 125px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 93px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 100px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 120px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 133px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 125px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 93px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 100px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 120px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 133px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 125px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 93px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 100px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 120px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 133px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii21">Design Validations</h3>
+
+<p dir="ltr">Document the validations associated with the new enhancement, what type of validations these are etc.</p>
+
+<ol dir="ltr">
+	<li>compileXPathExpressionPreventXPathInjection&nbsp; special characters can be used in an x-path expression to gain access to unauthorised data. Plan here is to validate the API using automated tests that insert malicious x-path parameters to ensure they are prevented from executing and creating the appropriate error.</li>
+</ol>
+
+<p dir="ltr"><span style="color:#0000ff;"><span style="font-size:14px;"><strong>Please Note : Please add new validations for each new API method we add.</strong></span></span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii24">Design Resilience Measures</h3>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. Some thought should be given to how resilient the new feature is.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" style="width: 1152px;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">What happens if something expected/unexpected goes wrong?</td>
+			<td style="width: 736px;">Application exceptions thrown.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">What happens to the system?</p>
+			</td>
+			<td style="width: 736px;">Standard Error messages to user</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">Will the user be able to take corrective action in the system without the need to resort to application logs/SQL searching/data manipulation outside of the system?</td>
+			<td style="width: 736px;">Inmost cases an error page will be shown. User should be able to recover easily.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">Will the data be left in a consistent state within the system after the exception is thrown?</td>
+			<td style="width: 736px;">Exception thrown and any transactions should be rolled back.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">Will there be messages given to the user? What will these messages be?</td>
+			<td style="width: 736px;">Standard response message when Application exception thrown.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">Will there something written to the logs? What will this be?</td>
+			<td style="width: 736px;">write to the logs in event of attack. This should be done at the API level.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">Does the feature require some of the exception data to be captured and an admin function provided to allow the situation to be re-mediated?</td>
+			<td style="width: 736px;">N/A</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii25">Design Logging</h3>
+
+<p dir="ltr">Logging security attacks is important. Logging should be done at the API level.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii27">Third Party Software and Legal Requirements</h3>
+
+<p dir="ltr">Does the feature require any new or updated open source third party software?</p>
+
+<p dir="ltr">So far, we have no requirement of additional third party jars. We will keep this under review and update legal if required.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii28">Use Cases</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. The various use cases for the feature must be outlined here. They can be in the following format.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 75px;">Use Case ID</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 447px;">1.1</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 75px;">Name</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 447px;">x-path Injection</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 75px;">Actor</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 447px;">Dev</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 75px;">Description</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 447px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">XPath injection attacks occur when a website constructs an XPath query for XML data from user-supplied information. Thus, the issues that occur when using XML to store data are quite similar to those faces with SQL.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 75px;">Preconditions</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 447px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Contrasts scans for security weaknesses in the code and detects an x-path injection vulnerability.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Security communicates the issue to the appropriate team.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 75px;">Flow</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 447px;">
+			<ul>
+				<li>Contrasts scans for security weaknesses in the code and detects an x-path injection vulnerability.</li>
+				<li>Code and application logic analysis is required by the developer to see if the reported issue is valid in the reported context. False positives do occur.&nbsp; XPath injection is a type of attack where malicious user input can be used to grant unauthorized access or reveal sensitive information such as XML document structure and content. This style of attack is carried out by making the user’s input be used in the construction of the query string.</li>
+				<li>Security Documentation will guide the developer to the correct API -- in this case the compileXPathExpressionPreventXPathInjection</li>
+				<li>compileXPathExpressionPreventXPathInjection -- The developer will use this method, so that queries are precompiled and thus pass user input as parameters instead of expressions. The resulting x-path expression is used to search the xml document.</li>
+			</ul>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 75px;">Expected</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 447px;">
+			<p>Returns the XPath expression.</p>
+
+			<p>If invalid, an XPath expression exception &amp; Application exception thrown.</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><span style="color:#0000ff;"><span style="font-size:14px;"><strong>Please Note : Please add a use case for each new API method we add.</strong></span></span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii16">Application Impact</h2>
+
+<ul dir="ltr">
+	<li>Many of the new api's that we will add to the security-inf component will likely do some form of data sanitisation:&nbsp; validation, encoding, escaping, removing etc. This has the potential to impact application performance and functionality.&nbsp; As we develop out the API and start to use it in the the code base, we need to routinely consider any impact. Robust testing will be required both of the API and its use within the code base. Testing should encompass both J-unit , CPT by QA and PVT by performance team.</li>
+	<li>A number of security features have been added to SPM and overtime they have become scattered throughout the code base making them difficult to find and maintain. With this new security component, the plan is to move and consolidate the features in one location. This refactoring may have an impact on functionality. Careful analysis will required as each feature is moved.</li>
+</ul>
+
+<h2 dir="ltr" id="ii18">Testing</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. An outline of all of the testing required by the feature should be present here. This may tie in with the use cases outlined above. Describe the framework being used and the kinds of tests being written:</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">All new API's to be covered by Unit Tests. Unit tests should verify new API functionality mitigates the threat that it has been designed for.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">When a fix has been applied to vulnerable area of code, unit or integration tests should be used to verify the fix in situ and to determine as far as possible that existing functionality has not been affected. This will be backed up with regression testing were we feel there is a risk.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Manual End to End Tests test may be required to verify fixes in cases were automated test are not applicable</li>
+</ul>
+
+<p dir="ltr">Is it just functional tests or are further performance tests required:</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">FVT Required? Sanitising or validating user input may impact the functionality of components to which it is applied. Not all security fixes will require FVT, however impact analysis is routinely performed for all security fixes. When identified, we will document the functional area affected by the fix and QA resources will be engaged to perform the required CPT</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">SVT Required? Sanitising or validating adds an additional layer to the application logic and could impact performance. We have reached out to FVT &amp; SVT to get guidance here. TBD</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii19">Documentation/How To Use Feature</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. This should describe how to use the feature added. Again this may differ from component to component but there are some general headings to consider:</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" style="width: 1153px;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 304px;">Where the feature fits in the overall component?</td>
+			<td style="width: 832px;">This is a new security component. The API will develop overtime.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 304px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">How it may be accessed (i.e. created/authored)?</p>
+			</td>
+			<td style="width: 832px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 304px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">What does it do (may be linked to the use cases above)?</p>
+			</td>
+			<td style="width: 832px;">Each API is linked to a use case above.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 304px;">Advantages of using the feature?</td>
+			<td style="width: 832px;">Central location -- easier to maintain and to document and use.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 304px;">Any limitations associated with the feature?</td>
+			<td style="width: 832px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 304px;">A description of how the feature should be used etc.? This may also include a description of a contract between the various teams using the feature and will incorporate some details of the design.</td>
+			<td style="width: 832px;">
+			<p>Documentation will be provided by SEC-COM team which explains what each API is and guidance on how and were to use it.</p>
+
+			<p>Info-session will be run to advertise the API and to evangelise secure coding practices.</p>
+
+			<p>External customisation guide may be required for customers -- TBD</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1178 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Optional clusters</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Optional clusters";
+    pageId="urn:lsid:ibm.com:td:99338a47-7062-44ae-baa1-c5b99c5fe2c2";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Optional clusters</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h2 dir="ltr">Background</h2>
+
+<p dir="ltr">The following details outline the current support from within UIM for conditionality. It will highlight that this conditionality is in the main "static" and not "dynamic" based on the user input on the current page being displayed.</p>
+
+<ul dir="ltr">
+	<li>Currently the UIM allows for minimal describing of the operations/interactions once the page contents are rendered.</li>
+	<li>The conditional clusters (elements) feature allows for hiding or showing a cluster at the page rendering time and is based on the server interface property setting.
+	<ul>
+		<li>The conditional clusters are driven by the <span style="font-family:courier new,courier,monospace;">CONDITION/IS_TRUE/IS_FALSE</span> UIM tags</li>
+	</ul>
+	</li>
+	<li>There is no further interaction foreseen, and any user choices related changes could be just seen upon navigating to another page or reloading the same page. Same way the conditional links functionality (<span style="font-family:courier new,courier,monospace;">HIDE_CONDITIONAL_LINKS</span> attribute on the <span style="font-family:courier new,courier,monospace;">PAGE </span>UIM tag) is another render-time feature to hide the conditional links or style them as disabled.</li>
+	<li>There is also the <span style="font-family:courier new,courier,monospace;">ACTION_CONTROL</span> of the type <span style="font-family:courier new,courier,monospace;">"CLIPBOARD"</span>, which inserts the JavaScript instruction on a page, the instruction being copying the specified content and placing that onto the Windows clipboard. The functionality is nearly deprecated at this stage as from all the browsers only Internet Explorer still exposed Windows Clipboard to the JavaScript, and it is not used in any case, however the approach is still there.</li>
+	<li>Another rarely used functionality is the connection from the bean property to the JavaScript variable, which is output for the specific <span style="font-family:courier new,courier,monospace;">TARGET </span>connection. This option alone does not give the required functionality, however it could be re-used for the optional cluster display and discussed in the design approach below.</li>
+</ul>
+
+<h2 dir="ltr">Requirements</h2>
+
+<p dir="ltr">The base requirement is for the introduction of "dynamic conditionality" for <strong>clusters</strong> into UIM. This means for the different roles:</p>
+
+<ul dir="ltr">
+	<li>&nbsp;<strong>User</strong> - the ability to hide/display a <strong>cluster</strong> based on clicking/selecting a control on a UIM Page.</li>
+	<li>&nbsp;<strong>Developer</strong> - the ability to construct a UIM which will allow a cluster to be dynamically displayed/hidden at run time.</li>
+</ul>
+
+<p dir="ltr">Support for dynamic conditionality will be initially added to the following UIM field types (i.e. user will be able to click/select a value from one of these field types and this can control the displaying/hiding of a cluster on a UIM page):</p>
+
+<ol dir="ltr">
+	<li>Check Box</li>
+	<li>Radio Button</li>
+	<li>Drop down.</li>
+</ol>
+
+<p dir="ltr">The conditionality aspect of the requirement will need to support the following:</p>
+
+<ol dir="ltr">
+	<li>Display/Hide a cluster based only on data input on that UIM page (e.g. user selects a value from a drop down and that controls the displaying/hiding of the cluster on the page)</li>
+	<li>Display/Hide a cluster based on data input on that UIM page plus data ascertained from elsewhere (i.e. data entered on a previous page, data read from the database etc.).</li>
+	<li><span style="color:#FF0000;">What this means in effect that the following data will be available to control the displaying/hiding of these clusters:</span>
+	<ol>
+		<li>Input field values or read only field values (even if these aren't mutable) on the page containing the cluster to be controlled.</li>
+		<li>The values of the request parameters coming to the page with the cluster through the request (i.e. Page Parameters on the specified page).</li>
+		<li>The server interface values which are not displayed on the page, but should be available in the expression to control the cluster (i.e. fields from the display phase bean)</li>
+	</ol>
+	</li>
+</ol>
+
+<p dir="ltr">The developer experience should be that they get to work with constructs, tools and languages familiar to them (ideally UIM constructs if possible).</p>
+
+<h3 dir="ltr">What is Supported/Not Supported Summary</h3>
+
+<p dir="ltr">The following is a summary of what is currently proposed to be supported/not supported for this new feature.</p>
+
+<h4 dir="ltr">Supported</h4>
+
+<ol dir="ltr">
+	<li>A user will be able to dynamically show/hide a cluster on a page by changing a value in a <strong>drop down</strong> on that page.</li>
+	<li>A user will be able to dynamically show/hide a cluster on a page by changing a value in a <strong>check box</strong> on that page.</li>
+	<li>A user will be able to dynamically show/hide a cluster on a page by changing a value in a <strong>radio button</strong> on that page.</li>
+	<li>Data from the following sources made to used to control a dynamic conditional cluster:
+	<ol>
+		<li><strong>Data selected by a user from the input contro</strong>l as specified above.</li>
+		<li>Data passed from a previous page via page <strong>parameters</strong>.</li>
+		<li>Data from the <strong>display phase bean</strong> on the page (either displayed on the page as read only data or not displayed at all on the page).</li>
+	</ol>
+	</li>
+	<li>&nbsp;The following data types can be used in the evaluation of whether a cluster will be dynamically shown/hidden:</li>
+</ol>
+
+<ul dir="ltr">
+	<li>CURAM_BOOLEAN</li>
+	<li>SVR_DATE</li>
+	<li>SVR_DATETIME</li>
+	<li>SVR_DOUBLE</li>
+	<li>SVR_FLOAT</li>
+	<li>SVR_INT8</li>
+	<li>SVR_INT16</li>
+	<li>SVR_INT32</li>
+	<li>SVR_INT64</li>
+	<li>SVR_STRING</li>
+	<li>CURAM_TIME</li>
+	<li>FREQUENCY_PATTERN</li>
+</ul>
+
+<p dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>NB:</strong> This means that for the supported methods of passing data to the feature for evaluating whether or not the cluster will be displayed/hidden, list data cannot be passed to the feature, all other data types can.</p>
+
+<ol dir="ltr">
+	<li>For the different data types which are supported and used in the evaluation of the dynamic conditionality, the date comes in the <strong>raw format</strong> (i.e.&nbsp; frequency pattern data and code table item data will be reflected as its code). Therefore, there can be no "localized" comparisons done in this evaluation as only the raw format of the data can be used.</li>
+	<li>
+	<p>The data entered into a dynamic conditional cluster will only be submitted if the <strong>cluster is shown </strong>when the user progresses to the next step of the wizard (or finishes using the wizard on the last step of the wizard). In other words if a user enters data into a dynamic conditional cluster and then hides the cluster again before progressing to the next step of the wizard, the data entered will not be submitted to the server. Additionally if<span style="font-size:12px;"><span style="font-family: tahoma,geneva,sans-serif;">&nbsp;the dynamic conditional cluster is shown again, any user data will be discarded and the initial page values will be displayed to the user. </span></span></p>
+	</li>
+	<li>A "dynamic conditional cluster" can be displayed on a <strong>page being loaded</strong> (without any initial user interaction) as the cluster show/hide evaluation will also take place when the page is loaded.</li>
+	<li>A field in a <strong>VIM</strong> can control a dynamic conditional cluster present in a parent <strong>UIM</strong>. The opposite is also true where a field in a UIM can control a dynamic conditional cluster present in an included VIM.</li>
+	<li>Nested dynamic conditional clusters are supported. The level of nesting supported is ? <strong>TODO: What number of levels should we permit - must document this! [AB] I have a test page with 20 levels that works fine so anything less than that.</strong></li>
+	<li>Two or more controlling fields (CONTROL_REF) on page can control a<strong> single</strong> dynamic cluster.</li>
+	<li>One controlling fields (CONTROL_REF) on page can control <strong>multiple</strong> dynamic clusters.</li>
+</ol>
+
+<h4 dir="ltr">Not Supported</h4>
+
+<ol dir="ltr">
+	<li>Only the <strong>three</strong> input controls listed above (drop down, check box, radio button) are supported for user input on a page for controlling the dynamic hiding/showing a cluster, no other input controls are currently supported.</li>
+	<li>A dynamic conditional cluster cannot contain <strong>mandatory</strong> fields.</li>
+	<li>Document that we don't support circular dependency between CONTROL_REF on fields is suported.</li>
+	<li>Dynamic Conditional Cluster <strong>ARE NOT </strong>supported for Dynamic UIM pages. In terms of effort required to implement this feature, it would be somewhat significant. The biggest aspect being that we don't support the SCRIPT element in dynamic UIM so there is no current ability to pull in a JavaScipt hook into a dynamic UIM page. We don't think anything would come for free here in Dynamic UIM, would also need to implement that new JSCRIPT_REF target connection, the updates to the CONDITION element and updates to CLUSTER. All a separate path of implementation from static!</li>
+</ol>
+
+<h4 dir="ltr"><strong>Questions:</strong></h4>
+
+<p dir="ltr">These are a series of requirements questions which have been answered over the past few weeks and which have fed into the support summary above.</p>
+
+<ol dir="ltr">
+	<li>Does the above satisfy all of the conditionality requirements for the first series of Guided Evidence Management Wizard screens?
+	<ul>
+		<li><strong>At first glance, it seems to. There may be issues with conditional clusters contained with conditional clusters though (i.e. nesting).</strong></li>
+	</ul>
+	</li>
+	<li>Are we sure that the three controls above are sufficient, that no other types of input controls are required for this feature?
+	<ul>
+		<li><strong>A question for the business analysts; technically we are able to support different input, even though some of it (free form text fields) might cause more trouble than the selection based fields.</strong></li>
+	</ul>
+	</li>
+	<li>How will the cluster be displayed and hidden? Will it fade in/out? Will it be similar to IEG transitions etc.?
+	<ul>
+		<li><strong>If there is a similar functionality in the other layers/solutions, it should follow the same animation pattern for consistency.</strong></li>
+	</ul>
+	</li>
+	<li>How many levels of nested conditional clusters are required/will be supported?
+	<ul>
+		<li><strong>A cluster which has been marked as dynamically displayed/hidden can contain another dynamic cluster within. The number of levels of conditional clusters needs to be clarified (i.e. what has been tested)? [AB] I have a test page with 20 levels that works fine so anything less than that.</strong></li>
+	</ul>
+	</li>
+	<li>How are mandatory field contained within clusters being hidden/displayed being handled? Can a developer specify a mandatory field within a conditional cluster? If so, what happens if that cluster is hidden and that mandatory field is not displayed?
+	<ul>
+		<li><strong>The optionally displayed cluster MUST NOT have fields defined to be mandatory.</strong></li>
+	</ul>
+	</li>
+	<li>Can fields contained within the optionally controlled cluster control the displaying/hiding of other clusters on the same page?
+	<ul>
+		<li><strong>The optionally displayed cluster should not have fields which would be used to control another clusters on the page.</strong>
+		<ul>
+			<li><strong>The above has changed and we now support "nested clusters".</strong></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li>Dynamic conditional cluster is hidden and then displayed. The user inputs some data and then hides that cluster again. What happens if that page is submitted (data not submitted). If that cluster is displayed again, does the data remain as was previously input by the user (or is it wiped)?
+	<ul>
+		<li><strong>The user input in the displayed optional cluster should be blanked if the cluster is hidden following the display expression re-evaluation, however the entered values should be preserved so that they re-populate the cluster once the display expression evaluates to true at a later stage.</strong>
+		<ul>
+			<li><strong>After discussion with Sally on (14/12/2015), we have decided that from a usability perspective it would be better to discard the user data and repopulate the cluster with the original initially displayed data.</strong></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li>Can this feature be used to display an optional cluster to a user when the page is loaded (i.e. just using data from the page parameters or display phase bean but without user input? Does the user have to action a control for the expression evaluation to be triggered etc.
+	<ul>
+		<li><strong>It definitely can, this should be supported, it can be required to re-create the layout resulting from the previous user input.</strong></li>
+	</ul>
+	</li>
+	<li>What types of data can be used as input data to the JavaScript expression function, is it all supported Cúram types etc.?
+	<ul>
+		<li><strong>While the initial requirement restricts the supported fields to the three types already mentioned, other fields <em>might</em> be used in the expressions. While we might intervene at XIM level to impose restrictions on the supported fields, this would require a more complicated mechanism which can hardly be justified. So, technically we would not limit the user input types at least at the build time; we might either introduce the restriction at the JavaScript infrastructure level, or just document what do we support, and what not. What was the final decision here?</strong></li>
+	</ul>
+	</li>
+	<li>Can I have multiple conditional clusters on the same page? Are there restrictions on the one UIM field controlling more than one conditional cluster (i.e. user clicks on one check box and this displays more than one cluster)?
+	<ul>
+		<li><strong>There are no restrictions here. It may look a little weird though if the selection of for example a value from a drop displays/hides multiple clusters on the page and even more so if those clusters are spread throughout the page. Therefore, sensible design is required to ensure that the page flow is not compromised for the user with the introduction of this dynamic conditional cluster feature.</strong></li>
+	</ul>
+	</li>
+	<li>What happens with respect to control_ref values when a page is submitted to itself?
+	<ul>
+		<li><strong>In Curam, when a page is submitted to itself any values entered in the page are persisted. This is default Curam behaviour. This will have the effect of persisting any changes to the dynamic conditional cluster status, i.e. if a cluster is visible when the page is submitted to itself, it will be visible on page load.</strong></li>
+	</ul>
+	</li>
+</ol>
+
+<h3 dir="ltr">Tickets</h3>
+
+<p dir="ltr">The original requirement is terms of usage on the application screens are described in the JIRA <em><strong><a href="http://pdappsrv.mul.ie.ibm.com:8080/browse/TEC-18864" id="key-val" rel="157142">TEC-18864</a></strong>, Guided Evidence Management: Update UIM to support dynamic conditional display of clusters.</em></p>
+
+<p dir="ltr">The sub-tasks are described by <a href="http://pdappsrv.mul.ie.ibm.com:8080/browse/TEC-19058" id="key-val" rel="157956">TEC-19058, </a><a href="http://pdappsrv.mul.ie.ibm.com:8080/browse/TEC-19059" id="key-val" rel="157957">TEC-19059, </a><a href="http://pdappsrv.mul.ie.ibm.com:8080/browse/TEC-19060" id="key-val" rel="157958">TEC-19060, </a><a href="http://pdappsrv.mul.ie.ibm.com:8080/browse/TEC-19061" id="key-val" rel="157959">TEC-19061,</a> <a href="http://pdappsrv.mul.ie.ibm.com:8080/browse/TEC-19062" id="key-val" rel="157960">TEC-19062.</a></p>
+
+<h2 dir="ltr">Non Functional Requirements</h2>
+
+<table border="1" dir="ltr" style="width: 873px;">
+	<tbody>
+		<tr>
+			<td style="width: 250px;"><strong>NFR</strong></td>
+			<td style="width: 610px;"><strong>Note</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">Accessibility</td>
+			<td style="width: 610px;">The accessibility is to be considered as the additional area; the freshly displayed cluster might be required to announce to the user, and same way the fact that the cluster has been hidden might have to be communicated via the screen reader. The tab order should be adjusted automatically, since the hidden element is (presumably) excluded from the order by the browser.</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">Availability &amp; Resilience</td>
+			<td style="width: 610px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">Development Resource</td>
+			<td style="width: 610px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">Evolution</td>
+			<td style="width: 610px;">
+			<p>The evolution of the current approach could be including more operations than just displaying/hiding, and the JavaScript API development to handle more complex field types.</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">Internationalisation</td>
+			<td style="width: 610px;">While this is purely functional requirement, the developer of the display expression should be careful when performing textual comparisons, since the text field values are language dependent.</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">Location</td>
+			<td style="width: 610px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">Performance and Scalability</td>
+			<td style="width: 610px;">This is page level functionality; it is not associated with any additional server communication neither with huge rendering effort (even though the display and hide operations might use certain animation), therefore the approach is seen to be fully scalable and not having any significant effect on the performance.</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">Regulation</td>
+			<td style="width: 610px;">N/A</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">Security</td>
+			<td style="width: 610px;">The values output on the page are interpreted by the JavaScript, therefore they should be properly Javascript escaped before using. Otherwise no additional page data is exposed by the approach.</td>
+		</tr>
+		<tr>
+			<td style="width: 250px;">Usability</td>
+			<td style="width: 610px;">The conditional display or hide operation does not create additional usability requirements, apart from the necessity to blank the hidden cluster values but to preserve any user input for the potential re-display; the usage of the clusters and fields is as usual.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr"><em>.</em></p>
+
+<h2 dir="ltr">The design approach</h2>
+
+<p dir="ltr">The proposed design of the optional clusters takes into account the following requirements:</p>
+
+<ul dir="ltr">
+	<li>A cluster needs to be displayed or hidden once certain combination of the field values and other data is encountered on the page; the combination is not initially limited and might be simple of complex enough expression (display expression further in the text).</li>
+	<li>The expression can use the data which isn't input or displayed on the page the rendered cluster resides on, but also the data input on the previous pages (cumulative condition).</li>
+	<li>The expression needs to be evaluated when the page with the optional cluster is displayed and re-evaluate with every field value change as a result of user input/selection.</li>
+	<li>The user input in the displayed optional cluster should be blanked if the cluster is hidden following the display expression re-evaluation, however the initial values should be preserved so that they re-populate the cluster if the display expression evaluates to true at a later stage.</li>
+</ul>
+
+<p dir="ltr">The following assumptions are in place:</p>
+
+<ul dir="ltr">
+	<li>The data used in a display expression can come to the page through three sources:</li>
+</ul>
+
+<ol dir="ltr">
+	<li style="margin-left: 80px;">input field values or read only field values (even if these aren't mutable)</li>
+	<li style="margin-left: 80px;">the values of the request parameters coming to a page through the request</li>
+	<li style="margin-left: 80px;">the server interface values which aren't displayed on the page, but should be available for the display expression.</li>
+</ol>
+
+<ul dir="ltr">
+	<li>The optionally displayed cluster <strong>MUST NOT</strong> have fields defined to be mandatory.</li>
+	<li>The optional cluster should be defined on the <strong>SAME</strong> page as the control fields, the cross-frame control is <strong>NOT</strong> supported.</li>
+</ul>
+
+<p dir="ltr">Given that the display expression might be fairly complicated which would result in a big UIM syntax changes and huge page build-up in UIM, thus becoming non-readable and difficult to maintain, and the fact that because of its nature the expression gets evaluated in the JavaScript domain, the <u>most suitable approach</u> seems to be:</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">the actual display expression is to be written by the developer as the <strong>custom JavaScript function</strong>. This ensures the required flexibility and minimal UIM changes,</li>
+	<li style="margin-left: 40px;">the<strong> fields and data</strong> to be used by the expression should be generated into the page JavaScript <strong>as runtime variables</strong> and available as the data sources for the custom expression; the contract for the naming of the variables and their accessing should be in place,</li>
+	<li style="margin-left: 40px;">the <strong>infrastructure </strong>should take care of initiating the display expression evaluation/re-evaluation and also of displaying/hiding the necessary clusters. The design should prevent the display expression usage for any side purpose,</li>
+	<li style="margin-left: 40px;">the custom display expression should use the <strong>uniform JavaScript API</strong> to access the values of fields of interest. The API should allow the access to the field values of interest in a simple, consistent way.</li>
+</ul>
+
+<p dir="ltr">The current design is the latest alternative chosen from the design page draft which could be found <a href="https://ibm.biz/BdHF3C">here</a>.</p>
+
+<h2 dir="ltr">The implementation considerations</h2>
+
+<h3 dir="ltr">UIM</h3>
+
+<p dir="ltr"><span style="font-size:12px;"><span style="font-family: arial,helvetica,sans-serif;">The UIM needs to be extended to accommodate the new attributes required for the fields and optionally displayed clusters, however the changes there should be minimal (yet the syntax should be intuitive enough to a developer).</span></span></p>
+
+<p dir="ltr"><span style="font-size:12px;"><span style="font-family: arial,helvetica,sans-serif;">After considering various options, the following UIM elements are to be re-used and extended: </span><span style="font-family:courier new,courier,monospace;">FIELD, TARGET, CONDITION, SCRIPT</span><span style="font-family: arial,helvetica,sans-serif;">.</span></span></p>
+
+<p dir="ltr"><span style="font-size:12px;"><span style="font-family: arial,helvetica,sans-serif;">Below are the details of their intended usage and the required extensions/customizations:</span></span></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>FIELD</strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">The UIM FIELD describes an immutable bit of data displayed to the user (read-only fields), or the user input field with the potential initial value/selection.</li>
+	<li style="margin-left: 40px;">Since the values of some of those fields are to be used by the display expression, there should be a way to denote the participating <span style="font-family:courier new,courier,monospace;">FIELDs</span> and to properly identify them in the JavaScript domain.</li>
+	<li style="margin-left: 40px;">Therefore another optional attribute is suggested on the <span style="font-family:courier new,courier,monospace;">FIELD</span> UIM element, <span style="font-family:courier new,courier,monospace;"><strong>CONTROL_REF</strong> </span>(more suitable name might be suggested if needed).</li>
+	<li style="margin-left: 40px;">The presence of this attribute denotes the <span style="font-family:courier new,courier,monospace;">FIELD</span> as the data source for the display expression.</li>
+	<li style="margin-left: 40px;">The value of the <span style="font-family:courier new,courier,monospace;">CONTROL_REF</span>, while arbitrary (some contract for this value is an option) is supposed to be the part of the scoped variable name in JavaScript, used to access the field value/selection by the display expression.</li>
+	<li style="margin-left: 40px;">The input field denoted with the CONTROL_REF should all be associated with the DOM <em><span style="font-family:courier new,courier,monospace;">onchange </span></em>event, which triggers evaluation/re-evaluation of the display expression (see JavaScript description below).<br />
+	<br />
+	&nbsp;</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>TARGET</strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">The <span style="font-family:courier new,courier,monospace;">TARGET</span> UIM element used in the context of the <span style="font-family:courier new,courier,monospace;">CONNECT</span> element describes the data binding and the element which should be initialized with the data from either the <span style="font-family:courier new,courier,monospace;">SOURCE</span> element, pre-population by the default value or user input.</li>
+	<li style="margin-left: 40px;">Variety of <span style="font-family:courier new,courier,monospace;">SOURCE</span>s is supported.</li>
+	<li style="margin-left: 40px;">Usually <span style="font-family:courier new,courier,monospace;">TARGET</span> is points at the display or action phase bean property or the page parameter; it is, therefore the value is either consumed when rendering the page or goes into the request string or request body for the subsequent requests.</li>
+	<li style="margin-left: 40px;">There is, however, the special <span style="font-family:courier new,courier,monospace;">TARGET</span> case supported in the form of</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 80px;"><span style="font-family:courier new,courier,monospace;">&lt;TARGET NAME="BROWSER" PROPERTY="variableName"/&gt;</span></p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">Where <span style="font-family:courier new,courier,monospace;">"BROWSER</span>" is specified as a target name, the value from the related <span style="font-family:courier new,courier,monospace;">SOURCE</span> is output as the JavaScript variable in the form of</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><em><span style="font-family:courier new,courier,monospace;">&lt;script&gt;var variableName=sourceValue&lt;/script&gt;</span></em>.</p>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">While this functionality is the legacy one, it is still supported through the UIM-XIM-JSP, and therefore might be re-used with the minimal adjustments (reviewing the endpoint constraints, making sure the proper escaping is in place, making sure the consistent JavaScript variable naming, potentially binding another tag for the output).</li>
+	<li style="margin-left: 40px;">For the optionally displayed clusters this would ensure the values which aren't rendered as input fields (server interface properties, page parameters or even read-only fields with just the source connections) are available for the display expression as the proper JavaScript variables.<br />
+	<br />
+	&nbsp;</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>CONDITION</strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">The <span style="font-family:courier new,courier,monospace;">CONDITION </span>UIM element is currently used within the<span style="font-family:courier new,courier,monospace;"> CLUSTER, LIST, ACTION_SET, ACTION_CONTROL, LINK</span> or <span style="font-family:courier new,courier,monospace;">DETAILS_ROW</span> element contexts to denote the conditional display of these elements.</li>
+	<li style="margin-left: 40px;">The display condition is evaluated at the page rendering stage by examining the boolean property of a bean, specified within the <span style="font-family:courier new,courier,monospace;">CONDITION</span> element by <span style="font-family:courier new,courier,monospace;">IS_TRUE</span> or <span style="font-family:courier new,courier,monospace;">IS_FALSE</span> child elements.</li>
+	<li style="margin-left: 40px;">This is, therefore, static evaluation without any further interaction unless the page is reloaded so that the condition is re-evaluated.</li>
+	<li style="margin-left: 40px;">Since the optional clusters functionality uses the same approach but brings it to the later (browser) stage and extends it to be dependent on the current user input, the <span style="font-family:courier new,courier,monospace;">CONDITION </span>element might be re-used just specifically marking it to denote the application, so</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 80px;"><span style="font-family:courier new,courier,monospace;">&lt;CONDITION TYPE="DYNAMIC"&gt;</span></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">as for the child elements, the <span style="font-family:courier new,courier,monospace;">IS_TRUE/IS_FALSE</span> are
+
+	<ul>
+		<li style="margin-left: 40px;">1) bound to the bean properties, and,</li>
+		<li style="margin-left: 40px;">2) just in fact point to an expression result (the evaluation happens/might happen on the server side).</li>
+	</ul>
+	</li>
+	<li style="margin-left: 40px;">At the same time for our purpose we would need the expression itself.</li>
+	<li style="margin-left: 40px;">However, the expression in the UIM would require extensive additional UIM markup different conditions, values, the potential combinations, supporting various expression/operation types.</li>
+	<li style="margin-left: 40px;">As it was already mentioned, this has significant drawbacks and cannot be considered a viable option, therefore the choice is to provide the full data <em>for</em> an expression and the expression engagement/evaluating mechanism, but <em>not</em> the expression <em>itself</em>, leaving it to the developer, therefore the only child for the dynamic <span style="font-family:courier new,courier,monospace;">CONDITION </span>type should be <span style="font-family:courier new,courier,monospace;">SCRIPT </span>element.</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 40px;"><strong>SCRIPT</strong></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">At the moment, there is custom JavaScript support on the page via the SCRIPT element which could be used in different contexts and binds HTML element DOM events to a certain action:</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;"><br />
+<br />
+<span style="font-family:courier new,courier,monospace;">&lt;SCRIPT EVENT="CLICK" ACTION="clickHandler"/&gt;</span></p>
+
+<ul dir="ltr">
+	<li style="margin-left: 40px;">The function of the <span style="font-family:courier new,courier,monospace;"><em>clickHandler</em></span> is defined purely by a developer, and it is guaranteed to be invoked once the specified event (field click in this case) occurs.</li>
+	<li style="margin-left: 40px;">The current limitation of the script approach is that it is just applicable for the elements which support DOM events.</li>
+	<li style="margin-left: 40px;">In our case the best place to describe the control relationship and control expression seems to be <span style="font-family:courier new,courier,monospace;">CLUSTER</span>, which is, however a layout element so, not to be scripted; however, since the cluster is supposed to be manipulated on some input element change on a page, it seems still relevant to consider <span style="font-family:courier new,courier,monospace;">SCRIPT</span> element to describe the required display expression.</li>
+	<li style="margin-left: 40px;"><span style="font-family:courier new,courier,monospace;">SCRIPT</span> element current declaration includes the <span style="font-family:courier new,courier,monospace;">EVENT </span>attribute which specifies the DOM event a developer wants to bind the JavaScript action.</li>
+	<li style="margin-left: 40px;">For the optional clusters the natural choice is the <span style="font-family:courier new,courier,monospace;"><em>onchange </em></span>event; while we might support another event types, the purpose of <span style="font-family:courier new,courier,monospace;">SCRIPT </span>within the dynamic condition is to specifically denote the display expression; as for the other event choices, it is better to have the uniform underlying treatment and the infrastructure limiting the potential side usages rather then enabling further experimentation.</li>
+	<li style="margin-left: 40px;">Therefore the suggested UIM construct would be</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 120px;"><span style="font-family:courier new,courier,monospace;">&lt;CONDITION TYPE="DYNAMIC"&gt;</span></p>
+
+<p dir="ltr" style="margin-left: 120px;"><span style="font-family:courier new,courier,monospace;">&nbsp;&nbsp;&nbsp; &lt;SCRIPT EXPRESSION="sampleDisplayExpression"/&gt;.</span></p>
+
+<p dir="ltr" style="margin-left: 80px;"><span style="font-family:courier new,courier,monospace;">&nbsp;&nbsp;&nbsp;&nbsp; &lt;/CONDITION&gt;</span></p>
+
+<p dir="ltr">Taking into account the extended UIM syntax, the <u><strong>sample UIM construct for the optional cluster</strong></u> could look like this:</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr" style="margin-left: 120px;"><span style="font-family:courier new,courier,monospace;">&lt;SERVER_INTERFACE NAME="DISPLAY" CLASS="SampleTH" OPERATION="sampleOperation" PHASE="DISPLAY"/&gt;<br />
+<br />
+&lt;SERVER_INTERFACE NAME="ACTION" CLASS="SampleActionTH" OPERATION="sampleActionOperation" PHASE="ACTION"/&gt;<br />
+<br />
+..<br />
+<br />
+&lt;PAGE_PARAMETER</span> <span style="font-family:courier new,courier,monospace;">NAME="pageParam1"/&gt;<br />
+<br />
+...<br />
+<br />
+&lt;CONNECT&gt;<br />
+<br />
+&nbsp; &lt;SOURCE NAME="DISPLAY" PROPERTY="personAge"/&gt;<br />
+<br />
+&nbsp; &lt;TARGET NAME="JSCRIPT_REF" PROPERTY="personAge"/&gt;<br />
+<br />
+&lt;/CONNECT&gt;<br />
+<br />
+...<br />
+<br />
+&lt;CONNECT&gt;<br />
+<br />
+&nbsp; &lt;SOURCE NAME="PAGE" PROPERTY="pageParam1"/&gt;<br />
+<br />
+&nbsp; &lt;TARGET NAME="BROWSER" PROPERTY="pageParam1"/&gt;<br />
+<br />
+&lt;/CONNECT&gt;<br />
+<br />
+...<br />
+<br />
+&lt;FIELD LABEL="Field.Label" CONTROL_REF="field1"&gt;<br />
+<br />
+&nbsp; &lt;CONNECT&gt;<br />
+<br />
+&nbsp;&nbsp;&nbsp; &lt;SOURCE NAME="DISPLAY" PROPERTY="displayBeanProperty"/&gt;<br />
+<br />
+&nbsp;&nbsp; &nbsp;&lt;TARGET NAME="ACTION" PROPERTY="actionBeanProperty"/&gt;<br />
+<br />
+&nbsp; &lt;/CONNECT&gt;<br />
+<br />
+&lt;/FIELD&gt;<br />
+<br />
+&lt;CLUSTER TITLE="Cluster.Title" ... /&gt;<br />
+<br />
+&nbsp; &lt;CONDITION TYPE="DYNAMIC"&gt;<br />
+<br />
+&nbsp;&nbsp;&nbsp; &lt;SCRIPT EXPRESSION="checkAndDisplayThisCluster"/&gt;<br />
+<br />
+&nbsp; &lt;/CONDITION&gt;<br />
+<br />
+&lt;/CLUSTER&gt;<br />
+<br />
+...</span></p>
+
+<h3 dir="ltr">Generator changes</h3>
+
+<ul dir="ltr">
+	<li>The UIM parser needs to be made aware of the additional attributes or values.</li>
+	<li>The UIM schema needs to be changed to allow for the new attributes and values.</li>
+	<li>The intermediate pages generator (XIM generator) and the intermediate tags need to be adjusted to properly handle the new attributes.</li>
+	<li>The main load of changes would be in the JSP generator where:
+	<ul>
+		<li>&nbsp;the JavaScript variables for the fields with the <span style="font-family:courier new,courier,monospace;">CONTROL_REF</span> are to be output and the same <span style="font-family:courier new,courier,monospace;"><em>onchange</em></span> event needs to be added to every of them to emit the standard re-evaluation event.
+		<ul>
+			<li>The main problem here would be the field identifiers, since most of them are rendered, so their identifiers are generated at the later stage; we might use the surrogate identifier using the bean/field combination which is converted to the proper identifier at the runtime.</li>
+			<li>The read-only fields without the proper <span style="font-family:courier new,courier,monospace;">TARGET</span> need to be output into the JavaScript domain without any further identification (their <span style="font-family:courier new,courier,monospace;">CONTROL_REF</span> becomes a variable name, the value is the value of the field known at the time of rendering).</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li>The JavaScript variables for the connections targeting BROWSER (display bean fields, page parameters) need to be output as the JavaScript variables; gen-jsp already handles this scenario, so from the optimistic perspective just the tag needs to be updated, not generator.</li>
+	<li>&nbsp;The JavaScript (Dojo) subscription for the standard re-evaluation event needs to be added to each cluster with the <span style="font-family:courier new,courier,monospace;">CONDITION TYPE="DYNAMIC"</span>; the subscription should call another function which makes use of the display expression (this is passed in the signature).</li>
+	<li>&nbsp;The cluster identification for the display or hiding needs to be added. In fact, each cluster should already be identified since all of them are collapsable, therefore that identifier should be captured and re-used.</li>
+</ul>
+
+<h3 dir="ltr">Tag/renderer changes</h3>
+
+<p dir="ltr">Since there is a need to reflect the values from the request (page parameters) and values from the server interfaces (beans) in the JavaScript domain, we would need changes in the tag library. While, as it is already said, we have a connection named <span style="font-family:courier new,courier,monospace;">BROWSER </span>which results in the JavaScript variable with the specified name, the optional clusters functionality needs a separate handling, and therefore a separate connection name (to keep the existing functionality) and a separate tag to output the JavaScript suitable for the optional cluster functionality. Therefore, the suggested name for the new connection endpoint would be <span style="font-family:courier new,courier,monospace;">JSCRIPT_REF</span> and the format would be<br />
+<br />
+<span style="font-family:courier new,courier,monospace;">&lt;TARGET NAME="JSCRIPT_REF" PROPERTY="variableName"/&gt;</span><br />
+<br />
+We also need a new tag to handle this type of connection, and the corresponding change in <span style="font-family:courier new,courier,monospace;">curam.tld</span>. The proposed class name would be <span style="font-family:courier new,courier,monospace;">JSControlVariableTag </span>located along with the pre-existing <span style="font-family:courier new,courier,monospace;">JSContextVariableTag</span>.<br />
+<br />
+Another tag/renderer related change is related to the fact that the variables which referenced by the <span style="font-family:courier new,courier,monospace;">CONTROL_REF</span> need to be actually referencing the input fields on a page; these input fields are identified by either id or name attributes, and these identifiers are generated at the page and field rendering time, there is no way to know them in advance. Therefore we need to plug into the tag/renderer infrastructure so that we are able to output the bindings between the JavaScript variable names (from <span style="font-family:courier new,courier,monospace;">CONTROL_REF</span>s) and the actual identifiers of the input fields. This means changes in the base classes used for outputting renderers.<br />
+<br />
+The classes being changed are <span style="font-family:courier new,courier,monospace;">AbstractLegacyRenderer, CuramTagSupport</span> for the legacy tag handling, and the <span style="font-family:courier new,courier,monospace;">SimpleRendererContext, FormItems</span> for the renderers. <span style="font-family:courier new,courier,monospace;">FormTag </span>also needs to be changed to output adiitional information related to the optional cluster binding and related infrastructure initialization.</p>
+
+<p dir="ltr">Also, since all the fields with the CONTROL_REF should notify the optional cluster infrastructure of their changes, the corresponding input elements should have the onchange hander set on them. The binding to the handler should also happen automatically, in the base classes; this change is to be placed in <span style="font-family:courier new,courier,monospace;">AbstractLegacyRenderer </span>for the legacy tags and <span style="font-family:courier new,courier,monospace;">AbstractDomainRenderer&nbsp;</span>for the renderers.</p>
+
+<h3 dir="ltr">JavaScript</h3>
+
+<p dir="ltr">There are two parts of the JavaScript needed - the infrastructure JavaScript, and the display expression.<br />
+<br />
+&nbsp;</p>
+
+<p dir="ltr"><strong>The infrastructure JavaScript</strong></p>
+
+<ul dir="ltr">
+	<li>The infrastructure should be set to handle the <em><span style="font-family:courier new,courier,monospace;">onchange </span></em>events and both invoke the display expressions and taking care of hiding or displaying the necessary clusters.</li>
+	<li>The suggested approach would be to convert any <span style="font-family:courier new,courier,monospace;"><em>onchange </em></span>event on the page to the agreed internal event (say '<em><span style="font-family:courier new,courier,monospace;">curam/check/cluster</span></em>') and to subscribe the display functions to that event, so that they are re-evaluated with every such event.</li>
+	<li>It could be in addition considered limiting the re-evaluation just to the certain display expressions, associated with the right clusters.</li>
+	<li>This might require some sort of the cluster identification, which hasn't be considered so far but might be added in one or the other form.</li>
+	<li>Same way the infrastructure should take care of registering in the JavaScript domain all the optionally displayed clusters and binding them to the display expressions to have the right ones displayed or hidden.</li>
+</ul>
+
+<p dir="ltr"><strong>The display expression</strong><br />
+<br />
+While the actual contents of the display expression is up to the developer, there should be a clear, well defined contract on the expression writing rules supported:</p>
+
+<ol dir="ltr">
+	<li>The expression should return just true or false, any other values should be either ignored by the infrastructure or error message should be popped up.</li>
+	<li>There should be the field access API for accessing the actual JavaScript values on the page. The API would allow more consistent and uniform usage, simplify writing the expressions and hide the actual implementation details (say, the developer might use the plain CONTROL_REF values for accessing the field values, while the actual variables output on the page would belong to some pre-defined scope, and the differences between the value/innerHTML/selectedValue/checked are also abstracted).</li>
+	<li>The display expression API should potentially include the parsing for the known data types - say, the read-only date would be formatted on the page, so if the display expression uses some part of it, that would be locale dependent; the API should be able to abstract the locale differences and ensure that when the day is requested, the day is returned.<br />
+	<br />
+	This might require a design decision on its own. The potential suggestion would be an addition to the locale or application setting dependent field renderer, so that <em>it</em> might add the required JavaScript converter along when it is rendered. For the approach like that, though, the converter addition should be controlled, so it's format defined, and the merging mechanism should be foreseen in the API for the particular field.<br />
+	<br />
+	Another option would be to require the such a converter be added to the same file the custom display expression is defined, therefore that would be the developer responsibility again, however at the time of development knowing the <span style="font-family:courier new,courier,monospace;">CONTROL_REF</span>s for the locale/application dependent fields would make the override easer.</li>
+	<li>The display expression should be defined in the JavaScript file specified via the <span style="font-family:courier new,courier,monospace;">SCRIPT_FILE</span> attribute on the <span style="font-family:courier new,courier,monospace;">PAGE </span>element, same way as any other custom JavaScript. The further development where the script files are converted to AMD modules is not considered here, but not considered an obstacle either, since all it changes would be just the display expression scoped name.</li>
+	<li>The display expression should <strong>NOT</strong> contain any alerts/prompts, any means of the user notification. The additional run time precautions should be added in the infrastructure JavaScript to suppress or exclude this type of output.</li>
+</ol>
+
+<p dir="ltr">Sample '<span style="font-family:courier new,courier,monospace;"><em>checkAnddisplayThisCluster</em></span>' function for the previous UIM could look like below (complete speculation on the API, whoever designs it should add the relevant section to this design page):</p>
+
+<p dir="ltr" style="margin-left: 120px;"><span style="font-family:courier new,courier,monospace;">function checkAndDisplayThisCluster()&nbsp; {</span></p>
+
+<p dir="ltr" style="margin-left: 120px;"><span style="font-family:courier new,courier,monospace;">&nbsp; if (getField('personAge') &gt; '18'</span></p>
+
+<p dir="ltr" style="margin-left: 120px;"><span style="font-family:courier new,courier,monospace;">&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; || getField('dependentChildCheckbox') == 'false') {</span></p>
+
+<p dir="ltr" style="margin-left: 120px;"><span style="font-family:courier new,courier,monospace;">&nbsp;&nbsp;&nbsp; return false;</span></p>
+
+<p dir="ltr" style="margin-left: 120px;"><span style="font-family:courier new,courier,monospace;">&nbsp; }</span></p>
+
+<p dir="ltr" style="margin-left: 120px;"><span style="font-family:courier new,courier,monospace;">&nbsp; if (getField('pageParam1') !="eligible") {</span></p>
+
+<p dir="ltr" style="margin-left: 120px;"><span style="font-family:courier new,courier,monospace;">&nbsp;&nbsp;&nbsp; return false;</span></p>
+
+<p dir="ltr" style="margin-left: 120px;"><span style="font-family:courier new,courier,monospace;">&nbsp; }</span></p>
+
+<p dir="ltr" style="margin-left: 120px;"><span style="font-family:courier new,courier,monospace;">&nbsp; if (getField('field1') == "REL2") {</span></p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return true;</span></p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return false;</span></p>
+
+<p dir="ltr"><span style="font-family:courier new,courier,monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p dir="ltr">One potential variation here might be defining global constants instead of just true or false, say <span style="font-family:courier new,courier,monospace;">ClusterControl.DISPLAY</span> and <span style="font-family:courier new,courier,monospace;">ClusterControl.HIDE</span> if this is agreed to add clarity for the developer.</p>
+
+<h2 dir="ltr">Validations</h2>
+
+<h2 dir="ltr">Use cases</h2>
+
+<h3 dir="ltr">Validation Regression Use Cases</h3>
+
+<table border="1" dir="ltr" height="124" width="629">
+	<tbody>
+		<tr>
+			<td style="width: 98px;"><strong>Role/Actor</strong></td>
+			<td style="width: 306px;"><strong>Description</strong></td>
+			<td><strong>Expected Behavior</strong></td>
+			<td style="width: 256px;"><strong>Tested</strong></td>
+			<td style="width: 256px;"><strong>Status</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 98px;">User</td>
+			<td style="width: 306px;">Views a page which contains no optional conditional clusters and none of the new UIM content.</td>
+			<td>Should behave exactly as previously</td>
+			<td style="width: 256px;">Manually + unit test</td>
+			<td style="width: 256px; background-color: rgb(0, 255, 0);">Complete</td>
+		</tr>
+	</tbody>
+</table>
+
+<h3 dir="ltr">Validation Use Cases</h3>
+
+<table border="1" dir="ltr">
+	<tbody>
+		<tr>
+			<td style="width: 98px;"><strong>Role/Actor</strong></td>
+			<td style="width: 306px;"><strong>Description</strong></td>
+			<td><strong>Expected Behavior</strong></td>
+			<td style="width: 256px;"><strong>Tested</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 98px;">UIM Developer</td>
+			<td style="width: 306px;">Defines the <span style="font-size:12px;"><span style="font-family:courier new,courier,monospace;">FIELD </span></span>element with the new <span style="font-size:12px;"><span style="font-family:courier new,courier,monospace;">CONTROL_REF </span></span>attribute spelt incorrectly.</td>
+			<td>UIM Build Validations fail with explanatory error message displayed</td>
+			<td style="width: 256px; background-color: rgb(0, 255, 0);">Manually + unit test</td>
+		</tr>
+		<tr>
+			<td style="width: 98px;">UIM Developer</td>
+			<td style="width: 306px;">Defines an optional cluster B is initially displayed with the fields which participate in the display expression of the cluster A which is contains the fields participating in the display expression of the cluster B.</td>
+			<td>
+			<p>This is an invalid condition to be prevented by the build time validation. The interrelationship of the two or more clusters creates an unstable situation where no optional clusters might be displayed on a page at all, or even with the infinitive loop of mutual display/hide of the interdependent clusters. There might be a further business requirement where the optionally displayed nested clusters support is requested, however this is not considered in the initial design, since this would complicate the field output rules and the potential validations.</p>
+			</td>
+			<td style="width: 256px; background-color: rgb(0, 255, 0);">Manually + unit test</td>
+		</tr>
+		<tr>
+			<td style="width: 98px;">UIM Developer</td>
+			<td style="width: 306px;">Next new Validation tested</td>
+			<td>UIM Build Validations fail with explanatory error message displayed</td>
+			<td style="width: 256px; background-color: rgb(0, 255, 0);">Manually + unit test</td>
+		</tr>
+		<tr>
+			<td style="width: 98px;">UIM Developer</td>
+			<td style="width: 306px;">Next New Validation for either FIELD, TARGET, CONDITION, SCRIPT etc. etc.</td>
+			<td>UIM Build Validations fail with explanatory error message displayed</td>
+			<td style="width: 256px; background-color: rgb(0, 255, 0);">Manually + unit test</td>
+		</tr>
+		<tr>
+			<td style="width: 98px;">UIM Developer</td>
+			<td style="width: 306px;">Defines a dynamic conditional cluster with two fields action as control refs (e.g. cluster X has a SCRIPT EXPRESSION attribute that references a JavaScript function. This JavaScript function references two different fields to determine if the cluster should be displayed or not.)</td>
+			<td>
+			<p><strong>FIXME: DECIDE IF THIS IS SUPPORTED.</strong></p>
+
+			<p>There is a test page implementing this in Tab Test App &gt; Dynamic Conditional Cluster Tests &gt; Multiple Control Refs One Cluster</p>
+			</td>
+			<td style="width: 256px; background-color: rgb(255, 165, 0);">Manually + unit test (manual only)</td>
+		</tr>
+		<tr>
+			<td style="width: 98px;">UIM Developer</td>
+			<td style="width: 306px;">Defines two dynamic conditional clusters that both reference the same control ref</td>
+			<td>
+			<p><strong>FIXME: DECIDE IF THIS IS SUPPORTED.</strong></p>
+
+			<p>There is a test page implementing this in Tab Test App &gt; Dynamic Conditional Cluster Tests &gt; One Control Ref Multiple Clusters</p>
+			</td>
+			<td style="width: 256px; background-color: rgb(255, 165, 0);">Manually + unit test (manual only)</td>
+		</tr>
+		<tr>
+			<td style="width: 98px;">UIM Developer</td>
+			<td style="width: 306px;">Target connection is JSCRIPT_REF and Source Connection is TEXT</td>
+			<td>A validation error should occur when building client specifying the root cause of issue.</td>
+			<td style="width: 256px; background-color: rgb(0, 255, 0);">&nbsp;Manually + unit test</td>
+		</tr>
+		<tr>
+			<td style="width: 98px;">UIM Developer</td>
+			<td style="width: 306px;">Target connection is JSCRIPT_REF and Source Connection is CONSTANT</td>
+			<td>A validation error should occur when building client specifying the root cause of issue.</td>
+			<td style="width: 256px; background-color: rgb(0, 255, 0);">&nbsp;Manually + unit test</td>
+		</tr>
+		<tr>
+			<td style="width: 98px;">UIM Developer</td>
+			<td style="width: 306px;">Creates CONDITION element and dynamic="true" with no nested SCRIP element</td>
+			<td>A validation error should occur stating that a SCRIPT element must be created</td>
+			<td style="width: 256px; background-color: rgb(255, 0, 0);">&nbsp;Manually + unit test - <strong>TODO:Create ticket</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 98px;">UIM Developer</td>
+			<td style="width: 306px;">Creates CONDITION element and dynamic="true" with SCRIP element and no EXPRESSION attribute</td>
+			<td>A validation error should occur stating that a SCRIPT element must be created</td>
+			<td style="width: 256px; background-color: rgb(0, 255, 0);">&nbsp;Manually + unit test</td>
+		</tr>
+		<tr>
+			<td style="width: 98px;">UIM Developer</td>
+			<td style="width: 306px;">Creates CONDITION element and dynamic="true" and has either has <span style="font-family:courier new,courier,monospace;">EVENT/ACTION</span> attributes on the CONDITION element too</td>
+			<td>A validation error should occur when building client specifying the root cause of issue.</td>
+			<td style="width: 256px; background-color: rgb(0, 255, 0);">&nbsp; Manually + unit test</td>
+		</tr>
+		<tr>
+			<td style="width: 98px;">UIM Developer</td>
+			<td style="width: 306px;">&nbsp;Creates CONDITION element and dynamic="true" within a LIST/ACTION_CONTROL/ACTION_SET</td>
+			<td>A validation error should occur when building client specifying the root cause of issue. (ERR_DYNAMIC_CONDITION_PARENT_NOT_CLUSTER)</td>
+			<td style="width: 256px; background-color: rgb(0, 255, 0);">&nbsp;Manually + unit test</td>
+		</tr>
+		<tr>
+			<td style="width: 98px;">UIM Developer</td>
+			<td style="width: 306px;">&nbsp;Creates multiple&nbsp; JSCRIPT_REF SOURCE connections with identical NMAE attributes</td>
+			<td>A validation error should occur when building client specifying the root cause of issue. (ERR_JSCRIPT_REF_NOT_UNIQUE)</td>
+			<td style="width: 256px; background-color: rgb(0, 255, 0);">&nbsp;Manually + unit test</td>
+		</tr>
+		<tr>
+			<td style="width: 98px;">UIM Developer</td>
+			<td style="width: 306px;">&nbsp;Creates a JSCRIPT_REF SOURCE connection whose source data is a list</td>
+			<td>A validation error should occur when building client specifying the root cause of issue. (<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">A page connection to a server interface has incompatible list and single properties</span>)</td>
+			<td style="width: 256px; background-color: rgb(0, 255, 0);">&nbsp;Manually + unit test</td>
+		</tr>
+		<tr>
+			<td style="width: 98px;">UIM Developer</td>
+			<td style="width: 306px;">Creates CONDITION element (not dynamic) within CLUSTER and created nested SCRIPT element</td>
+			<td>A validation error should occur when building client specifying the root cause of issue.</td>
+			<td style="width: 256px; background-color: rgb(0, 255, 0);">Manually + unit test</td>
+		</tr>
+		<tr>
+			<td style="width: 98px;">UIM Developer</td>
+			<td style="width: 306px;">When the developer invokes the curam.dcl.getField() function on a non exist variable e.g curam.dcl.getField('non_exitent_JSCRIP_REF')</td>
+			<td>A validation error should occur when building client specifying the root cause of issue.</td>
+			<td style="width: 256px; background-color: rgb(255, 0, 0);">Manually + unit test - <strong>TODO:Create ticket</strong></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr">Dropdown Use Cases</h3>
+
+<p dir="ltr"><span style="color:#FFA500;">BOS: Should include use cases that have combination of parameters passed in from previous page and the dynamic controlling Field</span></p>
+
+<p dir="ltr"><span style="color:#FF0000;">FG - So in this case, the "controlling" field is a drop down. We will need a user case for each of the supported controls and repeat this pattern (expression true, cluster displayed, user enter data, expression false, cluster hidden, data stored, etc. etc.)</span></p>
+
+<table border="1" dir="ltr" height="64" width="1234">
+	<tbody>
+		<tr>
+			<td style="width: 98px;"><strong>User</strong></td>
+			<td style="width: 302px;">Clicks Next button, <strong>page loads</strong> and the dropdown expression s <strong>evaluates to true</strong></td>
+			<td style="width: 430px;">
+			<p>The dynamic conditional cluster is <strong>displayed</strong></p>
+
+			<p>&nbsp;</p>
+			</td>
+			<td style="width: 374px; background-color: rgb(255, 165, 0);">Manually + unit test (Half complete - Tested Manually)</td>
+		</tr>
+		<tr>
+			<td style="width: 98px;"><strong>User</strong></td>
+			<td style="width: 302px;">Clicks Next button, <strong>page loads </strong>and the dropdown expression s <strong>evaluates to false</strong></td>
+			<td style="width: 430px;">The dynamic conditional cluster is <strong>hidden</strong></td>
+			<td style="width: 374px; background-color: rgb(255, 165, 0);">Manually + unit test (Half complete - Tested Manually)</td>
+		</tr>
+	</tbody>
+</table>
+
+<table border="1" dir="ltr" style="width: 1237px;">
+	<tbody>
+		<tr>
+			<td style="width: 98px;"><strong>User</strong></td>
+			<td style="width: 306px;">Selects the option in the dropdown which causes the expression to <strong>evaluate to true</strong></td>
+			<td style="width: 428px;">
+			<p>The dynamic conditional cluster is <strong>displayed</strong></p>
+
+			<p>&nbsp;</p>
+			</td>
+			<td style="width: 377px; background-color: rgb(255, 165, 0);">Manually + unit test (Half complete - Tested Manually)</td>
+		</tr>
+		<tr>
+			<td style="width: 98px;"><strong>User</strong></td>
+			<td style="width: 306px;">Selects the option in the dropdown which causes the expression to <strong>evaluate to false</strong></td>
+			<td style="width: 428px;">The dynamic conditional cluster is <strong>hidden</strong></td>
+			<td style="width: 377px; background-color: rgb(255, 165, 0);">Manually + unit test (Half complete - Tested Manually)</td>
+		</tr>
+		<tr>
+			<td style="width: 98px;"><strong>User</strong></td>
+			<td style="width: 306px;">
+			<p><strong>(1)</strong> Selects the option in the dropdown which causes the expression to <strong>evaluate to true,</strong></p>
+
+			<p><strong>(2</strong>) Edits<strong> initial data</strong> in dynamic conditional cluster</p>
+
+			<p><strong>(3)</strong> Selects the option in the dropdown which causes the expression to <strong>evaluate to false</strong></p>
+
+			<p><strong>(4)</strong> Selects the option in the dropdown which causes the expression to <strong>evaluate to true,</strong></p>
+			</td>
+			<td style="width: 428px;">The dynamic conditional cluster should be displayed again on step (4) but the data should not be the updated data but the initial data</td>
+			<td style="width: 377px; background-color: rgb(255, 165, 0);">Manually + unit test (Half complete - Tested Manually)</td>
+		</tr>
+		<tr>
+			<td valign="top">&nbsp;<strong>User</strong></td>
+			<td valign="top">&nbsp;</td>
+			<td style="width: 428px;" valign="top">&nbsp;</td>
+			<td style="width: 377px;" valign="top">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<h3 dir="ltr">Checkbox Use Cases</h3>
+
+<p dir="ltr"><span style="color:#FF8C00;">BOS: Should include use cases that have combination of parameters passed in from previous page and the dynamic controlling Field</span></p>
+
+<h3 dir="ltr">Radiobutton Use Cases</h3>
+
+<p dir="ltr"><span style="color:#FF8C00;">BOS: Should include use cases that have combination of parameters passed in from previous page and the dynamic controlling Field</span></p>
+
+<h3 dir="ltr">Miscelleaneous Use Cases</h3>
+
+<table border="1" dir="ltr">
+	<tbody>
+		<tr>
+			<td style="width: 98px;"><strong>Role/Actor</strong></td>
+			<td style="width: 306px;"><strong>Description</strong></td>
+			<td><strong>Expected Behavior</strong></td>
+			<td style="width: 256px;"><strong>Tested</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 98px;">UIM Developer</td>
+			<td style="width: 306px;">Tag/Renderer Changes, anything go wrong with these - use cases</td>
+			<td>&nbsp;</td>
+			<td style="width: 256px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 98px;">UIM Developer</td>
+			<td style="width: 306px;">JavaScript Infrastructure Changes - anything go wrong with these - use cases</td>
+			<td>&nbsp;</td>
+			<td style="width: 256px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 98px;">UIM Developer</td>
+			<td style="width: 306px;">JavaScript Display Expression - anything go wrong with this, any new validations introduced etc.</td>
+			<td>&nbsp;</td>
+			<td style="width: 256px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr">
+	<tbody>
+		<tr>
+			<td style="width: 98px;"><strong>Role/Actor</strong></td>
+			<td style="width: 306px;"><strong>Description</strong></td>
+			<td><strong>Expected Behavior</strong></td>
+			<td style="width: 256px;"><strong>Tested</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 98px;">User</td>
+			<td style="width: 306px;">Enters invalid value to the text field participating in the display expression(s).</td>
+			<td>
+			<p>If the display expression itself does not take care to validate the input, the infrastructure JS should handle the exception so it evaluates to false (however, some notification, either visual or by the screen reader might be considered).</p>
+
+			<p><span style="color:#FF0000;">FG - Can this use case really happen. If we support just drop downs, check boxes and radio buttons, is the user input limited by the UI? Are we supporting free form text field?</span></p>
+			</td>
+			<td style="width: 256px; background-color: rgb(0, 255, 0);">Manually + unit test</td>
+		</tr>
+		<tr>
+			<td style="width: 98px;">User</td>
+			<td style="width: 306px;">Advances to a page in the wizard flow where the fields on the previous pages are used in the display expression on the current page and the fields on the current page also participating in the come with the default values causing one or more display expressions on the page evaluate to true.</td>
+			<td>
+			<p>The clusters for which the display criteria are met should be displayed upon the page load, the scenario is a variation of use case 1 - it should not matter if the participating values come from the current page, the database or the page parameters.</p>
+
+			<p><span style="color:#FF0000;">FG - I think we should have use cases for all combinations of all possible "data" input here such as:</span></p>
+
+			<p><span style="color:#FF0000;">&nbsp;- user selected data only.</span></p>
+
+			<p><span style="color:#FF0000;">&nbsp;- user selected + page parameters</span></p>
+
+			<p><span style="color:#FF0000;">&nbsp;- user selected + display phase data</span></p>
+
+			<p><span style="color:#FF0000;">&nbsp;- user selected + both of the above</span></p>
+
+			<p><span style="color:#FF0000;">&nbsp;- etc. etc.</span></p>
+			</td>
+			<td style="width: 256px; background-color: rgb(0, 255, 0);">Manually + unit test</td>
+		</tr>
+		<tr>
+			<td style="width: 98px;">User</td>
+			<td style="width: 306px;">
+			<p>(1) Makes a dynamic conditional cluster visible that contains a second control ref</p>
+
+			<p>(2) Makes a second dynamic conditional cluster visible using the control ref in the first dynamic conditional cluster</p>
+
+			<p>(3) Hides the original dynamic conditional cluster by changing the control ref state</p>
+			</td>
+			<td>Both the first and second dynamic conditional cluster are hidden.</td>
+			<td style="width: 256px; background-color: rgb(255, 165, 0);">Manually + unit test (Half complete - Tested Manually)</td>
+		</tr>
+		<tr>
+			<td style="width: 98px;">User</td>
+			<td style="width: 306px;">
+			<p>Makes a dynamic conditional cluster visible and then submits the page where the page loads itself again on submit</p>
+			</td>
+			<td>The page remains in the same state and any dynamic conditional clusters that were visible remain visible, and any that were hidden remain hidden.</td>
+			<td style="width: 256px; background-color: rgb(255, 165, 0);">Manually + unit test (Half complete - Tested Manually)</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Feel free to add to the use cases section as more use cases emerge in the process of further design/development/testing.</p>
+
+<h2 dir="ltr">Application Impact</h2>
+
+<p dir="ltr">There should be no application impact in that the discussed functionality comes as an addition to the pre-existing functionality, there are no UIM replacements or JavaScript changes which would overlap with the OOTB or custom functionality.</p>
+
+<h2 dir="ltr">Testing</h2>
+
+<p dir="ltr"><strong>Automated testing</strong></p>
+
+<p dir="ltr">The automated Selenium (or Intern?) based tests could be applicable - any tests which make use of the actual page source/JavaScript. The tests should be checking the JavaScript output on a page for the conditional clusters, therefore, if the fields are correctly output as the scoped JavaScript variables;&nbsp; if the field values are available through the JavaScript API for the optional clusters and so on.</p>
+
+<p dir="ltr"><strong>Manual testing</strong></p>
+
+<p dir="ltr">TabTest application pages are available in Tab Test App &gt; Dynamic Conditional Cluster Tests tab to check the actual functionality with the various type of fields; there is a wizard type flow available at Tab Test App &gt; Wizard Tests tab &gt; Guided Evidence Mgt Demo nav group &gt; Add new Household Participant link. There should be certain numbers of control fields, clusters and sample display expressions to visually check when the optional clusters are displayed and hidden.</p>
+
+<p dir="ltr"><strong>FIXME Should we have the validations tested as well?</strong></p>
+
+<h2 dir="ltr">Worked Example</h2>
+
+<p dir="ltr">The screen below is taken from the HCR Add Member flow. What we're outlining here is how we believe a developer will implement this functionality using the new dynamic conditional clusters (http://pdappsrv.mul.ie.ibm.com:8080/browse/TEC-18864).</p>
+
+<h3 dir="ltr">Introduction to problem:</h3>
+
+<p dir="ltr">What we can see from the screen is that the display of the "Unemployment/Underemployment Information" cluster is controlled by two distinct pieces of information:<br />
+<br />
+- the value of the "Select Relationship Type" field ("Is the Parent of")<br />
+<br />
+- an evaluated expression that is based on data entered earlier in the wizard (for our purposes it doesn't matter whether the data was earlier in the script or was read from standard DB tables, the point is that it's not based on a field on the screen)</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><img alt="" height="622" id="1447082499775_0" src="Optional%20clusters._ATTACHMENTS_/editor_image_7b2096df-670f-4dd8-80d0-42d286039fca.png" width="752"></img></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Proposed/Suggested implementation for this scenario:</p>
+
+<h3 dir="ltr">1. Modelling</h3>
+
+<p dir="ltr">The display phase operation will return a Boolean which represents the evaluated expression (Child &lt; 18 or under 21 and full time student).</p>
+
+<p dir="ltr">Why? CDEJ doesn't know where these values come from. In this example they come from earlier in the script in another example by might be read from any table you'd care to think of. By allowing this data to be read &amp; evaluated in the facade implementation we are making this feature to be as flexible as possible (as well as allowing for additional "wins" like the ability to unit test the logic behind the expressions.)&nbsp; An additional reason is that we do not wish to introduce UIM syntax to represent an expression language. Although this is possible (isn't everything?) we would be opening ourselves to a maintenance &amp; support nightmare.</p>
+
+<h3 dir="ltr">2. UIM</h3>
+
+<p dir="ltr">So, now that we have the value we need to get it onto the screen so that it can be used to determine whether to display the cluster or not.</p>
+
+<p dir="ltr">A new UIM syntax will be introduced to allow the developer to mark a particular attribute as being "of interest" for the purposes of displaying hiding a cluster. The UIM syntax will be familiar to developers i.e. CONNECT, SOURCE, TARGET. However a new "name" keyword will be introduced: "JSCRIPT_REF". It is likely that a source of PAGE (i..e a page parameter) and CONST will also be supported.</p>
+
+<p dir="ltr"><strong><em>&lt;CONNECT&gt;<br />
+<br />
+&nbsp; &lt;SOURCE NAME="DISPLAY" PROPERTY="under18or21AndFTStudent"/&gt;<br />
+<br />
+&nbsp; &lt;TARGET NAME="JSCRIPT_REF" PROPERTY="under18or21AndFTStudent"/&gt;<br />
+<br />
+&lt;/CONNECT&gt;</em></strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">A "control" question needs to be defined. This is the drop down field in the screenshot:</p>
+
+<p dir="ltr"><strong><em>&lt;FIELD LABEL="Field.Label" CONTROL_REF="field1"&gt;<br />
+<br />
+&nbsp; &lt;CONNECT&gt;<br />
+<br />
+&nbsp;&nbsp;&nbsp; &lt;SOURCE NAME="DISPLAY" PROPERTY="displayBeanProperty"/&gt;<br />
+<br />
+&nbsp;&nbsp; &nbsp;&lt;TARGET NAME="ACTION" PROPERTY="actionBeanProperty"/&gt;<br />
+<br />
+&nbsp; &lt;/CONNECT&gt;<br />
+<br />
+&lt;/FIELD&gt;</em></strong></p>
+
+<p dir="ltr">This has two purposes:</p>
+
+<p dir="ltr">- tells the infrastructure that changes to this field should cause the specified expression(s) to be evaluated<br />
+<br />
+- provides an identifier, i.e. "field1", to allow access to the field value in Javascript</p>
+
+<p dir="ltr">Finally, additional UIM syntax will be introduced to mark the cluster as being conditionally displayed and the function which determines it's display:</p>
+
+<p dir="ltr"><strong><em>&lt;CLUSTER TITLE="Cluster.Title" ... /&gt;<br />
+<br />
+&nbsp; &lt;CONDITION TYPE="DYNAMIC"&gt;<br />
+<br />
+&nbsp;&nbsp;&nbsp; &lt;SCRIPT EXPRESSION="checkAndDisplayThisCluster"/&gt;<br />
+<br />
+&nbsp; &lt;/CONDITION&gt;<br />
+<br />
+&lt;/CLUSTER&gt;</em></strong></p>
+
+<h3 dir="ltr">3. JavaScript</h3>
+
+<p dir="ltr">The logic to actually determine whether a cluster should be displayed (or not) must be written in Javascript.</p>
+
+<p dir="ltr">As usual, the developer will need to import the custom script file into the UIM page e.g.</p>
+
+<p dir="ltr"><strong><em>&lt;PAGE SCRIPT_FILE="HCRCustomScripts.js"/&gt;</em></strong></p>
+
+<p dir="ltr">CDEJ will be providing a guidelines and a contract which must be satisfied for the JavaScript function e.g.</p>
+
+<p dir="ltr"><strong><em>function checkAndDisplayThisCluster()&nbsp; {<br />
+<br />
+&nbsp;&nbsp; &nbsp;if (curam.dcl.control.getField('under18or21AndFTStudent') == 'true' &amp;&amp; curam.ocl.control.getField('field1') == 'RELTYP01') {<br />
+<br />
+&nbsp;&nbsp;&nbsp; return curam.ocl.CLUSTER_SHOW; ;<br />
+<br />
+&nbsp;&nbsp; &nbsp;}<br />
+<br />
+&nbsp;&nbsp; &nbsp;return curam.ocl.CLUSTER_HIDE;<br />
+<br />
+}</em></strong></p>
+
+<p dir="ltr">(Notice that all access to JavaScript variables would be via a infrastructure provided getField() operation)</p>
+
+<h2 dir="ltr">Documentation/How To Use Feature</h2>
+
+<p dir="ltr">The feature will require the extensive documentation aimed at the developer, however for the end user this should not seem a complicated to use or unintuitive functionality.</p>
+
+<p dir="ltr">As for the developer documentation, the contract for writing the display expressions and the API to be used for it should be well documented.</p>
+
+<p dir="ltr">The internal scoping/naming of the fields into the JavaScript should be out of scope of such a document, since the API should take care of accessing the required values in the uniform way.</p>
+
+<p dir="ltr">Since the UIM changes are in place, the publicly available documentation which describes the UIM (Web Client Reference Manual) should be updated with the information on the new attributes, their usage, meaning and the potential values.</p>
+
+<h2 dir="ltr">Check List</h2>
+
+<table border="1" dir="ltr" height="92" width="751">
+	<tbody>
+		<tr>
+			<td style="width: 125px;"><strong>Check List Item</strong></td>
+			<td style="width: 299px;"><strong>Notes</strong></td>
+			<td style="width: 99px;"><strong>Considered</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 125px;">Layout</td>
+			<td style="width: 299px;">The optional cluster display causes the pages to resize to accommodate the additional content, and therefore the developer of the pages with the optional clusters should verify that the layout with and without the optionally displayed elements satisfies the requirements, do not cause the overflows or broken layout, or the unexpected scroll bars.</td>
+			<td style="width: 99px;">Yes</td>
+		</tr>
+		<tr>
+			<td style="width: 125px;">RTL</td>
+			<td style="width: 299px;">No additional requirements, since this the traditional layout with just the additional control means.</td>
+			<td style="width: 99px;">Yes</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2 dir="ltr">Work Estimation</h2>
+
+<h3 dir="ltr">&nbsp;Task list</h3>
+
+<table border="1" dir="ltr" style="width: 822px;">
+	<tbody>
+		<tr>
+			<td style="width: 701px;"><strong>Task</strong></td>
+			<td style="width: 105px;"><strong>Estimate (days)</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 701px;">Design discussions/documentation</td>
+			<td style="width: 105px;">4</td>
+		</tr>
+		<tr>
+			<td style="width: 701px;">UIM/XIM changes</td>
+			<td style="width: 105px;">3</td>
+		</tr>
+		<tr>
+			<td style="width: 701px;">JSP generator and renderer/tag related changes</td>
+			<td style="width: 105px;">5</td>
+		</tr>
+		<tr>
+			<td style="width: 701px;">Build-time validations</td>
+			<td style="width: 105px;">3</td>
+		</tr>
+		<tr>
+			<td style="width: 701px;">JavaScript API</td>
+			<td style="width: 105px;">5</td>
+		</tr>
+		<tr>
+			<td style="width: 701px;">Browser storage/optional cluster value restoring functionality</td>
+			<td style="width: 105px;">3</td>
+		</tr>
+		<tr>
+			<td style="width: 701px;">Accessibility</td>
+			<td style="width: 105px;">2</td>
+		</tr>
+		<tr>
+			<td style="width: 701px;">Test pages/automated tests/testing</td>
+			<td style="width: 105px;">3</td>
+		</tr>
+		<tr>
+			<td style="width: 701px;">Documentation</td>
+			<td style="width: 105px;">2</td>
+		</tr>
+		<tr>
+			<td style="width: 701px;"><strong>Total</strong></td>
+			<td style="width: 105px;"><strong>28</strong></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">Task breakdown (the view of the 09-10-2015)</h2>
+
+<table border="1" dir="ltr" style="width: 812px;">
+	<tbody>
+		<tr>
+			<td style="width: 707px;"><strong>Task</strong></td>
+			<td style="width: 89px;"><strong>Assignee</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 707px;">Add the CONTROL_REF attribute support to the UIM FIELD element and make its way through the XIM to the JSP generator.</td>
+			<td style="width: 89px;">SK</td>
+		</tr>
+		<tr>
+			<td style="width: 707px;">Add the additional CONDITION type and the changes to the potential child elements</td>
+			<td style="width: 89px;">SK</td>
+		</tr>
+		<tr>
+			<td style="width: 707px;">Add the variation for the SCRIPT element, new context and the new attribute support</td>
+			<td style="width: 89px;">SK</td>
+		</tr>
+		<tr>
+			<td style="width: 707px;">Adjust the JSP generator to reflect the input fields and read-only fields as the properly scoped and named JavaScript variables</td>
+			<td style="width: 89px;">SK</td>
+		</tr>
+		<tr>
+			<td colspan="2" style="width: 707px;"><strong>The above tasks should be covered by <a href="http://pdappsrv.mul.ie.ibm.com:8080/browse/TEC-19058" id="key-val" rel="157956">TEC-19058.</a></strong></td>
+		</tr>
+		<tr>
+			<td style="width: 707px;">
+			<p>Review TARGET NAME="BROWSER" usage, current constraints and adjust the tag/write an extension/a new tag to output the bean properties or page parameters as the scoped JavaScript variables, consider what output would be optimal.</p>
+			</td>
+			<td style="width: 89px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 707px;">Design the optional clusters related JavaScript namespace (singleton)</td>
+			<td style="width: 89px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="2" style="width: 707px;"><strong>The above two tasks should be covered by <a href="http://pdappsrv.mul.ie.ibm.com:8080/browse/TEC-19059" id="key-val" rel="157957">TEC-19059.</a></strong></td>
+		</tr>
+		<tr>
+			<td style="width: 707px;">Think of the appropriate validations, describe them in this design page, implement the viable ones</td>
+			<td style="width: 89px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="2" style="width: 707px;"><strong>The task should be covered by <a href="http://pdappsrv.mul.ie.ibm.com:8080/browse/TEC-19062" id="key-val" rel="157960">TEC-19062.</a></strong></td>
+		</tr>
+		<tr>
+			<td style="width: 707px;">Infrastructure JavaScript, cluster displaying/hiding/blanking and filling-in the fields with the initial values from the storage functionality - detail and implement.</td>
+			<td style="width: 89px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 707px;">JavaScript API for the display expressions</td>
+			<td style="width: 89px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="2" style="width: 707px;"><strong>The above two tasks should be covered by <a href="http://pdappsrv.mul.ie.ibm.com:8080/browse/TEC-19060" id="key-val" rel="157958">TEC-19060.</a></strong></td>
+		</tr>
+		<tr>
+			<td style="width: 707px;">Design and implement the storage mechanism and functionality for the optional cluster field values if it is hidden and then re-displayed.</td>
+			<td style="width: 89px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="2" style="width: 707px;"><strong>The above task should be covered by <a href="http://pdappsrv.mul.ie.ibm.com:8080/browse/TEC-19061" id="key-val" rel="157959">TEC-19061.</a></strong></td>
+		</tr>
+		<tr>
+			<td style="width: 707px;">Accessibility requirements and related implementation</td>
+			<td style="width: 89px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 707px;">Test pages and tests for the functionality</td>
+			<td style="width: 89px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 707px;">Document the functionality, update the necessary guides</td>
+			<td style="width: 89px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

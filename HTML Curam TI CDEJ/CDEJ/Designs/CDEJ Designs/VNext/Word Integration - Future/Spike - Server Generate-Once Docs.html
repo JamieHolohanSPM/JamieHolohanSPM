@@ -1,0 +1,353 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Spike - Server Generate-Once Docs</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Spike - Server Generate-Once Docs";
+    pageId="urn:lsid:ibm.com:td:56befb78-ecc7-4b47-bc56-9b401ae2f352";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Spike - Server Generate-Once Docs</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h1 dir="ltr">Spike - Server Generate-Once Docs</h1>
+
+<p dir="ltr">As part of the discussion on Word Integration, one of the options is to drop support altogether. &nbsp;This is unlikely to make customers very happy and so, we are looking into re-scoping / downsizing the&nbsp;MVP for WI. &nbsp;</p>
+
+<p dir="ltr">This alternative approach for continuing support involves creating the same document that gets created using the current WI. &nbsp;This doc would be generated on the server side (instead of within the client's Word application) and would include the updated fields from the template specific data. &nbsp;After this initial document creation, the user would be responsible for uploading any future changes through a file upload dialog. &nbsp;MS Word on the client machine would no longer have any connection to the Curam application. &nbsp;<br />
+<br />
+Therefore, the customer would be losing :-</p>
+
+<ol dir="ltr">
+	<li>overwrite on save</li>
+	<li>overwrite on close</li>
+	<li>template editing with paste-able "clauses" as in Appeals module</li>
+</ol>
+
+<p dir="ltr">The customer would be gaining :-</p>
+
+<ol dir="ltr">
+	<li>using alternates to MSWord</li>
+	<li>assuming a check-out, check-in policy, no more blocked saves due to concurrent access (currently possible but not likely)</li>
+	<li>if we move to docx4j content controls, dynamic lists in output documents (i'm only 95% sure that this is a current limitation)
+	<ul>
+		<li>in other words we could define a table header and a single row of placeholders in the template and the document could end up having multiple rows where the row data is dynamic</li>
+	</ul>
+	</li>
+</ol>
+
+<p dir="ltr"><img lconnwikiparamattachmentname="old_way.jpg" src="Spike%20-%20Server%20Generate-Once%20Docs._ATTACHMENTS_/old_way.jpg" lconnwikiparamwikipage="Spike - Server Generate-Once Docs" lconnwikimacro="image" alt=""></img></p>
+
+<p dir="ltr"><img lconnwikiparamattachmentname="new_way.jpg" src="Spike%20-%20Server%20Generate-Once%20Docs._ATTACHMENTS_/new_way.jpg" lconnwikiparamwikipage="Spike - Server Generate-Once Docs" lconnwikimacro="image" alt=""></img></p>
+
+<p dir="ltr">Two more&nbsp;key requirements of this solution are:-</p>
+
+<ol dir="ltr">
+	<li><img lconnwikiparamattachmentname="exclamation.png" src="Spike%20-%20Server%20Generate-Once%20Docs._ATTACHMENTS_/exclamation.png" lconnwikiparamwikipage="Spike - Server Generate-Once Docs" lconnwikimacro="image" alt=""></img>&nbsp;works without opening an MS Word installation on the server
+	<ul>
+		<li>opening MS Word to generate the document would not scale well</li>
+	</ul>
+	</li>
+	<li><img style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;" lconnwikiparamattachmentname="exclamation.png" src="Spike%20-%20Server%20Generate-Once%20Docs._ATTACHMENTS_/exclamation.png" lconnwikiparamwikipage="Spike - Server Generate-Once Docs" lconnwikimacro="image" alt=""></img><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">works on all supported servers</span>
+	<ul>
+		<li>as this includes unix, again an MS Word installation cannot be required</li>
+	</ul>
+	</li>
+</ol>
+
+<h2 dir="ltr">Document Types</h2>
+
+<ol dir="ltr">
+	<li>
+	<p style="margin: 0.67em 7px; color: rgb(0, 0, 0); font-family: Verdana, Helvetica, Arial, sans-serif; font-size: small;">DOT &amp; DOC<br />
+	Pre 2007 (e.g. our sample Curam templates are in this format)<br />
+	OLE2 (Object Linking and Embedding) is a proprietary technology developed by Microsoft that allows embedding and linking to documents and other objects.<br />
+	Files include most Microsoft Office files such as XLS, DOC, and PPT as well as MFC serialization API based file formats.&nbsp;</p>
+	</li>
+	<li>
+	<p style="margin: 0.67em 7px; color: rgb(0, 0, 0); font-family: Verdana, Helvetica, Arial, sans-serif; font-size: small;">DOTX &amp; DOCX<br />
+	Post 2007<br />
+	OOXML (Office OpenXML) Format&nbsp;<br />
+	A&nbsp;standards based XML file format found in Microsoft Office 2007 and 2008. This includes XLSX, DOCX and PPTX.&nbsp;</p>
+	</li>
+</ol>
+
+<p dir="ltr">This adds another two key requirements:-</p>
+
+<ol dir="ltr">
+	<li><img style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;" lconnwikiparamattachmentname="exclamation.png" src="Spike%20-%20Server%20Generate-Once%20Docs._ATTACHMENTS_/exclamation.png" lconnwikiparamwikipage="Spike - Server Generate-Once Docs" lconnwikimacro="image" alt=""></img><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span>works with OOXML templates<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span><strong style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">OR ELSE</strong><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;we provide a mass template&nbsp;migration from OOXML to the new format supported</span>
+
+	<ul>
+		<li><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">​​OOXML is higher priority than OLE2</span></li>
+	</ul>
+	</li>
+	<li><img style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;" lconnwikiparamattachmentname="exclamation.png" src="Spike%20-%20Server%20Generate-Once%20Docs._ATTACHMENTS_/exclamation.png" lconnwikiparamwikipage="Spike - Server Generate-Once Docs" lconnwikimacro="image" alt=""></img><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">&nbsp;</span>works with OLE2 templates&nbsp;<strong>OR ELSE</strong>&nbsp;we provide a mass template&nbsp;migration from OLE2 to the new format supported
+	<ul>
+		<li>SPM customers are likely to&nbsp;have many legacy OLE2 templates</li>
+	</ul>
+	</li>
+</ol>
+
+<h2 dir="ltr">3rd Party APIs</h2>
+
+<ol dir="ltr">
+	<li>
+	<p><strong><img lconnwikiparamattachmentname="tick_16.png" src="Spike%20-%20Server%20Generate-Once%20Docs._ATTACHMENTS_/tick_16.png" lconnwikiparamwikipage="Spike - Server Generate-Once Docs" lconnwikimacro="image" alt=""></img>&nbsp;Apache POI - works with both formats</strong>&nbsp;(<a href="https://poi.apache.org/">https://poi.apache.org/</a>)<br />
+	<span style="color: rgb(0, 0, 0); font-family: Verdana, Helvetica, Arial, sans-serif; font-size: small;">Java APIs for manipulating various file formats based upon the Office Open XML standards (OOXML) and Microsoft's OLE 2 Compound Document format (OLE2). Can read and write MS Word files using Java.&nbsp;<br />
+	For each MS Office application there exists a component module that attempts to provide a common high level Java api to both OLE2 and OOXML document formats. This is most developed for&nbsp;</span><a href="https://poi.apache.org/spreadsheet/index.html" style="color: blue; font-family: Verdana, Helvetica, Arial, sans-serif; font-size: small;">Excel workbooks (SS=HSSF+XSSF)</a><span style="color: rgb(0, 0, 0); font-family: Verdana, Helvetica, Arial, sans-serif; font-size: small;">. Work is progressing for&nbsp;</span><a href="https://poi.apache.org/document/index.html" style="color: blue; font-family: Verdana, Helvetica, Arial, sans-serif; font-size: small;">Word documents (WP=HWPF+XWPF)</a><span style="color: rgb(0, 0, 0); font-family: Verdana, Helvetica, Arial, sans-serif; font-size: small;">&nbsp;and&nbsp;</span><a href="https://poi.apache.org/slideshow/index.html" style="color: blue; font-family: Verdana, Helvetica, Arial, sans-serif; font-size: small;">PowerPoint presentations (SL=HSLF+XSLF)</a><span style="color: rgb(0, 0, 0); font-family: Verdana, Helvetica, Arial, sans-serif; font-size: small;">.</span></p>
+	</li>
+	<li>
+	<p><strong style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;"><img lconnwikiparamattachmentname="tick_16.png" src="Spike%20-%20Server%20Generate-Once%20Docs._ATTACHMENTS_/tick_16.png" lconnwikiparamwikipage="Spike - Server Generate-Once Docs" lconnwikimacro="image" alt=""></img>&nbsp;</strong><strong><span style="font-size:12px;">docx4j - only works 2007+ format (</span></strong><a href="https://www.docx4java.org/trac/docx4j">https://www.docx4java.org/trac/docx4j</a>)</p>
+
+	<p style="color: rgb(0, 0, 0); font-family: Verdana, Arial, &quot;Bitstream Vera Sans&quot;, Helvetica, sans-serif; font-size: 13px;">docx4j is an open source (ASLv2) Java library for creating and manipulating Microsoft Open XML (Word docx, Powerpoint pptx, and Excel xlsx) files.</p>
+
+	<p style="color: rgb(0, 0, 0); font-family: Verdana, Arial, &quot;Bitstream Vera Sans&quot;, Helvetica, sans-serif; font-size: 13px;">It is similar to Microsoft's OpenXML SDK, but for Java. docx4j uses JAXB to create the in-memory object representation.</p>
+
+	<p style="color: rgb(0, 0, 0); font-family: Verdana, Arial, &quot;Bitstream Vera Sans&quot;, Helvetica, sans-serif; font-size: 13px;">Its emphasis is on power: if the file format supports it, you can do it with docx4j. But first, you'll need to take the time to understand JAXB, and the Open XML file structure</p>
+
+	<p style="color: rgb(0, 0, 0); font-family: Verdana, Arial, &quot;Bitstream Vera Sans&quot;, Helvetica, sans-serif; font-size: 13px;">docx4j was created by Plutext Pty Ltd in 2008 - using OpenXML4J for the OPC piece. Plutext still drives the project, but since then docx4j has benefited from contributions from many individuals.&nbsp;<br />
+	&nbsp;</p>
+	</li>
+	<li>
+	<p style="color: rgb(0, 0, 0); font-family: Verdana, Arial, &quot;Bitstream Vera Sans&quot;, Helvetica, sans-serif; font-size: 13px;"><span style="font-size:12px;"><strong><img style="width: 13px; height: 13px;" lconnwikiparamattachmentname="Red_x_cross_uncheck_bad.png" src="Spike%20-%20Server%20Generate-Once%20Docs._ATTACHMENTS_/Red_x_cross_uncheck_bad.png" lconnwikiparamwikipage="Spike - Server Generate-Once Docs" lconnwikimacro="image" alt=""></img>&nbsp;WOPI - Web Application Open Platform Interface (</strong></span><a href="https://msdn.microsoft.com/en-us/library/hh641756(v=office.12).aspx">https://msdn.microsoft.com/en-us/library/hh641756(v=office.12).aspx</a>)<br />
+	<span style="color: rgb(51, 51, 51); font-family: &quot;Segoe UI&quot;, Tahoma, Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 14px;">WOPI provides web-based services a way to view and edit documents in the Office Web Apps. &nbsp;It provides a way for applications like Word (WOPI applications/clients) to view/edit documents from the web (WOPI host). &nbsp;</span><br />
+	The IBM Connections team have a project they are running creating this type of full fledged integration with Office 365. &nbsp;This would be a massive undertaking for SPM and would not be at all the direction that we are interested in going at the moment. &nbsp;We need something simpler to maintain going forward, not more complex.<br />
+	Having said that, one portion that could be interesting to look into is whether we could just implement the minimum requirements of a WOPI host (i.e. without any WOPI&nbsp;applications/clients). &nbsp;It's hard to ascertain whether this would provide the document generation that we are looking for though so I'm not going to investigate it at this time unless all else fails. &nbsp;It would still be increasing complexity from a straight forward server-side generation spike as it would involve adding another server application&nbsp;to SPM.</p>
+	</li>
+	<li>
+	<p style="color: rgb(0, 0, 0); font-family: Verdana, Arial, &quot;Bitstream Vera Sans&quot;, Helvetica, sans-serif; font-size: 13px;"><strong style="color: rgb(0, 0, 0); font-family: Verdana, Arial, &quot;Bitstream Vera Sans&quot;, Helvetica, sans-serif;"><img style="width: 13px; height: 13px;" lconnwikiparamattachmentname="Red_x_cross_uncheck_bad.png" src="Spike%20-%20Server%20Generate-Once%20Docs._ATTACHMENTS_/Red_x_cross_uncheck_bad.png" lconnwikiparamwikipage="Spike - Server Generate-Once Docs" lconnwikimacro="image" alt=""></img>&nbsp;</strong><strong>Jacob COM Bridge (</strong><a href="http://danadler.com/jacob/">http://danadler.com/jacob/</a>, <a href="http://www.land-of-kain.de/docs/jacob/">http://www.land-of-kain.de/docs/jacob/</a>)<br />
+	We already use this in the current WI. &nbsp;It could potentially work on the server side but it would have to be a windows server (i.e. wouldn't work on UNIX) with Word installed and it wouldn't be able to scale for generating multiple concurrent documents.</p>
+	</li>
+	<li>
+	<p style="color: rgb(0, 0, 0); font-family: Verdana, Arial, &quot;Bitstream Vera Sans&quot;, Helvetica, sans-serif; font-size: 13px;"><strong style="color: rgb(0, 0, 0); font-family: Verdana, Arial, &quot;Bitstream Vera Sans&quot;, Helvetica, sans-serif;"><img style="width: 13px; height: 13px;" lconnwikiparamattachmentname="Red_x_cross_uncheck_bad.png" src="Spike%20-%20Server%20Generate-Once%20Docs._ATTACHMENTS_/Red_x_cross_uncheck_bad.png" lconnwikiparamwikipage="Spike - Server Generate-Once Docs" lconnwikimacro="image" alt=""></img>&nbsp;</strong><strong>WordBean by Muller&amp;Stein (</strong><a href="http://www.java400.de/en/default.html?../Javactpe.htm">http://www.java400.de/en/default.html?../Javactpe.htm</a>)<br />
+	From the Jacob Tutorial linked above, I learned of WordBean.<br />
+	Most other applications seem to treat Templates with dynamic content as an after-thought but this one was designed specifically for that use case. &nbsp;It&nbsp;claims to do&nbsp;exactly what we need&nbsp;for OLE2 dot files. &nbsp;However, it only works on OLE2 and only on Windows. &nbsp;There are a few things that the page doesn't make clear that are pretty important:<br />
+	(a) Soes this open Word to work? &nbsp;It looks very likely but not completely clear. If so, this wouldn't scale.;<br />
+	(b) What is the licence? &nbsp;The page&nbsp;claims that it's free to use commercially but I can't see anything about the type of licence.</p>
+	</li>
+	<li>
+	<p style="color: rgb(0, 0, 0); font-family: Verdana, Arial, &quot;Bitstream Vera Sans&quot;, Helvetica, sans-serif; font-size: 13px;"><strong style="color: rgb(0, 0, 0); font-family: Verdana, Arial, &quot;Bitstream Vera Sans&quot;, Helvetica, sans-serif; font-size: 13px;"><img style="width: 13px; height: 13px;" lconnwikiparamattachmentname="Red_x_cross_uncheck_bad.png" src="Spike%20-%20Server%20Generate-Once%20Docs._ATTACHMENTS_/Red_x_cross_uncheck_bad.png" lconnwikiparamwikipage="Spike - Server Generate-Once Docs" lconnwikimacro="image" alt=""></img>&nbsp;</strong><strong>Curam's own XMLServer</strong><br />
+	This should technically support generating RTF (Rich Text Format) Documents and we could extend it to perform dynamic placeholder replacement. &nbsp;MSWord and other applications can open these but the design and layout is much more limited than modern day formats allow.</p>
+	</li>
+	<li>
+	<p style="color: rgb(0, 0, 0); font-family: Verdana, Arial, &quot;Bitstream Vera Sans&quot;, Helvetica, sans-serif; font-size: 13px;"><br />
+	&nbsp;</p>
+	</li>
+</ol>
+
+<h2 dir="ltr" style="color: rgb(0, 0, 0); font-family: Verdana, Arial, &quot;Bitstream Vera Sans&quot;, Helvetica, sans-serif; font-size: 13px;">Testing of these APIs so far</h2>
+
+<p dir="ltr">Note, the "template -&gt; template" scenario is not an SPM use-case. &nbsp;This is just a natural step in testing before getting to the main use-case.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" style="width: 895px;">
+	<tbody>
+		<tr>
+			<td style="width: 61px;">&nbsp;</td>
+			<td style="width: 79px;">&nbsp;</td>
+			<td colspan="3" rowspan="1" style="text-align: center; width: 269px;"><strong>OLE2 ( dot / doc )</strong></td>
+			<td rowspan="1" style="text-align: center; width: 6px;">&nbsp;</td>
+			<td colspan="3" rowspan="1" style="text-align: center; width: 457px;"><strong>OOXML ( dotx / docx )</strong></td>
+		</tr>
+		<tr>
+			<td style="text-align: center; width: 61px;">&nbsp;</td>
+			<td style="text-align: center; width: 79px;">&nbsp;</td>
+			<td style="text-align: center; width: 72px;"><strong>Create</strong></td>
+			<td style="text-align: center; width: 64px;"><strong>Populate</strong></td>
+			<td style="text-align: center; width: 141px;"><strong>seamless?</strong></td>
+			<td style="text-align: center; width: 6px;">&nbsp;</td>
+			<td style="text-align: center; width: 106px;"><strong><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center;">Create</span></strong></td>
+			<td style="text-align: center; width: 93px;"><strong><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center;">Populate</span></strong></td>
+			<td style="text-align: center; width: 248px;"><strong><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center;">seamless?</span></strong></td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="2" style="text-align: center; width: 61px;"><strong>docx4j</strong></td>
+			<td style="text-align: center; width: 79px;">template -&gt; template</td>
+			<td style="text-align: center; background-color: rgb(255, 153, 0); width: 72px;">no</td>
+			<td style="text-align: center; background-color: rgb(255, 153, 0); width: 64px;">no</td>
+			<td style="text-align: center; background-color: rgb(255, 153, 0); width: 141px;">no</td>
+			<td style="text-align: center; width: 6px;">&nbsp;</td>
+			<td style="text-align: center; background-color: rgb(102, 204, 0); width: 106px;">yes</td>
+			<td style="text-align: center; background-color: rgb(102, 204, 0); width: 93px;">yes</td>
+			<td style="text-align: center; background-color: rgb(0, 204, 0); width: 248px;">
+			<p>yes</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: center; width: 79px;">template -&gt; document</td>
+			<td style="text-align: center; background-color: rgb(255, 153, 0); width: 72px;">no</td>
+			<td style="text-align: center; background-color: rgb(255, 153, 0); width: 64px;">no</td>
+			<td style="text-align: center; background-color: rgb(255, 153, 0); width: 141px;">no</td>
+			<td style="text-align: center; width: 6px;">&nbsp;</td>
+			<td style="text-align: center; background-color: rgb(102, 204, 0); width: 106px;">yes</td>
+			<td style="text-align: center; background-color: rgb(102, 204, 0); width: 93px;">yes</td>
+			<td style="text-align: center; background-color: rgb(255, 153, 0); width: 248px;">
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center; background-color: rgb(255, 153, 0);">Mostly.</span><br />
+			<br />
+			1st time from a new template: Word states that the DOCX needs user to grant access to use the DOTX file. Answering Yes or No, the DOCX opens without updated values present. <strong>If loaded to another machine there's no prompt!!!</strong><br />
+			&nbsp;</p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center;">WITHOUT PATCHES TO DOCX4J:<br />
+			1-N times:&nbsp;The user has to:<br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center; background-color: rgb(255, 153, 0);">* select all (CTRL A)</span><br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center; background-color: rgb(255, 153, 0);">* update fields (F9)<br />
+			<br />
+			I've logged this defect to enquire about patches:-</span><br />
+			<a href="https://github.com/plutext/docx4j/issues/244">https://github.com/plutext/docx4j/issues/244</a><br />
+			&nbsp;</p>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="2" style="text-align: center; width: 61px;"><strong>poi</strong></td>
+			<td style="text-align: center; width: 79px;">template -&gt; template</td>
+			<td style="text-align: center; background-color: rgb(255, 255, 0); width: 72px;">No DOT files in Curam</td>
+			<td style="text-align: center; background-color: rgb(255, 255, 0); width: 64px;">No DOT files in Curam</td>
+			<td style="text-align: center; width: 141px; background-color: rgb(255, 255, 0);">N/A</td>
+			<td style="text-align: center; width: 6px;">&nbsp;</td>
+			<td style="text-align: center; background-color: rgb(102, 204, 0); width: 106px;">yes</td>
+			<td style="text-align: center; background-color: rgb(102, 204, 0); width: 93px;">yes</td>
+			<td style="text-align: center; background-color: rgb(255, 153, 0); width: 248px;">
+			<p>No. But maybe with further effort.</p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center;">The user is asked:</p>
+
+			<p class="p1" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center;">This document contains fields that may refer to other files. Do you want to update the fields in this document?</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: center; width: 79px;">document -&gt; document</td>
+			<td style="text-align: center; background-color: rgb(102, 204, 0); width: 72px;">Yes</td>
+			<td style="text-align: center; background-color: rgb(102, 204, 0); width: 64px;">Yes</td>
+			<td style="text-align: center; background-color: rgb(255, 153, 0); width: 141px;">
+			<p><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center; background-color: rgb(255, 153, 0);">No.</span><br style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center;" />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center; background-color: rgb(255, 153, 0);">The user has to</span><br style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center;" />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center; background-color: rgb(255, 153, 0);">* select all (CTRL A)</span><br style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center;" />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center; background-color: rgb(255, 153, 0);">* update fields (F9)</span></p>
+			</td>
+			<td style="text-align: center; width: 6px;">&nbsp;</td>
+			<td style="text-align: center; background-color: rgb(102, 204, 0); width: 106px;">yes</td>
+			<td style="text-align: center; background-color: rgb(102, 204, 0); width: 93px;">yes</td>
+			<td style="text-align: center; background-color: rgb(255, 153, 0); width: 248px;">
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center;">No<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center; background-color: rgb(255, 153, 0);">. But maybe with further effort.</span></p>
+
+			<p style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; text-align: center;">The user is asked:</p>
+
+			<p class="p1">This document contains fields that may refer to other files. Do you want to update the fields in this document?</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong>Migrating OLE2 to OOXML</strong></p>
+
+<p dir="ltr">There's a potential solution here to look into. &nbsp;It stipulates that it won't bring macros across to DOTX but I don't think that the document property replacement (dynamic fields) that SPM use are considered macros.<br />
+<a href="https://answers.microsoft.com/en-us/msoffice/forum/msoffice_word-mso_other/mass-convert-dot-and-pot-to-dotx-and-potx/efaa8ada-4043-e011-90b6-1cc1de79d2e2">https://answers.microsoft.com/en-us/msoffice/forum/msoffice_word-mso_other/mass-convert-dot-and-pot-to-dotx-and-potx/efaa8ada-4043-e011-90b6-1cc1de79d2e2</a><br />
+However, this article warns against any conversion: <span style="font-size:12px;">"<span style="color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica;">Avoid making a template from any documents converted from a different word processing program or even a much earlier version of Word."</span></span><br />
+<a href="http://www.addbalance.com/usersguide/templates.htm">http://www.addbalance.com/usersguide/templates.htm</a></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr">docx4j Content Control</h3>
+
+<p dir="ltr">The docx4j testing noted above focuses on re-using DOCX&nbsp;"custom properties" as SPM has done in the past. &nbsp;This appears to be basically working as of May-11-2017, but we've only been testing with an addressed letter. &nbsp;I would imagine it's not possible to return lists or other complex repeating structures using this technique.<br />
+docx4j has another way to update docs which is more forward thinking called "content control". &nbsp;This looks like you</p>
+
+<ul dir="ltr">
+	<li>drop DOTX files altogether and just use a DOCX</li>
+	<li>create your DOCX via XML rather than in Word &nbsp;(ideally business users could use Word but it looks tricky and requires an add-in&nbsp;<a href="https://opendope.codeplex.com/">https://opendope.codeplex.com/</a>)</li>
+	<li>associate your own custom XML file with the DOCX as the source of all your dynamic data</li>
+	<li>mark up your DOCX XML to connect it (via xpath) to the data in the custom XML file</li>
+	<li>generate copies of the DOCX where all that changes is the custom XML file</li>
+</ul>
+
+<p dir="ltr">This looks like a very interesting proposition going forwards but no testing has been done on it in this spike.</p>
+
+<p dir="ltr">For more info see the forum pages at&nbsp;<a href="https://www.docx4java.org/forums/data-binding-java-f16/">https://www.docx4java.org/forums/data-binding-java-f16/</a></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr">Testing Integration with CEF</h2>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Required Steps:</p>
+
+<ul dir="ltr">
+	<li>Update docx4j jar with the patches done by Conor and re compile it</li>
+	<li>Add the jar into JDE and reference it in EJBServer project</li>
+	<li>Modify the logic used today in order to remove the integration between Curam and Microsoft Word. That means, create a new method that will get&nbsp;the inputstream with the template contents as a parameter&nbsp;and return an outputstream with the populated template contents (Hard coded for now as this is a proof of concept).</li>
+	<li>Modify the way that the attachment is created for a communication so that it converts all the dotx files into docx.</li>
+	<li>Modify the UIMs related to this functionality (remove the ones related to the integration between curam and Microsoft Word, add a new download and upload buttons to the list of communications and add a new upload UIM so the user can upload a modifed version of the docx file).</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Results:</p>
+
+<ul dir="ltr">
+	<li>The user is prompted with a modal dialog to inform the communication details</li>
+	<li>By clicking Save the user is redirected to the previous screen with the list of available communications</li>
+	<li>In the list row menu there are 2 new buttons, "Download" and "upload"</li>
+	<li>By clicking the "Download" button, the user will receive a copy of the document and save it to it's own machine (This enables the user to modify the document as required)</li>
+	<li>By clicking the "Upload" button, a new modal will be displayed with a browse button so that user can select the modified file (.docx) that he wishes to upload and save to that communication</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Pending Use Cases&nbsp;</p>
+
+<ul dir="ltr">
+	<li>Non-usual characters like Chinese</li>
+	<li>Right to left document template</li>
+	<li>Replacing hard coded values to the actual Curam structs</li>
+	<li>Modifying communication details by editing the communication from the list row menu</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

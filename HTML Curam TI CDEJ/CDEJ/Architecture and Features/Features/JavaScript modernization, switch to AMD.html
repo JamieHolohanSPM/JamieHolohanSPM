@@ -1,0 +1,115 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>JavaScript modernization, switch to AMD</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="JavaScript modernization, switch to AMD";
+    pageId="urn:lsid:ibm.com:td:7d0c9700-0fb3-4010-b1c7-ec3cb0e77136";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">JavaScript modernization, switch to AMD</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Overview</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii5">Module Loader</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">Module Format</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii3">Dependencies</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii4">Reliance on Synchronous Loading</a></div>
+
+<h2 dir="ltr" id="ii1">Overview</h2>
+
+<ul dir="ltr">
+	<li>what we mean by modernization?
+	<ul>
+		<li>mainly keeping pace with Dojo evolution</li>
+		<li>but should also keep an eye on evolution in JavaScript, HTML, CSS and broader browser-based apps developments</li>
+	</ul>
+	</li>
+	<li>we started when old module loader was the only option</li>
+	<li>over time it evolved, but we couldn't keep up</li>
+	<li>mostly because we don't have a cutlure of continuous refactoring and mature maintenance practices so people are afraid to touch code to improve it</li>
+	<li>relying on legacy mode holds us back in important ways</li>
+	<li>impact on app dev teams when we make the switch</li>
+	<li>do all the work, then disable legacy mode in config</li>
+</ul>
+
+<h2 dir="ltr" id="ii5">Module Loader</h2>
+
+<ul dir="ltr">
+	<li>a software component which enables modularization of JS code</li>
+	<li>developed in times when there was no module support in JavaScript</li>
+	<li>no longer true for the future: see <a href="https://people.mozilla.org/~jorendorff/es6-draft.html#sec-imports">ECMAScript6&nbsp;draft&nbsp;spec</a> and a good summary <a href="http://www.2ality.com/2014/09/es6-modules-final.html">intro</a>.</li>
+	<li>instead of a single plain script file you separate your code out into multiple modules along some logical structure and place these in separate files</li>
+	<li>code can then declare dependency on one or more of these and module loader ensures they are available as needed</li>
+</ul>
+
+<h2 dir="ltr" id="ii2">Module Format</h2>
+
+<ul dir="ltr">
+	<li>CDEJ mostly converted, but not 100% yet, we even have some non-module / plain script files</li>
+	<li>modules in new format alone are a necessary, but insufficient condition for the full switch and also for testing based on Intern</li>
+	<li>we need to push this requirement across to application code as well, where often there is only plain script files and sometimes not even this and code is put directly into HTML
+	<ul>
+		<li>the sooner the better! (V7?)</li>
+	</ul>
+	</li>
+	<li>show examples</li>
+</ul>
+
+<h2 dir="ltr" id="ii3">Dependencies</h2>
+
+<ul dir="ltr">
+	<li>all dependencies need to be declared to enable the full switch, again a necessary, but insufficient condition on its own
+	<ul>
+		<li>again, app devs must adhere to this before we can switch and use Intern for testing</li>
+	</ul>
+	</li>
+	<li>some large modules need to be split up</li>
+	<li>with legacy mode of the loader there is significant performance cost in processing large dependency trees</li>
+	<li>so we employ some optimizations/hacks to speed up loading - these need to go and we can only do this if we switch to "modern" AMD loader mode
+	<ul>
+		<li>examples of the hacks</li>
+	</ul>
+	</li>
+	<li>cdej.js (and other CDEJ) layer files, have modules in it - preloaded if using legacy mode - app devs depend on it</li>
+</ul>
+
+<h2 dir="ltr" id="ii4">Reliance on Synchronous Loading</h2>
+
+<ul dir="ltr">
+	<li>last - and the most difficult - bit is that in places our code is subtly dependent on synchronous loading</li>
+	<li>subtly == there is no simple way to find those places by search or static analysis</li>
+	<li>this means we will have to do manual review of code
+	<ul>
+		<li>we can probably come up with some guidelines though TODO!</li>
+	</ul>
+	</li>
+	<li>this can be done now, so again the earlier the better!</li>
+	<li>show examples</li>
+</ul></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

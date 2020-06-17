@@ -1,0 +1,643 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Getting started with TI-CDEJ Development</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../wiki.css" />
+<script type="text/javascript" src="../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Getting started with TI-CDEJ Development";
+    pageId="urn:lsid:ibm.com:td:696430dd-f3c2-4cd3-b87e-618eb8de5806";
+    toRoot="../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Getting started with TI-CDEJ Development</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h1 dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Getting started with TI-CDEJ Development</h1>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii1" name="intInfo" style="border-radius: 6px;">
+<div id="ii1info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii1" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="head-4005ad42736ddfa011598ecdcbf59005cacf3ec9">Purpose</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="head-8a6c97948eb24b9635ab725f6767e8111d8a5ad3">Prerequisites</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="head-cf6997ca3ebec0aa706fea48abe88ec28c26c7ac">Set Up a ClearCase Development Stream and View</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="head-da5040d7046cbd38a160c5f341a00681aa4539e3">Next Steps</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="head-3fbfb82a6d8a4f2c609e694830b02ea5c840c644">Dynamic UIM Project</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="head-65c2712fd0928b9b42880a23d99d09a28e668610">Tabbed UI Project</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="head-9931ea20f14a862fd8f1ba63120d62719329972a">Coding Standards</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="head-43794c7a9490c89dc395351d205ed449620144db">QUICK Set Up the Development Environment &amp; application</a></div>
+
+<h2 dir="ltr" id="head-4005ad42736ddfa011598ecdcbf59005cacf3ec9" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Purpose</h2>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">This describes how to set up your development environment, how to pull down a JDE development stream and create a view for working on the CDEJ project.</p>
+
+<h2 dir="ltr" id="head-8a6c97948eb24b9635ab725f6767e8111d8a5ad3" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Prerequisites</h2>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">You should install the following software:</p>
+
+<div dir="ltr">
+<table align="center" border="1" dir="ltr" height="212" style="font-family: 'helvetica neue',helvetica,arial,sans-serif; width: 877px;" width="834">
+	<tbody>
+		<tr>
+			<td style="width: 260px; text-align: center; background-color: rgb(204, 204, 204);"><span style="font-size: 16px;"><strong>Software</strong></span></td>
+			<td style="width: 194px; text-align: center; background-color: rgb(204, 204, 204);"><font size="3"><span style="line-height: 24px;"><b>Purpose</b></span></font></td>
+			<td style="width: 142px; text-align: center; background-color: rgb(204, 204, 204);"><span style="font-size: 16px;"><strong>Version</strong></span></td>
+			<td style="width: 253px; text-align: center; background-color: rgb(204, 204, 204);"><font size="3"><b>Installation Guidelines</b></font></td>
+		</tr>
+		<tr>
+			<td style="width: 260px; text-align: center;">ClearCase / ClearQuest</td>
+			<td style="width: 194px; text-align: center;">Development</td>
+			<td style="width: 142px; text-align: center;">8.0.1.7</td>
+			<td style="width: 253px; text-align: center;"><a href="https://w3-connections.ibm.com/communities/service/html/communitystart?communityUuid=96aa6eef-d31e-4e5b-85fd-1c490007741a#fullpageWidgetId=Wc1d9edf4184a_4d79_99c6_108824482d41" target="_blank">How&nbsp;to&nbsp;install&nbsp;CC&nbsp;&amp;&nbsp;CQ</a></td>
+		</tr>
+		<tr>
+			<td style="width: 260px; text-align: center;">Rational Software Architect (RSA)</td>
+			<td style="width: 194px; text-align: center;">Development/Modelling</td>
+			<td style="width: 142px; text-align: center;">
+			<p>9.1.2</p>
+			</td>
+			<td style="width: 253px; text-align: center;"><a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" href="Getting%20started%20with%20TI-CDEJ%20Development/RSA%20Installation.html" id="wikiLink1456850393143" page="RSA Installation">How to install RSA</a></td>
+		</tr>
+		<tr>
+			<td style="width: 260px; text-align: center;">Chrome</td>
+			<td style="width: 194px; text-align: center;">Testing/Investigation</td>
+			<td style="width: 142px; text-align: center;">Latest</td>
+			<td style="width: 253px; text-align: center;">Simply download it from <a href="https://w3-03.ibm.com/tools/cm/iram/oslc/assets/4E91C884-DFDB-E14E-6F76-75D569FB5A4A/2013" target="_blank">IRAM&nbsp;site</a>.</td>
+		</tr>
+		<tr>
+			<td style="width: 260px; text-align: center;">Firefox</td>
+			<td style="width: 194px; text-align: center;">Testing/Accessibility/Investigation</td>
+			<td style="width: 142px; text-align: center;">38.3.0 ESR</td>
+			<td style="width: 253px; text-align: center;">How to install Firefox.</td>
+		</tr>
+		<tr>
+			<td style="width: 260px; text-align: center;">Firebug</td>
+			<td style="width: 194px; text-align: center;">Testing/Accessibility/Investigation</td>
+			<td style="width: 142px; text-align: center;">2.0.8</td>
+			<td style="width: 253px; text-align: center;">How to install Firebug.</td>
+		</tr>
+		<tr>
+			<td style="width: 260px; text-align: center;">Dynamic Assessment Plugin</td>
+			<td style="width: 194px; text-align: center;">Accessibility</td>
+			<td style="width: 142px; text-align: center;">450.cio.1.1</td>
+			<td style="width: 253px; text-align: center;"><a wiki="W88ee03f8907c_412b_a3a8_988dabb72b35" href="https://w3-connections.ibm.com/wikis/home?lang=en-us#!/wiki/W88ee03f8907c_412b_a3a8_988dabb72b35/page/Dynamic%20Assessment%20Plugin" id="wikiLink1445432822701" page="Dynamic Assessment Plugin">How&nbsp;to&nbsp;install&nbsp;DAP</a></td>
+		</tr>
+		<tr>
+			<td style="width: 260px; text-align: center;">Internet Explorer</td>
+			<td style="width: 194px; text-align: center;">Testing/Accessibility/Investigation</td>
+			<td style="width: 142px; text-align: center;">Check Supported Browsers (<a href="https://w3-connections.ibm.com/blogs/46c1ae46-ccb5-4fad-b298-e0a633d8b6ae?lang=en_gb" target="_blank">link&nbsp;1</a>, <a href="http://www-01.ibm.com/support/docview.wss?uid=swg27036661#webbrow" target="_blank">link&nbsp;2</a>)</td>
+			<td style="width: 253px; text-align: center;"><a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" href="Getting%20started%20with%20TI-CDEJ%20Development/Internet%20Explorer%20Installation.html" id="wikiLink1456850393144" page="Internet Explorer Installation">How to install Internet Explorer.</a></td>
+		</tr>
+		<tr>
+			<td style="width: 260px; text-align: center; background-color: rgb(255, 255, 204);"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Websphere Application Server for Developers (WAS)</span></td>
+			<td style="width: 194px; text-align: center; background-color: rgb(255, 255, 204);">Development<br />
+			(<strong>Not required for CDEJ</strong>)</td>
+			<td style="width: 142px; text-align: center; background-color: rgb(255, 255, 204);">8.5.5.5</td>
+			<td style="width: 253px; text-align: center; background-color: rgb(255, 255, 204);"><a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" target="_blank" href="Getting%20started%20with%20TI-CDEJ%20Development/WebSphere%20Application%20Server%20installation.html" id="wikiLink1456850393145" page="WebSphere Application Server installation">How to install WebSphere Application Server</a>.</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><span style="line-height: 1.5;">A database and a "real" application server are not really needed for client infrastructure development. The test application used - the&nbsp;</span><em style="line-height: 1.5;">ClientMockApp </em><span style="line-height: 1.5;">- has a mock back-end layer that simulates the presence of a server application and database, but no real server or database is actually started. You could just borrow someone else's&nbsp;</span><tt>j2ee.jar</tt><span style="line-height: 1.5;">&nbsp;file and leave it at that.</span></p>
+
+<h2 dir="ltr" id="head-cf6997ca3ebec0aa706fea48abe88ec28c26c7ac" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Set Up a ClearCase Development Stream and View</h2>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">To keep the page organised, the ClearCase Development guide has been moved here: <a lconnwikimacro="wikilink" href="Getting%20started%20with%20TI-CDEJ%20Development/Using%20ClearCase%20in%20TI.html" lconnwikiparamwikipage="Using ClearCase in TI">ClearCase in TI</a></p>
+
+<h2 dir="ltr" id="head-da5040d7046cbd38a160c5f341a00681aa4539e3" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Next Steps</h2>
+
+<p dir="ltr"><span style="background-color:#FF0000;">Links in this section are obsolete - Curzilla to be sunset at end of October 2015.</span></p>
+
+<h3 dir="ltr" id="head-3fbfb82a6d8a4f2c609e694830b02ea5c840c644" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Dynamic UIM Project</h3>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">You should check that you can run tests and generate&nbsp;<em>Clover</em>&nbsp;coverage reports by following the instructions on the development workflow here:&nbsp;<a href="http://curzilla.curamsoftware.com/EJB/TechInf/ClientTeam/ClientTesting/TestingInfrastructure">TechInf/ClientTeam/ClientTesting/TestingInfrastructure</a>.</p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">There is more information about the structure of the newer client projects here:&nbsp;<a href="http://curzilla.curamsoftware.com/EJB/TechInf/ClientTeam/WhitePapers/UsingComponentBuildScripts">TechInf/ClientTeam/WhitePapers/UsingComponentBuildScripts</a>.</p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">TODO: "TestingInfrastructure" page is confusing. Move this information back to top-level "Next Steps" once that is sorted.</p>
+
+<h3 dir="ltr" id="head-65c2712fd0928b9b42880a23d99d09a28e668610" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Tabbed UI Project</h3>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Now that we have build the JDE the next step is to setup the TabTestApp. Follow the instructions here:&nbsp;<a href="http://curzilla.curamsoftware.com/EJB/TechInf/ClientTeam/NewStarter/SettingUpForTheNewUIProject/SettingUpTheTabTestApp">/SettingUpTheTabTestApp</a>.</p>
+
+<h2 dir="ltr" id="head-9931ea20f14a862fd8f1ba63120d62719329972a" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Coding Standards</h2>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><a href="http://curzilla.curamsoftware.com/EJB/TechInf">TechInf</a>&nbsp;have a coding standard that there should be no trailing whitespace in our Java source code. This is validated by !Checkstyle. Setup the following shortcut in Eclipse to quickly remove trailing whitespace:</p>
+
+<ul dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+	<li>
+	<p>Open the preferences dialog with the&nbsp;<em>Window-&gt;Preferences</em>&nbsp;menu.</p>
+	</li>
+	<li>
+	<p>In the preferences tree go to&nbsp;<em>General-&gt;Keys</em>.</p>
+	</li>
+	<li>
+	<p>In the list of commands select "Remove Trailing Whitespace". (Use the search filter to find this quickly)</p>
+	</li>
+	<li>
+	<p>Set the focus to the "Binding" input box.</p>
+	</li>
+	<li>
+	<p>Press the key sequence you wish to use for removing trailing whitespace. (e.g.&nbsp;<em>Ctrl+Alt+R</em>&nbsp;does clash with any of the in-build Eclipse shortcuts).</p>
+	</li>
+	<li>
+	<p>A&nbsp;<em>When</em>&nbsp;dropdown list will then appear, set this to "In Windows".</p>
+	</li>
+</ul>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">TODO: The CDEJ projects should make use of the "Save Actions" feature to do code-formatting when a file is saved. TODO: provide links to coding standards!</p>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;</p>
+
+<h2 dir="ltr" id="head-43794c7a9490c89dc395351d205ed449620144db" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><a id="QUICK Set Up the Development E" name="QUICK Set Up the Development E">QUICK Set Up the Development Environment &amp; application</a></h2>
+
+<p dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Follow these instructions to create a new development environment for your snapshot view:</p>
+
+<ol dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;" type="1">
+	<li>
+	<p>Open a command prompt and change to your JDE root (to your project root = TIVOB) directory.</p>
+	</li>
+	<li>
+	<p>Set the environment variables using one of the methods below:</p>
+
+	<ol>
+		<li>
+		<p>I<strong>F you have WebSphere already installed</strong>, you can create/populate a file named&nbsp;<strong>setenv.bat</strong> with the following code</p>
+
+		<ul>
+			<li>
+			<pre>
+set WAS_HOME=%DEVENV_HOME%\tools\websphere
+set JAVA_HOME=%WAS_HOME%\java
+set J2EE_JAR=%WAS_HOME%\lib\j2ee.jar</pre>
+			</li>
+		</ul>
+		</li>
+		<li>
+		<p><strong>If you do not have WAS installed</strong> you can install it using the bootstrapped version of WAS by running the command below:</p>
+		</li>
+	</ol>
+	</li>
+</ol>
+
+<ul dir="ltr">
+	<li>
+	<pre>
+set JAVA_HOME to the JAVA location in devenv tools i.e &lt;TIIVOB&gt;\devenv\tools\java or %DEVENV%\tools\java. Then set PATH=%JAVA_HOME%\bin;%PATH%
+<span style="font-size:20px;"><strong>.</strong></span> <strong>install-appserver.bat was</strong></pre>
+	</li>
+</ul>
+
+<ol dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;" type="1">
+	<li class="gap">
+	<p>Setup the development environment installer</p>
+
+	<ul>
+		<li style="list-style-type: none;">
+		<table border="1" height="58" width="608">
+			<tbody>
+				<tr>
+					<td style="width: 500px;">
+					<pre>
+<strong>  TIVOB-root&gt;</strong> build dummy.<strong> this will fail you will get an error = dummy does not exist in the project</strong> </pre>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<p>&nbsp;</p>
+		</li>
+	</ul>
+	</li>
+	<li class="gap">
+	<p>Set up the&nbsp;<strong><span style="font-size:14px;"><tt>coreinf\properties\Bootstrap.properties</tt></span></strong>&nbsp;and&nbsp;<strong><span style="font-size:14px;"><tt>coreinf\properties\AppServer.properties</tt></span></strong>&nbsp;files. Create these files by copying the sample files located in the same directory and editing them as appropriate. If you have an existing development stream for another project, you can copy them from there and make any necessary changes.</p>
+	</li>
+</ol>
+
+<ul dir="ltr" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+	<li style="list-style-type: none;">
+	<p>sample <em>Bootstrap.properties</em> file</p>
+	</li>
+	<li style="list-style-type: none;">
+	<table border="1" style="width: 627px;">
+		<tbody>
+			<tr>
+				<td style="width: 617px;">
+				<p><span style="font-family:courier new,courier,monospace;">curam.environment.bindings.location=C:/CC/&lt;stream directory&gt;/TIVOB/coreinf/properties<br />
+				curam.environment.tnameserv.port=900</span></p>
+
+				<p><span style="font-family:courier new,courier,monospace;"># H2<br />
+				curam.db.type=H2<br />
+				curam.db.name=Curam_TI_MAIN<br />
+				curam.db.username=h2admin<br />
+				# The encrypted password is "password"<br />
+				curam.db.password=HlIxprF/66CsSSm6PON5+A==<br />
+				curam.db.h2.directory=C:/Exclude/H2<br />
+				curam.db.h2.mode=embedded<br />
+				curam.db.serverport=9092<br />
+				curam.db.servername=localhost</span></p>
+
+				<p><span style="font-family:courier new,courier,monospace;"># Needed for Eclipse/RWD only<br />
+				curam.testing.datasets=C:/CuramJDE/TestDatasets</span></p>
+
+				<p><span style="font-family:courier new,courier,monospace;">dbtojms.credentials.encr.text=b8nbWgbJtUFIZ25vODA4Vw==</span></p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<pre>
+<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.5;">To check the encrypted password
+</span><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">If you get any error building the DB, regenerate your password running</span>
+<span style="line-height: normal; font-family: 'courier new', courier, monospace;">appbuild encrypt -Dpassword="</span><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal;">YourPassword</span><span style="line-height: normal; font-family: 'courier new', courier, monospace;">"</span>
+
+<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.5;"><strong>Optional step: Open Start and run the Profile Management Tool, Create a Typical Profile / Application server</strong>
+User: websphere
+Password: websphere1
+
+In one of the next screen you will see YOUR Node for the AppServer.properties file
+</span><img alt="" id="1430317669881_0" src="Getting%20started%20with%20TI-CDEJ%20Development._ATTACHMENTS_/editor_image_3277f659-d928-4107-8b27-f814a5ba0dbe.png"></img>
+
+<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.5;">sample&nbsp;<em>AppServer.properties</em> file (note, most of these properties are not optional)<em>:</em></span>
+</pre>
+	</li>
+	<li style="list-style-type: none;">
+	<table border="1" style="width: 627px;">
+		<tbody>
+			<tr>
+				<td style="width: 672px;">
+				<p><span style="font-family:courier new,courier,monospace;">## APPLICATION SERVER PROPERTIES<br />
+				## IT IS VERY IMPORTANT TO USE '/' FOR DIRECTORY PATHS. ##</span></p>
+
+				<p><span style="font-family:courier new,courier,monospace;"># Property to indicate whether WAS, WLS, or NAS was installed. Sample values are IBM/BEA/SAP.<br />
+				as.vendor=IBM</span></p>
+
+				<p><span style="font-family:courier new,courier,monospace;"># The username and password for admin server.<br />
+				security.username=websphere</span></p>
+
+				<p><span style="font-family:courier new,courier,monospace;">#&nbsp; encrypted password 'websphere'<br />
+				security.password=RZq542wPRdtvDXdmXiln9A==</span></p>
+
+				<p><span style="font-family:courier new,courier,monospace;">#&nbsp; THESE TWO PROPERTIES NOT IMPORTANT<br />
+				curam.security.credentials.jms.messagedrivenbean.username=SYSTEM<br />
+				curam.security.credentials.jms.messagedrivenbean.password=hIAidlp83Q8=</span></p>
+
+				<p>&nbsp;</p>
+
+				<p><span style="font-family:courier new,courier,monospace;"># The name of the WebSphere Node or WebLogic Domain Name. </span><br />
+				<span style="font-family:courier new,courier,monospace;">node.name=DSLVM122Node01</span></p>
+
+				<p><span style="font-family:courier new,courier,monospace;">#######################################################<br />
+				## THE FOLLOWING PROPERTY IS FOR WLS AND WAS ONLY&nbsp;&nbsp;&nbsp; ##<br />
+				#######################################################<br />
+				# The name of the server on which the application will be hosted.<br />
+				curam.server.name=CuramServer<br />
+				# The default port for WAS is 2809, for WLS is 7001, for NAS is 50504<br />
+				curam.server.port=2809</span></p>
+
+				<p><span style="font-family:courier new,courier,monospace;">############################################<br />
+				## THE FOLLOWING PROPERTY IS FOR WAS ONLY ##<br />
+				############################################<br />
+				# The alias that should be used for the database authorisation<br />
+				curam.db.auth.alias=databaseAlias</span></p>
+
+				<p><span style="font-family:courier new,courier,monospace;">###############################################<br />
+				## THE FOLLOWING PROPERTIES ARE FOR WLS ONLY ##<br />
+				###############################################</span></p>
+
+				<p><span style="font-family:courier new,courier,monospace;"># The host of the application server a Curam Server application is to be installed on.<br />
+				curam.server.ipaddress=localhost</span></p>
+
+				<p><span style="font-family:courier new,courier,monospace;">###############################################<br />
+				## THE FOLLOWING PROPERTIES ARE FOR NAS ONLY ##<br />
+				## THESE PROPERTIES HAVE SAMPLE VALUES AND&nbsp;&nbsp; ##<br />
+				## SHOULD BE CONFIGURED WITH CORRECT VALUES. ##<br />
+				###############################################<br />
+				# JDBC driver name defined in the NAS NWA<br />
+				# It must NOT contain the "_" character<br />
+				curam.db.driver=oracle</span></p>
+
+				<p><span style="font-family:courier new,courier,monospace;"># NetWeaver Telnet port<br />
+				nas.telnet.port=50508</span></p>
+
+				<p><span style="font-family:courier new,courier,monospace;"># NetWeaver installation values<br />
+				nas.system.id=CE1<br />
+				nas.java.instance.number=05<br />
+				nas.scs.instance.number=06<br />
+				nas.db.home=C:/sapdb</span></p>
+
+				<p><span style="font-family:courier new,courier,monospace;">#######################################################<br />
+				## THE FOLLOWING PROPERTIES ARE FOR NAS AND WAS ONLY ##<br />
+				#######################################################<br />
+				# HTTP Port for the server on which the Web services<br />
+				# will be accessed. Default value is 9082 for WAS and 50500 for NAS.<br />
+				curam.webservices.httpport=9082</span></p>
+
+				<p><span style="font-family:courier new,courier,monospace;"># HTTP Port for the server on which the client<br />
+				# will be accessed.<br />
+				curam.client.httpport=$HTTPS_PORT</span></p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<pre>
+&nbsp;</pre>
+	</li>
+</ul>
+
+<ol dir="ltr" start="6" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; list-style-type: decimal;" type="1">
+	<li>
+	<p>Copy&nbsp;<a files="files" href="https://w3-connections.ibm.com/files/form/anonymous/api/library/2f2e3dd4-a3b3-49d9-ab5d-d17fe1ba05c5/document/65c4c88f-c9f4-457d-a8d3-027ed97cc305/media/CryptoConfig.jar" ic="ic" source="files" target="_blank" title="Download CryptoConfig.jar" uuid="65c4c88f-c9f4-457d-a8d3-027ed97cc305"><img aria-hidden="true" class="lconn-ftype16 lconn-ftype16-jar" src="https://w3-connections.ibm.com/common/resources/web/com.ibm.lconn.core.styles.oneui3/images/blank.gif?etag=20150131.201808"></img><strong>CryptoConfig.jar</strong></a><span aria-hidden="true" class="lotusDivider" role="img">|</span><a href="https://w3-connections.ibm.com/files/app/file/65c4c88f-c9f4-457d-a8d3-027ed97cc305" target="_blank" title="View details of CryptoConfig.jar">View Details</a> to %JAVA_HOME%\jre\lib\ext , and &nbsp;in \TIVOB\devenv\tools\java\jre\lib\ext (if different).</p>
+	</li>
+	<li class="gap">
+	<p>Build the JDE</p>
+
+	<ul>
+		<li style="list-style-type: none;">
+		<table border="1" style="width: 500px;">
+			<tbody>
+				<tr>
+					<td style="width: 500px;">
+					<pre>
+<strong>JDE-root&gt;</strong> build server client</pre>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<p>If this build does not succeed, then run the&nbsp;<strong>clean</strong>&nbsp;target and try again. If that does not work, seek help.</p>
+		</li>
+	</ul>
+	</li>
+	<li class="gap">
+	<p>Build client mock app</p>
+
+	<ul>
+		<li style="list-style-type: none;">
+		<table border="1" style="width: 500px;">
+			<tbody>
+				<tr>
+					<td style="width: 500px;">
+					<pre>
+<strong>JDE-root&gt;</strong> build clientmockapp</pre>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<p>you may get an error here TIVOB\build\gen\wasloginmodule\Stubs.jar' doesn't exist. that is related to WAS server not having a profile</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Create the Eclipse project files for the client "component" projects:</p>
+
+	<ul>
+		<li style="list-style-type: none;">
+		<table border="1" style="width: 500px;">
+			<tbody>
+				<tr>
+					<td style="width: 500px;">
+					<pre>
+<strong>JDE-root&gt;</strong> build.bat -f client\components\build.xml eclipse</pre>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<p>&nbsp;</p>
+		</li>
+	</ul>
+	</li>
+	<li class="gap">
+	<p>Create the Eclipse project files for the client "JDECommons" projects:</p>
+
+	<ul>
+		<li style="list-style-type: none;">
+		<table border="1" style="width: 500px;">
+			<tbody>
+				<tr>
+					<td style="width: 500px;">
+					<pre>
+<strong>JDE-root&gt;</strong> build.bat -f commons\build.xml eclipse</pre>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<p>&nbsp;</p>
+		</li>
+	</ul>
+	</li>
+	<li class="gap">
+	<p>Build&nbsp;<a class="nonexistent" href="http://curzilla.curamsoftware.com/EJB/TabTest">TabTest</a>&nbsp;application &amp; Database</p>
+
+	<ul>
+		<li style="list-style-type: none;">
+		<table border="1" style="width: 500px;">
+			<tbody>
+				<tr>
+					<td style="width: 500px;">
+					<pre>
+<strong>JDE-root&gt;</strong> build tabtestapp tabtestdatabase</pre>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<p>&nbsp;</p>
+		</li>
+	</ul>
+	</li>
+	<li class="gap">
+	<p>Start Eclipse using&nbsp;<strong><span style="font-size:14px;"><tt>devenv\eclipse.bat</tt></span></strong></p>
+	</li>
+	<li class="gap">
+	<p>In Eclipse, import the preferences file&nbsp;<span style="font-size:12px;"><tt>devenv\eclipseenv\curam.epf</tt></span>. Select&nbsp;<em>File-&gt;Import...</em>, expand the&nbsp;<em>General</em>&nbsp;node in the tree in the&nbsp;<em>Import</em>&nbsp;dialog box, and double-click&nbsp;<em>Preferences</em>. Browse to the preferences file, ensure&nbsp;<em>Import all</em>&nbsp;is selected and click&nbsp;<em>Finish</em>. This will provide the basic settings for your classpath variables and other preferences. Note: If you have a lot of custom editor preferences set in another copy of Eclipse that you would rather not have to set all over again, you can export those preferences from that copy of Eclipse and import them into your new copy of Eclipse&nbsp;<em>before</em>&nbsp;importing the&nbsp;<tt>curam.epf</tt>&nbsp;file. (You can always re-import&nbsp;<tt>curam.epf</tt>&nbsp;last, if you started in the wrong order.)</p>
+	If you don't see Tomcat plugin in the toolbar delete the following files:</li>
+</ol>
+
+<table align="center" border="1" dir="ltr" style="width: 627px;">
+	<tbody>
+		<tr>
+			<td style="width: 727px;">
+			<p class="gap" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><span style="font-size:12px;"><span style="font-family: courier new,courier,monospace;">{DEVENV_HOME}\eclipseenv\eclipse-extensions\checkstyle_plugin\artifacts.jar</span></span></p>
+
+			<p class="gap" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"><span style="font-size:12px;"><span style="font-family: courier new,courier,monospace;">{DEVENV_HOME}eclipseenv\eclipse-extensions\checkstyle_plugin\content.jar</span></span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<ol dir="ltr" start="14" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; list-style-type: decimal;" type="1">
+	<li class="gap">
+	<p>Open TIVOB/devenv/tools/tomcat/RELEASE-NOTES in a text editor. &nbsp;If the version is 7.x, in eclipse&nbsp;goto Window &gt; Preferences &gt; Tomcat and set the version to&nbsp;7.x</p>
+	</li>
+	<li class="gap">
+	<p>Select&nbsp;<em>File-&gt;Import...</em>&nbsp;from the main menu and double-click&nbsp;<em>General/Existing Projects into Workspace</em>. Use the&nbsp;<em>Select root directory</em>&nbsp;option and&nbsp;<em>Browse...</em>&nbsp;to the&nbsp;<tt>&lt;JDE-root&gt;</tt>&nbsp;directory. Check the projects below and click finish. That completes all of the client project imports.</p>
+	</li>
+</ol>
+
+<ul dir="ltr" style="font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif;">
+	<li class="gap">
+	<p>The minimum set of projects required to run the Tab Test App is as follows:</p>
+	</li>
+</ul>
+
+<p class="gap" dir="ltr" style="margin-left: 80px;"><img lconnwikiparamattachmentname="minimum-projects.png" src="Getting%20started%20with%20TI-CDEJ%20Development._ATTACHMENTS_/minimum-projects.png" lconnwikiparamwikipage="How to Set Up a JDE Development Stream for the CDEJ Project" lconnwikimacro="image" width="191" height="352" alt=""></img></p>
+
+<ul dir="ltr" style="font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif;">
+	<li class="gap">
+	<p>You may need these others depending on what areas you are working in:</p>
+
+	<ul>
+		<li>
+		<p>AppInf</p>
+		</li>
+		<li>
+		<p>client-inf</p>
+		</li>
+		<li>
+		<p>client-persistence</p>
+		</li>
+		<li>
+		<p>ClientMockApp</p>
+		</li>
+		<li>
+		<p>commons-testing</p>
+		</li>
+		<li>
+		<p>CoreInf</p>
+		</li>
+		<li>
+		<p>duim-generator</p>
+		</li>
+		<li>
+		<p>general-plug-ins</p>
+		</li>
+		<li>
+		<p>Generator</p>
+		</li>
+		<li>
+		<p>JDECommons</p>
+		</li>
+		<li>
+		<p>mobile-sdk (<strong>required just for TI_MAIN stream copies</strong>)</p>
+		</li>
+		<li>
+		<p>plug-in-core</p>
+		</li>
+		<li>
+		<p>plug-in-framework</p>
+		</li>
+		<li>
+		<p>renderer-model</p>
+		</li>
+		<li>
+		<p>renderer-plug-ins</p>
+		</li>
+		<li>
+		<p>resource-manager</p>
+		</li>
+		<li>
+		<p>ServerCore</p>
+		</li>
+		<li>
+		<p>TabTestClient</p>
+		</li>
+		<li>
+		<p>TabTestServer</p>
+		</li>
+		<li>
+		<p>test-framework</p>
+		</li>
+		<li>
+		<p>TestModel</p>
+		</li>
+		<li>
+		<p>Tooling (<strong>Needed for TI_6_0_FP stream and newer streams</strong>)</p>
+		</li>
+		<li>
+		<p>UnitTests</p>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<ol dir="ltr" start="14" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; list-style-type: decimal;" type="1">
+	<li>
+	<p><strong>ADDITIONAL CONFIGURATION JUST FOR TI_6_0_5_FP stream copies</strong>. In Eclipse:</p>
+
+	<ul>
+		<li>
+		<p>From Window --&gt; Preferences --&gt; Java --&gt; Installed JREs change the "Installed JRE" Location to "C:\Exclude\WAS8\java"</p>
+		</li>
+		<li>
+		<p>From Window --&gt; Preferences --&gt; Java --&gt; Compiler change the "Compiler compliance level:" from 1.7 to 1.6.</p>
+		</li>
+		<li>
+		<p>Refresh, clean and re-build all the imported projects in the Workspace.</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>These projects should now build successfully in Eclipse. The "ClientMockApp" project may report some Checkstyle errors, but that is OK, these are in a particular area of the code that will be ignored by the builder machines.</p>
+	</li>
+	<li>
+	<p>Setup runtime configurations for&nbsp;StartServer&nbsp;&amp; RMILoginClient - both found in the&nbsp;TabTestServer/ project. i.e components/core/source/(default package).</p>
+	</li>
+	<li>
+	<p>Now run&nbsp;StartServer (If you get a MarshalException or ClassNotFoundException later, ensure you are using the StartServer.java from TestTabServer and NOT the one from TestModel.)</p>
+	</li>
+	<li>
+	<p>Once complete, right-click on the "TabTestClient" project and select&nbsp;<em>Tomcat project-&gt;Update context definition</em>&nbsp;from the menu. Hit&nbsp;<em>OK</em>&nbsp;in the confirmation dialog. That will configure&nbsp;<em>Tomcat</em>&nbsp;for you.<br />
+	You might get an error here saying that Eclipse cannot update the context definition. Check that there the following folder exists on the filesystem (add if manually if not, just manually create empty folders)<br />
+	DEVENV_HOME\tools\tomcat\conf\Catalina\localhost</p>
+	</li>
+	<li>
+	<p>Select&nbsp;<em>Tomcat-&gt;Start Tomcat</em>&nbsp;from the main menu. Your&nbsp;<em>Console</em>&nbsp;view should show tomcat starting up. You should not see any error; seek help if you do.</p>
+	</li>
+	<li>
+	<p>Point your browser to&nbsp;<tt><a href="http://localhost:9080/TabTest/AppController.do">http://localhost:9080/TabTest/AppController.do</a></tt>. Application should start up.</p>
+	</li>
+	<li>
+	<p>To run the arabic application</p>
+	</li>
+	<li>
+	<p>run RMILoginClient</p>
+	</li>
+	<li>
+	<p>login as arabic/password</p>
+	</li>
+	<li class="gap">
+	<p>To run the external app</p>
+	</li>
+	<li>
+	<p>run RMILoginClient</p>
+	</li>
+	<li>
+	<p>log in as uatest/password</p>
+	</li>
+	<li>
+	<p>Point browser at&nbsp;<tt><a href="http://localhost:9080/TabTest/application.do">http://localhost:9080/TabTest/application.do</a></tt>. External Application should start up.</p>
+	</li>
+</ol></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,153 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>CDEJ Architecture Overview</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../wiki.css" />
+<script type="text/javascript" src="../../wiki.js" ></script>
+<script type="text/javascript" src="../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="CDEJ Architecture Overview";
+    pageId="urn:lsid:ibm.com:td:ba30fdf5-d9d2-47c4-8f86-b70e5b59a6cb";
+    toRoot="../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">CDEJ Architecture Overview</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h1 dir="ltr">Overview</h1>
+
+<p dir="ltr">This page provides a complete high level overview of CDEJ architecture.</p>
+
+<p dir="ltr">It is also meant to serve as a single point/hub for accessing detailed CDEJ documentation.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h1 dir="ltr">High Level Architecture</h1>
+
+<p dir="ltr">The following are a couple of links to documents in which the overall architecture of the JDE (including the CDEJ) is discussed:</p>
+
+<ul dir="ltr">
+	<li><a href="CDEJ%20Architecture%20Overview._ATTACHMENTS_/Cu%CC%81ram%20Technical%20Architecture.pptx">Cúram&nbsp;Technical&nbsp;Architecture.pptx</a></li>
+</ul>
+
+<h1 dir="ltr" id="ii8">CDEJ Features</h1>
+
+<ul dir="ltr">
+	<li><a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" href=".html" id="wikiLink1424689350657" page="FILE_EDIT widget (Word Integration)">FILE_EDIT widget (Word Integration)</a></li>
+	<li><a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" href="Features/Confirmation%20Dialog%20when%20Leaving%20a%20Page.html" id="wikiLink1424689350658" page="Confirmation Dialog when Leaving a Page">Confirmation Dialog when Leaving a Page</a></li>
+	<li><a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" href="Features/Design%20of%20Expandable%20Lists%20feature.html" id="wikiLink1424689350659" page="Design of Expandable Lists feature">Design of Expandable Lists feature</a></li>
+	<li><a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" href="Features/Design%20of%20Tabbed%20UI%20%28Javascript%29.html" id="wikiLink1424689350660" page="Design of Tabbed UI (Javascript)">Design of Tabbed UI (Javascript)</a></li>
+	<li><a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" href="Features/Tabbed%20UI%20Configuration.html" id="wikiLink1424689350661" page="Tabbed UI Configuration">Tabbed UI Configuration</a></li>
+	<li><a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" href="Features/CDEJ%20JavaScript%20test%20and%20coverage%20infrastructure.html" id="wikiLink1424689350662" page="CDEJ JavaScript test and coverage infrastructure">CDEJ JavaScript test and coverage infrastructure</a></li>
+	<li><a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" href="Features/List%20pagination%20support.html" id="wikiLink1424689350663" page="List pagination support">List pagination support</a></li>
+	<li><a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" href="Features/Modal%20Dialog%20Infrastructure.html" id="wikiLink1424689350664" page="Modal Dialog Infrastructure">Modal Dialog Infrastructure</a></li>
+	<li><a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" href="Features/JavaScript%20modernization%2C%20switch%20to%20AMD.html" id="wikiLink1424689350665" page="JavaScript modernization, switch to AMD">JavaScript modernization, switch to AMD</a></li>
+	<li><a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" href="Features/JavaScript%20Localization.html" id="wikiLink1424689350666" page="JavaScript Localization">JavaScript Localization</a></li>
+	<li><a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" href="Features/CDEJ%20JavaScript%20-%20support%20for%20debugging%2C%20tracing%20and%20config.html" id="wikiLink1424689350667" page="CDEJ JavaScript - support for debugging, tracing and config">CDEJ JavaScript - support for debugging, tracing and config</a></li>
+	<li><a wiki="W953a3b66c398_4024_a06d_931eafd64b1e" href="Features/Dojo%20Toolkit%20-%20integration%20into%20C%C3%BAram.html" id="wikiLink1424689350668" page="Dojo Toolkit - integration into Cúram">Dojo Toolkit - integration into Cúram</a></li>
+</ul>
+
+<h1 dir="ltr" id="ii9">Stories (CDEJ Use Cases)</h1>
+
+<p dir="ltr">The idea of this section is that we present some common use cases and use these as a way to demonstrate how different parts of the infrastructure play together in satisfying the use case requirements. Put another way the stories act as a kind of critical path through the infrastructure, touching all the important elements and giving us the opportunity to provide a meaningful way to describe how it works.</p>
+
+<ul dir="ltr">
+	<li><a lconnwikimacro="wikilink" href="Features/Rendering%20C%C3%BAram%20UI.html" lconnwikiparamwikipage="Rendering Cúram UI">Rendering Cúram UI</a></li>
+</ul>
+
+<h1 dir="ltr" id="ii4">By Build Type</h1>
+
+<ul dir="ltr">
+	<li>Build scripts
+	<ul>
+		<li>JDE build</li>
+		<li>app build</li>
+	</ul>
+	</li>
+	<li>Code
+	<ul>
+		<li>build time: generators (XSLT, Java), custom Ant task implementations</li>
+		<li>runtime: rest of the code</li>
+	</ul>
+	</li>
+</ul>
+
+<h1 dir="ltr" id="ii5">By Technical Layer at Runtime</h1>
+
+<ul dir="ltr">
+	<li>Storage layer – DB</li>
+	<li>Business logic layer – BPOs</li>
+	<li>webtier – JSPs</li>
+	<li>client tier – Tabbed UI</li>
+</ul>
+
+<h1 dir="ltr" id="ii2">By Non-functional Requirements</h1>
+
+<ul dir="ltr">
+	<li>Security</li>
+	<li>l10n, g11n</li>
+	<li>performance</li>
+	<li>accessibilty</li>
+	<li>Look&amp;Feel</li>
+	<li>.</li>
+</ul>
+
+<h1 dir="ltr">Items to Flesh Out/Document</h1>
+
+<p dir="ltr">Build time</p>
+
+<p dir="ltr">- UIM<br />
+- JSP generator / XIM<br />
+- Cúram actions generator</p>
+
+<p dir="ltr">Runtime<br />
+- generated JSP screens<br />
+- hand crafted JSPs<br />
+- text helpers<br />
+- renderers<br />
+- converter plugins<br />
+- custom JSP tags<br />
+- various Java APIs<br />
+- caching</p>
+
+<p dir="ltr">- Cúram config files</p>
+
+<p dir="ltr">- custom validations</p>
+
+<p dir="ltr">- popups, selectors</p>
+
+<p dir="ltr">- file dowload/upload</p>
+
+<p dir="ltr">- session mgmt</p>
+
+<p dir="ltr">- app config</p>
+
+<p dir="ltr">- describe sever-client-rendering cycle</p>
+
+<p dir="ltr">&nbsp;&nbsp; - getnerated JSP, etc.</p>
+
+<p dir="ltr">&nbsp;&nbsp; - struts config</p>
+
+<p dir="ltr">- submitting forms, action, etc.</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,207 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Modeling Tooling Enhancements</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Modeling Tooling Enhancements";
+    pageId="urn:lsid:ibm.com:td:9c61acbc-2a82-4fda-8819-7a7c45125357";
+    toRoot="../../../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Modeling Tooling Enhancements</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">This page describes the requirements for the Cúram model and related modeling tooling in relation to the Cúram mobile development.</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Model</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii4">Mobile facades</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii5">Hierarchical relationships</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">Tooling</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii6">CuramStore support</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii9">Question: Is the input struct in the above instances limited to only one input struct or does the store allow for multiple to be set? I think multiple, based on its just a JSON object, but depends on how our API is working.</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii7">Potential Generated Output</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii3">Notes</a></div>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii1">Model</h2>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii4">Mobile facades</h3>
+
+<p dir="ltr">We need the ability to create BPO marked as a mobile facade so that:</p>
+
+<ul dir="ltr">
+	<li>at client generation phase we can build configuration for whitelisting facades</li>
+	<li>we can generate a different mobile request handler impl if we later decide to move from servlet to, say, webservices</li>
+	<li>we can set mobile specific properties, such as:
+	<ul>
+		<li>Content_Filtering=true|false</li>
+		<li>Expose_Publicly=true|false</li>
+	</ul>
+	</li>
+</ul>
+
+<h3 dir="ltr" id="ii5">Hierarchical relationships</h3>
+
+<p dir="ltr">CuramStore needs to support a notion of hierarchical relationships between items it returns - this part of the dojo/store API</p>
+
+<ul dir="ltr">
+	<li>we need to think if we could let developers model these relationships and then let the infrastructure handle the rest for them</li>
+	<li>if this is not modeled they will have to implement facades in certain way so that the API can make calls to find out children of a specific item</li>
+</ul>
+
+<h2 dir="ltr" id="ii2">Tooling</h2>
+
+<h3 dir="ltr" id="ii6">CuramStore support</h3>
+
+<p dir="ltr">We need a way to get help with creating mobile facade that conforms to the requirements of CuramStore, this means:</p>
+
+<ul dir="ltr">
+	<li>it has a set of methods with specific names (read, readMulti, insert, modify, remove)</li>
+	<li>methods will get pre-generated input/output structs, which can be later modified by developer</li>
+	<li>optionally also pre-generate an input struct for method options
+	<ul>
+		<li>this is relevant to the query, add, put methods</li>
+		<li>we think this kind of info will be passed from webtier as ordinary struct as opposed to some kind of out-of-band metadata</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">CuramStore expects the following methods, though we are not restricting users in their choosing of these names:</p>
+
+<table border="1" dir="ltr" style="width: 99%;">
+	<thead>
+		<tr>
+			<th scope="col">dojo/store method</th>
+			<th scope="col">Default Curam Facade Name</th>
+			<th scope="col">Notes</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+			<p>query(query, options)</p>
+			</td>
+			<td>listItems</td>
+			<td>
+			<p>Query method will take usually one parameter as input, but it should not be restricted to this.</p>
+
+			<p>In addition, an optional second struct may have to be modelled. This struct contains additional input to allow the server side to handling sorting and pagination. This information includes:</p>
+
+			<p align="left" style="margin:3.75pt 0cm;background-position:initial initial;background-repeat:initial initial;"><span style="font-family:courier new;"><span style="font-size:9pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "sort": ...</span></span></p>
+
+			<p align="left" style="margin:3.75pt 0cm;background-position:initial initial;background-repeat:initial initial;"><span style="font-family:courier new;"><span style="font-size:9pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "count": 10, &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></span></p>
+
+			<p align="left" style="margin:3.75pt 0cm;background-position:initial initial;background-repeat:initial initial;"><span style="font-family:courier new;"><span style="font-size:9pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "offset": 5</span></span></p>
+
+			<p align="left" style="margin:3.75pt 0cm;background-position:initial initial;background-repeat:initial initial;"><span style="font-family:courier new;"><span style="font-size:9pt;">Where this information is provided, the infrastructure does not attempt sorting/pagination and it is expected that additional information be included in the return struct, in addition to the list:</span></span></p>
+
+			<p align="left" style="margin:3.75pt 0cm;background-position:initial initial;background-repeat:initial initial;"><span style="font-family:courier new;"><span style="font-size:9pt;">&nbsp;&nbsp;&nbsp; "count:"</span></span></p>
+
+			<p align="left" style="margin:3.75pt 0cm;background-position:initial initial;background-repeat:initial initial;"><span style="font-family:courier new;"><span style="font-size:9pt;">TODO: Is there more options expected to be returned?</span></span></p>
+			</td>
+		</tr>
+		<tr>
+			<td>get(identity)</td>
+			<td>read</td>
+			<td>
+			<p>&nbsp;</p>
+			</td>
+		</tr>
+		<tr>
+			<td>put(object, options)</td>
+			<td>modify</td>
+			<td>Options - I believe here we are not supporting options on the read. Martin can you confirm</td>
+		</tr>
+		<tr>
+			<td>add(object, options)</td>
+			<td>insert</td>
+			<td>Options - I believe here we are not supporting options on the add. Martin can you confirm</td>
+		</tr>
+		<tr>
+			<td>remove(identity)</td>
+			<td>remove</td>
+			<td>
+			<p>&nbsp;</p>
+			</td>
+		</tr>
+		<tr>
+			<td>getIdentity</td>
+			<td>N/A</td>
+			<td>&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<h3 dir="ltr" id="ii9"><em>Question: Is the input struct in the above instances limited to only one input struct or does the store allow for multiple to be set? I think multiple, based on its just a JSON object, but depends on how our API is working.</em></h3>
+
+<h2 dir="ltr" id="ii7">Potential Generated Output</h2>
+
+<ul dir="ltr">
+	<li>We need to map the service name to the name of the text helper to invoke at runtime. There are two options for this:
+	<ul>
+		<li>Generate an XML file containing this information that is loaded to the database and can be queried at runtime, e.g. getTextHelper(serviceName)</li>
+		<li>Generate JavaContent that does the same. This latter option is not dynamic and would restrict potential future directions</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr" style="margin-left: 40px;">Note: Options associated with the service should be adjustable at runtime, e.g. content_filtering=disable should be changable at runtime. This means the generate option is not ideal.</p>
+
+<ul dir="ltr">
+	<li>If a query method is choosing to implement/use the options parameter we have a couple of choices for determining this:
+	<ul>
+		<li>By convention pick up the additional second struct in the method being invoked</li>
+		<li>Set a flag on the method in the model and have this information available at runtime, so we know to assume second/last struct is the options struct.</li>
+		<li>A generate option - where the struct is generated for us?</li>
+	</ul>
+	</li>
+</ul>
+
+<h2 dir="ltr" id="ii3">Notes</h2>
+
+<ul dir="ltr">
+	<li>we speak "mobile", but this API is equally to be used by conventional web apps</li>
+	<li>use cases:
+	<ul>
+		<li>we need special handling for some domains, such as codetables, where the client can request that we send down not only the single field value, but also the complete codetable (all codes, descriptions and default code)
+		<ul>
+			<li>presumably marking facade as mobile will suffice as we will be able to use appropriate handling based on this mobile flag and the fact there are codetable domain defs present</li>
+		</ul>
+		</li>
+		<li>client can request either raw or formatted data</li>
+		<li>we need ability to allow extra information both to be sent to server and/or back to client
+		<ul>
+			<li>for example dojo/store.query() call has these options: start, count, order</li>
+			<li>and on the way back it needs to provide the "total" value containing the number of rows the result set contains</li>
+		</ul>
+		</li>
+		<li>need ability to package server errors and /or informationals and send back to client<br />
+		&nbsp;</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

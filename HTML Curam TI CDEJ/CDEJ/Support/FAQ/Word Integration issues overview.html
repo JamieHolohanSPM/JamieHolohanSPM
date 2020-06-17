@@ -1,0 +1,199 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Word Integration issues overview</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Word Integration issues overview";
+    pageId="urn:lsid:ibm.com:td:b009075a-64f7-4b67-9801-2d208c43414b";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Word Integration issues overview</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><table border="1" dir="ltr" style="width: 98%;">
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">Issue from user perspective</th>
+			<th scope="col">Details</th>
+			<th scope="col">Affects</th>
+			<th scope="col">Known Since</th>
+			<th scope="col">Fixed On</th>
+			<th scope="col">JIRA</th>
+			<th scope="col">CRM</th>
+			<th scope="col">APAR</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>1</td>
+			<td>IE specific: document doesn't open, main app is greyed-out and the little popup stays on screen</td>
+			<td>
+			<p>Caused by sporadic Jacob Exception (essentially a NPE) when opening a document, happens when some IE windows get closed or otherwise invalidated while our code is looping over them to find the Cúram window.</p>
+
+			<p><br />
+			Fixed by defensive checking for nulls in the loop.</p>
+			</td>
+			<td>6.0 SP2 +</td>
+			<td>29/10/2014</td>
+			<td>&nbsp;</td>
+			<td><a href="http://pdappsrv.mul.ie.ibm.com:8080/browse/TEC-17949"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">TEC-17949</span></a></td>
+			<td><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">44571,021,724</span></td>
+			<td><a href="https://w3-01.sso.ibm.com/software/servdb/APAR/AparRecord?&amp;apar=PO04285"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">PO04285</span></a></td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>Changes to Word document intermittently not saved and "page expired" errors</td>
+			<td>
+			<p>Timing issue, trying to save while previous save is still in progress. For example if user hits Save twice in a row.</p>
+
+			<p><br />
+			Fixed by checking for a save in progress when a save or exit is requested.</p>
+			</td>
+			<td>6.0 SP2 +</td>
+			<td><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">11/11/2014</span></td>
+			<td>&nbsp;</td>
+			<td><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;<a href="http://pdappsrv.mul.ie.ibm.com:8080/browse/TEC-18006">TEC-18006</a></span></td>
+			<td>&nbsp;84761,999,649</td>
+			<td><a href="https://w3-01.sso.ibm.com/software/servdb/APAR/AparRecord?&amp;apar=PO04338">PO04338</a></td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>Browser freezes when a Word document is opened or closed</td>
+			<td>
+			<p><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Caused by different editing sesions sharing a JVM. There will be a Jacob error in the logs: "DLL already loaded in another classloader"</span></p>
+
+			<p>&nbsp;</p>
+
+			<p><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Fixed by enforcing a new JVM for every session.</span></p>
+			</td>
+			<td><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">6.0 SP2 +</span></td>
+			<td><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">28/11/2013</span></td>
+			<td>&nbsp;</td>
+			<td><a href="http://pdappsrv.mul.ie.ibm.com:8080/browse/TEC-15705"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">TEC-15705</span></a></td>
+			<td><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">74304,999,649 78291,999,649</span></td>
+			<td><a href="https://w3-01.sso.ibm.com/software/servdb/APAR/AparRecord?&amp;apar=PO02392"><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">PO02392</span></a></td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>JRE not recognized by Cúram with JRE7 and newer. Also leaves Cúram main application greyed out with no way to continue navigatíon.</td>
+			<td>
+			<p><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Newer JREs not recognized by Cúram.</span></p>
+
+			<p>&nbsp;</p>
+
+			<p>F<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">ixed by upgrading the deployJava.js library</span></p>
+			</td>
+			<td><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">6.0 SP2 +</span></td>
+			<td><span data-name="Created" id="create-date">07/04/2014</span></td>
+			<td>
+			<p>6.0.6,</p>
+
+			<p>6.0.5.6</p>
+			</td>
+			<td><a href="http://pdappsrv.mul.ie.ibm.com:8080/browse/TEC-16632" target="_blank">TEC-16632</a></td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>5</td>
+			<td>Document doesn't open, main app is greyed-out and the little popup stays on screen or user gets a security warning with JRE7 u51 and newer</td>
+			<td>
+			<p><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Unsatisfied additional security requirements for applet JAR files. Error in trace log: "java.lang.SecurityException: Missing required Permissions manifest attribute in main jar: &lt;server-url&gt;/WordIntegrationApplet.jar"</span></p>
+
+			<p><br />
+			<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Fixed by adding the required manifest attributes.</span></p>
+			</td>
+			<td><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">6.0 SP2 +</span></td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td><a href="https://w3-01.sso.ibm.com/software/servdb/APAR/AparRecord?&amp;apar=PO02764">PO02764</a></td>
+		</tr>
+		<tr>
+			<td>6</td>
+			<td>in IE11, after closing Word the control popup stays open</td>
+			<td><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">about:blank related timing issue in IE11, possibly could affect other browsers too</span></td>
+			<td><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">6.0 SP2 +</span></td>
+			<td><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">11/2014</span></td>
+			<td><span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">6.0.6</span><br style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;" />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<span style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">6.0.5.6</span></td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>7</td>
+			<td>
+			<p>Word document fails to open due to COM API incompatibility</p>
+			</td>
+			<td>
+			<p>Caused by sporadic Jacob Exception (unsupported property) when opening a document, happens when an "invalid" IE window (Outlook in some cases) is encountered while our code is looping over them to find the Cúram window.</p>
+
+			<p><br />
+			Fixed by defensive catching of exceptions inside the loop.</p>
+			</td>
+			<td>&nbsp;</td>
+			<td>2015/01</td>
+			<td>6.0.5.2. iFix10</td>
+			<td><a href="http://pdappsrv.mul.ie.ibm.com:8080/browse/TEC-18223">TEC-18223</a></td>
+			<td>55166,021,724</td>
+			<td><a href="https://w3-01.sso.ibm.com/software/servdb/APAR/AparRecord?&amp;apar=PO04533">PO04533</a></td>
+		</tr>
+		<tr>
+			<td>8</td>
+			<td>
+			<p>Bad performance when opening a Word document from Cúram - related to large number of document fields.</p>
+			</td>
+			<td>
+			<p>An expensive document property scan is being done repeatedly inside a loop, unnecessarily.</p>
+
+			<p>&nbsp;</p>
+
+			<p>Fixed by moving an expensive document property scan out of a loop in our code.</p>
+			</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td><a href="http://pdappsrv.mul.ie.ibm.com:8080/browse/TEC-17516">TEC-17516</a></td>
+			<td>38417,999,616 43843,021,724 86054,999,649</td>
+			<td><a href="https://w3-01.sso.ibm.com/software/servdb/APAR/AparRecord?&amp;apar=PO03812">PO03812</a></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

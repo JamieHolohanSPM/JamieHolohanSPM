@@ -1,0 +1,126 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Time Based and Numeric Types</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Time Based and Numeric Types";
+    pageId="urn:lsid:ibm.com:td:e2fe42a4-1afd-4456-a4ea-b74aa3bd8fc6";
+    toRoot="../../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Time Based and Numeric Types</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">&nbsp;</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Raw values returned by API</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">Formatted values returned by API</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii3">JSON format</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii4">Dates and times</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii5">Numerical</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii6">Timezone handling</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii8">Daylight saving time handling</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii7">Locale specific settings</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii9">Date format</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii10">Number format</a></div>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii1">Raw values returned by API</h2>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">When raw data is requested the JavaScript API will always return corresponding native JavaScript objects. JavaScript Date for Date, Time and DateTime and JavaScript Number for the numeric types.<br />
+<br />
+The alternative would be returning custom objects containing both data value and methods for manipulating those values, but in this case extra application code would be required to adapt custom objects to real values and this would be complicating the usage of CDSL API with stock Dijit widgets which by default expect to be getting native JavaScript values.<br />
+<br />
+Instead any metadata and methods for manipulating the native value will be attached as custom properties to the native value. <em>[TODO: this will be done either by simply adding extra properties to each instance in the API implementation or by extending/subclassing native objects]</em></p>
+
+<p dir="ltr">For Cúram Date values the time portion of the JavaScript Date value will be set to midnight and is to be ignored by the application code.</p>
+
+<p dir="ltr">For Cúram Time values the date portion of the JavaScript Date value will be set to the epoch date and is to be ignored by the application code.</p>
+
+<p dir="ltr">Representing time duration or time ranges are not directly supported.</p>
+
+<h2 dir="ltr" id="ii2">Formatted values returned by API</h2>
+
+<p dir="ltr">When formatted data is requested API will return plain strings for all struct properties.</p>
+
+<p dir="ltr">Values will be formatted according in the standard CDEJ way, according to the current system configuration, including custom converter plugins, user locale and application date format settings.<br />
+<br />
+It is the responsibility of the API user to handle the fact they are getting string values in place of real data.</p>
+
+<h2 dir="ltr" id="ii3">JSON format</h2>
+
+<h3 dir="ltr" id="ii4">Dates and times</h3>
+
+<p dir="ltr">As the JSON format for dates we will use the standard JavaScript representation - number of milliseconds since 01 January, 1970 UTC (as per the <a href="http://ecma-international.org/ecma-262/5.1/#sec-15.9.1.1">ECMAScript&nbsp;spec</a>).</p>
+
+<p dir="ltr">For maximum efficiency the milliseconds value will be represented in JSON as a number and it will be distinguished from genuine numbers by using information from a separate metadata structure. The curam/cdsl/Struct API will then take care of converting any properties of temporal type to native Date objects.</p>
+
+<p dir="ltr">The alternative of using the ISO-8601 format was discounted because it requires more resources to be handled (more than twice the size in bytes, more CPU cycles to do conversions - compare <span style="font-family:courier new,courier,monospace;">'1385366650210'</span> and <span style="font-family:courier new,courier,monospace;">'2012-11-14T15:40:11.214+00:01'</span>).</p>
+
+<p dir="ltr">One good property of ISO format we are losing by this is readability by humans. This could be overcome by providing special "development" mode in our API in which the ISO format would be used instead of milliseconds.</p>
+
+<h3 dir="ltr" id="ii5">Numerical</h3>
+
+<p dir="ltr">Number types are handled natively in JSON spec.</p>
+
+<p dir="ltr"><em>One thing to verify is will we need to worry about precision in floating point.</em></p>
+
+<h2 dir="ltr" id="ii6">Timezone handling</h2>
+
+<p dir="ltr">Date/time values are transferred from server in the form of the number of milliseconds since the epoch. This represents an instant in time and it is time zone neutral.</p>
+
+<p dir="ltr">The Cúram server operates in a certain time zone. The application client (user of CDSL API) operates in the user preferred time zone, which is potentially different from the server time zone.</p>
+
+<p dir="ltr">As part of converting date values to milliseconds at server side we must make sure that server time zone is subtracted from the value so that the resulting milliseconds value conforms to the JavaScript specification.</p>
+
+<p dir="ltr">When the millisecond value from JSON is converted back into JavaScript native Date object at the client side, the local time zone is applied to the value. This local time zone corresponds to whatever time zone is set in the user's OS, not the Cúram user preferred time zone. In order to offset such a difference the API implementation will have to be aware of both OS and Cúram user preferred time zones and add/subtract any difference before converting to native JavaScript object.</p>
+
+<h2 dir="ltr" id="ii8">Daylight saving time handling</h2>
+
+<p dir="ltr">Similarly to time zones, we have to explicitly handle daylight saving time (DST) as part of our conversions. See <a href="http://stackoverflow.com/questions/11887934/check-if-daylight-saving-time-is-in-effect-and-if-it-is-for-how-many-hours">this&nbsp;StackOverflow&nbsp;article</a> for details on how to do it in JavaScript.</p>
+
+<p dir="ltr">We assume that converting server date/time to milliseconds is handled correctly by the Java Date class, including DST offset. As a result we get the correct instant in time represented in JSON.</p>
+
+<p dir="ltr">After this we have to take into account the DST offsets for the user's OS and the user preferred time zone in Cúram.</p>
+
+<p dir="ltr">The recommended approach is to find out the DST offsets for both of these time zones and then make the appropriate adjustment of the milliseconds value before converting milliseconds to JavaScript Date.</p>
+
+<h2 dir="ltr" id="ii7">Locale specific settings</h2>
+
+<p dir="ltr">We will provide an API to let the application code find out about user preferences and the application properties. The API will be of the following form:<br />
+<span style="font-family:courier new,courier,monospace;">curam/cdsl/CuramPreferences.getProperty(name) :: Promise :: String</span></p>
+
+<h3 dir="ltr" id="ii9">Date format</h3>
+
+<p dir="ltr">Cúram has an application property specifying in which way the date/time values should be formatted. We do not have control over the way custom applications format their data so we will be leaving the responsibility to apply correct formatting to them. However we have to give them a way to determine the Cúram configured format so that they can apply it.</p>
+
+<p dir="ltr">We expect application developers to use the provided API to find out what the user preferred locale is and set the dojo.locale appropriately. This will ensure that any locale-aware code in Dojo will use the correct formatting.</p>
+
+<p dir="ltr">Please note the date format application property uses a Java specific date format string. It is the responsibility of the application developer to interpret this format string and apply the correct format in their application.</p>
+
+<h3 dir="ltr" id="ii10">Number format</h3>
+
+<p dir="ltr">Numbers must be in a format corresponding to local conventions according to the Cúram user preferred locale, not the OS specified locale.</p>
+
+<p dir="ltr">We expect application developers to use the provided API to find out what the user preferred locale is and set the dojo.locale appropriately. This will ensure that any locale-aware code in Dojo will use the correct formatting.</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

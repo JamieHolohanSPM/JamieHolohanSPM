@@ -1,0 +1,438 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Date selector - Curam Accessibility</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Date selector - Curam Accessibility";
+    pageId="urn:lsid:ibm.com:td:23101c3a-bcd6-4d80-b18c-4c95e995dd2a";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Date selector - Curam Accessibility</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Date Selector -&nbsp;</strong>Curam Accessibility</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Stakeholders</strong></p>
+
+<table border="1" dir="ltr">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Role</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Sign Off if Applicable</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Customer</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Ontorio</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Business Owner/Product Owner</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Architect</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Fergal Gavin</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Developer(s)</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Sharunas</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">FVT</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Feargal Conneely</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">SVT</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Information Developer</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">UX Design</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Legal</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Problem</strong></p>
+
+<p dir="ltr">Curam Accessibility - JAWS issue selecting the Month in the Calendar</p>
+
+<p dir="ltr">Multiple issues found when Calendar was used to populate the Month field with the screen reader JAWS.</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </strong>&nbsp; &nbsp; &nbsp; &nbsp; <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</strong></p>
+
+<p dir="ltr">Support ticket:&nbsp;<a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/L2%20Support#action=com.ibm.team.workitem.viewWorkItem&amp;id=227876">https://jazz031.hursley.ibm.com:9443/ccm/web/projects/L2%20Support#action=com.ibm.team.workitem.viewWorkItem&amp;id=227876</a></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Implementation Notes:</strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CDEJ files:</strong><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CoreInf/CuramCDEJ/lib/curam/web/popups/date-selector.jsp</strong>
+
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">handcrafted poupup page.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+		&nbsp;</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CoreInf/CuramCDEJ/lib/curam/web/themes/curam/css/form_controls/curam_form_controls_calendar.css</strong>
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Styling the calendar style<b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">.</b><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+		&nbsp;</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CoreInf/src/curam/omega3/taglib/user/JavaScriptUserPreferencesTag.java</strong>
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Adding localized date and date time format string variables.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+		&nbsp;</p>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">client/components/client-inf/jscript/src/internal/curam/dateSelectorUtil.js</strong>
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">javascript file responsible to create and draw the calendar widget behaviour.</li>
+	</ul>
+	</li>
+</ul>
+
+<h2 dir="ltr" id="ii12">Use cases</h2>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">These tests should be performed in all Scenarios from where you can Launch Select a Date Modal&nbsp;</p>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;From a Page</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;From with in a Modal (ex: Register Person)</li>
+</ol>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="color:#ff0000;">Requirements for accessibility use cases</span>:</strong></p>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Turn on the screenreaders voiceover or JAWS</strong></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use the keyboard to navigate in the screen</strong></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use the supported keys/key combinations or gestures if on tablet/desktop.</strong></li>
+</ol>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Character/Actor</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 565px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 668px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Expected Behavior</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tested</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 565px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1.&nbsp;Navigate to a page with the calendar icon and click it;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2.&nbsp;The “Select Date” modal dialog&nbsp;open;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3. Select another month from the list.</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 668px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">- The focus changes to&nbsp;the Month field selected</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">- The screen reader:</p>
+
+			<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">reads the month selected.</li>
+			</ol>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Manual</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 565px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1.&nbsp;Navigate to a page with the calendar icon and click it;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2.&nbsp;The “Select Date” modal dialog&nbsp;open;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3. Navigate to the year field.</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 668px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">- The focus changes to&nbsp;the Year field selected</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">- The screen reader:</p>
+
+			<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">reads the Year value</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">reads the type of field</li>
+			</ol>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Manual</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 565px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1.&nbsp;Navigate to a page with the calendar icon and click it;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2.&nbsp;The “Select Date” modal dialog&nbsp;open;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3. Navigate back to the Month field.</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 668px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">- The focus changes to&nbsp;the Month field</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">- The screen reader:</p>
+
+			<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">reads the to select the month, the type of field and the keys to access it.</li>
+			</ol>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Manual</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 565px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1.&nbsp;Navigate to a page with the calendar icon and click it;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2.&nbsp;The “Select Date” modal dialog&nbsp;open;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3. Navigate to the days into to the calendar with the option Control +Option + arrow key(Mac) or Ctrl +Alt + Left/Right Arrow keys<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			&nbsp;</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 668px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">- The screen reader:</p>
+
+			<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">reads the Week Day&nbsp;selected in the column header along with the Date (ex: T Thursday 15).</li>
+			</ol>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Manual</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 565px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1.&nbsp;Navigate to a page with the calendar icon and click it;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2.&nbsp;The “Select Date” modal dialog&nbsp;open;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3. Navigate to the days into the calendar with the TAB button</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 668px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">- The screen reader:</p>
+
+			<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">reads the day selected.</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">reads the month and year selected</li>
+			</ol>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 565px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1.&nbsp;Navigate to a page with the calendar icon and click it;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2.&nbsp;The “Select Date” modal dialog&nbsp;open;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3. Navigate to&nbsp;Today's Date&nbsp;in&nbsp;the calendar with the TAB button</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 668px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">- The screen reader:</p>
+
+			<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">reads the day and also says Today's Date and says&nbsp;selected.</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">reads the month and year selected</li>
+			</ol>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 565px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1. Navigate to the date field with the calendar icon beside it;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2. Go onto the calendar icon and click it</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3. The “Select Date” modal dialog with the calendar should open;</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 668px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">- The focus&nbsp;goes on the Month selection combo-box&nbsp;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">- The month match with the field on the page the date selector was opened from or the current month(if the date was not selected before)</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">- the year display the appropriate fields(the current year or the year on the page it was opened from)</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">- The calendar should display the elements of the date displayed in the date field on the page it was opened from, and the date is highlighted in the calendar.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			&nbsp;</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Manual</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 565px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1. Navigate to the date field with the calendar icon beside it;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2. Go onto the calendar icon and click it</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3. The “Select Date” modal dialog with the calendar should open;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">4. Select another month from the list</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 668px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">- The calendar updates to gray-out the entries for the other months</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">- Display in black the dates for the currently selected one;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">- The selected date highlight should disappear.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Note that the month dates range is correct so that the “black” dates start with 1 and end up with the 30, 31, 28 or 29 depending on the displayed month.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			&nbsp;</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Manual</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 565px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1. Navigate to the date field with the calendar icon beside it;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2. Go onto the calendar icon and click it</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3. The “Select Date” modal dialog with the calendar should open;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">4. Change the year input field with more than four numbers</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 668px;">- The character above the valid four digits is truncated immediately.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Manual</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 565px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1. Navigate to the date field with the calendar icon beside it;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2. Go onto the calendar icon and click it</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3. The “Select Date” modal dialog with the calendar should open;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">4. Choose one of the dates in the calendar and press Enter<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			&nbsp;</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 668px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">- The popup closes;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">- The newly selected date, properly formatted, displayed in the date field on the parent page (from which the popup has been opened).</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">-&nbsp; The focus&nbsp;returns to the date field on the parent page</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Manual</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 565px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1. Navigate to the date field with the calendar icon beside it;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2. Blank-out the value in the date input;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3. Go onto the calendar icon and click it</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">4. The “Select Date” modal dialog with the calendar should open;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 668px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">- The pop-up opens with the current date</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">- The month and year should be current, and today’s date is highlighted in the calendar.</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Manual</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 565px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1. Navigate to the date field with the calendar icon beside it;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2. Go onto the calendar icon and click it</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3. The “Select Date” modal dialog with the calendar should open;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">4. Click the date couple of days ahead in the calendar.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">5. Once the pop-up closes and the new date selection display in the date field;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">6. Navigate the calendar icon and click to display the calendar pop-up again.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			&nbsp;</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 668px;">- The selected date should be highlighted in the calendar (along with the correct year and month selections in the appropriate fields); today’s date cell in the calendar should be additionally highlighted.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Manual</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">User</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 565px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1. Navigate to the date field with the calendar icon beside it;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">2. Go onto the calendar icon and click it</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">3. The “Select Date” modal dialog with the calendar should open;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">4.&nbsp;Move the mouse icon in a specific day in the calendar table.</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 668px;">- Show the hint(title) with the date format MMM DD,YYYY</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Manual</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

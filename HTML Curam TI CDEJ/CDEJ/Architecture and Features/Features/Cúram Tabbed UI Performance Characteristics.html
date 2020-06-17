@@ -1,0 +1,330 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Cúram Tabbed UI Performance Characteristics</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../wiki.css" />
+<script type="text/javascript" src="../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Cúram Tabbed UI Performance Characteristics";
+    pageId="urn:lsid:ibm.com:td:28ba4e79-fa9c-4ed1-ae4d-5194e5d1f14e";
+    toRoot="../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Cúram Tabbed UI Performance Characteristics</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h1 dir="ltr"><strong>Overview</strong></h1>
+
+<p dir="ltr">This document aims to provide a coherent story on the performance aspect of the Cúram Tabbed UI.</p>
+
+<p dir="ltr">It is intended for technical audience who need to be involved in performance related testing and fixing of issues.</p>
+
+<div class="iiFragment iiRenderToc" dir="ltr" id="ii0" name="intInfo" style="border-radius: 6px;">
+<div id="ii0info" style="height: 0px; width: 0px; overflow: hidden; display: inline-block;">{ dataSrc: "unbound", dataSrcObj: { noAutoLoad: true }, render: "toc", renderObj: { topLvl: 2, botLvl: 4 }, obj: {}, id: "ii0" }</div>
+Table of Contents: <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii1">Focusing on Performance</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii2">Tabbed UI architecture</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii11">Overview</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii8">Basic structural elements</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii9">Displaying UIM screens</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii10">Implementation</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii12">Performance related aspects</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii13">Usage of iframes</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii18">Computer resources</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii19">User experience</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii22">Size of application DOM</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii20">Dojo evolution</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii15">Module dependencies</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii21">Structure of Cúram JavaScript modules</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii16">Dojo in synchronous/compatibility mode</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii23">Genuine performance bugs in Dojo/Dijit</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii24">Unanchored hover in CSS</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii17">JavaScript layering scheme</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii14">Submitting modals</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii3">Other factors affecting performance</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii6">Browser type</a> <a href="" onclick="" style="display: block; margin-left: 80px;" targetid="ii7">Machine performance characteristics</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii33">Measurement and tracking methods</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii4">Solutions considered/explored or implemented so far</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii25">Optimize Tabbed UI module dependencies</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii26">Get the Dojo legacy loader mode fixed/optimized</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii27">Introduce caching into the dependency related code in Dojo loader</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii28">Move to the new AMD Dojo loader</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii29">Get rid of iframes</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii30">Fix the unanchored hover issue</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii31">Maintain our own fixes to various genuine Dojo performence issues</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii32">Stop loading next page twice on modal submit</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii38">Cache and reuse iframes so that they are never reloaded</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii5">Future directions</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii34">Automated/continuous performance monitoring</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii35">Implement known fixes</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii36">Keep evolving Tabbed UI</a> <a href="" onclick="" style="display: block; margin-left: 60px;" targetid="ii37">Performance-test Dojo releases ahead of take-on</a> <a href="" onclick="" style="display: block; margin-left: 40px;" targetid="ii39">References</a></div>
+
+<h2 dir="ltr" id="ii1">Focusing on Performance</h2>
+
+<p dir="ltr">As we progressed with evolution of Tabbed UI over the last 1-2 years we have noticed significant performance degradation and it has become an urgent problem.</p>
+
+<p dir="ltr">We have gone through the period of ad-hoc fixing of the most urgent issues and currently we are moving towards a more systematic approach where performance of the UI gets appropriate attention throughout the development process as an important non-functional requirement.</p>
+
+<h2 dir="ltr" id="ii2">Tabbed UI architecture</h2>
+
+<p dir="ltr" id="ii2">This section provides a view on the Cúram UI architecture and design from the perspective of performance.</p>
+
+<p dir="ltr">Cúram currently has a few different user interfaces:</p>
+
+<ul dir="ltr">
+	<li>Tabbed UI: the basic UI for the "internal" Cúram application</li>
+	<li>IEG player: UI screens dynamically generated from IEG scripts</li>
+	<li>UA</li>
+	<li>[TODO: I think there are more?]</li>
+</ul>
+
+<p dir="ltr">This document is primarily concerned with the Tabbed UI for the internal Cúram application.</p>
+
+<h3 dir="ltr" id="ii11">Overview</h3>
+
+<p dir="ltr">The main concept traditionally used to build Cúram user interfaces is that of a UIM screen. A large number of those screens are defined by application developers and the Cúram JDE provides tooling to generate the corresponding JSP files, which then at runtime generate the HTML view for the user of the application. Originally Cúram V 4.x and 5.x displayed one such screen at a time along with some navigation menus, which were loaded into browser again with each new screen requested by the user.</p>
+
+<p dir="ltr">With the evolution of the Web technologies more sophisticated applications became possible by using JavaScript and XHR to dynamically update the current page without completely reloading it for every user action. This approach opened up the possibility to:</p>
+
+<ul dir="ltr">
+	<li>create much more rich and user friendly web/browser based applications</li>
+	<li>achieve better performance by only loading small amount of content on demand instead of repeatedly reloading the complete page</li>
+</ul>
+
+<p dir="ltr">The new V6 Tabbed UI is Cúram take on those new possibilities.<br />
+It is much richer and user friendly UI, but as of now it is not yet taking a full advantage of the potential for performance improvement. More on this below.</p>
+
+<h3 dir="ltr" id="ii8">Basic structural elements</h3>
+
+<p dir="ltr">"Tabbed UI" provides navigation and a structured user interface to Cúram UIM screens. It consists of the following elements:</p>
+
+<ul dir="ltr">
+	<li>the top level "application controller" page which is loaded in the browser once when the user logs in to Cúram and stays loaded for the duration of a complete user session. The top level page is then further structured into various UI elements:
+	<ul>
+		<li>application header</li>
+		<li>shortcuts panel</li>
+		<li>section tabs
+		<ul>
+			<li>object tabs
+			<ul>
+				<li>main content panel <span style="color:#ff8c00;"><strong>(UIM)</strong></span></li>
+				<li>optional context panel <span style="color:#ff8c00;"><strong>(UIM)</strong></span></li>
+				<li>optional smart panel <span style="color:#ff8c00;"><strong>(UIM)</strong></span></li>
+			</ul>
+			</li>
+		</ul>
+		</li>
+		<li>can open dialog windows == modals <span style="color:#ff8c00;"><strong>(UIM)</strong></span></li>
+	</ul>
+	</li>
+	<li>Some UI components above display UIM screens as their contents - they are marked with <span style="color:#ff8c00;"><strong>(UIM)</strong></span><strong>. </strong>Any such UIM screen can optionally contain further nested UIM screens as follows:
+	<ul>
+		<li>expandable list rows <span style="color:#ff8c00;"><strong>(UIM)</strong></span></li>
+		<li>nested UIM <span style="color:#ff8c00;"><strong>(UIM)</strong></span></li>
+		<li>frameset based widgets <span style="color:#ff8c00;"><strong>(UIM)</strong></span></li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">The specific application structure based on the above elements is determined by configuration files which get loaded into database and the application is then constructed at runtime based on this stored configuration.</p>
+
+<p dir="ltr">[TODO: include link to the full Tabbed UI documentation]</p>
+
+<h3 dir="ltr" id="ii9">Displaying UIM screens</h3>
+
+<p dir="ltr">Every structural element that displays a UIM screen (as indicated above) is implemented with an &lt;IFRAME&gt; HTML element which provides a separate environment for the UIM to load into.</p>
+
+<p dir="ltr">This design was chosen in order to preserve legacy implementation of the UIM screens as much as possible when moving from Cúram 5.x user interface to a new V6 Tabbed UI. With the restrictions on time and development resources during this period we couldn't afford to rewrite the existing infrastructure too much.</p>
+
+<p dir="ltr">The main drawbacks of this design choice are that:</p>
+
+<ul dir="ltr">
+	<li>UIM was originally intended to be displayed "one screen at a time", but the new Tabbed UI displays a number of UIM screens at the same time.<br />
+	It is rather complicated to seamlessly integrate and coordinate those screens within the UI, given we need to be frequently crossing the boundaries of iframes that wrap each of the UIM screens.</li>
+	<li>Each iframe that wraps a UIM screen is a complete browser environment in itself, which causes performance problems when too many of those is created at the same time.</li>
+</ul>
+
+<h3 dir="ltr" id="ii10">Implementation</h3>
+
+<p dir="ltr">The browser side of the Tabbed UI is implemented with HTML/CSS and JavaScript and is heavily using the Dojo Toolkit library.</p>
+
+<p dir="ltr">The webtier side provides the UIM content with the generated JSPs and also contains a special servlet to handle a number of different types of XHR (AJAX) requests the Tabbed UI uses to dynamically update parts of itself.</p>
+
+<h2 dir="ltr" id="ii12">Performance related aspects</h2>
+
+<h3 dir="ltr" id="ii13">Usage of iframes</h3>
+
+<h4 dir="ltr" id="ii18">Computer resources</h4>
+
+<p dir="ltr">The fact iframes are used to load UIM screens means a complete browser environment must be created. This has implications for consumption of memory and CPU cycles.</p>
+
+<p dir="ltr">When too many iframes are in use simultaneously by the application, the web browser can become slow, especially on older machines.</p>
+
+<h4 dir="ltr" id="ii19">User experience</h4>
+
+<p dir="ltr">In the Cúram Tabbed UI there are cases that the user performs a simple action, such as clicking on a link, and it in effect causes loading of several iframes at the same time. The resulting experience is that of a very slow application response, because all these iframes have to load before the response to user action is completed.</p>
+
+<h3 dir="ltr" id="ii22">Size of application DOM</h3>
+
+<p dir="ltr">It has been noted that the Tabbed UI typically produces a large HTML DOM tree and it causes performance problems when the browser and/or JavaScript code manipulates the DOM elements.</p>
+
+<h3 dir="ltr" id="ii20">Dojo evolution</h3>
+
+<p dir="ltr">Dojo Toolkit is a complex JavaScript library and our experience is that with each new version it becomes more resource demanding, especially in relation to CPU usage.</p>
+
+<p dir="ltr">This is a problem especially on older machines with slower CPU.</p>
+
+<h3 dir="ltr" id="ii15">Module dependencies</h3>
+
+<p dir="ltr">When JavaScript modules are loaded by Dojo a significant property that affects performance is the depth and breadth of the module dependency tree. The larger the tree the more time and CPU resources it takes to load the modules.</p>
+
+<p dir="ltr">This aspect is related to how are the module dependencies structured and also to the Dojo loader mode of operation.</p>
+
+<h3 dir="ltr" id="ii21">Structure of Cúram JavaScript modules</h3>
+
+<p dir="ltr">Cúram modules are currently not well structured. For historical reasons there are a number of modules that contain large number of functions and in effect too many other modules depend on them.</p>
+
+<p dir="ltr">This causes loading of too much code unnecessarily which has memory implications and also causes the dependency tree to grow unnecessarily, causing further performance issues.</p>
+
+<h3 dir="ltr" id="ii16">Dojo in synchronous/compatibility mode</h3>
+
+<p dir="ltr">In the course of it's evolution over years, Dojo Toolkit introduced a concept of asynchronous module loading, which <a href="http://dojotoolkit.org/features/1.6/async-modules">provides&nbsp;significant&nbsp;performance&nbsp;boosts&nbsp;and&nbsp;debugging&nbsp;improvement&nbsp;(including&nbsp;real&nbsp;stack&nbsp;traces)</a>.</p>
+
+<p dir="ltr">Adoption of this new loading mechanism however requires significant (and user impacting) refactoring of existing Tabbed UI code which we couldn't afford to do, yet.</p>
+
+<p dir="ltr">Because of this we are using the compatibility mode of Dojo module loader which lets us continue with the existing code, but at the same time keeps us from taking advantage of performance improvements provided by new mode.</p>
+
+<p dir="ltr">We have proven with test examples that the compatibility mode of Dojo loader has performance problems (mainly around dependency tree handling, see the relevant section of this document), but we couldn't get Dojo developers to fix it, because it is deprecated and they didn't want to invest the time and resources.</p>
+
+<h3 dir="ltr" id="ii23">Genuine performance bugs in Dojo/Dijit</h3>
+
+<p dir="ltr">On a number of occassions the Dojo/Dijit code has been suboptimal from the performance perspective. This kind of issue is usually fixed in the next Dojo version.</p>
+
+<p dir="ltr">Where we couldn't wait for the fix in the next Dojo version we have introduced our own fix in the form of a Dojo override, which is applied to the Dojo version we ship with Cúram. Often we later removed the override when the issue was fixed in Dojo itself and this is an ongoing process with every new Dojo version we take on.</p>
+
+<h3 dir="ltr" id="ii24">Unanchored hover in CSS</h3>
+
+<p dir="ltr">This is a Dojo issue that affects mainly IE7 and IE8. We have asked Dojo folks to fix it, but the request was rejected because it only affects old browsers which are soon going out of support by Dojo.</p>
+
+<p dir="ltr">We have introduced the fix into the Dojo version we ship with Cúram.</p>
+
+<p dir="ltr">[TODO: include link to the full issue description]</p>
+
+<h3 dir="ltr" id="ii17">JavaScript layering scheme</h3>
+
+<p dir="ltr">JavaScript layering is a technique of concatenating a number of JavaScript files/modules required by the application into one file which can then be downloaded with a single network request instead of making a large number of request for individual files. The layer file can also contain other type of resources to be used by application, such as HTML widget templates or localized resource bundles.</p>
+
+<p dir="ltr">Instead of concatenating all application code into one large layer file it is possible to have several layer files, each for a specific part of the application. This is to avoid the other extreme of forward downloading all code for the complete application, some of which may never be used during the user session.</p>
+
+<p dir="ltr">Tabbed UI currently uses only one layer file for the top level window and another one for UIM screens. This causes significant delay when individual UIM screens are loaded and we should consider designing the layering scheme more intelligently with respect to performance to strike better balance between loading everything upfront and using tens of requests for individual files.</p>
+
+<h3 dir="ltr" id="ii14">Submitting modals</h3>
+
+<p dir="ltr">When a UIM screen is submitted in order to call a Cúram server interface, the HTTP response contains the full contents of the next screen in the flow. When this happens in a modal window in most cases the next action of the UI is to close the modal window and load the next page again in the parent window of the modal. It means that on modal submit the UIM screen is loaded twice unnecessarily, causing overly long response time for the user.</p>
+
+<p dir="ltr">We have a plan to rewrite the modal infrastructure so that we avoid loading the next page twice.</p>
+
+<h3 dir="ltr" id="ii3">Other factors affecting performance</h3>
+
+<h4 dir="ltr" id="ii6">Browser type</h4>
+
+<p dir="ltr">Old browsers, and especially MSIE 7 and 8 show biggest performance issues due to their rather poor JavaScript engine implementations.</p>
+
+<p dir="ltr">On the other hand Chrome and Firefox do not show significant issues from the performance perspective.</p>
+
+<h4 dir="ltr" id="ii7">Machine performance characteristics</h4>
+
+<p dir="ltr">In general older machines with slow CPU are problematic, because Dojo gets more demanding on the CPU with every new version. Machines with fast CPUs don't show big performance problems even with older browsers such as IE8.</p>
+
+<h2 dir="ltr" id="ii33">Measurement and tracking methods</h2>
+
+<p dir="ltr">This section provides an overview of techniques we use to measure UI performance and track changes between JDE releases.</p>
+
+<p dir="ltr">[TODO: mention the acceptance criteria for page load times, etc.]</p>
+
+<h2 dir="ltr" id="ii4">Solutions considered/explored or implemented so far</h2>
+
+<h3 dir="ltr" id="ii25">Optimize Tabbed UI module dependencies</h3>
+
+<p dir="ltr">This is the main method we used to get performance improvements when we discovered that the size of dependency tree affects performance of screen loading. It has the advantage in that we can make changes in our own code and get improvement even with the unfixed Dojo legacy loader.</p>
+
+<p dir="ltr">The optimizations consisted of identifying modules that cause most delay and finding ways to only load them when they are needed or load them only once in the top level window and not for every UIM screen.</p>
+
+<p dir="ltr">With this we could get a significant improvement in UIM screen load times.</p>
+
+<h3 dir="ltr" id="ii26">Get the Dojo legacy loader mode fixed/optimized</h3>
+
+<p dir="ltr">We have tried to persuade the Dojo loader maintainer to fix this issue [TODO: link to the bug report], but this effort was not successful. We also considered investing effort ourselves and fixing the loader [TODO: link to TEC], but this hasn't happened so far.</p>
+
+<h3 dir="ltr" id="ii27">Introduce caching into the dependency related code in Dojo loader</h3>
+
+<p dir="ltr">Stephane Queva proposed a simple cache to be introduced into Dojo loader to optimize performance. [TODO: link to TEC]</p>
+
+<p dir="ltr">This has been tried, but the performance gain is limited. We may still consider introducing the cache later on if we need to.</p>
+
+<h3 dir="ltr" id="ii28">Move to the new AMD Dojo loader</h3>
+
+<p dir="ltr">We have explored this move and had a hard time justifying that the performance gain by itself [TODO: provide data on results] is worth the effort and user impact.</p>
+
+<p dir="ltr">We may have to make this move sooner or later anyway though, because legacy loader mode will not be supported starting with Dojo 2.0 (to be released 2014-15)</p>
+
+<h3 dir="ltr" id="ii29">Get rid of iframes</h3>
+
+<p dir="ltr">So far we have done limited informal analysis and the effort and impact is probably too much for the performance to be gained. We need to explore this more thoroughly and provide analysis to let us decide.</p>
+
+<p dir="ltr">[TODO: link to TEC]</p>
+
+<h3 dir="ltr" id="ii30">Fix the unanchored hover issue</h3>
+
+<p dir="ltr">This has been implemented as a Dojo override.</p>
+
+<p dir="ltr">[TODO: link to TEC]</p>
+
+<h3 dir="ltr" id="ii31">Maintain our own fixes to various genuine Dojo performence issues</h3>
+
+<p dir="ltr">This has been implemented as a Dojo override.</p>
+
+<p dir="ltr">[TODO: link to TECs]</p>
+
+<h3 dir="ltr" id="ii32">Stop loading next page twice on modal submit</h3>
+
+<p dir="ltr">This is planned for a future JDE version.</p>
+
+<p dir="ltr">This has been implemented as a Dojo override.</p>
+
+<p dir="ltr">[TODO: link to TEC]</p>
+
+<h3 dir="ltr" id="ii38">Cache and reuse iframes so that they are never reloaded</h3>
+
+<p dir="ltr">In theory we could keep using iframes so that UIM screens are still isolated (necessary in order to avoid deep rewrite of UIM implementation), but do it is such a way that each iframe loads the full infrastructure only once and any subsequent screens are loaded via AJAX and inserted in the existing DOM, replacing the previous screen.</p>
+
+<p dir="ltr">Instead of destroying iframes which are no longer needed they would be returned to iframe pool and made available to be reused next time an iframe is needed. This would allow us to avoid the cost of creating too many iframes and also the cost of loading and initializing the JavaScript infrastructure over and over with every page load.</p>
+
+<p dir="ltr">In order to achieve this we would have to resolve a few issues:</p>
+
+<ul dir="ltr">
+	<li>we would have to make UIM loadable via AJAX, it would have to only send page contents and omit things like the Dojo/JavaScript initialization code, because this will be already present in the iframe
+	<ul>
+		<li>How to do this without affecting everyone else relying on UIM being what it is in this respect? Either use runtime parameter or maybe keep UIM as is and remove unnecessary stuff in JavaScript after getting the UIM response.</li>
+	</ul>
+	</li>
+	<li>Certain amount of JavaScript is typically executed on page load (and some on unload) - such code would have to newly rely on a custom events we fire when screen content is inserted to/removed from the DOM.</li>
+	<li>A fair amount of CDEJ JavaScript code is probably written with assumption that pages are reloaded as a whole and it doesn't provide a way to "reinitialize" it's state for the next UIM screen that may be loaded in the existing runtime context. Such code would have to be adapted to the new paradigm of never reloading the runtime context.</li>
+	<li>any actions that currently cause a reload of iframe (such as following a link or submitting a form) would have to be newly done using AJAX</li>
+	<li>in IE9+ iframes also reload if they are moved to a different location in DOM - we would have to make it so iframes stay in one location in DOM all the time (in the cache maybe) and we would have to use CSS absolute positioning to place them visually where they belong in the application.</li>
+</ul>
+
+<h2 dir="ltr" id="ii5">Future directions</h2>
+
+<h3 dir="ltr" id="ii34">Automated/continuous performance monitoring</h3>
+
+<p dir="ltr">We want to introduce automated test suite that will be run periodically on various builder machines (nightly, weekly, on release, etc.) and results (including historical) will be available through a sdashboard page. This is necessary so that we have a level of confidence in UI performance without doing costly manual testing.</p>
+
+<p dir="ltr">[TODO: link to Jira]</p>
+
+<h3 dir="ltr" id="ii35">Implement known fixes</h3>
+
+<p dir="ltr">[TODO: links to Jiras]</p>
+
+<h3 dir="ltr" id="ii36">Keep evolving Tabbed UI</h3>
+
+<p dir="ltr">We cannot keep using iframes for UIM screens forever and the underlying technologies are constantly evolving anyway.</p>
+
+<p dir="ltr">We need continuous monitoring of the industry state-of-the-art and be forming our own vision for the future.</p>
+
+<h3 dir="ltr" id="ii37">Performance-test Dojo releases ahead of take-on</h3>
+
+<p dir="ltr">We must run a suite of known tests on each Dojo release and keep the results so that we can spot performance changes and know the impact ahead of taking on the new version.</p>
+
+<h2 dir="ltr" id="ii39">References</h2>
+
+<p dir="ltr">IEG player now uses a <a href="http://curzilla.curamsoftware.com/EJB/RulesTeam/PageContentAreaLoading">custom&nbsp;solution</a> based on XHR that let them get rid of using iframe.</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

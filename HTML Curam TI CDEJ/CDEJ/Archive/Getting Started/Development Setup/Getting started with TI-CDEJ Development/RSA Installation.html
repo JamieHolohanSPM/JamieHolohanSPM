@@ -1,0 +1,230 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>RSA Installation</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../../wiki.css" />
+<script type="text/javascript" src="../../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="RSA Installation";
+    pageId="urn:lsid:ibm.com:td:80e7cf3c-652f-4bbc-8c4d-6e23d511a55b";
+    toRoot="../../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">RSA Installation</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><h2 dir="ltr">Installing RSA for Modelling</h2>
+
+<h3 dir="ltr">Supported Versions</h3>
+
+<table border="1" dir="ltr" style="width: 750px;">
+	<tbody>
+		<tr>
+			<td style="width: 104px; text-align: center;"><strong>Curam</strong></td>
+			<td style="width: 77px; text-align: center;"><strong>RSA</strong></td>
+			<td style="width: 546px;"><strong>RSA Repository</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 104px; text-align: center;">6.2.0.x</td>
+			<td style="width: 77px; text-align: center;">9.1.2</td>
+			<td style="width: 546px;">
+			<p>\\tiny.mul.ie.ibm.com\Applications\RSA\9.1.1\RSA\disk1</p>
+
+			<p>\\tiny.mul.ie.ibm.com\Applications\RSA\9.1.2\RSA\disk1</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 104px; text-align: center;">6.1.x</td>
+			<td style="width: 77px; text-align: center;">9.0</td>
+			<td style="width: 546px;">\\tiny.mul.ie.ibm.com\Applications\RSA\9.0\RSA\disk1</td>
+		</tr>
+		<tr>
+			<td style="width: 104px; text-align: center;">6.0.x</td>
+			<td style="width: 77px; text-align: center;">8.x</td>
+			<td style="width: 546px;">\\tiny.mul.ie.ibm.com\Applications\RSA\8.0.4\RSA\disk1</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr"><span style="background-color:#FFFF00;">Do </span><strong><span style="background-color:#FFFF00;">NOT</span></strong><span style="background-color:#FFFF00;"> attempt to edit models using an unsupported version for that stream.</span></p>
+
+<h3 dir="ltr">Modification History</h3>
+
+<table border="1" dir="ltr" height="94" width="635">
+	<tbody>
+		<tr>
+			<td style="width: 89px;"><strong>Date</strong></td>
+			<td style="width: 148px;"><strong>Editor</strong></td>
+			<td style="width: 241px;"><strong>Comment</strong></td>
+		</tr>
+		<tr>
+			<td style="width: 89px;">25-Mar-2016</td>
+			<td style="width: 148px;">Zhereshchin, Andrey</td>
+			<td style="width: 241px;">Updated for Curam 6.2.0.x</td>
+		</tr>
+		<tr>
+			<td style="width: 89px;">08-Oct-2015</td>
+			<td style="width: 148px;"><span class="vcard"><a class="fn url" href="https://w3-connections.ibm.com/profiles/html/profileView.do?userid=42ec2e40-1483-1034-8853-ea2d8929c917"  role="button">@Zhereshchin, Andrey</a><span class="x-lconn-userid" style="display: none">42ec2e40-1483-1034-8853-ea2d8929c917</span></span>​</td>
+			<td style="width: 241px;">Updated for Curam 6.1.x and TechInf specifics.</td>
+		</tr>
+		<tr>
+			<td style="width: 89px;">01-Jul-2015</td>
+			<td style="width: 148px;"><span class="vcard"><a class="fn url" href="https://w3-connections.ibm.com/profiles/html/profileView.do?userid=5367ab40-c96e-1030-97eb-d70a3a891b7f"  role="button">@Bergin, Alan</a><span class="x-lconn-userid" style="display: none">5367ab40-c96e-1030-97eb-d70a3a891b7f</span></span>​</td>
+			<td style="width: 241px;">Initial version in <a wiki="W386ba670c7bc_42fd_ba5a_77b6b5efebbe" href="https://w3-connections.ibm.com/wikis/home?lang=en-gb#!/wiki/W386ba670c7bc_42fd_ba5a_77b6b5efebbe/page/RSA%20Installation" id="wikiLink1444323232938" page="RSA Installation">NPG&nbsp;Development</a> community.</td>
+		</tr>
+	</tbody>
+</table>
+
+<h3 dir="ltr">Prerequisites</h3>
+
+<ul dir="ltr">
+	<li>Installation Manager v1.6.3.1 or higher installed.
+	<ul>
+		<li>See <a href="http://www-01.ibm.com/support/docview.wss?uid=swg27025142">http://www-01.ibm.com/support/docview.wss?uid=swg27025142</a> for IM install packages.</li>
+	</ul>
+	</li>
+	<li>Any previous versions of RSA/RSM uninstalled.
+	<ul>
+		<li>This can be done using the <strong>Uninstall</strong> option in Installation Manager.</li>
+	</ul>
+	</li>
+</ul>
+
+<h3 dir="ltr">Installation</h3>
+
+<ol dir="ltr">
+	<li>Start Installation Manager (Start &gt; All Programs &gt; IBM Installation Manager &gt; IBM Installation Manager).</li>
+	<li>Configure RSA repositories:
+	<ol>
+		<li>Go to File &gt; Preferences.</li>
+		<li>Click Add Repository.</li>
+		<li>Navigate to \\tiny.mul.ie.ibm.com\Applications\RSA\9.0\RSA\disk1\diskTag.inf and click OK. <img style="border-width: 1px; border-style: solid; margin-top: 5px; margin-bottom: 5px;" lconnwikiparamattachmentname="RepositoryConfig.jpg" src="RSA%20Installation._ATTACHMENTS_/RepositoryConfig.jpg" lconnwikiparamwikipage="Rational Software Architect (RSA) Installation" lconnwikimacro="image" alt=""></img></li>
+		<li>Click Apply and OK.</li>
+	</ol>
+	</li>
+	<li>Start the installation by clicking Install on the main screen of Installation Manager.</li>
+	<li>Select the product you wish to install (IBM Rational Software Architect &gt; Version 9.0) and click Next.
+	<ul>
+		<li>Warning regarding the Anti-Virus software can be safely ignored. Click Next.</li>
+	</ul>
+	</li>
+	<li>Accept the Licenses and click Next.</li>
+	<li>Choose a location for the Shared Resources and click Next.</li>
+	<li>Choose the package installation location, <span style="background-color:#FFFF00;">change the Architecture Selection to <strong>32-bit</strong></span> and click Next.
+	<ul>
+		<li>The Architecture selection is important, as some of the plug-ins do not function correctly with the 64-bit version.<img style="border-width: 1px; border-style: solid; margin-top: 5px; margin-bottom: 5px;" lconnwikiparamattachmentname="InstallArchDir.jpg" src="RSA%20Installation._ATTACHMENTS_/InstallArchDir.jpg" lconnwikiparamwikipage="Rational Software Architect (RSA) Installation" lconnwikimacro="image" alt=""></img></li>
+	</ul>
+	</li>
+	<li>Do NOT extend an existing version of Eclipse to avoid package conflicts. Click Next.</li>
+	<li>On the "Install Packages" screen, make sure to select "Rational ClearCase SCM adapter" and "Rational Rose model import". Click Next.<img style="border-width: 1px; border-style: solid; margin-top: 5px; margin-bottom: 5px;" lconnwikiparamattachmentname="PackageSelection.jpg" src="RSA%20Installation._ATTACHMENTS_/PackageSelection.jpg" lconnwikiparamwikipage="Rational Software Architect (RSA) Installation" lconnwikimacro="image" alt=""></img></li>
+	<li>Continue and accept the defaults for the rest of the installation.</li>
+</ol>
+
+<h3 dir="ltr">Post-Install Steps</h3>
+
+<ol dir="ltr">
+	<li>Choose "none" at the end of the installation, or else close the IBM Rational Software Architect window.</li>
+	<li>Copy the 3 JAR files located in the directory below to <em>RSAInstallDir</em>\plugins\
+	<ul>
+		<li>
+		<pre>
+<em>JDE_ROOT</em>\release\CuramSDEJ\rsa\eclipse\plugins\</pre>
+
+		<ul>
+			<li>where JDE_ROOT is the home of your stream, e.g. C:\CC\andreyzh_TI_MAIN\TIVOB</li>
+		</ul>
+		</li>
+		<li>If the release\CuramSDEJ directory does not exist, run 'build server' from JDE_ROOT</li>
+	</ul>
+	</li>
+	<li>Create a new workspace directory in the <em>RSAInstallDir </em>corresponding to the stream you intend to work on, e.g. <em>RSAInstallDir</em>\ws_TI_MAIN</li>
+	<li>Create/Edit the "IBM Rational Software Architect" windows shortcut on your desktop:
+	<ul>
+		<li>Change the shortcut name to include the stream you intend to work on, e.g. "IBM Rational Software Architect TI_MAIN".</li>
+		<li>Add the following two parameters to the Target field:
+		<ul>
+			<li>-clean</li>
+			<li>-data <em>RSAInstallDir</em>\ws_TI_MAIN</li>
+		</ul>
+		</li>
+		<li>e.g.: C:\Exclude\IBM\RSA9.0\eclipse.exe -product com.ibm.rational.rsa.product.v90.ide -clean -data C:\Exclude\IBM\RSA9.0\ws_TI_MAIN<span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span></li>
+		<li>Do this for every new stream that you intend to model</li>
+	</ul>
+	</li>
+</ol>
+
+<h3 dir="ltr">RSA License</h3>
+
+<h4 dir="ltr">Downloading the license</h4>
+
+<ol dir="ltr">
+	<li>Follow the instructions on the following page to create an account in IBM Rational License Key Center, if you don't already have one:
+	<ul>
+		<li><a wiki="Wc8429a358499_452c_9958_623d8a360705" href="https://w3-connections.ibm.com/wikis/home?lang=en-gb#!/wiki/Wc8429a358499_452c_9958_623d8a360705/page/License%20Keys%20for%20Internal%20Use" id="wikiLink1444322759653" page="License Keys for Internal Use">https://w3-connections.ibm.com/wikis/home?lang=en-gb#!/wiki/Wc8429a358499_452c_9958_623d8a360705/page/License%20Keys%20for%20Internal%20Use</a></li>
+	</ul>
+	</li>
+	<li>Log into the IBM Rational License Key Center: <a href="https://licensing.subscribenet.com/control/ibmr/login">https://licensing.subscribenet.com/control/ibmr/login</a></li>
+	<li>From the product line menu, navigate to IBM Rational Software Architect.</li>
+	<li>Select the activation kit of the version of RSA you are using and download the license.</li>
+</ol>
+
+<h4 dir="ltr">Installing the license</h4>
+
+<ol dir="ltr">
+	<li>Extract the contents of the zip into a new folder.</li>
+	<li>Start IBM Installation Manager and select "Manage Licenses".</li>
+	<li>Select the IBM Rational Product, then choose the "Import product activation kit" option.</li>
+	<li>Browse to the jar file that you unzipped in step 2 and click Next, then Finish.<br />
+	<img style="margin: 5px; border-width: 1px; border-style: solid;" lconnwikiparamattachmentname="Activation.jpg" src="RSA%20Installation._ATTACHMENTS_/Activation.jpg" lconnwikiparamwikipage="Rational Software Architect (RSA) Installation" lconnwikimacro="image" alt=""></img></li>
+	<li>The activation kit will be installed.
+	<ul>
+		<li>To verify the license installation, you can select Manage License in IBM Installation Manager or view it through Help -&gt; License status in the "Rational Product".</li>
+	</ul>
+	</li>
+	<li>The permanent license is now installed and you can continue using the Rational product installed.</li>
+</ol>
+
+<h3 dir="ltr"><br />
+Applying the Curam profile for a standalone RSA installation on a Mac</h3>
+
+<ol dir="ltr">
+	<li>From an SPM stream's SDEJ, copy the '/rsa' directory&nbsp;to a static directory like '/Users/<span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">jamessmith</span>/Documents/rsa'<br />
+	This contains 'curam.ide.modeling.profile.jar' and 'curam.ide.modeling.rsm.jar'</li>
+	<li>From an SPM DevEnv, copy 'curam.ide.internal.tooling.jar' which should be in a folder structure like&nbsp;'DevEnv/7.0.1/eclipse-extensions/internal/eclipse/plugins/'<br />
+	&nbsp;</li>
+	<li>Create this file in your dropins folder,&nbsp;/Applications/IBM/SoftwareDeliveryPlatform/dropins/rsa_plugin.link
+	<table border="1" style="width: 500px;">
+		<tbody>
+			<tr>
+				<td style="width: 500px;"><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">path=/Users/</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">jamessmith</span><span style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;">/Documents/rsa</span></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p>&nbsp;</p>
+	</li>
+	<li>Restart RSA</li>
+</ol></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>

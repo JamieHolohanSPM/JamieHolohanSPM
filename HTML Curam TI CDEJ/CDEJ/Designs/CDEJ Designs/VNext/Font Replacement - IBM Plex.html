@@ -1,0 +1,2054 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Font Replacement - IBM Plex</title>
+<link rel="stylesheet" type="text/css" id="defaultStylesheet" href="../../../../wiki.css" />
+<script type="text/javascript" src="../../../../wiki.js" ></script>
+<script type="text/javascript" src="../../../../navigation.js" ></script>
+<script type="text/javascript">
+    wikiName="Curam TI CDEJ";
+    wikiId="urn:lsid:ibm.com:td:efdf6112-d0d3-4d1d-811e-8ccefe245ee8";
+    pageName="Font Replacement - IBM Plex";
+    pageId="urn:lsid:ibm.com:td:54ce0a48-1000-45be-aea4-092b8693420d";
+    toRoot="../../../../";
+</script>
+</head>
+<body onload="wikiLoad()">
+<div class="main-wrapper">
+  <div class="wiki-title-container" id="wiki-title-container">
+    <div class="wiki-title-pane">
+      <div class="wiki-title-text">Curam TI CDEJ</div>
+    </div>
+  </div>
+  <div class="title-container" id="title-container">
+    <div class="title-pane"> 
+      <div class="title-text">Font Replacement - IBM Plex</div>
+    </div> 
+  </div>
+  <div class="main-menu-container" id="main-menu-container">
+    <ul class="main-menu" id="main-menu">
+    </ul>
+  </div>
+  <div class="content-container" id="content-container">
+    <div class="content-pane"> 
+<div><p dir="ltr">Table of Contents:</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii3">Stakeholders</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii4">Background</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii5">Requirements</a>
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii6">Requirement Decisions</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii7">Non Functional Requirements</a></li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii8">Design Options</a>
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii9">Design</a></li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii10">Architecture/Design Decisions</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii11">System Context Diagram</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii12">Architecture/Design Context Diagram</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii13">Design Specifics</a>
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii14">Design User Interface</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii21">Design Validations</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii22">Design Metadata Changes</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii23">Design Logical Data Model Changes</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii24">Design Resilience Measures</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii25">Design Logging</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii26">Design Accessibility</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii27">Third Party Software and Legal Requirements</a></li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii28">Use Cases</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#iirtl1">Right to Left</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii15">Implementation Notes</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii16">Application Impact</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii17">Configuration Transport Manager</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii18">Testing</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii19">Documentation/How To Use Feature</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii20">Check Lists</a>
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii1">IEG Check List</a></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="#ii2">Workflow Check List</a></li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h1 dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Design Page for Font Replacement - IBM Plex</strong></h1>
+
+<h2 dir="ltr" id="ii3">Stakeholders</h2>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Refer to the following Org Chart to ensure you are engaging the correct people. The table below indicates the current contacts for each area.
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://ibm.biz/BdsuKd">https://ibm.biz/BdsuKd</a></li>
+	</ul>
+	</li>
+</ul>
+
+<table border="1" dir="ltr">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Role</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 216px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 87px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Sign Off if Applicable</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Customer</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 216px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 87px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Business Owner/Product Owner</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 216px;">Des McCann</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 87px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Architect</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 216px;">Fergal Gavin</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 87px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Developer(s)</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 216px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Conor Duffy, Padraig Rochford &amp; Rishu Sharma</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 87px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">FVT</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 216px;">Feargal Conneely</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 87px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">SVT</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 216px;">Feargal Conneely</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 87px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Information Developer</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 216px;">Annette Sohor</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 87px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">UX Design</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 216px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 87px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Legal</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 216px;">Deirdre Dolan/Jim Rook</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 87px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii4">Background</h2>
+
+<p dir="ltr">This originates from RTC&nbsp;<a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=234623">Enhancement&nbsp;Request&nbsp;234623</a>&nbsp;which was then copied to RTC&nbsp;<a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=248182">Story&nbsp;248182</a>&nbsp;to track the work. Most of this section is copied from these.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+&nbsp;</p>
+
+<p dir="ltr">SPM&nbsp;will no longer be licensed to ship with <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Helvetica</strong> from (May?) 2020. As a result, SPM needs to move another font and IBM Design (dkuehn@us.ibm.com) has selected the&nbsp;<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">IBM Plex Font</strong>.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+For more links and information, please find below:</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://www.ibm.com/plex/">https://www.ibm.com/plex/</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://github.com/IBM/plex">https://github.com/IBM/plex</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="http://www.carbondesignsystem.com/style/typography/overview">http://www.carbondesignsystem.com/style/typography/overview</a></li>
+</ul>
+
+<p dir="ltr">SPM Analysis:</p>
+
+<p dir="ltr">The fonts currently used in SPM are located here: "\TI\client\CoreInf\CuramCDEJ\lib\curam\web\themes\curam\fonts". They include the following:</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">bold</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">light</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">medium</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">roman</li>
+</ul>
+
+<p dir="ltr">These fonts are then referenced in the CSS file which is used for inclusion into the SPM pages:</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">helvetica-neue-ibm.css</li>
+</ul>
+
+<p dir="ltr">There are then three CSS variables files which are used for defining the CSS variables which are used across the application (TI\client\Generator\resources\css)</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">css-variables.properties</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">external-infrastructure-css.properties</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">internal-infrastructure-css.properties</li>
+</ul>
+
+<p dir="ltr">In the "internal-infrastructure-css.properties" file, the font families have been defined:</p>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">FONT FAMILIES infrastructure_helv-medium_font-family = HelvNeueMediumforIBM, Helvetica, Arial<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+	infrastructure_helv-roman_font-family = HelvNeueRomanforIBM, Helvetica, Arial<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+	infrastructure_helv-bold_font-family = HelvNeueBoldforIBM, Helvetica, Arial<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+	infrastructure_helv-light_font-family = HelvNeueLightforIBM, Helvetica, Arial</li>
+</ol>
+
+<p dir="ltr">There are multiple references to these variable names in the css-variables.properties file.</p>
+
+<p dir="ltr">Unfortunately, the term "helv" has been used in these names so this may mean that we need to change these variable names and assess the impact across all of the higher stacks (i.e. rename the variables to something more generic agnostic of the font family being used and update all references). This may consume the most time as part of this exercise.</p>
+
+<h2 dir="ltr" id="ii5">Requirements</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. Each requirement for the feature should be defined here in as clear and concise fashion as possible.&nbsp; A link to the story in RTC should also be provided here:</p>
+
+<p dir="ltr">Read this at least once before you populate this section:</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="http://spacese.spacegrant.org/uploads/Requirements-Writing/Writing%20Good%20Requirements.pdf?cm_mc_uid=89070742679414755728514&amp;cm_mc_sid_50200000=1481103055">http://spacese.spacegrant.org/uploads/Requirements-Writing/Writing%20Good%20Requirements.pdf?cm_mc_uid=89070742679414755728514&amp;cm_mc_sid_50200000=1481103055</a></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Remember the language required:
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirements use <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">shall</em></strong></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Statements of fact use <em sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">will</strong></em></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Goals use <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">should</em></strong></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">All shall statement (requirements) must be verifiable (avoid ambiguous terms such as Minimize, Maximize, Rapid, User friendly, Easy, Sufficient, Adequate, Quick).</p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Terms such as<em sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups"> are, is, was</strong></em>, and <em sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">must</strong></em> do not belong in a requirement. They may be used in a descriptive section or in the lead-in to a requirements section of the specification.</p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The word support is often used incorrectly in requirements:</p>
+
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">WRONG</strong>: The system shall support the training coordinator in defining training scenarios.</p>
+			</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">RIGHT:</strong> The system shall provide input screens for defining training scenarios. The system<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			shall provide automated training scenario processes.</p>
+			</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">List of Requirements</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement 1: No Helvetica displayed anywhere in SPM screens</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement 2: adaadasdsadasdasdasdasdasdasdsssss</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement 3: Everywhere that was Helvetica now displayed in Plex</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">RTC Tickets</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=234623">Enhancement&nbsp;Request&nbsp;234623</a>&nbsp;</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><a href="https://jazz031.hursley.ibm.com:9443/ccm/web/projects/SPM#action=com.ibm.team.workitem.viewWorkItem&amp;id=248182">Story&nbsp;248182</a></li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii6">Requirement Decisions</h3>
+
+<p dir="ltr">There may be some outstanding questions/decisions made as regards to the requirements. These decisions should be documented here.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="156" width="860">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 85px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Requirement Decision Title</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 85px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Issue or Problem Statement</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 49px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Assumptions</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Motivation</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 129px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Alternatives</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 37px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Decision</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Justification</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Implications</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Status</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Date</strong></td>
+		</tr>
+		<tr aria-labelledby="mentionsAria_0" sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 85px;">Targeted release type</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 85px;">Is this change suitable for a Refresh Pack release?<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 49px;">Removing any existing OOTB CSS style names would be impactful.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">We strive for no impact but sometimes it makes sense to make changes impactful.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 129px;">See options in Design Decisions section
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 37px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Refresh<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			- bloat<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			- no impact</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">- probably shouldn't even reference Helvetica<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			Mod<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			- no bloat<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			- impact<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			- no refs left</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 85px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 85px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 49px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 129px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 37px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 85px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 85px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 49px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 129px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 37px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 85px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 85px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 49px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 129px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 37px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii7">Non Functional Requirements</h3>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. Do the following non functional requirements apply to the enhancement being created and if so, minor details should be provided here. We can fill in N/A if the specified non functional requirement is not applicable to the feature being delivered.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="263" style="width: 1161px;" width="671">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">NFR</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Note&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+			<td style="width: 489px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Details</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Accessibility</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to be used by people with disabilities. When new technologies are being used for the UI very careful consideration should be given to whether screen readers can be used with the technologies. This applies specifically to usage of JavaScript, Flex and SVG. The use of colors to provide functionality should be considered (and avoided), along with resolutions that will be used by vision impaired users.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Both desktop application and tablet devices should be considered in this effort.</p>
+			</td>
+			<td style="width: 489px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Availability &amp; Resilience</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to be fully or partly operational as and when required and to effectively handle failures that could affect system availability. This should be considered when working outside of the normal infrastructure and deployment. For example, the XML Server is not deployed in an application server and has special handling for fail-over and load balancing. Careful consideration should be taken before adding new components, e.g. EJB Beans, MDBs, to the infrastructure.</td>
+			<td style="width: 489px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Development Resource</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to be designed, built, deployed and operated within known constraints of people, budget, time, etc. In general there is not much information required here, however where special skill sets or people with siloed knowledge are required to work on the change/enhancement, this should be detailed here.</td>
+			<td style="width: 489px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Evolution</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to be flexible in the face of the inevitable change that all systems experience after deployment, balanced against the costs of providing such flexibility. Consideration should be given to future proofing the change, including considering how to upgrade to any changes or enhancements provided in the future. Specifically designs should accommodate elements such as localisation (text, dates, etc.), customization, configurability, and componentization. Providing these features in future releases, when not considered up front, has caused impacts for customers in the past and has prevented us from providing the features in some cases.</td>
+			<td style="width: 489px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Internationalisation</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to be independent from any particular language, country or cultural group. Localisation and internationalisation are a large concern for Cúram. Support should always be provided to view information in multiple locales, based on the user and server locale, along with support for working in multiple time zones.</td>
+			<td style="width: 489px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Location</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to overcome problems brought about by the absolute location of its elements and the distances between them. For the most part this is not a major concern, however we should never design based on the assumption that the customer will use a default configuration</td>
+			<td style="width: 489px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Performance and Scalability</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to predictably execute within its mandated performance profile and to handle increased processing volumes. Performance and scalability are a concern and should always be considered during design. Where necessary, the Performance and Benchmarking teaming should be engaged early to help with determining impact of potential changes.</td>
+			<td style="width: 489px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Regulation</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to conform to locale and international laws, quasi-legal regulations, company policies and other rules and standards. Regulation includes the usages of third party tools and the licensing issues associated with these. New jars should never be introduced without considering the legal implications and licensing of the jars. This includes usage of GPL licensed code. Also, usage of code freely provided on the web and not properly licensed should be avoided.</td>
+			<td style="width: 489px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Security</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ability of the system to reliably control, monitor and audit who can perform what actions on what resources and to detect and recover from failures in security mechanisms. This is a concern where new features are added that are not contained within the normal Cúram security.</td>
+			<td style="width: 489px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Usability</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The ease with which people who interact with the system can work effectively. How the change will affect the user and how they use the application/feature should always be considered. Where necessary the business analysts and our user interface experts should be engaged early to ensure we meet usability requirements. e.g. printing.</td>
+			<td style="width: 489px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii8">Design Options</h2>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">NOTE:</strong> Options 1 to&nbsp;4 inherit the requirements and development steps from the previous option.&nbsp;</em></p>
+
+<div dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Option 1</strong></div>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Ensure&nbsp;that Helvetica and Helvetica-neue&nbsp;fonts are not served (The minimum legal requirement is that we don't&nbsp;serve&nbsp;helvetica fonts)<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+	&nbsp;</li>
+</ul>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Approach:&nbsp;</strong></p>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Delete the following&nbsp; 4 helvetica font&nbsp;directories from TI CDEJ.
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">/CuramCDEJ/lib/curam/web/themes/curam/fonts/bold</p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">/CuramCDEJ/lib/curam/web/themes/curam/fonts/light</p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">/CuramCDEJ/lib/curam/web/themes/curam/fonts/medium</p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">/CuramCDEJ/lib/curam/web/themes/curam/fonts/roman</p>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Delete 4 files from TI XMLServer (as these are not shipped)
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-family:Arial,Helvetica,sans-serif;"><span style="font-size:12px;"><code data-stringify-type="code">TI/BuilderScripts/xmlserver-rtl/fonts/Helvetica-Bold.afm</code></span></span></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-family:Arial,Helvetica,sans-serif;"><code data-stringify-type="code">TI/BuilderScripts/xmlserver-rtl/fonts/Helvetica-BoldOblique.afm</code></span></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-family:Arial,Helvetica,sans-serif;"><code data-stringify-type="code">TI/BuilderScripts/xmlserver-rtl/fonts/Helvetica-Oblique.afm</code></span></p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-family:Arial,Helvetica,sans-serif;"><code data-stringify-type="code">TI/BuilderScripts/xmlserver-rtl/fonts/Helvetica.afm</code></span></p>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Complete platform take-on to consumer streams.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Scan all source codes for Helv* files.</li>
+</ol>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" style="width: 500px; table-layout: fixed; overflow-wrap: break-word; border-collapse : collapse; border-color : #696969;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">Pros:</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">Cons:</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The least Dev time</p>
+			</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">No control over the font displayed.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Potentially the least amount of test validation time</p>
+			</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Does not deliver:</p>
+
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">IBM design recommended Font family</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Mechanism to Simplify future changes</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Optimised Font family loading performance&nbsp;</li>
+			</ul>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">it's suitable for a Refresh</p>
+			</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Clean the codebase [Tech debt]</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">No further changes required OOTB or CUSTOM</p>
+			</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Misleading style names</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+			</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">From a business perspective this<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</strong>option does not give a good impression.</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Option 2&nbsp;</strong></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Introduce Plex font:&nbsp;Replace Helv* font family with the recommended one (IBM Plex)<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+	Note: we keep "helv"/""helvetica" in the existing style names but point to the Plex font</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Approach: - Includes&nbsp;the&nbsp;Approach from Option 1, do the following:</strong>
+
+	<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Add 1 large Plex Sans font file (containing everything we will use from Plex) to TI CDEJ</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Update (without renaming) 4 helv font-faces which specify weight. And create an 'IBM Plex Sans font face. Both pointing towards the new Plex font files.
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">For Example:&nbsp;
+			<table border="1" style="width: 500px; table-layout: fixed; overflow-wrap: break-word; border-collapse : collapse; border-color : #696969;">
+				<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+					<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+						<td style="overflow: hidden; width: 250px; border-color : #696969;">Before</td>
+						<td style="overflow: hidden; width: 250px; border-color : #696969;">After</td>
+					</tr>
+					<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+						<td style="overflow: hidden; width: 250px; border-color : #696969;">@font-face {<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+						&nbsp; font-family: 'HelvNeueLightforIBM';<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+						&nbsp; src: url('./light/helvetica-neue-light.eot?') format('eot'), url('./light/helvetica-neue-light.woff2') format('woff2'), url('./light/helvetica-neue-light.woff') format('woff'), url('./light/helvetica-neue-light.ttf') format('truetype');<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+						}</td>
+						<td style="overflow: hidden; width: 250px; border-color : #696969;">
+						<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">@font-face {<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+						&nbsp; font-family: 'HelvNeueLightforIBM';<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+						&nbsp; src: url(USE_PLEX_RECOMENED_STRUCTURE_HERE);<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+						}</p>
+
+						<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">@font-face {<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+						&nbsp; font-family: 'IBMPlexSansLight';<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+						&nbsp; src: url(USE_PLEX_RECOMENED_STRUCTURE_HERE)<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+						}</p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			</li>
+		</ul>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Update (without renaming) 4 helv font-family properties to 4 variations of the new list
+		<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">From:
+			<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">infrastructure_helv-light_font-family = HelvNeueLightforIBM, Helvetica, Arial</p>
+				</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">infrastructure_helv-bold_font-family = HelvNeueBoldforIBM, Helvetica, Arial</p>
+				</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">infrastructure_helv-roman_font-family = HelvNeueRomanforIBM, Helvetica, Arial</p>
+				</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">infrastructure_helv-medium_font-family = HelvNeueMediumforIBM, Helvetica, Arial</p>
+				</li>
+			</ol>
+			</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">To:&nbsp;</p>
+
+			<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">infrastructure_helv-[weight]_font-family = ‘IBM Plex Sans [weight]’, ‘Helvetica Neue’, -apple-system, BlinkMacSystemFont, ‘Segoe UI’, Roboto, ‘Droid Sans’, Helvetica, Arial, sans-serif;</p>
+				</li>
+			</ol>
+			</li>
+		</ol>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Throughout all source control (all streams contributing to a release), replace all decentralised "font" definitions whose list of font's start with helv (will not be directly after the colon though)
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">example (from HCR/EJBServer/components/HCROnline/HomePages/css/protohomepage.css)<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			.hcrHomePage .hcrHomePageTop .hcrHomePageHeadingTitleOne,<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			.hcrHomePage .hcrHomePageTop .hcrHomePageHeadingTitleTwo {<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			&nbsp; &nbsp; font: 36px Helvetica, Arial, Tahoma, sans-serif;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			&nbsp;&nbsp; &nbsp;color: #222;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			&nbsp;&nbsp; &nbsp;display: block;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			&nbsp;&nbsp; &nbsp;margin-left: 60px;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			}</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Correct the CSS&nbsp;to:<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			.hcrHomePage .hcrHomePageTop .hcrHomePageHeadingTitleOne,<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			.hcrHomePage .hcrHomePageTop .hcrHomePageHeadingTitleTwo {<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			&nbsp; &nbsp; font: 36px 'IBM Plex Sans', Helvetica, Arial, Tahoma, sans-serif;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			&nbsp;&nbsp; &nbsp;color: #222;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			&nbsp;&nbsp; &nbsp;display: block;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			&nbsp;&nbsp; &nbsp;margin-left: 60px;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			}<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			&nbsp;</li>
+		</ul>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Throughout all source control (all streams contributing to a release), replace all decentralised "font-family" definitions that start with any type of helv. Choose which family based on the font-weight of elements using the font-family being replaced.
+		<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Example (from&nbsp;components/AssessmentPlanning/css/AssessmentPlanning_custom_style.css)
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Before:<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				div#curam_smartercare_ipsum_dijit_charting_graph_InnerGraph_0 &gt; div div { &nbsp;&nbsp; &nbsp;&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				&nbsp; &nbsp; font-family: HelvNeueMediumforIBM !important;&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				&nbsp; &nbsp; font-size: 12px !important;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				&nbsp; &nbsp; color: #464646; &nbsp; &nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				}&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">After:<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				div#curam_smartercare_ipsum_dijit_charting_graph_InnerGraph_0 &gt; div div { &nbsp;&nbsp; &nbsp;&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				&nbsp; &nbsp; font-family:&nbsp;'IBM Plex Sans'&nbsp;!important;&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				&nbsp; &nbsp; font-size: 12px !important;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				&nbsp; &nbsp; color: #464646; &nbsp; &nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				}&nbsp;</li>
+			</ul>
+			</li>
+		</ol>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Throughout all source control (all streams contributing to a release),&nbsp; manually sanity check any remaining references to helv that are in neither the font nor the font-family regex pattern.</li>
+	</ol>
+	</li>
+</ul>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Note: </strong></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">If a font family represents like this Font-family: {Helvetica, Arial, Tahoma, Sans-serif} then to see 'Helvetica' font the user needs to have the it installed on the machine. The font files we provide are only used when loaded with the variables like 'HelvNeueLightforIBM'.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">On the question of are the properties external?
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">No they are not. Confirmed with Barry O'Sullivan: <span style="text-align: left; text-indent: 0px; background-color: rgb(248, 248, 248); text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;"><font color="#1d1c1d" face="Arial, Helvetica, sans-serif"><span style="font-variant-ligatures: common-ligatures;">our supported customisation&nbsp;path at the moment is strictly though CSS. The use of the references to the CSS properties in their custom CSS is not something we support or have documented anywhere. Now that's not to say they might not have done it as they can see these files in the source code&nbsp;</span></font></span><span style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: rgb(29, 28, 29); font-style: normal; font-variant-ligatures: common-ligatures; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;">and might&nbsp;</span><span style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: rgb(29, 28, 29); font-style: normal; font-variant-ligatures: common-ligatures; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;">&nbsp;</span><wbr style="box-sizing: inherit; color: rgb(29, 28, 29); font-family: Slack-Lato, appleLogo, sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: common-ligatures; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"></wbr><span style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: rgb(29, 28, 29); font-style: normal; font-variant-ligatures: common-ligatures; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;">but the key point is that is not supported at all at the</span><span style="font-family:Arial,Helvetica,sans-serif;"><span style="color: rgb(29, 28, 29); font-style: normal; font-variant-ligatures: common-ligatures; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;"> moment.</span></span></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-size:12px;"><span style="font-family:Arial,Helvetica,sans-serif;"><span style="color: rgb(29, 28, 29); font-style: normal; font-variant-ligatures: common-ligatures; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(248, 248, 248); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">the default CSS files are the ones that we have in the Out Of The Box components. We only want them to customize the ones in their custom component(s). Otherwise if they do update default they would break the upgrade path i.e future installations of upgrades would overrdie their customization in out of the box components but if they have them isolated in their custom component they won't get overwritten.</span></span></span></li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><span style="font-family:Arial,Helvetica,sans-serif;"><span style="color: rgb(29, 28, 29); font-style: normal; font-variant-ligatures: common-ligatures; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">Referenced knowledge center link:<span style="font-size:12px;"> </span></span><span style="font-size:12px;"><a class="c-link" href="https://www.ibm.com/support/knowledgecenter/SS8S5A_7.0.7/com.ibm.curam.content.doc/WebClientReference/r_WEBCREF_Development1CascadingStylesheets1.html" rel="noopener noreferrer" style="box-sizing: inherit; color: rgba(var(--sk_highlight_hover,11,76,140),1); text-decoration: underline; font-family: Slack-Lato, appleLogo, sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: common-ligatures; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(248, 248, 248);" target="_blank">https://www.ibm.com/support/knowledgecenter/SS8S5A_7.0.7/com.ibm.curam.content.doc/WebClientReference/r_WEBCREF_Development1CascadingStylesheets1.html</a></span></span></li>
+	</ul>
+	</li>
+</ul>
+
+<table border="1" dir="ltr" style="width: 500px; table-layout: fixed; overflow-wrap: break-word; border-collapse : collapse; border-color : #696969;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">Pros:</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">Cons:</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">It's suitable for a Refresh</p>
+			</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Large FVT regression</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">No further changes required OOTB or CUSTOM</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Misleading style names</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Lower impact risk.</p>
+			</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Hoped to rename to something generic like "first-choice-font" so we could change it again in future this way.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Delivers:&nbsp;IBM design recommended Font family</p>
+			</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><s sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Possibly not legal to even reference the name of the unlicensed font.</s>&nbsp;<em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Edit: Jim confirmed that legally we only need to make sure we are not serving the Helvetica font files</em></p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">Control Over the Font displayed.</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Some potential impact where customers are&nbsp; using decentralised&nbsp;properties in custom code</em></td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr"><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Option 3</strong></p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Replace variables names that ref Helv*</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<h3 sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Approach: - Includes&nbsp;the&nbsp;Approach from Option 2:</em></h3>
+
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Rename 4 helv font-faces to "main" which specify weight: regular,bold,medium,light. (rename "roman" one to "regular")
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<table border="1" style="width: 500px; table-layout: fixed; overflow-wrap: break-word; border-collapse : collapse; border-color : #696969;">
+				<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+					<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+						<td style="overflow: hidden; width: 250px; border-color : #696969;">
+						<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Before</p>
+						</td>
+						<td style="overflow: hidden; width: 250px; border-color : #696969;">After</td>
+					</tr>
+					<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+						<td style="overflow: hidden; width: 250px; border-color : #696969;">@font-face {<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+						&nbsp; font-family: 'HelvNeueLightforIBM';<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+						&nbsp; src: url('./light/helvetica-neue-light.eot?') format('eot'), url('./light/helvetica-neue-light.woff2') format('woff2'), url('./light/helvetica-neue-light.woff') format('woff'), url('./light/helvetica-neue-light.ttf') format('truetype');<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+						}</td>
+						<td style="overflow: hidden; width: 250px; border-color : #696969;">
+						<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">@font-face {<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+						&nbsp; font-family: 'MainLightFontforIBM';<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+						&nbsp; src: url(USE_PLEX_RECOMENED_STRUCTURE_HERE);<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+						}</p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<ul dir="ltr" style="margin-left: 40px;">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Throughout all source control (all streams contributing to a release) , replace refs to these 4 font-faces.
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<table border="1" style="width: 500px; table-layout: fixed; overflow-wrap: break-word; border-collapse : collapse; border-color : #696969;">
+			<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+					<td style="overflow: hidden; width: 250px; border-color : #696969;">
+					<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Before:</p>
+					</td>
+					<td style="overflow: hidden; width: 250px; border-color : #696969;">After:</td>
+				</tr>
+				<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+					<td style="overflow: hidden; width: 250px; border-color : #696969;">div#curam_smartercare_ipsum_dijit_charting_graph_InnerGraph_0 &gt; div div { &nbsp;&nbsp; &nbsp;&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+					&nbsp; &nbsp; font-family: HelvNeueMediumforIBM !important;&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+					&nbsp; &nbsp; font-size: 12px !important;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+					&nbsp; &nbsp; color: #464646; &nbsp; &nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+					}&nbsp;</td>
+					<td style="overflow: hidden; width: 250px; border-color : #696969;">div#curam_smartercare_ipsum_dijit_charting_graph_InnerGraph_0 &gt; div div { &nbsp;&nbsp; &nbsp;&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+					&nbsp; &nbsp; font-family:&nbsp;MainMediumFontforIBM&nbsp;!important;&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+					&nbsp; &nbsp; font-size: 12px !important;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+					&nbsp; &nbsp; color: #464646; &nbsp; &nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+					}</td>
+				</tr>
+			</tbody>
+		</table>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<ul dir="ltr" style="margin-left: 40px;">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Rename 4 helv font-family properties to "main"
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<table border="1" style="width: 500px; table-layout: fixed; overflow-wrap: break-word; border-collapse : collapse; border-color : #696969;">
+			<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+					<td style="overflow: hidden; width: 250px; border-color : #696969;">
+					<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Before&nbsp;</p>
+					</td>
+					<td style="overflow: hidden; width: 250px; border-color : #696969;">After</td>
+				</tr>
+				<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+					<td style="overflow: hidden; width: 250px; border-color : #696969;">
+					<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">infrastructure_helv-light_font-family = HelvNeueLightforIBM, Helvetica, Arial</p>
+
+					<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">infrastructure_helv-bold_font-family = HelvNeueBoldforIBM, Helvetica, Arial</p>
+
+					<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">infrastructure_helv-roman_font-family = HelvNeueRomanforIBM, Helvetica, Arial</p>
+
+					<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">infrastructure_helv-medium_font-family = HelvNeueMediumforIBM, Helvetica, Arial</p>
+					</td>
+					<td style="overflow: hidden; width: 250px; border-color : #696969;">
+					<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">infrastructure_plex-light_font-family = MainLightFontforIBM, ‘Helvetica Neue’, -apple-system, BlinkMacSystemFont, ‘Segoe UI’, Roboto, ‘Droid Sans’, Helvetica, Arial, sans-serif;</p>
+
+					<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">infrastructure_plex-bold_font-family = MainBoldFontforIBM, ‘Helvetica Neue’, -apple-system, BlinkMacSystemFont, ‘Segoe UI’, Roboto, ‘Droid Sans’, Helvetica, Arial, sans-serif;</p>
+
+					<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">infrastructure_plex-regular_font-family = MainRegularFontforIBM, ‘Helvetica Neue’, -apple-system, BlinkMacSystemFont, ‘Segoe UI’, Roboto, ‘Droid Sans’, Helvetica, Arial, sans-serif;</p>
+
+					<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">infrastructure_plex-medium_font-family = MainMediumFontforIBM, ‘Helvetica Neue’, -apple-system, BlinkMacSystemFont, ‘Segoe UI’, Roboto, ‘Droid Sans’, Helvetica, Arial, sans-serif;</p>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Throughout all source control, (all streams contributing to a release),&nbsp; replace refs to those 4 font-families.&nbsp;<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+	ie: updating all occurrences of&nbsp;infrastructure_helv-light_font-family to&nbsp;infrastructure_plex-light_font-family.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Throughout all source control, (all streams contributing to a release),&nbsp; statically update all decentralised "font" definitions whose list of font's start with helv (will not be directly after the colon though)
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<table border="1" style="width: 500px; table-layout: fixed; overflow-wrap: break-word; border-collapse : collapse; border-color : #696969;">
+			<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+					<td style="overflow: hidden; width: 250px; border-color : #696969;">Before:</td>
+					<td style="overflow: hidden; width: 250px; border-color : #696969;">After:</td>
+				</tr>
+				<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+					<td style="overflow: hidden; width: 250px; border-color : #696969;">font: 12px helvetica,&nbsp;&nbsp;Arial,&nbsp;&nbsp;Tahoma,&nbsp;sans-serif;</td>
+					<td style="overflow: hidden; width: 250px; border-color : #696969;">
+					<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+						<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">font: 12px&nbsp;MainRegularFontforIBM, Arial,&nbsp;&nbsp;Tahoma,&nbsp;sans-serif;</li>
+					</ul>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Throughout all source control, statically update all decentralized "font-family" definitions that start with any type of helv
+		<table border="1" style="width: 500px; table-layout: fixed; overflow-wrap: break-word; border-collapse : collapse; border-color : #696969;">
+			<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+					<td style="overflow: hidden; width: 250px; border-color : #696969;">Before:</td>
+					<td style="overflow: hidden; width: 250px; border-color : #696969;">After:</td>
+				</tr>
+				<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+					<td style="overflow: hidden; width: 250px; border-color : #696969;">font-family:Helvetica;</td>
+					<td style="overflow: hidden; width: 250px; border-color : #696969;">font-family: MainRegularFontforIBM;</td>
+				</tr>
+			</tbody>
+		</table>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Throughout all source control, manually sanity check any remaining references to helv that are in neither the font nor the font-family regex pattern&nbsp;</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">Table of Pros and Cons:</p>
+
+<table border="1" dir="ltr" style="width: 500px; table-layout: fixed; overflow-wrap: break-word; border-collapse : collapse; border-color : #696969;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color: rgb(105, 105, 105);">
+			<p style="text-align: center;">PROs</p>
+			</td>
+			<td style="overflow: hidden; width: 250px; border-color: rgb(105, 105, 105); text-align: center;">CONs</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Control over the font displayed.</p>
+			</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Does not deliver: Optimised Font family loading performance</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Delivers:&nbsp;IBM design recommended Font family</p>
+			</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Mechanism to Simplify future change</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Wont be left with confusing variable names. Does not introduce new technical debt.&nbsp;</p>
+			</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Risk of impact, <em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">(customer&nbsp;using decentralised&nbsp;properties&nbsp;or old font-faces in custom code)&nbsp;</em></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<h3 dir="ltr"><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<span sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Option 4a&nbsp;<font color="#008000">--&nbsp;recommended option&nbsp;</font></span></h3>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Centralise Plex font family management, leaving the weighted font families.</li>
+</ul>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<h3 sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Approach: - Includes the&nbsp;Approach from Option 3:</em></h3>
+	<span style="display: none;">&nbsp;</span>
+
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">same as R4 but update non-centralized references to Helvetica fonts to use a centralised IBM Plex property:
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Throughout all source control, replace all decentralised "font" definitions whose list of font's start with helv (will not be directly after the colon though) to point to the centralised properties.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			&nbsp;
+			<table border="1" style="width: 500px; table-layout: fixed; overflow-wrap: break-word; border-collapse : collapse; border-color : #696969;">
+				<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+					<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+						<td style="overflow: hidden; width: 250px; border-color : #696969;">Before:</td>
+						<td style="overflow: hidden; width: 250px; border-color : #696969;">After</td>
+					</tr>
+					<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+						<td style="overflow: hidden; width: 250px; border-color : #696969;">font: 12px helvetica,&nbsp;&nbsp;Arial,&nbsp;&nbsp;Tahoma,&nbsp;sans-serif;</td>
+						<td style="overflow: hidden; width: 250px; border-color : #696969;">font: 12px $infrastructure_plex-light_font-family;</td>
+					</tr>
+				</tbody>
+			</table>
+			</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Throughout all source control, replace all decentralised "font-family" definitions that start with any type of helv to point to the centralised properties
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Same as above but for font-family</li>
+			</ul>
+			</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Throughout all source control, manually sanity check any remaining references to helv that are in neither the font nor the font-family regex pattern.
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">ie: grep for 'helv'</li>
+			</ul>
+			</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" style="width: 500px; table-layout: fixed; overflow-wrap: break-word; border-collapse : collapse; border-color : #696969;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">PROs</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">CONs</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Control over the font displayed to end user.</p>
+			</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Risk of impact,<em sandbox="allow-forms allow-same-origin allow-scripts allow-popups"> (customer&nbsp;using decentralised&nbsp;properties&nbsp;or old font-faces in custom code)&nbsp;</em></p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Delivers:&nbsp;IBM design recommended Font family</p>
+			</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Does not deliver;&nbsp;Optimised Font family loading performance&nbsp;</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Won't be left with confusing variable names.&nbsp;</p>
+			</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Addresses some technical debt in the product.</p>
+			</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Does not address all technical debt, we will be left with an un-optimised and non-standard way of selecting fonts across the application.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Mechanism to Simplify future changes &amp; removes some technical debt from the product.</p>
+			</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<h3 dir="ltr"><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+<strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Option 4b</strong></h3>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Centralise Plex font family management, removing&nbsp;overloading of font family with font-weight&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+	<h3 sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><em sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Approach: - Includes the&nbsp;Approach from Option 3:</em></h3>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Delete 4 helv font-faces -- eg: the&nbsp; HelvNeueLightforIBM font-face mentioned above.&nbsp;</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Add ~18 "IBM Plex Sans" font-faces, calling them "main". Take from Plex npm installation CSS file all that come under weights: regular,bold,medium,light.&nbsp;</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Delete 4 helv font-family properties. eg:&nbsp; infrastructure_helv-light_font-family</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Add 1 "IBM Plex Sans" font-family property, called "infrastructure_font-family".&nbsp; Take CSS from Plex npm installation CSS file all font-face splits that come under weights: Regular,bold,medium,light.&nbsp;
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Add CDEJ/lib/curam/web/themes/curam/css/curam_fonts_definition.css
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">body {</p>
+
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp; font-family: $infrastructure_font-family;</p>
+
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">}&nbsp;</p>
+
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">this will become the default font-family on every page. We then remove all the duplicate helv ones around the place and they defer to the body default.</p>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Update CDEJ/lib/curam/web/themes/themes.xml
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&lt;theme id="curam"&gt;</p>
+
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;&nbsp;&nbsp; &lt;stylesheet type="main"&gt;</p>
+
+		<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;include file="curam/css/curam_fonts_definition.css"/&gt;</p>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Find refs to the 4 helv dynamic font-family properties recursively tracking weights
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">delete font-family CSS and add font-weight CSS
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">first, for all indirect property names (before losing track of weights),&nbsp;</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">second, do the same for all direct references</li>
+		</ul>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">find all font and font-families starting with any of the 4 weighted helv ones&nbsp;
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">delete font-family CSS (a portion of `font`) and add font-weight CSS (another portion of `font`)</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Throughout all source control, remove remaining static font and font-family definitions starting with with any variation of helv. this means:
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">find refs to the any font-family that starts with any variation of helv
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">delete font-family CSS and add font-weight CSS</li>
+		</ul>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">find refs to the any font that contains any variation of helv (and then filter to just those that start with it. it's not easy to automate this filter)
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">delete font-family CSS (a portion of `font`) and add font-weight CSS (another portion of `font`)</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Throughout all source control, manually sanity check any remaining references to helv that are in neither the font nor the font-family regex pattern.</li>
+</ul>
+
+<h3 dir="ltr">&nbsp;</h3>
+
+<table border="1" dir="ltr" style="width: 500px; table-layout: fixed; overflow-wrap: break-word; border-collapse : collapse; border-color : #696969;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">PROS</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">CONs</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Control&nbsp;the font displayed to end-user.</p>
+				</li>
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br />
+				<br />
+				&nbsp;
+				<li>&nbsp;</li>
+				<li>&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+			</ul>
+			</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">It's&nbsp;NOT suitable for a Refresh</p>
+				</li>
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br />
+				<br />
+				&nbsp;
+				<li>&nbsp;</li>
+				<li>&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+			</ul>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Delivers:&nbsp;IBM design recommended Font family,&nbsp;Optimised Font family loading performance.</p>
+				</li>
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br />
+				<br />
+				&nbsp;
+				<li>&nbsp;</li>
+				<li>&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+			</ul>
+			</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Optimised Font family loading performance&nbsp;</p>
+				</li>
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br />
+				<br />
+				&nbsp;
+				<li>&nbsp;</li>
+				<li>&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+			</ul>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Wont be left with confusing variable names.&nbsp;</p>
+				</li>
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br />
+				<br />
+				&nbsp;
+				<li>&nbsp;</li>
+				<li>&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+			</ul>
+			</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Highest&nbsp;amount of time and effort</p>
+				</li>
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br />
+				<br />
+				&nbsp;
+				<li>&nbsp;</li>
+				<li>&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+			</ul>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Won't leave behind confusing variable/property names</p>
+				</li>
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br />
+				<br />
+				&nbsp;
+				<li>&nbsp;</li>
+				<li>&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+			</ul>
+			</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Customer impact to do the same analysis / FVT regression on custom screens / widgets&nbsp;/ renderers</p>
+				</li>
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br />
+				<br />
+				&nbsp;
+				<li>&nbsp;</li>
+				<li>&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+			</ul>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<ul dir="ltr">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Mechanism to Simplify future changes</li>
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+				<br />
+				<br />
+				&nbsp;
+				<li>&nbsp;</li>
+				<li>&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+			</ul>
+			</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<ul dir="ltr">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Larger number of defects expected due to the larger amount of css changes.</li>
+			</ul>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Industry standard. This approach is technically the correct way to implement this solution.</li>
+			</ul>
+			</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr">What changes are suitable for a Refresh Pack release?</h3>
+
+<table border="1" dir="ltr" style="width: 500px; table-layout: fixed; overflow-wrap: break-word; border-collapse : collapse; border-color : #696969;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<div dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Option 1</strong></div>
+			</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">Yes - it's suitable for a Refresh</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<div dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Option 2</strong></div>
+			</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">No - it's not suitable for a Refresh</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">There is a lower level of impact here, however there is still impact where&nbsp;customer can has used decentralised rhs values for setting helvetica font in their custom CSS.&nbsp;</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<div dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Option 3</strong></div>
+			</td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">No - it's not suitable for a refresh.<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			The customer will need to check their CSS for decentralised references to Helvetica. They will also have to check if they are using the font-faces we are renaming.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Option 4a</strong></td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;"><font color="#000000">No - It's not suitable for a refresh.</font><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			<br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+			The customer will need to check their CSS for decentralised references to Helvetica. They will also have to check if they are using the font-faces we are renaming.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="overflow: hidden; width: 250px; border-color : #696969;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Option 4b</strong></td>
+			<td style="overflow: hidden; width: 250px; border-color : #696969;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">No - it's NOT suitable for a Refresh</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Highest level of impact as there is a change to&nbsp;the way we set fonts across pages.&nbsp;</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr">Do we need to update Flex widgets which will EOL soon?</h3>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Option 1</strong></p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Option 2</strong></p>
+
+<h3 dir="ltr" id="ii9">Design</h3>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. This should outline in detail the design chosen with all of the various areas for the component covered.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii10">Architecture/Design Decisions</h2>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="156" width="860">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Architecture Decision Title</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Issue or Problem Statement</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Assumptions</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Motivation</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 64px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Alternatives</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 78px;"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Decision</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Justification</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Implications</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Status</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Date</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 64px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 78px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Open/In Progress/Closed</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Chosen Design/Implementation Option&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">There are multiple design options, outlined above.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 64px;">outlined in design options</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 78px;">TODO</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TODO</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">OPEN</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">TODO</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 64px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 78px;">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">IEG Templating Mechanism</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">IEG has it's own dynamic CSS properties that pre-dates the UI Modernisation ones. These have a different syntax within the CSS files and are externally documented as to how to configure them via an &lt;*ieg-config.properties&gt; file.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 64px;">Duplicate the Dynamic CSS property within the ieg-config templating mechanism and use this within the 4 CSS files.<br />
+			<br />
+			Not chosen as it wasn't configurable in the past.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups" style="width: 78px;">Replace old literal fonts with new literal fonts.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p>The fonts were never among the configurable portions of the CSS.</p>
+
+			<p>The ieg config properties&nbsp;are externally documented whereas the Dynamic CSS are not (yet).&nbsp;</p>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CLOSED</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">18/12/2019</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii11">System Context Diagram</h2>
+
+<p dir="ltr">A diagram which shows the system context of the new feature, if applicable. This should be a simple schematic which highlights where the new feature as an enhancement fits into an existing feature or if a competely new feature, where it fits into the overall system context.</p>
+
+<h2 dir="ltr" id="ii12">Architecture/Design Context Diagram</h2>
+
+<p dir="ltr">A diagram should be constructed to display to the reader at a glance the architecture of the new enhancement or at the very least the relationship between the various classes that make up the new enhancement. This will help the designer to think about the relationships that exist within the architecture of the feature and the internal relationships of the internal classes within the new feature.</p>
+
+<h2 dir="ltr" id="ii13">Design Specifics</h2>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">IEG:</strong></p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Workflow:</strong></p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CDEJ:</strong></p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">SDEJ:</strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii14">Design User Interface</h3>
+
+<p dir="ltr">If the new enhancement contains any User Interface element, then a UX spec may be required. These include screenshots associated with the new feature, usability concerns, styling and any other UI considerations. Designers and UX team should be involved here. The spec should be associated with this design.</p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Note: New UI features should also be tested to ensure they work on a tablet device. From 7.0.1.0 we state we support tablet devices so we need to make sure we are not regressing in this area.</strong></p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Key board short cuts should also be considered if developing features that interact with the user depending on mouse clicks/key board interaction (i.e. back browser button, refresh etc.)</strong></p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Browser differences should be considered for features being developed ensuring that the required browsers are tested and supported.</strong></p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Is the feature specified for the internal caseworker application or for the external Universal Access application (or both)..</strong></p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Accessibility for both the desktop application (JAWS and IE11 is the supported combination) and tablet (VoiceOver on an iPAD using the keyboard and gestures is the supported combination) should be considered for new UI features.</strong></p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Table Support</strong></p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii21">Design Validations</h3>
+
+<p dir="ltr">Document the validations associated with the new enhancement, what type of validations these are etc.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii22">Design Metadata Changes</h3>
+
+<p dir="ltr">For any metadata based features being developed (e.g. IEG, Workflow etc.). document the new elements/attributes being added/modified and include an XML snippet of this new design. For each new element/attribute, describe how it works functionally.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii23">Design Logical Data Model Changes</h3>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">A. Screen shot or diagram of Logical Data Model Changes associated with the enhancement.</strong></p>
+
+<p dir="ltr"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">B. Each Entity and Attribute Change Described as follows:</strong></p>
+
+<p dir="ltr">Entity: Entity Name</p>
+
+<p dir="ltr">Description of what the entity stores and a real world example etc.</p>
+
+<table border="1" dir="ltr">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Attribute</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Type</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Nullable</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">example</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">systemName</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">String</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">No</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The name of the target Watson system. For example, the System name may be Watson Health Cloud on Softlayer, the front-end cluster system name.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii24">Design Resilience Measures</h3>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. Some thought should be given to how resilient the new feature is.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" style="width: 1152px;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">What happens if something expected/unexpected goes wrong?</td>
+			<td style="width: 736px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">What happens to the system?</p>
+			</td>
+			<td style="width: 736px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">Will the user be able to take corrective action in the system without the need to resort to application logs/SQL searching/data manipulation outside of the system?</td>
+			<td style="width: 736px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">Will the data be left in a consistent state within the system after the exception is thrown?</td>
+			<td style="width: 736px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">Will there be messages given to the user? What will these messages be?</td>
+			<td style="width: 736px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">Will there something written to the logs? What will this be?</td>
+			<td style="width: 736px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 399px;">Does the feature require some of the exception data to be captured and an admin function provided to allow the situation to be re-mediated?</td>
+			<td style="width: 736px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii25">Design Logging</h3>
+
+<p dir="ltr">Document any logging requirements for the new feature being added. Does the new feature require some logging output to aid debugging in a black box environment? Think about what the logging could be to avoid revealing PI information but giving enough information to allow effective debugging to occur in the event of an unexpected issue? JMX considerations should also be added here.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii26">Design Accessibility</h3>
+
+<p dir="ltr">The UX design should contain an accessible requirements but this section can capture any further requirements in this area.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii27">Third Party Software and Legal Requirements</h3>
+
+<p dir="ltr">Does the feature require any new or updated open source third party software? If so, describe it's usage, name, version and ensure legal are contacted to discuss the requirements around the third party software being used.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii28">Use Cases</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. The various use cases for the feature must be outlined here. They can be in the following format.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="329" width="539">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Use Case ID</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">1.1</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Name</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Add informational message to cluster with no toggle.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actor</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Citizen</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Where a cluster is defined to not have expand/collapse functionality, if the contents of the cluster are labelled by an informational label, the informational label shall still be displayed.</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Preconditions</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Define a &lt;cluster&gt; element.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The contents of this &lt;cluster&gt; element should be labelled by adding an &lt;informational-label&gt; child element.</p>
+
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</p>
+			</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Flow</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The citizen navigates to the question, relationship or summary page where the &lt;cluster&gt; defined in the preconditions is displayed.</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Expected</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The cluster which was labelled with an informational message shall be displayed as normal and have a informational message.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="iirtl1">Right to Left</h2>
+
+<p dir="ltr">Existing Helvetica font files do not contain RTL characters.&nbsp;Running the font files through an online font character support tool reveals that all right to left characters are not supported in our existing helvetica font files</p>
+
+<p dir="ltr">Testing of an Arabic build reveals&nbsp;that the build is falling back to Arial font characters, not Helvetica.&nbsp;</p>
+
+<p dir="ltr">RTL characters are separated into their own font files, Arabic has its&nbsp; own font files, Thai ect. The font weights are also seperated into their own font files.&nbsp;</p>
+
+<p dir="ltr">In our &nbsp;existing set up, we use&nbsp;4 font-faces, 4 font properties for light, regular, medium, bold.&nbsp;&nbsp;</p>
+
+<p dir="ltr">These font-faces point to the font files for the respective weight so to support all characters using only these 4 font faces,</p>
+
+<p dir="ltr">Solution Option 1: &nbsp;include all characters in the font file for each type. Something that is not typically done.</p>
+
+<p dir="ltr">Option 2: Use unicode range in CSS to have two classes with the same name but only serve the font files needed depending on the character sets used.</p>
+
+<p dir="ltr">Browser support for unicode-range (red:NO SUPPORT, light-green:PARTIAL SUPPORT, green:FULLY SUPPORTED):</p>
+
+<p dir="ltr"><img lconnwikiparamattachmentname="Screen Shot 2019-11-13 at 13.41.30.png" lconnwikimacro="image" lconnresourcetype="attachment" src="Font%20Replacement%20-%20IBM%20Plex._ATTACHMENTS_/Screen%20Shot%202019-11-13%20at%2013.41.30.png" lconnwikiparamwikipage="Font Replacement - IBM Plex" lconnattachedresourcetype="page"></img>&nbsp;&nbsp;</p>
+
+<p dir="ltr">Option 3: The recommended approach from design is to use implementation option 4b and the CSS classes that comes with Plex.</p>
+
+<h2 dir="ltr" id="ii15">Implementation Notes</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">optional</strong>. Any notes related to the actual implementation can be described here. These can be related to some questions related to the implementation, the way some part of the implementation was completed etc.</p>
+
+<h3 dir="ltr"><br sandbox="allow-forms allow-same-origin allow-scripts allow-popups" />
+Some Rough Ideas without a home on this page yet:</h3>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii16">Application Impact</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. If there is no impact, then this is as simple as saying so. If there is impact, then this may describe the impact in detail and outline the upgrade path. If the feature is related to a CLE, this section can be a link to that CLE (and hence the documentation associated with the CLE will suffice).</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" height="74" width="1124">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Description</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Components Affected</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Actions</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Comments</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2 dir="ltr" id="ii17">Configuration Transport Manager</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">optional</strong>. Consideration should be given to whether this feature adds or changes administration data. If new administration data is being added, are new CTM business objects required to transport this data. If existing administration data is being modified, will this require changes to existing CTM BOM instances?</p>
+
+<h2 dir="ltr" id="ii18">Testing</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. An outline of all of the testing required by the feature should be present here. This may tie in with the use cases outlined above. Describe the framework being used and the kinds of tests being written:</p>
+
+<p dir="ltr">Is it just functional tests or are further performance tests required:</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii19">Documentation/How To Use Feature</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. This should describe how to use the feature added. Again this may differ from component to component but there are some general headings to consider:</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<table border="1" dir="ltr" style="width: 1153px;">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 304px;">Where the feature fits in the overall component?</td>
+			<td style="width: 832px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 304px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">How it may be accessed (i.e. created/authored)?</p>
+			</td>
+			<td style="width: 832px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 304px;">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">What does it do (may be linked to the use cases above)?</p>
+			</td>
+			<td style="width: 832px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 304px;">Advantages of using the feature?</td>
+			<td style="width: 832px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 304px;">Any limitations associated with the feature?</td>
+			<td style="width: 832px;">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td style="width: 304px;">A description of how the feature should be used etc.? This may also include a description of a contract between the various teams using the feature and will incorporate some details of the design.</td>
+			<td style="width: 832px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h2 dir="ltr" id="ii20">Check Lists</h2>
+
+<p dir="ltr">This is <strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">mandatory</strong>. Basically this is a quick check list of items that should be considered when doing a design for that particular component. This varies between components.</p>
+
+<h3 dir="ltr" id="ii1">IEG Check List</h3>
+
+<table border="1" dir="ltr">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Check List Item</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Notes</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Navigation</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Is the feature being introduced going to have an affect on IEG navigation (fast path, disabling sections, page navigation, looping, visited pages, summary pages and links from them). Ensure tests cases in place for all of these.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Different Running Modes</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">IEG can be run in a tab, in a modal and in a page, consider the affect your new feature will have in all these running modes? Also External and Internal Mode.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Localizable Text</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Is there any localizable text in the new feature being added?</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Layout Impact</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">The feature you are adding may be used in many different contexts. Ensure you consider all of the places that this new feature can be used (examining the schema could give you a good idea of places where the metadata element/attribute can be used etc.). The actual way the feature is displayed in all of the different contexts should also be considered here.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Data Storage</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Consider the new feature with regards to the data (datastore entities) that it is manipulating (IEG Engine functionality). Ensure that the new feature will have no adverse affect on this.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">RTL Requirements</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Consider the new feature being added with regards to right to left requirements and feed these into the use cases</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Code Line</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Consider the new feature with regards to the code line policy for IEG</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">ERD</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Does the feature require updates to the ERD. If so, then it should be mocked up to see the relationships between the new feature and existing functionality at the ERD level. This may highlight some design features in the new data structures being added.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CPT</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Should this feature be added to the V7 CPT?</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<h3 dir="ltr" id="ii2">Workflow Check List</h3>
+
+<table border="1" dir="ltr">
+	<tbody sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Check List Item</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Notes</strong></td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Considered Yes/No/NA</strong></td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">PDT Page-level Validations</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Are there new ones required?</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">PDT Process-level Validations</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Are the process-level validation messages sensible when run on the command line?</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">PDT "Valid" Indicators</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Are there any pages where WDO attributes are displayed and if so do they need valid indicator fields?</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Localizable Text</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Is there any localizable text in the new feature being added (and if so the section of the PDT that allows a process developer to localize text must be updated)?</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Context WDOs</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<p sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Does the feature involve the creation of a Context WDO? If so, the following points must be considered.</p>
+
+			<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tests that the WDO is created and used properly</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tests that the WDO gets cleaned-up properly</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tests that the WDO is audited properly</li>
+				<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tests for "rainy day" scenarios (e.g. you just added a WDO that appears when a deadline expires, does it work when the deadline *doesn't* expire?).</li>
+			</ul>
+			</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Existing Context WDOs</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Does the feature interact with any existing Context WDOS? (e.g. is it mutually-exclusive to a WDO?)</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Workflow Auditing</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Does the feature introduce a new auditable workflow "event" (WORKFLOWHISTORY record)?</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">PDT Web Tests</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Does the feature need PDT Web Tests?</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Code Line</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Consider the new feature with regards to the code line policy for Workflow</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+		<tr sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">ERD</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Does the feature require updates to the ERD. If so, then it should be mocked up to see the relationships between the new feature and existing functionality at the ERD level. This may highlight some design features in the new data structures being added.</td>
+			<td sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Yes
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Pros:
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Font licence issue dealt with early. Don't need to worry about Flex replacement project overrunning beyond the deadline for Helvetica removal.</li>
+		</ul>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Cons:
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Spending time on things that are EOL soon.</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Greater development effort.</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Greater test effort.</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">No
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Pros:
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Not spending time on things that are EOL soon.</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Reduced development effort</li>
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Reduced test effort</li>
+		</ul>
+		</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Cons:
+		<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+			<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Font licence issue will still be a risk until Flex replacements are released.</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">IEG Editor</strong></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">IEG Player</strong></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">IEG Engine</strong></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Process Definition Tool</strong></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Workflow Engine</strong></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Workflow Admin</strong></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">HTML Changes</strong></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Widget Changes</strong></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">CSS Changes</strong></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Changes?</strong></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">As of v7.0.1 Curam will be certified for use on tablet devices. This introduces a new responsibility on Business Analysts, UX Designers and Developers to ensure that they do not change existing or introduce new features that break the Tablet support statement. For the most part this is limited to the production of custom widgets (non-standard UIM) and how they perform when using touch screen controls. Please note the following:</b></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Tablet resolution is typically lower than the minimum recommended resolution of 1366x768. This means that the rules around wrapping of text have been relaxed for tablet, but teams should make a reasonable effort to ensure that any wrapping is not excessive and does not affect the ability to understand and use the application.</b></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Where custom features are introduced, teams must test using a iOS and Android device to ensure that the feature is compatible with touch screen controls.</b></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Where custom features are introduced, they must meet accessibility requirements for mobile devices.</b></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><b sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Printing - ensure the UI changes do now affect the printing of the pages</b></li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Describe any changes required to the data model, entities, operations, indexes etc. This should be done in a tabular format as follows:</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">This will form of the data dictionary so it needs to be comprehensive.</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups"><strong sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Also important here that if new tables/indexes are being added, check to ensure that the primary key/index lenght does not exceed the maximum allowed for DB2</strong></li>
+</ul>
+
+<ol dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">For testing the change, swap Helvetica to a very loud and unusual font - i.e. Comic Sans in bold.
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">This should mean that we can easily spot any Helvetica that is persisting.</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Once we cannot find any persisting, we know all refs have been updated so we can switch the main font to Plex.</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">90% of screens are UIM and covered by a simple change. The remaining things to check are:-
+	<ul sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">widgets</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">custom js</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">renderers</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">pods</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">flex? - see design decision as these are EOL and we may be able to skip - TODO update after reaching decision</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">printing everything</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">generated PDFs</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">ieg screens</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">ua player screens</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">screens on a tablet</li>
+	</ul>
+	</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">We will likely approach this project as follows:
+	<ol sandbox="allow-forms allow-same-origin allow-scripts allow-popups">
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">replace the font/styles on TI</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">dev test the type of items listed in 2 above on TI tab test app</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">build a preview JDE</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">load this preview onto Platform - CEF / EntMods</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">dev test the type of items listed in 2 above on Platform</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">go back to 3 as many times as required</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">load this preview onto Solutions: HCR / CGISS / CFSS / ???</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">dev test the type of items listed in 2 above on Solutions</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">go back to 3 as many times as required</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">deliver JDE</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">take onto Platform</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">take onto Solutions</li>
+		<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">FVT on XSol / CFSS / CCS begins ?</li>
+	</ol>
+	</li>
+</ol>
+
+<ul dir="ltr">
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Unit Tests</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Process Tests</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">End to End Tests</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Functional/Business Flow Tests</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Scenario Tests</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">Integration Tests</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">FVT Required?</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">SVT Required?</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+	<li sandbox="allow-forms allow-same-origin allow-scripts allow-popups">&nbsp;</li>
+</ul>
+
+<p dir="ltr">&nbsp;</p>
+
+<p dir="ltr">&nbsp;</p></div>    </div>
+  </div>
+</div>
+
+</body>
+</html>
